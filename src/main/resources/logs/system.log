@@ -1,0 +1,92 @@
+[00:03:07][INFO ](AbstractApplicationContext.java:960)- Closing WebApplicationContext for namespace 'appServlet-servlet': startup date [Tue Jun 08 23:53:28 KST 2021]; parent: Root WebApplicationContext
+[00:03:07][INFO ](AbstractApplicationContext.java:960)- Closing Root WebApplicationContext: startup date [Tue Jun 08 23:53:24 KST 2021]; root of context hierarchy
+[00:03:12][INFO ](ContextLoader.java:307)- Root WebApplicationContext: initialization started
+[00:03:13][INFO ](AbstractApplicationContext.java:578)- Refreshing Root WebApplicationContext: startup date [Wed Jun 09 00:03:13 KST 2021]; root of context hierarchy
+[00:03:13][INFO ](XmlBeanDefinitionReader.java:317)- Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/root-context.xml]
+[00:03:15][INFO ](ContextLoader.java:347)- Root WebApplicationContext: initialization completed in 2667 ms
+[00:03:15][INFO ](FrameworkServlet.java:489)- FrameworkServlet 'appServlet': initialization started
+[00:03:15][INFO ](AbstractApplicationContext.java:578)- Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:03:15 KST 2021]; parent: Root WebApplicationContext
+[00:03:15][INFO ](XmlBeanDefinitionReader.java:317)- Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+[00:03:16][INFO ](AutowiredAnnotationBeanPostProcessor.java:153)- JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[00:03:19][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bDelete],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardDelete(java.lang.String,int,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.ModelAndView)
+[00:03:19][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bRenew],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardDetail(java.lang.String,org.springframework.web.servlet.ModelAndView)
+[00:03:19][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bDetail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardDetail(java.lang.String,int,org.springframework.web.servlet.ModelAndView)
+[00:03:19][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/blist],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardListService(int,java.lang.String,org.springframework.web.servlet.ModelAndView)
+[00:03:19][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/writeForm],methods=[GET]}" onto public java.lang.String com.kh.bts.board.controller.BoardController.boardInsertForm(org.springframework.web.servlet.ModelAndView)
+[00:03:19][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bInsert],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardInsert(com.kh.bts.board.model.vo.Board,org.springframework.web.multipart.MultipartFile,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.ModelAndView)
+[00:03:19][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bUpdate],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardUpdate(com.kh.bts.board.model.vo.Board,int,org.springframework.web.multipart.MultipartFile,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.ModelAndView)
+[00:03:19][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/],methods=[GET]}" onto public java.lang.String com.kh.bts.HomeController.home(java.util.Locale,org.springframework.ui.Model)
+[00:03:19][INFO ](RequestMappingHandlerAdapter.java:532)- Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:03:15 KST 2021]; parent: Root WebApplicationContext
+[00:03:20][INFO ](RequestMappingHandlerAdapter.java:532)- Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:03:15 KST 2021]; parent: Root WebApplicationContext
+[00:03:21][INFO ](AbstractUrlHandlerMapping.java:341)- Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+[00:03:21][INFO ](FrameworkServlet.java:508)- FrameworkServlet 'appServlet': initialization completed in 6146 ms
+[00:10:12][INFO ](AbstractApplicationContext.java:960)- Closing WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:03:15 KST 2021]; parent: Root WebApplicationContext
+[00:10:12][INFO ](AbstractApplicationContext.java:960)- Closing Root WebApplicationContext: startup date [Wed Jun 09 00:03:13 KST 2021]; root of context hierarchy
+[00:10:16][INFO ](ContextLoader.java:307)- Root WebApplicationContext: initialization started
+[00:10:17][INFO ](AbstractApplicationContext.java:578)- Refreshing Root WebApplicationContext: startup date [Wed Jun 09 00:10:17 KST 2021]; root of context hierarchy
+[00:10:17][INFO ](XmlBeanDefinitionReader.java:317)- Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/root-context.xml]
+[00:10:19][INFO ](ContextLoader.java:347)- Root WebApplicationContext: initialization completed in 3117 ms
+[00:10:19][INFO ](FrameworkServlet.java:489)- FrameworkServlet 'appServlet': initialization started
+[00:10:19][INFO ](AbstractApplicationContext.java:578)- Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:10:19 KST 2021]; parent: Root WebApplicationContext
+[00:10:19][INFO ](XmlBeanDefinitionReader.java:317)- Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+[00:10:21][INFO ](AutowiredAnnotationBeanPostProcessor.java:153)- JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[00:10:22][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bDelete],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardDelete(java.lang.String,int,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.ModelAndView)
+[00:10:22][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bRenew],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardDetail(java.lang.String,org.springframework.web.servlet.ModelAndView)
+[00:10:22][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bDetail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardDetail(java.lang.String,int,org.springframework.web.servlet.ModelAndView)
+[00:10:22][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/blist],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardListService(int,java.lang.String,org.springframework.web.servlet.ModelAndView)
+[00:10:22][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/writeForm],methods=[GET]}" onto public java.lang.String com.kh.bts.board.controller.BoardController.boardInsertForm(org.springframework.web.servlet.ModelAndView)
+[00:10:22][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bInsert],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardInsert(com.kh.bts.board.model.vo.Board,org.springframework.web.multipart.MultipartFile,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.ModelAndView)
+[00:10:22][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bUpdate],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardUpdate(com.kh.bts.board.model.vo.Board,int,org.springframework.web.multipart.MultipartFile,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.ModelAndView)
+[00:10:22][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/],methods=[GET]}" onto public java.lang.String com.kh.bts.HomeController.home(java.util.Locale,org.springframework.ui.Model)
+[00:10:23][INFO ](RequestMappingHandlerAdapter.java:532)- Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:10:19 KST 2021]; parent: Root WebApplicationContext
+[00:10:23][INFO ](RequestMappingHandlerAdapter.java:532)- Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:10:19 KST 2021]; parent: Root WebApplicationContext
+[00:10:23][INFO ](AbstractUrlHandlerMapping.java:341)- Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+[00:10:24][INFO ](FrameworkServlet.java:508)- FrameworkServlet 'appServlet': initialization completed in 4555 ms
+[00:23:34][INFO ](ContextLoader.java:307)- Root WebApplicationContext: initialization started
+[00:23:34][INFO ](AbstractApplicationContext.java:578)- Refreshing Root WebApplicationContext: startup date [Wed Jun 09 00:23:34 KST 2021]; root of context hierarchy
+[00:23:34][INFO ](XmlBeanDefinitionReader.java:317)- Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/root-context.xml]
+[00:23:39][INFO ](ContextLoader.java:347)- Root WebApplicationContext: initialization completed in 5409 ms
+[00:23:39][INFO ](FrameworkServlet.java:489)- FrameworkServlet 'appServlet': initialization started
+[00:23:39][INFO ](AbstractApplicationContext.java:578)- Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:23:39 KST 2021]; parent: Root WebApplicationContext
+[00:23:39][INFO ](XmlBeanDefinitionReader.java:317)- Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+[00:23:41][INFO ](AutowiredAnnotationBeanPostProcessor.java:153)- JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[00:23:42][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/blist],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardListService(int,java.lang.String,org.springframework.web.servlet.ModelAndView)
+[00:23:42][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bDelete],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardDelete(java.lang.String,int,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.ModelAndView)
+[00:23:42][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/writeForm],methods=[GET]}" onto public java.lang.String com.kh.bts.board.controller.BoardController.boardInsertForm(org.springframework.web.servlet.ModelAndView)
+[00:23:42][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bInsert],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardInsert(com.kh.bts.board.model.vo.Board,org.springframework.web.multipart.MultipartFile,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.ModelAndView)
+[00:23:42][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bUpdate],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardUpdate(com.kh.bts.board.model.vo.Board,int,org.springframework.web.multipart.MultipartFile,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.ModelAndView)
+[00:23:42][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bRenew],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardDetail(java.lang.String,org.springframework.web.servlet.ModelAndView)
+[00:23:42][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bDetail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardDetail(java.lang.String,int,org.springframework.web.servlet.ModelAndView)
+[00:23:42][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/],methods=[GET]}" onto public java.lang.String com.kh.bts.HomeController.home(java.util.Locale,org.springframework.ui.Model)
+[00:23:43][INFO ](RequestMappingHandlerAdapter.java:532)- Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:23:39 KST 2021]; parent: Root WebApplicationContext
+[00:23:43][INFO ](RequestMappingHandlerAdapter.java:532)- Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:23:39 KST 2021]; parent: Root WebApplicationContext
+[00:23:44][INFO ](AbstractUrlHandlerMapping.java:341)- Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+[00:23:44][INFO ](FrameworkServlet.java:508)- FrameworkServlet 'appServlet': initialization completed in 5226 ms
+[00:24:17][INFO ](AbstractApplicationContext.java:960)- Closing WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:23:39 KST 2021]; parent: Root WebApplicationContext
+[00:24:18][INFO ](AbstractApplicationContext.java:960)- Closing Root WebApplicationContext: startup date [Wed Jun 09 00:23:34 KST 2021]; root of context hierarchy
+[00:24:25][INFO ](ContextLoader.java:307)- Root WebApplicationContext: initialization started
+[00:24:25][INFO ](AbstractApplicationContext.java:578)- Refreshing Root WebApplicationContext: startup date [Wed Jun 09 00:24:25 KST 2021]; root of context hierarchy
+[00:24:25][INFO ](XmlBeanDefinitionReader.java:317)- Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/root-context.xml]
+[00:24:28][INFO ](ContextLoader.java:347)- Root WebApplicationContext: initialization completed in 3508 ms
+[00:24:28][INFO ](FrameworkServlet.java:489)- FrameworkServlet 'appServlet': initialization started
+[00:24:28][INFO ](AbstractApplicationContext.java:578)- Refreshing WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:24:28 KST 2021]; parent: Root WebApplicationContext
+[00:24:28][INFO ](XmlBeanDefinitionReader.java:317)- Loading XML bean definitions from ServletContext resource [/WEB-INF/spring/appServlet/servlet-context.xml]
+[00:24:30][INFO ](AutowiredAnnotationBeanPostProcessor.java:153)- JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[00:24:32][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/blist],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardListService(int,java.lang.String,org.springframework.web.servlet.ModelAndView)
+[00:24:32][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bDelete],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardDelete(java.lang.String,int,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.ModelAndView)
+[00:24:32][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/writeForm],methods=[GET]}" onto public java.lang.String com.kh.bts.board.controller.BoardController.boardInsertForm(org.springframework.web.servlet.ModelAndView)
+[00:24:32][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bInsert],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardInsert(com.kh.bts.board.model.vo.Board,org.springframework.web.multipart.MultipartFile,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.ModelAndView)
+[00:24:32][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bUpdate],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardUpdate(com.kh.bts.board.model.vo.Board,int,org.springframework.web.multipart.MultipartFile,javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.ModelAndView)
+[00:24:32][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bRenew],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardDetail(java.lang.String,org.springframework.web.servlet.ModelAndView)
+[00:24:32][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/bDetail],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.kh.bts.board.controller.BoardController.boardDetail(java.lang.String,int,org.springframework.web.servlet.ModelAndView)
+[00:24:32][INFO ](AbstractHandlerMethodMapping.java:527)- Mapped "{[/],methods=[GET]}" onto public java.lang.String com.kh.bts.HomeController.home(java.util.Locale,org.springframework.ui.Model)
+[00:24:33][INFO ](RequestMappingHandlerAdapter.java:532)- Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:24:28 KST 2021]; parent: Root WebApplicationContext
+[00:24:33][INFO ](RequestMappingHandlerAdapter.java:532)- Looking for @ControllerAdvice: WebApplicationContext for namespace 'appServlet-servlet': startup date [Wed Jun 09 00:24:28 KST 2021]; parent: Root WebApplicationContext
+[00:24:33][INFO ](AbstractUrlHandlerMapping.java:341)- Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+[00:24:34][INFO ](FrameworkServlet.java:508)- FrameworkServlet 'appServlet': initialization completed in 5831 ms
+[00:24:35][INFO ](AroundLog.java:18)- ============ 사전 공통 코드 동작! =============
+[00:24:36][INFO ](AroundLog.java:25)- ============ 사후 공통 코드 동작! =============
+[12:09:43][INFO ](ContextLoader.java:270)- Root WebApplicationContext: initialization started
+[12:09:48][INFO ](ContextLoader.java:306)- Root WebApplicationContext initialized in 5255 ms
+[12:09:49][INFO ](FrameworkServlet.java:521)- Initializing Servlet 'appServlet'
+[12:09:56][INFO ](FrameworkServlet.java:543)- Completed initialization in 7830 ms

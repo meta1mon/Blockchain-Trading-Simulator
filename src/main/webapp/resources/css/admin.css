@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.content {
+	clear: both;
+	position: relative;
+	justify-content: center !important;
+	width : 1240px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 180px; /* header height */
+	padding-bottom: 200px; /* footer height */
+	text-align: center;
+}

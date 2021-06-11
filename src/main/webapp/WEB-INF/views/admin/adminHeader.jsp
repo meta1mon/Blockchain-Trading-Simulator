@@ -6,9 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+body {
+	width: 1240px;
+	margin: 0 auto;
+}
+
 #mh li {
+	box-sizing: border-box;
 	list-style-type: none;
-	width: 305px;
+	width: 300px;
 	float: left;
 	text-align: center;
 }

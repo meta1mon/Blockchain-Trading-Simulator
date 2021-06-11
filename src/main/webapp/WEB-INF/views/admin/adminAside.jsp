@@ -44,11 +44,12 @@ i .fas {
 .menu {
 	margin: 0;
 	padding: 0;
+	background: #809bbf;
 }
 
-#index {
+/* #index {
 	background: #3d5a73;
-}
+} */
 
 .contenedor-menu {
 	width: 200px;
@@ -118,7 +119,7 @@ i .fas {
 		});
 	});
 </script>
-<body	style="height: 100vh; width: 200px; background-color: #809bbf; float: left;">
+<body	style="height: 100vh; width: 200px; float: left;">
 	<div class="contenedor-menu">
 		<ul class="menu">
 			<li id="index"><a href="#"><img src="" width="160"

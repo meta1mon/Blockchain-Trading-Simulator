@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+#chart {
+	
+	width: 760px;
+	height: 530px;
+	border: 1px solid;
+}
+
+#chart_div {
+	
+	width: 750px;
+	height: 500px;
+}
+
+#chart_btn {
+	width: 760px;
+	height: 30px;
+}
+
+
+#cointable_div{
+	width: 760px;
+	height: 350px;
+	border: 1px solid;
+}
+#cointable_btn {
+	width: 760px;
+	height: 30px;
+}

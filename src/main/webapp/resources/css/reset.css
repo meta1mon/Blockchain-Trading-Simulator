@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'BBTreeGB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    text-decoration: none;
+    list-style: none;
+    font-family: 'BBTreeGB';
+}
+
+/*ul 왼쪽 공백 padding 조절*/
+ul {
+    -webkit-padding-start: 10px;
+}
+
+ul li {
+    
+    list-style: none;    
+}
+a {
+    text-decoration: none;
+}
+a:visited{
+    color: #000;
+}

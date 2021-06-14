@@ -7,10 +7,17 @@
     font-style: normal;
 }
 
-body {
+@font-face {
+     font-family: 'S-CoreDream-5Medium';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+* {
     text-decoration: none;
     list-style: none;
-    font-family: 'BBTreeGB';
+    font-family: 'S-CoreDream-5Medium';
 }
 
 /*ul 왼쪽 공백 padding 조절*/

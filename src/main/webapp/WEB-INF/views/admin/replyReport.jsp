@@ -38,7 +38,7 @@
 </script>
 
 </head>
-<body>
+<body class="adminContent">
 	<table border="2">
 		<tr>
 			<th>No.</th>

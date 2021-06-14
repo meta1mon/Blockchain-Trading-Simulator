@@ -18,11 +18,6 @@
 li a {
 	font-size: 15px;
 }
-html {
-	margin: 0;
-	padding: 0;
-	height: 100vh;
-}
 
 body {
 	margin: 0 auto;
@@ -41,15 +36,12 @@ i .fas {
 	float: right;
 }
 
+/* 충전 내역 관리 아래 빈 곳*/
 .menu {
 	margin: 0;
 	padding: 0;
-	background: #809bbf;
+	background: #b85cef;
 }
-
-/* #index {
-	background: #3d5a73;
-} */
 
 .contenedor-menu {
 	width: 200px;
@@ -65,15 +57,17 @@ i .fas {
 	list-style: none;
 }
 
+/* aside 전체 부분 */
 .contenedor-menu .menu li a {
 	color: white;
 	display: block;
 	padding: 15px 20px;
-	background: #809bbf;
+	background: b85cef;
 }
 
+/* aside에 마우스 올릴 때 */
 .contenedor-menu .menu li a:hover {
-	background: #3d5a73;
+	background: #e3c8f8;
 	color: #fff;
 }
 
@@ -88,13 +82,15 @@ i .fas {
 	display: none;
 }
 
+/* aside 메뉴 안쪽 부분 */
 .contenedor-menu .menu ul li a {
-	background: #424242;
+	background: #b7aee8;
 	color: #e9e9e9;
 }
 
+/* 클린된 메뉴 */
 .contenedor-menu .menu .activado>a {
-	background: #3d5a73;
+	background: e3c8f8;
 	color: #fff;
 }
 </style>
@@ -119,53 +115,54 @@ i .fas {
 		});
 	});
 </script>
-<body	style="height: 100vh; width: 200px; float: left;">
-	<div class="contenedor-menu">
-		<ul class="menu">
-			<li id="index"><a href="#"><img src="" width="160"
-					height="100"></a></li>
-			<li id="home"><a href="#">MAIN<i class="fa fa-home"></i></a></li>
-			<li id="buychart"><a href="#">회원관리<i
-					class="fa fa-chevron-down"></i></a>
-				<ul>
-					<li><a href="#">회원 조회 및 탈퇴</a></li>
-				</ul></li>
-			<li id="adminshop"><a href="#">게시판 관리<i
-					class="fa fa-chevron-down"></i></a>
-				<ul>
-					<li><a href="#">게시판 신고 리스트</a></li>
-					<li><a href="#">댓글 신고 리스트</a></li>
-					<li><a href="#">처리한 신고 게시글</a></li>
-					<li><a href="#">처리한 신고 댓글</a></li>
-				</ul></li>
-			<li id="adminmember"><a href="#">공지사항 관리<i
-					class="fa fa-chevron-down"></i></a>
-				<ul>
-					<li><a href="#">공지사항 리스트</a></li>
-				</ul></li>
-			<li id="adminmember"><a href="#">충전 내역 관리<i
-					class="fa fa-chevron-down"></i></a>
-				<ul>
-					<li><a href="#">충전 내역 리스트</a></li>
-				</ul></li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
-			<li>&nbsp;</li>
 
-			<li id="adminmember"><a href="#">1:1 문의 관리</a></li>
-		</ul>
-	</div>
+<body style="height: 100vh; width: 200px; float: left;">
+	<div class="contenedor-menu">
+	<ul class="menu">
+		<li id="index"><a href="#"><img src="" width="160"
+				height="100"></a></li>
+		<li id="home"><a href="#">MAIN<i class="fa fa-home"></i></a></li>
+		<li id="buychart"><a href="#">회원관리<i
+				class="fa fa-chevron-down"></i></a>
+			<ul>
+				<li><a href="#">회원 조회 및 탈퇴</a></li>
+			</ul></li>
+		<li id="adminshop"><a href="#">게시판 관리<i
+				class="fa fa-chevron-down"></i></a>
+			<ul>
+				<li><a href="#">게시판 신고 리스트</a></li>
+				<li><a href="#">댓글 신고 리스트</a></li>
+				<li><a href="#">처리한 신고 게시글</a></li>
+				<li><a href="#">처리한 신고 댓글</a></li>
+			</ul></li>
+		<li id="adminmember"><a href="#">공지사항 관리<i
+				class="fa fa-chevron-down"></i></a>
+			<ul>
+				<li><a href="#">공지사항 리스트</a></li>
+			</ul></li>
+		<li id="adminmember"><a href="#">충전 내역 관리<i
+				class="fa fa-chevron-down"></i></a>
+			<ul>
+				<li><a href="#">충전 내역 리스트</a></li>
+			</ul></li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+
+		<li id="adminmember"><a href="#">1:1 문의 관리</a></li>
+	</ul>
+</div>
 </body>
 </html>

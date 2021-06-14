@@ -12,7 +12,7 @@ th, td {
 }
 </style>
 </head>
-<body>
+<body class="adminContent">
 	<div id="mmm">
 		<div>
 			<form action="#" method="get">

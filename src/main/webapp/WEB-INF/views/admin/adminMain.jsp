@@ -26,9 +26,9 @@
 }
 </style>
 </head>
-<%-- <%@include file="adminHeader.jsp"%>
+<%-- <%@include file="adminHeader.jsp"%> 
 <%@include file="adminAside.jsp"%> --%>
-<body>
+<body class="adminContent">
 	<div id="mm" style="width: 1240px;">
 		<ul>
 			<li><p>전체 가상 투자금</p> <img src="#" />

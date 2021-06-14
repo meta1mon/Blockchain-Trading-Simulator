@@ -37,7 +37,7 @@
 	}
 </script>
 </head>
-<body>
+<body class="adminContent">
 	<form action="#" method="post">
 		<input type="search">
 		<button type="button">검색</button>

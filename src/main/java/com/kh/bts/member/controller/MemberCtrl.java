@@ -20,13 +20,13 @@ public class MemberCtrl {
 	@Autowired
 	private MemberService mService;
 	
-//	È¸¿ø°¡ÀÔ
-	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+// íšŒì›ê°€ì…
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public ModelAndView insertMember(ModelAndView mv) {
-		mv.setViewName("member/insert");
+		mv.setViewName("member/signup");
 		return mv;
 	}
-	@RequestMapping(value="/insertmember", method=RequestMethod.POST)
+	@RequestMapping(value="/signupmember", method=RequestMethod.POST)
 	public void insertMember(Member vo, HttpServletResponse response) throws Exception {
 		int result=mService.insertMember(vo);
 		PrintWriter out = null;
@@ -44,22 +44,22 @@ public class MemberCtrl {
 		System.out.println(vo.toString());
 	}
 	
-//	È¸¿ø°¡ÀÔ ÈÄ ÀÎÁõ ´ë±â ÆäÀÌÁö
+//	íšŒì›ê°€ì… í›„ ì¸ì¦ ëŒ€ê¸°
 	@RequestMapping(value = "/authwait")
 	public ModelAndView authWait(ModelAndView mv) {
 		mv.setViewName("member/authwait");
 		return mv;
 	}
 	
-// ÀÎÁõ¸ŞÀÏ Å¬¸¯ ½Ã ÀÌµ¿ ÆäÀÌÁö
+// ì´ë©”ì¼ ì¸ì¦ ë§í¬ ëˆŒë €ì„ ë•Œ
 	@RequestMapping(value = "/emailconfirm", method = RequestMethod.GET)
-	public String emailConfirm(Member vo, Model model) throws Exception { // ÀÌ¸ŞÀÏÀÎÁõ
+	public String emailConfirm(Member vo, Model model) throws Exception { // ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		mService.authMember(vo);
 		model.addAttribute("vo", vo);
-		return "home";
+		return "mainpage";
 	}
 	
-//	·Î±×ÀÎ
+//	ë¡œê·¸ì¸
 	@RequestMapping(value = "/login")
 	public ModelAndView loginMember(ModelAndView mv) {
 		mv.setViewName("member/login");
@@ -70,12 +70,11 @@ public class MemberCtrl {
 	public String loginMember(Member vo, HttpServletRequest request) throws Exception {
 		Member loginMember = mService.loginMember(vo);
 		if (loginMember == null) {
-			System.out.println("·Î±×ÀÎ ½ÇÆĞ");
 			return "redirect:/";
 		} else {
 			request.getSession().setAttribute("loginMember", loginMember);
 		}
-		return "home";
+		return "mainpage";
 	}
 
 }

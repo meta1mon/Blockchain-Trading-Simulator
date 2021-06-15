@@ -391,7 +391,7 @@
 			console.log("회원가입버튼누름");
 			var dataquery = $("#frmJoin").serialize();
 			$.ajax({
-				url : "insertmember",
+				url : "signup",
 				type : "POST",
 				data : dataquery,
 				async : true,

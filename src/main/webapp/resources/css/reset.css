@@ -15,10 +15,13 @@
 }
 
 * {
+	margin: 0;
+	padding: 0;
     text-decoration: none;
     list-style: none;
     font-family: 'S-CoreDream-5Medium';
 }
+
 
 /*ul 왼쪽 공백 padding 조절*/
 ul {

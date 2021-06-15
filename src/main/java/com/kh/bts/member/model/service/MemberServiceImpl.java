@@ -26,12 +26,12 @@ public class MemberServiceImpl implements MemberService{
 		int result = 0;
 		result=mDao.insertMember(vo);
 		
-		String key = new TempKey().getKey(50, false); // ÀÎÁõÅ° »ı¼º
-		mDao.createAuthkey(vo.getEmail(), key); // ÀÎÁõÅ° DBÀúÀå
+		String key = new TempKey().getKey(50, false); // ëœë¤ ë¬¸ì ìƒì„±
+		mDao.createAuthkey(vo.getEmail(), key); 
 		MailHandler sendMail = new MailHandler(mailSender);
-		sendMail.setSubject("ÀÎÁõ ÀÌ¸ŞÀÏ Å×½ºÆ®ÀÔ´Ï´Ù.");
+		sendMail.setSubject("ë©”ì¼ ì¸ì¦ í…ŒìŠ¤íŠ¸");
 		sendMail.setText(
-				new StringBuffer().append("<h1>¸ŞÀÏÀÎÁõ</h1>").append("<a href='http://localhost:8090/bts/emailConfirm?email=").append(vo.getEmail()).append("&authkey=").append(key).append("' targer='blenk'>ÀÌ¸ŞÀÏ ÀÎÁõ È®ÀÎ</a>").toString());
+				new StringBuffer().append("<h1> ì•ˆë…•í•˜ì„¸ìš” </h1>").append("<a href='http://localhost:8090/bts/emailConfirm?email=").append(vo.getEmail()).append("&authkey=").append(key).append("' target='blenk'>ì´ë©”ì¼ ì¸ì¦ í™•ì¸</a>").toString());
 		sendMail.setFrom("Aces.Recruited.Member@gmail.com", "BTS");
 		sendMail.setTo(vo.getEmail());
 		sendMail.send();

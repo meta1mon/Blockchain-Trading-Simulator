@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="community">
+	<resultMap type="Community" id="resultCommunity">
+	</resultMap>
+
+	<!-- 검색한 게시글 조회 -->
+	<select id="searchList" parameterType="int"
+		resultType="arraylist" resultMap="resultCommunity">
+		SELECT * FROM COMMUNITY WHERE CSUBJECT LIKE '%'|| #{keyword} ||'%'
+		OR CWRITER LIKE '%'|| #{keyword} ||'%'
+		OR CCONTENT LIKE '%'|| #{keyword} ||'%'
+		ORDER BY CNO DESC
+	</select>
+
+	<!-- 페이지당 게시글 조회 -->
+	<select id="selectList" resultType="arraylist" resultMap="resultCommunity">
+		SELECT * FROM COMMUNITY
+	</select>
+
+	<!-- 게시글 전체 개수 조회 -->
+	<select id="countCommunity" resultType="int">
+		SELECT count(*) FROM COMMUNITY
+	</select>
+	
+	<!-- 게시글 단일 조회 -->
+	<select id="selectOne" parameterType="int" resultType="Community">
+		SELECT * FROM COMMUNITY WHERE CNO = #{cno}
+	</select>
+
+	<!-- 게시글 삽입 -->
+	<insert id="insertCommunity" parameterType="Community"
+		flushCache="true" statementType="PREPARED">
+		INSERT INTO COMMUNITY VALUES(
+		'CO'||TO_CHAR(SYSDATE,'RRMMDD')||NVL(MAX(CNO),0)+1,
+		#{csubject}, #{ccontent}, to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS'),
+		#{filepath}, 0, 0, 0, 0, #{cwriter})
+	</insert>
+
+	<!-- 게시글 수정 -->
+	<update id="updateCommunity" parameterType="Community" flushCache="true"
+		statementType="PREPARED">
+		UPDATE COMMUNITY
+		SET CSUBJECT = #{csubject},
+		CCONTENT = #{ccontent},
+		FILEPATH = #{filepath}
+		WHERE CNO = #{cno}
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="deleteCommunity" parameterType="int"
+		flushCache="true" statementType="PREPARED">
+		DELETE FROM COMMUNITY WHERE CNO = #{cno}
+	</delete>
+	
+	<!-- 게시글 조회 수 증가 -->
+	<update id="addReadCount" parameterType="int"
+		flushCache="true" statementType="PREPARED">
+		UPDATE COMMUNITY SET VIEWCNT = VIEWCNT+1 WHERE CNO = #{cno}
+	</update>
+</mapper>

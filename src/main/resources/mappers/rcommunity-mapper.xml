@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rcommunity">
+	<resultMap type="Rcommunity" id="resultRcommunity">
+		<id property="rno" column="RNO" />
+		<result property="rwriter" column="RWRITER" />
+		<result property="rcontent" column="RCONTENT" />
+		<result property="rdate" column="RDATE" />
+		<result property="cno" column="CNO" />
+	</resultMap>
+
+	<!-- 해당 게시글에 대한 댓글 리스트 조회 -->
+	<select id="selectRcommunityAll" parameterType="string" resultType="arraylist" resultMap="resultRcommunity">
+		SELECT * FROM RCOMMUNITY WHERE CNO = #{cno}
+	</select>
+
+	<!-- 댓글 단일 조회 -->
+	<select id="selectRommunity" parameterType="string" resultType="Rcommunity" resultMap="resultRcommunity">
+		SELECT * FROM RCOMMUNITY WHERE RNO = #{RNO}
+	</select>
+
+	<!-- 댓글 입력 -->
+	<insert id="insertRcommunity" parameterType="Rcommunity" flushCache="true" statementType="PREPARED" timeout="20">
+		INSERT INTO
+		RCOMMUNITY VALUES(
+		'CR'||TO_CHAR(SYSDATE,'RRMMDD')||NVL(MAX(RNO),0)+1,
+		#{rwriter}, #{rcontent}, to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS'), #{cno})
+	</insert>
+
+	<!-- 댓글 수정 -->
+	<update id="updateRcommunity" parameterType="Rcommunity" flushCache="true" statementType="PREPARED" timeout="20">
+		UPDATE RCOMMUNITY SET RCONTENT = #{rcontent} WHERE RNO = #{rno}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteRcommunity" parameterType="Rcommunity" flushCache="true" statementType="PREPARED" timeout="20">
+	DELETE FROM RCOMMUNITY WHERE RNO = #{rno}
+	</delete>
+</mapper>

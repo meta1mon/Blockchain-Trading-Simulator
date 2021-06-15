@@ -16,14 +16,17 @@
 		<input type="text" name="keyword"> 
 		<input type="submit" value="검색">
 		<div class="headLine">
-			<marquee>
-				<ul class="headList">
-					<!-- newsList.js의 newsAPI 함수 참조  -->
-				</ul>
+			<marquee class="scroll" onmouseover="this.stop();" onmouseout="this.start();">
+				<!-- newsList.js의 newsAPI() 함수 참조 -->
 			</marquee>
 		</div>
+		<div class="newsList" id="raw1">
+			<!-- newsList.js의 newsAPI() 함수 참조 -->
+		</div>
+		<div class="newsList" id="raw2">
+			<!-- newsList.js의 newsAPI() 함수 참조 -->
+		</div>
 	</div>
-	
 	<script type="text/javascript"	src="${pageContext.request.contextPath}/resources/js/newsList.js"></script>
 </body>
 <jsp:include page="../main/footer.jsp"></jsp:include>

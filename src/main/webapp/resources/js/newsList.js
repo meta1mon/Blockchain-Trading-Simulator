@@ -28,16 +28,23 @@ function newsAPI() {
 					token : "$2y$10$hUvFjpPSDU5Gx6vp20vhGOg6Nuib3IZBzZk4cR5f.uGbRtMKN.S2m"
 				},
 				success : function(data) {
-					
+					// 헤드라인 : 최신 기사 10개만 출력
 					for (var i = 0; i < 10; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
-						$(".headList").append('<li class="headli"><span>['+newsTime+']</span><span>'+data.data[i].title+'</span></li>');
+						$(".scroll").append('<span class="headList" id="headTime">&#128344;'+newsTime+'&nbsp;&nbsp;</span><span class="headList">'+data.data[i].title+'</span>&nbsp;&nbsp;&nbsp;&nbsp;');
 					}
 					
-
+					// 뉴스목록 
+					for (var i = 0; i < 3; i++) {
+						var newsTime = dateDiffer(data.data[i].pubdate);
+						$("#raw1").append('<div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div>');
+					}
+					for (var i = 3; i < 6; i++) {
+						var newsTime = dateDiffer(data.data[i].pubdate);
+						$("#raw2").append('<div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div>');
+					}
 				}
 			});
 };
 
 newsAPI();
-

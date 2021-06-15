@@ -29,7 +29,7 @@ function newsAPI() {
 				},
 				success : function(data) {
 					
-					for (var i = 0; i < 5; i++) {
+					for (var i = 0; i < 10; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
 						$(".headList").append('<li class="headli"><span>['+newsTime+']</span><span>'+data.data[i].title+'</span></li>');
 					}
@@ -40,3 +40,4 @@ function newsAPI() {
 };
 
 newsAPI();
+

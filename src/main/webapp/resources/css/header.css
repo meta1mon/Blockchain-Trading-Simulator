@@ -9,11 +9,13 @@ header {
 }
 
 .h_left {
+	margin: 10px 0 0 0;
 	width: 700px;
 	float: left;
 }
 
 .h_right {
+	margin: 10px 10px 0 0;
 	width: 300px;
 	float: right;
 }

@@ -12,17 +12,18 @@
 </head>
 <jsp:include page="../main/header.jsp"></jsp:include>
 <body>
-	<div>
+	<div class="wrapper">
 		<input type="text" name="keyword"> 
 		<input type="submit" value="검색">
 		<div class="headLine">
-			<ul class="headList">
-				<!-- newsList.js의 newsAPI 함수 참조  -->
-			</ul>
+			<marquee>
+				<ul class="headList">
+					<!-- newsList.js의 newsAPI 함수 참조  -->
+				</ul>
+			</marquee>
 		</div>
-		
-
 	</div>
+	
 	<script type="text/javascript"	src="${pageContext.request.contextPath}/resources/js/newsList.js"></script>
 </body>
 <jsp:include page="../main/footer.jsp"></jsp:include>

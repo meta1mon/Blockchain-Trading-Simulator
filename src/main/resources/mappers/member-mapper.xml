@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Member">
+	<resultMap type="Member" id="Member">
+	</resultMap>
+	<!-- 회원조회-->
+	<select id="searchMember" parameterType="Member">
+		SELECT * FROM MEMBER ORDER BY REQAGR DESC
+	</select>
+	<!-- 회원수조회 -->
+	<select id="countMember" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	<!-- 개인조회-->
+	<select id="searchOneMember" parameterType="string" resultType="string">
+		SELECT * FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+	<!-- 회원가입 -->
+	<insert id="insertMember" parameterType="Member" flushCache="true" statementType="PREPARED">
+		INSERT INTO MEMBER VALUES(#{email}, #{nickname}, #{authkey}, default, #{pw}, #{pwCh}, #{gender}, #{birthdate}, #{phone}, #{mailing},
+		 default, default)
+	</insert>
+	<!-- 이메일인증키설정 -->
+	<update id="createAuthKey" parameterType="Member" flushCache="true" statementType="PREPARED">
+		UPDATE MEMBER SET AUTHKEY= #{authkey} WHERE EMAIL = #{email}
+	</update>
+	<!-- 이메일인증후 -->
+	<update id="authMember" parameterType="Member" flushCache="true" statementType="PREPARED">
+		UPDATE MEMBER SET AUTH = 'Y' WHERE EMAIL=#{email}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="deleteMember" parameterType="string" flushCache="true" statementType="PREPARED">
+		DELETE FROM MEMBER WHERE EMAIL = #{email}
+	</delete>
+	
+	<!-- 회원정보수정 -->
+	<update id="updateMember" parameterType="Member" flushCache="true" statementType="PREPARED">
+		UPDATE MEMBER SET NICKNAME=#{nickname}, GENDER=#{gender}, BIRTHDATE=#{birthdate}, PHONE=#{phone}, MAILING=#{mailing} WHERE EMAIL=#{email}
+	</update>
+	
+	<!-- 비밀번호수정 -->
+	<update id="updatePassword">
+		UPDATE MEMBER SET PW=#{pw}, PWCH=#{pwCh}
+	</update>
+	
+	<!-- 로그인 -->
+	<select id="loginMember" parameterType="Member" resultMap="Member"> 
+		SELECT * FROM MEMBER WHERE EMAIL = #{email} AND PW=#{pw} AND AUTH = 'Y'
+	</select>
+</mapper>

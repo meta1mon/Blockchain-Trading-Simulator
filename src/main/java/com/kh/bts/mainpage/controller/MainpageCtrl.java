@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-public class MainpageController {
+public class MainpageCtrl {
 
 	@RequestMapping("mainpage")
 	public ModelAndView MainPage(ModelAndView mav) {

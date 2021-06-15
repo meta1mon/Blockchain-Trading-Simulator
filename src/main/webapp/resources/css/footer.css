@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+
+footer {
+	background-color: #f2f2f2;
+	overflow: hidden;
+	height : 65px;
+	text-decoration: none;
+	font-size: 13px;
+	width: 1240px;
+}
+
+.f_left {
+	width: 430px;
+	float: left;
+}
+
+.f_center {
+	width: 400px;
+	float: left;
+}
+
+.f_right {
+	width: 400px;
+	float: left;
+}
+
+.f_list {
+	padding: 4px;
+}

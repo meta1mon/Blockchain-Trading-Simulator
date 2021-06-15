@@ -4,14 +4,25 @@ header {
 	background-color: #f2f2f2;
 	overflow: hidden;
 	height : 80px;
+	width: 1240px;
 	
 }
 
-header .logo {
+.h_left {
+	width: 700px;
 	float: left;
 }
 
-header .menu {
+.h_right {
+	width: 300px;
+	float: right;
+}
+
+.logo {
+	float: left;
+}
+
+.menu {
 	float: left;
 	text-align: center;
 	padding: 14px 16px;
@@ -19,7 +30,7 @@ header .menu {
 	font-size: 16px;
 }
 
-header .member {
+.member {
 	float: right;
 	text-align: center;
 	padding: 14px 16px;

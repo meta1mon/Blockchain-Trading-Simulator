@@ -5,6 +5,8 @@ header {
 	overflow: hidden;
 	height : 80px;
 	width: 1240px;
+	margin: 0 auto;
+	text-align: center;
 	
 }
 

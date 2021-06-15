@@ -3,13 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="${pageContext.request.contextPath}/resources/css/header.css"
 	rel="stylesheet" type="text/css" />
-<script>
-	
-</script>
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
 <header>
 	<div class="h_left">
 		<ul>
-			<li class="logo"><a href="<%=request.getContextPath()%>/blist"><img src="http://placehold.it/120x50"></a></li>
+			<li class="logo"><a href="<%=request.getContextPath()%>/blist"><img
+					src="http://placehold.it/120x50"></a></li>
 			<li class="menu"><a href="#">About Us</a></li>
 			<li class="menu"><a href="#">모의투자</a></li>
 			<li class="menu"><a href="#">뉴스</a></li>
@@ -19,20 +19,20 @@
 		</ul>
 	</div>
 	<div class="h_right">
-	<c:choose>
-	<c:when test="${loginMember == null }">
-		<ul>
-			<li class="member"><button>로그인</button></li>
-			<li class="member"><button>회원가입</button></li>
-		</ul>
-	</c:when>
-	<c:when test="${loginMember != null }">
-		<input type="image" src="http://placehold.it/60x60">
-		<ul>
-			<li class="member"><button>로그아웃</button></li>
-			<li class="member"><button>회원가입</button></li>
-		</ul>
-	</c:when>
-	</c:choose>
+		<c:choose>
+			<c:when test="${loginMember == null }">
+				<ul>
+					<li class="member"><button>로그인</button></li>
+					<li class="member"><button>회원가입</button></li>
+				</ul>
+			</c:when>
+			<c:when test="${loginMember != null }">
+				<input type="image" src="http://placehold.it/60x60">
+				<ul>
+					<li class="member"><button>로그아웃</button></li>
+					<li class="member"><button>회원가입</button></li>
+				</ul>
+			</c:when>
+		</c:choose>
 	</div>
 </header>

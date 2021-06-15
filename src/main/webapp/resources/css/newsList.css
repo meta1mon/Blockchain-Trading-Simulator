@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+
+.headLine {
+	border: 1px solid;
+	width : 1000px;
+	height : 50px;
+	font-size : 13px;
+	overflow : hidden;
+}
+
+.headli{
+	float: left;
+	margin: 3px 10px;
+}

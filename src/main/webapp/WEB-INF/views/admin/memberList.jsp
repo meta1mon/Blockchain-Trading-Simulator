@@ -4,16 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="${pageContext.request.contextPath}/resources/css/admin.css"
+	rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
 <style>
-th, td {
+#mmm th, td {
 	padding: 5px;
 	text-align: center;
 }
 </style>
 </head>
-<body class="adminContent">
-	<div id="mmm">
+<%@include file="headerAndAside.jsp"%>
+<body>
+	<div id="mmm" style="position: absolute; top: 300px; left: 400px;">
 		<div>
 			<form action="#" method="get">
 				<select name="searchType">
@@ -51,15 +54,8 @@ th, td {
 
 		</div>
 		<div id="page">
-			<a href="#">&#60;&#60;</a>
-			<a href="#">1 2 3</a>
-			<a href="#">&#62;&#62;</a>
+			<a href="#">&#60;&#60;</a> <a href="#">1 2 3</a> <a href="#">&#62;&#62;</a>
 		</div>
-
-
-
-
-
 	</div>
 </body>
 </html>

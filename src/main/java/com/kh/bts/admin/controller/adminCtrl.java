@@ -9,21 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/admin")
 public class AdminCtrl {
-	@RequestMapping(value = "")
+	@RequestMapping(value = "/main")
 	public ModelAndView adminMain(ModelAndView mv) {
 		mv.setViewName("admin/adminMain");
-		return mv;
-	}
-
-	@RequestMapping(value = "/header", method = RequestMethod.GET)
-	public ModelAndView adminHeader(ModelAndView mv) {
-		mv.setViewName("admin/adminHeader");
-		return mv;
-	}
-
-	@RequestMapping(value = "/aside", method = RequestMethod.GET)
-	public ModelAndView adminAside(ModelAndView mv) {
-		mv.setViewName("admin/adminAside");
 		return mv;
 	}
 
@@ -60,6 +48,12 @@ public class AdminCtrl {
 	@RequestMapping(value = "rr", method = RequestMethod.GET)
 	public ModelAndView rr(ModelAndView mv) {
 		mv.setViewName("admin/replyReport");
+		return mv;
+	}
+	
+	@RequestMapping(value = "cll", method = RequestMethod.GET)
+	public ModelAndView cashLogList(ModelAndView mv) {
+		mv.setViewName("admin/cashLogList");
 		return mv;
 	}
 }

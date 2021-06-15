@@ -26,10 +26,9 @@
 }
 </style>
 </head>
-<%-- <%@include file="adminHeader.jsp"%> 
-<%@include file="adminAside.jsp"%> --%>
+<%@include file="headerAndAside.jsp"%> 
 <body class="adminContent">
-	<div id="mm" style="width: 1240px;">
+	<div id="mm" style="position: absolute; top: 300px; left: 400px;">
 		<ul>
 			<li><p>전체 가상 투자금</p> <img src="#" />
 				<p>1,111,111원</p></li>

@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="${pageContext.request.contextPath}/resources/css/admin.css"
+	rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
 </head>
-<body class="adminContent">
+<%@include file="headerAndAside.jsp"%>
+<body>
+<div id="nl"  style="position: absolute; top: 300px; left: 400px;">
 	<form action="#" method="post">
 		<input type="search">
 		<button type="button">검색</button>
@@ -33,5 +37,6 @@
 	</table>
 	<p>&#60; 1 2 3 &#62;</p>
 	<button type="button">글쓰기</button>
+</div>
 </body>
 </html>

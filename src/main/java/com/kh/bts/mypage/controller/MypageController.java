@@ -14,44 +14,50 @@ public class MypageController {
 		mv.setViewName("mypage/myPageEnter");
 		return mv;
 	}
+	
+	@RequestMapping(value = "mh")
+	public ModelAndView myHeader(ModelAndView mv) {
+		mv.setViewName("mypage/myHeader");
+		return mv;
+	}
 
-	@RequestMapping(value = "/myInfo")
+	@RequestMapping(value = "/mi")
 	public ModelAndView myInfo(ModelAndView mv) {
 		mv.setViewName("mypage/myInfo");
 		return mv;
 	}
 
-	@RequestMapping(value = "/myInfoUpdate")
+	@RequestMapping(value = "/miu")
 	public ModelAndView myInfoUpdate(ModelAndView mv) {
 		mv.setViewName("mypage/myInfoUpdate");
 		return mv;
 	}
 
-	@RequestMapping(value = "/myPasswordUpdate")
+	@RequestMapping(value = "/mpu")
 	public ModelAndView mypagePasswordUpdate(ModelAndView mv) {
 		mv.setViewName("mypage/myPasswordUpdate");
 		return mv;
 	}
 
-	@RequestMapping(value = "/MyEssets")
+	@RequestMapping(value = "/me")
 	public ModelAndView myEssets(ModelAndView mv) {
 		mv.setViewName("mypage/myEssets");
 		return mv;
 	}
 
-	@RequestMapping(value = "/myEssetsEnter")
+	@RequestMapping(value = "/mee")
 	public ModelAndView myEssetsEnter(ModelAndView mv) {
 		mv.setViewName("mypage/myEssetsEnter");
 		return mv;
 	}
 
-	@RequestMapping(value = "/myCommunity")
+	@RequestMapping(value = "/mc")
 	public ModelAndView myCommunity(ModelAndView mv) {
 		mv.setViewName("mypage/myCommunity");
 		return mv;
 	}
 
-	@RequestMapping(value = "/myReply")
+	@RequestMapping(value = "/mr")
 	public ModelAndView myReply(ModelAndView mv) {
 		mv.setViewName("mypage/myReply");
 		return mv;

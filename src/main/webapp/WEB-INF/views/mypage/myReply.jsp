@@ -16,6 +16,7 @@ li:nth-last-of-type(2), li:nth-last-of-type(3) {
 }
 </style>
 </head>
+<jsp:include page="myHeader.jsp"></jsp:include>
 <body>
 	<table border="2">
 		<tr>

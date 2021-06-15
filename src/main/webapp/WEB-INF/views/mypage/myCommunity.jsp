@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
 <style>
 li {
@@ -16,6 +18,7 @@ li:nth-last-of-type(2), li:nth-last-of-type(3) {
 }
 </style>
 </head>
+<jsp:include page="myHeader.jsp"></jsp:include>
 <body>
 	<table border="2">
 		<tr>

@@ -3,32 +3,41 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <style>
+    	#myM {
+    		width: 1240px;
+    		margin: 0 auto;
+    		text-align: center;
+    	}
+    	#myM ul {
+    		padding : 0;
+    	}
         #myM li {
+        	box-sizing: border-box;
             list-style-type: none;
             float: left;
+            width: 248px;
+        }
+        #myM a {
+        	text-decoration: none;
         }
 
-        #member li{
-            list-style-type: none;
-            float: left;
-            width: 300px;
-            height: 300px;
-            background-color: red;
-        }
     </style>
 </head>
+<jsp:include page="../main/header.jsp"></jsp:include>
 <body>
     <div id="myM">
         <h2>마이 페이지</h2>
         <ul>
-            <li>나의 정보</li>
-            <li>비밀번호 변경</li>
-            <li>나의 자산</li>
-            <li>나의 게시글/댓글</li>
-            <li>충전 내역</li>
+            <li><a href="">나의 정보</a></li>
+            <li><a href="">비밀번호 변경</a></li>
+            <li><a href="">나의 자산</a></li>
+            <li><a href="">나의 게시글/댓글</a></li>
+            <li><a href="">충전 내역</a></li>
         </ul>
         <hr style="clear: both;">
     </div>

@@ -61,7 +61,7 @@ function table() {
 						html += "<tr><td><a href=# onclick='changename("
 								+ thisCoin + ");'>" + coinList[i]
 								+ "</a></td><td>" + display[i][0] + "</td><td>"
-								+ display[i][1] + "</td><td>" + display[i][2]
+								+ display[i][1]+"%" + "</td><td>" + display[i][2]
 								+ "</td></tr>";
 
 					}
@@ -91,25 +91,19 @@ function chart() {
 			var abc6 = data['data'][a - 6][2] * 1; // 형변환
 			var abc7 = data['data'][a - 7][2] * 1; // 형변환
 
-			var now = new Date().getTime();
-			
-		
-			const curr = new Date();
-			const utc = curr.getTime() + (curr.getTimezoneOffset() * 60 * 1000);
-			const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
-			const kr_curr = new Date(utc + (KR_TIME_DIFF));
-
-			
-			
-		
-			var aaa = data['data'][0][0]; // 형변환
-			var aaa1 = data['data'][0][1]; // 형변환
-			console.log(now);
-			console.log(kr_curr);
-			console.log(kr_curr.getTime());
-			console.log(aaa1);
-			console.log(aaa);
-			console.log(aaa1);
+//			var now = new Date().getTime();
+//			const curr = new Date();
+//			const utc = curr.getTime() + (curr.getTimezoneOffset() * 60 * 1000);
+//			const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+//			const kr_curr = new Date(utc + (KR_TIME_DIFF));
+//			var aaa = data['data'][0][0]; // 형변환
+//			var aaa1 = data['data'][0][1]; // 형변환
+//			console.log(now);
+//			console.log(kr_curr);
+//			console.log(kr_curr.getTime());
+//			console.log(aaa1);
+//			console.log(aaa);
+//			console.log(aaa1);
 
 			function drawChart() {
 				console.log("drawChart 안에서의 abc 값 : " + abc);

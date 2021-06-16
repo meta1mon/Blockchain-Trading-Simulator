@@ -14,6 +14,7 @@
 <meta charset="UTF-8">
 <title>MainPage</title>
 </head>
+<jsp:include page="../main/header.jsp"></jsp:include>
 <body>
 	<div id="center">
 		<table>

@@ -26,7 +26,7 @@ public class MemberServiceImpl implements MemberService{
 		int result = 0;
 		result=mDao.insertMember(vo);
 		
-		String key = new TempKey().getKey(50, false); // 랜덤 문자 생성
+		String key = new TempKey().getKey(12, false); // 랜덤 문자 생성
 		mDao.createAuthkey(vo.getEmail(), key); 
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("메일 인증 테스트");

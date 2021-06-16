@@ -78,7 +78,7 @@
   border-radius: 4px;
 }
 
-.newsPage a.active {
+.newsPage a.pageActive {
   background-color: #B85CEF;
   color: white;
 }

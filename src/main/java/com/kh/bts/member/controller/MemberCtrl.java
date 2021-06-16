@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class MemberCtrl {
 	private MemberService mService;
 	
 // 회원가입
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	@RequestMapping(value = "/signup")
 	public ModelAndView insertMember(ModelAndView mv) {
 		mv.setViewName("member/signup");
 		return mv;
@@ -53,10 +54,10 @@ public class MemberCtrl {
 	
 // 이메일 인증 링크 눌렀을 때
 	@RequestMapping(value = "/emailconfirm", method = RequestMethod.GET)
-	public String emailConfirm(Member vo, Model model) throws Exception { // �̸�������
+	public String emailConfirm(Member vo, Model model) throws Exception {
 		mService.authMember(vo);
 		model.addAttribute("vo", vo);
-		return "mainpage";
+		return "main/mainPage";
 	}
 	
 //	로그인
@@ -67,14 +68,19 @@ public class MemberCtrl {
 	}
 	
 	@RequestMapping(value = "/loginmember")
-	public String loginMember(Member vo, HttpServletRequest request) throws Exception {
+	public void loginMember(Member vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
 		Member loginMember = mService.loginMember(vo);
 		if (loginMember == null) {
-			return "redirect:/";
+			response.sendRedirect("login");
 		} else {
-			request.getSession().setAttribute("loginMember", loginMember);
+			if (!loginMember.getPw().equals(vo.getPw())) {
+				response.sendRedirect("login");
+			} else {
+				session.setAttribute("loginMember", loginMember);
+				System.out.println(loginMember.getEmail() + loginMember.getNickname());
+				response.sendRedirect("mainpage");
+			}
 		}
-		return "mainpage";
 	}
-
 }

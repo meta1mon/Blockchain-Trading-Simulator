@@ -22,15 +22,14 @@
 		<c:choose>
 			<c:when test="${loginMember == null }">
 				<ul>
-					<li class="member"><button>로그인</button></li>
-					<li class="member"><button>회원가입</button></li>
+					<li class="member"><a href="<%=request.getContextPath()%>/login" id="login">로그인</a></li>
+					<li class="member"><a href="<%=request.getContextPath()%>/signup" id="signup">회원가입</a></li>
 				</ul>
 			</c:when>
 			<c:when test="${loginMember != null }">
-				<input type="image" src="http://placehold.it/60x60">
 				<ul>
-					<li class="member"><button>로그아웃</button></li>
-					<li class="member"><button>회원가입</button></li>
+					<li class="member"><a href="#">로그아웃</a></li>
+					<li class="member"><a href="#">마이페이지</a></li>
 				</ul>
 			</c:when>
 		</c:choose>

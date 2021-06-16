@@ -62,5 +62,12 @@ public class MypageController {
 		mv.setViewName("mypage/myReply");
 		return mv;
 	}
+	
+	@RequestMapping(value = "/mcl")
+	public ModelAndView myCashLog(ModelAndView mv) {
+		mv.setViewName("mypage/myCashLog");
+		return mv;
+	}
+	
 
 }

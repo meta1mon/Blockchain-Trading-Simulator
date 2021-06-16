@@ -42,7 +42,7 @@
 				</div>
 				<div class="insertInfo">
 				</div>
- -->				</table>
+ -->
 			</div>
 			<form id="frmJoin">
 				<div class="terms">

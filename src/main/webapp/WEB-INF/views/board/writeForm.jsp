@@ -10,6 +10,7 @@
 	rel="stylesheet" type="text/css" />
 </head>
 <body bgcolor="#FFEFD5">
+	<jsp:include page="../main/header.jsp"></jsp:include>
 	<form action="bInsert" method="post" enctype="multipart/form-data">
 		<table align="center">
 			<tr>

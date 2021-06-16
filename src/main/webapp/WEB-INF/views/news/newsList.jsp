@@ -17,14 +17,24 @@
 		<input type="submit" value="검색">
 		<div class="headLine">
 			<marquee class="scroll" onmouseover="this.stop();" onmouseout="this.start();">
-				<!-- newsList.js의 newsAPI() 함수 참조 -->
+				<!-- newsList.js의 newsHeadLine() 함수 참조 -->
 			</marquee>
 		</div>
 		<div class="newsList" id="raw1">
-			<!-- newsList.js의 newsAPI() 함수 참조 -->
+			<!-- newsList.js의 newsList() 함수 참조 -->
 		</div>
 		<div class="newsList" id="raw2">
-			<!-- newsList.js의 newsAPI() 함수 참조 -->
+			<!-- newsList.js의 newsList() 함수 참조 -->
+		</div>
+		<div class="newsPage">
+			<a href="#">이전</a>
+			<a class="pageActive" href="#">1</a>
+			<a href="#">2</a>
+			<a href="#">3</a>
+			<a href="#">4</a>
+			<a href="#">5</a>
+			<a href="#">6</a>
+			<a href="#">다음</a>
 		</div>
 	</div>
 	<script type="text/javascript"	src="${pageContext.request.contextPath}/resources/js/newsList.js"></script>

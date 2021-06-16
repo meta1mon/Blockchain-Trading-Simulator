@@ -18,8 +18,8 @@ function dateDiffer(pubDate){
 	return newsTime;
 };
 
-function newsAPI() {
-	console.log("newsAPI함수 실행")
+function newsHeadLine() {
+	console.log("newsHeadLine 실행")
 	$.ajax({
 				url : 'https://www.cryptohub.or.kr/api/v1/news',
 				type : "POST",
@@ -34,6 +34,23 @@ function newsAPI() {
 						$(".scroll").append('<span class="headList" id="headTime">&#128344;'+newsTime+'&nbsp;&nbsp;</span><span class="headList">'+data.data[i].title+'</span>&nbsp;&nbsp;&nbsp;&nbsp;');
 					}
 					
+				}
+			});
+};
+
+function newsList() {
+	console.log("newsList 실행")
+	var p = $(".pageActive").val();
+	console.log(p);
+	$.ajax({
+				url : 'https://www.cryptohub.or.kr/api/v1/news',
+				type : "POST",
+				cache : false,
+				data : {
+					token : "$2y$10$hUvFjpPSDU5Gx6vp20vhGOg6Nuib3IZBzZk4cR5f.uGbRtMKN.S2m"
+				},
+				success : function(data) {
+					
 					// 뉴스목록 
 					for (var i = 0; i < 3; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
@@ -47,4 +64,6 @@ function newsAPI() {
 			});
 };
 
-newsAPI();
+newsHeadLine();
+
+newsList();

@@ -9,7 +9,8 @@
 <link href="${pageContext.request.contextPath}/resources/css/style.css"
 	rel="stylesheet" type="text/css" />
 </head>
-<body bgcolor="#FFEFD5">
+<body>
+	<jsp:include page="../main/header.jsp"></jsp:include>
 	<h1 align="center">게시글 상세보기</h1>
 	<table align="center" cellpadding="10" cellspacing="0" border="1"
 		width="70%">

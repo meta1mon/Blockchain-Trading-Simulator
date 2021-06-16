@@ -9,7 +9,8 @@
 </head>
 <link href="${pageContext.request.contextPath}/resources/css/style.css"
 	rel="stylesheet" type="text/css" />
-<body bgcolor="#FFEFD5">
+<body>
+	<jsp:include page="../main/header.jsp"></jsp:include>
 	<form name="renewForm" action="bUpdate" method="post"
 		enctype="multipart/form-data">
 		<input type="hidden" name="board_num" value="${board.board_num}">

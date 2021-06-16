@@ -6,8 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>BTS</title>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/decoupled-document/ckeditor.js"></script>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <style>
 .ck.ck-editor {
 	max-width: 800px;
@@ -17,9 +18,11 @@
 	min-height: 400px;
 }
 </style>
+
 </head>
 <%@include file="../main/header.jsp"%>
 <body>
+
 	<form action="cInsert" method="post" enctype="multipart/form-data">
 		<table align="center">
 			<tr>
@@ -36,7 +39,14 @@
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td><div id="toolbar-container"></div><div id="editor" name="ccontent" maxlength="4000"></div></td>
+				<td><textarea id="editor" name="ccontent" maxlength="4000">
+    </textarea> <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"
@@ -46,18 +56,14 @@
 			</tr>
 		</table>
 	</form>
+	<script>
 <script>
-    DecoupledEditor
-        .create( document.querySelector( '#editor' ) )
-        .then( editor => {
-            const toolbarContainer = document.querySelector( '#toolbar-container' );
-
-            toolbarContainer.appendChild( editor.ui.view.toolbar.element );
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
+ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
 </script>
 </body>
 <%@include file="../main/footer.jsp"%>
-</html> 
+</html>

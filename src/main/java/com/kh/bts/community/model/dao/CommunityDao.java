@@ -29,7 +29,7 @@ public class CommunityDao {
 		return sqlSession.selectOne("community.countCommunity");
 	}
 
-	public Community selectOne(int cno) { // 게시글 단일 조회
+	public Community selectOne(String cno) { // 게시글 단일 조회
 		return sqlSession.selectOne("community.selectOne", cno);
 	}
 
@@ -41,11 +41,11 @@ public class CommunityDao {
 		return sqlSession.update("community.updateCommunity", c);
 	}
 
-	public int deleteCommunity(int cno) { // 게시글 삭제
+	public int deleteCommunity(String cno) { // 게시글 삭제
 		return sqlSession.delete("community.deleteCommunity", cno);
 	}
 
-	public int addReadCount(int cno) { // 게시글 조회수 증가
+	public int addReadCount(String cno) { // 게시글 조회수 증가
 		return sqlSession.update("community.addReadCount", cno);
 	}
 

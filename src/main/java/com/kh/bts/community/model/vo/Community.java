@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Community implements java.io.Serializable {
 	private static final long serialVersionUID = 20001L;
-	private int cno;
+	private String cno;
 	private String csubject;
 	private String ccontent;
 	private String cdate;
@@ -19,7 +19,7 @@ public class Community implements java.io.Serializable {
 	public Community() {
 	}
 
-	public Community(int cno, String csubject, String ccontent, String cdate, String filepath, int viewcnt, int likecnt,
+	public Community(String cno, String csubject, String ccontent, String cdate, String filepath, int viewcnt, int likecnt,
 			int dislikecnt, int replycnt, String cwriter) {
 		this.cno = cno;
 		this.csubject = csubject;
@@ -40,11 +40,11 @@ public class Community implements java.io.Serializable {
 				+ dislikecnt + ", replycnt=" + replycnt + ", cwriter=" + cwriter + "]";
 	}
 
-	public int getCno() {
+	public String getCno() {
 		return cno;
 	}
 
-	public void setCno(int cno) {
+	public void setCno(String cno) {
 		this.cno = cno;
 	}
 

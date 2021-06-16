@@ -21,16 +21,17 @@ public class CommunityCtrl {
 	private CommunityService cmService;
 	public static final int LIMIT = 10;
 
-	// RequestMethod 생략 시, GET과 POST 둘 다 가능
 	@RequestMapping(value = "clist", method = RequestMethod.GET)
-	public ModelAndView communityListService(@RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam(name = "keyword", required = false) String keyword,
+	public ModelAndView communityListService(
+			@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
 			@RequestParam(name = "searchType", defaultValue = "1") int searchType, ModelAndView mv) {
 		try {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
 			int listCount = cmService.totalCount();
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+			
 			if (keyword != null && !keyword.equals(""))
 				mv.addObject("list", cmService.selectSearch(keyword, searchType));
 			else
@@ -38,6 +39,8 @@ public class CommunityCtrl {
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);
+			mv.addObject("searchType", searchType);
+			mv.addObject("keyword", keyword);
 			mv.setViewName("community/clist");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
@@ -46,9 +49,8 @@ public class CommunityCtrl {
 		return mv;
 	}
 
-	// 댓글 부분은 아예 빼버렸기 때문에, 상세 글은 나와도 댓글은 안보임
 	@RequestMapping(value = "cDetail", method = RequestMethod.GET)
-	public ModelAndView communityDetail(@RequestParam(name = "cno") int cno,
+	public ModelAndView communityDetail(@RequestParam(name = "cno") String cno,
 			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
 		try {
 			int currentPage = page;
@@ -64,7 +66,7 @@ public class CommunityCtrl {
 	}
 
 	@RequestMapping(value = "cUpdateForm", method = RequestMethod.GET)
-	public ModelAndView communityDetail(@RequestParam(name = "cno") int cno, ModelAndView mv) {
+	public ModelAndView communityDetail(@RequestParam(name = "cno") String cno, ModelAndView mv) {
 		try {
 			mv.addObject("community", cmService.selectCommunity(1, cno));
 			mv.setViewName("community/updateForm");
@@ -81,8 +83,9 @@ public class CommunityCtrl {
 	}
 
 	@RequestMapping(value = "cInsert", method = RequestMethod.POST)
-	public ModelAndView communityInsert(Community c, @RequestParam(name = "upfile", required = false) MultipartFile report,
-			HttpServletRequest request, ModelAndView mv) {
+	public ModelAndView communityInsert(Community c,
+			@RequestParam(name = "upfile", required = false) MultipartFile report, HttpServletRequest request,
+			ModelAndView mv) {
 		try {
 			if (report != null && !report.equals(""))
 				saveFile(report, request);
@@ -116,7 +119,7 @@ public class CommunityCtrl {
 	}
 
 	@RequestMapping(value = "cDelete", method = RequestMethod.GET)
-	public ModelAndView communityDelete(@RequestParam(name = "cno") int cno,
+	public ModelAndView communityDelete(@RequestParam(name = "cno") String cno,
 			@RequestParam(name = "page", defaultValue = "1") int page, HttpServletRequest request, ModelAndView mv) {
 		try {
 			Community c = cmService.selectCommunity(1, cno);

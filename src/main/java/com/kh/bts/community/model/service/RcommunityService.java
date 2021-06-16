@@ -1,18 +1,18 @@
 package com.kh.bts.community.model.service;
 
+import java.util.List;
+
+import com.kh.bts.community.model.vo.Rcommunity;
+
 public interface RcommunityService {
 
-//	List<Community> selectSearch(String keyword, int searchType);
-//
-//	List<Community> selectList(int startPage, int limit);
-//
-//	int totalCount();
-//
-//	Community selectCommunity(int chk, int cno);
-//	
-//	void insertCommunity(Community c);
-//
-//	Community updateCommunity(Community c);
-//
-//	void deleteCommunity(int cno);
+	List<Rcommunity> selectList(String cno);
+
+	Rcommunity selectRcommunity(String rno);
+
+	int insertRcommunity(Rcommunity rc);
+
+	int updateRcommunity(Rcommunity rc);
+
+	int deleteRcommunity(Rcommunity rc);
 }

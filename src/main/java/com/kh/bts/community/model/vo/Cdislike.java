@@ -4,13 +4,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Cdislike {
-	private int cno;
+	private String cno;
 	private String nickname;
 
 	public Cdislike() {
 	}
 
-	public Cdislike(int cno, String nickname) {
+	public Cdislike(String cno, String nickname) {
 		super();
 		this.cno = cno;
 		this.nickname = nickname;
@@ -21,11 +21,11 @@ public class Cdislike {
 		return "Clike [cno=" + cno + ", nickname=" + nickname + "]";
 	}
 
-	public int getCno() {
+	public String getCno() {
 		return cno;
 	}
 
-	public void setCno(int cno) {
+	public void setCno(String cno) {
 		this.cno = cno;
 	}
 

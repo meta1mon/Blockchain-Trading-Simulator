@@ -1,46 +1,37 @@
 package com.kh.bts.community.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.kh.bts.community.model.vo.Rcommunity;
 
 @Repository("rcmDao")
 public class RcommunityDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-//	public List<Community> searchList(String keyword, int searchType) { // 검색한 게시글 조회
-//		return sqlSession.selectList("Community.searchList", keyword);
-//	}
-//
-//	public List<Community> selectList(int startPage, int limit) { // 페이지당 게시글 조회
-//		int startRow = (startPage - 1) * limit;
-//		RowBounds row = new RowBounds(startRow, limit);
-//		return sqlSession.selectList("Community.selectList", null, row);
-//	}
-//
-//	public int listCount() { // 게시글 전체 개수 조회
-//		return sqlSession.selectOne("Community.countCommunity");
-//	}
-//
-//	public Community selectOne(int cno) { // 게시글 단일 조회
-//		return sqlSession.selectOne("Community.selectOne", cno);
-//	}
-//
-//	public int insertCommunity(Community c) { // 게시글 삽입
-//		return sqlSession.insert("Community.insertCommunity", c);
-//	}
-//
-//	public int updateCommunity(Community c) { // 게시글 수정
-//		return sqlSession.update("Community.updateCommunity", c);
-//	}
-//
-//	public int deleteCommunity(int cno) { // 게시글 삭제
-//		return sqlSession.delete("Community.deleteCommunity", cno);
-//	}
-//
-//	public int addReadCount(int cno) { // 게시글 조회수 증가
-//		return sqlSession.update("Community.addReadCount", cno);
-//	}
-
+	public List<Rcommunity> selectList(String cno) { // 게시글에 해당하는 댓글 조회
+		return sqlSession.selectList("Rcommunity.selectRcommunityAll", cno);
+	}
+	
+	public Rcommunity selectOne(String rno) { // 단일 댓글 조회
+		return sqlSession.selectOne("Rcommunity.selectRcommunity", rno);
+	}
+	
+	public int insertRcommunity(Rcommunity rc) { // 댓글 입력
+		return sqlSession.insert("Rcommunity.insertRcommunity", rc);
+	}
+	
+	public int updateRcommunity(Rcommunity rc) { // 댓글 수정
+		System.out.println(rc);
+		return sqlSession.update("Rcommunity.updateRcommunity", rc);
+	}
+	
+	public int deleteRcommunity(Rcommunity rc) { // 댓글 삭제
+		System.out.println(rc);
+		return sqlSession.delete("Rcommunity.deleteRcommunity", rc);
+	}
 }

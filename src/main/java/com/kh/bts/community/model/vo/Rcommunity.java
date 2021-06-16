@@ -4,16 +4,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Rcommunity {
-	private int rno;
+	private String rno;
 	private String rwriter;
 	private String rcontent;
 	private String rdate;
-	private int cno;
+	private String cno;
 
 	public Rcommunity() {
 	}
 
-	public Rcommunity(int rno, String rwriter, String rcontent, String rdate, int cno) {
+	public Rcommunity(String rno, String rwriter, String rcontent, String rdate, String cno) {
 		super();
 		this.rno = rno;
 		this.rwriter = rwriter;
@@ -28,11 +28,11 @@ public class Rcommunity {
 				+ ", cno=" + cno + "]";
 	}
 
-	public int getRno() {
+	public String getRno() {
 		return rno;
 	}
 
-	public void setRno(int rno) {
+	public void setRno(String rno) {
 		this.rno = rno;
 	}
 
@@ -60,11 +60,11 @@ public class Rcommunity {
 		this.rdate = rdate;
 	}
 
-	public int getCno() {
+	public String getCno() {
 		return cno;
 	}
 
-	public void setCno(int cno) {
+	public void setCno(String cno) {
 		this.cno = cno;
 	}
 

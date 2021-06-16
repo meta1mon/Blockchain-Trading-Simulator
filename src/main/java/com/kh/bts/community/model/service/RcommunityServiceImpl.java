@@ -1,56 +1,36 @@
 package com.kh.bts.community.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.bts.community.model.dao.RcommunityDao;
+import com.kh.bts.community.model.vo.Rcommunity;
 
 @Service("rcmService")
 public class RcommunityServiceImpl implements RcommunityService {
 	@Autowired
 	private RcommunityDao rcmDao;
 
-//	@Override
-//	public List<Community> selectSearch(String keyword, int searchType) {
-//		return cmDao.searchList(keyword, searchType);
-//	}
-//
-//	@Override
-//	public List<Community> selectList(int startPage, int limit) {
-//		return cmDao.selectList(startPage, limit);
-//	}
-//
-//	@Override
-//	public int totalCount() {
-//		return cmDao.listCount();
-//	}
-//
-//	@Override
-//	public Community selectCommunity(int chk, int cno) {
-//		if (chk == 0)
-//			cmDao.addReadCount(cno);
-//		return cmDao.selectOne(cno);
-//	}
-//
-//	@Override
-//	public void insertCommunity(Community c) {
-//		cmDao.insertCommunity(c);
-//	}
-//
-//	@Override
-//	public Community updateCommunity(Community c) {
-//		int result = cmDao.updateCommunity(c);
-//		if (result > 0) {
-//			c = cmDao.selectOne(c.getCno());
-//		} else {
-//			c = null;
-//		}
-//		return c;
-//	}
-//
-//	@Override
-//	public void deleteCommunity(int cno) {
-//		cmDao.deleteCommunity(cno);
-//	}
+	public List<Rcommunity> selectList(String cno) { // 게시글에 해당하는 댓글 조회
+		return rcmDao.selectList(cno);
+	}
+
+	public Rcommunity selectRcommunity(String rno) { // 단일 댓글 조회
+		return rcmDao.selectOne(rno);
+	}
+
+	public int insertRcommunity(Rcommunity rc) { // 댓글 입력
+		return rcmDao.insertRcommunity(rc);
+	}
+
+	public int updateRcommunity(Rcommunity rc) { // 댓글 수정
+		return rcmDao.updateRcommunity(rc);
+	}
+
+	public int deleteRcommunity(Rcommunity rc) { // 댓글 삭제
+		return rcmDao.deleteRcommunity(rc);
+	}
 
 }

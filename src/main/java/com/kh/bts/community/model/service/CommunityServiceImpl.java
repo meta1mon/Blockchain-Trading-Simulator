@@ -29,7 +29,7 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public Community selectCommunity(int chk, int cno) {
+	public Community selectCommunity(int chk, String cno) {
 		if (chk == 0)
 			cmDao.addReadCount(cno);
 		return cmDao.selectOne(cno);
@@ -52,7 +52,7 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public void deleteCommunity(int cno) {
+	public void deleteCommunity(String cno) {
 		cmDao.deleteCommunity(cno);
 	}
 

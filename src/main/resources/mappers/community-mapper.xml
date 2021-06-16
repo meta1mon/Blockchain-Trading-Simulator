@@ -5,12 +5,21 @@
 	</resultMap>
 
 	<!-- 검색한 게시글 조회 -->
-	<select id="searchList" parameterType="int"
+	<select id="searchList" parameterType="Community"
 		resultType="arraylist" resultMap="resultCommunity">
-		SELECT * FROM COMMUNITY WHERE CSUBJECT LIKE '%'|| #{keyword} ||'%'
-		OR CWRITER LIKE '%'|| #{keyword} ||'%'
-		OR CCONTENT LIKE '%'|| #{keyword} ||'%'
-		ORDER BY CNO DESC
+		SELECT NVL(MAX(ROWNUM),0)
+		FROM COMMUNITY
+		<choose>
+			<when test="CSUBJECT != null">
+				WHERE CSUBJECT LIKE '%'||#{csubject}||'%' 
+			</when>							<!-- #은 set하는거고	 -->
+			<when test="CCONTENT != null">
+				WHERE CCONTENT LIKE '%${ccontent}%'  <!-- $는 미리만들어놓고 실행한다 이엘아님..마이바티스문임!-->
+			</when>
+			<when test="CWRITER !=null">
+				WHERE CWRITER LIKE '%${cwriter}%'
+			</when>
+		</choose>
 	</select>
 
 	<!-- 페이지당 게시글 조회 -->
@@ -24,16 +33,16 @@
 	</select>
 	
 	<!-- 게시글 단일 조회 -->
-	<select id="selectOne" parameterType="int" resultType="Community">
+	<select id="selectOne" parameterType="string" resultType="Community">
 		SELECT * FROM COMMUNITY WHERE CNO = #{cno}
 	</select>
 
 	<!-- 게시글 삽입 -->
-	<insert id="insertCommunity" parameterType="Community"
+	<insert id="insertCommunity" parameterType="String"
 		flushCache="true" statementType="PREPARED">
 		INSERT INTO COMMUNITY VALUES(
-		'CO'||TO_CHAR(SYSDATE,'RRMMDD')||NVL(MAX(CNO),0)+1,
-		#{csubject}, #{ccontent}, to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS'),
+		'CO'||TO_CHAR(SYSDATE,'RRMMDD')||LPAD(SEQ_COMMUNITY.NEXTVAL,2,'0'),
+		#{csubject}, #{ccontent}, default,
 		#{filepath}, 0, 0, 0, 0, #{cwriter})
 	</insert>
 
@@ -48,13 +57,13 @@
 	</update>
 
 	<!-- 게시글 삭제 -->
-	<delete id="deleteCommunity" parameterType="int"
+	<delete id="deleteCommunity" parameterType="string"
 		flushCache="true" statementType="PREPARED">
 		DELETE FROM COMMUNITY WHERE CNO = #{cno}
 	</delete>
 	
 	<!-- 게시글 조회 수 증가 -->
-	<update id="addReadCount" parameterType="int"
+	<update id="addReadCount" parameterType="string"
 		flushCache="true" statementType="PREPARED">
 		UPDATE COMMUNITY SET VIEWCNT = VIEWCNT+1 WHERE CNO = #{cno}
 	</update>

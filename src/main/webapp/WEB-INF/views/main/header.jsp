@@ -10,27 +10,30 @@
 		<ul>
 			<li class="logo"><a href="<%=request.getContextPath()%>/blist"><img
 					src="http://placehold.it/120x50"></a></li>
-			<li class="menu"><a href="#">About Us</a></li>
+			<li class="menu"><a href="<%=request.getContextPath()%>/aboutus">About Us</a></li>
 			<li class="menu"><a href="#">모의투자</a></li>
-			<li class="menu"><a href="#">뉴스</a></li>
+			<li class="menu"><a href="${pageContext.request.contextPath}/nlist">뉴스</a></li>
 			<li class="menu"><a href="#">프로차트</a></li>
-			<li class="menu"><a href="#">커뮤니티</a></li>
+			<li class="menu"><a href="<%=request.getContextPath()%>/clist">커뮤니티</a></li>
 			<li class="menu"><a href="#">충전소</a></li>
+			<li class="menu"><a href="#">커뮤니티</a></li>
+			<li class="menu"><a href="${pageContext.request.contextPath}/cashShop">충전소</a></li>
+			<li class="menu"><a href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
+
 		</ul>
 	</div>
 	<div class="h_right">
 		<c:choose>
 			<c:when test="${loginMember == null }">
 				<ul>
-					<li class="member"><button>로그인</button></li>
-					<li class="member"><button>회원가입</button></li>
+					<li class="member"><a href="<%=request.getContextPath()%>/login" id="login">로그인</a></li>
+					<li class="member"><a href="<%=request.getContextPath()%>/signup" id="signup">회원가입</a></li>
 				</ul>
 			</c:when>
 			<c:when test="${loginMember != null }">
-				<input type="image" src="http://placehold.it/60x60">
 				<ul>
-					<li class="member"><button>로그아웃</button></li>
-					<li class="member"><button>회원가입</button></li>
+					<li class="member"><a href="<%=request.getContextPath()%>/logout" id="logout">로그아웃</a></li>
+					<li class="member"><a href="#">마이페이지</a></li>
 				</ul>
 			</c:when>
 		</c:choose>

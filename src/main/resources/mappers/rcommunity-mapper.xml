@@ -23,8 +23,8 @@
 	<insert id="insertRcommunity" parameterType="Rcommunity" flushCache="true" statementType="PREPARED" timeout="20">
 		INSERT INTO
 		RCOMMUNITY VALUES(
-		'CR'||TO_CHAR(SYSDATE,'RRMMDD')||NVL(MAX(RNO),0)+1,
-		#{rwriter}, #{rcontent}, to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS'), #{cno})
+		'CR'||TO_CHAR(SYSDATE,'RRMMDD')||LPAD(SEQ_RCOMMUNITY.NEXTVAL,2,'0'),
+		#{rwriter}, #{rcontent}, default, #{cno})
 	</insert>
 
 	<!-- 댓글 수정 -->

@@ -6,15 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>BTS</title>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/decoupled-document/ckeditor.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/decoupled-document/ckeditor.js"></script>
 </head>
 <%@include file="../main/header.jsp"%>
 <body bgcolor="#FFEFD5">
 	<form name="renewForm" action="cUpdate" method="post"
 		enctype="multipart/form-data">
-		<input type="hidden" name="cno" value="${community.cno}">
-		<input type="hidden" name="filepath" value="${community.filepath}">
+		<input type="hidden" name="cno" value="${community.cno}"> <input
+			type="hidden" name="filepath" value="${community.filepath}">
 		<table align="center">
 			<tr>
 				<td>제목</td>
@@ -41,7 +43,14 @@
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td><div id="toolbar-container"></div><div id="editor" name="ccontent" maxlength="4000"></div></td>
+				<td><textarea id="editor" name="ccontent" maxlength="4000">
+    </textarea> <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit" id="renew"
@@ -51,18 +60,6 @@
 			</tr>
 		</table>
 	</form>
-<script>
-    DecoupledEditor
-        .create( document.querySelector( '#editor' ) )
-        .then( editor => {
-            const toolbarContainer = document.querySelector( '#toolbar-container' );
-
-            toolbarContainer.appendChild( editor.ui.view.toolbar.element );
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
-</script>
 </body>
 <%@include file="../main/footer.jsp"%>
 </html>

@@ -12,11 +12,11 @@ public interface CommunityService {
 
 	int totalCount();
 
-	Community selectCommunity(int chk, int cno);
+	Community selectCommunity(int chk, String cno);
 	
 	void insertCommunity(Community c);
 
 	Community updateCommunity(Community c);
 
-	void deleteCommunity(int cno);
+	void deleteCommunity(String cno);
 }

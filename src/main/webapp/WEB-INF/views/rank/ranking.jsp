@@ -4,15 +4,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
 <style>
-li {
+#rank {
+	width: 1240px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#rank table {
+	margin: 0 auto;
+}
+
+#rank li {
 	list-style-type: none;
 	float: left;
 	margin: 0 50px;
 }
 </style>
 </head>
+<jsp:include page="../main/header.jsp"></jsp:include>
 <body>
 	<div id="rank">
 		<ul>

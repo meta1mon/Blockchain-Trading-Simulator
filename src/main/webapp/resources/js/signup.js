@@ -17,6 +17,15 @@ $(".termCheck").on("click", function() {
 
 })
 
+$(function(){
+	$(".agreement").on("click", function(){
+		if($(".insertInfo").css("display", "block")){
+			$(".insertInfo").css("display", "none");
+			$(".terms").css("display", "block");
+		}
+	})
+})
+
 // 다음 버튼
 $(function() {
 	$(".insertInfo").css("display", "none");
@@ -24,7 +33,10 @@ $(function() {
 		if ($(".req:checked").length == 2) {
 			$(".insertInfo").css("display", "block");
 			$(".terms").css("display", "none");
+			$(".step1").removeClass("far fa-check-circle");
+			$(".step1").addClass("fas fa-check-circle");
 			$("input[name=mailing]:checked").val("Y");
+			$(window).scrollTop(0);
 		} else {
 			alert("필수 항목에 동의해주세요.")
 		}
@@ -176,7 +188,7 @@ $("input[name=pwCh]").on("keyup", passEqual);
 	$("#pw").on("keyup", pwReg);
 	$("#phone").on("keyup", phoneReg);
 
-	function regCheck() {
+	var regCheck = function() {
 		if (!emailReg) {
 			return false;
 		}
@@ -190,24 +202,39 @@ $("input[name=pwCh]").on("keyup", passEqual);
 			return false;
 		}
 		return true;
+	};
+	
+	function check(){
+		if(!passEqual){
+			console.log("비밀번호 일치X");
+			return false;
+		}
+		if(!regCheck){
+			console.log("형식 일치X");
+			return false;
+		}
+		if(!required){
+			console.log("필수항목 입력X");
+			return false;
+		}
+		return true;
 	}
-	;
 
 //pinpad 생성
-new pinpad({
-	ref : {
-		el : '.pin1'
-	},
-	immediate : false,
-	maxLength : 4,
-	close: '<i class="far fa-times-circle"></i>',
-	desc : 'ACCOUNT PASSWORD',
-	passcode : true,
-	letterReplace : {
-		'del' : '<i class="fas fa-backspace"></i>',
-		'done' : '<i class="fas fa-check"></i>'
-	}
-});
+	new pinpad({
+		ref : {
+			el : '.pin1'
+		},
+		immediate : false,
+		maxLength : 4,
+		close: '<i class="far fa-times-circle"></i>',
+		desc : 'ACCOUNT PASSWORD',
+		passcode : true,
+		letterReplace : {
+			'del' : '<i class="fas fa-times delete"></i>',
+			'done' : '<i class="fas fa-check done"></i>',
+		}
+	});
 
 // 회원가입
 $("#insert").on("click", function() {
@@ -221,12 +248,13 @@ $("#insert").on("click", function() {
 		success : function(data) {
 			if (data > 0) {
 				location.href = "authwait";
+				alert("회원가입 성공!")
 			} else {
 				alert("입력 사항을 다시 확인해주세요.")
 			}
 		},
 		error : function() {
-			alert("회원가입 실패");
+			alert("회원가입 실패!");
 		}
 	});
 });

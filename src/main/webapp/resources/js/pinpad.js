@@ -12,43 +12,42 @@
 
 
 var tmplt = ' \
-<div class="pinpad-dimmed [[SKIN]]"> \
-  <div class="wrapper"> \
-    <div class="inner_wrapper"> \
-      <div class="high"> \
-	  <div class="pin-board"> \
-		<table class="table"> \
-			<tr> \
-				<td> \
-					<div class="button"> \
-						[[CLOSE]]\
-					</div> \
-				</td> \
-			</tr> \
-			<tr> \
-				<td> \
-					<div class="pin-desc">[[DESC]] \
-					</div> \
-				</td> \
-			</tr> \
-			<tr> \
-				<td> \
-					<div class="pin"></div> \
-				</td> \
-			</tr> \
-		</table> \
-	</div> \
-	</div> \
-	<div class="low"> \
-	<div class="pinpad"> \
-          <div class="pads">  \
-            [[NUMBERS]] \
-          </div> \
-     </div> \
-    </div> \
-    </div> \
-  </div> \
-</div>';
+	<div class="pinpad-dimmed [[SKIN]]"> \
+	  <div class="wrapper"> \
+	    <div class="inner_wrapper"> \
+	      <div class="high"> \
+		  <div class="pin-board"> \
+			<table class="table"> \
+				<tr> \
+					<td> \
+					</td> \
+				</tr> \
+				<tr> \
+					<td class="sec"> \
+						<div class="pin-desc"> \
+						<p>[[DESC]]</p> \
+						<p class="bankPwCh">&nbsp;</p> \
+						</div> \
+					</td> \
+				</tr> \
+				<tr> \
+					<td> \
+						<div class="pin"></div> \
+					</td> \
+				</tr> \
+			</table> \
+		</div> \
+		</div> \
+		<div class="low"> \
+		<div class="pinpad"> \
+	          <div class="pads">  \
+	            [[NUMBERS]] \
+	          </div> \
+	     </div> \
+	    </div> \
+	    </div> \
+	  </div> \
+	</div>';
 var pinpadCount = 0;
 var $pinpad = null;
 var text = '';
@@ -113,20 +112,28 @@ function keyevent(e) {
 			break;
 		case 'done':
 			if(text.length != 4){
-				$(".alert").html("4자리 숫자만 사용할 수 있습니다.");
+				$(".bankPwCh").html("4자리 숫자만 사용할 수 있습니다.");
+				$(".bankPwCh").css("color", "red");
+				$(".bankPwCh").css("font-size", "small");
 				console.log("자리수 부족: " + text);
 				text = '';
 			} else {
 				if(text.match(same) != null) {
-					$(".alert").html("동일한 숫자를 연속 3번 이상 사용할 수 없습니다.");
+					$(".bankPwCh").html("동일한 숫자를 연속 3번 이상 사용할 수 없습니다.");
+					$(".bankPwCh").css("color", "red");
+					$(".bankPwCh").css("font-size", "small");
 					console.log("같은 숫자: " + text);
 					text = '';
 				}else if(text.match(contNum) !=null){
-					$(".alert").html("연속된 숫자를 사용할 수 없습니다.");
+					$(".bankPwCh").html("연속된 숫자를 사용할 수 없습니다.");
+					$(".bankPwCh").css("color", "red");
+					$(".bankPwCh").css("font-size", "small");
 					console.log("연속숫자: " + text);
 					text = '';
 				} else {
-					$(".alert").html("");
+					$(".bankPwCh").html("");
+					$(".bankPwCh").css("color", "red");
+					$(".bankPwCh").css("font-size", "small");
 					console.log("통과: " + text);
 					done(text, formattedText);
 				}

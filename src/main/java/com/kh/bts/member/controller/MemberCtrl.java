@@ -1,5 +1,6 @@
 package com.kh.bts.member.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -82,5 +83,12 @@ public class MemberCtrl {
 				response.sendRedirect("mainpage");
 			}
 		}
+	}
+	
+//	로그아웃
+	@RequestMapping(value = "/logout")
+	public void logoutMember(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.getSession().removeAttribute("loginMember");
+		response.sendRedirect("mainpage");
 	}
 }

@@ -4,6 +4,39 @@
 	margin: 10px;
 }
 
+.newsSearch {
+/* 	border: 1px solid; */
+	width: 1240px;
+	height: 55px;
+	font-size: 13px;
+	overflow: hidden;
+	margin: 10px auto;
+}
+
+#search {
+	width: 1020px;
+	height: 50px;
+	font-size: 24px;
+	overflow: hidden;
+	padding: 0 15px;
+	border: 1px solid transparent;
+	border-color: #dbdbdb;
+  	border-radius: 4px;
+}
+
+#searchBtn {
+	height: 50px;
+	font-size: 24px;
+	border: none;
+	outline: none;
+	background-color: #f2f2f2;
+	padding: 8px 16px;
+	border: 1px solid transparent;
+	border-color: #dbdbdb;
+  	border-radius: 4px;
+  	cursor: pointer;
+}
+
 .headLine {
 	border: 1px solid;
 	width: 1240px;

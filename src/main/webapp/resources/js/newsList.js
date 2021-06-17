@@ -1,3 +1,13 @@
+var page = 1;
+var search = '';
+
+$('#searchBtn').click(function(){
+	
+//	console.log($('#search').val());
+	search = $('#search').val();
+	newsList(page, search);
+});
+
 function dateDiffer(pubDate){
 	// 현재 시각과 뉴스 송고일자 차이 반환 함수
 	var cur = new Date();
@@ -19,7 +29,7 @@ function dateDiffer(pubDate){
 };
 
 function newsHeadLine() {
-	console.log("newsHeadLine 실행")
+//	console.log("newsHeadLine 실행")
 	$.ajax({
 				url : 'https://www.cryptohub.or.kr/api/v1/news',
 				type : "POST",
@@ -33,16 +43,15 @@ function newsHeadLine() {
 						var newsTime = dateDiffer(data.data[i].pubdate);
 						$(".scroll").append('<span class="headList" id="headTime">&#128344;'+newsTime+'&nbsp;&nbsp;</span><span class="headList">'+data.data[i].title+'</span>&nbsp;&nbsp;&nbsp;&nbsp;');
 					}
-					
 				}
 			});
 };
 
-function newsList(page) {
+function newsList(page, search) {
 	
 	var p = (page-1)*6; //(현재 페이지-1) 곱하기 6
 	
-	console.log("newsList 실행")
+//	console.log("newsList 실행")
 	$.ajax({
 				url : 'https://www.cryptohub.or.kr/api/v1/news',
 				type : "POST",
@@ -51,7 +60,7 @@ function newsList(page) {
 					token : "$2y$10$hUvFjpPSDU5Gx6vp20vhGOg6Nuib3IZBzZk4cR5f.uGbRtMKN.S2m",
 					page : 1,
 					limit : 100,
-					keyword : ""
+					keyword : search
 				},
 				success : function(data) {
 					$("#raw1").empty(); // 각 클래스 내용 비워주기
@@ -65,73 +74,138 @@ function newsList(page) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
 						$("#raw2").append('<div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div>');
 					}
-//					console.log("console : "+data.total);  
-//					console.log("console : "+data.per_page);  
-				}
+//					console.log("console total : "+data.total);  
+//					console.log("console : "+data.current_page);
+					genPage(page, data.total);
+
+					//페이지별 함수
+					$('.newsPage a').click(function(){
+//						console.log("클릭펑션");
+						// 버튼 색 바꿔주기 CSS
+						if($('.newsPage a').hasClass("pageActive")) {
+							$('.newsPage a').removeClass();
+							$('.newsPage a').addClass("inactive");
+							$(this).addClass("pageActive");
+						} 
+						
+						// 페이징 함수
+						page = parseInt($(this).html());
+						newsList(page, search);
+					});
+
+					// 이전 버튼 함수
+					$('#pageBefore').click(function(){
+						if(page>3) {
+							page -= 3;
+						}
+						newsList(page, search);
+						
+						// 버튼 색 빼주기 CSS
+						if($('.newsPage a').hasClass("pageActive")) {
+							$('.newsPage a').removeClass();
+							$('.newsPage a').addClass("inactive");
+						} 
+						
+						// 이전 페이지 버튼색 넣어주기 CSS
+						$('.newsPage a').each(function(index){
+							var targetPage = parseInt($(this).html());
+							
+							if(targetPage == page){
+//								console.log(index + ": " +targetPage);
+								$(this).addClass("pageActive");
+							}
+						});
+					});
+
+					// 다음 버튼 함수
+					$('#pageNext').click(function(){
+						var totalLast;
+						if(data.total%6>0){
+							totalLast = parseInt(data.total/6)+1;
+						} else {
+							totalLast = parseInt(data.total/6);
+						}
+						
+						if( !search ){
+							totalLast = 17;
+						}
+						
+						if(page < totalLast-2) {
+							page += 3;
+						}
+						newsList(page, search);
+						
+						// 버튼 색 빼주기 CSS
+						if($('.newsPage a').hasClass("pageActive")) {
+							$('.newsPage a').removeClass();
+							$('.newsPage a').addClass("inactive");
+						} 
+						
+						// 이전 페이지 버튼색 넣어주기 CSS
+						$('.newsPage a').each(function( index){
+							var targetPage = parseInt($(this).html());
+							
+							if(targetPage == page){
+//								console.log(index + ": " +targetPage);
+								$(this).addClass("pageActive");
+							}
+						});
+					});
+				} //TODO 에러페이지
 			});
 };
 
-$('.newsPage a').click(function(){
-	// 버튼 색 바꿔주기 CSS
-	if($('.newsPage a').hasClass("pageActive")) {
-		$('.newsPage a').removeClass();
-		$('.newsPage a').addClass("inactive");
-		$(this).addClass("pageActive");
-	} 
-	
-	// 페이징 함수
-	page = parseInt($(this).html());
-	newsList(page);
-});
-
-$('#pageBefore').click(function(){
-	if(page>1) {
-		page -= 1;
+function genPage(page, total) {
+	var totalLast;
+	if(total%6>0){
+		totalLast = parseInt(total/6)+1;
+	} else {
+		totalLast = parseInt(total/6);
 	}
-	newsList(page);
 	
-	// 버튼 색 빼주기 CSS
-	if($('.newsPage a').hasClass("pageActive")) {
-		$('.newsPage a').removeClass();
-		$('.newsPage a').addClass("inactive");
-	} 
-	
-	// 이전 페이지 버튼색 넣어주기 CSS
-	$('.newsPage a').each(function( index){
-		var targetPage = parseInt($(this).html());
-		
-		if(targetPage == page){
-//			console.log(index + ": " +targetPage);
-			$(this).addClass("pageActive");
-		}
-	});
-});
-
-$('#pageNext').click(function(){
-	if(page<10) {
-		page += 1;
+	if( !search ){
+		totalLast = 17;
 	}
-	newsList(page);
 	
-	// 버튼 색 빼주기 CSS
-	if($('.newsPage a').hasClass("pageActive")) {
-		$('.newsPage a').removeClass();
-		$('.newsPage a').addClass("inactive");
-	} 
+//	console.log("totalLast : " + totalLast);
+	var startPage;
+	if(page < 4) {
+		startPage = 1;
+	}else if (page>totalLast-3){
+		startPage = totalLast-4;
+	}else{	
+		startPage = page - 2;
+	}
 	
-	// 이전 페이지 버튼색 넣어주기 CSS
-	$('.newsPage a').each(function( index){
-		var targetPage = parseInt($(this).html());
-		
-		if(targetPage == page){
-//			console.log(index + ": " +targetPage);
-			$(this).addClass("pageActive");
+	var lastPage;
+	if(totalLast < 5) {
+		lastPage = totalLast;
+	}else if ((totalLast-startPage) < 5){
+		lastPage = totalLast;
+	}else {
+		lastPage = startPage+4;
+	}
+	
+//	console.log("lastPage : " +  lastPage);
+	
+	$(".newsPage").empty();
+	$(".newsPage").append('<button class="pageBtn" id="pageBefore">이전</button>');
+	for (var i = startPage; i < lastPage+1; i++) {
+		if(i==page){
+			$(".newsPage").append('<a class="pageActive">'+i+'</a>');
+		}else{
+			$(".newsPage").append('<a class="inactive">'+i+'</a>');
 		}
-	});
-});
+	}
+	$(".newsPage").append('<button class="pageBtn" id="pageNext">다음</button>');
+};
+
+
+//$('.test').click(function(){
+//	console.log("왜?");
+//});
 
 newsHeadLine();
 
-var page = 1;
+newsList(page, search);
 
-newsList(page);

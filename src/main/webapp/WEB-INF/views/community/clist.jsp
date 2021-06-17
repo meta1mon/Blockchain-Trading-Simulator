@@ -50,7 +50,7 @@
 		<tr bgcolor="#FFD1B7">
 			<td align="center" width="60">번호</td>
 			<td align="center" width="380">제목</td>
-			<td align="center" width="100">글쓴이</td>
+			<td align="center" width="100">작성자</td>
 			<td align="center" width="100">작성일</td>
 			<td align="center" width="60">조회</td>
 			<td align="center" width="60">추천</td>
@@ -65,7 +65,7 @@
 		<c:if test="${listCount ne 0}">
 			<c:forEach var="vo" items="${list}" varStatus="status">
 				<tr>
-					<td align="center">${status.count}</td>
+					<td align="center">${vo.cno}</td>
 					<td align="left"><a
 						href="cDetail?cno=${vo.cno}&page=${currentPage}">
 							&nbsp;${vo.csubject} </a></td>

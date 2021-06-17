@@ -69,6 +69,18 @@
 	text-align: center;
 }
 
+.pageBtn{
+	border: none;
+	outline: none;
+	background-color: white;
+	padding: 8px 16px;
+	border: 1px solid transparent;
+	border-color: #dbdbdb;
+  	border-radius: 4px;
+  	font-size: 15px;
+  	cursor: pointer;
+}
+
 .newsPage a {
   color: black;
   padding: 8px 16px;
@@ -76,6 +88,7 @@
   border: 1px solid transparent;
   border-color: #dbdbdb;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .newsPage a.pageActive {

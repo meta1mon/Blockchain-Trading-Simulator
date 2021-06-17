@@ -11,9 +11,9 @@
 			<li class="logo"><a href="<%=request.getContextPath()%>/blist"><img
 					src="http://placehold.it/120x50"></a></li>
 			<li class="menu"><a href="<%=request.getContextPath()%>/aboutus">About Us</a></li>
-			<li class="menu"><a href="#">모의투자</a></li>
+			<li class="menu"><a href="<%=request.getContextPath()%>/investmentpage">모의투자</a></li>
 			<li class="menu"><a href="${pageContext.request.contextPath}/nlist">뉴스</a></li>
-			<li class="menu"><a href="#">프로차트</a></li>
+			<li class="menu"><a href="javascript:void(window.open('<%=request.getContextPath()%>/prochart', '_blank','width=1000px, height=730px'))">프로차트</a></li>
 			<li class="menu"><a href="<%=request.getContextPath()%>/clist">커뮤니티</a></li>
 			<li class="menu"><a href="#">충전소</a></li>
 			<li class="menu"><a href="#">커뮤니티</a></li>

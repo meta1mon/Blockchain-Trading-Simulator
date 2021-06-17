@@ -27,14 +27,18 @@
 			<!-- newsList.js의 newsList() 함수 참조 -->
 		</div>
 		<div class="newsPage">
-			<a href="#">이전</a>
-			<a class="pageActive" href="#">1</a>
-			<a class="inactive" href="#">2</a>
-			<a class="inactive" href="#">3</a>
-			<a class="inactive" href="#">4</a>
-			<a class="inactive" href="#">5</a>
-			<a class="inactive" href="#">6</a>
-			<a href="#">다음</a>
+			<button class="pageBtn" id="pageBefore">이전</button>
+			<a class="pageActive">1</a>
+			<a class="inactive">2</a>
+			<a class="inactive" >3</a>
+			<a class="inactive">4</a>
+			<a class="inactive">5</a>
+			<a class="inactive">6</a>
+			<a class="inactive">7</a>
+			<a class="inactive">8</a>
+			<a class="inactive">9</a>
+			<a class="inactive">10</a>
+			<button class="pageBtn" id="pageNext">다음</button>
 		</div>
 	</div>
 	<script type="text/javascript"	src="${pageContext.request.contextPath}/resources/js/newsList.js"></script>

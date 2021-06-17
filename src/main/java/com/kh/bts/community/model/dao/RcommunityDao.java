@@ -13,25 +13,29 @@ public class RcommunityDao {
 	@Autowired
 	private SqlSession sqlSession;
 
+	public int listCount() { // 댓글 전체 개수 조회
+		return sqlSession.selectOne("rcommunity.countRcommunity");
+	}
+	
 	public List<Rcommunity> selectList(String cno) { // 게시글에 해당하는 댓글 조회
-		return sqlSession.selectList("Rcommunity.selectRcommunityAll", cno);
+		return sqlSession.selectList("rcommunity.selectRcommunityAll", cno);
 	}
 	
 	public Rcommunity selectOne(String rno) { // 단일 댓글 조회
-		return sqlSession.selectOne("Rcommunity.selectRcommunity", rno);
+		return sqlSession.selectOne("rcommunity.selectRcommunity", rno);
 	}
 	
 	public int insertRcommunity(Rcommunity rc) { // 댓글 입력
-		return sqlSession.insert("Rcommunity.insertRcommunity", rc);
+		return sqlSession.insert("rcommunity.insertRcommunity", rc);
 	}
 	
 	public int updateRcommunity(Rcommunity rc) { // 댓글 수정
 		System.out.println(rc);
-		return sqlSession.update("Rcommunity.updateRcommunity", rc);
+		return sqlSession.update("rcommunity.updateRcommunity", rc);
 	}
 	
 	public int deleteRcommunity(Rcommunity rc) { // 댓글 삭제
 		System.out.println(rc);
-		return sqlSession.delete("Rcommunity.deleteRcommunity", rc);
+		return sqlSession.delete("rcommunity.deleteRcommunity", rc);
 	}
 }

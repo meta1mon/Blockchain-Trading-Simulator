@@ -6,9 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>BTS</title>
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 <style>
 .ck.ck-editor {
 	max-width: 800px;
@@ -30,23 +29,20 @@
 				<td><input type="text" name="csubject"></td>
 			</tr>
 			<tr>
-				<td>작성자</td>
-				<td><input type="text" name="cwriter"></td>
-			</tr>
-			<tr>
 				<td>첨부파일</td>
-				<td><input type="file" name="upfile"></td>
+				<td><input type="file" name="upfile" multiple="multiple"></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td><textarea id="editor" name="ccontent" maxlength="4000">
-    </textarea> <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
-    </script></td>
+				<td><textarea id="editor" name="ccontent" maxlength="4000"></textarea> 
+					<script>
+				        ClassicEditor
+				            .create( document.querySelector( '#editor' ) )
+				            .catch( error => {
+				                console.error( error );
+				            } );
+				    </script>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"

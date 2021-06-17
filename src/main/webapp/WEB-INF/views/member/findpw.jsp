@@ -12,8 +12,9 @@
 </head>
 <jsp:include page="../main/header.jsp"></jsp:include>
 <body>
+<h1>비밀번호 찾기</h1>
 	<div class="contents">
-	<form action="loginmember" method="post">
+	<form action="" method="post">
 		<table>
 			<tr>
 				<td>
@@ -25,29 +26,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<p class="alert emailReg"></p>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<p>비밀번호</p>
-				</td>
-			</tr>
-			<tr>
-				<td><input type="password" placeholder="비밀번호를 입력해주세요."
-					name="pw"></td>
-			</tr>
-			<tr>
-				<td>
-					<p class="alert pwReg"></p>
-				</td>
-			</tr>
-			<tr>
-				<td><span><a href="<%=request.getContextPath()%>/findpassword">비밀번호 찾기</a></span> <span><a href="<%=request.getContextPath()%>/signup" id="signup">회원가입</a></span></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="로그인"></td>
+				<td><input type="submit" value="비밀번호 찾기"></td>
 			</tr>
 		</table>
 	</form>

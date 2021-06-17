@@ -32,10 +32,14 @@ ul li {
     
     list-style: none;    
 }
+/* 
 a {
     text-decoration: none;
     color:black;
 }
+
 a:visited{
     color: #000;
 }
+
+ 태그에 직접 css를 걸면 body태그 안에 있는 모든 a태그에 스타일이 적용되므로 주석 처리함.*/

@@ -8,9 +8,9 @@
 		<typeAlias type="com.kh.bts.board.model.vo.Board" alias="Board" />
 		<typeAlias type="com.kh.bts.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.bts.community.model.vo.Community" alias="Community"/>
-		<typeAlias type="com.kh.bts.community.model.vo.Community" alias="Rcommunity"/>
-		<typeAlias type="com.kh.bts.community.model.vo.Community" alias="Clike"/>
-		<typeAlias type="com.kh.bts.community.model.vo.Community" alias="Cdislike"/>
+		<typeAlias type="com.kh.bts.community.model.vo.Rcommunity" alias="Rcommunity"/>
+		<typeAlias type="com.kh.bts.community.model.vo.Clike" alias="Clike"/>
+		<typeAlias type="com.kh.bts.community.model.vo.Cdislike" alias="Cdislike"/>
 	</typeAliases>
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
 		<mapper resource="mappers/board-mapper.xml" />

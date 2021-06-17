@@ -36,7 +36,7 @@
 </style>
 </head>
 <%@include file="main/header.jsp"%>
-<body>
+<body class="content">
 	<img id="img" src="resources/assets/img/team/2.jpg" alt="..." />
 	<div id="body">
 		<div id="error">ERROR</div>

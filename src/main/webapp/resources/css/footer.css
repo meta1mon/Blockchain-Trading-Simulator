@@ -1,15 +1,26 @@
 @charset "UTF-8";
 
-
-footer {
-	background-color: #f2f2f2;
+.footer {
+	height: 64px;
+	width: 100%;
+	min-width: 320px;
+	margin: 0 auto;
+	background-color: rgb(0, 0, 0, 0.5);
 	overflow: hidden;
-	height : 65px;
 	text-decoration: none;
 	font-size: 13px;
-	width: 1240px;
-	margin: 0 auto;
 	text-align: center;
+	color: #F2F2F2;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+.behindfooter {
+	height: 64px;
+	width: 100%;
+	min-width: 320px;
+	background-color: none;
 }
 
 .f_left {
@@ -29,4 +40,12 @@ footer {
 
 .f_list {
 	padding: 4px;
+}
+
+.kakao {
+	color: #F2F2F2;
+}
+
+.kakao:hover {
+	color: #fef01b;
 }

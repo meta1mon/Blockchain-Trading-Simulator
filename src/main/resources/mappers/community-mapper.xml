@@ -22,9 +22,14 @@
 		</choose>
 	</select>
 
+	<!-- 조회수 상위 5개 인기 게시글 -->
+	<select id="selectpopularlist" resultType="arraylist" resultMap="resultCommunity">
+		SELECT * FROM COMMUNITY WHERE ROWNUM &lt;=5 ORDER BY VIEWCNT DESC;
+	</select>
+	
 	<!-- 페이지당 게시글 조회 -->
 	<select id="selectList" resultType="arraylist" resultMap="resultCommunity">
-		SELECT * FROM COMMUNITY
+		SELECT * FROM COMMUNITY ORDER BY CNO DESC
 	</select>
 
 	<!-- 게시글 전체 개수 조회 -->

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.bts.HomeController;
 import com.kh.bts.member.model.service.MemberService;
 import com.kh.bts.member.model.vo.Member;
 
 @Controller
 public class MemberCtrl {
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private MemberService mService;
 
@@ -82,11 +86,14 @@ public class MemberCtrl {
 		HttpSession session = request.getSession();
 		Member loginMember = mService.loginMember(vo);
 		if (loginMember == null) {
+			logger.info("로그인 실패");
 			response.sendRedirect("login");
 		} else {
 			if (!loginMember.getPw().equals(vo.getPw())) {
+				logger.info("비번 틀림");
 				response.sendRedirect("login");
 			} else {
+				logger.info("로그인 성공");
 				session.setAttribute("loginMember", loginMember);
 				System.out.println(loginMember.getEmail() + loginMember.getNickname());
 				response.sendRedirect("mainpage");
@@ -101,7 +108,7 @@ public class MemberCtrl {
 		response.sendRedirect("mainpage");
 	}
 
-//	비밀번호 찾기
+//	비밀번호 찾기 페이지로 이동
 	@RequestMapping(value = "/findpassword")
 	public ModelAndView findPw(ModelAndView mv) {
 		mv.setViewName("member/findpw");

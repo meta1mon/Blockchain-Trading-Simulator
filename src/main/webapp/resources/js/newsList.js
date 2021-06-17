@@ -38,16 +38,24 @@ function newsHeadLine() {
 			});
 };
 
-function newsList(p) {
+function newsList(page) {
+	
+	var p = (page-1)*6; //(현재 페이지-1) 곱하기 6
+	
 	console.log("newsList 실행")
 	$.ajax({
 				url : 'https://www.cryptohub.or.kr/api/v1/news',
 				type : "POST",
 				cache : false,
 				data : {
-					token : "$2y$10$hUvFjpPSDU5Gx6vp20vhGOg6Nuib3IZBzZk4cR5f.uGbRtMKN.S2m"
+					token : "$2y$10$hUvFjpPSDU5Gx6vp20vhGOg6Nuib3IZBzZk4cR5f.uGbRtMKN.S2m",
+					page : 1,
+					limit : 100,
+					keyword : ""
 				},
 				success : function(data) {
+					$("#raw1").empty(); // 각 클래스 내용 비워주기
+					$("#raw2").empty();
 					// 뉴스목록 
 					for (var i = p; i < p+3; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
@@ -57,30 +65,73 @@ function newsList(p) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
 						$("#raw2").append('<div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div>');
 					}
-					console.log("pubdate"+data.data[10].pubdate);  // pubdate 문제 해결해야함(temp 영상보고 다시해보기)
+//					console.log("console : "+data.total);  
+//					console.log("console : "+data.per_page);  
 				}
 			});
 };
 
 $('.newsPage a').click(function(){
-	// 버튼 색 바꿔주기
+	// 버튼 색 바꿔주기 CSS
 	if($('.newsPage a').hasClass("pageActive")) {
 		$('.newsPage a').removeClass();
 		$('.newsPage a').addClass("inactive");
 		$(this).addClass("pageActive");
 	} 
 	
-	// 페이징
-	p = $(this).html();
-	p = parseInt(p)-1;// 현재 페이지 읽어온 뒤 1 빼주기
-	p *= 6;				// 6을 곱하면 상단 첫 기사 index
-	$("#raw1").empty(); // 각 클래스 내용 비워주기
-	$("#raw2").empty();
-	newsList(p);
+	// 페이징 함수
+	page = parseInt($(this).html());
+	newsList(page);
+});
+
+$('#pageBefore').click(function(){
+	if(page>1) {
+		page -= 1;
+	}
+	newsList(page);
+	
+	// 버튼 색 빼주기 CSS
+	if($('.newsPage a').hasClass("pageActive")) {
+		$('.newsPage a').removeClass();
+		$('.newsPage a').addClass("inactive");
+	} 
+	
+	// 이전 페이지 버튼색 넣어주기 CSS
+	$('.newsPage a').each(function( index){
+		var targetPage = parseInt($(this).html());
+		
+		if(targetPage == page){
+//			console.log(index + ": " +targetPage);
+			$(this).addClass("pageActive");
+		}
+	});
+});
+
+$('#pageNext').click(function(){
+	if(page<10) {
+		page += 1;
+	}
+	newsList(page);
+	
+	// 버튼 색 빼주기 CSS
+	if($('.newsPage a').hasClass("pageActive")) {
+		$('.newsPage a').removeClass();
+		$('.newsPage a').addClass("inactive");
+	} 
+	
+	// 이전 페이지 버튼색 넣어주기 CSS
+	$('.newsPage a').each(function( index){
+		var targetPage = parseInt($(this).html());
+		
+		if(targetPage == page){
+//			console.log(index + ": " +targetPage);
+			$(this).addClass("pageActive");
+		}
+	});
 });
 
 newsHeadLine();
 
-var p = 0;
+var page = 1;
 
-newsList(p);
+newsList(page);

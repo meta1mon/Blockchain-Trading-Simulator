@@ -12,7 +12,11 @@ import com.kh.bts.community.model.vo.Rcommunity;
 public class RcommunityServiceImpl implements RcommunityService {
 	@Autowired
 	private RcommunityDao rcmDao;
-
+	 
+	public int totalCount() { // 댓글 전체 개수 조회
+		return rcmDao.listCount();
+	}
+	
 	public List<Rcommunity> selectList(String cno) { // 게시글에 해당하는 댓글 조회
 		return rcmDao.selectList(cno);
 	}

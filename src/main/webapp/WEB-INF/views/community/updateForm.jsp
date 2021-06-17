@@ -9,10 +9,20 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script
-	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/decoupled-document/ckeditor.js"></script>
+	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+<style>
+.ck.ck-editor {
+	max-width: 800px;
+}
+
+.ck-editor__editable {
+	min-height: 400px;
+}
+</style>
+
 </head>
 <%@include file="../main/header.jsp"%>
-<body bgcolor="#FFEFD5">
+<body>
 	<form name="renewForm" action="cUpdate" method="post"
 		enctype="multipart/form-data">
 		<input type="hidden" name="cno" value="${community.cno}"> <input
@@ -24,33 +34,35 @@
 					value="${community.csubject}"></td>
 			</tr>
 			<tr>
-				<td>작성자</td>
-				<td>${community.cwriter}</td>
-			</tr>
-			<tr>
 				<td>이전 첨부파일</td>
 				<td><c:if test="${empty community.filepath}">
 첨부파일 없음
 </c:if> <c:if test="${!empty community.filepath}">
-						<a
-							href="${pageContext.request.contextPath}/resources/uploadFiles/${community.filepath}"
-							download>${community.filepath}</a>
+						<c:forTokens var="fileName" items="${community.filepath}"
+							delims="," varStatus="st">
+							<a download="${fileName}"
+								href="${pageContext.request.contextPath}/resources/uploadFiles/${community.filepath}">${fileName}</a>
+							<c:if test="${!st.last }">
+                        /
+                    </c:if>
+							<br>
+						</c:forTokens>
 					</c:if></td>
 			</tr>
 			<tr>
 				<td>변경할 첨부파일</td>
-				<td><input type="file" name="upfile"></td>
+				<td><input type="file" name="upfile" multiple="multiple"></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td><textarea id="editor" name="ccontent" maxlength="4000">
-    </textarea> <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
-    </script></td>
+				<td><textarea id="editor" name="ccontent" maxlength="4000">${community.ccontent}</textarea>
+					<script>
+				        ClassicEditor
+				            .create( document.querySelector( '#editor' ) )
+				            .catch( error => {
+				                console.error( error );
+				            } );
+				    </script></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit" id="renew"

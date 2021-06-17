@@ -31,7 +31,7 @@ public class MemberServiceImpl implements MemberService{
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("메일 인증 테스트");
 		sendMail.setText(
-				new StringBuffer().append("<h1> 안녕하세요 </h1>").append("<a href='http://localhost:8090/bts/emailConfirm?email=").append(vo.getEmail()).append("&authkey=").append(key).append("' target='blenk'>이메일 인증 확인</a>").toString());
+				new StringBuffer().append("<h1> 안녕하세요 </h1>").append("<a href='http://localhost:8090/bts/emailconfirm?email=").append(vo.getEmail()).append("&authkey=").append(key).append("' target='blenk'>이메일 인증 확인</a>").toString());
 		sendMail.setFrom("Aces.Recruited.Member@gmail.com", "BTS");
 		sendMail.setTo(vo.getEmail());
 		sendMail.send();

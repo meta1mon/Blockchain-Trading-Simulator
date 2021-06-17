@@ -43,6 +43,7 @@ $(function() {
 	})
 })
 
+var flag = false;
 // 비밀번호 비밀번호 확인 일치 여부
 var passEqual = function() {
 	var pass1 = $("input[name=pw]").val();
@@ -53,7 +54,7 @@ var passEqual = function() {
 	} else {
 		$(".pwCh").text("비밀번호가 일치하지 않습니다.");
 		$(".pwCh").css("color", "red");
-		return false;
+		return flag;
 	}
 };
 
@@ -64,14 +65,14 @@ $("input[name=pwCh]").on("keyup", passEqual);
 	if ($("#email").val().length == 0) {
 		$(".emailReg").text("필수 입력 항목입니다.");
 		$(".emailReg").css("color", "red");
-		return false;
+		flag = false;
 	}
 	}
 	var nicknameReq = function(){
 	if ($("#nickname").val().length == 0) {
 		$(".nickReg").text("필수 입력 항목입니다.");
 		$(".nickReg").css("color", "red");
-		return false;
+		flag = false;
 	}
 	}
 	var pwReq = function(){
@@ -79,7 +80,7 @@ $("input[name=pwCh]").on("keyup", passEqual);
 	if ($("#pw").val().length == 0) {
 		$(".pwReg").text("필수 입력 항목입니다.");
 		$(".pwReg").css("color", "red");
-		return false;
+		flag = false;
 	}
 	}
 	var pwChReq = function(){
@@ -87,7 +88,7 @@ $("input[name=pwCh]").on("keyup", passEqual);
 	if ($("#pwCh").val().length == 0) {
 		$(".pwCh").text("필수 입력 항목입니다.");
 		$(".pwCh").css("color", "red");
-		return false;
+		flag = false;
 	}
 
 	}
@@ -96,22 +97,22 @@ $("input[name=pwCh]").on("keyup", passEqual);
 	$("#nickname").on("keyup", nicknameReq);
 	$("#pw").on("keyup", pwReq);
 	$("#pwCh").on("keyup", pwChReq);
-
-	var required = function(){
-		if(!emailReq){
-			return false;
-		}
-		if(!nicknameReq){
-			return false;
-		}
-		if(!pwReq){
-			return false;
-		}
-		if(!pwChReq){
-			return false;
-		}
-		return true;
-	}
+//
+//	var required = function(){
+//		if(!emailReq){
+//			return false;
+//		}
+//		if(!nicknameReq){
+//			return false;
+//		}
+//		if(!pwReq){
+//			return false;
+//		}
+//		if(!pwChReq){
+//			return false;
+//		}
+//		return true;
+//	}
 
 
 // 형식 체크
@@ -120,9 +121,9 @@ $("input[name=pwCh]").on("keyup", passEqual);
 		var reg = /^[A-Za-z0-9]([-_.]?[0-9a-zA-Z])+@[A-Za-z0-9]+\.[A-Za-z0-9]+$/g;
 		if (email.length != 0) {
 			if (email.match(reg) == null) {
-				$(".emailReg").text("영어 대 소문자, 숫자와 특수문자(-_.)만 사용할 수 있습니다.");
+				$(".emailReg").text("영어 대 소문자, 숫자와 특수문자(-_.@)만 사용할 수 있습니다.");
 				$(".emailReg").css("color", "red");
-				return false;
+				flag = false;
 			} else {
 				$(".emailReg").html("&nbsp;");
 			}
@@ -137,11 +138,11 @@ $("input[name=pwCh]").on("keyup", passEqual);
 		var reg = /^[가-힣A-Za-z0-9]{1,8}$/g;
 		if (nickname.length != 0) {
 			if (nickname.match(reg) != null) {
-				$(".nickReg").text("");
+				$(".nickReg").html("&nbsp;");
 			} else {
 				$(".nickReg").text("2~8자의 한글, 영어 대 소문자, 숫자만 사용할 수 있습니다.");
 				$(".nickReg").css("color", "red");
-				return false;
+				flag = false;
 			}
 		} else {
 
@@ -154,70 +155,65 @@ $("input[name=pwCh]").on("keyup", passEqual);
 		var reg = /^[A-Za-z0-9!@#$%^&*]{8,15}$/g;
 		if (password.length != 0) {
 			if (password.match(reg) != null) {
-				$(".pwReg").text("")
+				$(".pwReg").html("&nbsp;");
 			} else {
 				$(".pwReg").text(
 						"8~15자의 영어 대 소문자, 숫자와 특수문자(!@#$%^&*)만 사용할 수 있습니다.");
 				$(".pwReg").css("color", "red");
-				return false;
+				flag = false;
 			}
 		} else {
 
 		}
 	};
 
-	var phoneReg = function() {
-		var phone = $("input[name=phone]").val()
-		var reg = /^01(?:0|1|[6-9])*(?:\d{3}|\d{4})*\d{4}$/;
-		if (phone.length != 0) {
-			if (phone.match(reg) != null) {
-				$(".phoneReg").text("");
-			} else {
-				$(".phoneReg").text("01로 시작하는 숫자만 사용할 수 있습니다.");
-				$(".phoneReg").css("color", "red");
-				return false;
-			}
-		} else {
-			$(".phoneReg").text("");
-			return true;
-		}
-	};
+//	var phoneReg = function() {
+//		var phone = $("input[name=phone]").val()
+//		var reg = /^01(?:0|1|[6-9])*(?:\d{3}|\d{4})*\d{4}$/;
+//		if (phone.length != 0) {
+//			if (phone.match(reg) != null) {
+//				$(".phoneReg").text("");
+//			} else {
+//				$(".phoneReg").text("01로 시작하는 숫자만 사용할 수 있습니다.");
+//				$(".phoneReg").css("color", "red");
+//				return false;
+//			}
+//		} else {
+//		$(".phoneReg").text("");
+//		return true;
+//		} 
+//	};
 
 	$("#email").on("keyup", emailReg);
 	$("#nickname").on("keyup", nicknameReg);
 	$("#pw").on("keyup", pwReg);
-	$("#phone").on("keyup", phoneReg);
-
+//	$("#phone").on("keyup", phoneReg);
+//
 	var regCheck = function() {
-		if (!emailReg) {
+		if (emailReg = false) {
 			return false;
 		}
-		if (!nicknameReg) {
+		if (nicknameReg = false) {
 			return false;
 		}
-		if (!pwReg) {
+		if (pwReg = false) {
 			return false;
 		}
-		if (!phoneReg) {
-			return false;
-		}
-		return true;
 	};
 	
 	function check(){
-		if(!passEqual){
+		if(passEqual = false){
 			console.log("비밀번호 일치X");
 			return false;
 		}
-		if(!regCheck){
+		if(regCheck = false){
 			console.log("형식 일치X");
 			return false;
 		}
-		if(!required){
+		if(required = false){
 			console.log("필수항목 입력X");
 			return false;
 		}
-		return true;
 	}
 
 //pinpad 생성
@@ -236,26 +232,28 @@ $("input[name=pwCh]").on("keyup", passEqual);
 		}
 	});
 
-// 회원가입
-$("#insert").on("click", function() {
-	console.log("회원가입버튼누름");
-	var dataquery = $("#frmJoin").serialize();
-	$.ajax({
-		url : "signup",
-		type : "POST",
-		data : dataquery,
-		async : true,
-		success : function(data) {
-			if (data > 0) {
-				location.href = "authwait";
-				alert("회원가입 성공!")
-			} else {
-				alert("입력 사항을 다시 확인해주세요.")
-			}
-		},
-		error : function() {
-			alert("회원가입 실패!");
+	// 회원가입
+	$("#insert").on("click", function() {
+		console.log("회원가입버튼누름");
+		console.log(flag);
+		var dataquery = $("#frmJoin").serialize();
+		// console.log("dataquery: " + dataquery);
+		if (flag) {
+			$.ajax({
+				url : "signupmember",
+				type : "POST",
+				data : dataquery,
+				async : true,
+				success : function(data) {
+					console.log("회원가입 성공!");
+					location.href = "authwait"
+				},
+				error : function() {
+					console.log("error: 회원가입 실패!");
+				}
+			})
+		} else {
+			console.log("flag is false");
 		}
 	});
-});
 });

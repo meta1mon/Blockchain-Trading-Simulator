@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.member.model.service.MemberService;
@@ -21,53 +22,61 @@ import com.kh.bts.member.model.vo.Member;
 public class MemberCtrl {
 	@Autowired
 	private MemberService mService;
-	
+
 // 회원가입
-	@RequestMapping(value = "/signup")
+	@RequestMapping(value = "/signup", method=RequestMethod.GET)
 	public ModelAndView insertMember(ModelAndView mv) {
 		mv.setViewName("member/signup");
 		return mv;
 	}
+
+// 회원가입 눌렀을 때
 	@RequestMapping(value="/signupmember", method=RequestMethod.POST)
 	public void insertMember(Member vo, HttpServletResponse response) throws Exception {
-		int result=mService.insertMember(vo);
+		int result = mService.insertMember(vo);
+		System.out.println(result);
 		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-			out.println(result);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			if(out != null) {
-				out.flush();
-				out.close();
-			}			
-		}
-		System.out.println(vo.toString());
+//		if (result > 0) {
+			try {
+				out = response.getWriter();
+				out.println(result);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (out != null) {
+					out.flush();
+					out.close();
+				}
+			}
+//			out.println("<script>alert('인증 후 사이트 이용이 가능합니다.')</script>");
+//			response.sendRedirect("authwait");
+//		} else {
+//			response.sendRedirect("signup");
+//		}
 	}
-	
+
 //	회원가입 후 인증 대기
-	@RequestMapping(value = "/authwait")
+	@RequestMapping(value = "/authwait", method=RequestMethod.GET)
 	public ModelAndView authWait(ModelAndView mv) {
 		mv.setViewName("member/authwait");
 		return mv;
 	}
-	
+
 // 이메일 인증 링크 눌렀을 때
 	@RequestMapping(value = "/emailconfirm", method = RequestMethod.GET)
-	public String emailConfirm(Member vo, Model model) throws Exception {
+	public void emailConfirm(Member vo, Model model,  HttpServletResponse response) throws Exception {
 		mService.authMember(vo);
 		model.addAttribute("vo", vo);
-		return "main/mainPage";
+		response.sendRedirect("mainpage");
 	}
-	
+
 //	로그인
 	@RequestMapping(value = "/login")
 	public ModelAndView loginMember(ModelAndView mv) {
 		mv.setViewName("member/login");
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/loginmember")
 	public void loginMember(Member vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
@@ -84,11 +93,18 @@ public class MemberCtrl {
 			}
 		}
 	}
-	
+
 //	로그아웃
 	@RequestMapping(value = "/logout")
 	public void logoutMember(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.getSession().removeAttribute("loginMember");
 		response.sendRedirect("mainpage");
+	}
+
+//	비밀번호 찾기
+	@RequestMapping(value = "/findpassword")
+	public ModelAndView findPw(ModelAndView mv) {
+		mv.setViewName("member/findpw");
+		return mv;
 	}
 }

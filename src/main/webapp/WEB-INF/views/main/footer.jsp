@@ -6,7 +6,6 @@
 	
 </script>
 <footer>
-	<div class="behindfooter"> </div>
 	<div class="footer">
 	<div class="f_left">
 		<ul>

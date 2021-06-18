@@ -112,7 +112,7 @@
 							<td colspan="2">이메일*</td>
 						</tr>
 						<tr>
-							<td colspan="2"><input type="text" name="email" id="email" class="reqInfo"
+							<td colspan="2"><input type="text" name="email" id="email"
 								placeholder="이메일을 입력해주세요."></td>
 						</tr>
 						<tr>
@@ -122,7 +122,7 @@
 							<td colspan="2">닉네임*</td>
 						</tr>
 						<tr>
-							<td colspan="2"><input type="text" name="nickname" id="nickname" class="reqInfo"
+							<td colspan="2"><input type="text" name="nickname" id="nickname"
 								placeholder="닉네임을 입력해주세요."></td>
 						</tr>
 						<tr>
@@ -132,7 +132,7 @@
 							<td colspan="2">비밀번호*</td>
 						</tr>
 						<tr>
-							<td colspan="2"><input type="password" name="pw" id="pw" class="reqInfo"
+							<td colspan="2"><input type="password" name="pw" id="pw"
 								placeholder="비밀번호를 입력해주세요."></td>
 						</tr>
 						<tr>
@@ -142,7 +142,7 @@
 							<td colspan="2">비밀번호 확인*</td>
 						</tr>
 						<tr>
-							<td colspan="2"><input type="password" name="pwCh" id="pwCh" class="reqInfo"
+							<td colspan="2"><input type="password" name="pwCh" id="pwCh"
 								placeholder="비밀번호를 다시 한 번 입력해주세요."></td>
 						</tr>
 						<tr>
@@ -153,7 +153,7 @@
 						</tr>
 						<tr>
 							<td colspan="2"><input type="password" name="bankPw" id="bankPw"
-								class="pin1 reqInfo" placeholder="계좌 비밀번호를 입력해주세요."></td>
+								class="pin1" placeholder="계좌 비밀번호를 입력해주세요."></td>
 						</tr>
 						<tr>
 							<td colspan="2">

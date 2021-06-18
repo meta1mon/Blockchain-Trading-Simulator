@@ -11,6 +11,7 @@
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<%-- <script src="${pageContext.request.contextPath}/resources/js/jquery.ajax-cross-origin.min.js"></script> --%>
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
@@ -18,7 +19,6 @@
 <meta charset="UTF-8">
 <title>InvestmentPage</title>
 </head>
-<jsp:include page="../main/header.jsp"></jsp:include>
 <body>
 	<div id="center">
 		<table>
@@ -155,5 +155,4 @@
 	</div>
 
 </body>
-<jsp:include page="../main/footer.jsp"></jsp:include>
 </html>

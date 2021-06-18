@@ -1,23 +1,33 @@
 @charset "UTF-8";
 
-header {
-	background-color: #f2f2f2;
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	min-width: 320px;
+	height: 64px;
+	background-color: rgb(0, 0, 0, 0.2);
 	overflow: hidden;
-	height : 80px;
-	width: 1240px;
 	margin: 0 auto;
 	text-align: center;
-	
+	z-index: 1001;
+}
+
+.behindheader {
+	width: 100%;
+	height: 64px;
 }
 
 .h_left {
-	margin: 10px 0 0 0;
+	margin: 6.5px 0 0 0;
 	width: 900px;
 	float: left;
 }
 
 .h_right {
-	margin: 10px 10px 0 0;
+	margin: 6.5px 10px 0 0;
 	width: 300px;
 	float: right;
 }
@@ -34,6 +44,15 @@ header {
 	font-size: 16px;
 }
 
+.menutext {
+	color: white;
+	transition: color 0.15s ease-in-out;
+}
+
+.menutext:hover {
+	color: #8C66C8;
+	
+}
 .member {
 	float: right;
 	text-align: center;
@@ -41,6 +60,3 @@ header {
 	text-decoration: none;
 	font-size: 16px;
 }
-
-
-

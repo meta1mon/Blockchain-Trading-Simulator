@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainpageCtrl {
 
-	@RequestMapping("/mainpage")
+	@RequestMapping("mainpage")
 	public ModelAndView MainPage(ModelAndView mav) {
 		mav.setViewName("main/mainPage");
 		return mav;

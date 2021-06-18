@@ -76,6 +76,7 @@ function newsList(page, search) {
 					}
 //					console.log("console total : "+data.total);  
 //					console.log("console : "+data.current_page);
+//					console.log("current page : " + page);
 					genPage(page, data.total);
 
 					//페이지별 함수
@@ -128,6 +129,10 @@ function newsList(page, search) {
 						
 						if( !search ){
 							totalLast = 17;
+						} 
+						
+						if (totalLast >17) {
+							totalLast = 17;
 						}
 						
 						if(page < totalLast-2) {
@@ -167,7 +172,13 @@ function genPage(page, total) {
 		totalLast = 17;
 	}
 	
+	if (totalLast >17) {
+		totalLast = 17;
+	}
+	
 //	console.log("totalLast : " + totalLast);
+//	console.log("current page : " + page);
+	
 	var startPage;
 	if(page < 4) {
 		startPage = 1;

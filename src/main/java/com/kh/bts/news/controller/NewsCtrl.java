@@ -8,16 +8,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.news.model.service.NewsService;
 
-
 @Controller
 public class NewsCtrl {
-	
-	  @Autowired private NewsService nService;
-	 
-	
+
+	@Autowired
+	private NewsService nService;
+
 	@RequestMapping(value = "nlist", method = RequestMethod.GET)
 	public ModelAndView newsListService(ModelAndView mv) {
 		mv.setViewName("news/newsList");
+		return mv;
+	}
+	
+	@RequestMapping(value = "ncontent", method = RequestMethod.GET)
+	public ModelAndView newsContentService(ModelAndView mv) {
+		mv.setViewName("news/newsContent");
 		return mv;
 	}
 

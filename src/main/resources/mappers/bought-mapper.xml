@@ -10,8 +10,15 @@
 	<insert id="insertBought" parameterType="Bought" flushCache="true"
 		statementType="PREPARED">
 		INSERT INTO BOUGHT VALUES(
-		#{ubno}, #{coin}, #{buycnt}, #{buyprice}, #{bdate}, #{acntno})
+		SEQ_BOUGHT.NEXTVAL, #{coin}, #{buycnt}, #{buyprice}, default, #{acntno})
 	</insert>
 
+   <delete id="deleteBought" parameterType="string"	flushCache="true" statementType="PREPARED">
+		DELETE FROM BOUGHT WHERE UBNO = #{ubno}
+	</delete>
+	
+	<select id="selectListBought" resultType="arraylist" resultMap="resultBought">
+		SELECT * FROM BOUGHT WHERE ACNTNO = #{acntno}
+	</select>
 	
 </mapper>

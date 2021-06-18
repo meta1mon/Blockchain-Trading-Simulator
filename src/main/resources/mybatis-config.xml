@@ -5,19 +5,31 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	<typeAliases> <!-- 사용하고자 하는 클래스의 별칭을 선언 -->
-		<typeAlias type="com.kh.bts.board.model.vo.Board" alias="Board" />
-		<typeAlias type="com.kh.bts.member.model.vo.Member" alias="Member"/>
-		<typeAlias type="com.kh.bts.community.model.vo.Community" alias="Community"/>
-		<typeAlias type="com.kh.bts.community.model.vo.Rcommunity" alias="Rcommunity"/>
-		<typeAlias type="com.kh.bts.community.model.vo.Clike" alias="Clike"/>
-		<typeAlias type="com.kh.bts.community.model.vo.Cdislike" alias="Cdislike"/>
+		<typeAlias type="com.kh.bts.member.model.vo.Member"
+			alias="Member" />
+		<typeAlias type="com.kh.bts.community.model.vo.Community"
+			alias="Community" />
+		<typeAlias type="com.kh.bts.community.model.vo.Rcommunity"
+			alias="Rcommunity" />
+		<typeAlias type="com.kh.bts.community.model.vo.Clike"
+			alias="Clike" />
+		<typeAlias type="com.kh.bts.community.model.vo.Cdislike"
+			alias="Cdislike" />
+		<typeAlias type="com.kh.bts.investment.model.vo.WaitBought"
+			alias="WaitBought" />
+		<typeAlias type="com.kh.bts.investment.model.vo.WaitSold"
+			alias="WaitSold" />
+		<typeAlias type="com.kh.bts.investment.model.vo.Bought"
+			alias="Bought" />
 	</typeAliases>
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
-		<mapper resource="mappers/board-mapper.xml" />
-		<mapper resource="mappers/member-mapper.xml"/>
-		<mapper resource="mappers/community-mapper.xml"/>
-		<mapper resource="mappers/rcommunity-mapper.xml"/>
-		<mapper resource="mappers/clike-mapper.xml"/>
-		<mapper resource="mappers/cdislike-mapper.xml"/>
+		<mapper resource="mappers/member-mapper.xml" />
+		<mapper resource="mappers/community-mapper.xml" />
+		<mapper resource="mappers/rcommunity-mapper.xml" />
+		<mapper resource="mappers/clike-mapper.xml" />
+		<mapper resource="mappers/cdislike-mapper.xml" />
+		<mapper resource="mappers/waitbought-mapper.xml" />
+		<mapper resource="mappers/waitsold-mapper.xml" />
+		<mapper resource="mappers/bought-mapper.xml" />
 	</mappers>
 </configuration>

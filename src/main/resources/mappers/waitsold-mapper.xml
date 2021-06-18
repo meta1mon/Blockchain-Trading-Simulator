@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="waitSold">
+	<!-- config에서 선언한 별칭을 사용한 namespace를 통해 해당 mapper를 접근한다 -->
+	<resultMap type="WaitSold" id="resultwaitSold">
+		<!-- class와 table의 컬럼명이 동일할 경우, 따로 기입하지 않아도 된다 -->
+	</resultMap>
+
+	<!-- 미체결 삽입 -->
+	<insert id="insertWaitSold" parameterType="WaitSold" flushCache="true"
+		statementType="PREPARED">
+		INSERT INTO WAITSOLD VALUES(
+		#{usno}, #{coin}, #{sellcnt}, #{sellprice}, #{wsdate}, #{acntno})
+	</insert>
+
+	
+</mapper>

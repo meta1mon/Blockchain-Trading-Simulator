@@ -1,4 +1,4 @@
-package com.kh.bts.investmentpage.controller;
+package com.kh.bts.investment.controller;
 
 
 import org.springframework.stereotype.Controller;

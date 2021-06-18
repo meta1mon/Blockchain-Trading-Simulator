@@ -8,8 +8,6 @@ public interface CommunityService {
 
 	List<Community> selectSearch(String keyword, int searchType);
 
-	List<Community> selectPopularList();
-	
 	List<Community> selectList(int startPage, int limit);
 
 	int totalCount();

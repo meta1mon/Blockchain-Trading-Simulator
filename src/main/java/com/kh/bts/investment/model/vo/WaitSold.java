@@ -1,28 +1,27 @@
-package com.kh.bts.investmentpage.model.vo;
+package com.kh.bts.investment.model.vo;
 
-import org.springframework.stereotype.Component;
-
-@Component
-public class Sold {
+public class WaitSold {
 	private int usno;
 	private String coin;
 	private float sellcnt;
 	private float sellprice;
-	private String sdate;
+	private String wsdate;
 	private String acntno;
 
-	public Sold() {
+	public WaitSold() {
 	}
-	public Sold(int usno,String coin,float sellcnt,float sellprice,String sdate,String acntno) {
+
+	public WaitSold(int usno, String coin, float sellcnt, float sellprice, String wsdate, String acntno) {
 		super();
 		this.usno = usno;
 		this.coin = coin;
 		this.sellcnt = sellcnt;
 		this.sellprice = sellprice;
-		this.sdate = sdate;
+		this.wsdate = wsdate;
 		this.acntno = acntno;
+		
 	}
-
+	
 	public int getUsno() {
 		return usno;
 	}
@@ -55,12 +54,12 @@ public class Sold {
 		this.sellprice = sellprice;
 	}
 
-	public String getSdate() {
-		return sdate;
+	public String getWsdate() {
+		return wsdate;
 	}
 
-	public void setSdate(String sdate) {
-		this.sdate = sdate;
+	public void setWsdate(String wsdate) {
+		this.wsdate = wsdate;
 	}
 
 	public String getAcntno() {
@@ -73,8 +72,8 @@ public class Sold {
 
 	@Override
 	public String toString() {
-		return "Sold [usno=" + usno + ", coin=" + coin + ", sellcnt=" + sellcnt + ", sellprice=" + sellprice
-				+ ", sdate=" + sdate + ", acntno=" + acntno + "]";
+		return "Waitsold [usno=" + usno + ", coin=" + coin + ", sellcnt=" + sellcnt + ", sellprice=" + sellprice
+				+ ", wsdate=" + wsdate + ", acntno=" + acntno + "]";
 	}
 
 }

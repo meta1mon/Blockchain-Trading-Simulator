@@ -1,3 +1,13 @@
+var page = 1;
+var search = '';
+
+$('#searchBtn').click(function(){
+	
+//	console.log($('#search').val());
+	search = $('#search').val();
+	newsList(page, search);
+});
+
 function dateDiffer(pubDate){
 	// 현재 시각과 뉴스 송고일자 차이 반환 함수
 	var cur = new Date();
@@ -19,7 +29,7 @@ function dateDiffer(pubDate){
 };
 
 function newsHeadLine() {
-	console.log("newsHeadLine 실행")
+//	console.log("newsHeadLine 실행")
 	$.ajax({
 				url : 'https://www.cryptohub.or.kr/api/v1/news',
 				type : "POST",
@@ -33,21 +43,28 @@ function newsHeadLine() {
 						var newsTime = dateDiffer(data.data[i].pubdate);
 						$(".scroll").append('<span class="headList" id="headTime">&#128344;'+newsTime+'&nbsp;&nbsp;</span><span class="headList">'+data.data[i].title+'</span>&nbsp;&nbsp;&nbsp;&nbsp;');
 					}
-					
 				}
 			});
 };
 
-function newsList(p) {
-	console.log("newsList 실행")
+function newsList(page, search) {
+	
+	var p = (page-1)*6; //(현재 페이지-1) 곱하기 6
+	
+//	console.log("newsList 실행")
 	$.ajax({
 				url : 'https://www.cryptohub.or.kr/api/v1/news',
 				type : "POST",
 				cache : false,
 				data : {
-					token : "$2y$10$hUvFjpPSDU5Gx6vp20vhGOg6Nuib3IZBzZk4cR5f.uGbRtMKN.S2m"
+					token : "$2y$10$hUvFjpPSDU5Gx6vp20vhGOg6Nuib3IZBzZk4cR5f.uGbRtMKN.S2m",
+					page : 1,
+					limit : 100,
+					keyword : search
 				},
 				success : function(data) {
+					$("#raw1").empty(); // 각 클래스 내용 비워주기
+					$("#raw2").empty();
 					// 뉴스목록 
 					for (var i = p; i < p+3; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
@@ -57,7 +74,6 @@ function newsList(p) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
 						$("#raw2").append('<div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div>');
 					}
-<<<<<<< HEAD
 //					console.log("console total : "+data.total);  
 //					console.log("console : "+data.current_page);
 //					console.log("current page : " + page);
@@ -141,22 +157,17 @@ function newsList(p) {
 						});
 					});
 				} //TODO 에러페이지
-=======
-					console.log("pubdate"+data.data[10].pubdate);  // pubdate 문제 해결해야함(temp 영상보고 다시해보기)
-				}
->>>>>>> 610c63a6fa18e2c6e994164d67e15ddaee8a0ca0
 			});
 };
 
-$('.newsPage a').click(function(){
-	// 버튼 색 바꿔주기
-	if($('.newsPage a').hasClass("pageActive")) {
-		$('.newsPage a').removeClass();
-		$('.newsPage a').addClass("inactive");
-		$(this).addClass("pageActive");
-	} 
+function genPage(page, total) {
+	var totalLast;
+	if(total%6>0){
+		totalLast = parseInt(total/6)+1;
+	} else {
+		totalLast = parseInt(total/6);
+	}
 	
-<<<<<<< HEAD
 	if( !search ){
 		totalLast = 17;
 	}
@@ -204,19 +215,8 @@ $('.newsPage a').click(function(){
 //$('.test').click(function(){
 //	console.log("왜?");
 //});
-=======
-	// 페이징
-	p = $(this).html();
-	p = parseInt(p)-1;// 현재 페이지 읽어온 뒤 1 빼주기
-	p *= 6;				// 6을 곱하면 상단 첫 기사 index
-	$("#raw1").empty(); // 각 클래스 내용 비워주기
-	$("#raw2").empty();
-	newsList(p);
-});
->>>>>>> 610c63a6fa18e2c6e994164d67e15ddaee8a0ca0
 
 newsHeadLine();
 
-var p = 0;
+newsList(page, search);
 
-newsList(p);

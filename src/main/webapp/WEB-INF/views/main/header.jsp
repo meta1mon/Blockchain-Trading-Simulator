@@ -15,7 +15,7 @@
 			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/aboutus">About Us</a></li>
 			<li class="menu"><a class="menutext" href="#">모의투자</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/nlist">뉴스</a></li>
-			<li class="menu"><a class="menutext" href="#">프로차트</a></li>
+			<li class="menu"><a href="javascript:void(window.open('<%=request.getContextPath()%>/prochart', '_blank','width=1000px, height=730px'))">프로차트</a></li>
 			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/clist">커뮤니티</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/cashShop">충전소</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/ranking">랭킹</a></li>

@@ -1,4 +1,4 @@
-package com.kh.bts.investmentpage.model.vo;
+package com.kh.bts.investment.model.vo;
 
 import org.springframework.stereotype.Component;
 

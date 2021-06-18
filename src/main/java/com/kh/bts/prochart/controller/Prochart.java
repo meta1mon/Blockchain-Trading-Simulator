@@ -1,17 +1,14 @@
-package com.kh.bts.mainpage.controller;
-
+package com.kh.bts.prochart.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
 @Controller
-public class MainpageCtrl {
-
-	@RequestMapping("/mainpage")
+public class Prochart {
+	@RequestMapping("prochart")
 	public ModelAndView MainPage(ModelAndView mav) {
-		mav.setViewName("main/mainPage");
+		mav.setViewName("prochart/prochart");
 		return mav;
 	}
 }

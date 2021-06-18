@@ -1,9 +1,9 @@
-package com.kh.bts.investmentpage.model.vo;
+package com.kh.bts.investment.model.vo;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class Waitbought {
+public class WaitBought {
 	private int ubno;
 	private String coin;
 	private float buycnt;
@@ -11,11 +11,11 @@ public class Waitbought {
 	private String wbdate;
 	private String acntno;
 
-	public Waitbought() {
+	public WaitBought() {
 
 	}
 
-	public Waitbought(int ubno, String coin, float buycnt, float buyprice, String wbdate, String acntno) {
+	public WaitBought(int ubno, String coin, float buycnt, float buyprice, String wbdate, String acntno) {
 		super();
 		this.ubno = ubno;
 		this.coin = coin;

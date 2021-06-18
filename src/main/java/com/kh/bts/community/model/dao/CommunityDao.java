@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.bts.board.model.vo.Board;
 import com.kh.bts.community.model.vo.Community;
 
 @Repository("cmDao")
@@ -19,10 +18,6 @@ public class CommunityDao {
 		return sqlSession.selectList("community.searchList", keyword);
 	}
 
-	public List<Community> selectPopularList() { // 조회수 상위 5개 게시글 조회
-		return sqlSession.selectList("community.selectPopularList");
-	}
-	
 	public List<Community> selectList(int startPage, int limit) { // 페이지당 게시글 조회
 		int startRow = (startPage - 1) * limit;
 		RowBounds row = new RowBounds(startRow, limit);

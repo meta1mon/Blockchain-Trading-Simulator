@@ -21,6 +21,8 @@
 			alias="WaitSold" />
 		<typeAlias type="com.kh.bts.investment.model.vo.Bought"
 			alias="Bought" />
+		<typeAlias type="com.kh.bts.investment.model.vo.Sold"
+			alias="Sold" />
 	</typeAliases>
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
 		<mapper resource="mappers/member-mapper.xml" />
@@ -31,5 +33,6 @@
 		<mapper resource="mappers/waitbought-mapper.xml" />
 		<mapper resource="mappers/waitsold-mapper.xml" />
 		<mapper resource="mappers/bought-mapper.xml" />
+		<mapper resource="mappers/sold-mapper.xml" />
 	</mappers>
 </configuration>

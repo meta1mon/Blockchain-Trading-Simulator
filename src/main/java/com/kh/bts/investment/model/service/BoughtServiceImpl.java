@@ -1,5 +1,7 @@
 package com.kh.bts.investment.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,16 @@ public class BoughtServiceImpl implements BoughtService{
 	public int insertBought(Bought vo) {
 		// TODO Auto-generated method stub
 		return bDao.insertBought(vo);
+	}
+	@Override
+	public int deleteBought(int ubno) {
+		// TODO Auto-generated method stub
+		return bDao.deleteBought(ubno);
+	}
+	@Override
+	public List<Bought> selectListBought(String acntno) {
+		// TODO Auto-generated method stub
+		return bDao.selectList(acntno);
 	}
 
 }

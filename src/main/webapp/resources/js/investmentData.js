@@ -4,7 +4,7 @@ $(function() {
 	var timer1 = setInterval(function() {
 		console.log("1초");
 		alltable();
-		// orderbook();s
+		// orderbook();
 
 	}, 1000);
 
@@ -32,6 +32,10 @@ function chart() {
 	});
 }
 
+function toname(name){
+	  document.getElementById("coin").value = name;
+};
+
 function changename(listNum) {
 	var checkstring = typeof(listNum);
 	
@@ -46,7 +50,7 @@ function changename(listNum) {
 
 	}
 	console.log(changecoin);
-
+	toname(changecoin);
 	chart();
 };
 

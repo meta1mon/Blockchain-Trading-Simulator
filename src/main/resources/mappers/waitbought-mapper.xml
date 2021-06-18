@@ -10,8 +10,19 @@
 	<insert id="insertWaitBought" parameterType="WaitBought" flushCache="true"
 		statementType="PREPARED">
 		INSERT INTO WAITBOUGHT VALUES(
-		#{ubno}, #{coin}, #{buycnt}, #{buyprice}, #{wbdate}, #{acntno})
+		SEQ_WAITBOUGHT.NEXTVAL, #{coin}, #{buycnt}, #{buyprice}, default, #{acntno})
 	</insert>
-
+	
+	<delete id="deleteWaitBought" parameterType="string"	flushCache="true" statementType="PREPARED">
+		DELETE FROM WAITBOUGHT WHERE UBNO = #{ubno}
+	</delete>
+	
+	<select id="selectListWaitBought" resultType="arraylist" resultMap="resultwaitBought">
+		SELECT * FROM WAITBOUGHT WHERE ACNTNO = #{acntno}
+	</select>
 	
 </mapper>
+
+<!-- 매수 -> ajax 미체결로 넣고(성공).//
+미체결 정보와 실시간 코인 가격을 계속 에이잭스로 비교해주고, 체결 된 상태에서 해야되는 일 1) 미체결에서 없애고, 체결에 넣고, 코인계좌에도 넣어야됨
+(미체결 테이블에 아무 값이 없으면, 굳이 실시간이랑 비교 안하게끔 처리 => 컨트롤러에서) -->

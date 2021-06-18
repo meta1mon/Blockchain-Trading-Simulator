@@ -32,12 +32,37 @@ ul li {
     
     list-style: none;    
 }
-/* 
 a {
     text-decoration: none;
-    color:black;
+}
+html,body {
+    margin:0;
+    padding:0;
+    height:100vh;
 }
 
+#wrapper {
+	position:relative;
+}
+
+#container {
+	height: 100%;
+	padding:20px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 스크롤 숨기기 */
+*{
+	-ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+	display: none;
+}
+
+/* 
 a:visited{
     color: #000;
 }

@@ -26,7 +26,7 @@ public class MemberDAO {
 		Member vo = new Member();
 		vo.setEmail(email);
 		vo.setAuthkey(authkey);
-		sqlSession.selectOne("Member.createAuthKey", email);
+		sqlSession.selectOne("Member.createAuthKey", vo);
 	}
 	
 	public void authMember(Member vo) {

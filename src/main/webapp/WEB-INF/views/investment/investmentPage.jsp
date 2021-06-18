@@ -10,10 +10,28 @@
 	href="${pageContext.request.contextPath}/resources/css/investment.css"
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
-
 <script
 	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
+<script type="text/javascript">
+	$("#bought").on(
+			"click",
+			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+				$.ajax({
+					url : "wbInsert",
+					type : "post",
+					dataType : "json",
+					success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+						alert("성공");
+						console.log(data);
+					},
+					error : function(request, status, errorData) {
+						alert("error code : " + request.status + "\n"
+								+ "message : " + request.responseText + "\n"
+								+ "error : " + errorData);
+					}
+				});
+			});
+</script>
 
 <meta charset="UTF-8">
 <title>InvestmentPage</title>
@@ -83,8 +101,12 @@
 					<td>55555</td>
 					<td>55555</td>
 				</tr>
-				
+
 			</table>
+
+
+
+
 			<table style="border: solid 3px; width: 500px; height: 500px;">
 
 				<tr>
@@ -97,18 +119,31 @@
 
 				</tr>
 				<tr>
-					<th colspan="1">가격</th>
-
+					<th colspan="1">코인종류 </th>
 				</tr>
 				<tr>
-					<td colspan="1"><input id="cash1"></td>
+					<td colspan="1"><input id="coin" type="text" value="BTC"></td>
+				</tr>
+
+				<tr>
+					<th colspan="1">가격</th>
+				</tr>
+				<tr>
+					<td colspan="1"><input id="buyprice" type="text"></td>
 				</tr>
 				<tr>
 					<th colspan="1">수량</th>
 
 				</tr>
 				<tr>
-					<td colspan="1"><input id="cash1"></td>
+					<td colspan="1"><input id="buycnt" type="text"></td>
+				</tr>
+				<tr>
+					<th colspan="1">총액</th>
+
+				</tr>
+				<tr>
+					<td colspan="1"><input id="totalprice" type="text"></td>
 				</tr>
 
 
@@ -119,11 +154,15 @@
 						<button value="100%">100%</button></td>
 				</tr>
 				<tr>
-					<td colspan="1"><button value="매도">매도</button></td>
+					<td colspan="1"><button id="bought">매수</button>
+						<button id="sold">매도</button></td>
 
 				</tr>
 
 			</table>
+
+
+
 			<table style="border: solid 3px; width: 500px; height: 500px;">
 
 				<tr>

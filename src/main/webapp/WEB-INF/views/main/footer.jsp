@@ -5,7 +5,7 @@
 <script>
 	
 </script>
-<footer>
+<footer class="footer-container">
 	<div class="footer">
 	<div class="f_left">
 		<ul>

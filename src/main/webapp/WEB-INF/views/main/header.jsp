@@ -33,7 +33,7 @@
 			<c:when test="${loginMember != null }">
 				<ul>
 					<li class="member"><a class="menutext" href="<%=request.getContextPath()%>/logout" id="logout">로그아웃</a></li>
-					<li class="member"><a class="menutext" href="#">마이페이지</a></li>
+					<li class="member"><a class="menutext" href="<%=request.getContextPath()%>/mypage">마이페이지</a></li>
 				</ul>
 			</c:when>
 		</c:choose>

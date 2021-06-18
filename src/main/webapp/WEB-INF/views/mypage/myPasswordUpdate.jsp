@@ -78,7 +78,7 @@
 			
 			$("#frm1").action = "findpassword";
 			$("#frm1").method = "post";
-			$("#frm1").submit
+			$("#frm1").submit;
 			
 
 		});

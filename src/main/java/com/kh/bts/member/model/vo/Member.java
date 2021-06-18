@@ -11,7 +11,6 @@ public class Member {
 	
 	private String pw;
 	
-	private String pwCh;
 	private String gender;
 	private String birthdate;
 	
@@ -50,12 +49,6 @@ public class Member {
 	}
 	public void setPw(String pw) {
 		this.pw = pw;
-	}
-	public String getPwCh() {
-		return pwCh;
-	}
-	public void setPwCh(String pwCh) {
-		this.pwCh = pwCh;
 	}
 	public String getGender() {
 		return gender;

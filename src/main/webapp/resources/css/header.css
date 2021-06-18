@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+header {
+	height: 64px;
+}
 .header {
 	position: fixed;
 	top: 0;

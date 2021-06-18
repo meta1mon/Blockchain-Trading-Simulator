@@ -40,6 +40,11 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
+	public void createAuthkey(String email, String authkey) throws Exception {
+		mDao.createAuthkey(email, authkey);
+	}
+	
+	@Override
 	public int updateMember(Member vo) {
 		return mDao.updateMember(vo);
 	}
@@ -58,6 +63,5 @@ public class MemberServiceImpl implements MemberService{
 	public Member loginMember(Member vo) throws Exception{
 		return mDao.loginMember(vo);
 	}
-	
 
 }

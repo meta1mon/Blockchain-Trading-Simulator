@@ -40,7 +40,6 @@ public class MemberCtrl {
 		int result = mService.insertMember(vo);
 		System.out.println(result);
 		PrintWriter out = null;
-//		if (result > 0) {
 			try {
 				out = response.getWriter();
 				out.println(result);
@@ -52,11 +51,6 @@ public class MemberCtrl {
 					out.close();
 				}
 			}
-//			out.println("<script>alert('인증 후 사이트 이용이 가능합니다.')</script>");
-//			response.sendRedirect("authwait");
-//		} else {
-//			response.sendRedirect("signup");
-//		}
 	}
 
 //	회원가입 후 인증 대기
@@ -82,23 +76,18 @@ public class MemberCtrl {
 	}
 
 	@RequestMapping(value = "/loginmember")
-	public void loginMember(Member vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void loginMember(@RequestParam("email") String email, @RequestParam("pw") String pw, Member vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		Member loginMember = mService.loginMember(vo);
-		if (loginMember == null) {
-			logger.info("로그인 실패");
+		if(loginMember == null) {
+			logger.info("======= 회원 정보 불일치 =======");
 			response.sendRedirect("login");
 		} else {
-			if (!loginMember.getPw().equals(vo.getPw())) {
-				logger.info("비번 틀림");
-				response.sendRedirect("login");
-			} else {
-				logger.info("로그인 성공");
-				session.setAttribute("loginMember", loginMember);
-				System.out.println(loginMember.getEmail() + loginMember.getNickname());
-				response.sendRedirect("mainpage");
-			}
+			logger.info("======= 로그인 성공 =======");
+			session.setAttribute("loginMember", loginMember);
+			response.sendRedirect("mainpage");
 		}
+		
 	}
 
 //	로그아웃

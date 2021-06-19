@@ -8,6 +8,14 @@ $('#searchBtn').click(function(){
 	newsList(page, search);
 });
 
+$('#search').on("keyup",function(key){
+    if(key.keyCode==13) {
+    	search = $('#search').val();
+    	newsList(page, search);
+    }
+});
+
+
 function dateDiffer(pubDate){
 	// 현재 시각과 뉴스 송고일자 차이 반환 함수
 	var cur = new Date();

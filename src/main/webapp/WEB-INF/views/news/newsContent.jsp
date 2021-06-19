@@ -29,6 +29,8 @@
 				</div>
 			</div>
 		</div>
+		<div id="space">
+		</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 	<script type="text/javascript"	src="${pageContext.request.contextPath}/resources/js/newsContent.js"></script>

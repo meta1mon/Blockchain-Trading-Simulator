@@ -3,9 +3,19 @@ a:visited{
     text-decoration: none;
 }
 
+#newsList {
+/* 	border: 1px solid; */
+	width: 65%;
+	min-width: 1000px;
+	height: 100%;
+	padding:20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .newsSearch {
 /* 	border: 1px solid; */
-	width: 1240px;
+/* 	width: 1240px; */
 	height: 55px;
 	font-size: 13px;
 	overflow: hidden;
@@ -13,10 +23,11 @@ a:visited{
 }
 
 #search {
-	width: 1020px;
+	width: 87%;
 	height: 50px;
 	font-size: 24px;
 	overflow: hidden;
+	margin-left: 10px; 	
 	padding: 0 15px;
 	border: 1px solid transparent;
 	border-color: #dbdbdb;
@@ -37,17 +48,20 @@ a:visited{
 }
 
 .headLine {
-	border: 1px solid;
-	width: 1240px;
-	height: 50px;
+	border: 2px inset;
+	width: 97%;
+	height: 40px;
 	font-size: 13px;
 	overflow: hidden;
-	margin: 10px auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 9px;
+	margin-right: auto;
 }
 
 .headList {
-	line-height: 50px;
-	vertical-align: middle;
+	line-height: 40px;
+	vertical-align: middle; 
 }
 
 #headTime {
@@ -55,8 +69,9 @@ a:visited{
 }
 
 .newsList {
+/* 	border: 1px solid; */
 	clear: both;
-	width: 1120px;
+	width: 100%;
 	height: 350px;
 	margin: 0 auto;
 }
@@ -64,7 +79,7 @@ a:visited{
 .newsLabel {
 	margin: 10px;
 	position: relative;
-	width: 30%;
+	width: 31%;
 	height: 300px;
 	float: left;
 	border: 1.5px solid #f2f2f2;
@@ -105,6 +120,7 @@ a:visited{
 	border: none;
 	outline: none;
 	background-color: white;
+	margin-top: 20px ;
 	padding: 8px 16px;
 	border: 1px solid transparent;
 	border-color: #dbdbdb;
@@ -129,3 +145,7 @@ a:visited{
 }
 
 .newsPage a:hover:not(.active) {background-color: #E3C8F8;}
+
+#space {
+	height: 100px;
+}

@@ -49,6 +49,10 @@
     color: #999;
 }
 
+#space {
+	height: 40px;
+}
+
 /* 	max-width: 800px; */
 /*     margin: 0px auto 20px; */
 /*     padding: 10px 20px; */

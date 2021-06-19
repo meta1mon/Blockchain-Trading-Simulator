@@ -41,15 +41,15 @@ function newsHeadLine() {
 					// 헤드라인 : 최신 기사 10개만 출력
 					for (var i = 0; i < 10; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
-						$(".scroll").append('<span class="headList" id="headTime">&#128344;'+newsTime+'&nbsp;&nbsp;</span><span class="headList">'+data.data[i].title+'</span>&nbsp;&nbsp;&nbsp;&nbsp;');
+						$(".scroll").append('<a href="ncontent?news_id='+data.data[i].id+'"><span class="headList" id="headTime">&#128344;'+newsTime+'&nbsp;&nbsp;</span><span class="headList">'+data.data[i].title+'</span></a>&nbsp;&nbsp;&nbsp;&nbsp;');
+						$("a").css("color","black");
 					}
 				}
 			});
 };
 
 function newsList(page, search) {
-	
-	var p = (page-1)*6; //(현재 페이지-1) 곱하기 6
+	var p = (page-1)*6; //(현재 페이지-1) 곱하기 6	
 	
 //	console.log("newsList 실행")
 	$.ajax({
@@ -63,16 +63,19 @@ function newsList(page, search) {
 					keyword : search
 				},
 				success : function(data) {
+					
 					$("#raw1").empty(); // 각 클래스 내용 비워주기
 					$("#raw2").empty();
 					// 뉴스목록 
 					for (var i = p; i < p+3; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
-						$("#raw1").append('<div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div>');
+						$("#raw1").append('<a href="ncontent?news_id='+data.data[i].id+'"><div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div></a>');
+						$("a").css("color","black");
 					}
 					for (var i = p+3; i < p+6; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
-						$("#raw2").append('<div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div>');
+						$("#raw2").append('<a href="ncontent?news_id='+data.data[i].id+'"><div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div></a>');
+						$("a").css("color","black");
 					}
 //					console.log("console total : "+data.total);  
 //					console.log("console : "+data.current_page);
@@ -156,6 +159,7 @@ function newsList(page, search) {
 							}
 						});
 					});
+					
 				} //TODO 에러페이지
 			});
 };
@@ -211,10 +215,6 @@ function genPage(page, total) {
 	$(".newsPage").append('<button class="pageBtn" id="pageNext">다음</button>');
 };
 
-
-//$('.test').click(function(){
-//	console.log("왜?");
-//});
 
 newsHeadLine();
 

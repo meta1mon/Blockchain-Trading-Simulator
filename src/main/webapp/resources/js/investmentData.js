@@ -98,7 +98,7 @@ function alltable() {
 									data['data'][coinList[i]]['fluctate_rate_24H'] * 1,
 									data['data'][coinList[i]]['acc_trade_value_24H'] * 1 ]
 						}
-						html = "<table class='table table-striped' ><tr><td>코인명</td><td>현재가</td><td>등락률(24H)</td><td>거래대금</td></tr>";
+						html = "<table class='table table-striped' id='cointable' ><tr><td>코인명</td><td>현재가</td><td>등락률(24H)</td><td>거래대금</td></tr>";
 						for (var i = 0; i < coinList.length; i++) {
 							thisCoin = i;
 							// console.log(coinList[i] + "의 정보는 다음과 같다" +

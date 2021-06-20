@@ -42,7 +42,7 @@
 						변경</a></li>
 				<li><a href="${pageContext.request.contextPath}/mypage/me">나의
 						자산</a></li>
-				<li><a href="${pageContext.request.contextPath}/mypage/mc">나의
+				<li><a href="${pageContext.request.contextPath}/mypage/myClist">나의
 						게시글</a></li>
 				<li><a href="${pageContext.request.contextPath}/mypage/mr">나의
 						댓글</a></li>

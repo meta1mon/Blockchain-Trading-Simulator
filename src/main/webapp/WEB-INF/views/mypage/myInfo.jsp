@@ -48,37 +48,34 @@
 			}
 
 			var checkPN = true;
-			var phone = $("input[name=nickname]").val();
+			var phone = $("input[name=phone]").val();
 			var reg2 = /^01([0|1|6|7|8|9]?)+([0-9]{3,4})+([0-9]{4})$/;
 			if (phone.length != 0 && phone.match(reg2) == null) {
 				checkPN = false;
 				console.log("연락처 양식X")
-				alert("연락처는 숫자만 사용할 수 있습니다")
+				alert("연락처는 10~11자리의 숫자만 사용할 수 있습니다")
 			} else {
 				checkPN = true;
 				console.log("연락처 양식O")
 			}
-
+			// 닉네임 중복체크 아직 안함!
 			var dataquery = $("#frmChangeInfo").serialize();
-			if(checkNN && checkPN){
-				
+			if (checkNN && checkPN) {
 				$.ajax({
-					url : "signupmember",
+					url : "miu",
 					type : "POST",
 					data : dataquery,
 					async : true,
 					success : function(data) {
-						console.log("회원가입 성공!");
-						location.href = "authwait"
+						alert("회원 정보 수정 완료!");
+						location.href = "mi";
 					},
 					error : function() {
+						alert("회원 정보 수정 실패!");
 						console.log("error: 회원가입 실패!");
 					}
 				})
-			} else {
-				alert("입력 항목을 다시 확인해주세요.")
 			}
-
 		});
 
 	})
@@ -102,10 +99,10 @@
 				<tr>
 					<td>성별</td>
 					<c:if test="${myInfo.gender == 'M' }">
-						<td>남자</td>
+						<td><input type="hidden" name="gender" value="M">남자</td>
 					</c:if>
 					<c:if test="${myInfo.gender == 'F' }">
-						<td>여자</td>
+						<td><input type="hidden" name="gender" value="F">여자</td>
 					</c:if>
 					<c:if test="${myInfo.gender == null }">
 						<td class="none">입력하지 않은 항목입니다</td>
@@ -128,8 +125,8 @@
 							placeholder="숫자만 입력하세요"></td>
 					</c:if>
 					<c:if test="${myInfo.phone != null }">
-						<td><input type="text" name="phone" value="${myInfo.phone }" readonly
-							class="update"></td>
+						<td><input type="text" name="phone" value="${myInfo.phone }"
+							readonly class="update"></td>
 					</c:if>
 				</tr>
 				<tr>
@@ -137,8 +134,7 @@
 					<c:if test="${myInfo.mailing == null }">
 						<td class="none"><input type="checkbox"
 							onclick="return(false);"></td>
-						<td class="insert"><input type="checkbox" name="mailing"
-							checked></td>
+						<td class="insert"><input type="checkbox" name="mailing"></td>
 					</c:if>
 					<c:if test="${myInfo.mailing != null }">
 						<td class="none"><input type="checkbox" checked

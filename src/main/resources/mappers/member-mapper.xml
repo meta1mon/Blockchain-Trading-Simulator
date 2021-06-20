@@ -47,8 +47,13 @@
 	</update>
 	
 	<!-- 비밀번호수정 -->
-	<update id="updatePassword">
-		UPDATE MEMBER SET PW=#{pw}, PWCH=#{pwCh}
+	<update id="updatePassword" parameterType="Member" flushCache="true" statementType="PREPARED">
+		UPDATE MEMBER SET PW=#{pw} WHERE EMAIL = #{email}
+	</update>
+	
+	<!-- 계좌 비밀번호수정 -->
+	<update id="updateBankPw" parameterType="Acnt" flushCache="true" statementType="PREPARED">
+		UPDATE ACNT SET BANKPW=#{bankPw} WHERE EMAIL = #{email}
 	</update>
 	
 	<!-- 로그인 -->

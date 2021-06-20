@@ -30,6 +30,7 @@ public class MemberDAO {
 		return result;
 	}
 
+	// 계좌번호 중복 체크
 	public int checkAcntno(String acntno) {
 		return sqlSession.selectOne("Member.checkAcntno", acntno);
 	}

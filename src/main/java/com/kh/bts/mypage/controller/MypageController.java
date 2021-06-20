@@ -1,6 +1,8 @@
 package com.kh.bts.mypage.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.HomeController;
+import com.kh.bts.acnt.model.vo.Acnt;
+import com.kh.bts.community.model.service.CommunityService;
+import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.service.MemberService;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.service.MypageService;
@@ -30,7 +35,7 @@ public class MypageController {
 
 	@Autowired
 	private MypageService myService;
-	
+
 	@RequestMapping(value = "")
 	public ModelAndView mypageEnter(ModelAndView mv) {
 		mv.setViewName("mypage/myPageEnter");
@@ -46,9 +51,7 @@ public class MypageController {
 		response.setContentType("text/html; charset=UTF-8");
 
 		HttpSession session = request.getSession();
-		String loginEmail = ((Member) session.getAttribute("loginMember")).getEmail();
-		logger.info(inputPass + "입력받은 비밀번호");
-		logger.info(loginEmail + "현재 로그인 중인 이메일");
+		String loginEmail = (String) session.getAttribute("loginMember");
 
 		Member vo = new Member();
 		vo.setEmail(loginEmail);
@@ -64,7 +67,6 @@ public class MypageController {
 
 			if (loginMember != null) { // 로그인 성공
 				out.print("<script>alert('환영합니다 " + loginMember.getNickname() + "님!')</script>");
-//				request.getRequestDispatcher("myPage/myPage.jsp").forward(request, response);
 				out.print("<script>location.href='mi'</script>)");
 			} else { // 로그인 실패
 				out.print("<script>alert('잘못된 비밀번호 입니다')</script>");
@@ -73,15 +75,51 @@ public class MypageController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
 		}
-		out.flush();
-		out.close();
 	}
 
+	// 비밀번호 변경
 	@RequestMapping(value = "/passChange")
-	public ModelAndView passChange(ModelAndView mv) {
+	public ModelAndView passChange(ModelAndView mv, HttpServletRequest request, @RequestParam(name = "pw") String pw) {
 		logger.info("비밀번호 변경하러 들어옴");
-		mv.setViewName("mypage/myInfo");
+		HttpSession session = request.getSession();
+		String email = (String) session.getAttribute("loginMember");
+		Member vo = new Member();
+		vo.setEmail(email);
+		vo.setPw(pw);
+		int result = myService.passwordUpdate(vo);
+		if (result > 0) {
+			logger.info("비밀번호 변경 성공");
+			request.getSession().removeAttribute("loginMember");
+		} else {
+			logger.info("비밀번호 변경 실패");
+		}
+		mv.setViewName("main/mainPage");
+		return mv;
+	}
+
+//미완성
+	// 계좌 비밀번호 변경
+	@RequestMapping(value = "/bankPwChange")
+	public ModelAndView bankPwChange(ModelAndView mv, HttpServletRequest request,
+			@RequestParam(name = "bankPw") int bankPw) {
+		logger.info("계좌 비밀번호 변경하러 들어옴");
+		HttpSession session = request.getSession();
+		String email = (String) session.getAttribute("loginMember");
+		Acnt vo = new Acnt();
+		vo.setEmail(email);
+		vo.setBankPw(bankPw);
+		int result = myService.bankPwUpdate(vo);
+		if (result > 0) {
+			logger.info("계좌 비밀번호 변경 성공");
+			request.getSession().removeAttribute("loginMember");
+		} else {
+			logger.info("계좌 비밀번호 변경 실패");
+		}
+		mv.setViewName("main/mainPage");
 		return mv;
 	}
 
@@ -89,16 +127,37 @@ public class MypageController {
 	@RequestMapping(value = "/mi")
 	public ModelAndView myInfo(ModelAndView mv, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String email = ((Member) session.getAttribute("loginMember")).getEmail();
+		String email = (String) session.getAttribute("loginMember");
 		Member vo = myService.myInfo(email);
 		mv.addObject("myInfo", vo);
 		mv.setViewName("mypage/myInfo");
 		return mv;
 	}
 
+	// 내 회원 정보 수정
 	@RequestMapping(value = "/miu")
-	public ModelAndView myInfoUpdate(ModelAndView mv) {
-		mv.setViewName("mypage/myInfoUpdate");
+	public void myInfoUpdate(Member vo, HttpServletResponse response) {
+		int result = myService.myInfoUpdate(vo);
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+			out.print(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+
+	}
+
+	@RequestMapping(value = "/myClist", method = RequestMethod.GET)
+	public ModelAndView myClist(ModelAndView mv, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String email = (String) session.getAttribute("loginMember");
+		List<Community> list = myService.myCommunity(email);
+		mv.addObject("myClist", list);
+		mv.setViewName("mypage/myCommunity");
 		return mv;
 	}
 
@@ -117,12 +176,6 @@ public class MypageController {
 	@RequestMapping(value = "/mee")
 	public ModelAndView myEssetsEnter(ModelAndView mv) {
 		mv.setViewName("mypage/myEssetsEnter");
-		return mv;
-	}
-
-	@RequestMapping(value = "/mc")
-	public ModelAndView myCommunity(ModelAndView mv) {
-		mv.setViewName("mypage/myCommunity");
 		return mv;
 	}
 

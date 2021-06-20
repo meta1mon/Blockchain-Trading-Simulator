@@ -98,12 +98,13 @@ public class MemberCtrl {
 	public void loginMember(@RequestParam("email") String email, @RequestParam("pw") String pw, Member vo,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		Member loginMember = mService.loginMember(vo);
-		if (loginMember == null) {
+		Member nowLogin = mService.loginMember(vo);
+		if (nowLogin == null) {
 			logger.info("======= 회원 정보 불일치 =======");
 			response.sendRedirect("login");
 		} else {
 			logger.info("======= 로그인 성공 =======");
+			String loginMember = nowLogin.getEmail();
 			session.setAttribute("loginMember", loginMember);
 			response.sendRedirect("mainpage");
 		}

@@ -56,5 +56,4 @@ public class MemberDAO {
 	public Member loginMember(Member vo) throws Exception {
 		return sqlSession.selectOne("Member.loginMember", vo);
 	}
-
 }

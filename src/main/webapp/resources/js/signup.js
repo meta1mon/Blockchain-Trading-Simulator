@@ -106,7 +106,7 @@ $(function() {
 	var nicknameReg = function() {
 
 		var nickname = $("input[name=nickname]").val()
-		var reg = /^[가-힣A-Za-z0-9]{1,8}$/g;
+		var reg = /^[가-힣A-Za-z0-9]{2,8}$/g;
 		if (nickname.length != 0) {
 			if (nickname.match(reg) != null) {
 				$(".nickReg").html("&nbsp;");

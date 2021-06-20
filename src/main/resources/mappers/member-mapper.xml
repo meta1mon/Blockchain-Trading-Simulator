@@ -4,8 +4,8 @@
 	<resultMap type="Member" id="Member">
 	</resultMap>
 	<!-- 회원조회-->
-	<select id="searchMember" parameterType="Member">
-		SELECT * FROM MEMBER ORDER BY REQAGR DESC
+	<select id="searchMember" parameterType="string" resultMap="Member">
+		SELECT * FROM MEMBER WHERE EMAIL = #{email}
 	</select>
 	<!-- 회원수조회 -->
 	<select id="countMember" resultType="int">

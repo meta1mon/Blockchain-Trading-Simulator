@@ -13,13 +13,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.community.model.service.CommunityService;
+import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Community;
+import com.kh.bts.member.model.vo.Member;
 
 @Controller
 public class CommunityCtrl {
 	@Autowired
 	private CommunityService cmService;
-	public static final int LIMIT = 10;
+	
+	@Autowired
+	private RcommunityService rcmService;
+	public static final int LIMIT = 30;
 
 	@RequestMapping(value = "clist", method = RequestMethod.GET)
 	public ModelAndView communityListService(
@@ -56,6 +61,7 @@ public class CommunityCtrl {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
 			mv.addObject("community", cmService.selectCommunity(0, cno));
+			mv.addObject("commentList", rcmService.selectList(cno));
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("community/communityDetail");
 		} catch (Exception e) {
@@ -90,6 +96,10 @@ public class CommunityCtrl {
 			if (report != null && !report.equals(""))
 				saveFile(report, request);
 			c.setFilepath(report.getOriginalFilename());
+			
+			Member me = (Member) request.getSession().getAttribute("loginMember");
+			String cwriter = me.getNickname();
+			c.setCwriter(cwriter);
 			cmService.insertCommunity(c);
 			mv.setViewName("redirect:clist");
 		} catch (Exception e) {

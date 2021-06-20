@@ -138,8 +138,7 @@ comm {
 </head>
 <%@include file="../main/header.jsp"%>
 <body class="content" style="background-image:url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: cover;">
-	<div
-		style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
+	<div style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
 		
 		<div class="comm">커뮤니티</div>
 		<form action="clist" name="listForm" method="get">
@@ -155,13 +154,12 @@ comm {
 		<input type="hidden" name="page" value="${currentPage}"> <input
 			type="button" value="글쓰기" onclick="window.location='cWriteForm'">
 
-		<table class="ctable">
-		
+		<!-- 조회수 상위 5개 인기 게시글 -->
+		<table class="popularTable">
 			<!-- 글이 없을 경우 -->
 			<c:if test="${listCount eq 0}">
 				<tr>
-					<td colspan="6" align="center"><br> <br> 게시판에 저장된 글이
-						없습니다.<br> <br></td>
+					<td colspan="6" align="center"><br> <br> 게시판에 저장된 글이없습니다.<br> <br></td>
 				</tr>
 			</c:if>
 			<c:if test="${listCount ne 0}">
@@ -178,11 +176,9 @@ comm {
 					</tr>
 				</c:forEach>
 			</c:if>
-
 		</table>
 		
 		<table class="ctable">
-	
 			<tr bgcolor="#8C66C8">
 				<td align="center" width="60">번호</td>
 				<td align="center" width="380">제목</td>
@@ -194,8 +190,7 @@ comm {
 			<!-- 글이 없을 경우 -->
 			<c:if test="${listCount eq 0}">
 				<tr>
-					<td colspan="6" align="center"><br> <br> 게시판에 저장된 글이
-						없습니다.<br> <br></td>
+					<td colspan="6" align="center"><br> <br> 게시판에 저장된 글이없습니다.<br> <br></td>
 				</tr>
 			</c:if>
 			<c:if test="${listCount ne 0}">
@@ -212,7 +207,6 @@ comm {
 					</tr>
 				</c:forEach>
 			</c:if>
-
 		</table>
 		<!-- 앞 페이지 번호 처리 -->
 		<c:if test="${currentPage <= 1}">
@@ -246,25 +240,6 @@ comm {
 			</c:url>
 			<a href="${clistEND}">[다음]</a>
 		</c:if>
-
-		<%-- <form method="get" name="listForm" action="clist">
-		<select id="searchType" name="searchType">
-			<option value="1">글제목</option>
-			<option value="2">작성자</option>
-			<option value="3">글내용</option>
-		</select> <input type="hidden" name="page" value="${currentPage}"> <input
-			type="text" name="keyword"> <input type="submit" value="검색">
-				<input type="button" value="글쓰기" onclick="window.location='cWriteForm'">
-	</form> --%>
-		<!-- 			<form action="qnalist" method="get">
-			<select id="searchType" name="searchType">
-				<option value="1">글제목</option>
-				<option value="2">작성자</option>
-				<option value="3">글내용</option>
-			</select> <input type='search' id="search" name="search"
-				placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp질문을 검색하세요.">
-			<button type=submit id="btnsearch">검색</button>
-		</form> -->
 	</div>
 </body>
 <%@include file="../main/footer.jsp"%>

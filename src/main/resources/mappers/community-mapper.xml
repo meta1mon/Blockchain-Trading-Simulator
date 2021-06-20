@@ -22,6 +22,11 @@
 		</choose>
 	</select>
 
+	<!-- 조회수 상위 5개 게시글 조회 -->
+	<select id="searchpopularList" parameterType="Community" resultType="arraylist" resultMap="resultCommunity">
+	SELECT * FROM COMMUNITY WHERE ROWNUM &lt;=5 ORDER BY VIEWCNT DESC
+	</select>
+	
 	<!-- 페이지당 게시글 조회 -->
 	<select id="selectList" resultType="arraylist" resultMap="resultCommunity">
 		SELECT * FROM COMMUNITY ORDER BY CNO DESC
@@ -41,7 +46,7 @@
 	<insert id="insertCommunity" parameterType="String"
 		flushCache="true" statementType="PREPARED">
 		INSERT INTO COMMUNITY VALUES(
-		'CO'||TO_CHAR(SYSDATE,'RRMMDD')||LPAD(SEQ_COMMUNITY.NEXTVAL,2,'0'),
+		LPAD(SEQ_COMMUNITY.NEXTVAL,2,'0'),
 		#{csubject}, #{ccontent}, default,
 		#{filepath}, 0, 0, 0, 0, #{cwriter})
 	</insert>

@@ -10,7 +10,7 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 <style>
 .ck.ck-editor {
-	max-width: 800px;
+	max-width: 1000px;
 }
 
 .ck-editor__editable {
@@ -26,27 +26,17 @@
 }
 
 #subject {
+	margin: 0 auto 10 auto;
+	height: 40px; 
+	font-size: 15px; 
+	box-sizing: border-box;
+	width:1000px;
 	background-color: #FBFBFC;
 	border: 1px solid #D5D5D5;
-	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-		box-shadow 0.15s ease-in-out;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
 }
 
 #subject:hover, #subject:focus {
-	background-color: #ffffff;
-	color: black;
-	border: 1px solid #BDBDBD;
-}
-
-#tag {
-	color: #76858C;
-	background-color: #FBFBFC;
-	border: 1px solid #D5D5D5;
-	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-		box-shadow 0.15s ease-in-out;
-}
-
-#tag:hover, #tag:focus {
 	background-color: #ffffff;
 	color: black;
 	border: 1px solid #BDBDBD;
@@ -71,12 +61,6 @@
 	position: relative;
 	top: 6px;
 	left: 276px;
-	font-family: 'GmarketSansMedium';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
 	border: none;
 }
 
@@ -94,12 +78,6 @@
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
 	float: left;
-	font-family: 'GmarketSansMedium';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
 }
 
 #cancel {
@@ -117,12 +95,6 @@
 		box-shadow 0.15s ease-in-out;
 	float: left;
 	display: inline;
-	font-family: 'GmarketSansMedium';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
 }
 
 #submit:hover, #submit:active {
@@ -137,56 +109,36 @@
 
 </head>
 <%@include file="../main/header.jsp"%>
-<body class="content" style="background-color:#E3C8F8">
-<div style="width: 1240px; margin: 0 auto 0 auto; color: #99ADB6; background:#ffffff; padding:20px; border-radius: 4px;">
+<body class="content" style="background-image:url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: cover;">
+	<div style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
 		<div id="write">글 쓰기</div><br><br><br><br>
 		<form action="cInsert" method="post" enctype="multipart/form-data">
-			<div style="margin-bottom: 10px;">
 				<input id="subject"
-					style="width: 800px; height: 40px; font-size: 15px; box-sizing: border-box;"
 					type="text" placeholder="제목을 입력해 주세요." name="csubject"
 					maxlength="100">
-			</div>
-			<div style="margin-bottom: 10px;">
-				<textarea id="editor" name="ccontent" maxlength="4000"></textarea>
-			</div>
-			<div>
-				<input type="submit" value="글 작성하기" id="submit"> <input
-					type="button" value="취소하기" id="cancel"
-					onclick="location.href = '${clist}'">
-			</div>
-
+				<textarea id="editor" name="ccontent" maxlength="4000" style="margin: 0 auto 10 auto;"></textarea>
+				<input type="submit" value="글 작성하기" id="submit"> 
+				<input type="button" value="취소하기" id="cancel" onclick="location.href = '${clist}'">
 
 			<div id="file_text">파일 첨부</div>
-			<img src="<%=request.getContextPath()%>/images/folder.png"
+			<img src="resources/assets/img/folder.png"
 				id="folder">
 			<p id="fileDiv">
 				<input type="file" id="file" name="upfile"  multiple="multiple" style="margin-top: 25px;">
 		</form>
-	</div>
 
-					<script>
+					<c:url var="clist" value="clist">
+						<c:param name="page" value="1" />
+					</c:url> <a href="${clist}">목록으로</a>
+		</div>
+						<script>
 				        ClassicEditor
 				            .create( document.querySelector( '#editor' ) )
 				            .catch( error => {
 				                console.error( error );
 				            } );
 				    </script>
-				    
-					<c:url var="clist" value="clist">
-						<c:param name="page" value="1" />
-					</c:url> <a href="${clist}">목록으로</a></td>
-			</tr>
-		</table>
-	</form>
-	<script>
-<script>
-ClassicEditor
-    .create( document.querySelector( '#editor' ) )
-    .catch( error => {
-        console.error( error );
-    } );
-</script>
+
 </body>
 <%@include file="../main/footer.jsp"%>
 </html>

@@ -13,7 +13,7 @@ import com.kh.bts.community.model.vo.Community;
 public class CommunityDao {
 	@Autowired
 	private SqlSession sqlSession;
-
+	
 	public List<Community> searchList(String keyword, int searchType) { // 검색한 게시글 조회
 		return sqlSession.selectList("community.searchList", keyword);
 	}
@@ -22,6 +22,10 @@ public class CommunityDao {
 		int startRow = (startPage - 1) * limit;
 		RowBounds row = new RowBounds(startRow, limit);
 		return sqlSession.selectList("community.selectList", null, row);
+	}
+	
+	public List<Community> searchpopularList() { // 조회수 상위 5개 게시글 조회
+		return sqlSession.selectList("community.searchpopularList");
 	}
 
 	public int listCount() { // 게시글 전체 개수 조회

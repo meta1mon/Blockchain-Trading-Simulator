@@ -2,6 +2,7 @@ package com.kh.bts.community.controller;
 
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Rcommunity;
+import com.kh.bts.member.model.vo.Member;
 
 @Controller
 public class RcommunityCtrl {
@@ -28,9 +30,13 @@ public class RcommunityCtrl {
 	public ModelAndView RcommunityInsert(
 			@RequestParam(name = "cno")String cno,
 			@RequestParam(name = "page", defaultValue = "1") int page,
-			Rcommunity rc, ModelAndView mv) {
+			Rcommunity rc, HttpServletRequest request, ModelAndView mv) {
 		try {
 			rcmService.insertRcommunity(rc);
+			
+			Member me = (Member) request.getSession().getAttribute("loginMember");
+			String rwriter = me.getNickname();
+			rc.setRwriter(rwriter);
 			mv.addObject("cno", cno);
 			mv.addObject("page", page);
 			mv.setViewName("redirect:cDetail");

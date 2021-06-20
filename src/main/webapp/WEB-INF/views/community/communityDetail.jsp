@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 상세 보기</title>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 </head>
 <%@include file="../main/header.jsp"%>
 <body class="content"
@@ -71,10 +73,9 @@
 			<c:forEach var="rep" items="${commentList}">
 				<div id="comment">
 					<hr>
-					<input type="hidden" id="rep_id" name="rep_id"
-						value="${rep.rno}">
-					<h4 class="comment-head">작성자 : ${rep.rwriter} &nbsp;
-						&nbsp; 작성일 : ${rep.rdate}</h4>
+					<input type="hidden" id="rep_id" name="rep_id" value="${rep.rno}">
+					<h4 class="comment-head">작성자 : ${rep.rwriter} &nbsp; &nbsp;
+						작성일 : ${rep.rdate}</h4>
 					<div class="comment-body">
 						<p>${rep.rcontent}</p>
 					</div>
@@ -94,30 +95,38 @@
 			</c:forEach>
 		</c:if>
 		<hr>
+
 		<div class="comment-box">
-			<form action="rcInsert" id="replyForm" method="get">
-				<input type="hidden" id="cno" name="cno"
-					value="${community.cno}"> <input type="hidden" id="page"
-					name="page" value="${currentPage}"> <input type="hidden"
-					id="comments" name="comments" value="">
-				<p align="center">
-					작성자 : <input type="text" name="comment_name" size="23">
-				<br> <br>
-					<textarea id="reply_contents" class="form control" rows="6"
-						cols="70%"
-						onfocus="if(this.value == 'Message') { this.value = ''; }"
-						onblur="if(this.value == '') { this.value ='Message'; }"
-						placeholder="Message"></textarea>
-					<br> <br> <input type="submit" value="댓글쓰기">
-				</p>
-			</form>
+			<c:if test="${loginMember != null }">
+				<form action="rcInsert" id="replyForm" method="post">
+					<div style="float: right; margin-top: 10px;">
+						<input type="hidden" name="cno" value="${community.cno }">
+						<input type="hidden" id="page" name="page" value="${currentPage}">
+						<input type="hidden" id="comments" name="comments" value="">
+						<textarea placeholder="댓글 쓰기" id="editor" name="rqcontent"
+							maxlength="4000"
+							onfocus="if(this.value == '댓글 쓰기') { this.value = ''; }"
+							onblur="if(this.value == '') { this.value ='댓글 쓰기'; }"></textarea>
+					</div>
+					<div style="clear: both; float: right; padding-top: 10px;">
+						<button type="submit" id="rsubmit">등록</button>
+					</div>
+				</form>
+			</c:if>
+			<c:if test="${loginMember == null }">
+				<div id="login">답변을 하려면 로그인이 필요합니다.</div>
+			</c:if>
 		</div>
 	</div>
 </body>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
+	ClassicEditor
+	.create( document.querySelector( '#editor' ) )
+	.catch( error => {
+	    console.error( error );
+	} );
+
 $(function(){
 	// 댓글 Insert Script
 	$('#replyForm').on('submit',function(event){
@@ -138,8 +147,7 @@ $(".update").on('click',function(){
 	var content = commBody.children('p').text().trim();
 	
 		if($(this).text() == "수정 및 삭제"){
-			commBody.append('<textarea style="margin top:7px;" rows="4" cols="70%"
-class="updateContent" name="updateContent" id="updateContent">'+content+'</textarea>');
+			commBody.append('<textarea style="margin top:7px;" rows="4" cols="70%" class="updateContent" name="updateContent" id="updateContent">'+content+'</textarea>');
 			parentDiv.children('.comment-confirm').show();
 			parentP.children(".delete").toggle("fast");
 			parentP.children(".updateConfirm").toggle("fast");

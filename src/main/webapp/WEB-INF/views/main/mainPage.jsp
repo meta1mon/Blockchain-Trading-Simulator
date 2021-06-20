@@ -10,9 +10,10 @@
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script src="${pageContext.request.contextPath}/resources/js/data.js"></script>
-<link
+<%-- <link
 	href="${pageContext.request.contextPath}/resources/css/newsList.css"
 	rel="stylesheet" type="text/css" />
+	--%>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/newsList.js"></script>
 <meta charset="UTF-8">
@@ -20,33 +21,43 @@
 <script type="text/javascript">
 function go() {
 	location.href = "<%=request.getContextPath()%>/investmentpage";
-}
+	}
 </script>
 </head>
 <jsp:include page="../main/header.jsp"></jsp:include>
 <body>
+	<br>
+	<br>
+	<br>
 	<div id="center">
 		<table>
 			<tr>
-				<td>
+				<td id="c1">
 					<div id="chart">
 						<div id="chart_div"></div>
 						<button id="chart_btn" class="btn btn-outline-primary"
 							onclick="go();">거래소바로가기</button>
 					</div>
 				</td>
-				<td>
-					<div id="cointable_div"></div>
-					<button id="cointable_btn" class="btn btn-outline-primary"
-						onclick="go();">거래소바로가기</button>
+				<td id="c2">
+					<div id="table">
+						<div id="cointable_div"></div>
+						<button id="cointable_btn" class="btn btn-outline-primary"
+							onclick="go();">거래소바로가기</button>
+					</div>
 				</td>
 			</tr>
 		</table>
-		<div class="headLine">
-			<marquee class="scroll" onmouseover="this.stop();"
-				onmouseout="this.start();">
-				<!-- newsList.js의 newsHeadLine() 함수 참조 -->
-			</marquee>
+		<br>
+		<br>
+		<br>
+		<div id="new">
+			<div class="headLine">
+				<marquee class="scroll" onmouseover="this.stop();"
+					onmouseout="this.start();">
+					<!-- newsList.js의 newsHeadLine() 함수 참조 -->
+				</marquee>
+			</div>
 		</div>
 
 

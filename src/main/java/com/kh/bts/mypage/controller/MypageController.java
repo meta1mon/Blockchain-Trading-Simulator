@@ -11,12 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.HomeController;
 import com.kh.bts.member.model.service.MemberService;
 import com.kh.bts.member.model.vo.Member;
+import com.kh.bts.mypage.model.service.MypageService;
 
 @Controller
 @RequestMapping("mypage")
@@ -26,6 +28,9 @@ public class MypageController {
 	@Autowired
 	private MemberService mService;
 
+	@Autowired
+	private MypageService myService;
+	
 	@RequestMapping(value = "")
 	public ModelAndView mypageEnter(ModelAndView mv) {
 		mv.setViewName("mypage/myPageEnter");
@@ -73,8 +78,20 @@ public class MypageController {
 		out.close();
 	}
 
+	@RequestMapping(value = "/passChange")
+	public ModelAndView passChange(ModelAndView mv) {
+		logger.info("비밀번호 변경하러 들어옴");
+		mv.setViewName("mypage/myInfo");
+		return mv;
+	}
+
+	// 내 회원 정보 가져오기
 	@RequestMapping(value = "/mi")
-	public ModelAndView myInfo(ModelAndView mv) {
+	public ModelAndView myInfo(ModelAndView mv, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String email = ((Member) session.getAttribute("loginMember")).getEmail();
+		Member vo = myService.myInfo(email);
+		mv.addObject("myInfo", vo);
 		mv.setViewName("mypage/myInfo");
 		return mv;
 	}

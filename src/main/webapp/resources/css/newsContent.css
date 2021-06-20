@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.wrapper {
+.contentWrapper {
 	margin: 0;
 	padding: 0;
 	background-color: #f2f2f2;
@@ -47,6 +47,10 @@
 .copyright {
     text-align: center;
     color: #999;
+}
+
+#space {
+	height: 40px;
 }
 
 /* 	max-width: 800px; */

@@ -1,4 +1,10 @@
+
+
 function newsContent() {
+	
+	var newsId= parseInt($('#news_id').val());
+//	console.log("newsId : "+newsId+" type : "+ typeof(newsId));
+	
 	$.ajax({
 		url : 'https://www.cryptohub.or.kr/api/v1/news',
 		type : "POST",
@@ -9,9 +15,22 @@ function newsContent() {
 			limit : 100
 		},
 		success : function(data) {
-			$('.title').append(data.data[0].title);
-			$('.byline_pubdate').append(data.data[0].byline+'<br>송고&nbsp;'+data.data[0].pubdate+'<span class="update">최종수정&nbsp;'+data.data[0].updated_at+'</span>');
-			$('.content').append(data.data[0].content);
+//			console.log("data.data.length : " + data.data.length);
+			
+			var index;
+			
+			for (var i = 0; i < data.data.length; i++) {
+				if(data.data[i].id == newsId) {
+					index = i;
+					break;
+				}
+			}
+			
+//			console.log("index : " + index);
+			
+			$('.title').append(data.data[index].title);
+			$('.byline_pubdate').append(data.data[index].byline+'<br>송고&nbsp;'+data.data[index].pubdate+'<span class="update">최종수정&nbsp;'+data.data[index].updated_at+'</span>');
+			$('.content').append(data.data[index].content);
 		} //TODO 에러페이지
 	});
 };

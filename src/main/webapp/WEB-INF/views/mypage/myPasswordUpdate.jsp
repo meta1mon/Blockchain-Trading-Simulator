@@ -29,7 +29,7 @@
 <script>
 	$(function() {
 
-		var flag = false;
+		var flag1 = false;
 		// 비밀번호 비밀번호 확인 일치 여부
 		var passEqual = function() {
 			var pass1 = $("input[name=pw]").val();
@@ -37,51 +37,53 @@
 			if ((pass1.length != 0 && pass2.length != 0) && pass1 == pass2) {
 				$(".pwCh").text("비밀번호가 일치합니다.");
 				$(".pwCh").css("color", "blue");
+				flag1 = true;
 			} else {
 				$(".pwCh").text("비밀번호가 일치하지 않습니다.");
 				$(".pwCh").css("color", "red");
-				return flag;
+				flag1 = false;
 			}
+			console.log(flag1 + "일치여부");
+			return flag1;
 		};
 
 		$("input[name=pwCh]").on("keyup", passEqual);
 
+		var flag2 = false;
 		var pwReg = function() {
 			var password = $("input[name=pw]").val();
 			var reg = /^[A-Za-z0-9!@#$%^&*]{8,15}$/g;
 			if (password.length != 0) {
 				if (password.match(reg) != null) {
 					$(".pwReg").html("&nbsp;");
+					flag2 = true;
 				} else {
 					$(".pwReg").text(
 							"8~15자의 영어 대 소문자, 숫자와 특수문자(!@#$%^&*)만 사용할 수 있습니다.");
 					$(".pwReg").css("color", "red");
-					flag = false;
+					flag2 = false;
 				}
-			} else {
-
+				console.log(flag2 + "양식 여부");
+				return flag2;
 			}
 		};
 
 		$("#pw").on("keyup", pwReg);
 
-		$("#update1").on("click", function() {
-			if (passEqual = false) {
-				console.log("비밀번호 일치X");
-				return;
-			}
-			
-			if (regCheck = false) {
+		function passChange() {
+			if (flag2 == false) {
 				console.log("형식 일치X");
-				return;
+				return false;
 			}
 			
-			$("#frm1").action = "findpassword";
-			$("#frm1").method = "post";
-			$("#frm1").submit;
+			if (flag1 == false) {
+				console.log("비밀번호 일치X");
+				return false;
+			}
 			
+			return true;
 
-		});
+		}
 
 	});
 </script>
@@ -90,7 +92,7 @@
 <body>
 	<div id="mpu">
 		<h2>비밀번호 변경</h2>
-		<form id="frm1" style="border: 1px solid black;">
+		<form action=""${pageContext.request.contextPath}/mypage/passChange" method="post" style="border: 1px solid black;">
 			<table>
 				<tr>
 					<td colspan="2">비밀번호*</td>
@@ -113,7 +115,7 @@
 					<td colspan="2"><p class="alert pwCh">&nbsp;</p></td>
 				</tr>
 			</table>
-			<button type="button" id="update1">비밀번호 수정</button>
+			<button type="submit" onclick="return passChange();">비밀번호 수정</button>
 		</form>
 
 

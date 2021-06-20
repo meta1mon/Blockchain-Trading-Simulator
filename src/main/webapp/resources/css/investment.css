@@ -1,1 +1,38 @@
 @charset "UTF-8";
+
+#center {
+	text-align: center;
+	display: inline;
+	width: 80%;
+}
+#top_t{
+	width: 80%;
+	height: 80%;
+}
+#top_t_1 {
+	width: 760px;
+	height: 500px;
+}
+
+#top_t_2 {
+	width: 760px;
+	height: 500px;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#all_t {
+	
+	width: 80%;
+	height: 100%;
+}
+
+#cointable_div {
+	overflow: auto;
+
+	height: 500px;
+}

@@ -14,7 +14,7 @@ var changecoin = "BTC"; // default
 
 function changename(listNum) {
 	console.log("changename함수");
-	var coinList2 = [ 'BTC', 'ETH', 'DOGE', 'LTC', 'XRP' ];
+	var coinList2 = [ 'BTC', 'ETH', 'DOGE', 'LTC', 'XRP' ,'ETC', 'ADA', 'TRX','SXP','STRAX'];
 	changecoin = coinList2[listNum];
 
 };
@@ -37,7 +37,7 @@ function coinname() {
 
 function table() {
 	console.log("table함수 들어옴");
-	var coinList = [ 'BTC', 'ETH', 'DOGE', 'LTC', 'XRP' ];
+	var coinList = [ 'BTC', 'ETH', 'DOGE', 'LTC', 'XRP','ETC', 'ADA', 'TRX','SXP','STRAX' ];
 	var display = new Array();
 	var html = "";
 	var thisCoin = null;

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.HomeController;
+import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.member.model.service.MemberService;
 import com.kh.bts.member.model.vo.Member;
 
@@ -28,33 +29,51 @@ public class MemberCtrl {
 	private MemberService mService;
 
 // 회원가입
-	@RequestMapping(value = "/signup", method=RequestMethod.GET)
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public ModelAndView insertMember(ModelAndView mv) {
 		mv.setViewName("member/signup");
 		return mv;
 	}
 
 // 회원가입 눌렀을 때
-	@RequestMapping(value="/signupmember", method=RequestMethod.POST)
-	public void insertMember(Member vo, HttpServletResponse response) throws Exception {
-		int result = mService.insertMember(vo);
+	@RequestMapping(value = "/signupmember", method = RequestMethod.POST)
+	public void insertMember(Member vo, Acnt vo2, HttpServletResponse response) throws Exception {
+		// 랜덤으로 계좌번호 생성(B와 8자리 숫자)
+		boolean flag = true;
+		while (flag) {
+			String tempAcntno = "B";
+			for (int i = 0; i < 8; i++) {
+				tempAcntno += ((int) (Math.random() * 10));
+			}
+			System.out.println("임시계좌번호" + tempAcntno);
+			int check = mService.checkAcntno(tempAcntno);
+			if (check == 0) {
+				vo2.setAcntno(tempAcntno);
+				flag = false;
+			}
+		}
+		System.out.println("정식 계좌번호" + vo2.getAcntno() );
+		
+		System.out.println("bankPw 입력값이 얼마냐?" + vo2.getBankPw());
+		System.out.println("acnt 이메일 입력값이 얼마냐?" + vo2.getEmail());
+		int result = mService.insertMember(vo, vo2);
 		System.out.println(result);
 		PrintWriter out = null;
-			try {
-				out = response.getWriter();
-				out.println(result);
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if (out != null) {
-					out.flush();
-					out.close();
-				}
+		try {
+			out = response.getWriter();
+			out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				out.flush();
+				out.close();
 			}
+		}
 	}
 
 //	회원가입 후 인증 대기
-	@RequestMapping(value = "/authwait", method=RequestMethod.GET)
+	@RequestMapping(value = "/authwait", method = RequestMethod.GET)
 	public ModelAndView authWait(ModelAndView mv) {
 		mv.setViewName("member/authwait");
 		return mv;
@@ -62,7 +81,7 @@ public class MemberCtrl {
 
 // 이메일 인증 링크 눌렀을 때
 	@RequestMapping(value = "/emailconfirm", method = RequestMethod.GET)
-	public void emailConfirm(Member vo, Model model,  HttpServletResponse response) throws Exception {
+	public void emailConfirm(Member vo, Model model, HttpServletResponse response) throws Exception {
 		mService.authMember(vo);
 		model.addAttribute("vo", vo);
 		response.sendRedirect("mainpage");
@@ -76,10 +95,11 @@ public class MemberCtrl {
 	}
 
 	@RequestMapping(value = "/loginmember")
-	public void loginMember(@RequestParam("email") String email, @RequestParam("pw") String pw, Member vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void loginMember(@RequestParam("email") String email, @RequestParam("pw") String pw, Member vo,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		Member loginMember = mService.loginMember(vo);
-		if(loginMember == null) {
+		if (loginMember == null) {
 			logger.info("======= 회원 정보 불일치 =======");
 			response.sendRedirect("login");
 		} else {
@@ -87,7 +107,7 @@ public class MemberCtrl {
 			session.setAttribute("loginMember", loginMember);
 			response.sendRedirect("mainpage");
 		}
-		
+
 	}
 
 //	로그아웃

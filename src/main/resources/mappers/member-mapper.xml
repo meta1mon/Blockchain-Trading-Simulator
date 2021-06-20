@@ -19,6 +19,14 @@
 	<insert id="insertMember" parameterType="Member" flushCache="true" statementType="PREPARED">
 		INSERT INTO MEMBER VALUES(#{email}, #{nickname}, #{authkey}, default, #{pw}, #{gender}, #{birthdate}, #{phone}, #{mailing}, default)
 	</insert>
+	<!-- 회원가입 시, 계좌번호 중복 확인-->
+	<select id="checkAcntno" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM ACNT WHERE ACNTNO = #{acntno}
+	</select>
+	<!-- 회원가입 시, 계좌번호 및 계좌 비밀번호 등록-->
+	<insert id="insertAcnt" parameterType="Acnt" flushCache="true" statementType="PREPARED">
+		INSERT INTO ACNT VALUES(#{acntno}, #{email}, default, #{bankPw})
+	</insert>
 	<!-- 이메일인증키설정 -->
 	<update id="createAuthKey" parameterType="Member" flushCache="true" statementType="PREPARED">
 		UPDATE MEMBER SET AUTHKEY= #{authkey} WHERE EMAIL = #{email}

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -73,6 +74,13 @@ public class MypageController {
 		out.close();
 	}
 
+	@RequestMapping(value = "/passChange")
+	public ModelAndView passChange(ModelAndView mv) {
+		logger.info("비밀번호 변경하러 들어옴");
+		mv.setViewName("mypage/myInfo");
+		return mv;
+	}
+	
 	@RequestMapping(value = "/mi")
 	public ModelAndView myInfo(ModelAndView mv) {
 		mv.setViewName("mypage/myInfo");

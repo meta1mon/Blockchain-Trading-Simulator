@@ -97,10 +97,8 @@ public class CommunityCtrl {
 				saveFile(report, request);
 			c.setFilepath(report.getOriginalFilename());
 			
-			Member me = (Member) request.getSession().getAttribute("loginMember");
-			String cwriter = me.getNickname();
-			c.setCwriter(cwriter);
-			cmService.insertCommunity(c);
+			String email = (String) request.getSession().getAttribute("loginMember");
+			int result = cmService.insertCommunity(c, email);
 			mv.setViewName("redirect:clist");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());

@@ -36,8 +36,8 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public void insertCommunity(Community c) {
-		cmDao.insertCommunity(c);
+	public int insertCommunity(Community c, String email) {
+		return cmDao.insertCommunity(c, email);
 	}
 
 	@Override

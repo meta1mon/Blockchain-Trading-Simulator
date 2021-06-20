@@ -14,7 +14,7 @@ public interface CommunityService {
 
 	Community selectCommunity(int chk, String cno);
 	
-	void insertCommunity(Community c);
+	int insertCommunity(Community c, String email);
 
 	Community updateCommunity(Community c);
 

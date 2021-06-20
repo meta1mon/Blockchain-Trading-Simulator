@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.bts.community.model.vo.Community;
+import com.kh.bts.member.model.vo.Member;
 
 @Repository("cmDao")
 public class CommunityDao {
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	public List<Community> searchList(String keyword, int searchType) { // 검색한 게시글 조회
 		return sqlSession.selectList("community.searchList", keyword);
 	}
@@ -23,7 +24,7 @@ public class CommunityDao {
 		RowBounds row = new RowBounds(startRow, limit);
 		return sqlSession.selectList("community.selectList", null, row);
 	}
-	
+
 	public List<Community> searchpopularList() { // 조회수 상위 5개 게시글 조회
 		return sqlSession.selectList("community.searchpopularList");
 	}
@@ -36,8 +37,17 @@ public class CommunityDao {
 		return sqlSession.selectOne("community.selectOne", cno);
 	}
 
-	public int insertCommunity(Community c) { // 게시글 삽입
-		return sqlSession.insert("community.insertCommunity", c);
+	public int insertCommunity(Community c, String email) { // 게시글 삽입
+		Member vo = sqlSession.selectOne("Member.searchMember", email);
+		if (vo == null) {
+			System.out.println("로그인 오류");
+		} else {
+			System.out.println("정상 로그인");
+		}
+		String cwriter = vo.getNickname();
+		c.setCwriter(cwriter);
+		int result = sqlSession.insert("community.insertCommunity", c);
+		return result;
 	}
 
 	public int updateCommunity(Community c) { // 게시글 수정

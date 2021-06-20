@@ -3,6 +3,7 @@ package com.kh.bts.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.HomeController;
@@ -33,6 +35,20 @@ public class MemberCtrl {
 	public ModelAndView insertMember(ModelAndView mv) {
 		mv.setViewName("member/signup");
 		return mv;
+	}
+	
+// 이메일, 닉네임 중복 체크
+	@ResponseBody
+	@RequestMapping(value = "/emailcheck", method = RequestMethod.POST)
+	public int emailCheck(Member vo) throws Exception {
+		int result = mService.dupeEmail(vo);
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/nickcheck", method = RequestMethod.POST)
+	public int nickCheck(Member vo) throws Exception {
+		int result = mService.dupeNick(vo);
+		return result;
 	}
 
 // 회원가입 눌렀을 때
@@ -101,7 +117,9 @@ public class MemberCtrl {
 		Member nowLogin = mService.loginMember(vo);
 		if (nowLogin == null) {
 			logger.info("======= 회원 정보 불일치 =======");
-			response.sendRedirect("login");
+			request.setAttribute("errorMessage", "로그인 정보가 올바르지 않습니다.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
+			dispatcher.forward(request, response); 
 		} else {
 			logger.info("======= 로그인 성공 =======");
 			String loginMember = nowLogin.getEmail();

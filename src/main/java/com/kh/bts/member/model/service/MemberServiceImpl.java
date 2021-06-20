@@ -40,7 +40,19 @@ public class MemberServiceImpl implements MemberService {
 
 		return result;
 	}
+	@Override
+	public int dupeEmail(Member vo) throws Exception{
+		int result = 0;
+		result = mDao.dupeEmail(vo);
+		return result;
+	}
 
+	@Override
+	public int dupeNick(Member vo)  throws Exception{
+		int result = 0;
+		result = mDao.dupeNick(vo);
+		return result;
+	}
 	@Override
 	public int checkAcntno(String acntno) {
 		return mDao.checkAcntno(acntno);

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  	
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +49,21 @@
 					</tr>
 					<tr>
 						<td colspan="2"><input type="submit" value="로그인" class="btn1"></td>
+					</tr>
+					
+					<tr>
+					<td colspan="2">
+						<p class="alert loginCh">
+								<c:choose>
+									<c:when test="${not empty errorMessage}">
+										<c:out value="${errorMessage}" />
+									</c:when>
+									<c:when test="${empty errorMessage}">
+										<c:out value="" />
+									</c:when>
+								</c:choose>
+							</p>
+						</td>
 					</tr>
 				</table>
 			</form>

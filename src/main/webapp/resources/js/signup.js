@@ -80,6 +80,45 @@ $(function() {
 		}
 	})
 })
+// 이메일, 닉네임 중복 체크
+var checkED = false;
+var emailDupe = function(){
+	$.ajax({
+		url: "emailcheck",
+		type: "post",
+		dataType: "json",
+		data: {"email" : $("#email").val()},
+		success: function(data){
+			if(data == 1){
+				$(".emailCh").text("이미 사용 중인 이메일입니다.");
+				checkED = false;
+			} else {
+				checkED = true;
+			}
+		}
+	})
+}
+$("#email").on("keyup", emailDupe);
+
+var checkND = false;
+var nickDupe = function(){
+	$.ajax({
+		url: "nickcheck",
+		type: "post",
+		dataType: "json",
+		data: {"nickname" : $("#nickname").val()},
+		success: function(data){
+			if(data == 1){
+				$(".nickCh").text("이미 사용 중인 닉네임입니다.");
+				checkND = false;
+			} else {
+				checkND = true;
+			}
+		}
+	})
+}
+$("#nickname").on("keyup", nickDupe);
+
 
 // 입력, 형식 체크
 	var checkER = false;
@@ -252,8 +291,9 @@ $(function() {
 	//이벤트 슬정
 	$("#birthdate").on("change", isAdult);
 	$("#pw").on("keyup", pwReg);
-	$("#pw").on("keyup", pwChReg);
+	$("#pw").on("blur", pwReg);
 	$("#pwCh").on("keyup", pwChReg);
+	$("#pwCh").on("blur", pwChReg);
 	$("#pwCh").on("keyup", passEqual);
 	$("#email").on("keyup", emailReg);
 	$("#nickname").on("keyup", nicknameReg);
@@ -264,8 +304,8 @@ $(function() {
 		console.log("회원가입버튼누름");
 		var dataquery = $("#frmJoin").serialize();
 		// console.log("dataquery: " + dataquery);
-		console.log("checkER: " + checkER + " checkNN: " + checkNN + " checkPR: " + checkPR + " checkPCR: " + checkPCR + " checkPE: " + checkPE + " checkBday: " + checkBday + " checkPN: " + checkPN)
-		if(checkER && checkNN && checkPR && checkPCR && checkPE && checkBday && checkPN){
+		console.log("이메일: " + checkER + "\n이메일 중복 확인: " + checkED + "\n닉네임: " + checkNN + "\n닉네임 중복 확인: " + checkND + "\n비밀번호: " + checkPR + "\n비밀번호 확인: " + checkPCR + "\n비밀번호 일치: " + checkPE + "\n성인 확인: " + checkBday + "\n연락처 양식: " + checkPN)
+		if(checkER && checkED && checkND && checkNN && checkPR && checkPCR && checkPE && checkBday && checkPN){
 			
 			$.ajax({
 				url : "signupmember",
@@ -282,6 +322,7 @@ $(function() {
 			})
 		} else {
 			alert("입력 항목을 다시 확인해주세요.")
+			$(window).scrollTop(0);
 		}
 	});
 	

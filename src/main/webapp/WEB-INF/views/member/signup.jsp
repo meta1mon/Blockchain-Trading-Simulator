@@ -131,7 +131,7 @@
 							class="reqInfo" placeholder="이메일을 입력해주세요."></td>
 					</tr>
 					<tr>
-						<td colspan="2"><p class="alert emailReg emailICh">&nbsp;</p></td>
+						<td colspan="2"><p class="alert emailReg emailICh emailCh">&nbsp;</p></td>
 					</tr>
 					<tr>
 						<td colspan="2">닉네임<span class="star">*</span></td>
@@ -141,7 +141,7 @@
 							id="nickname" class="reqInfo" placeholder="닉네임을 입력해주세요."></td>
 					</tr>
 					<tr>
-						<td colspan="2"><p class="alert nickReg">&nbsp;</p></td>
+						<td colspan="2"><p class="alert nickReg nickCh">&nbsp;</p></td>
 					</tr>
 					<tr>
 						<td colspan="2">비밀번호<span class="star">*</span></td>
@@ -176,7 +176,7 @@
 					</tr>
 					<tr>
 						<td><label for="gender">성별</label></td>
-						<td><label for="birthdate">생년월일</label><span class="alert"
+						<td><label for="birthdate">생년월일</label><span class="star">*</span><span class="alert"
 							id="bdlabel"> 만 19세 이상만 가입할 수 있습니다.</span></td>
 					</tr>
 					<tr>

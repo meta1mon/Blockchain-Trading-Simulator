@@ -29,6 +29,18 @@ public class MemberDAO {
 		}
 		return result;
 	}
+	// 이메일, 닉네임 중복 체크
+	public int dupeEmail(Member vo) {
+		int result = 0;
+		result = sqlSession.selectOne("Member.dupeEmail", vo);
+		return result; 
+	}
+	public int dupeNick(Member vo) {
+		int result = 0;
+		result = sqlSession.selectOne("Member.dupeNick", vo);
+		return result; 
+	}
+
 
 	// 계좌번호 중복 체크
 	public int checkAcntno(String acntno) {

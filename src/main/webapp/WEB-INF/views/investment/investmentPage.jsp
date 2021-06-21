@@ -96,9 +96,8 @@
 						</td>
 						<td id="top_t_2">
 							<div>
-								<input type="text" id="searchcoin" style="width: 500px;"
-									value="">
-							</div> <br>
+								<input type="text" id="searchcoin" style="width: 400px;" value="">
+							</div>
 							<div id="cointable_div"></div>
 
 

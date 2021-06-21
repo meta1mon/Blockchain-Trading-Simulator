@@ -21,7 +21,7 @@ td{
 	width: 400px;
 	font-size: small;
 	overflow: auto;
-	height: calc(100% - 30px);
+	height: 490px;
 }
 #cointable_div td{
 	width: 25%;

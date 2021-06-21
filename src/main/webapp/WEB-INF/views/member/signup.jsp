@@ -22,6 +22,8 @@
 	src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
 <title>회원 가입</title>
 </head>
 <body>

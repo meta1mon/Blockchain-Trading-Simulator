@@ -50,12 +50,31 @@ public class CommunityDao {
 		return result;
 	}
 
-	public int updateCommunity(Community c) { // 게시글 수정
-		return sqlSession.update("community.updateCommunity", c);
+	public int updateCommunity(Community c, String email) { // 게시글 수정
+		Member vo = sqlSession.selectOne("Member.searchMember", email);
+		if (vo == null) {
+			System.out.println("로그인 오류");
+		} else {
+			System.out.println("정상 로그인");
+		}
+		String cwriter = vo.getNickname();
+		c.setCwriter(cwriter);
+		int result = sqlSession.update("community.updateCommunity", c);
+		return result;
 	}
 
-	public int deleteCommunity(String cno) { // 게시글 삭제
-		return sqlSession.delete("community.deleteCommunity", cno);
+	public int deleteCommunity(String cno, String email) { // 게시글 삭제
+		Member vo = sqlSession.selectOne("Member.searchMember", email);
+		if (vo == null) {
+			System.out.println("로그인 오류");
+		} else {
+			System.out.println("정상 로그인");
+		}
+		String cwriter = vo.getNickname();
+		Community c = new Community();
+		c.setCwriter(cwriter);
+		int result = sqlSession.delete("community.deleteCommunity", cno);
+		return result;
 	}
 
 	public int addReadCount(String cno) { // 게시글 조회수 증가

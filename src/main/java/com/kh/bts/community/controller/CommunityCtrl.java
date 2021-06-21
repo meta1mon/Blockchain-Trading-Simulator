@@ -116,7 +116,9 @@ public class CommunityCtrl {
 				saveFile(report, request);
 			}
 			c.setFilepath(report.getOriginalFilename());
-			mv.addObject("cno", cmService.updateCommunity(c).getCno());
+			
+			String email = (String) request.getSession().getAttribute("loginMember");
+			mv.addObject("cno", cmService.updateCommunity(c, email).getCno());
 			mv.addObject("currentPage", page);
 			mv.setViewName("redirect:cDetail");
 		} catch (Exception e) {
@@ -132,7 +134,9 @@ public class CommunityCtrl {
 		try {
 			Community c = cmService.selectCommunity(1, cno);
 			removeFile(c.getFilepath(), request);
-			cmService.deleteCommunity(cno);
+			
+			String email = (String) request.getSession().getAttribute("loginMember");
+			cmService.deleteCommunity(cno, email);
 			mv.addObject("currentPage", page);
 			mv.setViewName("redirect:clist");
 		} catch (Exception e) {

@@ -16,7 +16,7 @@ public interface CommunityService {
 	
 	int insertCommunity(Community c, String email);
 
-	Community updateCommunity(Community c);
+	Community updateCommunity(Community c, String email);
 
-	void deleteCommunity(String cno);
+	int deleteCommunity(String cno, String email);
 }

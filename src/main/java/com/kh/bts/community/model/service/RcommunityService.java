@@ -12,7 +12,7 @@ public interface RcommunityService {
 
 	Rcommunity selectRcommunity(String rno);
 
-	int insertRcommunity(Rcommunity rc);
+	int insertRcommunity(Rcommunity rc, String email);
 
 	int updateRcommunity(Rcommunity rc);
 

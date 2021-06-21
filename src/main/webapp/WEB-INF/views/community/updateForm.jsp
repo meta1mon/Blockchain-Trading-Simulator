@@ -57,11 +57,16 @@
 				<td>&nbsp;</td>
 				<td><textarea id="editor" name="ccontent" maxlength="4000">${community.ccontent}</textarea>
 					<script>
-				        ClassicEditor
-				            .create( document.querySelector( '#editor' ) )
-				            .catch( error => {
-				                console.error( error );
-				            } );
+					  ClassicEditor
+					    .create( document.querySelector( '#editor' ), {
+					        cloudServices: {
+					            tokenUrl: 'https://81478.cke-cs.com/token/dev/de0d9159dc2b7ce3ecb85191c28f789217b087f58ae6880e30d89820724d',
+					            uploadUrl: 'https://81478.cke-cs.com/easyimage/upload/'
+					        }
+					    } )
+					    .catch( error => {
+					        console.error( error );
+					    } );
 				    </script></td>
 			</tr>
 			<tr>

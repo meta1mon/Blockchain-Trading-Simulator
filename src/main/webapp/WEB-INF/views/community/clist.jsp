@@ -30,33 +30,30 @@
 </script>
 <style>
 .comm {
-	margin: 40px 0 20px 10px;
+	margin: 40px 0 20px 20px;
 	text-align: left;
-	font-size: 17px;
-	color: black;
+	font-size: 25px;
+	color: #8C66C8;
 	float: left;
 }
 
 #write {
-	margin: 20px 0 0 0;
-	width: 100px;
-	height: 65px;
-	padding: 0;
+width: 125px;
+	height: 35px;
+	float: right;
 	border: none;
 	border-radius: 4px;
 	text-align: center;
 	color: #ffffff;
-	background-color: #1abc9c;
-	float: right;
+	background-color: #B85CEF;
 	font-size: 18px;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
 }
 
 #write:hover {
-	color: #2c3e50;
-	background-color: #ffffff;
-	box-shadow: 10px 10px 10px #eeeeee;
+	background-color: #CC70EF;
+	box-shadow: 10px 10px 20px 5px #eeeeee;
 }
 
 #searchType {
@@ -124,10 +121,6 @@
 		box-shadow 0.15s ease-in-out;
 }
 
-comm {
-	margin:
-}
-
 .ctable {
 	margin: 30px auto;
 	clear: both;
@@ -152,7 +145,7 @@ comm {
 		</form>
 
 		<input type="hidden" name="page" value="${currentPage}"> <input
-			type="button" value="글쓰기" onclick="window.location='cWriteForm'">
+			type="button" id="write" value="글쓰기" onclick="window.location='cWriteForm'">
 
 		<!-- 조회수 상위 5개 인기 게시글 -->
 		<table class="popularTable">

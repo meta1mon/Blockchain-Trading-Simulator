@@ -32,11 +32,10 @@ public class RcommunityCtrl {
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			Rcommunity rc, HttpServletRequest request, ModelAndView mv) {
 		try {
-			rcmService.insertRcommunity(rc);
+			String email = (String) request.getSession().getAttribute("loginMember");
+			int result = rcmService.insertRcommunity(rc, email);
+			rcmService.insertRcommunity(rc, email);
 			
-			Member me = (Member) request.getSession().getAttribute("loginMember");
-			String rwriter = me.getNickname();
-			rc.setRwriter(rwriter);
 			mv.addObject("cno", cno);
 			mv.addObject("page", page);
 			mv.setViewName("redirect:cDetail");

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.bts.community.model.vo.Rcommunity;
+import com.kh.bts.member.model.vo.Member;
 
 @Repository("rcmDao")
 public class RcommunityDao {
@@ -25,8 +26,17 @@ public class RcommunityDao {
 		return sqlSession.selectOne("rcommunity.selectRcommunity", rno);
 	}
 	
-	public int insertRcommunity(Rcommunity rc) { // 댓글 입력
-		return sqlSession.insert("rcommunity.insertRcommunity", rc);
+	public int insertRcommunity(Rcommunity rc, String email) { // 댓글 입력
+		Member vo = sqlSession.selectOne("Member.searchMember", email);
+		if (vo == null) {
+			System.out.println("로그인 오류");
+		} else {
+			System.out.println("정상 로그인");
+		}
+		String cwriter = vo.getNickname();
+		rc.setRwriter(cwriter);
+		int result = sqlSession.insert("community.insertCommunity", rc);
+		return result;
 	}
 	
 	public int updateRcommunity(Rcommunity rc) { // 댓글 수정

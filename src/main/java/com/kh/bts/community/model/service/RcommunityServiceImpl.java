@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.bts.community.model.dao.RcommunityDao;
 import com.kh.bts.community.model.vo.Rcommunity;
@@ -25,14 +26,17 @@ public class RcommunityServiceImpl implements RcommunityService {
 		return rcmDao.selectOne(rno);
 	}
 
-	public int insertRcommunity(Rcommunity rc) { // 댓글 입력
-		return rcmDao.insertRcommunity(rc);
+	@Transactional
+	public int insertRcommunity(Rcommunity rc, String email) { // 댓글 입력
+		return rcmDao.insertRcommunity(rc, email);
 	}
 
+	@Transactional
 	public int updateRcommunity(Rcommunity rc) { // 댓글 수정
 		return rcmDao.updateRcommunity(rc);
 	}
 
+	@Transactional
 	public int deleteRcommunity(Rcommunity rc) { // 댓글 삭제
 		return rcmDao.deleteRcommunity(rc);
 	}

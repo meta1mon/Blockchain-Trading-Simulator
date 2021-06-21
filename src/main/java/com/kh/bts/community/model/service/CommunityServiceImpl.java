@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.bts.community.model.dao.CommunityDao;
 import com.kh.bts.community.model.vo.Community;
@@ -35,14 +36,16 @@ public class CommunityServiceImpl implements CommunityService {
 		return cmDao.selectOne(cno);
 	}
 
+	@Transactional
 	@Override
 	public int insertCommunity(Community c, String email) {
 		return cmDao.insertCommunity(c, email);
 	}
 
+	@Transactional
 	@Override
-	public Community updateCommunity(Community c) {
-		int result = cmDao.updateCommunity(c);
+	public Community updateCommunity(Community c, String email) {
+		int result = cmDao.updateCommunity(c, email);
 		if (result > 0) {
 			c = cmDao.selectOne(c.getCno());
 		} else {
@@ -51,9 +54,10 @@ public class CommunityServiceImpl implements CommunityService {
 		return c;
 	}
 
+	@Transactional
 	@Override
-	public void deleteCommunity(String cno) {
-		cmDao.deleteCommunity(cno);
+	public int deleteCommunity(String cno, String email) {
+		return cmDao.deleteCommunity(cno, email);
 	}
 
 }

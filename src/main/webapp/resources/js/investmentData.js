@@ -16,8 +16,8 @@ var changecoin = "BTC"; // default
 function chart() {
 
 	new TradingView.widget({
-		"width" : 980,
-		"height" : 610,
+		"width" : 600,
+		"height" : 490,
 		"symbol" : "BITHUMB:" + changecoin + "KRW",
 		"interval" : "5",
 		"timezone" : "Asia/Seoul",

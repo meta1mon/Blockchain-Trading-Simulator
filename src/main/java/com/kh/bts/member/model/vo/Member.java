@@ -18,7 +18,6 @@ public class Member {
 
 	private String mailing;
 	private String reqAgr;
-	private String optAgr;
 
 	public String getEmail() {
 		return email;
@@ -98,14 +97,6 @@ public class Member {
 
 	public void setReqAgr(String reqAgr) {
 		this.reqAgr = reqAgr;
-	}
-
-	public String getOptAgr() {
-		return optAgr;
-	}
-
-	public void setOptAgr(String optAgr) {
-		this.optAgr = optAgr;
 	}
 
 	@Override

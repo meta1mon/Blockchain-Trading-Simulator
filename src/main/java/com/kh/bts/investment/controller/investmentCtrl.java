@@ -30,8 +30,12 @@ public class investmentCtrl {
 
 	@Autowired
 	private WaitBoughtService wbService;
+
+	@Autowired
 	private WaitSoldService wsService;
+	@Autowired
 	private BoughtService bService;
+	@Autowired
 	private SoldService sService;
 
 	@RequestMapping("investmentpage")
@@ -172,6 +176,9 @@ public class investmentCtrl {
 	@RequestMapping(value = "wsInsert")
 	public void WaitSoldInsert(WaitSold ws, HttpServletResponse response) {
 		System.out.println(ws.getCoin() + "코인이름");
+		System.out.println(ws.getSellcnt() + "코인수 ");
+		System.out.println(ws.getAcntno() + "코인수 ");
+		System.out.println(ws.getSellprice() + "코인수 ");
 		int result = wsService.insertWaitSold(ws);
 		PrintWriter out = null;
 		try {

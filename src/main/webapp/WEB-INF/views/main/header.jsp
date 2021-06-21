@@ -13,12 +13,13 @@
 	<div class="header">
 	<div class="h_left">
 		<ul>
-			<li class="logo"><a href="<%=request.getContextPath()%>/blist"><img src="http://placehold.it/120x50"></a></li>
-			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/aboutus">About Us</a></li>
+			<li class="logo"><a href="<%=request.getContextPath()%>/mainpage"><img
+					src="http://placehold.it/120x50"></a></li>
+			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/aboutus">About Us</a></li>
 			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/investmentpage">모의투자</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/nlist">뉴스</a></li>
-			<li class="menu"><a class="menutext" href="javascript:void(window.open('<%=request.getContextPath()%>/prochart', '_blank','width=1000px, height=730px'))">프로차트</a></li>
-			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/clist">커뮤니티</a></li>
+			<li class="menu"><a class="menutext" href="javascript:void(window.open('<%=request.getContextPath()%>/prochart', '_blank','width=1300px, height=800px'))">프로차트</a></li>
+			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/clist">커뮤니티</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/cashShop">충전소</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
 		</ul>

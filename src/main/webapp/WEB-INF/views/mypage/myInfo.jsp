@@ -59,6 +59,7 @@
 				console.log("연락처 양식O")
 			}
 			// 닉네임 중복체크 아직 안함!
+			// 닉네임 변경 시, 기존 게시글과 댓글의 작성자도 변경해주기 아직 안함!
 			var dataquery = $("#frmChangeInfo").serialize();
 			if (checkNN && checkPN) {
 				$.ajax({
@@ -76,6 +77,28 @@
 					}
 				})
 			}
+		});
+
+		$("#leaveBtn").click(function() {
+			var doubleCheck = prompt("탈퇴하시려면, \"탈퇴하겠습니다\" 라고 입력하세요");
+			if (doubleCheck == "탈퇴하겠습니다") {
+				console.log("탈퇴하였습니다.");
+				$.ajax({
+					url : "mw",
+					type : "POST",
+					success : function(data) {
+						alert("탈퇴 되었습니다. 다음에 꼭 다시 만나요!")
+						location.href = "${pageContext.request.contextPath}/";
+					},
+					error : function() {
+						console.log("error: 탈퇴 실패");
+					}
+				})
+
+			} else {
+				console.log("탈퇴 취소")
+			}
+
 		});
 
 	})
@@ -115,7 +138,7 @@
 				</tr>
 				<tr>
 					<td>생년월일</td>
-					<td><input type="date" value="${myInfo.birthdate }" readonly></td>
+					<td><input type="date" name="birthdate" value="${myInfo.birthdate }" readonly></td>
 				</tr>
 				<tr>
 					<td>연락처</td>
@@ -147,7 +170,7 @@
 					<td colspan="2">
 						<button type="button" id="moveChangeBtn">정보수정</button>
 						<button type="button" id="changeBtn">수정완료</button>
-						<button type="button">탈퇴</button>
+						<button type="button" id="leaveBtn">탈퇴</button>
 					</td>
 				</tr>
 			</table>

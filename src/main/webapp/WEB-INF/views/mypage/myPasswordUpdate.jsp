@@ -83,18 +83,12 @@
 
 		}
 
-	});
-</script>
-
-<script>
-	$(function() {
-
 		// 은행 비밀번호와 은행 비밀번호 확인 일치 여부
 
+		var flag3 = false;
 		function bankPwChange() {
-			var flag3 = false;
-			var bankPw1 = $("input[name=bankPw]").val();
-			var bankPw2 = $("input[name=bankPw2]").val();
+			var bankPw1 = $("#bankPw1").val();
+			var bankPw2 = $("#bankPw2").val();
 			if ((bankPw1.length != 0 && bankPw2.length != 0)
 					&& (bankPw1 == bankPw2)) {
 				alert("계좌 비번 일치");

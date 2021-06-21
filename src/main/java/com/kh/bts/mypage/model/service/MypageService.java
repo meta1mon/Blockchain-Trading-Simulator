@@ -12,4 +12,5 @@ public interface MypageService {
 	public int passwordUpdate(Member vo);
 	public int bankPwUpdate(Acnt vo);
 	public List<Community> myCommunity(String email);
+	public int myDelete(String email);
 }

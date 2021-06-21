@@ -1,4 +1,10 @@
 @charset "UTF-8";
+.link:visited {
+	color: black;
+}
+.link:hover{
+	color: rgb(140, 102, 200);
+}
 body{
 	background: whitesmoke;
 }
@@ -59,18 +65,28 @@ body{
 	width: 100px;
 }
 
+.w500px{
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+}
+
+#frmLogin{
+	padding-top: calc(50% - 122px);
+}
 .btn1{
 	width: 100%;
 	height: 44px;
 	border-radius: 5px;
 	background: white;
-	border: 1px solid rgb(140, 102, 200);;
+	border: 1px solid rgb(140, 102, 200);
 	color: rgb(140, 102, 200);
 }
 
 .btn1:hover{
 	background: rgb(140, 102, 200);
-	border: 1px solid rgb(140, 102, 200);;
+	border: 1px solid rgb(140, 102, 200);
 	color: white;
 }
 

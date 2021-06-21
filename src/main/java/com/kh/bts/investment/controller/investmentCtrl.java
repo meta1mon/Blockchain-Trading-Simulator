@@ -1,14 +1,18 @@
 package com.kh.bts.investment.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.investment.model.service.BoughtService;
@@ -19,6 +23,7 @@ import com.kh.bts.investment.model.vo.Bought;
 import com.kh.bts.investment.model.vo.Sold;
 import com.kh.bts.investment.model.vo.WaitBought;
 import com.kh.bts.investment.model.vo.WaitSold;
+import com.kh.bts.member.model.vo.Member;
 
 @Controller
 public class investmentCtrl {
@@ -40,6 +45,7 @@ public class investmentCtrl {
 		mav.setViewName("investment/1sChart");
 		return mav;
 	}
+
 	@RequestMapping(value = "sInsert", method = RequestMethod.POST)
 	public ModelAndView SoldInsert(Sold s, HttpServletRequest request, ModelAndView mv) {
 		try {
@@ -63,8 +69,7 @@ public class investmentCtrl {
 	}
 
 	@RequestMapping(value = "sDelete", method = RequestMethod.GET)
-	public ModelAndView SoldDelete(@RequestParam(name = "usno") int usno, HttpServletRequest request,
-			ModelAndView mv) {
+	public ModelAndView SoldDelete(@RequestParam(name = "usno") int usno, HttpServletRequest request, ModelAndView mv) {
 		try {
 //			WaitBought wb = wbService.selectListWaitBought(acntno);
 			int result = sService.deleteSold(usno);
@@ -164,26 +169,26 @@ public class investmentCtrl {
 	}
 
 //////////////////////////////////////
-	@RequestMapping(value = "wsInsert", method = RequestMethod.POST)
-	public ModelAndView WaitSoldInsert(WaitSold ws, HttpServletRequest request, ModelAndView mv) {
+	@RequestMapping(value = "wsInsert")
+	public void WaitSoldInsert(WaitSold ws, HttpServletResponse response) {
+		System.out.println(ws.getCoin() + "코인이름");
+		int result = wsService.insertWaitSold(ws);
+		PrintWriter out = null;
 		try {
-
-			int result = wsService.insertWaitSold(ws);
-			System.out.println(result);
 			if (result > 0) {
 				System.out.println("insert성공");
-
 			} else {
 				System.out.println("insert실패");
-
 			}
-			// mv.setViewName("redirect:investmentpage");
-
-		} catch (Exception e) {
-			mv.addObject("msg", e.getMessage());
-			mv.setViewName("errorPage");
+			out = response.getWriter();
+			out.print(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
 		}
-		return mv;
+
 	}
 
 	@RequestMapping(value = "wsDelete", method = RequestMethod.GET)
@@ -225,27 +230,26 @@ public class investmentCtrl {
 		return mv;
 	}
 
-//////////////////////////////////////
-	@RequestMapping(value = "wbInsert", method = RequestMethod.POST)
-	public ModelAndView WaitBoughtInsert(WaitBought wb, HttpServletRequest request, ModelAndView mv) {
+	@RequestMapping(value = "wbInsert")
+	public void WaitBoughtInsert(WaitBought wb, HttpServletResponse response) {
+		System.out.println(wb.getCoin() + "코인이름");
+		int result = wbService.insertWaitBought(wb);
+		PrintWriter out = null;
 		try {
-
-			int result = wbService.insertWaitBought(wb);
-			System.out.println(result);
 			if (result > 0) {
 				System.out.println("insert성공");
-
 			} else {
 				System.out.println("insert실패");
-
 			}
-			// mv.setViewName("redirect:investmentpage");
-
-		} catch (Exception e) {
-			mv.addObject("msg", e.getMessage());
-			mv.setViewName("errorPage");
+			out = response.getWriter();
+			out.print(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
 		}
-		return mv;
+
 	}
 
 	@RequestMapping(value = "wbDelete", method = RequestMethod.GET)

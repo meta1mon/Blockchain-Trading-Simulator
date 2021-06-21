@@ -25,39 +25,46 @@
 		$("#bought").on(
 				"click",
 				function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+					var dataList = $("#frm22").serialize();
 					$.ajax({
 						url : "wbInsert",
 						type : "post",
+						data : dataList,
 						dataType : "json",
 						success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
 							alert("성공");
 							console.log(data);
 						},
 						error : function(request, status, errorData) {
-							alert("error code : " + request.status + "\n"
-									+ "message : " + request.responseText
-									+ "\n" + "error : " + errorData);
+							alert("실패" + "error code : " + request.status
+									+ "\n" + "message : "
+									+ request.responseText + "\n" + "error : "
+									+ errorData);
 						}
 					});
 				});
 		$("#sold").on(
 				"click",
 				function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+					var dataList = $("#frm22").serialize();
 					$.ajax({
 						url : "wsInsert",
 						type : "post",
+						data : dataList,
 						dataType : "json",
 						success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
 							alert("성공");
 							console.log(data);
 						},
 						error : function(request, status, errorData) {
-							alert("error code : " + request.status + "\n"
-									+ "message : " + request.responseText
-									+ "\n" + "error : " + errorData);
+							alert("실패" + "error code : " + request.status
+									+ "\n" + "message : "
+									+ request.responseText + "\n" + "error : "
+									+ errorData);
 						}
 					});
 				});
+
 	});
 </script>
 
@@ -140,60 +147,76 @@
 							</td>
 
 							<td>
-								<table>
-									<tr>
-										<td><button value="">매도</button>
-											<button value="">매수</button></td>
-									</tr>
-									<tr>
-										<td><input id="cash" placeholder="보유 KRW"> <br>
-											<input id="cash" placeholder="매도가능 코인"></td>
+								<form id="frm22">
+									<table>
+										<tr>
+											<td><button value="">매도</button>
+												<button value="">매수</button></td>
+										</tr>
+										<tr>
+											<td><input id="cash" placeholder="보유 KRW"> <br>
+												<input id="cash" placeholder="매도가능 코인"></td>
 
-									</tr>
-									<tr>
-										<th colspan="1">코인종류</th>
-									</tr>
-									<tr>
-										<td colspan="1"><input id="coin" type="text" value="BTC"
-											readonly="readonly" style="text-align: center;"></td>
-									</tr>
+										</tr>
+										<tr>
+											<th colspan="1">코인종류</th>
+										</tr>
+										<tr>
+											<td colspan="1"><input name="coin" id="coin" type="text"
+												value="BTC" readonly="readonly" style="text-align: center;"></td>
+										</tr>
 
-									<tr>
-										<th colspan="1">가격</th>
-									</tr>
-									<tr>
-										<td colspan="1"><input id="buyprice" type="text"></td>
-									</tr>
-									<tr>
-										<th colspan="1">수량</th>
+										<tr>
+											<th colspan="1">가격</th>
+										</tr>
+										<tr>
+											<td colspan="1"><input id="price_b" type="text"
+												name="buyprice"></td>
+											<td colspan="1"><input id="price_s" type="text"
+												name="sellprice"></td>
 
-									</tr>
-									<tr>
-										<td colspan="1"><input id="buycnt" type="text"></td>
-									</tr>
-									<tr>
-										<th colspan="1">총액</th>
+										</tr>
+										<tr>
+											<th colspan="1">수량</th>
 
-									</tr>
-									<tr>
-										<td colspan="1"><input id="totalprice" type="text"
-											value="0"></td>
-									</tr>
+										</tr>
+										<tr>
+											<td colspan="1"><input id="cnt_b" type="text"
+												name="buycnt"></td>
+											<td colspan="1"><input id="cnt_s" type="text"
+												name="sellcnt"></td>
+										</tr>
+										<tr>
+											<th colspan="1">총액</th>
+
+										</tr>
+										<tr>
+											<td colspan="1"><input id="totalprice" type="text"
+												value="0"></td>
+										</tr>
+										<tr>
+											<td colspan="1"><input id="acntno" name="acntno"
+												type="text" value="b12345678"></td>
+										</tr>
 
 
-									<tr>
-										<td colspan="1"><button value="10%">10%</button>
-											<button value="25%">25%</button>
-											<button value="50%">50%</button>
-											<button value="100%">100%</button></td>
-									</tr>
-									<tr>
-										<td colspan="1"><button id="bought">매수</button>
-											<button id="sold">매도</button></td>
+										<tr>
+											<td colspan="1"><button value="10%">10%</button>
+												<button value="25%">25%</button>
+												<button value="50%">50%</button>
+												<button value="100%">100%</button></td>
+										</tr>
+										<tr>
+											<td colspan="1"><button id="bought" type="button">매수</button>
+												<button id="sold" type="button">매도</button></td>
 
-									</tr>
+										</tr>
 
-								</table>
+									</table>
+
+
+								</form>
+
 							</td>
 							<td>
 								<table>

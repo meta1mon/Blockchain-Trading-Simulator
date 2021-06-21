@@ -101,12 +101,10 @@ public class MypageController {
 		return mv;
 	}
 
-//미완성
 	// 계좌 비밀번호 변경
 	@RequestMapping(value = "/bankPwChange")
 	public ModelAndView bankPwChange(ModelAndView mv, HttpServletRequest request,
 			@RequestParam(name = "bankPw") int bankPw) {
-		logger.info("################################계좌 비밀번호 변경하러 들어옴");
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("loginMember");
 		Acnt vo = new Acnt();
@@ -137,6 +135,7 @@ public class MypageController {
 	// 내 회원 정보 수정
 	@RequestMapping(value = "/miu")
 	public void myInfoUpdate(Member vo, HttpServletResponse response) {
+		System.out.println("######################################수정하러 들어옴");
 		int result = myService.myInfoUpdate(vo);
 		PrintWriter out = null;
 		try {

@@ -10,6 +10,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/signup.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/login.css">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
 <script type="text/javascript"
@@ -22,8 +24,14 @@
 		<div id="container">
 			<div class="w500px">
 				<form action="loginmember" method="post" id="frmLogin">
-					<h1 class="center">로그인</h1>
 					<table class="w100">
+					<tr>
+					<td colspan="2">
+					<h1 class="center">로그인</h1>
+					</td>
+					<td>
+					</td>
+					</tr>
 						<tr>
 							<td colspan="3">이메일</td>
 						</tr>
@@ -41,7 +49,10 @@
 						<tr>
 							<td colspan="2"><input type="password" name="pw" id="pw"
 								class="reqInfo" placeholder="비밀번호를 입력해주세요."></td>
-							<td><input type="button" value="보기" id="seePw"></td>
+							<td style="width: 50px">
+							&nbsp;
+							<span id="seePw" class="fas fa-lock">
+							</span>
 						</tr>
 						<tr>
 							<td colspan="3"><p class="alert pwReg">&nbsp;</p></td>
@@ -59,13 +70,21 @@
 									</c:choose>
 								</p>
 							</td>
-							<td class="right">
-								<span><a href="<%=request.getContextPath()%>/findpassword" class="small link">비밀번호 찾기</a></span> 
-								<span><a href="<%=request.getContextPath()%>/signup" id="signup" class="small link">회원가입</a></span>
+							<td>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="3"><input type="submit" value="로그인" class="btn1"></td>
+							<td colspan="2"><input type="submit" value="로그인" class="btn1"></td>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="right">
+								<span><a href="<%=request.getContextPath()%>/findpassword" class="small link">비밀번호 찾기</a></span> 
+								<span><a href="<%=request.getContextPath()%>/signup" id="signup" class="small link">회원가입</a></span>
+							</td>
+							<td>
+							</td>
 						</tr>
 					</table>
 				</form>

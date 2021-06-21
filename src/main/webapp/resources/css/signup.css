@@ -65,6 +65,10 @@ body{
 	width: 100px;
 }
 
+.w21px {
+	width: 21px;
+}
+
 .w500px{
 	width: 500px;
 	margin-left: auto;
@@ -74,6 +78,11 @@ body{
 
 #frmLogin{
 	padding-top: calc(50% - 122px);
+}
+.back{
+	width: 21px;
+	height: 21px;
+	cursor: pointer;
 }
 .btn1{
 	width: 100%;

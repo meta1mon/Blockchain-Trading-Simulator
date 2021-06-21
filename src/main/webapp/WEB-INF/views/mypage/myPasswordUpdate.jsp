@@ -85,31 +85,6 @@
 
 	});
 </script>
-
-<script>
-	$(function() {
-
-		// 은행 비밀번호와 은행 비밀번호 확인 일치 여부
-
-		function bankPwChange() {
-			var flag3 = false;
-			var bankPw1 = $("input[name=bankPw]").val();
-			var bankPw2 = $("input[name=bankPw2]").val();
-			if ((bankPw1.length != 0 && bankPw2.length != 0)
-					&& (bankPw1 == bankPw2)) {
-				alert("계좌 비번 일치");
-				flag3 = true;
-			} else {
-				alert("계좌 비밀번호가 일치 하지 않습니다. 다시 입력하세요.");
-				flag3 = false;
-			}
-
-			return flag3;
-
-		}
-
-	});
-</script>
 </head>
 <jsp:include page="myHeader.jsp"></jsp:include>
 <body>
@@ -165,6 +140,20 @@
 	</div>
 
 	<script>
+		// 은행 비밀번호와 은행 비밀번호 확인 일치 여부
+
+		function bankPwChange() {
+			var bankPw1 = $("#bankPw1").val();
+			var bankPw2 = $("#bankPw2").val();
+			if ((bankPw1.length != 0 && bankPw2.length != 0)
+					&& (bankPw1 == bankPw2)) {
+			} else {
+				alert("계좌 비밀번호가 일치 하지 않습니다. 다시 입력하세요.");
+				return false;
+			}
+			return true;
+
+		}
 		new pinpad({
 			ref : {
 				el : '.pin1'

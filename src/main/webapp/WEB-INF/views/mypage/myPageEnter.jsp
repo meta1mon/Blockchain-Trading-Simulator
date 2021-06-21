@@ -15,14 +15,17 @@
 }
 </style>
 </head>
-<jsp:include page="myHeader.jsp"></jsp:include>
 <body>
-	<div id="mpe">
-		<h2>비밀번호 확인</h2>
-		<form action="${pageContext.request.contextPath}/mypage/admitEnter" method="post">
-			<input type="password" placeholder="비밀번호를 입력하세요" name="password">
-			<button type="submit">확인</button>
-		</form>
+	<div id="wrapper">
+		<jsp:include page="../main/header.jsp"></jsp:include>
+		<div id="mpe">
+			<h2>비밀번호 확인</h2>
+			<form action="${pageContext.request.contextPath}/mypage/admitEnter"
+				method="post">
+				<input type="password" placeholder="비밀번호를 입력하세요" name="password">
+				<button type="submit">확인</button>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

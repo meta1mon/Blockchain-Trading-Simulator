@@ -145,9 +145,21 @@ public class MemberCtrl {
 		return mv;
 	}
 	
+//	비밀번호 찾기 눌렀을 때
 	@RequestMapping(value="/findpassword", method = RequestMethod.POST)
-	public String findPassword(@RequestParam("email") String email, Member vo) throws Exception {
+	public void findPassword(@RequestParam("email") String email, Member vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("폼에서 받아온 email 값: " + email);
-		return mService.findPassword(vo);
+		int result = mService.dupeEmail(vo);
+		if(result == 1) {
+			mService.findPassword(vo);
+			request.setAttribute("errorMessage", "임시 비밀번호가 이메일로 전송되었습니다.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/find");
+			dispatcher.forward(request, response);
+		}else {
+			request.setAttribute("errorMessage", "존재하지 않는  회원입니다.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/find");
+			dispatcher.forward(request, response);
+		}
+		System.out.println(mService.findPassword(vo));
 	}
 }

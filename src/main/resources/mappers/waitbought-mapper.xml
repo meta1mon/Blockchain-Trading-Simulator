@@ -13,11 +13,11 @@
 		SEQ_WAITBOUGHT.NEXTVAL, #{coin}, #{buycnt}, #{buyprice}, default, #{acntno})
 	</insert>
 	
-	<delete id="deleteWaitBought" parameterType="string"	flushCache="true" statementType="PREPARED">
+	<delete id="deleteWaitBought" parameterType="Integer"	flushCache="true" statementType="PREPARED">
 		DELETE FROM WAITBOUGHT WHERE UBNO = #{ubno}
 	</delete>
 	
-	<select id="selectListWaitBought" resultType="arraylist" resultMap="resultwaitBought">
+	<select id="selectListWaitBought" parameterType="string" resultType="arraylist" resultMap="resultwaitBought">
 		SELECT * FROM WAITBOUGHT WHERE ACNTNO = #{acntno}
 	</select>
 	

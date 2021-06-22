@@ -26,3 +26,19 @@ td{
 #cointable_div td{
 	width: 25%;
 }
+#sold_b{
+	background: ccc;
+}
+#bought_b{
+	background: red;
+	
+}
+#price_s{
+	display: none;
+}
+#cnt_s{
+	display: none;
+}
+#sold{
+	display: none;
+}

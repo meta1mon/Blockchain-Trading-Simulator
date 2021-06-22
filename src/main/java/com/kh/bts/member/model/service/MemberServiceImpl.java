@@ -49,7 +49,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String findPassword(Member vo) throws Exception {
 		String result = null;
-		if(vo!=null) {
+		if(vo.getEmail()!=null) {
 			String key = new TempKey().getKey(12, false); // 랜덤 문자 생성
 			mDao.createTempPassword(vo.getEmail(), key);
 			MailHandler sendMail = new MailHandler(mailSender);
@@ -61,10 +61,8 @@ public class MemberServiceImpl implements MemberService {
 			sendMail.setTo(vo.getEmail());
 			sendMail.send();
 			result = "Success";
-			System.out.println("임시 비밀번호 발급 성공");
 		} else {
 			result = "Fail";
-			System.out.println("임시 비밀번호 발급 실패");
 		}
 		return result;
 	}
@@ -110,6 +108,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member loginMember(Member vo) throws Exception {
 		return mDao.loginMember(vo);
+	}
+	
+	// 이메일로 닉네임 가져오는 함수
+	@Override
+	public String returnNickname(String email) {
+		return mDao.returnNickname(email);
 	}
 
 }

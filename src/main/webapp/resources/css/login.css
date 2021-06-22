@@ -2,3 +2,7 @@
 #seePw {
 	color: rgb(140, 102, 200);
 }
+
+#frmLogin{
+	padding-top: calc(50% - 135.5px);
+}

@@ -15,4 +15,5 @@ public interface MemberService {
 	public int deleteMember(String email);
 	public void authMember(Member vo);
 	public Member loginMember(Member vo) throws Exception;
+	public String returnNickname(String email);
 }

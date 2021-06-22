@@ -9,8 +9,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/signup.css">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/member.css">
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
 <title>Insert title here</title>

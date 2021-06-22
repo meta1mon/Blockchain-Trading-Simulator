@@ -51,4 +51,5 @@ public class MypageServiceImpl implements MypageService {
 	public int myDelete(String email) {
 		return myDao.myDelete(email);
 	}
+
 }

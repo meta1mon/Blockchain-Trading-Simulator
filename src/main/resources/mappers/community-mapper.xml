@@ -79,7 +79,7 @@
 		WHERE CNO =
 		#{cno}
 	</update>
-
+	
 	<!-- 게시글 삭제 -->
 	<delete id="deleteCommunity" parameterType="string"
 		flushCache="true" statementType="PREPARED">

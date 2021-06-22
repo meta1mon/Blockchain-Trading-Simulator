@@ -137,6 +137,10 @@ public class MypageController {
 	@RequestMapping(value = "/miu")
 	public void myInfoUpdate(Member vo, HttpServletResponse response) {
 		int result = myService.myInfoUpdate(vo);
+		if (result > 0) {
+			logger.info("회원정보 수정 완료");
+		}
+
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();

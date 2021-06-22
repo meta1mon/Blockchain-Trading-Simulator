@@ -34,25 +34,29 @@
 			$("#changeBtn").css("display", "inline");
 		});
 
-		var checkND = false;
-		$("#nickname").on("keyup", function() {
-			$.ajax({
-				url : "${pageContext.request.contextPath}/nickcheck",
-				type : "post",
-				dataType : "json",
-				data : {
-					"nickname" : $("#nickname").val()
-				},
-				success : function(data) {
-					if (data == 1) {
-						checkND = false;
-					} else {
-						console.log("닉네임 중복 x");
-						checkND = true;
+		var checkND = true;
+		$("#nickname").on("blur", function() {
+			checkND = true;
+			if($("#nickname").val() != ${myInfo.nickname }) {
+				$.ajax({
+					url : "${pageContext.request.contextPath}/nickcheck",
+					type : "post",
+					dataType : "json",
+					data : {
+						"nickname" : $("#nickname").val()
+					},
+					success : function(data) {
+						if (data == 1) {
+							checkND = false;
+						} else {
+							console.log("닉네임 중복 x");
+							checkND = true;
+						}
 					}
-				}
-			});
+				});
+			}
 		});
+		
 		$("#changeBtn").click(function() {
 			var checkNN = false;
 			var nickname = $("input[name=nickname]").val();

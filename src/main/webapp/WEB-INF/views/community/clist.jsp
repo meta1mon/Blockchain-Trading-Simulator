@@ -15,8 +15,7 @@
 		$('form[name=listForm]').on(
 				'submit',
 				function(e) {
-					if ($('input[name=keyword]').val() == null
-							|| $('input[name=keyword]').val() == "") {
+					if ($('input[name=keyword]').val() == null|| $('input[name=keyword]').val() == "") {
 						alert("검색어를 입력해 주세요");
 						e.preventDefault();
 					} else {
@@ -137,8 +136,8 @@ width: 125px;
 		<form action="clist" name="listForm" method="get">
 			<select id="searchType" name="searchType">
 				<option value="1">글제목</option>
-				<option value="2">작성자</option>
-				<option value="3">글내용</option>
+				<option value="2">글내용</option>
+				<option value="3">작성자</option>
 			</select> <input type='search' id="search" name="keyword"
 				placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp질문을 검색하세요.">
 			<button type=submit id="btnsearch">검색</button>

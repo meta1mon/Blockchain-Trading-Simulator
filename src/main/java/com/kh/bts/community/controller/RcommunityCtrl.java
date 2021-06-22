@@ -34,8 +34,6 @@ public class RcommunityCtrl {
 		try {
 			String email = (String) request.getSession().getAttribute("loginMember");
 			int result = rcmService.insertRcommunity(rc, email);
-			rcmService.insertRcommunity(rc, email);
-			
 			mv.addObject("cno", cno);
 			mv.addObject("page", page);
 			mv.setViewName("redirect:cDetail");

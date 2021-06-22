@@ -82,5 +82,11 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginMember(Member vo) throws Exception {
 		return mDao.loginMember(vo);
 	}
+	
+	// 이메일로 닉네임 가져오는 함수
+	@Override
+	public String returnNickname(String email) {
+		return mDao.returnNickname(email);
+	}
 
 }

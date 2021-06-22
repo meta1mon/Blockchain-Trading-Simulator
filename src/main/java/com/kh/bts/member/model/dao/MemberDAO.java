@@ -41,6 +41,9 @@ public class MemberDAO {
 		return result; 
 	}
 
+	public String returnNickname(String email) {
+		return sqlSession.selectOne("Member.returnNickname", email);
+	}
 
 	// 계좌번호 중복 체크
 	public int checkAcntno(String acntno) {

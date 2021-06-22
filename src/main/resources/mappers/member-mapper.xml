@@ -11,10 +11,11 @@
 	<select id="countMember" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 	</select>
-	<!-- 개인조회-->
-	<select id="searchOneMember" parameterType="string" resultType="string">
-		SELECT * FROM MEMBER WHERE EMAIL = #{email}
+	<!-- 닉네임만 조회 -->
+	<select id="returnNickname" parameterType="string" resultType="string">
+		SELECT NICKNAME FROM MEMBER WHERE EMAIL = #{email}
 	</select>
+		
 	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="Member" flushCache="true" statementType="PREPARED">
 		INSERT INTO MEMBER VALUES(#{email}, #{nickname}, #{authkey}, default, #{pw}, #{gender}, #{birthdate}, #{phone}, #{mailing}, default)

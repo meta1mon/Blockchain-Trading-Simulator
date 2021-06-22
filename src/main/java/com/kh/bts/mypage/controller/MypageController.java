@@ -22,6 +22,7 @@ import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.service.MemberService;
+import com.kh.bts.member.model.service.MemberServiceImpl;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.service.MypageService;
 
@@ -135,7 +136,6 @@ public class MypageController {
 	// 내 회원 정보 수정
 	@RequestMapping(value = "/miu")
 	public void myInfoUpdate(Member vo, HttpServletResponse response) {
-		System.out.println("######################################수정하러 들어옴");
 		int result = myService.myInfoUpdate(vo);
 		PrintWriter out = null;
 		try {

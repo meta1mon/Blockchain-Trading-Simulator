@@ -10,6 +10,8 @@ public interface CommunityService {
 
 	List<Community> selectList(int startPage, int limit);
 
+	List<Community> searchpopularList();
+	
 	int totalCount();
 
 	Community selectCommunity(int chk, String cno);

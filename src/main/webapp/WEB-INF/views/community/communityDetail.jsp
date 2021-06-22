@@ -382,6 +382,40 @@ hr {
 						<c:param name="page" value="${currentPage}" />
 					</c:url> <button type="button" id="list"
 				onclick="location.href='${clist}'">목록으로 돌아가기</button>
+				
+			<form action="creport" name="creport" method="post">
+				<p>신고</p>
+			<div>
+			    <input type="radio" id="contactChoice1"
+			     name="contact" value="email">
+			    <label for="contactChoice1">Email</label>
+			
+			    <input type="radio" id="contactChoice2"
+			     name="contact" value="phone">
+			    <label for="contactChoice2">Phone</label>
+			
+			    <input type="radio" id="contactChoice3"
+			     name="contact" value="mail">
+			    <label for="contactChoice3">Mail</label>
+			    
+			    <input type="radio" id="contactChoice1"
+			     name="contact" value="email">
+			    <label for="contactChoice1">Email</label>
+			
+			    <input type="radio" id="contactChoice2"
+			     name="contact" value="phone">
+			    <label for="contactChoice2">Phone</label>
+			
+			    <input type="radio" id="contactChoice3"
+			     name="contact" value="mail">
+			    <label for="contactChoice3">Mail</label>
+			  </div>
+			  <hr>
+			  <div>
+			    <button type="button" id="btncancel">취소</button>
+			    <button type="submit" id="btnreport">신고</button>
+			  </div>
+		</form>
 	</div>
 </body>
 

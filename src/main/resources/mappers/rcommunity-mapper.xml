@@ -34,9 +34,14 @@
 
 	<!-- 댓글 입력 시 댓글 수 +1 -->
 	<update id="updateReplyCnt" parameterType="string"
-		flushCache="true" statementType="PREPARED">>
-		UPDATE COMMUNITY SET REPLYCNT =
-		REPLYCNT+1 WHERE CNO = #{cno}
+		flushCache="true" statementType="PREPARED">
+		UPDATE COMMUNITY SET REPLYCNT = REPLYCNT+1 WHERE CNO = #{cno}
+	</update>
+	
+	<!-- 댓글 삭제 시 댓글 수 -1 -->
+	<update id="updateDelReplyCnt" parameterType="string"
+		flushCache="true" statementType="PREPARED">
+		UPDATE COMMUNITY SET REPLYCNT = REPLYCNT-1 WHERE CNO = #{cno}
 	</update>
 	
 	<!-- 댓글 수정 -->

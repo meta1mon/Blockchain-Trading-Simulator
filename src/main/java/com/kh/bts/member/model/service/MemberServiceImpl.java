@@ -40,6 +40,35 @@ public class MemberServiceImpl implements MemberService {
 
 		return result;
 	}
+	
+	@Override
+	public void createTempPassword(String email, String pw) throws Exception {
+		mDao.createTempPassword(email, pw);
+	}
+	
+	@Override
+	public String findPassword(Member vo) throws Exception {
+		String result = null;
+		if(vo!=null) {
+			String key = new TempKey().getKey(12, false); // 랜덤 문자 생성
+			mDao.createTempPassword(vo.getEmail(), key);
+			MailHandler sendMail = new MailHandler(mailSender);
+			sendMail.setSubject("임시 비밀번호 발급 테스트");
+			sendMail.setText(new StringBuffer().append("<h1> 안녕하세요 </h1>")
+					.append("<p>").append(vo.getEmail()).append("님께서 요청하신 임시 비밀번호입니다.</p>")
+					.append("<p>임시 비밀번호: ").append(key).append("</p>").toString());
+			sendMail.setFrom("Aces.Recruited.Member@gmail.com", "BTS");
+			sendMail.setTo(vo.getEmail());
+			sendMail.send();
+			result = "Success";
+			System.out.println("임시 비밀번호 발급 성공");
+		} else {
+			result = "Fail";
+			System.out.println("임시 비밀번호 발급 실패");
+		}
+		return result;
+	}
+
 	@Override
 	public int dupeEmail(Member vo) throws Exception{
 		int result = 0;

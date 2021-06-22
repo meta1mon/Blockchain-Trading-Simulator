@@ -41,9 +41,13 @@
 	<update id="createAuthKey" parameterType="Member" flushCache="true" statementType="PREPARED">
 		UPDATE MEMBER SET AUTHKEY= #{authkey} WHERE EMAIL = #{email}
 	</update>
+	<!-- 임시비밀번호설정 -->
+	<update id="createTempPassword" parameterType="Member" flushCache="true" statementType="PREPARED">
+		UPDATE MEMBER SET pw= #{pw} WHERE EMAIL = #{email}
+	</update>
 	<!-- 이메일인증후 -->
 	<update id="authMember" parameterType="Member" flushCache="true" statementType="PREPARED">
-		UPDATE MEMBER SET AUTH = 'Y' WHERE EMAIL=#{email}
+		UPDATE MEMBER SET AUTH = 'Y', AUTHKEY='DONE' WHERE EMAIL=#{email}
 	</update>
 	
 	<!-- 회원탈퇴 -->

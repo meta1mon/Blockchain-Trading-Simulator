@@ -80,7 +80,7 @@
 						</tr>
 						<tr>
 							<td colspan="2" class="right">
-								<span><a href="<%=request.getContextPath()%>/findpassword" class="small link">비밀번호 찾기</a></span> 
+								<span><a href="<%=request.getContextPath()%>/find" class="small link">비밀번호 찾기</a></span> 
 								<span><a href="<%=request.getContextPath()%>/signup" id="signup" class="small link">회원가입</a></span>
 							</td>
 							<td>

@@ -11,7 +11,7 @@ import com.kh.bts.member.model.vo.Member;
 public class MemberDAO {
 	@Autowired
 	SqlSession sqlSession;
-
+	// 회원가입
 	public int insertMember(Member vo, Acnt vo2) {
 		int result = 0;
 		result = sqlSession.insert("Member.insertMember", vo);
@@ -54,18 +54,26 @@ public class MemberDAO {
 	public int deleteMember(String email) {
 		return sqlSession.delete("Member.deleteMember", email);
 	}
-
+	// 인증키 생성
 	public void createAuthkey(String email, String authkey) throws Exception {
 		Member vo = new Member();
 		vo.setEmail(email);
 		vo.setAuthkey(authkey);
 		sqlSession.selectOne("Member.createAuthKey", vo);
 	}
-
+	// 임시 비밀번호 생성
+	public void createTempPassword(String email, String pw) throws Exception {
+		Member vo = new Member();
+		vo.setEmail(email);
+		vo.setPw(pw);
+		sqlSession.selectOne("Member.createTempPassword", vo);
+	}
+	// 이메일 인증 링크 클릭시, 멤버 Auth를 Y로 변경
 	public void authMember(Member vo) {
 		sqlSession.update("Member.authMember", vo);
 	}
 
+	// 로그인
 	public Member loginMember(Member vo) throws Exception {
 		return sqlSession.selectOne("Member.loginMember", vo);
 	}

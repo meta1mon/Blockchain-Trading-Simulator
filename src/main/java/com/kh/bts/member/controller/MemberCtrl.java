@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,7 @@ public class MemberCtrl {
 		mv.setViewName("member/signup");
 		return mv;
 	}
+	
 	
 // 이메일, 닉네임 중복 체크
 	@ResponseBody
@@ -137,9 +139,15 @@ public class MemberCtrl {
 	}
 
 //	비밀번호 찾기 페이지로 이동
-	@RequestMapping(value = "/findpassword")
+	@RequestMapping(value = "/find")
 	public ModelAndView findPw(ModelAndView mv) {
 		mv.setViewName("member/findpw");
 		return mv;
+	}
+	
+	@RequestMapping(value="/findpassword", method = RequestMethod.POST)
+	public String findPassword(@RequestParam("email") String email, Member vo) throws Exception {
+		System.out.println("폼에서 받아온 email 값: " + email);
+		return mService.findPassword(vo);
 	}
 }

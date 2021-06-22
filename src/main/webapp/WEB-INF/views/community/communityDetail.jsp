@@ -332,20 +332,14 @@ hr {
 					<h4 class="comment-head">작성자 : ${rep.rwriter} &nbsp; &nbsp; 작성일 : ${rep.rdate}</h4>
 					<div class="comment-body"><p>${rep.rcontent}</p>
 					</div>
-					<c:if test="${loginMember.nickname == rep.rwriter}">
 						<button type="button" class="rupdateConfirm" name="updateConfirm"
 							id="rupdateConfirm" style="display: none;">수정완료</button>
-							</c:if>
 						&nbsp;&nbsp;&nbsp;
-						<c:if test="${(loginMember.nickname == rep.rqwriter) || (loginMember.nickname == '관리자')}">
 						<button type="button" class="rdelete" name="delete" id="rdelete"
 							style="displ ay: none;">삭제하기</button>
-							</c:if>
 						&nbsp;&nbsp;&nbsp;
-						<c:if test="${loginMember.nickname == rep.rwriter}">
 						<button type="button" class="rupdate" name="update" id="rupdate">수정
 							및 삭제</button>
-							</c:if>
 				</div>
 				<br>
 				<br>

@@ -12,24 +12,34 @@
 #mm li {
 	float: left;
 	list-style-type: none;
-	margin-left: 30px;
-	background-color: blueviolet;
-	color: white;
-	width: 200px;
-	height: 200px;
+	margin: 15px;
+	color: black;
+	width: 128px;
+	height: 167px;
 	text-align: center;
+	border: 1px solid #ffc000;
+	border-radius: 5px;
+    padding-top: 39px;
+    padding-left: 39px;
+    padding-right: 39px;	
 }
 
 #mm img {
 	width: 100px;
 	height: 100px;
 }
+
+#mm {
+	position: absolute;
+	top: calc(50% - 150px);
+	left: calc(50% - 238px);
+}
 </style>
 </head>
 <%@include file="headerAndAside.jsp"%> 
 <body class="adminContent">
-	<div id="mm" style="position: absolute; top: 300px; left: 400px;">
-		<ul>
+	<div>
+		<ul id="mm">
 			<li><p>전체 가상 투자금</p> <img src="#" />
 				<p>1,111,111원</p></li>
 			<li><p>미처리 신고 건수</p> <img src="#" />

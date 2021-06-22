@@ -125,7 +125,7 @@
 				<tr>
 					<td>계좌 비밀번호</td>
 					<td colspan="2"><input type="password" name="bankPw"
-						id="bankPw1" class="pin1" placeholder="계좌 비밀번호를 입력해주세요."></td>
+						id="bankPw1" class="pin1" placeholder="계좌 비밀번호를 입력해주세요"></td>
 				</tr>
 				<tr>
 					<td>계좌 비밀번호 확인</td>

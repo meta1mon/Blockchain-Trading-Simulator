@@ -40,7 +40,7 @@
 						정보</a></li>
 				<li><a href="${pageContext.request.contextPath}/mypage/mpu">비밀번호
 						변경</a></li>
-				<li><a href="${pageContext.request.contextPath}/mypage/me">나의
+				<li><a href="${pageContext.request.contextPath}/mypage/mee">나의
 						자산</a></li>
 				<li><a href="${pageContext.request.contextPath}/mypage/myClist">나의
 						게시글</a></li>

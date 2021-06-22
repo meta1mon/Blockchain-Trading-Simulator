@@ -26,6 +26,10 @@ public class RcommunityDao {
 		return sqlSession.selectOne("rcommunity.selectRcommunity", rno);
 	}
 	
+	public int updateReplyCnt(String cno) { // 댓글 입력 시 댓글 수 +1
+		return sqlSession.update("rcommunity.updateReplyCnt", cno);
+	}
+	
 	public int insertRcommunity(Rcommunity rc, String email) { // 댓글 입력
 		Member vo = sqlSession.selectOne("Member.searchMember", email);
 		if (vo == null) {

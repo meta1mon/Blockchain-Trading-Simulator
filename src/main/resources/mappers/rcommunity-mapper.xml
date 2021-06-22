@@ -10,7 +10,7 @@
 	</resultMap>
 	
 	<!-- 댓글 전체 개수 조회 -->
-	<select id="countRcommunity" resultType="int">
+	<select id="countRcommunityALl" resultType="int">
 		SELECT count(*) FROM RCOMMUNITY
 	</select>
 	
@@ -32,6 +32,13 @@
 		#{rwriter}, #{rcontent}, default, #{cno})
 	</insert>
 
+	<!-- 댓글 입력 시 댓글 수 +1 -->
+	<update id="updateReplyCnt" parameterType="string"
+		flushCache="true" statementType="PREPARED">>
+		UPDATE COMMUNITY SET REPLYCNT =
+		REPLYCNT+1 WHERE CNO = #{cno}
+	</update>
+	
 	<!-- 댓글 수정 -->
 	<update id="updateRcommunity" parameterType="Rcommunity" flushCache="true" statementType="PREPARED" timeout="20">
 		UPDATE RCOMMUNITY SET RCONTENT = #{rcontent} WHERE RNO = #{rno}

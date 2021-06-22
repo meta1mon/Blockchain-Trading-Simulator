@@ -45,6 +45,11 @@
 		SELECT count(*) FROM
 		COMMUNITY
 	</select>
+	
+	<!-- 해당 게시글의 댓글 개수 조회 -->
+	<select id="countReply" resultType="int">
+		SELECT REPLYCNT FROM COMMUNITY WHERE CNO = #{cno}
+	</select>
 
 	<!-- 내가 쓴 게시글 리스트 -->
 	<select id="myCommunity" parameterType="string"

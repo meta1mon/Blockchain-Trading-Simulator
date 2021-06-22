@@ -25,6 +25,11 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
+	public List<Community> searchpopularList() {
+		return cmDao.searchpopularList();
+	}
+	
+	@Override
 	public int totalCount() {
 		return cmDao.listCount();
 	}

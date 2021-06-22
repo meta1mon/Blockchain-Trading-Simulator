@@ -3,71 +3,115 @@
 <mapper namespace="Member">
 	<resultMap type="Member" id="Member">
 	</resultMap>
-	<!-- 회원조회-->
-	<select id="searchMember" parameterType="string" resultMap="Member">
+	<!-- 회원조회 -->
+	<select id="searchMember" parameterType="string"
+		resultMap="Member">
 		SELECT * FROM MEMBER WHERE EMAIL = #{email}
 	</select>
+
 	<!-- 회원수조회 -->
 	<select id="countMember" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 	</select>
-	<!-- 개인조회-->
-	<select id="searchOneMember" parameterType="string" resultType="string">
-		SELECT * FROM MEMBER WHERE EMAIL = #{email}
-	</select>
+
 	<!-- 회원가입 -->
-	<insert id="insertMember" parameterType="Member" flushCache="true" statementType="PREPARED">
-		INSERT INTO MEMBER VALUES(#{email}, #{nickname}, #{authkey}, default, #{pw}, #{gender}, #{birthdate}, #{phone}, #{mailing}, default)
+	<insert id="insertMember" parameterType="Member"
+		flushCache="true" statementType="PREPARED">
+		INSERT INTO MEMBER VALUES(#{email},
+		#{nickname}, #{authkey}, default, #{pw}, #{gender}, #{birthdate},
+		#{phone}, #{mailing}, default)
 	</insert>
+
 	<!-- 이메일 중복 체크 -->
 	<select id="dupeEmail" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE EMAIL = #{email}
 	</select>
+
 	<!-- 닉네임 중복 체크 -->
 	<select id="dupeNick" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE NICKNAME = #{nickname}
 	</select>
-	<!-- 회원가입 시, 계좌번호 중복 확인-->
+
+	<!-- 이메일인증키설정 -->
+	<update id="createAuthKey" parameterType="Member"
+		flushCache="true" statementType="PREPARED">
+		UPDATE MEMBER SET AUTHKEY= #{authkey}
+		WHERE EMAIL = #{email}
+	</update>
+
+	<!-- 회원가입 시, 계좌번호 중복 확인 -->
 	<select id="checkAcntno" parameterType="string" resultType="int">
 		SELECT COUNT(*) FROM ACNT WHERE ACNTNO = #{acntno}
 	</select>
-	<!-- 회원가입 시, 계좌번호 및 계좌 비밀번호 등록-->
-	<insert id="insertAcnt" parameterType="Acnt" flushCache="true" statementType="PREPARED">
-		INSERT INTO ACNT VALUES(#{acntno}, #{email}, default, #{bankPw})
+
+	<!-- 회원가입 시, 계좌번호 및 계좌 비밀번호 등록 -->
+	<insert id="insertAcnt" parameterType="Acnt" flushCache="true"
+		statementType="PREPARED">
+		INSERT INTO ACNT VALUES(#{acntno}, #{email}, default,
+		#{bankPw})
 	</insert>
-	<!-- 이메일인증키설정 -->
-	<update id="createAuthKey" parameterType="Member" flushCache="true" statementType="PREPARED">
-		UPDATE MEMBER SET AUTHKEY= #{authkey} WHERE EMAIL = #{email}
+
+	<!-- 임시비밀번호설정 -->
+	<update id="createTempPassword" parameterType="Member"
+		flushCache="true" statementType="PREPARED">
+		UPDATE MEMBER SET pw= #{pw} WHERE
+		EMAIL = #{email}
 	</update>
+
 	<!-- 이메일인증후 -->
-	<update id="authMember" parameterType="Member" flushCache="true" statementType="PREPARED">
-		UPDATE MEMBER SET AUTH = 'Y' WHERE EMAIL=#{email}
+	<update id="authMember" parameterType="Member" flushCache="true"
+		statementType="PREPARED">
+		UPDATE MEMBER SET AUTH = 'Y', AUTHKEY='DONE' WHERE
+		EMAIL=#{email}
 	</update>
-	
-	<!-- 회원탈퇴 -->
-	<delete id="deleteMember" parameterType="string" flushCache="true" statementType="PREPARED">
-		DELETE FROM MEMBER WHERE EMAIL = #{email}
-	</delete>
-	
+
+	<!-- 로그인 -->
+	<select id="loginMember" parameterType="Member"
+		resultMap="Member">
+		SELECT * FROM MEMBER WHERE EMAIL = #{email} AND PW=#{pw} AND
+		AUTH = 'Y'
+	</select>
+
 	<!-- 회원정보수정 -->
-	<update id="updateMember" parameterType="Member" flushCache="true" statementType="PREPARED">
-		UPDATE MEMBER SET NICKNAME=#{nickname}, GENDER=#{gender}, BIRTHDATE=#{birthdate}, PHONE=#{phone}, MAILING=#{mailing} WHERE EMAIL=#{email}
+	<update id="updateMember" parameterType="Member"
+		flushCache="true" statementType="PREPARED">
+		UPDATE MEMBER SET
+		NICKNAME=#{nickname}, GENDER=#{gender}, BIRTHDATE=#{birthdate},
+		PHONE=#{phone}, MAILING=#{mailing} WHERE EMAIL=#{email}
 	</update>
-	
+
+	<!-- 회원탈퇴 -->
+	<delete id="deleteMember" parameterType="string"
+		flushCache="true" statementType="PREPARED">
+		DELETE FROM MEMBER WHERE EMAIL =
+		#{email}
+	</delete>
+
 	<!-- 비밀번호수정 -->
-	<update id="updatePassword" parameterType="Member" flushCache="true" statementType="PREPARED">
-		UPDATE MEMBER SET PW=#{pw} WHERE EMAIL = #{email}
+	<update id="updatePassword" parameterType="Member"
+		flushCache="true" statementType="PREPARED">
+		UPDATE MEMBER SET PW=#{pw} WHERE EMAIL
+		= #{email}
 	</update>
-	
+
 	<!-- 계좌 비밀번호수정 -->
-	<update id="updateBankPw" parameterType="Acnt" flushCache="true" statementType="PREPARED">
+	<update id="updateBankPw" parameterType="Acnt" flushCache="true"
+		statementType="PREPARED">
 		UPDATE ACNT SET BANKPW=#{bankPw} WHERE EMAIL = #{email}
 	</update>
-	
-	<!-- 로그인 -->
-	<select id="loginMember" parameterType="Member" resultMap="Member"> 
-		SELECT * FROM MEMBER WHERE EMAIL = #{email} AND PW=#{pw} AND AUTH = 'Y'
+
+	<!-- 닉네임만 조회 -->
+	<select id="returnNickname" parameterType="string"
+		resultType="string">
+		SELECT NICKNAME FROM MEMBER WHERE EMAIL = #{email}
 	</select>
+
+	<!-- 계좌 정보 가져오기 -->
+	<select id="selectMyAcnt" parameterType="string"
+		resultType="Acnt">
+		SELECT * FROM ACNT WHERE EMAIL = #{email}
+	</select>
+
 </mapper>

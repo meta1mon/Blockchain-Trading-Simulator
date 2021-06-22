@@ -33,23 +33,27 @@ public class MypageDao {
 
 	public List<Community> myCommunity(String email) {
 		Member vo = sqlSession.selectOne("Member.searchMember", email);
-		if(vo == null) {
+		if (vo == null) {
 			System.out.println("로그인 오류");
 		} else {
 			System.out.println("정상 로그인");
 		}
 		String cwriter = vo.getNickname();
 		List<Community> list = sqlSession.selectList("community.myCommunity", cwriter);
-		if(list == null) {
+		if (list == null) {
 			System.out.println(cwriter + "인 닉네임으로 작성한 글이 없음");
 		} else {
 			System.out.println(cwriter + "인 닉네임으로 작성한 글이 있음");
 		}
 		return list;
 	}
-	
+
 	public int myDelete(String email) {
 		return sqlSession.delete("Member.deleteMember", email);
+	}
+
+	public Acnt myAcnt(String email) {
+		return sqlSession.selectOne("Member.selectMyAcnt", email);
 	}
 
 }

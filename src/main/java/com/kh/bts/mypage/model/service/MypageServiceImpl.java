@@ -51,4 +51,10 @@ public class MypageServiceImpl implements MypageService {
 	public int myDelete(String email) {
 		return myDao.myDelete(email);
 	}
+
+	@Override
+	public Acnt myAcnt(String email) {
+		return myDao.myAcnt(email);
+	}
+
 }

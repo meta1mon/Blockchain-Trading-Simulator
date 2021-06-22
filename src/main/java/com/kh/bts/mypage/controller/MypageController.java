@@ -22,6 +22,7 @@ import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.service.MemberService;
+import com.kh.bts.member.model.service.MemberServiceImpl;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.service.MypageService;
 
@@ -135,8 +136,11 @@ public class MypageController {
 	// 내 회원 정보 수정
 	@RequestMapping(value = "/miu")
 	public void myInfoUpdate(Member vo, HttpServletResponse response) {
-		System.out.println("######################################수정하러 들어옴");
 		int result = myService.myInfoUpdate(vo);
+		if (result > 0) {
+			logger.info("회원정보 수정 완료");
+		}
+
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();
@@ -185,6 +189,40 @@ public class MypageController {
 		return mv;
 	}
 
+// 내 자산 진입
+	@RequestMapping(value = "/bankPwCheck", method = RequestMethod.POST)
+	public void bankPwCheck(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name = "bankPw") int bankPw) {
+		String email = (String) request.getSession().getAttribute("loginMember");
+		System.out.println("이메일" + email);
+		Acnt vo = myService.myAcnt(email);
+
+		int result;
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+			if (vo == null) {
+				logger.info("잘못된 접근");
+				result = -1;
+				out.print(result);
+			} else {
+				if (vo.getBankPw() == bankPw) {
+					logger.info("계좌 비번 일치");
+					result = 1;
+				} else {
+					logger.info("계좌 비번 불일치");
+					result = 0;
+				}
+			}
+			out.println(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+	}
+
 	@RequestMapping(value = "/mpu")
 	public ModelAndView mypagePasswordUpdate(ModelAndView mv) {
 		mv.setViewName("mypage/myPasswordUpdate");
@@ -193,6 +231,9 @@ public class MypageController {
 
 	@RequestMapping(value = "/me")
 	public ModelAndView myEssets(ModelAndView mv) {
+		
+		
+		
 		mv.setViewName("mypage/myEssets");
 		return mv;
 	}

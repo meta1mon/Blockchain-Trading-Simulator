@@ -5,45 +5,62 @@
 	</resultMap>
 
 	<!-- 검색한 게시글 조회 -->
-	<select id="searchList" parameterType="Community"
+	<select id="searchListSubject" parameterType="string"
 		resultType="arraylist" resultMap="resultCommunity">
-		SELECT NVL(MAX(ROWNUM),0)
-		FROM COMMUNITY
-		<choose>
-			<when test="CSUBJECT != null">
-				WHERE CSUBJECT LIKE '%'||#{csubject}||'%' 
-			</when>							<!-- #은 set하는거고	 -->
-			<when test="CCONTENT != null">
-				WHERE CCONTENT LIKE '%${ccontent}%'  <!-- $는 미리만들어놓고 실행한다 이엘아님..마이바티스문임!-->
-			</when>
-			<when test="CWRITER !=null">
-				WHERE CWRITER LIKE '%${cwriter}%'
-			</when>
-		</choose>
+		SELECT *
+		FROM
+		COMMUNITY
+		WHERE CSUBJECT LIKE '%'||#{keyword}||'%'
+	</select>
+	<select id="searchListContent" parameterType="string"
+		resultType="arraylist" resultMap="resultCommunity">
+		SELECT *
+		FROM
+		COMMUNITY
+		WHERE CCONTENT LIKE '%'||#{keyword}||'%'
+	</select>
+	<select id="searchListWriter" parameterType="string"
+		resultType="arraylist" resultMap="resultCommunity">
+		SELECT *
+		FROM
+		COMMUNITY
+		WHERE CWRITER LIKE '%'||#{keyword}||'%'
 	</select>
 
 	<!-- 조회수 상위 5개 게시글 조회 -->
-	<select id="searchpopularList" parameterType="Community" resultType="arraylist" resultMap="resultCommunity">
-	SELECT * FROM COMMUNITY WHERE ROWNUM &lt;=5 ORDER BY VIEWCNT DESC
+	<select id="searchpopularList" resultType="arraylist"
+		resultMap="resultCommunity">
+		SELECT * FROM COMMUNITY WHERE ROWNUM &lt;=5 ORDER BY VIEWCNT
+		DESC
 	</select>
-	
+
 	<!-- 페이지당 게시글 조회 -->
-	<select id="selectList" resultType="arraylist" resultMap="resultCommunity">
+	<select id="selectList" resultType="arraylist"
+		resultMap="resultCommunity">
 		SELECT * FROM COMMUNITY ORDER BY CNO DESC
 	</select>
 
 	<!-- 게시글 전체 개수 조회 -->
 	<select id="countCommunity" resultType="int">
-		SELECT count(*) FROM COMMUNITY
+		SELECT count(*) FROM
+		COMMUNITY
 	</select>
 	
+	<!-- 해당 게시글의 댓글 개수 조회 -->
+	<select id="countReply" resultType="int">
+		SELECT REPLYCNT FROM COMMUNITY WHERE CNO = #{cno}
+	</select>
+
 	<!-- 내가 쓴 게시글 리스트 -->
-	<select id="myCommunity" parameterType="string" resultType="arraylist" resultMap="resultCommunity">
-		SELECT * FROM COMMUNITY WHERE CWRITER = #{cwriter}
+	<select id="myCommunity" parameterType="string"
+		resultType="arraylist" resultMap="resultCommunity">
+		SELECT * FROM COMMUNITY WHERE CWRITER
+		= #{cwriter}
 	</select>
 
 	<!-- 게시글 단일 조회 -->
-	<select id="selectOne" parameterType="string" resultType="Community">
+	<select id="selectOne" parameterType="string"
+		resultType="Community">
 		SELECT * FROM COMMUNITY WHERE CNO = #{cno}
 	</select>
 
@@ -57,24 +74,28 @@
 	</insert>
 
 	<!-- 게시글 수정 -->
-	<update id="updateCommunity" parameterType="Community" flushCache="true"
-		statementType="PREPARED">
+	<update id="updateCommunity" parameterType="Community"
+		flushCache="true" statementType="PREPARED">
 		UPDATE COMMUNITY
-		SET CSUBJECT = #{csubject},
+		SET CSUBJECT =
+		#{csubject},
 		CCONTENT = #{ccontent},
 		FILEPATH = #{filepath}
-		WHERE CNO = #{cno}
+		WHERE CNO =
+		#{cno}
 	</update>
-
+	
 	<!-- 게시글 삭제 -->
 	<delete id="deleteCommunity" parameterType="string"
 		flushCache="true" statementType="PREPARED">
-		DELETE FROM COMMUNITY WHERE CNO = #{cno}
+		DELETE FROM COMMUNITY WHERE CNO =
+		#{cno}
 	</delete>
-	
+
 	<!-- 게시글 조회 수 증가 -->
 	<update id="addReadCount" parameterType="string"
 		flushCache="true" statementType="PREPARED">
-		UPDATE COMMUNITY SET VIEWCNT = VIEWCNT+1 WHERE CNO = #{cno}
+		UPDATE COMMUNITY SET VIEWCNT =
+		VIEWCNT+1 WHERE CNO = #{cno}
 	</update>
 </mapper>

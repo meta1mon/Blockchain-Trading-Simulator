@@ -26,6 +26,10 @@ public class RcommunityDao {
 		return sqlSession.selectOne("rcommunity.selectRcommunity", rno);
 	}
 	
+	public int updateReplyCnt(String cno) { // 댓글 입력 시 댓글 수 +1
+		return sqlSession.update("rcommunity.updateReplyCnt", cno);
+	}
+	
 	public int insertRcommunity(Rcommunity rc, String email) { // 댓글 입력
 		Member vo = sqlSession.selectOne("Member.searchMember", email);
 		if (vo == null) {
@@ -33,9 +37,26 @@ public class RcommunityDao {
 		} else {
 			System.out.println("정상 로그인");
 		}
-		String cwriter = vo.getNickname();
-		rc.setRwriter(cwriter);
-		int result = sqlSession.insert("community.insertCommunity", rc);
+		System.out.println("############################################## vo 받아");
+		String rwriter = vo.getNickname();
+		System.out.println("############################################## 닉네임  받아");
+		rc.setRwriter(rwriter);
+		int result = sqlSession.insert("rcommunity.insertRcommunity", rc);
+		System.out.println("##############################" + result);
+		int result2;
+		
+		if (result > 0) {
+			System.out.println("댓글 추가 성공");
+			result2 = sqlSession.update("rcommunity.updateReplyCnt", rc.getCno());
+			if (result2 > 0) {
+				System.out.println("댓글 개수 +1 성공");
+			} else {
+				System.out.println("댓글 개수 +1 실패");
+			}
+		} else {
+			System.out.println("댓글 추가 실패");
+		}
+		
 		return result;
 	}
 	
@@ -46,6 +67,22 @@ public class RcommunityDao {
 	
 	public int deleteRcommunity(Rcommunity rc) { // 댓글 삭제
 		System.out.println(rc);
-		return sqlSession.delete("rcommunity.deleteRcommunity", rc);
+		int result = sqlSession.delete("rcommunity.deleteRcommunity", rc);
+		int result2;
+		
+		if (result > 0) {
+			System.out.println("댓글 삭제 성공");
+			result2 = sqlSession.update("rcommunity.updateDelReplyCnt", rc.getCno());
+			if (result2 > 0) {
+				System.out.println("댓글 개수 -1 성공");
+			} else {
+				System.out.println("댓글 개수 -1 실패");
+			}
+		} else {
+			System.out.println("댓글 삭제 실패");
+		}
+		
+		return result;
+		
 	}
 }

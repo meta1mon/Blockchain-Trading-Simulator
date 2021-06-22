@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,7 @@ public class MemberCtrl {
 		mv.setViewName("member/signup");
 		return mv;
 	}
+	
 	
 // 이메일, 닉네임 중복 체크
 	@ResponseBody
@@ -137,9 +139,27 @@ public class MemberCtrl {
 	}
 
 //	비밀번호 찾기 페이지로 이동
-	@RequestMapping(value = "/findpassword")
+	@RequestMapping(value = "/find")
 	public ModelAndView findPw(ModelAndView mv) {
 		mv.setViewName("member/findpw");
 		return mv;
+	}
+	
+//	비밀번호 찾기 눌렀을 때
+	@RequestMapping(value="/findpassword", method = RequestMethod.POST)
+	public void findPassword(@RequestParam("email") String email, Member vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("폼에서 받아온 email 값: " + email);
+		int result = mService.dupeEmail(vo);
+		if(result == 1) {
+			mService.findPassword(vo);
+			request.setAttribute("errorMessage", "임시 비밀번호가 이메일로 전송되었습니다.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/find");
+			dispatcher.forward(request, response);
+		}else {
+			request.setAttribute("errorMessage", "존재하지 않는  회원입니다.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/find");
+			dispatcher.forward(request, response);
+		}
+		System.out.println(mService.findPassword(vo));
 	}
 }

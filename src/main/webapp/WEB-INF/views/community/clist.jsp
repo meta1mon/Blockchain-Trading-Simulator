@@ -10,13 +10,13 @@
 	rel="stylesheet" type="text/css" /> --%>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+	
 <script type="text/javascript">
 	$(function() {
 		$('form[name=listForm]').on(
 				'submit',
 				function(e) {
-					if ($('input[name=keyword]').val() == null
-							|| $('input[name=keyword]').val() == "") {
+					if ($('input[name=keyword]').val() == null|| $('input[name=keyword]').val() == "") {
 						alert("검색어를 입력해 주세요");
 						e.preventDefault();
 					} else {
@@ -92,7 +92,7 @@ width: 125px;
 		box-shadow 0.15s ease-in-out;
 }
 
-#search::-webkit-input-placeholder {
+#btnsearchVal {
 	background-image:
 		url(https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png);
 	background-size: contain;
@@ -121,6 +121,13 @@ width: 125px;
 		box-shadow 0.15s ease-in-out;
 }
 
+.popularTable {
+	margin: 10px auto 10px; 20px;
+	clear: both;
+	width: 1200px;
+	border-collapse: collapse;
+}
+
 .ctable {
 	margin: 30px auto 30px; 20px;
 	clear: both;
@@ -134,49 +141,45 @@ width: 125px;
 	<div style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
 		
 		<div class="comm">커뮤니티</div>
+					<br><br><br><br><br>
+		<!-- 조회수 상위 5개 인기 게시글 -->
+		<c:if test="${listCount ne 0}">
+			<hr>
+			<table class="popularTable">
+				<c:forEach var="vo" items="${plist}" varStatus="status">
+					<tr>
+						<td align="center" width="60">${vo.cno}</td>
+						<td align="left" width="360"><a
+							href="cDetail?cno=${vo.cno}&page=${currentPage}">
+								&nbsp;${vo.csubject} </a>${vo.replycnt}</td>
+						<td align="center" width="100">${vo.cwriter}</td>
+						<td align="center" width="120">${vo.cdate}</td>
+						<td align="center" width="60">${vo.viewcnt}</td>
+						<td align="center" width="60">${vo.likecnt}</td>
+					</tr>
+				</c:forEach>
+			</table>
+			<hr>
+		</c:if>
+		
 		<form action="clist" name="listForm" method="get">
 			<select id="searchType" name="searchType">
 				<option value="1">글제목</option>
-				<option value="2">작성자</option>
-				<option value="3">글내용</option>
-			</select> <input type='search' id="search" name="keyword"
-				placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp질문을 검색하세요.">
-			<button type=submit id="btnsearch">검색</button>
+				<option value="2">글내용</option>
+				<option value="3">작성자</option>
+			</select> <input type='search' id="search" name="keyword">
+			<button type=submit id="btnsearch"><p id="btnsearchVal"></p></button>
 		</form>
 
 		<input type="hidden" name="page" value="${currentPage}"> <input
 			type="button" id="write" value="글쓰기" onclick="window.location='cWriteForm'">
 
-		<!-- 조회수 상위 5개 인기 게시글 -->
-		<table class="popularTable">
-			<!-- 글이 없을 경우 -->
-			<c:if test="${listCount eq 0}">
-				<tr>
-					<td colspan="6" align="center"><br> <br> 게시판에 저장된 글이없습니다.<br> <br></td>
-				</tr>
-			</c:if>
-			<c:if test="${listCount ne 0}">
-				<c:forEach var="vo" items="${plist}" varStatus="status">
-					<tr>
-						<td align="center">${vo.cno}</td>
-						<td align="left"><a
-							href="cDetail?cno=${vo.cno}&page=${currentPage}">
-								&nbsp;${vo.csubject} </a></td>
-						<td align="center">${vo.cwriter}</td>
-						<td align="center">${vo.cdate}</td>
-						<td align="center">${vo.viewcnt}</td>
-						<td align="center">${vo.likecnt}</td>
-					</tr>
-				</c:forEach>
-			</c:if>
-		</table>
-		
 		<table class="ctable">
-			<tr bgcolor="#8C66C8">
+			<tr>
 				<td align="center" width="60">번호</td>
-				<td align="center" width="380">제목</td>
+				<td align="center" width="360">제목</td>
 				<td align="center" width="100">작성자</td>
-				<td align="center" width="100">작성일</td>
+				<td align="center" width="120">작성일</td>
 				<td align="center" width="60">조회</td>
 				<td align="center" width="60">추천</td>
 			</tr>
@@ -192,7 +195,7 @@ width: 125px;
 						<td align="center">${vo.cno}</td>
 						<td align="left"><a
 							href="cDetail?cno=${vo.cno}&page=${currentPage}">
-								&nbsp;${vo.csubject} </a></td>
+								&nbsp;${vo.csubject} </a>${vo.replycnt}</td>
 						<td align="center">${vo.cwriter}</td>
 						<td align="center">${vo.cdate}</td>
 						<td align="center">${vo.viewcnt}</td>
@@ -233,6 +236,17 @@ width: 125px;
 			</c:url>
 			<a href="${clistEND}">[다음]</a>
 		</c:if>
+		
+				<form action="clist" name="listForm" method="get">
+			<select id="searchType" name="searchType">
+				<option value="1">글제목</option>
+				<option value="2">글내용</option>
+				<option value="3">작성자</option>
+			</select> <input type='search' id="search" name="keyword">
+			<button type=submit id="btnsearch">검색</button>
+		</form>
+				<input type="hidden" name="page" value="${currentPage}"> <input
+			type="button" id="write" value="글쓰기" onclick="window.location='cWriteForm'">
 	</div>
 </body>
 <%@include file="../main/footer.jsp"%>

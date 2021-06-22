@@ -6,35 +6,30 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-#mh ul {
-	width: 100%;
-}
-
-#mh li {
-	box-sizing: border-box;
-	list-style-type: none;
-	width: 300px;
+#mh {
+	position: absolute;
+    width: calc(100% - 200px);
+    left: 200px;
 	height: 100px;
-	float: left;
-	text-align: center;
-	background-color: purple;
 }
-
-#mh li:nth-child(2), #mh li:nth-child(3), #mh li:nth-child(4) {
+#mh td {
+	padding-top: 42px; 
+	text-align: center;
+}
+#mh td:nth-child(2), #mh td:nth-child(3), #mh td:nth-child(4) {
 	border-left: 1px solid black;
 }
 
-#mh li p {
-	text-align: center;
+#mh td p {
+	text-align: left;
 }
 
 #mh span {
 	vertical-align: top;
-	margin-left: 10px;
 }
+
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
 <!-- Font Awesome 4-->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -43,6 +38,10 @@
 	rel="stylesheet">
 
 <style>
+#aa {
+	background-color: #8c66c8;
+}
+
 #aa li a {
 	font-size: 15px;
 }
@@ -60,12 +59,6 @@
 }
 
 /* 충전 내역 관리 아래 빈 곳*/
-#aa .menu {
-	margin: 0;
-	padding: 0;
-	background: #b85cef;
-}
-
 #aa .contenedor-menu {
 	width: 200px;
 	display: block;
@@ -89,13 +82,13 @@
 	color: white;
 	display: block;
 	padding: 15px 20px;
-	background: b85cef;
+	background: #8c66c8;
 }
 
 /* aside에 마우스 올릴 때 */
 #aa .contenedor-menu .menu li a:hover {
-	background: #e3c8f8;
-	color: #fff;
+	background: #ffc000;
+	color: white;
 }
 
 #aa .contenedor-menu .menu i.fa {
@@ -111,14 +104,14 @@
 
 /* aside 메뉴 안쪽 부분 */
 #aa .contenedor-menu .menu ul li a {
-	background: #b7aee8;
-	color: #e9e9e9;
+	background: #f2f2f2;
+	color: black;
 }
 
 /* 클린된 메뉴 */
 #aa .contenedor-menu .menu .activado>a {
-	background: e3c8f8;
-	color: #fff;
+	background: #ffc000;
+	color: white;
 }
 </style>
 <script>
@@ -172,44 +165,36 @@
 						class="fa fa-chevron-down"></i></a>
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/admin/cll">충전 내역 리스트</a></li>
-					</ul></li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-				<li>&nbsp;</li>
-
-				<li id="adminmember"><a href="#">1:1 문의 관리</a></li>
+					</ul>
+				</li>
+				<li id="adminmember" style="width: 200px; margin-top: auto; position: absolute; bottom: 0px;"><a href="#">1:1 문의 관리</a></li>
 			</ul>
 
 		</div>
 	</div>
 
-	<div id="mh">
-		<ul>
-			<li><br> <br> <img width="25px" height="25px" /><span>전체
-					ARMY 수</span>
-				<p>111명</p></li>
-			<li><br> <br> <img width="25px" height="25px" /><span>신규
-					ARMY 수</span>
-				<p>111명</p></li>
-			<li><br> <br> <img width="25px" height="25px" /><span>신규
-					게시글 수</span>
-				<p>111개</p></li>
-			<li><br> <br> <img width="25px" height="25px" /><span>총
-					게시글 수</span>
-				<p>111개</p></li>
-		</ul>
+	<div>
+	<table id="mh">
+		<tr>
+			<td>
+				<span class="fas fa-users"></span>
+				<span>전체 ARMY 수 111명</span>
+			</td>
+			<td>
+				<span class="fas fa-user-plus"></span>
+				<span>신규 ARMY 수 111명</span>
+			</td>
+			<td>
+				<span class="fas fa-newspaper"></span>
+				<span>총 게시글 수 111개</span>
+			</td>
+			<td>
+				<span class="fas fa-pencil-alt"></span>
+				<span>신규 게시글 수 111개</span>
+			</td>
+		</tr>
+	</table>
+
 	</div>
 </body>
 </html>

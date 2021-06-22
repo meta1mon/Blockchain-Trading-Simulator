@@ -1,5 +1,6 @@
 package com.kh.bts.community.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -16,7 +17,24 @@ public class CommunityDao {
 	private SqlSession sqlSession;
 
 	public List<Community> searchList(String keyword, int searchType) { // 검색한 게시글 조회
-		return sqlSession.selectList("community.searchList", keyword);
+		List<Community> list = new ArrayList<Community>();
+		if (keyword != null) {
+			switch (searchType) {
+			case 1: //제목으로 검색
+				list = sqlSession.selectList("community.searchListSubject", keyword);
+				break;
+			case 2: //내용으로 검색
+				list = sqlSession.selectList("community.searchListContent", keyword);
+				break;
+			case 3: //작성자명으로 검색
+				list = sqlSession.selectList("community.searchListWriter", keyword);
+				break;
+			default:
+				System.out.println("dao 오류");
+				break;
+			}
+		}
+		return list;
 	}
 
 	public List<Community> selectList(int startPage, int limit) { // 페이지당 게시글 조회

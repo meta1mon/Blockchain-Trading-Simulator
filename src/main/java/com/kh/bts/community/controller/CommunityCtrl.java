@@ -21,14 +21,13 @@ import com.kh.bts.member.model.vo.Member;
 public class CommunityCtrl {
 	@Autowired
 	private CommunityService cmService;
-	
+
 	@Autowired
 	private RcommunityService rcmService;
 	public static final int LIMIT = 30;
 
 	@RequestMapping(value = "clist", method = RequestMethod.GET)
-	public ModelAndView communityListService(
-			@RequestParam(name = "page", defaultValue = "1") int page,
+	public ModelAndView communityListService(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
 			@RequestParam(name = "searchType", defaultValue = "1") int searchType, ModelAndView mv) {
 		try {
@@ -36,16 +35,16 @@ public class CommunityCtrl {
 			// 한 페이지당 출력할 목록 갯수
 			int listCount = cmService.totalCount();
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
-			
+
 			if (keyword != null && !keyword.equals(""))
 				mv.addObject("list", cmService.selectSearch(keyword, searchType));
 			else
 				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
+			mv.addObject("plist", cmService.searchpopularList());
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);
-			mv.addObject("searchType", searchType);
-			mv.addObject("keyword", keyword);
+			Community vo = new Community();
 			mv.setViewName("community/clist");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
@@ -96,7 +95,7 @@ public class CommunityCtrl {
 			if (report != null && !report.equals(""))
 				saveFile(report, request);
 			c.setFilepath(report.getOriginalFilename());
-			
+
 			String email = (String) request.getSession().getAttribute("loginMember");
 			int result = cmService.insertCommunity(c, email);
 			mv.setViewName("redirect:clist");
@@ -116,7 +115,7 @@ public class CommunityCtrl {
 				saveFile(report, request);
 			}
 			c.setFilepath(report.getOriginalFilename());
-			
+
 			String email = (String) request.getSession().getAttribute("loginMember");
 			mv.addObject("cno", cmService.updateCommunity(c, email).getCno());
 			mv.addObject("currentPage", page);
@@ -134,7 +133,7 @@ public class CommunityCtrl {
 		try {
 			Community c = cmService.selectCommunity(1, cno);
 			removeFile(c.getFilepath(), request);
-			
+
 			String email = (String) request.getSession().getAttribute("loginMember");
 			cmService.deleteCommunity(cno, email);
 			mv.addObject("currentPage", page);

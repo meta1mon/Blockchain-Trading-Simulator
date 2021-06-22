@@ -5,26 +5,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 스타일 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/signup.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/member.css">
 <link href="${pageContext.request.contextPath}/resources/css/pinpad.css"
 	rel="stylesheet" />
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet" />
+<!-- 스크립트 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/reset.css"
-	rel="stylesheet" type="text/css" />
-<title>회원 가입</title>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/member.js"></script>
 </head>
 <body>
 	<div class="contents shadow">

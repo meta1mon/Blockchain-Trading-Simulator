@@ -3,10 +3,11 @@ package com.kh.bts.investment.model.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.bts.investment.model.dao.WaitSoldDao;
 import com.kh.bts.investment.model.vo.WaitSold;
-
+@Service("wsService")
 public class WaitSoldServiceImpl implements WaitSoldService {
 	@Autowired
 	private WaitSoldDao wsDao;
@@ -14,6 +15,7 @@ public class WaitSoldServiceImpl implements WaitSoldService {
 	@Override
 	public int insertWaitSold(WaitSold vo) {
 		// TODO Auto-generated method stub
+		System.out.println("잎플리먼트 속");
 		return wsDao.insertWaitSold(vo);
 	}
 

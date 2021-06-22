@@ -1,38 +1,28 @@
 @charset "UTF-8";
 
-#center {
-	text-align: center;
-	display: inline;
-	width: 80%;
-}
-#top_t{
-	width: 80%;
-	height: 80%;
-}
-#top_t_1 {
-	width: 760px;
-	height: 500px;
-}
-
-#top_t_2 {
-	width: 760px;
-	height: 500px;
-}
-
-table {
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-}
-
 #all_t {
-	
-	width: 80%;
+	width: 1000px;	
 	height: 100%;
+}
+#container {
+	width: 1000px !important;
+}
+#widgetTB{
+	width: 100%;
+	height: 500px;
+}
+
+td{
+	padding: 0px;
+	margin: 0px;
 }
 
 #cointable_div {
+	width: 400px;
+	font-size: small;
 	overflow: auto;
-
-	height: 500px;
+	height: 490px;
+}
+#cointable_div td{
+	width: 25%;
 }

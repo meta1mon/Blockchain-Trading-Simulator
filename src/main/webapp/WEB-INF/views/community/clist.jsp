@@ -122,9 +122,9 @@ width: 125px;
 }
 
 .ctable {
-	margin: 30px auto;
+	margin: 30px auto 30px; 20px;
 	clear: both;
-	width: 800px;
+	width: 1200px;
 	border-collapse: collapse;
 }
 </style>

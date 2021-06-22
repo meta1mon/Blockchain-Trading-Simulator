@@ -17,6 +17,7 @@ public class WaitSoldDao {
 	private SqlSession sqlSession;
 
 	public int insertWaitSold(WaitSold vo) { // 글 입력
+		System.out.println("디오 속");
 		return sqlSession.insert("waitSold.insertWaitSold", vo);
 	}
 	public int deleteWaitSold(int usno) {

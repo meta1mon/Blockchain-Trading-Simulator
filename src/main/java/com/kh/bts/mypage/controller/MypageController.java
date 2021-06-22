@@ -101,12 +101,10 @@ public class MypageController {
 		return mv;
 	}
 
-//미완성
 	// 계좌 비밀번호 변경
 	@RequestMapping(value = "/bankPwChange")
 	public ModelAndView bankPwChange(ModelAndView mv, HttpServletRequest request,
 			@RequestParam(name = "bankPw") int bankPw) {
-		logger.info("계좌 비밀번호 변경하러 들어옴");
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("loginMember");
 		Acnt vo = new Acnt();
@@ -137,6 +135,7 @@ public class MypageController {
 	// 내 회원 정보 수정
 	@RequestMapping(value = "/miu")
 	public void myInfoUpdate(Member vo, HttpServletResponse response) {
+		System.out.println("######################################수정하러 들어옴");
 		int result = myService.myInfoUpdate(vo);
 		PrintWriter out = null;
 		try {
@@ -151,6 +150,31 @@ public class MypageController {
 
 	}
 
+	// 회원 자진 탈퇴
+	@RequestMapping(value = "/mw")
+	public void myDelete(Member vo, HttpServletRequest request, HttpServletResponse response) {
+		String email = (String) request.getSession().getAttribute("loginMember");
+		int result = myService.myDelete(email);
+		if (result > 0) {
+			logger.info("회원 탈퇴 성공");
+		} else {
+			logger.info("회원 탈퇴 실패");
+		}
+		PrintWriter out = null;
+		try {
+			request.getSession().removeAttribute("loginMember");
+			out = response.getWriter();
+			out.print(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+
+	}
+
+// 내 게시글 불러오기
 	@RequestMapping(value = "/myClist", method = RequestMethod.GET)
 	public ModelAndView myClist(ModelAndView mv, HttpServletRequest request) {
 		HttpSession session = request.getSession();

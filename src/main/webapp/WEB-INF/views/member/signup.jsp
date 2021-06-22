@@ -22,16 +22,16 @@
 	src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
 <title>회원 가입</title>
 </head>
 <body>
 	<div class="contents shadow">
 		<table class="w100">
 			<tr>
-				<td>
-					<h1>
-						<i class="fas fa-chevron-left back left" title="메인 페이지로 이동"></i>
-					</h1>
+				<td class="w21px">
+					<span class="left"><img class="back" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTQ5OC4xOTUzMTIgMjIyLjY5NTMxMmMtLjAxMTcxOC0uMDExNzE4LS4wMjM0MzctLjAyMzQzNy0uMDM1MTU2LS4wMzUxNTZsLTIwOC44NTU0NjgtMjA4Ljg0NzY1NmMtOC45MDIzNDQtOC45MDYyNS0yMC43MzgyODItMTMuODEyNS0zMy4zMjgxMjYtMTMuODEyNS0xMi41ODk4NDMgMC0yNC40MjU3ODEgNC45MDIzNDQtMzMuMzMyMDMxIDEzLjgwODU5NGwtMjA4Ljc0NjA5MyAyMDguNzQyMTg3Yy0uMDcwMzEzLjA3MDMxMy0uMTQwNjI2LjE0NDUzMS0uMjEwOTM4LjIxNDg0NC0xOC4yODEyNSAxOC4zODY3MTktMTguMjUgNDguMjE4NzUuMDg5ODQ0IDY2LjU1ODU5NCA4LjM3ODkwNiA4LjM4MjgxMiAxOS40NDUzMTIgMTMuMjM4MjgxIDMxLjI3NzM0NCAxMy43NDYwOTMuNDgwNDY4LjA0Njg3Ni45NjQ4NDMuMDcwMzEzIDEuNDUzMTI0LjA3MDMxM2g4LjMyNDIxOXYxNTMuNjk5MjE5YzAgMzAuNDE0MDYyIDI0Ljc0NjA5NCA1NS4xNjAxNTYgNTUuMTY3OTY5IDU1LjE2MDE1Nmg4MS43MTA5MzhjOC4yODEyNSAwIDE1LTYuNzE0ODQ0IDE1LTE1di0xMjAuNWMwLTEzLjg3ODkwNiAxMS4yODkwNjItMjUuMTY3OTY5IDI1LjE2Nzk2OC0yNS4xNjc5NjloNDguMTk1MzEzYzEzLjg3ODkwNiAwIDI1LjE2Nzk2OSAxMS4yODkwNjMgMjUuMTY3OTY5IDI1LjE2Nzk2OXYxMjAuNWMwIDguMjg1MTU2IDYuNzE0ODQzIDE1IDE1IDE1aDgxLjcxMDkzN2MzMC40MjE4NzUgMCA1NS4xNjc5NjktMjQuNzQ2MDk0IDU1LjE2Nzk2OS01NS4xNjAxNTZ2LTE1My42OTkyMTloNy43MTg3NWMxMi41ODU5MzcgMCAyNC40MjE4NzUtNC45MDIzNDQgMzMuMzMyMDMxLTEzLjgwODU5NCAxOC4zNTkzNzUtMTguMzcxMDkzIDE4LjM2NzE4Ny00OC4yNTM5MDYuMDIzNDM3LTY2LjYzNjcxOXptMCAwIiBmaWxsPSIjOGM2NmM4IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PC9nPjwvc3ZnPg==" /></span>
 				</td>
 				<td colspan="2">
 					<h1 class="center">회원가입</h1>
@@ -131,7 +131,7 @@
 							class="reqInfo" placeholder="이메일을 입력해주세요."></td>
 					</tr>
 					<tr>
-						<td colspan="2"><p class="alert emailReg emailICh">&nbsp;</p></td>
+						<td colspan="2"><p class="alert emailReg emailICh emailCh">&nbsp;</p></td>
 					</tr>
 					<tr>
 						<td colspan="2">닉네임<span class="star">*</span></td>
@@ -141,7 +141,7 @@
 							id="nickname" class="reqInfo" placeholder="닉네임을 입력해주세요."></td>
 					</tr>
 					<tr>
-						<td colspan="2"><p class="alert nickReg">&nbsp;</p></td>
+						<td colspan="2"><p class="alert nickReg nickCh">&nbsp;</p></td>
 					</tr>
 					<tr>
 						<td colspan="2">비밀번호<span class="star">*</span></td>
@@ -176,7 +176,7 @@
 					</tr>
 					<tr>
 						<td><label for="gender">성별</label></td>
-						<td><label for="birthdate">생년월일</label><span class="alert"
+						<td><label for="birthdate">생년월일</label><span class="star">*</span><span class="alert"
 							id="bdlabel"> 만 19세 이상만 가입할 수 있습니다.</span></td>
 					</tr>
 					<tr>

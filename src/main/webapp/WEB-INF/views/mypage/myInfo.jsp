@@ -34,6 +34,25 @@
 			$("#changeBtn").css("display", "inline");
 		});
 
+		var checkND = false;
+		$("#nickname").on("keyup", function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/nickcheck",
+				type : "post",
+				dataType : "json",
+				data : {
+					"nickname" : $("#nickname").val()
+				},
+				success : function(data) {
+					if (data == 1) {
+						checkND = false;
+					} else {
+						console.log("닉네임 중복 x");
+						checkND = true;
+					}
+				}
+			});
+		});
 		$("#changeBtn").click(function() {
 			var checkNN = false;
 			var nickname = $("input[name=nickname]").val();
@@ -58,11 +77,16 @@
 				checkPN = true;
 				console.log("연락처 양식O")
 			}
-			// 닉네임 중복체크 아직 안함!
+
+// 닉네임 변경 시, 기존 게시글과 댓글의 작성자도 변경해주기 아직 안함!
+
 			var dataquery = $("#frmChangeInfo").serialize();
-			if (checkNN && checkPN) {
+			if (!checkND) {
+				alert("이미 사용중인 닉네임 입니다");
+			}
+			if (checkNN && checkPN && checkND) {
 				$.ajax({
-					url : "miu",
+					url : "${pageContext.request.contextPath}/mypage/miu",
 					type : "POST",
 					data : dataquery,
 					async : true,
@@ -74,8 +98,31 @@
 						alert("회원 정보 수정 실패!");
 						console.log("error: 회원가입 실패!");
 					}
-				})
+				});
 			}
+
+		});
+		// 회원 탈퇴
+		$("#leaveBtn").click(function() {
+			var doubleCheck = prompt("탈퇴하시려면, \"탈퇴하겠습니다\" 라고 입력하세요");
+			if (doubleCheck == "탈퇴하겠습니다") {
+				console.log("탈퇴하였습니다.");
+				$.ajax({
+					url : "mw",
+					type : "POST",
+					success : function(data) {
+						alert("탈퇴 되었습니다. 다음에 꼭 다시 만나요!")
+						location.href = "${pageContext.request.contextPath}/";
+					},
+					error : function() {
+						console.log("error: 탈퇴 실패");
+					}
+				})
+
+			} else {
+				console.log("탈퇴 취소")
+			}
+
 		});
 
 	})
@@ -93,7 +140,7 @@
 				</tr>
 				<tr>
 					<td>닉네임</td>
-					<td><input type="text" name="nickname"
+					<td><input type="text" name="nickname" id="nickname"
 						value="${myInfo.nickname }" readonly class="update"></td>
 				</tr>
 				<tr>
@@ -115,7 +162,8 @@
 				</tr>
 				<tr>
 					<td>생년월일</td>
-					<td><input type="date" value="${myInfo.birthdate }" readonly></td>
+					<td><input type="date" name="birthdate"
+						value="${myInfo.birthdate }" readonly></td>
 				</tr>
 				<tr>
 					<td>연락처</td>
@@ -147,7 +195,7 @@
 					<td colspan="2">
 						<button type="button" id="moveChangeBtn">정보수정</button>
 						<button type="button" id="changeBtn">수정완료</button>
-						<button type="button">탈퇴</button>
+						<button type="button" id="leaveBtn">탈퇴</button>
 					</td>
 				</tr>
 			</table>

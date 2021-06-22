@@ -47,5 +47,9 @@ public class MypageDao {
 		}
 		return list;
 	}
+	
+	public int myDelete(String email) {
+		return sqlSession.delete("Member.deleteMember", email);
+	}
 
 }

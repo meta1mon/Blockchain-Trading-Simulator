@@ -73,7 +73,7 @@ public class MypageDao {
 	}
 
 	public Acnt myAcnt(String email) {
-		return sqlSession.selectOne("Member.selectMyAcnt", email);
+		return sqlSession.selectOne("acnt.selectMyAcnt", email);
 	}
 
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="acnt">
+	<!-- 계좌 정보 가져오기 -->
+	<select id="selectMyAcnt" parameterType="string"
+		resultType="Acnt">
+		SELECT * FROM ACNT WHERE EMAIL = #{email}
+	</select>
+
+	<!-- 코인 계좌 정보 가져오기 -->
+	<select id="selectMyAcnt" parameterType="string"
+		resultType="CoinAcnt">
+		SELECT * FROM COINACNT WHERE ACNTNO = #{acntno}
+	</select>
+</mapper>

@@ -25,6 +25,7 @@
 			alias="Sold" />
 		<typeAlias type="com.kh.bts.acnt.model.vo.Acnt" alias="Acnt" />
 		<typeAlias type="com.kh.bts.mypage.model.vo.MyRcommunity" alias="MyRcommunity" />
+		<typeAlias type="com.kh.bts.acnt.model.vo.CoinAcnt" alias="CoinAcnt" />
 	</typeAliases>
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
 		<mapper resource="mappers/member-mapper.xml" />

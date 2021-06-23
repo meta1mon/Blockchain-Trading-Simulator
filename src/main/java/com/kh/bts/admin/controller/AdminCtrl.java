@@ -1,10 +1,12 @@
 package com.kh.bts.admin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.community.model.service.CommunityService;
@@ -18,6 +20,8 @@ public class AdminCtrl {
 	
 	@Autowired
 	private CommunityService cService;
+	
+	public static final int LIMIT = 30;
 	
 	@ModelAttribute("countMember")
 	public int countMember() {
@@ -67,8 +71,28 @@ public class AdminCtrl {
 	}
 
 	@RequestMapping(value = "/nl", method = RequestMethod.GET)
-	public ModelAndView nl(ModelAndView mv) {
-		mv.setViewName("admin/noticeList");
+	public ModelAndView nl(@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
+			@RequestParam(name = "searchType", defaultValue = "1") int searchType, ModelAndView mv) {
+		try {
+			System.out.println("nl까지 들어옴");
+			int currentPage = page;
+			// 한 페이지당 출력할 목록 갯수
+			int listCount = cService.totalCount();
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+
+			if (keyword != null && !keyword.equals(""))
+				mv.addObject("list", cService.selectSearch(keyword, searchType));
+			else
+				mv.addObject("list", cService.selectList(currentPage, LIMIT));
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("listCount", listCount);
+			mv.setViewName("admin/noticeList");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
+		}
 		return mv;
 	}
 

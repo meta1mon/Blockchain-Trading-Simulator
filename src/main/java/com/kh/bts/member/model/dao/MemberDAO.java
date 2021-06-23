@@ -83,6 +83,8 @@ public class MemberDAO {
 	
 	// 전체 회원 수 조회
 	public int countMember() {
-		return sqlSession.selectOne("Memeber.countMember");
+		int result =0;
+		result= sqlSession.selectOne("Memeber.countMember");
+		return result;
 	}
 }

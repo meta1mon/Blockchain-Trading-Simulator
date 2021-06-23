@@ -309,9 +309,7 @@ $(function() {
 		//이벤트 등록
 		$("#birthdate").on("change", isAdult);
 		$("#pw").on("keyup", pwReg);
-		$("#pw").on("blur", pwReg);
 		$("#pwCh").on("keyup", pwChReg);
-		$("#pwCh").on("blur", pwChReg);
 		$("#pwCh").on("keyup", passEqual);
 		$("#email").on("keyup", emailReg);
 		$("#nickname").on("keyup", nicknameReg);
@@ -334,8 +332,9 @@ $(function() {
 					console.log("회원가입 성공!");
 					location.href = "authwait"
 				},
-				error : function() {
+				error : function(request, status, error) {
 					console.log("error: 회원가입 실패!");
+					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
 			})
 		} else {

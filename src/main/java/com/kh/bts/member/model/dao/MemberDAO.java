@@ -90,7 +90,14 @@ public class MemberDAO {
 	// 전체 회원 수 조회
 	public int countMember() {
 		int result =0;
-		result= sqlSession.selectOne("Memeber.countMember");
+		result= sqlSession.selectOne("Member.countMember");
+		return result;
+	}
+	
+	// 오늘 가입 회원 수 조회
+	public int countTodayMember() {
+		int result =0;
+		result= sqlSession.selectOne("Member.countTodayMember");
 		return result;
 	}
 }

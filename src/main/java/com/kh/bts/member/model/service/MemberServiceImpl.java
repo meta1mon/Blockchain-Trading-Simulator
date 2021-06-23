@@ -115,5 +115,18 @@ public class MemberServiceImpl implements MemberService {
 	public String returnNickname(String email) {
 		return mDao.returnNickname(email);
 	}
+	
+	@Override
+	public int countMember() {
+		int result =0;
+		result = mDao.countMember();
+		return result;
+	}
+	@Override
+	public int countTodayMember() {
+		int result =0;
+		result = mDao.countTodayMember();
+		return result;
+	}
 
 }

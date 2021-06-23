@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ import com.kh.bts.investment.model.vo.Bought;
 import com.kh.bts.investment.model.vo.Sold;
 import com.kh.bts.investment.model.vo.WaitBought;
 import com.kh.bts.investment.model.vo.WaitSold;
+import com.kh.bts.member.model.service.MemberService;
+import com.kh.bts.member.model.vo.Member;
 
 @Controller
 public class investmentCtrl {
@@ -38,13 +41,20 @@ public class investmentCtrl {
 	private BoughtService bService;
 	@Autowired
 	private SoldService sService;
-
+	@Autowired
+	private MemberService mService;
+	
 	@RequestMapping("investmentpage")
-	public ModelAndView MainPage(ModelAndView mav) {
-		System.out.println("메인페이지 1111111 아무거나");
+	public ModelAndView MainPage(Member vo,ModelAndView mav,HttpServletRequest request) {
+		
+		
 		mav.setViewName("investment/investmentPage");
-		System.out.println("메인페이지 22222222 아무거나");
-
+		HttpSession session = request.getSession();
+		String loginEmail = (String) session.getAttribute("loginMember");
+		System.out.println(loginEmail);
+		mav.addObject("email",loginEmail);
+		
+		
 		return mav;
 	}
 

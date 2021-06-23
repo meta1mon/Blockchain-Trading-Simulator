@@ -18,7 +18,7 @@
 	</delete>
 	
 	<select id="selectListSold" resultType="arraylist" resultMap="resultSold">
-		SELECT * FROM SOLD WHERE ACNTNO = #{acntno}
+		SELECT * FROM SOLD WHERE ACNTNO = #{acntno} ORDER BY SDATE DESC
 	</select>
 	
 </mapper>

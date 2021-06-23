@@ -26,6 +26,10 @@
 		<typeAlias type="com.kh.bts.acnt.model.vo.Acnt" alias="Acnt" />
 		<typeAlias type="com.kh.bts.mypage.model.vo.MyRcommunity" alias="MyRcommunity" />
 		<typeAlias type="com.kh.bts.acnt.model.vo.CoinAcnt" alias="CoinAcnt" />
+		<typeAlias type="com.kh.bts.report.model.vo.Acreport" alias="Acreport" />
+		<typeAlias type="com.kh.bts.report.model.vo.Arreport" alias="Arreport" />
+		<typeAlias type="com.kh.bts.report.model.vo.Creport" alias="Creport" />
+		<typeAlias type="com.kh.bts.report.model.vo.Rreport" alias="Rreport" />
 	</typeAliases>
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
 		<mapper resource="mappers/member-mapper.xml" />
@@ -39,5 +43,6 @@
 		<mapper resource="mappers/sold-mapper.xml" />
 		<mapper resource="mappers/acnt-mapper.xml" />
 		<mapper resource="mappers/mypage-mapper.xml" />
+		<mapper resource="mappers/report-mapper.xml" />
 	</mappers>
 </configuration>

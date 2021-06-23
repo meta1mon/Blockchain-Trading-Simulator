@@ -1,5 +1,8 @@
 package com.kh.bts.report.model.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Rreport {
 	private String rrno;
 	private String rreporter;

@@ -2,7 +2,7 @@
 
 #listWrapper {
 	width: 90%;
-	height: 87%;
+	height: 100%;
 	position: absolute;
 	top: 100px;
 	left: 200px;
@@ -106,7 +106,7 @@
 .noticeList{
 	clear: both;
 	margin-top: 15px;
-	width: 65%;
+	width: 85%;
 /* 	border: 1px double; */
 	border-collapse: collapse;
 }

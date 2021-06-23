@@ -16,4 +16,6 @@ public interface MemberService {
 	public void authMember(Member vo);
 	public Member loginMember(Member vo) throws Exception;
 	public String returnNickname(String email);
+	public int countMember();
+	public int countTodayMember();
 }

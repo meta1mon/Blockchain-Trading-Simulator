@@ -178,11 +178,11 @@
 		<tr>
 			<td>
 				<span class="fas fa-users"></span>
-				<span>전체 ARMY 수 111명</span>
+				<span>전체 ARMY 수: ${countMember}명</span>
 			</td>
 			<td>
 				<span class="fas fa-user-plus"></span>
-				<span>신규 ARMY 수 111명</span>
+				<span>신규 ARMY 수: ${countTodayMember}명</span>
 			</td>
 			<td>
 				<span class="fas fa-newspaper"></span>

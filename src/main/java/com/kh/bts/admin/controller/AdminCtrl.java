@@ -1,14 +1,29 @@
 package com.kh.bts.admin.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.bts.member.model.service.MemberService;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminCtrl {
+	@Autowired
+	private MemberService mService;
+	
+	@ModelAttribute("countMember")
+	public int countMember() {
+		return mService.countMember();
+	}
+	@ModelAttribute("countTodayMember")
+	public int countTodayMember() {
+		return mService.countTodayMember();
+	}
+	
 	@RequestMapping(value = "")
 	public ModelAndView adminMain(ModelAndView mv) {
 		mv.setViewName("admin/adminMain");

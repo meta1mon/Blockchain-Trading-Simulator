@@ -12,6 +12,9 @@
 	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 
 <style>
+* {
+font-weight: lighter
+}
 .ck.ck-editor {
 	max-width: 1000px;
 	min-width: 1000px;
@@ -33,7 +36,7 @@
 	margin: 40px 0 20px 20px;
 	text-align: left;
 	font-size: 25px;
-	color: #8C66C8;
+	color: #FFC000;
 	float: left;
 }
 
@@ -312,8 +315,7 @@ hr {
 </style>
 </head>
 <%@include file="../main/header.jsp"%>
-<body class="content"
-	style="background-image: url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: cover;">
+<body class="content" style="background-image:url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
 	<div
 		style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
 		<div class="comm">커뮤니티</div>
@@ -500,8 +502,8 @@ hr {
 				</div>
 			</form>
 		</div>
-
 	</div>
+<br><br><br><br><br><br><br><br><br>
 	<script>
 	function modal(id) {
         var zIndex = 9999;
@@ -560,21 +562,23 @@ hr {
         // 모달창 띄우기
         modal('my_modal_reply');
     });
+    
+
     </script>
     
     
 	<script>
-$(function(){
-	// 댓글 Insert Script
-	$('#replyForm').on('submit',function(event){
-		if($('#reply_contents').val() == ""){
-			alert(" 내용을 입력해주세요.");
-			event.preventDefault();
-		} else {
-			$('#comments').val($('#reply_contents').val());
-			return true;
-		}
-	});
+    $(function(){
+    	// 댓글 Insert Script
+    	$('#replyForm').on('submit', function(event){
+    		if($('#reply_contents').val() == ""){
+    			alert(" 내용을 입력해주세요.");
+    			event.preventDefault();
+    		} else {
+    			$('#comments').val($('#reply_contents').val());
+    			return true;
+    		}
+    	});
 	
 //기존 댓글 수정 & 삭제
 $(".update").on('click',function(){

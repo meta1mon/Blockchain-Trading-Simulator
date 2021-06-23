@@ -48,7 +48,7 @@
 		<br>
 		<br>
 		<div id="help">Here are some helpful links instead:</div>
-		<a id="a" href="<%=request.getContextPath()%>/mainPage">Home</a>
+		<a id="a" href="<%=request.getContextPath()%>/mainpage">Home</a>
 		&nbsp;
 		<a id="a" href="javascript:window.history.back();">Back</a>
 	</div>

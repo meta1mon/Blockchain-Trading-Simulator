@@ -28,7 +28,7 @@
 	<insert id="insertRcommunity" parameterType="Rcommunity" flushCache="true" statementType="PREPARED" timeout="20">
 		INSERT INTO
 		RCOMMUNITY VALUES(
-		LPAD(SEQ_RCOMMUNITY.NEXTVAL,2,'0'),
+		LPAD(SEQ_RCOMMUNITY.NEXTVAL,5,'0'),
 		#{rwriter}, #{rcontent}, default, #{cno})
 	</insert>
 

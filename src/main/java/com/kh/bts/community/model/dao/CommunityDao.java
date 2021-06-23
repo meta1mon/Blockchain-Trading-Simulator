@@ -50,6 +50,10 @@ public class CommunityDao {
 	public int listCount() { // 게시글 전체 개수 조회
 		return sqlSession.selectOne("community.countCommunity");
 	}
+	
+	public int listTodayCount() { // 오늘 게시글 전페 개수 조회
+		return sqlSession.selectOne("community.countTodayCommunity");
+	}
 
 	public Community selectOne(String cno) { // 게시글 단일 조회
 		return sqlSession.selectOne("community.selectOne", cno);

@@ -80,4 +80,9 @@ public class MemberDAO {
 	public Member loginMember(Member vo) throws Exception {
 		return sqlSession.selectOne("Member.loginMember", vo);
 	}
+	
+	// 전체 회원 수 조회
+	public int countMember() {
+		return sqlSession.selectOne("Memeber.countMember");
+	}
 }

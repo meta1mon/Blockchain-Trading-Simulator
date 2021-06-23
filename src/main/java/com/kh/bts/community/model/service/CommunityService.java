@@ -13,6 +13,8 @@ public interface CommunityService {
 	List<Community> searchpopularList();
 	
 	int totalCount();
+	
+	int totalTodayCount();
 
 	Community selectCommunity(int chk, String cno);
 	

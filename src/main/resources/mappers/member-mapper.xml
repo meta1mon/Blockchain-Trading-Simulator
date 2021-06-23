@@ -12,6 +12,11 @@
 	<select id="countMember" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 	</select>
+	
+	<!-- 오늘 가입한 회원수조회 -->
+	<select id="countTodayMember" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE REQAGR LIKE TO_CHAR(SYSDATE, 'YYYY-MM-DD%')
+	</select>
 
 	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="Member" flushCache="true" statementType="PREPARED">
@@ -75,10 +80,6 @@
 		SELECT NICKNAME FROM MEMBER WHERE EMAIL = #{email}
 	</select>
 
-	<!-- 계좌 정보 가져오기 -->
-	<select id="selectMyAcnt" parameterType="string"
-		resultType="Acnt">
-		SELECT * FROM ACNT WHERE EMAIL = #{email}
-	</select>
+
 
 </mapper>

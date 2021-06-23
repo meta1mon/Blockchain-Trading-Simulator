@@ -53,7 +53,73 @@ public class investmentCtrl {
 		mav.setViewName("investment/1sChart");
 		return mav;
 	}
+	
+	@RequestMapping(value = "sInsert")
+	public void SoldInsert(Sold ws, HttpServletResponse response) {
+		int result = sService.insertSold(ws);
+		PrintWriter out = null;
+		try {
+			if (result > 0) {
+				System.out.println("insert성공");
+			} else {
+				System.out.println("insert실패");
+			}
+			out = response.getWriter();
+			out.print(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
 
+	}
+	// ajax 
+			@RequestMapping(value = "ajslists", method = RequestMethod.POST)
+			public void SoldListService(@RequestParam(name="acntno") String acntno, HttpServletResponse response) {
+				System.out.println(acntno);
+				List<Sold> result = sService.selectListSold(acntno);
+				PrintWriter out = null;
+				Gson gson = new GsonBuilder().create();
+				String jsonlist = gson.toJson(result);
+
+				try {
+
+					System.out.println("ajax select성공");
+
+					out = response.getWriter();
+					out.print(jsonlist);
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					out.flush();
+					out.close();
+				}
+			}
+			@RequestMapping(value = "sdelete", method = RequestMethod.POST)
+			public void Solddelete(@RequestParam(name="usno") int usno,HttpServletResponse response) {
+				System.out.println("SDelete@@@@@@");
+
+				System.out.println(usno);
+				int result = sService.deleteSold(usno);
+				PrintWriter out = null;
+				try {
+					if (result > 0) {
+						System.out.println("wbdelete 성공");
+					} else {
+						System.out.println("wbdelete 실패");
+					}
+					out = response.getWriter();
+					out.print(result);
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					out.flush();
+					out.close();
+				}
+			
+			}
+//////////////////////////////////////waitsold 부분 //////////////////////////
 	@RequestMapping(value = "wsInsert")
 	public void WaitSoldInsert(WaitSold ws, HttpServletResponse response) {
 		System.out.println(ws.getCoin() + "코인이름");
@@ -78,7 +144,52 @@ public class investmentCtrl {
 		}
 
 	}
+	// ajax 
+		@RequestMapping(value = "ajwslists", method = RequestMethod.POST)
+		public void WaitSoldListService(@RequestParam(name="acntno") String acntno, HttpServletResponse response) {
+			System.out.println(acntno);
+			List<WaitSold> result = wsService.selectListWaitSold(acntno);
+			PrintWriter out = null;
+			Gson gson = new GsonBuilder().create();
+			String jsonlist = gson.toJson(result);
 
+			try {
+
+				System.out.println("ajax select성공");
+
+				out = response.getWriter();
+				out.print(jsonlist);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				out.flush();
+				out.close();
+			}
+		}
+		@RequestMapping(value = "wsdelete", method = RequestMethod.POST)
+		public void WaitSolddelete(@RequestParam(name="usno") int usno,HttpServletResponse response) {
+			System.out.println("WSDelete@@@@@@");
+
+			System.out.println(usno);
+			int result = wsService.deleteWaitSold(usno);
+			PrintWriter out = null;
+			try {
+				if (result > 0) {
+					System.out.println("wbdelete 성공");
+				} else {
+					System.out.println("wbdelete 실패");
+				}
+				out = response.getWriter();
+				out.print(result);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				out.flush();
+				out.close();
+			}
+		
+		}
+//////////////////////////////////////wait bought 부분 //////////////////////////
 	@RequestMapping(value = "wbInsert")
 	public void WaitBoughtInsert(WaitBought wb, HttpServletResponse response) {
 		System.out.println(wb.getCoin() + "코인이름");
@@ -105,11 +216,10 @@ public class investmentCtrl {
 	}
 
 // ajax 
-	@RequestMapping(value = "ajwblists", method = RequestMethod.GET)
+	@RequestMapping(value = "ajwblists", method = RequestMethod.POST)
 	public void WaitBoughtListService(@RequestParam(name="acntno") String acntno, HttpServletResponse response) {
 		System.out.println(acntno);
 		List<WaitBought> result = wbService.selectListWaitBought(acntno);
-		System.out.println(result.size() + "크기 입니다.");
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(result);
@@ -128,12 +238,12 @@ public class investmentCtrl {
 		}
 	}
 
-	@RequestMapping(value = "wbdelete", method = RequestMethod.GET)
-	public void WaitBoughtdelete(@RequestParam(name="wbno") int wbno,HttpServletResponse response) {
-		System.out.println("@@@@@@");
+	@RequestMapping(value = "wbdelete", method = RequestMethod.POST)
+	public void WaitBoughtdelete(@RequestParam(name="ubno") int ubno,HttpServletResponse response) {
+		System.out.println("WBDelete@@@@@@");
 		//@RequestParam(name="wbno") int wbno,
-		System.out.println(wbno);
-		int result = wbService.deleteWaitBought(wbno);
+		System.out.println(ubno);
+		int result = wbService.deleteWaitBought(ubno);
 		PrintWriter out = null;
 		try {
 			if (result > 0) {
@@ -149,10 +259,80 @@ public class investmentCtrl {
 			out.flush();
 			out.close();
 		}
-		System.out.println("@@@@@@여기까지");
 	
 	}
+////////////////////////////////////// bought 부분 //////////////////////////
+	@RequestMapping(value = "bInsert")
+	public void BoughtInsert(Bought b, HttpServletResponse response) {
+		System.out.println(b.getCoin() + "코인이름");
+		int result = bService.insertBought(b);
+		PrintWriter out = null;
+		try {
+			if (result > 0) {
+				System.out.println("binsert성공");
+				// 계좌 비밀번호 입력하면 => 계좌 비밀번호가 맞는가! 체크하고. 맞으면매수 매도 버튼 열림과 동시에, 현금액이랑 코인 계좌 정보 알아오고,
+				// + 미체결 주문 내용까지
+				// 매수 매도 버튼 눌렀을 때 미체결 테이블에 ㅑㅜㄴㄷ 하면서 동시에 ㅑㅜㄴㄷㄳ 포함한 전체 미체결 내역을 갖고 돌아ㅇ와
+			} else {
+				System.out.println("binsert실패");
+			}
+			out = response.getWriter();
+			out.print(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
 
+	}
+	// ajax 
+		@RequestMapping(value = "ajblists", method = RequestMethod.POST)
+		public void BoughtListService(@RequestParam(name="acntno") String acntno, HttpServletResponse response) {
+			System.out.println(acntno);
+			List<Bought> result = bService.selectListBought(acntno);
+			PrintWriter out = null;
+			Gson gson = new GsonBuilder().create();
+			String jsonlist = gson.toJson(result);
+
+			try {
+
+				System.out.println("ajax select성공");
+
+				out = response.getWriter();
+				out.print(jsonlist);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				out.flush();
+				out.close();
+			}
+		}
+		@RequestMapping(value = "bdelete", method = RequestMethod.POST)
+		public void Boughtdelete(@RequestParam(name="ubno") int ubno,HttpServletResponse response) {
+			System.out.println("BDelete@@@@@@");
+			System.out.println(ubno);
+			int result = bService.deleteBought(ubno);
+			PrintWriter out = null;
+			try {
+				if (result > 0) {
+					System.out.println("bdelete 성공");
+				} else {
+					System.out.println("bdelete 실패");
+				}
+				out = response.getWriter();
+				out.print(result);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				out.flush();
+				out.close();
+			}
+		
+		}
+		
+		
+/////////////////////////////////////////////////////////////////////////  연습코드 ///////////////////////////////////////////////////		
 //// ajax 아닌버젼
 //	@RequestMapping(value = "wblists", method = RequestMethod.GET)
 //	public ModelAndView WaitBoughtListService2(@RequestParam(name="acntno") String acntno,ModelAndView mv) {

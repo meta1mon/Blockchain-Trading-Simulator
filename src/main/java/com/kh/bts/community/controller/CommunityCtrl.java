@@ -44,7 +44,6 @@ public class CommunityCtrl {
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);
-			Community vo = new Community();
 			mv.setViewName("community/clist");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());

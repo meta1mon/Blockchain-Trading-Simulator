@@ -5,9 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BTS</title>
-<%-- <link href="${pageContext.request.contextPath}/resources/css/style.css"
-	rel="stylesheet" type="text/css" /> --%>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 	
@@ -33,26 +30,26 @@
 	margin: 40px 0 20px 20px;
 	text-align: left;
 	font-size: 25px;
-	color: #8C66C8;
+	color: #FFC000;
 	float: left;
 }
 
 #write {
-width: 125px;
+	width: 125px;
 	height: 35px;
 	float: right;
 	border: none;
 	border-radius: 4px;
 	text-align: center;
 	color: #ffffff;
-	background-color: #B85CEF;
+	background-color: #8C66C8;
 	font-size: 18px;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
 }
 
 #write:hover {
-	background-color: #CC70EF;
+	background-color: #A07ADC;
 	box-shadow: 10px 10px 20px 5px #eeeeee;
 }
 
@@ -107,8 +104,8 @@ width: 125px;
 	padding: 0;
 	border: 2px solid #8C66C8;
 	font-size: 18px;
-	color: #99ADB6;
-	background-color: #ffffff;
+	color: #ffffff;
+	background-color: #8C66C8;
 	margin-top: 20px;
 	float: left;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
@@ -121,23 +118,42 @@ width: 125px;
 		box-shadow 0.15s ease-in-out;
 }
 
-.popularTable {
-	margin: 10px auto 10px; 20px;
+.ptable {
+	margin: 0 auto 0; 20px;
 	clear: both;
 	width: 1200px;
 	border-collapse: collapse;
 }
 
 .ctable {
-	margin: 30px auto 30px; 20px;
+	margin: 0 auto 0; 20px;
 	clear: both;
 	width: 1200px;
 	border-collapse: collapse;
 }
+
+.ptable tr, .ctable tr {
+	border-bottom: 1px solid #eeeeee;
+	height: 45px;
+	font-size:17px;
+}
+
+.ptable tr:hover, .ctable tr:hover{
+	background-color: #FCFCFC;
+}
+
+.subject {
+	color: black;
+	text-decoration: none;
+}
+
+.subject:hover, .subject:active {
+	text-decoration:underline;
+}
 </style>
 </head>
 <%@include file="../main/header.jsp"%>
-<body class="content" style="background-image:url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: cover;">
+<body class="content" style="background-image:url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
 	<div style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
 		
 		<div class="comm">커뮤니티</div>
@@ -145,15 +161,15 @@ width: 125px;
 		<!-- 조회수 상위 5개 인기 게시글 -->
 		<c:if test="${listCount ne 0}">
 			<hr>
-			<table class="popularTable">
+			<table class="ptable">
 				<c:forEach var="vo" items="${plist}" varStatus="status">
 					<tr>
 						<td align="center" width="60">${vo.cno}</td>
-						<td align="left" width="360"><a
-							href="cDetail?cno=${vo.cno}&page=${currentPage}">
+						<td align="left" width="370">
+						<a href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">
 								&nbsp;${vo.csubject} </a>${vo.replycnt}</td>
 						<td align="center" width="100">${vo.cwriter}</td>
-						<td align="center" width="120">${vo.cdate}</td>
+						<td align="center" width="110" style="font-size:15px;">${vo.cdate}</td>
 						<td align="center" width="60">${vo.viewcnt}</td>
 						<td align="center" width="60">${vo.likecnt}</td>
 					</tr>
@@ -168,18 +184,19 @@ width: 125px;
 				<option value="2">글내용</option>
 				<option value="3">작성자</option>
 			</select> <input type='search' id="search" name="keyword">
-			<button type=submit id="btnsearch"><p id="btnsearchVal"></p></button>
+			<button type=submit id="btnsearch">검색</button>
 		</form>
 
 		<input type="hidden" name="page" value="${currentPage}"> <input
 			type="button" id="write" value="글쓰기" onclick="window.location='cWriteForm'">
-
+<br><br><br><br><br>
+		<hr>
 		<table class="ctable">
 			<tr>
 				<td align="center" width="60">번호</td>
-				<td align="center" width="360">제목</td>
+				<td align="center" width="370">제목</td>
 				<td align="center" width="100">작성자</td>
-				<td align="center" width="120">작성일</td>
+				<td align="center" width="110">작성일</td>
 				<td align="center" width="60">조회</td>
 				<td align="center" width="60">추천</td>
 			</tr>
@@ -193,17 +210,19 @@ width: 125px;
 				<c:forEach var="vo" items="${list}" varStatus="status">
 					<tr>
 						<td align="center">${vo.cno}</td>
-						<td align="left"><a
-							href="cDetail?cno=${vo.cno}&page=${currentPage}">
+						<td align="left">
+						<a href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">
 								&nbsp;${vo.csubject} </a>${vo.replycnt}</td>
 						<td align="center">${vo.cwriter}</td>
-						<td align="center">${vo.cdate}</td>
+						<td align="center" style="font-size:15px;">${vo.cdate}</td>
 						<td align="center">${vo.viewcnt}</td>
 						<td align="center">${vo.likecnt}</td>
 					</tr>
 				</c:forEach>
 			</c:if>
 		</table>
+		<hr>
+		
 		<!-- 앞 페이지 번호 처리 -->
 		<c:if test="${currentPage <= 1}">
 [이전]&nbsp;
@@ -248,6 +267,7 @@ width: 125px;
 				<input type="hidden" name="page" value="${currentPage}"> <input
 			type="button" id="write" value="글쓰기" onclick="window.location='cWriteForm'">
 	</div>
+	<br><br><br><br><br><br><br><br><br>
 </body>
 <%@include file="../main/footer.jsp"%>
 </html>

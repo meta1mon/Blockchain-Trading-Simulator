@@ -61,7 +61,7 @@
 	<insert id="insertCommunity" parameterType="String"
 		flushCache="true" statementType="PREPARED">
 		INSERT INTO COMMUNITY VALUES(
-		LPAD(SEQ_COMMUNITY.NEXTVAL,2,'0'),
+		LPAD(SEQ_COMMUNITY.NEXTVAL,5,'0'),
 		#{csubject}, #{ccontent}, default,
 		#{filepath}, 0, 0, 0, 0, #{cwriter})
 	</insert>

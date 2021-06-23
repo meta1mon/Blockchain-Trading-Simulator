@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.vo.Member;
+import com.kh.bts.mypage.model.vo.MyRcommunity;
 
 public interface MypageService {
 	public Member myInfo(String email);
@@ -14,4 +15,5 @@ public interface MypageService {
 	public List<Community> myCommunity(String email);
 	public int myDelete(String email);
 	public Acnt myAcnt(String email);
+	public List<MyRcommunity> selectMyRcommunity(String email);
 }

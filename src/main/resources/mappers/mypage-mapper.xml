@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mypage">
+	<resultMap type="Community" id="resultCommunity">
+	</resultMap>
+
+	<resultMap type="Rcommunity" id="resultRcommunity">
+	</resultMap>
+
+	<resultMap type="MyRcommunity" id="resultMyRcommunity">
+	</resultMap>
+
+	<!-- 내가 쓴 댓글 리스트 -->
+	<select id="selectMyRcommunity" parameterType="string"
+		resultType="arraylist" resultMap="resultMyRcommunity">
+		SELECT community.cno cno, csubject, cwriter, rcontent, rdate, viewcnt, likecnt
+		FROM RCOMMUNITY
+		JOIN COMMUNITY
+		ON rcommunity.cno = community.cno
+		WHERE RWRITER = #{rwriter}
+		ORDER BY RDATE DESC
+	</select>
+	
+	
+	<!-- 회원정보수정 -->
+	<update id="updateMember" parameterType="Member"
+		flushCache="true" statementType="PREPARED">
+		UPDATE MEMBER SET
+		NICKNAME=#{nickname}, GENDER=#{gender}, BIRTHDATE=#{birthdate},
+		PHONE=#{phone}, MAILING=#{mailing} WHERE EMAIL=#{email}
+	</update>
+
+	<!-- 회원탈퇴 -->
+	<delete id="deleteMember" parameterType="string"
+		flushCache="true" statementType="PREPARED">
+		DELETE FROM MEMBER WHERE EMAIL =
+		#{email}
+	</delete>
+
+	<!-- 비밀번호수정 -->
+	<update id="updatePassword" parameterType="Member"
+		flushCache="true" statementType="PREPARED">
+		UPDATE MEMBER SET PW=#{pw} WHERE EMAIL
+		= #{email}
+	</update>
+
+	<!-- 계좌 비밀번호수정 -->
+	<update id="updateBankPw" parameterType="Acnt" flushCache="true"
+		statementType="PREPARED">
+		UPDATE ACNT SET BANKPW=#{bankPw} WHERE EMAIL = #{email}
+	</update>
+
+
+	<!-- 내가 쓴 게시글 리스트 -->
+	<select id="myCommunity" parameterType="string"
+		resultType="arraylist" resultMap="resultCommunity">
+		SELECT * FROM COMMUNITY WHERE CWRITER
+		= #{cwriter} ORDER BY CDATE DESC
+	</select>
+
+
+
+</mapper>

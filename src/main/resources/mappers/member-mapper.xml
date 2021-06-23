@@ -74,34 +74,6 @@
 		AUTH = 'Y'
 	</select>
 
-	<!-- 회원정보수정 -->
-	<update id="updateMember" parameterType="Member"
-		flushCache="true" statementType="PREPARED">
-		UPDATE MEMBER SET
-		NICKNAME=#{nickname}, GENDER=#{gender}, BIRTHDATE=#{birthdate},
-		PHONE=#{phone}, MAILING=#{mailing} WHERE EMAIL=#{email}
-	</update>
-
-	<!-- 회원탈퇴 -->
-	<delete id="deleteMember" parameterType="string"
-		flushCache="true" statementType="PREPARED">
-		DELETE FROM MEMBER WHERE EMAIL =
-		#{email}
-	</delete>
-
-	<!-- 비밀번호수정 -->
-	<update id="updatePassword" parameterType="Member"
-		flushCache="true" statementType="PREPARED">
-		UPDATE MEMBER SET PW=#{pw} WHERE EMAIL
-		= #{email}
-	</update>
-
-	<!-- 계좌 비밀번호수정 -->
-	<update id="updateBankPw" parameterType="Acnt" flushCache="true"
-		statementType="PREPARED">
-		UPDATE ACNT SET BANKPW=#{bankPw} WHERE EMAIL = #{email}
-	</update>
-
 	<!-- 닉네임만 조회 -->
 	<select id="returnNickname" parameterType="string"
 		resultType="string">

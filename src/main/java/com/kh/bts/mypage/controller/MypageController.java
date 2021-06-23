@@ -25,6 +25,7 @@ import com.kh.bts.member.model.service.MemberService;
 import com.kh.bts.member.model.service.MemberServiceImpl;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.service.MypageService;
+import com.kh.bts.mypage.model.vo.MyRcommunity;
 
 @Controller
 @RequestMapping("mypage")
@@ -189,6 +190,21 @@ public class MypageController {
 		return mv;
 	}
 
+	// 내 댓글 불러오기
+	@RequestMapping(value = "/myRlist", method = RequestMethod.GET)
+	public ModelAndView myRlist(ModelAndView mv, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String email = (String) session.getAttribute("loginMember");
+		List<MyRcommunity> list = myService.selectMyRcommunity(email);
+		if(list == null) {
+			System.out.println("");
+		}
+		System.out.println(list.get(0).getRcontent());
+		mv.addObject("myRlist", list);
+		mv.setViewName("mypage/myRcommunity");
+		return mv;
+	}
+
 // 내 자산 진입
 	@RequestMapping(value = "/bankPwCheck", method = RequestMethod.POST)
 	public void bankPwCheck(HttpServletRequest request, HttpServletResponse response,
@@ -231,9 +247,7 @@ public class MypageController {
 
 	@RequestMapping(value = "/me")
 	public ModelAndView myEssets(ModelAndView mv) {
-		
-		
-		
+
 		mv.setViewName("mypage/myEssets");
 		return mv;
 	}
@@ -246,7 +260,7 @@ public class MypageController {
 
 	@RequestMapping(value = "/mr")
 	public ModelAndView myReply(ModelAndView mv) {
-		mv.setViewName("mypage/myReply");
+		mv.setViewName("mypage/myRcommunity");
 		return mv;
 	}
 

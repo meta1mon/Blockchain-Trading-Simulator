@@ -62,7 +62,7 @@
 							<tr>
 								<td align="center">${vo.cno}</td>
 								<td align="left">
-									<a	href="cDetail?cno=${vo.cno}&page=${currentPage}">
+									<a	href="nDetail?cno=${vo.cno}&page=${currentPage}">
 									&nbsp;${vo.csubject} </a>
 									${vo.replycnt}
 								</td>

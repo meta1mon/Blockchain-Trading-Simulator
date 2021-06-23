@@ -44,7 +44,7 @@
 						자산</a></li>
 				<li><a href="${pageContext.request.contextPath}/mypage/myClist">나의
 						게시글</a></li>
-				<li><a href="${pageContext.request.contextPath}/mypage/mr">나의
+				<li><a href="${pageContext.request.contextPath}/mypage/myRlist">나의
 						댓글</a></li>
 				<li><a href="${pageContext.request.contextPath}/mypage/mcl">충전
 						내역</a></li>

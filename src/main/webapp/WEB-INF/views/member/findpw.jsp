@@ -15,7 +15,7 @@
 <!-- 스크립트 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/member.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
 <title>로그인</title>
 </head>
 <body>

@@ -215,9 +215,9 @@ function genPage(page, total) {
 	$(".newsPage").append('<button class="pageBtn" id="pageBefore">이전</button>');
 	for (var i = startPage; i < lastPage+1; i++) {
 		if(i==page){
-			$(".newsPage").append('<a class="pageActive">'+i+'</a>');
+			$(".newsPage").append('<a id="page" class="pageActive">'+i+'</a>');
 		}else{
-			$(".newsPage").append('<a class="inactive">'+i+'</a>');
+			$(".newsPage").append('<a id="page" class="inactive">'+i+'</a>');
 		}
 	}
 	$(".newsPage").append('<button class="pageBtn" id="pageNext">다음</button>');

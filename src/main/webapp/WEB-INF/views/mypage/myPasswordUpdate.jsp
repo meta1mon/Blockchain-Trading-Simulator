@@ -27,8 +27,8 @@
 }
 </style>
 <script>
+// #################################################  비밀번호 매우 불완전함. 다시 해야함!
 	$(function() {
-
 		// 비밀번호와 비밀번호 확인 일치 여부
 		var flag1 = false;
 		var passEqual = function() {
@@ -69,6 +69,10 @@
 		$("#pw").on("keyup", pwReg);
 
 		function passChange() {
+			if (pass1.length == 0) {
+				alert("비밀번호를 입력하세요");
+				return false;
+			}
 			if (flag2 == false) {
 				console.log("형식 일치X");
 				return false;
@@ -82,7 +86,6 @@
 			return true;
 
 		}
-
 	});
 </script>
 </head>
@@ -114,7 +117,8 @@
 					<td colspan="2"><p class="alert pwCh">&nbsp;</p></td>
 				</tr>
 			</table>
-			<button type="submit" onclick="return passChange();">비밀번호 수정</button>
+			<button type="submit" id="changePw" onclick="return passChange();">비밀번호
+				수정</button>
 		</form>
 
 
@@ -147,8 +151,11 @@
 			var bankPw2 = $("#bankPw2").val();
 			if ((bankPw1.length != 0 && bankPw2.length != 0)
 					&& (bankPw1 == bankPw2)) {
+			} else if (bankPw1.length == 0 || bankPw2.length == 0) {
+				alert("계좌 비밀번호를 입력해주세요");
+				return false;
 			} else {
-				alert("계좌 비밀번호가 일치 하지 않습니다. 다시 입력하세요.");
+				alert("계좌 비밀번호가 일치하지 않습니다. 다시 입력하세요");
 				return false;
 			}
 			return true;

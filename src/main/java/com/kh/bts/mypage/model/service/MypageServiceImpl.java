@@ -10,6 +10,7 @@ import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.dao.MypageDao;
+import com.kh.bts.mypage.model.vo.MyRcommunity;
 
 @Service("myService")
 public class MypageServiceImpl implements MypageService {
@@ -55,6 +56,11 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public Acnt myAcnt(String email) {
 		return myDao.myAcnt(email);
+	}
+
+	@Override
+	public List<MyRcommunity> selectMyRcommunity(String email) {
+		return myDao.selectMyRcommunity(email);
 	}
 
 }

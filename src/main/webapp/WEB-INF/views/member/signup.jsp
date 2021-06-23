@@ -26,8 +26,6 @@
 	src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/member.js"></script>
 </head>
 <body>
 	<div class="contents shadow">

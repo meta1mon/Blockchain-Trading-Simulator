@@ -17,7 +17,7 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/login.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/member.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
 </head>
 <body>
 	<div id="wrapper">

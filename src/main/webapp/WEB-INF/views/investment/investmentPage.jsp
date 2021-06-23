@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" />
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -11,168 +14,108 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/investment.css"
 	rel="stylesheet" type="text/css" />
+<link
+	href="${pageContext.request.contextPath}/resources/css/pinpad.css"
+	rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
 <script type="text/javascript">
-	$(function() {
-		$("#sold_b").click(function() {
-
-			$("#sold_b").css("background", "blue");
-			$("#bought_b").css("background", "white");
-			$("#cnt_b").hide();
-			$("#price_b").hide();
-			$("#bought").hide();
-			$("#cnt_s").show();
-			$("#price_s").show();
-			$("#sold").show();
-		});
-		$("#bought_b").click(function() {
-
-			$("#bought_b").css("background", "red");
-			$("#sold_b").css("background", "white");
-			$("#cnt_s").hide();
-			$("#price_s").hide();
-			$("#sold").hide();
-			$("#cnt_b").show();
-			$("#price_b").show();
-			$("#bought").show();
-		});
-
-		$("#cnt_b").keyup(function() {
-			var sum = 0;
-			console.log("눌림눌림");
-			var a = $("#price_b").val();
-			var b = $("#cnt_b").val();
-			sum = a * b;
-			$("#totalprice").val(sum);
-		});
-		$("#cnt_s").keyup(function() {
-			var sum = 0;
-			console.log("눌림눌림");
-			var a = $("#price_s").val();
-			var b = $("#cnt_s").val();
-			sum = a * b;
-			$("#totalprice").val(sum);
-		});
-		$("#bought").on(
-				"click",
-				function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-					var dataList = $("#frm22").serialize();
-					$.ajax({
-						url : "wbInsert",
-						type : "post",
-						data : dataList,
-						dataType : "json",
-						success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-							alert("성공");
-							console.log(data);
-
-						},
-						error : function(request, status, errorData) {
-							alert("실패" + "error code : " + request.status
-									+ "\n" + "message : "
-									+ request.responseText + "\n" + "error : "
-									+ errorData);
-						}
-					});
-				});
-		$("#aj")
-				.on(
-						"click",
-						function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-							var dataList = $("#frm22").serialize();
-							var dataList1 = $("#frm23").serialize();
-							$
-									.ajax({
-										url : "ajwblists",
-										type : "get",
-										data : dataList,
-										dataType : "json",
-
-										success : function(json) {
-											var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
-											console.log(json);
-											if (json.length > 0) {
-												$
-														.each(
-																json,
-																function(
-																		entryIndex,
-																		entry) {
-																	html1 += "<tr><td>"
-																			+ entry.ubno
-																			+ "</td>"
-																			+ "<td>"
-																			+ entry.coin
-																			+ "</td>"
-																			+ "<td>"
-																			+ entry.buycnt
-																			+ "</td>"
-																			+ "<td>"
-																			+ entry.buyprice
-																			+ "</td>"
-																			+ "<td>"
-																			+ entry.wbdate
-																			+ "</td>"
-																			+ "<td>"
-																			+ entry.acntno
-																			+ "</td>"
-																			
-																			+ "<td><button class='del' id='del' onclick=\"location.href='wbdelete?wbno=" + entry.ubno+ "'\">X</button><input type='hidden' name='wbno' value='"+entry.ubno+"'></input></td></tr>";
-																});
-												html1 += "</table></form>"
-											} else {
-												html1 = "<tr><td colspan="6">데이터가 없습니다.</td></tr></table></form>";
-											}
-
-											$("#aj_v").html(html1);
-											$("#del").on("click",function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-																//var dataList1 = $("#frm23").serialize();
-																$.ajax({
-																			url : "wbdelete",
-																			type : "get",
-																			//data : dataList1,
-																			dataType : "json",
-																			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-																				alert("성공");
-																				console.log(data);
-																			},
-																			error : function(request, status,errorData) {
-																				alert("실패"+ "error code : "+ request.status
-																						+ "\n"+ "message : "+ request.responseText
-																						+ "\n"+ "error : "+ errorData);
-																			}
-																		});
-															});
-										}
-
-									});
-						});
-
-		$("#sold").on(
-				"click",
-				function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-					var dataList = $("#frm22").serialize();
-					$.ajax({
-						url : "wsInsert",
-						type : "post",
-						data : dataList,
-						dataType : "json",
-						success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-							alert("성공");
-							console.log(data);
-						},
-						error : function(request, status, errorData) {
-							alert("실패" + "error code : " + request.status
-									+ "\n" + "message : "
-									+ request.responseText + "\n" + "error : "
-									+ errorData);
-						}
-					});
-				});
-
+function removeWaitBought(ubno) {
+	alert("지우러 들어는 왔다"+ubno);
+	$.ajax({
+		url : "wbdelete",
+		type : "post",
+		data : {"ubno" : ubno}, 
+		success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+			if(data>0){
+				alert("성공");
+				console.log(data);
+			}else{
+				alert("실패");
+				console.log(data);
+			}
+			
+		},
+		error : function(request, status,errorData) {
+			alert("실패"+ "error code : "+ request.status
+					+ "\n"+ "message : "+ request.responseText
+					+ "\n"+ "error : "+ errorData);
+		}
 	});
+}
+function removeBought(ubno) {
+	alert("지우러 들어는 왔다"+ubno);
+	$.ajax({
+		url : "bdelete",
+		type : "post",
+		data : {"ubno" : ubno}, 
+		success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+			if(data>0){
+				alert("성공");
+				console.log(data);
+			}else{
+				alert("실패");
+				console.log(data);
+			}
+			
+		},
+		error : function(request, status,errorData) {
+			alert("실패"+ "error code : "+ request.status
+					+ "\n"+ "message : "+ request.responseText
+					+ "\n"+ "error : "+ errorData);
+		}
+	});
+}
+function removeWaitSold(usno) {
+	alert("지우러 들어는 왔다"+usno);
+	$.ajax({
+		url : "wsdelete",
+		type : "post",
+		data : {"usno" : usno}, 
+		success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+			if(data>0){
+				alert("성공");
+				console.log(data);
+			}else{
+				alert("실패");
+				console.log(data);
+			}
+			
+		},
+		error : function(request, status,errorData) {
+			alert("실패"+ "error code : "+ request.status
+					+ "\n"+ "message : "+ request.responseText
+					+ "\n"+ "error : "+ errorData);
+		}
+	});
+}
+function removeSold(usno) {
+	alert("지우러 들어는 왔다"+usno);
+	$.ajax({
+		url : "sdelete",
+		type : "post",
+		data : {"usno" : usno}, 
+		success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+			if(data>0){
+				alert("성공");
+				console.log(data);
+			}else{
+				alert("실패");
+				console.log(data);
+			}
+			
+		},
+		error : function(request, status,errorData) {
+			alert("실패"+ "error code : "+ request.status
+					+ "\n"+ "message : "+ request.responseText
+					+ "\n"+ "error : "+ errorData);
+		}
+	});
+}
+
 </script>
 
 <meta charset="UTF-8">
@@ -252,8 +195,11 @@
 								<tr>
 									<td><button value="" id="bought_b">매수</button>
 										<button value="" id="sold_b">매도</button>
-										<button value="" id="aj">ajax결과나와라</button>
-										<button value="" id="noaj" onclick="location.href='wblists'">결과나와라</button></td>
+										<button value="" id="ajwb">ajwb</button>
+										<button value="" id="ajws">ajws</button>
+										<button value="" id="ajb">ajb</button>
+										<button value="" id="ajs">ajs</button></td>
+										<!-- <button value="" id="noaj" onclick="location.href='wblists'">결과나와라</button> -->
 								</tr>
 							</table>
 							<form id="frm22">
@@ -325,16 +271,20 @@
 							<table>
 
 								<tr>
-									<th colspan="1">회원계좌번호 : <a>불러와</a><input type="password"
+									<th colspan="1">회원계좌번호 : <a>불러와</a><input class="password2" type="password"
 										placeholder="비밀번호"></th>
 
 								</tr>
 								<tr>
-									<th colspan="1">미체결주문 ** ${wblists[0].coin } **</th>
+									<th colspan="1">미체결주문 </th>
+								</tr>
+								<tr> 
+									<td><div id="aj_wb"></div></td>
+									<td><div id="aj_ws"></div></td>
 								</tr>
 								<!-- 글이 없을 경우 -->
 
-								<c:if test="${empty wblists }">
+							<%-- 	<c:if test="${empty wblists }">
 									<tr>
 										<td align="center">미체결 내역이 없습니다.</td>
 									</tr>
@@ -352,13 +302,14 @@
 											<td align="center"><button>삭제</button></td>
 										</tr>
 									</c:forEach>
-								</c:if>
+								</c:if> --%>
 								<tr>
 									<th colspan="1">체결주문</th>
 								</tr>
 								<tr>
 
-									<td><div id="aj_v"></div></td>
+									<td><div id="aj_b"></div></td>
+									<td><div id="aj_s"></div></td>
 								</tr>
 
 							</table>
@@ -369,8 +320,410 @@
 		</div>
 
 
-	</div>
 	<jsp:include page="../main/footer.jsp"></jsp:include>
+	</div>
+<script>
+$(function() {
 
+	$("#sold_b").click(function() {
+
+		$("#sold_b").css("background", "blue");
+		$("#bought_b").css("background", "white");
+		$("#cnt_b").hide();
+		$("#price_b").hide();
+		$("#bought").hide();
+		$("#cnt_s").show();
+		$("#price_s").show();
+		$("#sold").show();
+	});
+	$("#bought_b").click(function() {
+
+		$("#bought_b").css("background", "red");
+		$("#sold_b").css("background", "white");
+		$("#cnt_s").hide();
+		$("#price_s").hide();
+		$("#sold").hide();
+		$("#cnt_b").show();
+		$("#price_b").show();
+		$("#bought").show();
+	});
+
+	$("#cnt_b").keyup(function() {
+		var sum = 0;
+		console.log("눌림눌림");
+		var a = $("#price_b").val();
+		var b = $("#cnt_b").val();
+		sum = a * b;
+		$("#totalprice").val(sum);
+	});
+	$("#cnt_s").keyup(function() {
+		var sum = 0;
+		console.log("눌림눌림");
+		var a = $("#price_s").val();
+		var b = $("#cnt_s").val();
+		sum = a * b;
+		$("#totalprice").val(sum);
+	});
+	$("#sold").on(
+			"click",
+			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+				var dataList = $("#frm22").serialize();
+				$.ajax({
+					url : "wsInsert",
+					type : "post",
+					data : dataList,
+					dataType : "json",
+					success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+						alert("ws성공");
+						console.log(data);
+					},
+					error : function(request, status, errorData) {
+						alert("ws실패" + "error code : " + request.status
+								+ "\n" + "message : "
+								+ request.responseText + "\n" + "error : "
+								+ errorData);
+					}
+				});
+			});
+	$("#sold").on(
+			"click",
+			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+				var dataList = $("#frm22").serialize();
+				$.ajax({
+					url : "sInsert",
+					type : "post",
+					data : dataList,
+					dataType : "json",
+					success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+						alert("s성공");
+						console.log(data);
+					},
+					error : function(request, status, errorData) {
+						alert("s실패" + "error code : " + request.status
+								+ "\n" + "message : "
+								+ request.responseText + "\n" + "error : "
+								+ errorData);
+					}
+				});
+			});
+	$("#bought").on(
+			"click",
+			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+				var dataList = $("#frm22").serialize();
+				$.ajax({
+					url : "wbInsert",
+					type : "post",
+					data : dataList,
+					dataType : "json",
+					success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+						alert("wb성공");
+						console.log(data);
+
+					},
+					error : function(request, status, errorData) {
+						alert("실패" + "error code : " + request.status
+								+ "\n" + "message : "
+								+ request.responseText + "\n" + "error : "
+								+ errorData);
+					}
+				});
+			});
+	$("#bought").on(
+			"click",
+			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+				var dataList = $("#frm22").serialize();
+				$.ajax({
+					url : "bInsert",
+					type : "post",
+					data : dataList,
+					dataType : "json",
+					success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+						alert("b성공");
+						console.log(data);
+
+					},
+					error : function(request, status, errorData) {
+						alert("실패" + "error code : " + request.status
+								+ "\n" + "message : "
+								+ request.responseText + "\n" + "error : "
+								+ errorData);
+					}
+				});
+			});
+	$("#ajwb")
+			.on(
+					"click",
+					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+						var dataList = $("#frm22").serialize();
+						
+						$
+								.ajax({
+									url : "ajwblists",
+									type : "POST",
+									data : dataList,
+									dataType : "json",
+
+									success : function(json) {
+										
+										var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
+										
+										
+										console.log(json);
+										if (json.length > 0) {
+											$
+													.each(
+															json,
+															function(
+																	entryIndex,
+																	entry) {
+																html1 += "<tr><td>"
+																		+ entry.ubno
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.coin
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.buycnt
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.buyprice
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.wbdate
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.acntno
+																		+ "</td>"
+																		
+																		+ "<td><button class='del' onclick=\"removeWaitBought(" + entry.ubno+ ")\">X</button><input type='hidden' name='wbno' value='"+entry.ubno+"'></input></td></tr>";
+															});
+											html1 += "</table></form>"
+										} else {
+											html1 = "<div>내용이없습니다</div>";
+										}
+
+										$("#aj_wb").html(html1);
+										
+										
+										
+/* 											$("#del").on("click",function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+															 var dataList1 = $("#frm23").serialize(); 
+															$.ajax({
+																		url : "wbdelete",
+																		type : "get",
+																		data : dataList1, 
+																		dataType : "json",
+																		success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+																			alert("성공");
+																			console.log(data);
+																		},
+																		error : function(request, status,errorData) {
+																			alert("실패"+ "error code : "+ request.status
+																					+ "\n"+ "message : "+ request.responseText
+																					+ "\n"+ "error : "+ errorData);
+																		}
+																	});
+														}); */
+									}
+
+								});
+					});
+	$("#ajws")
+			.on(
+					"click",
+					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+						var dataList = $("#frm22").serialize();
+						
+						$
+								.ajax({
+									url : "ajwslists",
+									type : "POST",
+									data : dataList,
+									dataType : "json",
+
+									success : function(json) {
+										
+										var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
+										
+										
+										console.log(json);
+										if (json.length > 0) {
+											$
+													.each(
+															json,
+															function(
+																	entryIndex,
+																	entry) {
+																html1 += "<tr><td>"
+																		+ entry.usno
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.coin
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.sellcnt
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.sellprice
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.wsdate
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.acntno
+																		+ "</td>"
+																		
+																		+ "<td><button class='del' onclick=\"removeWaitSold(" + entry.usno+ ")\">X</button></td></tr>";
+															});
+											html1 += "</table></form>"
+										} else {
+											html1 = "<div>내용이없습니다</div>";
+										}
+
+										$("#aj_ws").html(html1);
+	
+									}
+
+								});
+					});
+	$("#ajb")
+			.on(
+					"click",
+					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+						var dataList = $("#frm22").serialize();
+						
+						$
+								.ajax({
+									url : "ajblists",
+									type : "POST",
+									data : dataList,
+									dataType : "json",
+
+									success : function(json) {
+										
+										var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
+										
+										
+										console.log(json);
+										if (json.length > 0) {
+											$
+													.each(
+															json,
+															function(
+																	entryIndex,
+																	entry) {
+																html1 += "<tr><td>"
+																		+ entry.ubno
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.coin
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.buycnt
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.buyprice
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.bdate
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.acntno
+																		+ "</td>"
+																		
+																		+ "<td><button class='del' onclick=\"removeBought(" + entry.ubno+ ")\">X</button></td></tr>";
+															});
+											html1 += "</table></form>"
+										} else {
+											html1 = "<div>내용이없습니다</div>";
+										}
+
+										$("#aj_b").html(html1);
+	
+									}
+
+								});
+					});
+	$("#ajs")
+			.on(
+					"click",
+					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+						var dataList = $("#frm22").serialize();
+						
+						$
+								.ajax({
+									url : "ajslists",
+									type : "POST",
+									data : dataList,
+									dataType : "json",
+
+									success : function(json) {
+										
+										var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
+										
+										
+										console.log(json);
+										if (json.length > 0) {
+											$
+													.each(
+															json,
+															function(
+																	entryIndex,
+																	entry) {
+																html1 += "<tr><td>"
+																		+ entry.usno
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.coin
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.sellcnt
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.sellprice
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.sdate
+																		+ "</td>"
+																		+ "<td>"
+																		+ entry.acntno
+																		+ "</td>"
+																		
+																		+ "<td><button class='del' onclick=\"removeSold(" + entry.usno+ ")\">X</button></td></tr>";
+															});
+											html1 += "</table></form>"
+										} else {
+											html1 = "<div>내용이없습니다</div>";
+										}
+
+										$("#aj_s").html(html1);
+	
+									}
+
+								});
+					});
+
+	
+
+});
+</script>
+<script type="text/javascript">
+//pinpad 생성
+new pinpad({
+	ref : {
+		el : '.password2'
+	},
+	immediate : false,
+	maxLength : 4,
+	close : '<i class="far fa-times-circle"></i>',
+	desc : 'ACCOUNT PASSWORD',
+	passcode : true,
+	letterReplace : {
+		'del' : '<i class="fas fa-times delete"></i>',
+		'done' : '<i class="fas fa-check done"></i>',
+	}
+});
+
+</script>
 </body>
 </html>

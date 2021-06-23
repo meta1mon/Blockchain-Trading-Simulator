@@ -13,7 +13,7 @@
 		SEQ_SOLD.NEXTVAL, #{coin}, #{sellcnt}, #{sellprice}, default, #{acntno})
 	</insert>
 	
-    <delete id="deleteSold" parameterType="string"	flushCache="true" statementType="PREPARED">
+    <delete id="deleteSold" parameterType="Integer"	flushCache="true" statementType="PREPARED">
 		DELETE FROM SOLD WHERE USNO = #{usno}
 	</delete>
 	

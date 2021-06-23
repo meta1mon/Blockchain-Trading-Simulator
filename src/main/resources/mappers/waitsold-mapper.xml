@@ -13,7 +13,7 @@
 		SEQ_WAITSOLD.NEXTVAL, #{coin}, #{sellcnt}, #{sellprice}, default, #{acntno})
 	</insert>
 
-   <delete id="deleteWaitSold" parameterType="string"	flushCache="true" statementType="PREPARED">
+   <delete id="deleteWaitSold" parameterType="Integer"	flushCache="true" statementType="PREPARED">
 		DELETE FROM WAITSOLD WHERE USNO = #{usno}
 	</delete>
 	

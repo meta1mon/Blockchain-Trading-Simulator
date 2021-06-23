@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.member.model.service.MemberService;
 
 @Controller
@@ -15,6 +16,9 @@ public class AdminCtrl {
 	@Autowired
 	private MemberService mService;
 	
+	@Autowired
+	private CommunityService cService;
+	
 	@ModelAttribute("countMember")
 	public int countMember() {
 		return mService.countMember();
@@ -22,6 +26,14 @@ public class AdminCtrl {
 	@ModelAttribute("countTodayMember")
 	public int countTodayMember() {
 		return mService.countTodayMember();
+	}
+	@ModelAttribute("totalCount")
+	public int totalCount() {
+		return cService.totalCount();
+	}
+	@ModelAttribute("totalTodayCount")
+	public int totalTodayCount() {
+		return cService.totalTodayCount();
 	}
 	
 	@RequestMapping(value = "")

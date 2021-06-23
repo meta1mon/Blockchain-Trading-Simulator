@@ -9,7 +9,6 @@ import com.kh.bts.community.model.service.CdislikeService;
 public class CdislikeCtrl {
 	@Autowired
 	private CdislikeService dlService;
-	public static final int LIMIT = 10;
 
 
 }

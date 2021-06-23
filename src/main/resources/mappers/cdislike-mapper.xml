@@ -4,4 +4,43 @@
 	<resultMap type="Cdislike" id="resultCdislike">
 	</resultMap>
 
+	<!-- 비추천 삽입 -->
+	<insert id="insertDislike" parameterType="string" flushCache="true"
+		statementType="PREPARED">
+		INSERT INTO CDISLIKE VALUES(#{email}, #{cno})
+	</insert>
+
+	<!-- 커뮤니티 테이블에 비추천수 +1 -->
+	<update id="addDislikeCount" parameterType="string"
+		flushCache="true" statementType="PREPARED">
+		UPDATE COMMUNITY
+		SET DISLIKECNT =
+		DISLIKECNT+1 WHERE CNO = #{cno}
+	</update>
+
+	<!-- 비추천 삭제 -->
+	<delete id="deleteDislike" parameterType="string" flushCache="true"
+		statementType="PREPARED">
+		DELETE FROM CDISLIKE WHERE EMAIL = #{email} AND CNO =
+		#{cno}
+	</delete>
+
+
+	<!-- 커뮤니티 테이블에 비추천수 -1 -->
+	<update id="subDislikeCount" parameterType="string"
+		flushCache="true" statementType="PREPARED">
+		UPDATE COMMUNITY
+		SET DISLIKECNT =
+		DISLIKECNT-1 WHERE CNO = #{cno}
+	</update>
+
+	<!-- 해당 게시글 비추천 유무 조회 -->
+	<select id="selectIsDislike" resultType="string" resultMap="resultCdislike">
+		SELECT COUNT(*) FROM CDISLIKE WHERE EMAIL = #{email} AND CNO = #{cno}	
+	</select>
+	
+	<!-- 비추천 개수 조회 -->
+	<select id="selectDislikeCount" resultType="string" resultMap="resultCdislike">
+		SELECT COUNT(*) FROM CDISLIKE WHERE CNO = #{cno}
+	</select>
 </mapper>

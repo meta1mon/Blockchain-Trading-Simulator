@@ -4,4 +4,43 @@
 	<resultMap type="Clike" id="resultClike">
 	</resultMap>
 
+	<!-- 추천 삽입 -->
+	<insert id="insertLike" parameterType="string" flushCache="true"
+		statementType="PREPARED">
+		INSERT INTO CLIKE VALUES(#{email}, #{cno})
+	</insert>
+
+	<!-- 커뮤니티 테이블에 추천수 +1 -->
+	<update id="addLikeCount" parameterType="string"
+		flushCache="true" statementType="PREPARED">
+		UPDATE COMMUNITY
+		SET LIKECNT =
+		LIKECNT+1 WHERE CNO = #{cno}
+	</update>
+
+	<!-- 추천 삭제 -->
+	<delete id="deleteLike" parameterType="string" flushCache="true"
+		statementType="PREPARED">
+		DELETE FROM CLIKE WHERE EMAIL = #{email} AND CNO =
+		#{cno}
+	</delete>
+
+
+	<!-- 커뮤니티 테이블에 추천수 -1 -->
+	<update id="subLikeCount" parameterType="string"
+		flushCache="true" statementType="PREPARED">
+		UPDATE COMMUNITY
+		SET LIKECNT =
+		LIKECNT-1 WHERE CNO = #{cno}
+	</update>
+
+	<!-- 해당 게시글 추천 유무 조회 -->
+	<select id="selectIsLike" resultType="string" resultMap="resultClike">
+		SELECT COUNT(*) FROM CLIKE WHERE EMAIL = #{email} AND CNO = #{cno}	
+	</select>
+	
+	<!-- 추천 개수 조회 -->
+	<select id="selectLikeCount" resultType="string" resultMap="resultClike">
+		SELECT COUNT(*) FROM CLIKE WHERE CNO = #{cno}
+	</select>
 </mapper>

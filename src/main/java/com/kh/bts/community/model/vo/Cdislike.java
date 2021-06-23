@@ -5,20 +5,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class Cdislike {
 	private String cno;
-	private String nickname;
+	private String email;
 
 	public Cdislike() {
 	}
 
-	public Cdislike(String cno, String nickname) {
+	public Cdislike(String cno, String email) {
 		super();
 		this.cno = cno;
-		this.nickname = nickname;
+		this.email = email;
 	}
 
 	@Override
 	public String toString() {
-		return "Clike [cno=" + cno + ", nickname=" + nickname + "]";
+		return "Cdislike [cno=" + cno + ", email=" + email + "]";
 	}
 
 	public String getCno() {
@@ -29,11 +29,12 @@ public class Cdislike {
 		this.cno = cno;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+
 }

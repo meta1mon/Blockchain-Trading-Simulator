@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.community.model.service.CommunityService;
+import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.service.MemberService;
 
@@ -21,7 +22,10 @@ public class AdminCtrl {
 
 	@Autowired
 	private CommunityService cService;
-
+	
+	@Autowired
+	private RcommunityService rcService;
+	
 	public static final int LIMIT = 30;
 	
 	@ModelAttribute("countMember")
@@ -113,6 +117,24 @@ public class AdminCtrl {
 		}
 		return mv;
 	}
+
+	@RequestMapping(value = "/nDetail", method = RequestMethod.GET)
+	public ModelAndView communityDetail(@RequestParam(name = "cno") String cno,
+			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
+		try {
+			int currentPage = page;
+			// 한 페이지당 출력할 목록 갯수
+			mv.addObject("community", cService.selectCommunity(0, cno));
+			mv.addObject("commentList", rcService.selectList(cno));
+			mv.addObject("currentPage", currentPage);
+			mv.setViewName("admin/noticeDetail");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
+		}
+		return mv;
+	}
+
 
 	@RequestMapping(value = "rr", method = RequestMethod.GET)
 	public ModelAndView rr(ModelAndView mv) {

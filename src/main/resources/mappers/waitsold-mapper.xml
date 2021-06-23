@@ -18,7 +18,7 @@
 	</delete>
 	
 	<select id="selectListWaitSold" resultType="arraylist" resultMap="resultwaitSold">
-		SELECT * FROM WAITSOLD WHERE ACNTNO = #{acntno}
+		SELECT * FROM WAITSOLD WHERE ACNTNO = #{acntno} ORDER BY WSDATE DESC
 	</select>
 	
 </mapper>

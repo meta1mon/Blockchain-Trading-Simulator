@@ -37,6 +37,7 @@
 		<mapper resource="mappers/waitsold-mapper.xml" />
 		<mapper resource="mappers/bought-mapper.xml" />
 		<mapper resource="mappers/sold-mapper.xml" />
+		<mapper resource="mappers/acnt-mapper.xml" />
 		<mapper resource="mappers/mypage-mapper.xml" />
 	</mappers>
 </configuration>

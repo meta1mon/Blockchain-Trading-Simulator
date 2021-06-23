@@ -366,8 +366,10 @@ hr {
 								<c:param name="cno" value="${community.cno}" />
 							</c:url>
 							<button type="button" class="report" id="popup_open_btn">신고</button>
-							<button type="button" class="delete" onclick="location.href='${cdelete}'">삭제</button>
-							<button type="button" class="update" onclick="location.href='${cupdate}'">수정</button>
+							<button type="button" class="delete"
+								onclick="location.href='${cdelete}'">삭제</button>
+							<button type="button" class="update"
+								onclick="location.href='${cupdate}'">수정</button>
 						</div>
 					</div></td>
 			</tr>
@@ -443,7 +445,7 @@ hr {
 
 		<!-- 게시글 신고 모달창 -->
 		<div id="my_modal">
-			<form action="creport" name="creport" method="post">
+			<form action="${pageContext.request.contextPath}/admin/reportCommunity" name="creport" method="post">
 				<p>게시글 신고</p>
 				<div class="modal_report_div">
 					<input type="radio" id="reportChoice1" class="reportChoice" name="creport" value="1">
@@ -463,6 +465,10 @@ hr {
 					
 					<input type="radio" id="reportChoice6" class="reportChoice" name="creport" value="6"> 
 					<label for="reportChoice6" class="modal_choise_label">마음에 들지 않습니다.</label>
+					<input type="hidden" name="csubject" value="${community.csubject }"/>
+					<input type="hidden" name="cwriter" value="${community.cwriter }"/>
+					<input type="hidden" name="ccontent" value="${community.ccontent }"/>
+					<input type="hidden" name="cno" value="${community.cno }"/>
 				</div>
 				<hr style="width: 328px; position: relative; right: 30px; top: 20px;">
 				<div>

@@ -129,7 +129,7 @@ a:visited{
   	cursor: pointer;
 }
 
-/* .newsPage a {
+#page {
   color: black;
   padding: 8px 16px;
   transition: background-color .3s;
@@ -137,14 +137,14 @@ a:visited{
   border-color: #dbdbdb;
   border-radius: 4px;
   cursor: pointer;
-} */
+}
 
-/* .newsPage a.pageActive {
+.pageActive {
   background-color: #B85CEF;
   color: white;
 }
 
-.newsPage a:hover:not(.active) {background-color: #E3C8F8;} */
+#page:hover:not(.active) {background-color: #E3C8F8;} 
 
 #space {
 	height: 100px;

@@ -1,5 +1,12 @@
 package com.kh.bts.admin.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -9,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.bts.admin.model.service.AdminService;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.service.MemberService;
+import com.kh.bts.report.model.vo.Creport;
 
 @Controller
 @RequestMapping("/admin")
@@ -22,8 +31,11 @@ public class AdminCtrl {
 	@Autowired
 	private CommunityService cService;
 
+	@Autowired
+	private AdminService aService;
+
 	public static final int LIMIT = 30;
-	
+
 	@ModelAttribute("countMember")
 	public int countMember() {
 		return mService.countMember();
@@ -45,17 +57,69 @@ public class AdminCtrl {
 	}
 
 	@RequestMapping(value = "/reportCommunity")
-	public ModelAndView reportCommunity(ModelAndView mv, Community vo,
-			@RequestParam("creport") int crreason) {
+	public void reportCommunity(HttpServletRequest request, HttpServletResponse response, Community vo, @RequestParam("creport") int crreason) {
+		HttpSession session = request.getSession();
+		String loginEmail = (String) session.getAttribute("loginMember");
+		String creporter = mService.returnNickname(loginEmail);		
 		System.out.println("############## 신고하러 들어옴");
 		
-		System.out.println(crreason);
-		System.out.println(vo.getCcontent());
+		Creport vo2 = new Creport();
+		vo2.setCsubject(vo.getCsubject());
+		vo2.setCrreason(crreason);
+		vo2.setCrespondent(vo.getCwriter());
+		vo2.setCreporter(creporter);
+		vo2.setCcontent(vo.getCcontent());
+		vo2.setCno(vo.getCno());
+		int result = aService.insertCreport(vo2);
+		PrintWriter out = null;
+		if (result > 0) {
+			System.out.println("신고 성공");
+		} else {
+			System.out.println("신고 실패");
+		}
+		try {
+			out = response.getWriter();
+			out.print(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
 		
+	}
+///// 아직 진행 중
+	@RequestMapping(value = "/reportRcommunity")
+	public void reportRcommunity(HttpServletRequest request, HttpServletResponse response, Community vo, @RequestParam("creport") int crreason) {
+		HttpSession session = request.getSession();
+		String loginEmail = (String) session.getAttribute("loginMember");
+		String creporter = mService.returnNickname(loginEmail);		
+		System.out.println("############## 신고하러 들어옴");
 		
+		Creport vo2 = new Creport();
+		vo2.setCsubject(vo.getCsubject());
+		vo2.setCrreason(crreason);
+		vo2.setCrespondent(vo.getCwriter());
+		vo2.setCreporter(creporter);
+		vo2.setCcontent(vo.getCcontent());
+		vo2.setCno(vo.getCno());
+		int result = aService.insertCreport(vo2);
+		PrintWriter out = null;
+		if (result > 0) {
+			System.out.println("신고 성공");
+		} else {
+			System.out.println("신고 실패");
+		}
+		try {
+			out = response.getWriter();
+			out.print(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
 		
-		mv.setViewName("admin/adminMain");
-		return mv;
 	}
 
 	@RequestMapping(value = "")

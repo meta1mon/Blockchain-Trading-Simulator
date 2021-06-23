@@ -16,7 +16,6 @@ public class AdminDao {
 	private SqlSession sqlSession;
 
 	public int insertCreport(Creport vo) {
-		
-		return 0;
+		return sqlSession.insert("report.insertCreport", vo);
 	}
 }

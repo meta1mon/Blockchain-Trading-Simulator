@@ -10,7 +10,7 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
 * {
 font-weight: lighter
@@ -445,7 +445,7 @@ hr {
 
 		<!-- 게시글 신고 모달창 -->
 		<div id="my_modal">
-			<form action="${pageContext.request.contextPath}/admin/reportCommunity" name="creport" method="post">
+			<form id="frmC">
 				<p>게시글 신고</p>
 				<div class="modal_report_div">
 					<input type="radio" id="reportChoice1" class="reportChoice" name="creport" value="1">
@@ -477,6 +477,27 @@ hr {
 				</div>
 			</form>
 		</div>
+	
+		<script>
+		<!-- 게시글 신고 전송 ajax -->
+		$("#btnreport").on("click", function() {
+			var dataList = $("#frmC").serialize();
+			$.ajax({
+				url : "${pageContext.request.contextPath}/admin/reportCommunity",
+				type : "post",
+				data : dataList,
+				success : function(data) {
+					if(data > 0) {
+						alert("신고 접수 되었습니다!");
+					} else {
+						alert("신고 접수 실패! 관리자에게 문의하세요!");						
+					}
+					
+				}
+			});
+		});
+		</script>	
+		
 		
 		<!-- 댓글 신고 모달창 -->
 		<div id="my_modal_reply">
@@ -508,6 +529,26 @@ hr {
 				</div>
 			</form>
 		</div>
+		
+		<!-- 댓글 신고 ajax -->
+		<script>
+		$("#").on("click", function() {
+			var dataList = $("#frmC").serialize();
+			$.ajax({
+				url : "${pageContext.request.contextPath}/admin/reportRcommunity",
+				type : "post",
+				data : dataList,
+				success : function(data) {
+					if(data > 0) {
+						alert("신고 접수 되었습니다!");
+					} else {
+						alert("신고 접수 실패! 관리자에게 문의하세요!");						
+					}
+					
+				}
+			});
+		});
+		</script>
 	</div>
 <br><br><br><br><br><br><br><br><br>
 	<script>

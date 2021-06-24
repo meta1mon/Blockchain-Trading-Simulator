@@ -31,9 +31,13 @@
 <body>
 	<div id="cashShop">
 		<form action="#" method="post">
+			<table>
+			<tr>
+			<td colspan="3">
 			<h1>1단계 : 결제 금액을 선택해 주세요</h1>
 			<h4>할인 EVENT 기간 : 06/01 ~ 06/30</h4>
-			<table>
+			</td>
+			</tr>
 			<tr>
 			<td>모의 투자 충전 금액</td>
 			<td>KRW</td>
@@ -69,18 +73,27 @@
 			<td>20%</td>
 			<td><input type="radio" value="5" name="cash" class="cash"></td>
 			</tr>
+			<tr>
+			<td colspan="3"><h1>2단계 : 최종 금액을 확인해 주세요</h1></td>
+			</tr>
+			<tr>
+			<td>충전할 금액:</td>
+			<td colspan="2"><span class="cyber">&nbsp;</span></td>
+			</tr>
+			<tr>
+			<td>지불할 금액:</td>
+			<td colspan="2"><span class="pay">&nbsp;</span></td>
+			</tr>
+			<tr>
+			<td colspan="3"><button type="submit">결제하기</button></td>
+			</tr>
 			</table>
-			
-			<h1>2단계 : 최종 금액을 확인해 주세요</h1>
-			<p>충전할 금액 :<span class="cyber">&nbsp;</span></p>
-			<p>지불할 금액 :<span class="pay">&nbsp;</span></p>
-			<button type="submit">결제하기</button>
 		</form>
 	</div>
 </body>
 <script>
-	$(function()
-	{
+	$(function(){
+		$(".step2").css("display", "none");
 		$("input[type=radio]").on("click", function() {
 			console.log("클릭 이벤트 정상 작동");
 			var pay = $(".pay").val();

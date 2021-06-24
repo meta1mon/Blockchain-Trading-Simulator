@@ -199,11 +199,13 @@
 								<td>
 									<table>
 										<tr>
-											<td><a href="<%=request.getContextPath()%>/signup"  id="join">가입</a></td>
+											<td><a href="<%=request.getContextPath()%>/signup"
+												id="join">가입</a></td>
 
 										</tr>
 										<tr>
-											<td><a href="<%=request.getContextPath()%>/login" id="signup" id="login">로그인</a></td>
+											<td><a href="<%=request.getContextPath()%>/login"
+												id="signup" id="login">로그인</a></td>
 										</tr>
 									</table>
 								</td>
@@ -225,8 +227,9 @@
 									<form id="frm22">
 										<table>
 											<tr>
-												<td><input id="cash" placeholder="보유 KRW"> <br>
-													<input id="cash" placeholder="매도가능 코인"></td>
+												<td><input id="cash" placeholder="보유 KRW"
+													value="${acnt.cybcash }원"> <br> <input
+													id="cash" placeholder="매도가능 코인"></td>
 
 											</tr>
 											<tr>
@@ -257,7 +260,7 @@
 													name="sellcnt"></td>
 											</tr>
 											<tr>
-												<th colspan="1">총액${loginMember }</th>
+												<th colspan="1">총액</th>
 
 											</tr>
 											<tr>
@@ -266,7 +269,7 @@
 											</tr>
 											<tr>
 												<td colspan="1"><input id="acntno" name="acntno"
-													type="text" value="b12345678"></td>
+													type="hidden" value="${acnt.acntno }"></td>
 											</tr>
 
 
@@ -293,23 +296,34 @@
 						</c:choose>
 
 						<td>
-							<table>
+							<form id="frm11">
 
-								<tr>
-									<th colspan="1">회원계좌번호 : <a>불러와</a><input
-										class="password2" type="password" placeholder="비밀번호"></th>
 
-								</tr>
-								<tr>
-									<th colspan="1">미체결주문</th>
-								</tr>
-								<tr>
-									<td><div id="aj_wb"></div></td>
-									<td><div id="aj_ws"></div></td>
-								</tr>
-								<!-- 글이 없을 경우 -->
+								<table>
 
-								<%-- 	<c:if test="${empty wblists }">
+									<tr>
+										<th><span>회원계좌번호 : ${acnt.acntno } </span> <span>**${check2 }**</span><input
+											name="acntno" type="hidden" value="${acnt.acntno }">
+										</th>
+
+
+
+									</tr>
+									<tr>
+										<td>계좌비밀번호 : <input class="password2" id="bankpw"
+											name="bankPw" type="password" placeholder="비밀번호">
+											<button id="check2" type="button">확인</button></td>
+									</tr>
+									<tr>
+										<th colspan="1">미체결주문</th>
+									</tr>
+									<tr>
+										<td><div id="aj_wb"></div></td>
+										<td><div id="aj_ws"></div></td>
+									</tr>
+									<!-- 글이 없을 경우 -->
+
+									<%-- 	<c:if test="${empty wblists }">
 									<tr>
 										<td align="center">미체결 내역이 없습니다.</td>
 									</tr>
@@ -328,16 +342,17 @@
 										</tr>
 									</c:forEach>
 								</c:if> --%>
-								<tr>
-									<th colspan="1">체결주문</th>
-								</tr>
-								<tr>
+									<tr>
+										<th colspan="1">체결주문</th>
+									</tr>
+									<tr>
 
-									<td><div id="aj_b"></div></td>
-									<td><div id="aj_s"></div></td>
-								</tr>
+										<td><div id="aj_b"></div></td>
+										<td><div id="aj_s"></div></td>
+									</tr>
 
-							</table>
+								</table>
+							</form>
 						</td>
 					</tr>
 				</table>
@@ -349,7 +364,25 @@
 	</div>
 	<script>
 		$(function() {
+			var checkpw = false;
+			$("#check2").click(function() {
+				var acntList = $("#frm11").serialize();
+				$.ajax({
+					url : "bankpw",
+					type : "post",
+					data : acntList,
+					success : function(data) {
+						if (data == 1) {
+							console.log("맞아요:");
+							checkpw = true;
+						} else {
+							checkpw = false;
+							console.log("틀려요:");
+						}
+					}
+				})
 
+			});
 			$("#sold_b").click(function() {
 
 				$("#sold_b").css("background", "blue");
@@ -389,91 +422,114 @@
 				sum = a * b;
 				$("#totalprice").val(sum);
 			});
+
 			$("#sold").on(
 					"click",
 					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-						var dataList = $("#frm22").serialize();
-						$.ajax({
-							url : "wsInsert",
-							type : "post",
-							data : dataList,
-							dataType : "json",
-							success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-								alert("ws성공");
-								console.log(data);
-							},
-							error : function(request, status, errorData) {
-								alert("ws실패" + "error code : " + request.status
-										+ "\n" + "message : "
-										+ request.responseText + "\n"
-										+ "error : " + errorData);
-							}
-						});
+						if (checkpw == false) {
+							alert("계좌비밀번호를 입력해주세요");
+						} else {
+							var dataList = $("#frm22").serialize();
+							$.ajax({
+								url : "wsInsert",
+								type : "post",
+								data : dataList,
+								dataType : "json",
+								success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+									alert("ws성공");
+									console.log(data);
+								},
+								error : function(request, status, errorData) {
+									alert("ws실패" + "error code : "
+											+ request.status + "\n"
+											+ "message : "
+											+ request.responseText + "\n"
+											+ "error : " + errorData);
+								}
+							});
+						}
 					});
+
 			$("#sold").on(
 					"click",
 					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-						var dataList = $("#frm22").serialize();
-						$.ajax({
-							url : "sInsert",
-							type : "post",
-							data : dataList,
-							dataType : "json",
-							success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-								alert("s성공");
-								console.log(data);
-							},
-							error : function(request, status, errorData) {
-								alert("s실패" + "error code : " + request.status
-										+ "\n" + "message : "
-										+ request.responseText + "\n"
-										+ "error : " + errorData);
-							}
-						});
+						if (checkpw == false) {
+							alert("계좌비밀번호를 입력해주세요");
+						} else {
+							var dataList = $("#frm22").serialize();
+							$.ajax({
+								url : "sInsert",
+								type : "post",
+								data : dataList,
+								dataType : "json",
+								success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+									alert("s성공");
+									console.log(data);
+								},
+								error : function(request, status, errorData) {
+									alert("s실패" + "error code : "
+											+ request.status + "\n"
+											+ "message : "
+											+ request.responseText + "\n"
+											+ "error : " + errorData);
+								}
+							});
+						}
+
 					});
 			$("#bought").on(
 					"click",
 					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-						var dataList = $("#frm22").serialize();
-						$.ajax({
-							url : "wbInsert",
-							type : "post",
-							data : dataList,
-							dataType : "json",
-							success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-								alert("wb성공");
-								console.log(data);
+						if (checkpw == false) {
+							alert("계좌비밀번호를 입력해주세요");
+						} else {
+							var dataList = $("#frm22").serialize();
+							$.ajax({
+								url : "wbInsert",
+								type : "post",
+								data : dataList,
+								dataType : "json",
+								success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+									alert("wb성공");
+									console.log(data);
 
-							},
-							error : function(request, status, errorData) {
-								alert("실패" + "error code : " + request.status
-										+ "\n" + "message : "
-										+ request.responseText + "\n"
-										+ "error : " + errorData);
-							}
-						});
+								},
+								error : function(request, status, errorData) {
+									alert("실패" + "error code : "
+											+ request.status + "\n"
+											+ "message : "
+											+ request.responseText + "\n"
+											+ "error : " + errorData);
+								}
+							});
+						}
 					});
 			$("#bought").on(
 					"click",
 					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-						var dataList = $("#frm22").serialize();
-						$.ajax({
-							url : "bInsert",
-							type : "post",
-							data : dataList,
-							dataType : "json",
-							success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-								alert("b성공");
-								console.log(data);
+						if (checkpw == false) {
+							alert("계좌비밀번호를 입력해주세요");
+						} else {
+							var dataList = $("#frm22").serialize();
+							$.ajax({
+								url : "bInsert",
+								type : "post",
+								data : dataList,
+								dataType : "json",
+								success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+									alert("b성공");
+									console.log(data);
 
-							},
-							error : function(request, status, errorData) {
-								alert("실패" + "error code : " + request.status
-										+ "\n" + "message : "
-										+ request.responseText + "\n"
-										+ "error : " + errorData);
-							}
-						});
+								},
+								error : function(request, status, errorData) {
+									alert("실패" + "error code : "
+											+ request.status + "\n"
+											+ "message : "
+											+ request.responseText + "\n"
+											+ "error : " + errorData);
+								}
+							});
+						}
 					});
 			$("#ajwb")
 					.on(

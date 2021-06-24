@@ -12,4 +12,11 @@
 		resultType="CoinAcnt">
 		SELECT * FROM COINACNT WHERE ACNTNO = #{acntno}
 	</select>
+	
+	<!-- 2차 비번 -->
+	<select id="cntAcnt" parameterType="Acnt" resultType="int">
+		SELECT COUNT(*) FROM ACNT
+		WHERE ACNTNO = #{acntno} AND BANKPW = #{bankPw}
+	</select>
+	
 </mapper>

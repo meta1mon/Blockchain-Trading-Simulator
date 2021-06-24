@@ -26,68 +26,6 @@
 	margin: 0 auto;
 }
 </style>
-<script>
-// #################################################  비밀번호 매우 불완전함. 다시 해야함!
-	$(function() {
-		// 비밀번호와 비밀번호 확인 일치 여부
-		var flag1 = false;
-		var passEqual = function() {
-			var pass1 = $("input[name=pw]").val();
-			var pass2 = $("input[name=pwCh]").val();
-			if ((pass1.length != 0 && pass2.length != 0) && pass1 == pass2) {
-				$(".pwCh").text("비밀번호가 일치합니다.");
-				$(".pwCh").css("color", "blue");
-				flag1 = true;
-			} else {
-				$(".pwCh").text("비밀번호가 일치하지 않습니다.");
-				$(".pwCh").css("color", "red");
-				flag1 = false;
-			}
-			console.log(flag1 + "일치여부");
-		};
-
-		$("input[name=pwCh]").on("keyup", passEqual);
-
-		// 비밀번호의 정규식 일치 여부
-		var flag2 = false;
-		var pwReg = function() {
-			var password = $("input[name=pw]").val();
-			var reg = /^[A-Za-z0-9!@#$%^&*]{8,15}$/g;
-			if (password.length != 0) {
-				if (password.match(reg) != null) {
-					$(".pwReg").html("&nbsp;");
-					flag2 = true;
-				} else {
-					$(".pwReg").text(
-							"8~15자의 영어 대 소문자, 숫자와 특수문자(!@#$%^&*)만 사용할 수 있습니다.");
-					$(".pwReg").css("color", "red");
-					flag2 = false;
-				}
-				console.log(flag2 + "양식 여부");
-			}
-		};
-		$("#pw").on("keyup", pwReg);
-
-		function passChange() {
-			if (pass1.length == 0) {
-				alert("비밀번호를 입력하세요");
-				return false;
-			}
-			if (flag2 == false) {
-				console.log("형식 일치X");
-				return false;
-			}
-
-			if (flag1 == false) {
-				console.log("비밀번호 일치X");
-				return false;
-			}
-
-			return true;
-
-		}
-	});
-</script>
 </head>
 <jsp:include page="myHeader.jsp"></jsp:include>
 <body>
@@ -142,7 +80,62 @@
 				비밀번호 수정</button>
 		</form>
 	</div>
+	<script>
+		// 비밀번호와 비밀번호 확인 일치 여부
+		var pass1 = $("input[name=pw]").val();
+		var pass2 = $("input[name=pwCh]").val();
+		
+		var flag1 = false;
+		var passEqual = function() {
+			var pass1 = $("input[name=pw]").val();
+			var pass2 = $("input[name=pwCh]").val();
+				if (pass1 == pass2) {
+					$(".pwCh").text("비밀번호가 일치합니다.");
+					$(".pwCh").css("color", "blue");
+					flag1 = true;
+					console.log("일치");
+				} else {
+					$(".pwCh").text("비밀번호가 일치하지 않습니다.");
+					console.log("일치X");
+					flag1 = false;
+				}
+				console.log(flag1 + "일치 여부" + pass1 + "/" + pass2);
+		};
 
+		$("input[name=pwCh]").on("keyup", passEqual);
+
+		// 비밀번호의 정규식 일치 여부
+		var flag2 = false;
+		var pwReg = function() {
+			var password = $("input[name=pw]").val();
+			var reg = /^[A-Za-z0-9!@#$%^&*]{8,15}$/g;
+			if (password.length != 0) {
+				if (password.match(reg) != null) {
+					$(".pwReg").html("&nbsp;");
+					flag2 = true;
+				} else {
+					$(".pwReg").text(
+							"8~15자의 영어 대 소문자, 숫자와 특수문자(!@#$%^&*)만 사용할 수 있습니다.");
+					$(".pwReg").css("color", "red");
+					flag2 = false;
+				}
+				console.log(flag2 + "양식 여부" + password);
+			}
+		};
+		$("#pw").on("keyup", pwReg);
+
+		function passChange() {
+			console.log(flag1 + "/" + flag2);
+			console.log(flag1 && flag2);
+			alert("변경하시겠습니까?");
+			if(flag1 && flag2 ) {
+				alert("변경 성공!");
+				return true;
+			};
+				alert("변경 실패!");
+				return false;
+		};
+</script>
 	<script>
 		// 은행 비밀번호와 은행 비밀번호 확인 일치 여부
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.report.model.vo.Creport;
+import com.kh.bts.report.model.vo.Rreport;
 
 @Repository("aDao")
 public class AdminDao {
@@ -17,5 +18,9 @@ public class AdminDao {
 
 	public int insertCreport(Creport vo) {
 		return sqlSession.insert("report.insertCreport", vo);
+	}
+	
+	public int insertRreport(Rreport vo) {
+		return sqlSession.insert("report.insertRreport", vo);
 	}
 }

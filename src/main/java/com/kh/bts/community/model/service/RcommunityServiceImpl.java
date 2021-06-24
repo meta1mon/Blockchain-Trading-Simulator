@@ -23,7 +23,7 @@ public class RcommunityServiceImpl implements RcommunityService {
 	}
 
 	public Rcommunity selectRcommunity(String rno) { // 단일 댓글 조회
-		return rcmDao.selectOne(rno);
+		return rcmDao.selectRcommunity(rno);
 	}
 
 	@Transactional

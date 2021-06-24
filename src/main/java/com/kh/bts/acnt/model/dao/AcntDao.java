@@ -18,5 +18,9 @@ public class AcntDao {
 	public List<Acnt> selectList(String email){
 		return sqlSession.selectList("acnt.selectMyAcnt", email);
 	}
-
+	public int cntAcnt(Acnt vo) {
+		int result = 0;
+		result = sqlSession.selectOne("acnt.cntAcnt", vo);
+		return result;
+	}
 }

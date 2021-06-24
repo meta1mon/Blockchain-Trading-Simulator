@@ -85,7 +85,7 @@
 			console.log("클릭 이벤트 정상 작동");
 			var pay = $(".pay").val();
 			var cash = $(".cyber").val();
-			switch ($(".cash").val()) {
+			switch ($(".cash:checked").val()) {
 			case "1":
 				cash = "1000000";
 				pay = "1000";

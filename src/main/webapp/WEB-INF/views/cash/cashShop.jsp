@@ -53,7 +53,7 @@
 			</tr>
 			<tr>
 			<td>10,000,000원</td>
-			<td>9,900원</td>
+			<td>9,000원</td>
 			<td>10%</td>
 			<td><input type="radio" value="3" name="cash" class="cash"></td>
 			</tr>

@@ -28,4 +28,8 @@ public class AdminDao {
 	public int registerCash(Cash vo) {
 		return sqlSession.insert("cash.registerCash", vo);
 	}
+	
+	public List<Cash> selectCashAll() {
+		return sqlSession.selectList("cash.selectCashAll");
+	}
 }

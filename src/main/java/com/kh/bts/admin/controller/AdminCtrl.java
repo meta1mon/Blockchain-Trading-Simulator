@@ -90,7 +90,7 @@ public class AdminCtrl {
 			out.close();
 		}
 	}
-
+	
 // 게시글 신고 등록
 	@RequestMapping(value = "/reportCommunity")
 	public void reportCommunity(HttpServletRequest request, HttpServletResponse response, Community vo,

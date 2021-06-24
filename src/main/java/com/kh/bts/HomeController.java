@@ -40,21 +40,5 @@ public class HomeController {
 	return "main/mainPage"; }
 	
 
-	@RequestMapping("/ranking")
-	public ModelAndView ranking(ModelAndView mav) {
-		mav.setViewName("rank/ranking");
-		return mav;
-	}
 
-	@RequestMapping("/cashShop")
-	public ModelAndView cash(ModelAndView mav) {
-		mav.setViewName("cash/cashShop");
-		return mav;
-	}
-
-	@RequestMapping("/pay")
-	public ModelAndView pay(ModelAndView mav) {
-		mav.setViewName("cash/payAPI");
-		return mav;
-	}
 }

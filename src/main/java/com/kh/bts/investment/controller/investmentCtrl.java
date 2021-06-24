@@ -10,14 +10,17 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.bts.acnt.model.service.AcntService;
+import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.investment.model.service.BoughtService;
 import com.kh.bts.investment.model.service.SoldService;
 import com.kh.bts.investment.model.service.WaitBoughtService;
@@ -42,22 +45,44 @@ public class investmentCtrl {
 	@Autowired
 	private SoldService sService;
 	@Autowired
-	private MemberService mService;
+	private AcntService aService;
 	
 	@RequestMapping("investmentpage")
 	public ModelAndView MainPage(Member vo,ModelAndView mav,HttpServletRequest request) {
 		
 		
-		mav.setViewName("investment/investmentPage");
 		HttpSession session = request.getSession();
 		String loginEmail = (String) session.getAttribute("loginMember");
-		System.out.println(loginEmail);
-		mav.addObject("email",loginEmail);
-		
-		
+		if(loginEmail == null) {
+			System.out.println("비회원입니다");
+		} else {
+			
+			System.out.println(loginEmail);
+			mav.addObject("email",loginEmail);
+			List<Acnt> result = aService.selectListAcnt(loginEmail);
+			Acnt acnt = result.get(0);
+			mav.addObject("acnt",acnt);
+			
+		}
+		mav.setViewName("investment/investmentPage");
 		return mav;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "bankpw", method = RequestMethod.POST)
+	public int Check(Acnt vo,ModelAndView mav) throws Exception {
+		
+		int result = aService.cntAcnt(vo);
+		if (result > 0) {
+			System.out.println("bankpw성공");
+		} else {
+			System.out.println("bankpw실패");
+		}
+		System.out.println(result);
+		mav.addObject("check2",result);
+		return result;
+	}
+	
 	@RequestMapping("1sChart")
 	public ModelAndView MainPaged(ModelAndView mav) {
 		mav.setViewName("investment/1sChart");

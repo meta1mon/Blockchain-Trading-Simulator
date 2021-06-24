@@ -5,8 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 <style>
 .ck.ck-editor {
 	max-width: 1200px;
@@ -34,10 +36,10 @@
 
 #subject {
 	margin: 0 auto 10 auto;
-	height: 40px; 
-	font-size: 15px; 
+	height: 40px;
+	font-size: 15px;
 	box-sizing: border-box;
-	width:1200px;
+	width: 1200px;
 	background-color: #FBFBFC;
 	border: 1px solid #D5D5D5;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
@@ -51,36 +53,44 @@
 
 #folder {
 	float: right;
+	position: relative;
+	left: 13px;
+	top: 18px;
+}
+
+#oldFolder {
+ 	float: left;
     position: relative;
-    left: 13px;
-    top: 8px;
+    right: 6px;
+    bottom: 2px;
 }
 
 #file_text {
 	color: black;
-    font-size: 14px;
-    float: right;
-    width: 150px;
-    position: relative;
-    top: 10px;
-    left: 20px;
+	font-size: 14px;
+	float: right;
+	width: 150px;
+	position: relative;
+	top: 20px;
+	left: 20px;
+	
 }
 
 #file {
     position: relative;
-    bottom: 95px;
-    left: 74px;
+    top: 55px;
+    left: 264px;
     border: none;
     float: right;
+    font-size: 14px;
 }
 
-input#file-upload-button{
-	background-color:#ffffff;
-	color:black;
-}
-input #file-upload-button{
-	background-color:#ffffff;
-	color:black;
+#oldFileDiv {
+	float: right;
+    font-size: 14px;
+    position: relative;
+    top: 22px;
+    left: 190px;
 }
 
 #submit {
@@ -126,45 +136,55 @@ input #file-upload-button{
 
 </head>
 <%@include file="../main/header.jsp"%>
-<body class="content" style="background-image:url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
-	<div style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
-		<div class="comm">글 쓰기</div><br><br><br><br><br>
-		<form action="cInsert" method="post" enctype="multipart/form-data" style="margin-left:20px">
-						<input type="hidden" name="cno" value="${community.cno}"> 
-						<input type="hidden" name="filepath" value="${community.filepath}">
-				<input id="subject"
-					type="text" placeholder="&nbsp;&nbsp;제목을 입력해 주세요." name="csubject"
-					maxlength="100" value="${community.csubject}">
-				<textarea id="editor" name="ccontent" maxlength="4000" style="margin: 0 auto 10 auto;">${community.ccontent}</textarea>
-				<input type="submit" value="글 작성하기" id="submit"> 
-				<c:url var="clist" value="clist">
-						<c:param name="page" value="1" />
-				</c:url>
-				<input type="button" value="취소하기" id="cancel" onclick="location.href = '${clist}'">
-
+<body class="content"
+	style="background-image: url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
+	<div
+		style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
+		<div class="comm">글 쓰기</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<form action="cInsert" method="post" enctype="multipart/form-data"
+			style="margin-left: 20px">
+			<input type="hidden" name="cno" value="${community.cno}"> <input
+				type="hidden" name="filepath" value="${community.filepath}">
+			<input id="subject" type="text"
+				placeholder="&nbsp;&nbsp;제목을 입력해 주세요." name="csubject"
+				maxlength="100" value="${community.csubject}">
+			<textarea id="editor" name="ccontent" maxlength="4000"
+				style="margin: 0 auto 10 auto;">${community.ccontent}</textarea>
+			<input type="submit" value="글 작성하기" id="submit">
+			<c:url var="clist" value="clist">
+				<c:param name="page" value="1" />
+			</c:url>
+			<input type="button" value="취소하기" id="cancel"
+				onclick="location.href = '${clist}'">
+			<!-- 게시글 첨부파일 -->
 			<div id="file_text">변경할 첨부 파일</div>
-			<img src="resources/assets/img/folder.png"
-				id="folder">
-			<p id="fileDiv">
-				<input type="file" id="file" name="upfile"  multiple="multiple" style="margin-top: 25px;">
-				
-				<p>이전 첨부파일</p>
-				<c:if test="${empty community.filepath}">
-첨부파일 없음
-</c:if> <c:if test="${!empty community.filepath}">
-						<c:forTokens var="fileName" items="${community.filepath}"
-							delims="," varStatus="st">
-							<a download="${fileName}"
-								href="${pageContext.request.contextPath}/resources/uploadFiles/${community.filepath}">${fileName}</a>
-							<c:if test="${!st.last }">
+			<img src="resources/assets/img/upload.png" id="folder">
+				<input type="file" id="file" name="upfile" multiple="multiple">
+			<!-- 이전 게시글 첨부파일 -->
+			<p id="oldFileDiv"><img src="resources/assets/img/download.png" id="oldFolder">
+			이전 첨부 파일<br>
+			<c:if test="${empty community.filepath}">
+			<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;첨부 파일 없음
+			</c:if></p>
+			<c:if test="${!empty community.filepath}">
+				<c:forTokens var="fileName" items="${community.filepath}" delims=","
+					varStatus="st">
+					<a download="${fileName}"
+						href="${pageContext.request.contextPath}/resources/uploadFiles/${community.filepath}">${fileName}</a>
+					<c:if test="${!st.last }">
                         /
                     </c:if>
-							<br>
-						</c:forTokens>
-					</c:if>
+					<br>
+				</c:forTokens>
+			</c:if>
 		</form>
-		
-						<script>
+
+		<script>
 					    ClassicEditor
 					    .create( document.querySelector( '#editor' ), {
 					        cloudServices: {
@@ -176,8 +196,16 @@ input #file-upload-button{
 					        console.error( error );
 					    } );
 				    </script>
-</div>
-<br><br><br><br><br><br><br><br><br>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 </body>
 <%@include file="../main/footer.jsp"%>
 </html>

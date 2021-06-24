@@ -14,14 +14,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.admin.model.service.AdminService;
+import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Community;
+import com.kh.bts.community.model.vo.Rcommunity;
 import com.kh.bts.member.model.service.MemberService;
 import com.kh.bts.report.model.vo.Creport;
+import com.kh.bts.report.model.vo.Rreport;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,11 +34,11 @@ public class AdminCtrl {
 	private MemberService mService;
 
 	@Autowired
-	private CommunityService cService;
-	
+	private CommunityService cmService;
+
 	@Autowired
-	private RcommunityService rcService;
-	
+	private RcommunityService rcmService;
+
 	@Autowired
 	private AdminService aService;
 
@@ -52,54 +56,49 @@ public class AdminCtrl {
 
 	@ModelAttribute("totalCount")
 	public int totalCount() {
-		return cService.totalCount();
+		return cmService.totalCount();
 	}
 
 	@ModelAttribute("totalTodayCount")
 	public int totalTodayCount() {
-		return cService.totalTodayCount();
+		return cmService.totalTodayCount();
 	}
 
-	@RequestMapping(value = "/reportCommunity")
-	public void reportCommunity(HttpServletRequest request, HttpServletResponse response, Community vo, @RequestParam("creport") int crreason) {
-		HttpSession session = request.getSession();
-		String loginEmail = (String) session.getAttribute("loginMember");
-		String creporter = mService.returnNickname(loginEmail);		
-		System.out.println("############## 신고하러 들어옴");
-		
-		Creport vo2 = new Creport();
-		vo2.setCsubject(vo.getCsubject());
-		vo2.setCrreason(crreason);
-		vo2.setCrespondent(vo.getCwriter());
-		vo2.setCreporter(creporter);
-		vo2.setCcontent(vo.getCcontent());
-		vo2.setCno(vo.getCno());
-		int result = aService.insertCreport(vo2);
+// 충전 상품 등록
+	@RequestMapping(value = "/cashRegister", method = RequestMethod.POST)
+	public void cashRegister(Cash vo, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+
+		vo.setSellprice(vo.getPrice() * (100 - vo.getDiscountrate()) / 100);
+		int result = aService.registerCash(vo);
 		PrintWriter out = null;
-		if (result > 0) {
-			System.out.println("신고 성공");
-		} else {
-			System.out.println("신고 실패");
-		}
 		try {
 			out = response.getWriter();
-			out.print(result);
+			if (result > 0) {
+				System.out.println("상품 등록 완료");
+				out.print("<script>alert('상품 등록이 완료되었습니다.')</script>");
+			} else {
+				System.out.println("상품 등록 실패");
+				out.print("<script>alert('상품 등록 실패')</script>");
+			}
+			out.print("<script>location.href='cashMR'</script>");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			out.flush();
 			out.close();
 		}
-		
 	}
-///// 아직 진행 중
-	@RequestMapping(value = "/reportRcommunity")
-	public void reportRcommunity(HttpServletRequest request, HttpServletResponse response, Community vo, @RequestParam("creport") int crreason) {
+
+// 게시글 신고 등록
+	@RequestMapping(value = "/reportCommunity")
+	public void reportCommunity(HttpServletRequest request, HttpServletResponse response, Community vo,
+			@RequestParam("creport") int crreason) {
 		HttpSession session = request.getSession();
 		String loginEmail = (String) session.getAttribute("loginMember");
-		String creporter = mService.returnNickname(loginEmail);		
-		System.out.println("############## 신고하러 들어옴");
-		
+		String creporter = mService.returnNickname(loginEmail);
+
 		Creport vo2 = new Creport();
 		vo2.setCsubject(vo.getCsubject());
 		vo2.setCrreason(crreason);
@@ -123,7 +122,31 @@ public class AdminCtrl {
 			out.flush();
 			out.close();
 		}
-		
+
+	}
+
+// 댓글 신고 등록
+	@ResponseBody
+	@RequestMapping(value = "/reportRcommunity")
+	public int reportRcommunity(HttpServletRequest request, Rreport vo) {
+		System.out.println("컨트롤러 들어오~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(vo.getRrreason() + "댓글 신고 사유");
+		System.out.println(vo.getRno() + "댓글  번호");
+		HttpSession session = request.getSession();
+		String loginEmail = (String) session.getAttribute("loginMember");
+		String rreporter = mService.returnNickname(loginEmail);
+		String oracleRno = setLPad(vo.getRno(), 5, "0");
+		Rcommunity vo2 = rcmService.selectRcommunity(oracleRno);
+		vo.setRno(oracleRno);
+		vo.setRreporter(rreporter);
+		vo.setCno(vo2.getCno());
+		vo.setRcontent(vo2.getRcontent());
+		vo.setRrespondent(vo2.getRwriter());
+		vo.setRrreason(vo.getRrreason());
+
+		int result = aService.insertRreport(vo);
+
+		return result;
 	}
 
 	@RequestMapping(value = "")
@@ -156,6 +179,18 @@ public class AdminCtrl {
 		return mv;
 	}
 
+	@RequestMapping(value = "/cashR", method = RequestMethod.GET)
+	public ModelAndView cashR(ModelAndView mv) {
+		mv.setViewName("admin/cashRegister");
+		return mv;
+	}
+
+	@RequestMapping(value = "/cashMR", method = RequestMethod.GET)
+	public ModelAndView cashMR(ModelAndView mv) {
+		mv.setViewName("admin/cashModifyRemove");
+		return mv;
+	}
+
 	@RequestMapping(value = "/nl", method = RequestMethod.GET)
 	public ModelAndView nl(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
@@ -164,13 +199,13 @@ public class AdminCtrl {
 			System.out.println("nl까지 들어옴");
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
-			int listCount = cService.totalCount();
+			int listCount = cmService.totalCount();
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 
 			if (keyword != null && !keyword.equals(""))
-				mv.addObject("list", cService.selectSearch(keyword, searchType));
+				mv.addObject("list", cmService.selectSearch(keyword, searchType));
 			else
-				mv.addObject("list", cService.selectList(currentPage, LIMIT));
+				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);
@@ -188,8 +223,8 @@ public class AdminCtrl {
 		try {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
-			mv.addObject("community", cService.selectCommunity(0, cno));
-			mv.addObject("commentList", rcService.selectList(cno));
+			mv.addObject("community", cmService.selectCommunity(0, cno));
+			mv.addObject("commentList", rcmService.selectList(cno));
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("admin/noticeDetail");
 		} catch (Exception e) {
@@ -198,7 +233,6 @@ public class AdminCtrl {
 		}
 		return mv;
 	}
-
 
 	@RequestMapping(value = "rr", method = RequestMethod.GET)
 	public ModelAndView rr(ModelAndView mv) {
@@ -211,4 +245,15 @@ public class AdminCtrl {
 		mv.setViewName("admin/cashLogList");
 		return mv;
 	}
+
+	private String setLPad(String strContext, int iLen, String strChar) {
+		String strResult = "";
+		StringBuilder sbAddChar = new StringBuilder();
+		for (int i = strContext.length(); i < iLen; i++) { // iLen길이 만큼 strChar문자로 채운다.
+			sbAddChar.append(strChar);
+		}
+		strResult = sbAddChar + strContext; // LPAD이므로, 채울문자열 + 원래문자열로 Concate한다.
+		return strResult;
+	}
+
 }

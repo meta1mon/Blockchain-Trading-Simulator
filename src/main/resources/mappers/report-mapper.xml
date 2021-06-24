@@ -10,4 +10,11 @@
 		#{creporter}, #{crreason}, #{csubject}, #{ccontent}, #{crespondent}, default, #{cno})
 	</insert>
 
+	<!-- 신고 댓글 삽입 -->
+	<insert id="insertRreport" parameterType="Rreport"
+		flushCache="true" statementType="PREPARED">
+		INSERT INTO RREPORT VALUES(
+		SEQ_RREPORT.NEXTVAL,
+		#{rreporter}, #{rrreason}, #{rcontent}, #{rrespondent}, default, #{cno}, #{rno})
+	</insert>
 </mapper>

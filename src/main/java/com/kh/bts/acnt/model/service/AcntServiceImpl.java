@@ -19,4 +19,10 @@ public class AcntServiceImpl implements AcntService{
 		// TODO Auto-generated method stub
 		return acntDao.selectList(email);
 	}
+
+	@Override
+	public int cntAcnt(Acnt vo) throws Exception {
+		// TODO Auto-generated method stub
+		return acntDao.cntAcnt(vo);
+	}
 }

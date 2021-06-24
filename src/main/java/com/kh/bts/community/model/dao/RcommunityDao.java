@@ -22,8 +22,18 @@ public class RcommunityDao {
 		return sqlSession.selectList("rcommunity.selectRcommunityAll", cno);
 	}
 	
-	public Rcommunity selectOne(String rno) { // 단일 댓글 조회
-		return sqlSession.selectOne("rcommunity.selectRcommunity", rno);
+	public Rcommunity selectRcommunity(String rno) { // 단일 댓글 조회
+		System.out.println("dao 들어옴");
+		System.out.println(rno + "dao안 rno");
+		Rcommunity vo = sqlSession.selectOne("rcommunity.selectRcommunity", rno);
+		System.out.println(vo);
+		if(vo == null) {
+			System.out.println("매퍼에 문제있다 null이다 야");
+		} else {
+			System.out.println("매퍼에 정상");
+			
+		}
+		return vo;
 	}
 	
 	public int updateReplyCnt(String cno) { // 댓글 입력 시 댓글 수 +1

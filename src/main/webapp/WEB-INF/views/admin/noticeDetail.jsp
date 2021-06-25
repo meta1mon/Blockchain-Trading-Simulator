@@ -127,37 +127,8 @@
 		</c:if>
 		<hr>
 
-		<!-- 댓글 작성 영역 -->
-		<div>
-			<c:if test="${loginMember != null }">
-				<form action="rcInsert" id="replyForm" method="get">
-					<div class="comment-box">
-						<input type="hidden" name="cno" value="${community.cno }">
-						<input type="hidden" id="page" name="page" value="${currentPage}">
-						<textarea placeholder="댓글 쓰기" id="editor" name="rcontent"
-							maxlength="4000"
-							onfocus="if(this.value == '댓글 쓰기') { this.value = ''; }"
-							onblur="if(this.value == '') { this.value ='댓글 쓰기'; }"></textarea>
-						<script>
-							ClassicEditor
-							.create( document.querySelector( '#editor' ), {
-							    cloudServices: {
-							        tokenUrl: 'https://81478.cke-cs.com/token/dev/de0d9159dc2b7ce3ecb85191c28f789217b087f58ae6880e30d89820724d',
-							        uploadUrl: 'https://81478.cke-cs.com/easyimage/upload/'
-							    }
-							} )
-							.catch( error => {
-							    console.error( error );
-							} );
-							</script>
-						<button type="submit" id="rsubmit">등록</button>
-					</div>
-				</form>
-			</c:if>
-			<c:if test="${loginMember == null }">
-				<div id="needlogin">&nbsp;&nbsp;&nbsp;댓글을 작성하려면 로그인이 필요합니다.</div>
-			</c:if>
-		</div>
+		<!-- 댓글 작성 영역 : 공지사항에서는 댓글 작성 기능을 삭제함 -->
+		
 		<c:url var="nlist" value="nl">
 			<c:param name="page" value="${currentPage}" />
 		</c:url>

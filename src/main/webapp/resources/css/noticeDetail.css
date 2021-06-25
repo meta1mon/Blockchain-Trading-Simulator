@@ -13,16 +13,16 @@
 }
 
 #detailOut {
-	width: 70%; 
-	background-color: #ffffff; 
-	margin: 70px auto; 
-	padding: 20px; 
+	width: 70%;
+	background-color: #ffffff;
+	margin: 70px auto;
+	padding: 20px;
 	border-radius: 4px;
 }
 
 .ck.ck-editor {
-	max-width: 1000px;
-	min-width: 1000px;
+	max-width: 80%;
+	min-width: 80%;
 }
 
 .ck-editor__editable {
@@ -34,23 +34,35 @@
 }
 
 .ck
+
+
 .ck-editor__main
 >
 .ck-editor__editable
+
+
 :not
+
  
+
 (
 .ck-focused
+
  
+
 )
 {
 border
+
+
 :
+
  
+
 none
+
+
 ;
-
-
 }
 .comm {
 	margin: 40px 0 20px 20px;
@@ -104,11 +116,6 @@ none
 	position: relative;
 	right: 26px;
 	bottom: 19px;
-}
-
-#replycnt2 {
-	position: relative;
-	left: 18px;
 }
 
 #speechbubble {
@@ -169,7 +176,7 @@ none
 	margin: 0 auto;
 	background-color: #FAFAFA;
 	padding: 20px 0;
-	width: 1200px;
+	width: 100%;
 }
 
 #file {
@@ -178,12 +185,45 @@ none
 	text-align: left;
 }
 
+#like {
+	width: 55px;
+	margin: 0 auto;
+	font-size: 18px;
+	position: relative;
+	left: 500px;
+	display: inline;
+	color: #d31900;
+}
+
+#dislike {
+	width: 55px;
+	margin: 0 auto;
+	font-size: 18px;
+	position: relative;
+	left: 500px;
+	display: inline;
+}
+
+.img_like {
+	width: 50px;
+	position: relative;
+	top: 15px;
+	cursor: pointer;
+}
+
+.img_dislike {
+	width: 50px;
+	position: relative;
+	top: 15px;
+	cursor: pointer;
+}
+
 hr {
 	clear: both;
 	/* background-color:#black;
 	border: 1px solid #black; */
-/* 	width: 1200px; */
-/* 	margin: auto; */
+	/* 	width: 1200px; */
+	/* 	margin: auto; */
 }
 
 #rsubmit {

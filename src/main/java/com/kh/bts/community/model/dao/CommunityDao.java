@@ -103,4 +103,10 @@ public class CommunityDao {
 		return sqlSession.update("community.addReadCount", cno);
 	}
 
+	public List<Community> selectNoticeList(int startPage, int limit) {
+		int startRow = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(startRow, limit);
+		return sqlSession.selectList("community.selectNoticeList", null, row);
+	}
+
 }

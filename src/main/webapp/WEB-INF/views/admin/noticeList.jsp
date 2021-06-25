@@ -10,6 +10,22 @@
 <link href="${pageContext.request.contextPath}/resources/css/noticeList.css"
 	rel="stylesheet" type="text/css" />
 <title>공지사항 리스트 - BTS</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	$(function() {
+		$('form[name=listForm]').on(
+				'submit',
+				function(e) {
+					if ($('input[name=keyword]').val() == null
+							|| $('input[name=keyword]').val() == "") {
+						alert("검색어를 입력해 주세요");
+						e.preventDefault();
+					} else {
+						return true;
+					}
+				});
+	});
+</script>
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
@@ -33,7 +49,7 @@
 				</form>
 				
 				<input type="hidden" name="page" value="${currentPage}"> 
-				<input type="button" id="write" value="글쓰기" onclick="window.location='cWriteForm'">
+				<input type="button" id="write" value="글쓰기" onclick="window.location='nWrite'">
 				
 				<div style="clear: both; height: 30px;">
 				</div>
@@ -79,10 +95,10 @@
 					[이전]&nbsp;
 				</c:if>
 				<c:if test="${currentPage >1 }">
-					<c:url var="clistST" value="clist">
+					<c:url var="nlistST" value="nl">
 						<c:param name="page" value="${currentPage-1}" />
 					</c:url>
-					<a href="${clistST}">[이전]</a>
+					<a href="${nlistST}">[이전]</a>
 				</c:if>
 				<!-- 끝 페이지 번호 처리 -->
 				<c:set var="endPage" value="${maxPage}" />
@@ -91,20 +107,20 @@
 						<font color="#8C66C8" size="4"><b>[${p}]</b></font>
 					</c:if>
 					<c:if test="${p ne currentPage}">
-						<c:url var="clistchk" value="clist">
+						<c:url var="nlistchk" value="nl">
 							<c:param name="page" value="${p}" />
 						</c:url>
-						<a href="${clistchk}">${p}</a>
+						<a href="${nlistchk}">${p}</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${currentPage >= maxPage}">
 					[다음]
 				</c:if>
 				<c:if test="${currentPage < maxPage}">
-					<c:url var="clistEND" value="clist">
+					<c:url var="nlistEND" value="nl">
 						<c:param name="page" value="${currentPage+1}" />
 					</c:url>
-					<a href="${clistEND}">[다음]</a>
+					<a href="${nlistEND}">[다음]</a>
 				</c:if>
 			</div>
 		</div>

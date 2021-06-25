@@ -96,4 +96,10 @@
 		UPDATE COMMUNITY SET VIEWCNT =
 		VIEWCNT+1 WHERE CNO = #{cno}
 	</update>
+	
+	<!-- 공지사항 조회 -->
+	<select id="selectNoticeList" resultType="arraylist"
+		resultMap="resultCommunity">
+		SELECT * FROM COMMUNITY WHERE CWRITER = '관리자' ORDER BY CNO DESC
+	</select>
 </mapper>

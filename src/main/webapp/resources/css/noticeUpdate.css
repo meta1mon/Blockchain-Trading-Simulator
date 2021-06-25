@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+#updateWrapper {
+	width: 90%;
+	height: 100%;
+	position: absolute;
+	top: 100px;
+	left: 200px;
+}
+
+#updateOut {
+	width: 70%; 
+	background-color: #ffffff; 
+	margin: 70px auto; 
+	padding: 20px; 
+	border-radius: 4px;
+}
+
+.ck.ck-editor {
+	max-width: 1200px;
+}
+
+.ck-editor__editable {
+	min-height: 600px;
+}
+
+.comm {
+	margin: 40px 0 20px 20px;
+	text-align: left;
+	font-size: 25px;
+	color: #FFC000;
+	float: left;
+}
+
+#write {
+	margin: 40px 0 20px 10px;
+	text-align: left;
+	font-size: 17px;
+	color: black;
+	float: left;
+}
+
+#subject {
+	margin: 0 auto 10 auto;
+	height: 40px;
+	font-size: 15px;
+	box-sizing: border-box;
+	width: 100%;
+	background-color: #FBFBFC;
+	border: 1px solid #D5D5D5;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+#subject:hover, #subject:focus {
+	background-color: #ffffff;
+	color: black;
+	border: 1px solid #BDBDBD;
+}
+
+#folder {
+	float: right;
+	position: relative;
+	left: 13px;
+	top: 18px;
+}
+
+#oldFolder {
+ 	float: left;
+    position: relative;
+    right: 6px;
+    bottom: 2px;
+}
+
+#file_text {
+	color: black;
+	font-size: 14px;
+	float: right;
+	width: 150px;
+	position: relative;
+	top: 20px;
+	left: 20px;
+	
+}
+
+#file {
+    position: relative;
+    top: 55px;
+    left: 264px;
+    border: none;
+    float: right;
+    font-size: 14px;
+}
+
+#oldFileDiv {
+	float: right;
+    font-size: 14px;
+    position: relative;
+    top: 22px;
+    left: 190px;
+}
+
+#submit {
+	width: 125px;
+	height: 35px;
+	padding: 5px;
+	margin: 30px 0 50px 0;
+	border: none;
+	border-radius: 4px;
+	text-align: center;
+	color: #ffffff;
+	background-color: #8C66C8;
+	font-size: 15px;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+}
+
+#cancel {
+	width: 90px;
+	height: 35px;
+	padding: 5px;
+	margin: 30px 0px 0px 0;
+	border: none;
+	border-radius: 4px;
+	text-align: center;
+	color: #8C66C8;
+	background-color: #ffffff;
+	font-size: 15px;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+	display: inline;
+}
+
+#submit:hover, #submit:active {
+	background-color: #B85CEF;
+	box-shadow: 10px 10px 20px 5px #eeeeee;
+}
+
+#cancel:active, #cancel:hover {
+	box-shadow: 10px 10px 20px 5px #eeeeee;
+}

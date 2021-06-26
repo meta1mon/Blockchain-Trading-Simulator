@@ -31,7 +31,7 @@
 <jsp:include page="../main/header.jsp"></jsp:include>
 <body>
 	<div id="cashShop">
-		<form action="#" method="post">
+		<form>
 			<table>
 				<tr>
 					<td colspan="3">
@@ -44,13 +44,17 @@
 					<td>KRW</td>
 					<td>할인율</td>
 				</tr>
-				<c:forEach items="${cashList }" var="cashVo">
-
+				<c:forEach items="${cashList }" var="cashVo" varStatus="status">
 					<tr>
-						<td>${cashVo.won }</td>
-						<td>${cashVo.sellprice }</td>
-						<td>${cashVo.discountrate }</td>
-						<td><input type="radio" value="1" name="cash" class="cash"></td>
+						<td>${cashVo.won }원</td>
+						<td>${cashVo.sellprice }원</td>
+						<td>${cashVo.discountrate }%</td>
+						<td><input type="hidden" name="currentWon${status.count }"
+							value="${cashVo.won }" readonly></td>
+						<td><input type="hidden" name="currentPrice${status.count }"
+							value="${cashVo.sellprice }" readonly></td>
+						<td><input type="button" value="선택"
+							onclick="buyCash(currentPrice${status.count }, currentWon${status.count })"></td>
 					</tr>
 					<tr>
 				</c:forEach>
@@ -59,54 +63,61 @@
 				</tr>
 				<tr>
 					<td>충전할 금액:</td>
-					<td colspan="2"><span class="cyber">&nbsp;</span></td>
+					<td colspan="2"><span id="won">&nbsp;</span></td>
 				</tr>
 				<tr>
 					<td>지불할 금액:</td>
-					<td colspan="2"><span class="pay">&nbsp;</span></td>
+					<td colspan="2"><span id="cash">&nbsp;</span></td>
 				</tr>
 				<tr>
-					<td colspan="3"><button type="submit">결제하기</button></td>
+					<td colspan="3"><button type="button" onclick="openPayment();">결제하기</button></td>
 				</tr>
 			</table>
 		</form>
 	</div>
 </body>
 <script>
-	$(function() {
-		$(".step2").css("display", "none");
-		$("input[type=radio]").on("click", function() {
-			console.log("클릭 이벤트 정상 작동");
-			var pay = $(".pay").val();
-			var cash = $(".cyber").val();
-			switch ($(".cash:checked").val()) {
-			case "1":
-				cash = "1000000";
-				pay = "1000";
-				break;
-			case "2":
-				cash = "5000000";
-				pay = "5000";
-				break;
-			case "3":
-				cash = "10000000";
-				pay = "9900";
-				break;
-			case "4":
-				cash = "50000000";
-				pay = "42500";
-				break;
-			case "5":
-				cash = "1000000000";
-				pay = "80000";
-				break;
-			}
-			console.log(pay);
-			console.log(cash);
-			$(".cyber").text(cash);
-			$(".pay").text(pay);
-		})
+	function buyCash(sellprice, won) {
+		console.log(sellprice.value + ("가격"));
+		console.log(won.value + ("가격"));
+		$("#won").text(won.value);
+		$("#cash").text(sellprice.value);
+	}
+	
+	function openPayment() {
+		var paymentPrice = $("#cash").text();
+		alert(paymentPrice);
+		$.ajax({
+			url: "${pageContext.request.contextPath }/payment",
+			type: "post",
+			data : { "paymentPrice" : paymentPrice},
+			datatype : "json",
+			success: function(json) {
+				alert("성공");
+				console.log(json);
+				console.log(json['email'][0]);
+				console.log(json.phone);
+				console.log(json.nickname);
+				console.log(Object.keys(json)[0]);
+				console.log(json[Object.keys(json)[0]]);
+				console.log(json[Object.keys(json)[1]]);
+				console.log(json[Object.keys(json)[2]]);
+				console.log(json[Object.keys(json)[3]]);
+				console.log(json[Object.keys(json)['email'][0]]);
 
-	})
+				alert(json.nickname);
+				
+				window.open("<%=request.getContextPath()%>/pay/payAPI", "paymentPopup", "width=680px, height=491px, resizable = no, left= 100, top=100");
+				
+				
+				
+			}
+		});
+	}
+	
+	function openChild() {
+		openWin = window.open("<%=request.getContextPath()%>/pay/payAPI", "paymentPopup", "width=680px, height=491px, resizable = no, left= 100, top=100");
+		
+	}
 </script>
 </html>

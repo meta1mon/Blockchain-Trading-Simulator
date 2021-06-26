@@ -47,6 +47,18 @@ public class investmentCtrl {
 	@Autowired
 	private AcntService aService;
 	
+	@RequestMapping("Chatting")
+	public ModelAndView Chatting(ModelAndView mav) {
+		mav.setViewName("sub/chatting");
+		return mav;
+	}
+	
+	@RequestMapping("kakao")
+	public ModelAndView Kakao(ModelAndView mav) {
+		mav.setViewName("sub/kakao");
+		return mav;
+	}
+	
 	@RequestMapping("investmentpage")
 	public ModelAndView MainPage(Member vo,ModelAndView mav,HttpServletRequest request) {
 		
@@ -70,7 +82,7 @@ public class investmentCtrl {
 
 	@ResponseBody
 	@RequestMapping(value = "bankpw", method = RequestMethod.POST)
-	public int Check(Acnt vo,ModelAndView mav) throws Exception {
+	public int Check(Acnt vo) throws Exception {
 		
 		int result = aService.cntAcnt(vo);
 		if (result > 0) {
@@ -79,7 +91,7 @@ public class investmentCtrl {
 			System.out.println("bankpw실패");
 		}
 		System.out.println(result);
-		mav.addObject("check2",result);
+	
 		return result;
 	}
 	

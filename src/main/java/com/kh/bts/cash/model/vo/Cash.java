@@ -1,5 +1,8 @@
 package com.kh.bts.cash.model.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Cash {
 
 	private int cashno;

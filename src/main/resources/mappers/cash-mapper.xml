@@ -17,4 +17,20 @@
 		resultMap="resultCash">
 		SELECT * FROM CASH ORDER BY CASHNO DESC
 	</select>
+
+	<!-- 결제 상품액 충전 -->
+	<update id="chargeCash" parameterType="Acnt" flushCache="true"
+		statementType="PREPARED">
+		UPDATE ACNT
+		SET CYBCASH = CYBCASH + #{cybcash}
+		WHERE EMAIL
+		= #{email}
+	</update>
+
+	<!-- 충전 상품 구매 내역 기록 -->
+	<insert id="insertCashLog" parameterType="CashLog" flushCache="true"
+		statementType="PREPARED">
+		INSERT INTO CASHLOG VALUES(SEQ_CASHLOG.NEXTVAL,
+		default, #{acntno}, #{email}, #{won}, #{sellprice})
+	</insert>
 </mapper>

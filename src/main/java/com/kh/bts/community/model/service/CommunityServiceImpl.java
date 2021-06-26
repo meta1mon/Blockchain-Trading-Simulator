@@ -69,4 +69,9 @@ public class CommunityServiceImpl implements CommunityService {
 		return cmDao.deleteCommunity(cno, email);
 	}
 
+	@Override
+	public List<Community> selectNoticeList(int startPage, int limit) {
+		return cmDao.selectNoticeList(startPage, limit);
+	}
+
 }

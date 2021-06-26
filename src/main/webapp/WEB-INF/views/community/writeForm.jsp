@@ -5,8 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 <style>
 .ck.ck-editor {
 	max-width: 1200px;
@@ -34,10 +36,10 @@
 
 #subject {
 	margin: 0 auto 10 auto;
-	height: 40px; 
-	font-size: 15px; 
+	height: 40px;
+	font-size: 15px;
 	box-sizing: border-box;
-	width:1200px;
+	width: 1200px;
 	background-color: #FBFBFC;
 	border: 1px solid #D5D5D5;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
@@ -51,36 +53,37 @@
 
 #folder {
 	float: right;
-    position: relative;
-    left: 53px;
-    top: 8px;
+	position: relative;
+	left: 53px;
+	top: 8px;
 }
 
 #file_text {
 	color: black;
-    font-size: 14px;
-    float: right;
-    width: 150px;
-    position: relative;
-    top: 10px;
-    left: 60px;
+	font-size: 14px;
+	float: right;
+	width: 150px;
+	position: relative;
+	top: 10px;
+	left: 60px;
 }
 
 #file {
-    position: relative;
-    bottom: 95px;
-    left: 74px;
-    border: none;
-    float: right;
+	position: relative;
+	bottom: 95px;
+	left: 74px;
+	border: none;
+	float: right;
 }
 
-input#file-upload-button{
-	background-color:#ffffff;
-	color:black;
+input#file-upload-button {
+	background-color: #ffffff;
+	color: black;
 }
-input #file-upload-button{
-	background-color:#ffffff;
-	color:black;
+
+input #file-upload-button {
+	background-color: #ffffff;
+	color: black;
 }
 
 #submit {
@@ -126,28 +129,38 @@ input #file-upload-button{
 
 </head>
 <%@include file="../main/header.jsp"%>
-<body class="content" style="background-image:url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
-	<div style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
-		<div class="comm">글 쓰기</div><br><br><br><br><br>
-		<form action="cInsert" method="post" enctype="multipart/form-data" style="margin-left:20px">
-				<input id="subject"
-					type="text" placeholder="&nbsp;&nbsp;제목을 입력해 주세요." name="csubject"
-					maxlength="100">
-				<textarea id="editor" name="ccontent" maxlength="4000" style="margin: 0 auto 10 auto;"></textarea>
-				<input type="submit" value="글 작성하기" id="submit"> 
-				<c:url var="clist" value="clist">
-						<c:param name="page" value="1" />
-				</c:url>
-				<input type="button" value="취소하기" id="cancel" onclick="location.href = '${clist}'">
+<body class="content"
+	style="background-image: url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
+	<div
+		style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
+		<div class="comm">글 쓰기</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<form action="cInsert" method="post" enctype="multipart/form-data"
+			style="margin-left: 20px">
+			<input id="subject" type="text"
+				placeholder="&nbsp;&nbsp;제목을 입력해 주세요." name="csubject"
+				maxlength="100">
+			<textarea id="editor" name="ccontent" maxlength="4000"
+				style="margin: 0 auto 10 auto;"></textarea>
+			<input type="submit" value="글 작성하기" id="submit">
+			<c:url var="clist" value="clist">
+				<c:param name="page" value="1" />
+			</c:url>
+			<input type="button" value="취소하기" id="cancel"
+				onclick="location.href = '${clist}'">
 
 			<div id="file_text">파일 첨부</div>
-			<img src="resources/assets/img/folder.png"
-				id="folder">
+			<img src="resources/assets/img/folder.png" id="folder">
 			<p id="fileDiv">
-				<input type="file" id="file" name="upfile"  multiple="multiple" style="margin-top: 25px;">
+				<input type="file" id="file" name="upfile" multiple="multiple"
+					style="margin-top: 25px;">
 		</form>
-		
-						<script>
+
+		<script>
 					    ClassicEditor
 					    .create( document.querySelector( '#editor' ), {
 					        cloudServices: {
@@ -159,8 +172,16 @@ input #file-upload-button{
 					        console.error( error );
 					    } );
 				    </script>
-</div>
-<br><br><br><br><br><br><br><br><br>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 </body>
 <%@include file="../main/footer.jsp"%>
 </html>

@@ -3,17 +3,17 @@ package com.kh.bts.cash.model.vo;
 public class Cash {
 
 	private int cashno;
-	private int price;
-	private float discountrate;
-	private int sellprice;
-	private int won;
+	private int price;             // 원가
+	private int discountrate;    // 할인률
+	private int sellprice;         // 할인가
+	private int won;               // 충전금
 	private String startdate;
 	private String enddate;
-	private int issale;
+	private int issale;            // 0이면 판매끝, 1이면 판매중
 	
 	public Cash() {}
 	
-	public Cash(int cashno, int price, float discountrate, int sellprice, int won, String startdate, String enddate,
+	public Cash(int cashno, int price, int discountrate, int sellprice, int won, String startdate, String enddate,
 			int issale) {
 		super();
 		this.cashno = cashno;
@@ -42,11 +42,11 @@ public class Cash {
 		this.price = price;
 	}
 
-	public float getDiscountrate() {
+	public int getDiscountrate() {
 		return discountrate;
 	}
 
-	public void setDiscountrate(float discountrate) {
+	public void setDiscountrate(int discountrate) {
 		this.discountrate = discountrate;
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,89 +31,93 @@
 <jsp:include page="../main/header.jsp"></jsp:include>
 <body>
 	<div id="cashShop">
-		<form action="#" method="post">
-			<h1>1단계 : 결제 금액을 선택해 주세요</h1>
-			<h4>할인 EVENT 기간 : 06/01 ~ 06/30</h4>
+		<form>
 			<table>
-			<tr>
-			<td>모의 투자 충전 금액</td>
-			<td>KRW</td>
-			<td>할인율</td>
-			</tr>
-			<tr>
-			<td>1,000,000원</td>
-			<td>1,000원</td>
-			<td>0%</td>
-			<td><input type="radio" value="1" name="cash" class="cash"></td>
-			</tr>
-			<tr>
-			<td>5,000,000원</td>
-			<td>5,000원</td>
-			<td>0%</td>
-			<td><input type="radio" value="2" name="cash" class="cash"></td>
-			</tr>
-			<tr>
-			<td>10,000,000원</td>
-			<td>9,900원</td>
-			<td>10%</td>
-			<td><input type="radio" value="3" name="cash" class="cash"></td>
-			</tr>
-			<tr>
-			<td>50,000,000원</td>
-			<td>42,500원</td>
-			<td>15%</td>
-			<td><input type="radio" value="4" name="cash" class="cash"></td>
-			</tr>
-			<tr>
-			<td>100,000,000원</td>
-			<td>80,000원</td>
-			<td>20%</td>
-			<td><input type="radio" value="5" name="cash" class="cash"></td>
-			</tr>
+				<tr>
+					<td colspan="3">
+						<h1>1단계 : 결제 금액을 선택해 주세요</h1>
+						<h4>할인 EVENT 기간 : 06/01 ~ 06/30</h4>
+					</td>
+				</tr>
+				<tr>
+					<td>모의 투자 충전 금액</td>
+					<td>KRW</td>
+					<td>할인율</td>
+				</tr>
+				<c:forEach items="${cashList }" var="cashVo" varStatus="status">
+					<tr>
+						<td>${cashVo.won }원</td>
+						<td>${cashVo.sellprice }원</td>
+						<td>${cashVo.discountrate }%</td>
+						<td><input type="hidden" name="currentWon${status.count }"
+							value="${cashVo.won }" readonly></td>
+						<td><input type="hidden" name="currentPrice${status.count }"
+							value="${cashVo.sellprice }" readonly></td>
+						<td><input type="button" value="선택"
+							onclick="buyCash(currentPrice${status.count }, currentWon${status.count })"></td>
+					</tr>
+					<tr>
+				</c:forEach>
+				<tr>
+					<td colspan="3"><h1>2단계 : 최종 금액을 확인해 주세요</h1></td>
+				</tr>
+				<tr>
+					<td>충전할 금액:</td>
+					<td colspan="2"><span id="won">&nbsp;</span></td>
+				</tr>
+				<tr>
+					<td>지불할 금액:</td>
+					<td colspan="2"><span id="cash">&nbsp;</span></td>
+				</tr>
+				<tr>
+					<td colspan="3"><button type="button" onclick="openPayment();">결제하기</button></td>
+				</tr>
 			</table>
-			
-			<h1>2단계 : 최종 금액을 확인해 주세요</h1>
-			<p>충전할 금액 :<span class="cyber">&nbsp;</span></p>
-			<p>지불할 금액 :<span class="pay">&nbsp;</span></p>
-			<button type="submit">결제하기</button>
 		</form>
 	</div>
 </body>
 <script>
-	$(function()
-	{
-		$("input[type=radio]").on("click", function() {
-			console.log("클릭 이벤트 정상 작동");
-			var pay = $(".pay").val();
-			var cash = $(".cyber").val();
-			switch ($(".cash:checked").val()) {
-			case "1":
-				cash = "1000000";
-				pay = "1000";
-				break;
-			case "2":
-				cash = "5000000";
-				pay = "5000";
-				break;
-			case "3":
-				cash = "10000000";
-				pay = "9900";
-				break;
-			case "4":
-				cash = "50000000";
-				pay = "42500";
-				break;
-			case "5":
-				cash = "1000000000";
-				pay = "80000";
-				break;
-			}
-			console.log(pay);
-			console.log(cash);
-			$(".cyber").text(cash);
-			$(".pay").text(pay);
-		})
+	function buyCash(sellprice, won) {
+		console.log(sellprice.value + ("가격"));
+		console.log(won.value + ("가격"));
+		$("#won").text(won.value);
+		$("#cash").text(sellprice.value);
+	}
+	
+	function openPayment() {
+		var paymentPrice = $("#cash").text();
+		alert(paymentPrice);
+		$.ajax({
+			url: "${pageContext.request.contextPath }/payment",
+			type: "post",
+			data : { "paymentPrice" : paymentPrice},
+			datatype : "json",
+			success: function(json) {
+				alert("성공");
+				console.log(json);
+				console.log(json['email'][0]);
+				console.log(json.phone);
+				console.log(json.nickname);
+				console.log(Object.keys(json)[0]);
+				console.log(json[Object.keys(json)[0]]);
+				console.log(json[Object.keys(json)[1]]);
+				console.log(json[Object.keys(json)[2]]);
+				console.log(json[Object.keys(json)[3]]);
+				console.log(json[Object.keys(json)['email'][0]]);
 
-	})
+				alert(json.nickname);
+				
+				window.open("<%=request.getContextPath()%>/pay/payAPI", "paymentPopup", "width=680px, height=491px, resizable = no, left= 100, top=100");
+				
+				
+				
+			}
+		});
+	}
+	
+	function openChild() {
+		openWin = window.open("<%=request.getContextPath()%>/pay/payAPI", "paymentPopup", "width=680px, height=491px, resizable = no, left= 100, top=100");
+		
+	}
 </script>
 </html>

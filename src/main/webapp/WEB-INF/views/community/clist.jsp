@@ -24,6 +24,7 @@
 		location.href = "cwriteForm";
 	}
 </script>
+
 <style>
 .comm {
 	margin: 40px 0 20px 20px;
@@ -34,17 +35,19 @@
 }
 
 #write {
-	width: 125px;
-	height: 35px;
+	width: 120px;
+	height: 45px;
 	float: right;
 	border: none;
-	border-radius: 4px;
+	margin-top: 30px;
 	text-align: center;
 	color: #ffffff;
 	background-color: #8C66C8;
 	font-size: 18px;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
+	position:relative;
+	right:80px;
 }
 
 #write:hover {
@@ -53,33 +56,36 @@
 }
 
 #searchType {
-	width: 80px;
-	height: 35px;
-	border: 2px solid #8C66C8;
+	width: 100px;
+	height: 45px;
+	border: 3px solid #8C66C8;
 	font-size: 18px;
-	color: #99ADB6;
-	margin-top: 20px;
+	color: black;
+	margin-top: 30px;
 	padding: 0;
 	float: left;
-	text-align: left;
 	clear: both;
+	position:relative;
+	left:60px;
 }
 
 #searchType:hover, #searchType:focus {
-	color: black;
+	color: #8C66C8;
 	transition: color 0.15s ease-in-out;
 }
 
 #search {
 	width: 650px;
-	height: 35px;
+	height: 45px;
 	top: 0;
 	background-color: #ffffff;
-	border: 2px solid #8C66C8;
+	border: 3px solid #8C66C8;
 	font-size: 18px;
-	margin-top: 20px;
+	margin-top: 30px;
 	padding: 0;
 	float: left;
+	position:relative;
+	left:80px;
 }
 
 #search:hover, #search:focus {
@@ -98,17 +104,19 @@
 }
 
 #btnsearch {
-	width: 70px;
-	height: 35px;
+	width: 80px;
+	height: 45px;
 	padding: 0;
 	border: 2px solid #8C66C8;
 	font-size: 18px;
 	color: #ffffff;
 	background-color: #8C66C8;
-	margin-top: 20px;
+	margin-top: 30px;
 	float: left;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
+	position:relative;
+	left:70px;
 }
 
 #btnsearch:hover, #btnsearch:focus {
@@ -149,6 +157,15 @@
 .subject:hover, .subject:active {
 	text-decoration: underline;
 }
+
+.replycnt {
+	color: #999;
+	font-size: 15px;
+}
+
+.replycnt:hover, .replycnt:active {
+	text-decoration: underline;
+}
 </style>
 </head>
 <%@include file="../main/header.jsp"%>
@@ -171,8 +188,9 @@
 					<tr>
 						<td align="center" width="60">${vo.cno}</td>
 						<td align="left" width="370"><a
-							href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">
-								&nbsp;${vo.csubject} </a>${vo.replycnt}</td>
+							href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">&nbsp;${vo.csubject}
+						</a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
+							class="replycnt">[${vo.replycnt}]</a></td>
 						<td align="center" width="100">${vo.cwriter}</td>
 						<td align="center" width="110" style="font-size: 15px;">${vo.cdate}</td>
 						<td align="center" width="60">${vo.viewcnt}</td>
@@ -221,8 +239,9 @@
 					<tr>
 						<td align="center">${vo.cno}</td>
 						<td align="left"><a
-							href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">
-								&nbsp;${vo.csubject} </a>${vo.replycnt}</td>
+							href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">&nbsp;${vo.csubject}
+						</a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
+							class="replycnt">[${vo.replycnt}]</a></td>
 						<td align="center">${vo.cwriter}</td>
 						<td align="center" style="font-size: 15px;">${vo.cdate}</td>
 						<td align="center">${vo.viewcnt}</td>
@@ -277,6 +296,15 @@
 		<input type="hidden" name="page" value="${currentPage}"> <input
 			type="button" id="write" value="글쓰기"
 			onclick="window.location='cWriteForm'">
+			<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	</div>
 	<br>
 	<br>

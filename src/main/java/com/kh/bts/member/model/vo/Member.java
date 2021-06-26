@@ -18,6 +18,8 @@ public class Member {
 
 	private String mailing;
 	private String reqAgr;
+	
+	private int cybcash;
 
 	public String getEmail() {
 		return email;
@@ -97,6 +99,14 @@ public class Member {
 
 	public void setReqAgr(String reqAgr) {
 		this.reqAgr = reqAgr;
+	}
+
+	public int getCybcash() {
+		return cybcash;
+	}
+
+	public void setCybcash(int cybcash) {
+		this.cybcash = cybcash;
 	}
 
 	@Override

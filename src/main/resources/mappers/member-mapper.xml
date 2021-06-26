@@ -7,6 +7,26 @@
 	<select id="searchMember" parameterType="string" resultMap="Member">
 		SELECT * FROM MEMBER WHERE EMAIL = #{email}
 	</select>
+	
+	<!-- 관리자 페이지 회원 조회 나중에 COINACNT랑 JOIN 하기--> 
+	<select id="adminListMember" resultType="arraylist" resultMap="Member">
+		SELECT EMAIL, NICKNAME, GENDER, BIRTHDATE, CYBCASH FROM MEMBER JOIN ACNT USING (EMAIL)
+		ORDER BY REQAGR DESC
+	</select>
+	
+	<!-- 관리자 페이지 회원 이메일로 조회 -->
+	<select id="adminSearchEmail" parameterType="string" resultType="arraylist" resultMap="Member">
+		SELECT EMAIL, NICKNAME, GENDER, BIRTHDATE, CYBCASH FROM MEMBER JOIN ACNT USING (EMAIL)
+		WHERE EMAIL LIKE '%'|| #{keyword} ||'%'
+		ORDER BY REQAGR DESC
+	</select>
+	
+	<!-- 관리자 페이지 회원 닉네임으로 조회 -->
+	<select id="adminSearchNick" parameterType="string" resultType="arraylist" resultMap="Member">
+		SELECT EMAIL, NICKNAME, GENDER, BIRTHDATE, CYBCASH FROM MEMBER JOIN ACNT USING (EMAIL)
+		WHERE NICKNAME LIKE '%'|| #{keyword} ||'%'
+		ORDER BY REQAGR DESC
+	</select>
 
 	<!-- 회원수조회 -->
 	<select id="countMember" resultType="int">

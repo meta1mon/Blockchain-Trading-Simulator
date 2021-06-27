@@ -23,9 +23,6 @@
 	function showInsertForm() {
 		location.href = "cwriteForm";
 	}
-	$(function() {
-		$('.footer-container').css('position','relative');
-	});
 </script>
 
 <style>

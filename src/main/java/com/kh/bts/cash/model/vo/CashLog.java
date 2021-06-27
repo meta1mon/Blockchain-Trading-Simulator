@@ -1,20 +1,27 @@
 package com.kh.bts.cash.model.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CashLog {
 	private int clno;
 	private String cashdate;
-	private int cashno;
 	private String acntno;
+	private String email;
+	private int won;
+	private int sellprice;
 
 	public CashLog() {
 	}
 
-	public CashLog(int clno, String cashdate, int cashno, String acntno) {
+	public CashLog(int clno, String cashdate, String acntno, String email, int won, int sellprice) {
 		super();
 		this.clno = clno;
 		this.cashdate = cashdate;
-		this.cashno = cashno;
 		this.acntno = acntno;
+		this.email = email;
+		this.won = won;
+		this.sellprice = sellprice;
 	}
 
 	public int getClno() {
@@ -33,20 +40,42 @@ public class CashLog {
 		this.cashdate = cashdate;
 	}
 
-	public int getCashno() {
-		return cashno;
-	}
-
-	public void setCashno(int cashno) {
-		this.cashno = cashno;
-	}
-
 	public String getAcntno() {
 		return acntno;
 	}
 
 	public void setAcntno(String acntno) {
 		this.acntno = acntno;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getWon() {
+		return won;
+	}
+
+	public void setWon(int won) {
+		this.won = won;
+	}
+
+	public int getSellprice() {
+		return sellprice;
+	}
+
+	public void setSellprice(int sellprice) {
+		this.sellprice = sellprice;
+	}
+
+	@Override
+	public String toString() {
+		return "CashLog [clno=" + clno + ", cashdate=" + cashdate + ", acnto=" + acntno + ", email=" + email + ", won="
+				+ won + ", sellprice=" + sellprice + "]";
 	}
 
 }

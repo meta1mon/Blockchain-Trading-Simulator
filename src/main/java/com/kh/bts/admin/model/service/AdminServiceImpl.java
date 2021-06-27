@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.bts.admin.model.dao.AdminDao;
 import com.kh.bts.cash.model.vo.Cash;
+import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
@@ -33,6 +34,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Cash> selectCashAll() {
 		return aDao.selectCashAll();
+	}
+
+	@Override
+	public List<Member> adminSearchMember(String keyword, int searchType) {
+		return aDao.adminSearchMember(keyword, searchType);
+	}
+
+	@Override
+	public List<Member> adminListMember(/* int startPage, int limit */) {
+		return aDao.adminListMember(/* startPage, limit */);
 	}
 
 }

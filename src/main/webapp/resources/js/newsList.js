@@ -50,8 +50,8 @@ function newsHeadLine() {
 					// 헤드라인 : 최신 기사 10개만 출력
 					for (var i = 0; i < 10; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
-						$(".scroll").append('<a href="ncontent?news_id='+data.data[i].id+'"><span class="headList" id="headTime">&#128344;'+newsTime+'&nbsp;&nbsp;</span><span class="headList">'+data.data[i].title+'</span></a>&nbsp;&nbsp;&nbsp;&nbsp;');
-						$("a").css("color","black");
+						$(".scroll").append('<a class="atitle" href="ncontent?news_id='+data.data[i].id+'"><span class="headList" id="headTime">&#128344;'+newsTime+'&nbsp;&nbsp;</span><span class="headList">'+data.data[i].title+'</span></a>&nbsp;&nbsp;&nbsp;&nbsp;');
+						$(".atitle").css("color","black");
 					}
 				}
 			});
@@ -78,13 +78,13 @@ function newsList(page, search) {
 					// 뉴스목록 
 					for (var i = p; i < p+3; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
-						$("#raw1").append('<a href="ncontent?news_id='+data.data[i].id+'"><div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div></a>');
-						$("a").css("color","black");
+						$("#raw1").append('<a class="alist1" href="ncontent?news_id='+data.data[i].id+'"><div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div></a>');
+						$(".alist1").css("color","black");
 					}
 					for (var i = p+3; i < p+6; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
-						$("#raw2").append('<a href="ncontent?news_id='+data.data[i].id+'"><div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div></a>');
-						$("a").css("color","black");
+						$("#raw2").append('<a class="alist2" href="ncontent?news_id='+data.data[i].id+'"><div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div></a>');
+						$(".alist2").css("color","black");
 					}
 //					console.log("console total : "+data.total);  
 //					console.log("console : "+data.current_page);

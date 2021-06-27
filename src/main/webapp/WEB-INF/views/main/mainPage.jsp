@@ -23,36 +23,33 @@ function go() {
 <body>
 	<div id="wrapper">
 		<div id="container">
-			<div id="center">
-				<table style="width:100%" class="shadow">
-					<tr>
-						<td id="c1">
-							<div id="chart">
-								<div id="chart_div"></div>
-							</div>
-						</td>
-						<td id="c2">
-							<div id="table">
-								<div id="cointable_div"></div>
-							</div>
-						</td>
-					</tr>
-				</table>
-				<table>
-					<tr>
-						<td colspan="2">
-							<button id="cointable_btn"
-								onclick="go();">거래소바로가기</button>
-						</td>
-					</tr>
-				</table>
-				<div id="new">
-					<div class="headLine">
-						<marquee class="scroll" onmouseover="this.stop();"
-							onmouseout="this.start();">
-							<!-- newsList.js의 newsHeadLine() 함수 참조 -->
-						</marquee>
-					</div>
+			<table style="width: 100%" class="shadow">
+				<tr>
+					<td id="c1">
+						<div id="chart">
+							<div id="chart_div"></div>
+						</div>
+					</td>
+					<td id="c2">
+						<div id="table">
+							<div id="cointable_div"></div>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td colspan="2">
+						<button id="cointable_btn" onclick="go();">거래소바로가기</button>
+					</td>
+				</tr>
+			</table>
+			<div id="new">
+				<div class="headLine">
+					<marquee class="scroll" onmouseover="this.stop();"
+						onmouseout="this.start();">
+						<!-- newsList.js의 newsHeadLine() 함수 참조 -->
+					</marquee>
 				</div>
 			</div>
 		</div>

@@ -101,7 +101,7 @@ function populateChatWindowWithMessages(messages) {
     const message = messages[i];
     $('#users').append($('<p></p>').text(message.userId));
     $('#messages').append($('<p></p>').text(message.text));
-    $('#timestamps').append($('<p></p>').text(new Date(message.createdAt).toLocaleTimeString()));
+    $('#timestamps').append($('<p></p>').text(new Date(message.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })));
   }
 }
 

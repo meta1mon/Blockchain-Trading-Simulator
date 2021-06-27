@@ -42,7 +42,7 @@ public class CashController {
 	public int chargeCash(ModelAndView mav, @RequestParam("won") int won, @RequestParam("email") String email,
 			@RequestParam("sellprice") int sellprice) {
 		int result = 0;
-		cashService.chargeCash(email, won);
+		cashService.chargeCash(email, won, sellprice);
 		return result;
 	}
 

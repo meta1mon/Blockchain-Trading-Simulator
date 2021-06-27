@@ -14,7 +14,7 @@
 		$("#childWon").val(opener.document.getElementById("won").value);
 		$("#childPrice").val(opener.document.getElementById("cash").value);
 
-/* 		IMP.init('imp94986051'); // 아임포트 관리자 페이지의 "시스템 설정" > "내 정보" 에서 확인 가능');
+ 		IMP.init('imp94986051'); // 아임포트 관리자 페이지의 "시스템 설정" > "내 정보" 에서 확인 가능');
 		IMP.request_pay({
 			pg : 'html5_inicis',
 			pay_method : 'card',
@@ -40,25 +40,25 @@
 			}
 			chargeFinished = true;
 			alert(msg);
-		}); */
+
 
 		if (chargeFinished) {
 			$.ajax({
 				url : "<%=request.getContextPath()%>/chargeCash",
-				type : "post",
-				data : {
-					"email" : $("#email").val(),
-					"won" : $("#childWon").val(),
-					"sellprice" : $("#childPrice").val()
-				},
-				success : function(data) {
-
-				}
-			});
-		} else {
-			alert("db들리는 거 실패임, 왜냐면 결제가 덜 됐거덩");
-		}
-
+					type : "post",
+					data : {
+						"email" : $("#email").val(),
+						"won" : $("#childWon").val(),
+						"sellprice" : $("#childPrice").val()
+					},
+					success : function(data) {
+						alert("충전 완료!! db 확인해보즈아아")
+					}
+				});
+			} else {
+				alert("db들리는 거 실패임, 왜냐면 결제가 덜 됐거덩");
+			}
+		});
 	})
 </script>
 <style>

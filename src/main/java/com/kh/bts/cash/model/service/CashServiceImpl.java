@@ -16,8 +16,8 @@ public class CashServiceImpl implements CashService{
 	
 	@Transactional
 	@Override
-	public int chargeCash(String email, int won) {
-		return cashDao.chargeCash(email, won);
+	public int chargeCash(String email, int won, int sellprice) {
+		return cashDao.chargeCash(email, won, sellprice);
 	}
 
 }

@@ -23,8 +23,7 @@
 		statementType="PREPARED">
 		UPDATE ACNT
 		SET CYBCASH = CYBCASH + #{cybcash}
-		WHERE EMAIL
-		= #{email}
+		WHERE EMAIL = #{email}
 	</update>
 
 	<!-- 충전 상품 구매 내역 기록 -->

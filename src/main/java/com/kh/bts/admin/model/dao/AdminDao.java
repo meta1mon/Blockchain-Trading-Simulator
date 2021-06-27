@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.bts.cash.model.vo.Cash;
-import com.kh.bts.community.model.vo.Community;
+import com.kh.bts.cash.model.vo.CashLog;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
@@ -33,6 +33,24 @@ public class AdminDao {
 	
 	public List<Cash> selectCashAll() {
 		return sqlSession.selectList("cash.selectCashAll");
+	}
+	
+	public List<CashLog> selectCashLog(int startPage, int limit){
+		
+		int startRow = (startPage -1)*limit; RowBounds row = new RowBounds(startRow,
+		limit);
+		
+		return sqlSession.selectList("CashLog.selectCashLog", null, row);
+	}
+	
+	public int countCashLog() {
+		int result =0;
+		result= sqlSession.selectOne("CashLog.countCashLog");
+		return result;
+	}
+	
+	public List<CashLog> searchCashLog(String keyword){
+		return sqlSession.selectList("CashLog.searchCashLog", keyword);
 	}
 	public List<Member> adminSearchMember(String keyword, int searchType){
 		List<Member> list = new ArrayList<Member>();

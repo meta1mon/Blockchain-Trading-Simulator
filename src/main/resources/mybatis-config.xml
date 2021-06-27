@@ -56,5 +56,6 @@
 		<mapper resource="mappers/mypage-mapper.xml" />
 		<mapper resource="mappers/report-mapper.xml" />
 		<mapper resource="mappers/cash-mapper.xml" />
+		<mapper resource="mappers/cashlog-mapper.xml" />
 	</mappers>
 </configuration>

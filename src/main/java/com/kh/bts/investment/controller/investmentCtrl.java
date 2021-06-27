@@ -20,7 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.bts.acnt.model.service.AcntService;
+import com.kh.bts.acnt.model.service.CoinAcntService;
 import com.kh.bts.acnt.model.vo.Acnt;
+import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.investment.model.service.BoughtService;
 import com.kh.bts.investment.model.service.SoldService;
 import com.kh.bts.investment.model.service.WaitBoughtService;
@@ -46,6 +48,8 @@ public class investmentCtrl {
 	private SoldService sService;
 	@Autowired
 	private AcntService aService;
+	@Autowired
+	private CoinAcntService caService;
 	
 	@RequestMapping("Chatting")
 	public ModelAndView Chatting(ModelAndView mav) {
@@ -74,6 +78,13 @@ public class investmentCtrl {
 			List<Acnt> result = aService.selectListAcnt(loginEmail);
 			Acnt acnt = result.get(0);
 			mav.addObject("acnt",acnt);
+			System.out.println("@@"+acnt.getAcntno());
+			
+			/*
+			 * String acntno = acnt.getAcntno(); List<CoinAcnt> result1 =
+			 * caService.allselectList(acntno); System.out.println(result1);
+			 * mav.addObject("coinacnt",result1);
+			 */
 			
 		}
 		mav.setViewName("investment/investmentPage");
@@ -120,6 +131,95 @@ public class investmentCtrl {
 			out.close();
 		}
 
+	}
+	@RequestMapping(value = "coinacntInsert")
+	public void CoinAcntInsert(CoinAcnt vo, HttpServletResponse response) {
+		
+		int result = caService.insertCoinAcnt(vo);
+		PrintWriter out = null;
+		try {
+			if (result > 0) {
+				System.out.println("insert성공");
+			} else {
+				System.out.println("insert실패");
+			}
+			out = response.getWriter();
+			out.print(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+
+	}
+	@RequestMapping(value = "coinacntdelete", method = RequestMethod.POST)
+	public void CoinAcntdelete(@RequestParam(name="cano") int cano,HttpServletResponse response) {
+		
+
+		System.out.println(cano);
+		int result = caService.deleteCoinAcnt(cano);
+		PrintWriter out = null;
+		try {
+			if (result > 0) {
+				System.out.println("wbdelete 성공");
+			} else {
+				System.out.println("wbdelete 실패");
+			}
+			out = response.getWriter();
+			out.print(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+	
+	}
+	// ajax 
+	@RequestMapping(value = "coinacntlists", method = RequestMethod.POST)
+	public void coinacntService(@RequestParam(name="acntno") String acntno, HttpServletResponse response) {
+		List<CoinAcnt> result = caService.allselectList(acntno);
+		PrintWriter out = null;
+		Gson gson = new GsonBuilder().create();
+		String jsonlist = gson.toJson(result);
+		
+		try {
+			
+			System.out.println("ajax select성공");
+			
+			out = response.getWriter();
+			out.print(jsonlist);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+	}
+	// ajax 
+	@RequestMapping(value = "acntlists", method = RequestMethod.POST)
+	public void acntService(@RequestParam(name="acntno") String acntno, HttpServletRequest request,HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		String loginEmail = (String) session.getAttribute("loginMember");
+		List<Acnt> result = aService.selectListAcnt(loginEmail);
+		PrintWriter out = null;
+		Gson gson = new GsonBuilder().create();
+		String jsonlist = gson.toJson(result);
+		
+		try {
+			
+			System.out.println("ajax select성공");
+			
+			out = response.getWriter();
+			out.print(jsonlist);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
 	}
 	// ajax 
 			@RequestMapping(value = "ajslists", method = RequestMethod.POST)

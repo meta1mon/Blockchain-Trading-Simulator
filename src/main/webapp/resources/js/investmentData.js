@@ -154,6 +154,135 @@ $(function() {
 					});
 				}
 			});
+	$("#select_coin_add").on(
+			"click",
+			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+				
+					var dataList = $("#frm22").serialize();
+					$.ajax({
+						url : "coinacntInsert",
+						type : "post",
+						data : dataList,
+						dataType : "json",
+						success : function(data) { // 전달받은 data를 JSON 문자열 형태로
+							// 바꾼다
+							alert("성공");
+							console.log(data);
+						
+							
+						},
+						error : function(request, status, errorData) {
+							alert("실패" + "error code : " + request.status
+									+ "\n" + "message : "
+									+ request.responseText + "\n" + "error : "
+									+ errorData);
+						}
+					});
+				
+			});
+	$("#select_coin")
+	.on(
+			"click",
+			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+				var dataList = $("#frm22").serialize();
+
+				$
+						.ajax({
+							url : "coinacntlists",
+							type : "POST",
+							data : dataList,
+							dataType : "json",
+
+							success : function(json) {
+
+								var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>계좌번호</td></tr>";
+
+								console.log(json);
+								if (json.length > 0) {
+									$
+											.each(
+													json,
+													function(
+															entryIndex,
+															entry) {
+														html1 += "<tr><td>"
+																+ entry.cano
+																+ "</td>"
+																+ "<td>"
+																+ entry.coin
+																+ "</td>"
+																+ "<td>"
+																+ entry.buycnt
+																+ "</td>"
+																+ "<td>"
+																+ entry.buyprice
+																+ "</td>"
+																+ "<td>"
+																+ entry.acntno
+																+ "</td>"
+																
+
+																+ "<td><button class='del' onclick=\"removeCoinAcnt("
+																+ entry.cano
+																+ ")\">X</button></td></tr>";
+													});
+									html1 += "</table></form>"
+								} else {
+									html1 = "<div>내용이없습니다</div>";
+								}
+
+								$("#aj_b").html(html1);
+
+							}
+
+						});
+			});
+	$("#select_acnt")
+	.on(
+			"click",
+			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+				var dataList = $("#frm22").serialize();
+				
+				$
+				.ajax({
+					url : "acntlists",
+					type : "POST",
+					data : dataList,
+					dataType : "json",
+					
+					success : function(json) {
+						
+						var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>계좌번호</td><td>계좌보유금액</td><td>이메일</td></tr>";
+						
+						console.log(json);
+						if (json.length > 0) {
+							$
+							.each(
+									json,
+									function(
+											entryIndex,
+											entry) {
+										html1 += "<tr><td>"
+											+ entry.acntno
+											+ "</td>"
+											+ "<td>"
+											+ entry.cybcash
+											+ "</td>"
+											+ "<td>"
+											+ entry.email
+											+ "</td></tr>";
+									});
+							html1 += "</table></form>"
+						} else {
+							html1 = "<div>내용이없습니다</div>";
+						}
+						
+						$("#aj_b").html(html1);
+						
+					}
+				
+				});
+			});
 	$("#bought").on(
 			"click",
 			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다

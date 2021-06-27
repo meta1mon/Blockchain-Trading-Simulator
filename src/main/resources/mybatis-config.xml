@@ -36,8 +36,8 @@
 			alias="Creport" />
 		<typeAlias type="com.kh.bts.report.model.vo.Rreport"
 			alias="Rreport" />
-		<typeAlias type="com.kh.bts.cash.model.vo.Cash"
-         alias="Cash" />
+		<typeAlias type="com.kh.bts.cash.model.vo.Cash" alias="Cash" />
+
 		<typeAlias type="com.kh.bts.cash.model.vo.CashLog"
 			alias="CashLog" />
 	</typeAliases>

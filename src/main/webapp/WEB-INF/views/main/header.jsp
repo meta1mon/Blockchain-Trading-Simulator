@@ -14,7 +14,7 @@
 	<div class="h_left">
 		<ul>
 			<li class="logo"><a href="<%=request.getContextPath()%>/mainpage"><img
-					src="http://placehold.it/120x50"></a></li>
+					src="resources/assets/img/bts_logo.png" style="border-radius:5px;"></a></li>
 			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/aboutus">About Us</a></li>
 			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/investmentpage">모의투자</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/nlist">뉴스</a></li>

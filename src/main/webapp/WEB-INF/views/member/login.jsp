@@ -23,6 +23,7 @@
 	<div id="wrapper">
 		<jsp:include page="../main/header.jsp"></jsp:include>
 		<div id="container">
+			<jsp:include page="../sub/pop.jsp"></jsp:include>
 			<div class="w500px">
 				<form action="loginmember" method="post" id="frmLogin">
 					<table class="w100">

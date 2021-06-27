@@ -10,7 +10,7 @@
 	<div class="f_left">
 		<ul>
 			<li class="f_list">고객센터</li>
-			<li class="f_list"><a class="kakao" href="#">카카오톡</a> 채널 평일 09:00~18:00</li>
+			<li class="f_list"><a class="kakao" href="http://pf.kakao.com/_ZhLns/chat" target="_blank">카카오톡</a> 채널 평일 09:00~18:00</li>
 		</ul>
 	</div>
 

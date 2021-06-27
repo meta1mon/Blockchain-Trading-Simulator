@@ -42,8 +42,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Member> adminListMember(/* int startPage, int limit */) {
-		return aDao.adminListMember(/* startPage, limit */);
+	public List<Member> adminListMember(int startPage, int limit) {
+		return aDao.adminListMember(startPage, limit);
 	}
 
 }

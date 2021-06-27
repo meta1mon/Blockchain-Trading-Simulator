@@ -3,11 +3,14 @@ package com.kh.bts.admin.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.bts.HomeController;
 import com.kh.bts.admin.model.service.AdminService;
 import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.community.model.service.CommunityService;
@@ -26,12 +30,15 @@ import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.community.model.vo.Rcommunity;
 import com.kh.bts.member.model.service.MemberService;
+import com.kh.bts.member.model.vo.Member;
+import com.kh.bts.mypage.model.service.MypageService;
 import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminCtrl {
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private MemberService mService;
 
@@ -43,6 +50,9 @@ public class AdminCtrl {
 
 	@Autowired
 	private AdminService aService;
+	
+	@Autowired
+	private MypageService myService;
 
 	public static final int LIMIT = 20;
 
@@ -172,12 +182,6 @@ public class AdminCtrl {
 	@RequestMapping(value = "/cr", method = RequestMethod.GET)
 	public ModelAndView cr(ModelAndView mv) {
 		mv.setViewName("admin/communityReport");
-		return mv;
-	}
-
-	@RequestMapping(value = "/ml", method = RequestMethod.GET)
-	public ModelAndView ml(ModelAndView mv) {
-		mv.setViewName("admin/memberList");
 		return mv;
 	}
 
@@ -370,5 +374,47 @@ public class AdminCtrl {
 			System.out.println("파일 삭제 에러 : " + e.getMessage());
 		}
 	}
+	
+	@RequestMapping(value = "/ml", method = RequestMethod.GET)
+	public ModelAndView ml(/*
+							 * @RequestParam(name="page", defaultValue = "1") int page,
+							 * 
+							 * @RequestParam(name="keyword", defaultValue="", required = false) String
+							 * keyword,
+							 * 
+							 * @RequestParam(name="searchType", defaultValue="1") int searchType,
+							 */ ModelAndView mv) {
+		/*
+		 * try { int currentPage = page; int listCount = mService.countMember(); int
+		 * maxPage = (int)((double) listCount / LIMIT + 0.9);
+		 * 
+		 * if(keyword != null && !keyword.equals("")) { mv.addObject("list",
+		 * aService.adminSearchMember(keyword, searchType)); } else {
+		 * mv.addObject("list", aService.adminListMember(currentPage, LIMIT)); }
+		 * mv.addObject("currentPage", currentPage); mv.addObject("maxPage", maxPage);
+		 * mv.addObject("listCount", listCount); mv.setViewName("admin/memberList"); }
+		 * catch (Exception e) { System.out.println(e.getMessage()); }
+		 */
+		mv.setViewName("admin/memberList");
+		List<Member> list = aService.adminListMember();
+		System.out.println(list); //왜 하나밖에 안나오지..?
+		System.out.println(list.size());
+		mv.addObject("list", list);
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/md")
+	public int deleteMember(String email, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println("선택한 이메일"+email);
+		int result = myService.myDelete(email);
+		if (result > 0) {
+			logger.info("회원 탈퇴 성공");
+		} else {
+			logger.info("회원 탈퇴 실패");
+		}
+		return result;
+	}
+	
 }
 

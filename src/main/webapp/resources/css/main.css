@@ -10,12 +10,14 @@ table {
 	text-align: center;
 }
 #c1{
-	width: 760px;
+	width: 600px;
 	height: 500px;
+	background: white;
 }
 #c2{
-	width: 760px;
+	width: 400px;
 	height: 500px;
+	background: white;
 }
 /*  #chart {
 	
@@ -25,21 +27,40 @@ table {
 } */
 
  #chart_div {
-	height: 561px;
+	height: 500px;
+	border: 1px solid #f2f2f2;
+	border-radius: 5px;
+	
 } 
 
  #cointable_div{
-	
 	height: 100%;
-	border: 1px solid;
 } 
-#chart_btn {
-	width: 760px;
-	height: 30px;
-}
+ #cointable_div a{
+ 	color: #8C66C8;
+} 
+ #cointable_div a:visited{
+ 	color: #8C66C8;
+ 	text-decoration: none;
+} 
+ #cointable_div a:active{
+ 	text-decoration: none;
+} 
 #cointable_btn {
-	width: 760px;
+	width: 960px;
 	height: 30px;
+	border: 1px solid #8C66C8;
+	border-radius: 5px;
+	color: #8C66C8;
+	background: white;
+	margin-top: 10px;
+	margin-bottom: 70px;
+}
+#cointable_btn:hover {
+	border: 1px solid #8C66C8;
+	border-radius: 5px;
+	color: white;
+	background: #8C66C8;
 }
 #new{
 	text-align:center;
@@ -48,13 +69,19 @@ table {
 	height: 10%;
 }
 .headLine {
-	border: 2px inset;
+	/* border: 2px inset; */
+	border-radius: 5px;
+	background: #f2f2f2;
 	width: 100%;
-	height: 40px;
+	height: 20px;
 	font-size: 13px;
 	overflow: hidden;
-	margin-top: 10px;
+	/* margin-top: 10px;
 	margin-bottom: 10px;
 	margin-left: 9px;
-	margin-right: auto;
+	margin-right: auto; */
+}
+
+marquee {
+	width: 960px;
 }

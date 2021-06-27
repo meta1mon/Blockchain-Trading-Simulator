@@ -15,6 +15,9 @@
     font-family: 'S-CoreDream-5Medium';
 }
 
+.shadow{
+	box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.25) !important;
+}
 
 /*ul 왼쪽 공백 padding 조절*/
 ul {
@@ -25,7 +28,7 @@ ul li {
     
     list-style: none;    
 }
-a {
+a, a:visited, a:hover, a:active, a:enabled {
     text-decoration: none;
 }
 html,body {

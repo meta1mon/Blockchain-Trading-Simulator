@@ -28,14 +28,14 @@
 		<c:choose>
 			<c:when test="${loginMember == null }">
 				<ul>
-					<li class="member"><a class="menutext" href="<%=request.getContextPath()%>/login" id="login">로그인</a></li>
-					<li class="member"><a class="menutext" href="<%=request.getContextPath()%>/signup" id="signup">회원가입</a></li>
+					<li class="menu member"><a class="menutext" href="<%=request.getContextPath()%>/login" id="login">로그인</a></li>
+					<li class="menu member"><a class="menutext" href="<%=request.getContextPath()%>/signup" id="signup">회원가입</a></li>
 				</ul>
 			</c:when>
 			<c:when test="${loginMember != null }">
 				<ul>
-					<li class="member"><a class="menutext" href="<%=request.getContextPath()%>/logout" id="logout">로그아웃</a></li>
-					<li class="member"><a class="menutext" href="<%=request.getContextPath()%>/mypage">마이페이지</a></li>
+					<li class="menu member"><a class="menutext" href="<%=request.getContextPath()%>/logout" id="logout">로그아웃</a></li>
+					<li class="menu member"><a class="menutext" href="<%=request.getContextPath()%>/mypage">마이페이지</a></li>
 				</ul>
 			</c:when>
 		</c:choose>

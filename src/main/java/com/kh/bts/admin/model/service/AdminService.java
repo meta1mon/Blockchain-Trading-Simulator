@@ -14,5 +14,5 @@ public interface AdminService {
 	public List<Cash> selectCashAll();
 	public List<Member> adminSearchMember(String keyword, int searchType);
 
-	public List<Member> adminListMember(/* int startPage, int limit */);
+	public List<Member> adminListMember(int startPage, int limit);
 }

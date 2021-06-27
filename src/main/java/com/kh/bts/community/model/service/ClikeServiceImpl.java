@@ -12,16 +12,16 @@ public class ClikeServiceImpl implements ClikeService {
 	@Autowired
 	private ClikeDao lDao;
 
-	public int insertClike(String email, String cno) {
-		return lDao.insertClike(email, cno);
+	public int insertClike(String cno, String email) {
+		return lDao.insertClike(cno, email);
 	}
 	
-	public int deleteClike(String email, String cno) {
-		return lDao.deleteClike(email, cno);
+	public int deleteClike(String cno, String email) {
+		return lDao.deleteClike(cno, email);
 	}
 	
-	public int isLike(String email, String cno) {
-		return lDao.isLike(email, cno);
+	public int isLike(String cno, String email) {
+		return lDao.isLike(cno, email);
 	}
 	
 	public int likeCount(String cno) {

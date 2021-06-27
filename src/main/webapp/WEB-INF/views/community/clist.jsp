@@ -35,19 +35,18 @@
 }
 
 #write {
-	width: 120px;
-	height: 45px;
-	float: right;
-	border: none;
-	margin-top: 30px;
-	text-align: center;
-	color: #ffffff;
-	background-color: #8C66C8;
-	font-size: 18px;
-	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-		box-shadow 0.15s ease-in-out;
-	position:relative;
-	right:80px;
+	width: 80px;
+    height: 45px;
+    float: right;
+    border: none;
+    margin-top: 30px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #8C66C8;
+    font-size: 18px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    position: relative;
+    right: 40px;
 }
 
 #write:hover {
@@ -66,7 +65,7 @@
 	float: left;
 	clear: both;
 	position:relative;
-	left:60px;
+	left:40px;
 }
 
 #searchType:hover, #searchType:focus {
@@ -75,17 +74,17 @@
 }
 
 #search {
-	width: 650px;
-	height: 45px;
-	top: 0;
-	background-color: #ffffff;
-	border: 3px solid #8C66C8;
-	font-size: 18px;
-	margin-top: 30px;
-	padding: 0;
-	float: left;
-	position:relative;
-	left:80px;
+	    width: 650px;
+    height: 45px;
+    top: 0;
+    background-color: #ffffff;
+    border: 3px solid #8C66C8;
+    font-size: 18px;
+    margin-top: 30px;
+    padding: 0;
+    float: left;
+    position: relative;
+    left: 60px;
 }
 
 #search:hover, #search:focus {
@@ -116,7 +115,7 @@
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
 	position:relative;
-	left:70px;
+	left:50px;
 }
 
 #btnsearch:hover, #btnsearch:focus {
@@ -128,21 +127,21 @@
 .ptable {
 	margin: 0 auto 0; 20 px;
 	clear: both;
-	width: 1200px;
+	width: 1000px;
 	border-collapse: collapse;
 }
 
 .ctable {
 	margin: 0 auto 0; 20 px;
 	clear: both;
-	width: 1200px;
+	width: 1000px;
 	border-collapse: collapse;
 }
 
 .ptable tr, .ctable tr {
 	border-bottom: 1px solid #eeeeee;
-	height: 45px;
-	font-size: 17px;
+	height: 35px;
+	font-size: 15px;
 }
 
 .ptable tr:hover, .ctable tr:hover {
@@ -166,13 +165,17 @@
 .replycnt:hover, .replycnt:active {
 	text-decoration: underline;
 }
+#space {
+	height: 100px;
+	border: 1px solid;
+}
 </style>
 </head>
 <%@include file="../main/header.jsp"%>
 <body class="content"
 	style="background-image: url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
 	<div
-		style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
+		style="width: 1040px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
 
 		<div class="comm">커뮤니티</div>
 		<br>
@@ -186,13 +189,13 @@
 			<table class="ptable">
 				<c:forEach var="vo" items="${plist}" varStatus="status">
 					<tr>
-						<td align="center" width="60">${vo.cno}</td>
-						<td align="left" width="370"><a
+						<td align="center" width="60" style="font-size: 13px;">${vo.cno}</td>
+						<td align="left" width="300"><a
 							href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">&nbsp;${vo.csubject}
 						</a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
 							class="replycnt">[${vo.replycnt}]</a></td>
 						<td align="center" width="100">${vo.cwriter}</td>
-						<td align="center" width="110" style="font-size: 15px;">${vo.cdate}</td>
+						<td align="center" width="110" style="font-size: 13px;">${vo.cdate}</td>
 						<td align="center" width="60">${vo.viewcnt}</td>
 						<td align="center" width="60">${vo.likecnt}</td>
 					</tr>
@@ -221,7 +224,7 @@
 		<table class="ctable">
 			<tr>
 				<td align="center" width="60">번호</td>
-				<td align="center" width="370">제목</td>
+				<td align="center" width="300">제목</td>
 				<td align="center" width="100">작성자</td>
 				<td align="center" width="110">작성일</td>
 				<td align="center" width="60">조회</td>
@@ -235,6 +238,20 @@
 				</tr>
 			</c:if>
 			<c:if test="${listCount ne 0}">
+				<c:forEach var="voNotice" items="${noticeList }" varStatus="status">
+					<tr>
+						<td align="center" style="color: #B85CEF;">공지사항</td>
+						<td align="left">
+							<a	href="cDetail?cno=${voNotice.cno}&page=${currentPage}" class="subject">
+							&nbsp;${voNotice.csubject} </a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
+							class="replycnt">[${voNotice.replycnt}]</a>
+						</td>
+						<td align="center">${voNotice.cwriter}</td>
+						<td align="center" style="font-size: 15px;">${voNotice.cdate}</td>
+						<td align="center">${voNotice.viewcnt}</td>
+						<td align="center">${voNotice.likecnt}</td>
+					</tr>
+				</c:forEach>
 				<c:forEach var="vo" items="${list}" varStatus="status">
 					<tr>
 						<td align="center">${vo.cno}</td>
@@ -298,23 +315,9 @@
 			onclick="window.location='cWriteForm'">
 			<br>
 	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	
 </body>
 <%@include file="../main/footer.jsp"%>
 </html>

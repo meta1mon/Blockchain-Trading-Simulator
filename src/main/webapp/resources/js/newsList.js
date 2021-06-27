@@ -46,6 +46,7 @@ function newsHeadLine() {
 					token : "$2y$10$hUvFjpPSDU5Gx6vp20vhGOg6Nuib3IZBzZk4cR5f.uGbRtMKN.S2m"
 				},
 				success : function(data) {
+					console.log(typeof(data));
 					// 헤드라인 : 최신 기사 10개만 출력
 					for (var i = 0; i < 10; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);

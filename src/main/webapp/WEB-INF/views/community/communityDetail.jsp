@@ -404,6 +404,61 @@ hr {
 	margin: 10px;
 }
 </style>
+<script>
+
+// 댓글 아무것도 입력 안 했을 때
+$(function(){
+       // 댓글 Insert Script
+       $('#replyForm').on('submit', function(event){
+          if($('#reply_contents').val() == "" || $('#reply_contents').val() == null){
+             alert("내용을 입력해주세요.");
+             event.preventDefault();
+          } else {
+             $('#comments').val($('#reply_contents').val());
+             return true;
+          }
+       });
+       
+// 추천, 비추천
+	function clike() {
+		if(${loginMember == null}) {
+			alert("로그인이 필요합니다");			
+		} else {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/clike",
+				type : "post",
+				data : {
+					"cno" : "${community.cno}",
+					"email": "${loginMember}"
+					
+				},
+				success : function(data) {
+					window.location.reload();
+				}
+			});
+		}
+	};
+	
+	function cdislike() {
+		if(${loginMember == null}) {
+			alert("로그인이 필요합니다");			
+		} else {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/cdislike",
+				type : "post",
+				data : {
+					"cno" : "${community.cno}",
+					"email": "${loginMember}"
+					
+				},
+				success : function(data) {
+					window.location.reload();
+				}
+			});
+		}
+	};
+</script>
+
 </head>
 
 <%@include file="../main/header.jsp"%>
@@ -422,6 +477,8 @@ hr {
   				  modalFn('my_modal_reply');
    
 			}
+			
+
 		</script>
 		<!-- 게시글 제목 부분 -->
 		<hr style="position: relative; top: 7px;">
@@ -469,16 +526,26 @@ hr {
 								<c:param name="cno" value="${community.cno}" />
 							</c:url>
 							<br> <br> <br> <br> <br>
-							<div id="like">
-								<span class="likecnt">${community.likecnt }</span>&nbsp;&nbsp;&nbsp;<img
-									class="img_like" src="resources/assets/img/like.png"
-									onclick="like(${community.cno})">
+					<!-- 추천, 비추천 -->
+					<%-- <c:if test="${already == 1 }"> // 컨트롤러에서 sql문 한 번 더 필요.
+					// 너가 10번 게시글 들어갔을 때, clike랑 cdislike 테이블에서 select문으로 where 10번이고 내 이메일;
+					//  조회한 값이 1이거나 아무튼 있으면 사진을 파란색으로
+					// 없으면 회색 사진
+					// 파란 사진
+					</c:if>
+					<c:if test = "${already == 0 }">
+					// 회색사진
+					</c:if> --%>
+							<div id="like" title="추천">
+								<span class="likecnt">${community.likecnt }</span>&nbsp;&nbsp;&nbsp;
+								<img class="img_like" src="resources/assets/img/like.png"
+								onclick="clike()">
 							</div>
 							&nbsp;&nbsp;&nbsp;
-							<div id="dislike">
+							<div id="dislike" title="비추천">
 								<img class="img_dislike" src="resources/assets/img/dislike.png"
-									onclick="dislike(${community.cno})">&nbsp;&nbsp;&nbsp;<span
-									class="dislikecnt">${community.dislikecnt }</span>
+									onclick="dislike()">&nbsp;&nbsp;&nbsp;
+									<span class="dislikecnt">${community.dislikecnt }</span>
 							</div>
 							<!-- 게시글 신고, 삭제, 수정 버튼 -->
 						</div>
@@ -504,11 +571,15 @@ hr {
 					<br>
 					<!-- 댓글 작성자명, 내용, 날짜 -->
 					<input type="hidden" id="rep_id" name="rep_id" value="${rep.rno}">
-					<a style="display: inline;"> <a class="comment_writer">
-							${rep.rwriter} &nbsp; &nbsp;</a> <a class="comment_date">
-							${rep.rdate}</a> <a class="comment_writer"> ${rep.rcontent}</a>
-
-					</a>
+						<span style="display:inline;">
+						<span class="comment_writer">
+							${rep.rwriter} &nbsp; &nbsp;</span>
+						<span class="comment_date">
+							${rep.rdate}</span>
+						<span class="comment_writer">
+							${rep.rcontent}</span>
+						
+							</span>
 					<!-- 댓글 수정, 삭제, 신고 버튼 -->
 					<button type="button" class="rupdateConfirm" name="updateConfirm"
 						id="rupdateConfirm" style="display: none;">수정완료</button>
@@ -636,11 +707,6 @@ hr {
 				<button type="button" id="btnrply" class="modal_report_btn">신고</button>
 			</div>
 		</div>
-
-		<!-- 댓글 신고 ajax -->
-		<script>
-
-      </script>
 	</div>
 	<br>
 	<br>
@@ -731,8 +797,6 @@ hr {
     
     
 // 댓글 신고 부분
-
-    
     $("#btnrply").on("click", function() {
   	  var rreport = $("input[name='rreport']:checked").val();
        $.ajax({
@@ -753,21 +817,31 @@ hr {
        });
     });
 
+
+	
+	function dislike() {
+		if(${loginMember == null}) {
+			alert("로그인이 필요합니다");			
+		} else {
+		$.ajax({
+			url : "${pageContext.request.contextPath}/cdislike",
+			type : "post",
+			data : {
+				cno : "${community.cno}"
+			},
+			datatype : "json",
+			success : function(data) {
+				alert(data);
+				window.location.reload();
+			}
+		});
+		}
+	};
     </script>
 
 
 	<script>
-    $(function(){
-       // 댓글 Insert Script
-       $('#replyForm').on('submit', function(event){
-          if($('#reply_contents').val() == ""){
-             alert(" 내용을 입력해주세요.");
-             event.preventDefault();
-          } else {
-             $('#comments').val($('#reply_contents').val());
-             return true;
-          }
-       });
+
    
 //기존 댓글 수정 & 삭제
 $(".update").on('click',function(){
@@ -827,8 +901,7 @@ $(".delete").on('click',function(){
    var parentP = $(this).parent();
       var parentDiv = parentP.parent();
       
-      if(parentDiv.find('input[name=pwd_chk]').val() !=
-parentDiv.children('input[name=rep_pwd]').val()){
+      if(parentDiv.find('input[name=pwd_chk]').val() != parentDiv.children('input[name=rep_pwd]').val()){
       alert(" 비밀번호가 일치하지 않습니다.");
       return false;
    } else {

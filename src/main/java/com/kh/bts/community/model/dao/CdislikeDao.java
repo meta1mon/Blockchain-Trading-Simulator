@@ -12,7 +12,7 @@ public class CdislikeDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public int insertCdislike(String email, String cno) {
+	public int insertCdislike(String cno, String email) {
 		Member vo = sqlSession.selectOne("Member.searchMember", email);
 		if (vo == null) {
 			System.out.println("로그인 오류");
@@ -20,11 +20,10 @@ public class CdislikeDao {
 			System.out.println("정상 로그인");
 		}
 		System.out.println("Member vo 받아옴");
-		String writer = vo.getNickname();
-		System.out.println("닉네임  받아옴");
 		Cdislike cdislike = new Cdislike();
-		cdislike.setEmail(writer);
-		int result = sqlSession.insert("cdislike.insertDislike", cno);
+		cdislike.setCno(cno);
+		cdislike.setEmail(email);
+		int result = sqlSession.insert("cdislike.insertDislike", cdislike);
 		System.out.println("##############################" + result);
 		int result2;
 		
@@ -43,7 +42,7 @@ public class CdislikeDao {
 		return result;
 	}
 	
-	public int deleteCdislike(String email, String cno) {
+	public int deleteCdislike(String cno, String email) {
 		Member vo = sqlSession.selectOne("Member.searchMember", email);
 		if (vo == null) {
 			System.out.println("로그인 오류");
@@ -51,17 +50,17 @@ public class CdislikeDao {
 			System.out.println("정상 로그인");
 		}
 		System.out.println("Member vo 받아옴");
-		String writer = vo.getNickname();
-		System.out.println("닉네임  받아옴");
 		Cdislike cdislike = new Cdislike();
-		cdislike.setEmail(writer);
-		int result = sqlSession.delete("cdislike.deleteDisike", cno);
+		cdislike.setCno(cno);
+		cdislike.setEmail(email);
+		System.out.println("cdislike : " + cdislike);
+		int result = sqlSession.delete("cdislike.deleteDislike", cdislike);
 		System.out.println("##############################" + result);
 		int result2;
 		
 		if (result > 0) {
 			System.out.println("비추천 삭제 성공");
-			result2 = sqlSession.update("cdislike.addDislikeCount", cdislike.getCno());
+			result2 = sqlSession.update("cdislike.subDislikeCount", cno);
 			if (result2 > 0) {
 				System.out.println("비추천 -1 성공");
 			} else {
@@ -74,7 +73,8 @@ public class CdislikeDao {
 		return result;
 	}
 	
-	public int isDislike(String email, String cno) {
+	public int isDislike(String cno, String email) {
+		System.out.println(email + "hihi email");
 		Member vo = sqlSession.selectOne("Member.searchMember", email);
 		if (vo == null) {
 			System.out.println("로그인 오류");
@@ -82,11 +82,12 @@ public class CdislikeDao {
 			System.out.println("정상 로그인");
 		}
 		System.out.println("Member vo 받아옴");
-		String writer = vo.getNickname();
-		System.out.println("닉네임  받아옴");
 		Cdislike cdislike = new Cdislike();
-		cdislike.setEmail(writer);
-		return sqlSession.selectOne("cdislike.selectIsDislike", cno);
+		cdislike.setCno(cno);
+		cdislike.setEmail(email);
+		int result = sqlSession.selectOne("cdislike.selectIsDislike", cdislike);
+		System.out.println("result : " + result);
+		return result;
 	}
 	
 	public int dislikeCount(String cno) {

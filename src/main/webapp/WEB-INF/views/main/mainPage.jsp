@@ -6,18 +6,13 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/main.css"
-	rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script src="${pageContext.request.contextPath}/resources/js/data.js"></script>
-<%-- <link
-	href="${pageContext.request.contextPath}/resources/css/newsList.css"
-	rel="stylesheet" type="text/css" />
-	--%>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/newsList.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/main.css"
+	rel="stylesheet" type="text/css" />
 <meta charset="UTF-8">
-<title>MainPage</title>
 <script type="text/javascript">
 function go() {
 	location.href = "<%=request.getContextPath()%>/investmentpage";
@@ -26,46 +21,39 @@ function go() {
 </head>
 <jsp:include page="../main/header.jsp"></jsp:include>
 <body>
-	<br>
-	<br>
-	<br>
-	<div id="center">
-		<table>
-			<tr>
-				<td id="c1">
-					<div id="chart">
-						<div id="chart_div"></div>
-						<button id="chart_btn" class="btn btn-outline-primary"
-							onclick="go();">거래소바로가기</button>
-					</div>
-				</td>
-				<td id="c2">
-					<div id="table">
-						<div id="cointable_div"></div>
-						<button id="cointable_btn" class="btn btn-outline-primary"
-							onclick="go();">거래소바로가기</button>
-					</div>
-				</td>
-			</tr>
-		</table>
-		<br>
-		<br>
-		<br>
-		<div id="new">
-			<div class="headLine">
-				<marquee class="scroll" onmouseover="this.stop();"
-					onmouseout="this.start();">
-					<!-- newsList.js의 newsHeadLine() 함수 참조 -->
-				</marquee>
+	<div id="wrapper">
+		<div id="container">
+			<table style="width: 100%" class="shadow">
+				<tr>
+					<td id="c1">
+						<div id="chart">
+							<div id="chart_div"></div>
+						</div>
+					</td>
+					<td id="c2">
+						<div id="table">
+							<div id="cointable_div"></div>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td colspan="2">
+						<button id="cointable_btn" onclick="go();">거래소바로가기</button>
+					</td>
+				</tr>
+			</table>
+			<div id="new">
+				<div class="headLine">
+					<marquee class="scroll" onmouseover="this.stop();"
+						onmouseout="this.start();">
+						<!-- newsList.js의 newsHeadLine() 함수 참조 -->
+					</marquee>
+				</div>
 			</div>
 		</div>
-
-
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
 </body>
 <jsp:include page="../main/footer.jsp"></jsp:include>
 </html>

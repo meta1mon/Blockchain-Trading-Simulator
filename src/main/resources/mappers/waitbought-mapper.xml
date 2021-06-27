@@ -17,8 +17,16 @@
 		DELETE FROM WAITBOUGHT WHERE UBNO = #{ubno}
 	</delete>
 	
+	
 	<select id="selectListWaitBought" parameterType="string" resultType="arraylist" resultMap="resultwaitBought">
 		SELECT * FROM WAITBOUGHT WHERE ACNTNO = #{acntno} ORDER BY WBDATE DESC
+	</select>
+	
+	<select id="selectAllCoinListWaitBought" resultType="string" >
+		SELECT DISTINCT COIN FROM WAITBOUGHT ORDER BY COIN DESC
+	</select>
+	<select id="selectAllListWaitBought" resultType="arraylist" resultMap="resultwaitBought">
+		SELECT UBNO, COIN, BUYCNT, BUYPRICE, ACNTNO FROM WAITBOUGHT ORDER BY COIN DESC
 	</select>
 	
 </mapper>

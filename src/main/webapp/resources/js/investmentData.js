@@ -1,6 +1,6 @@
 $(function() {
 	var checkpw = false;
-	coinname();
+	coinname(); // 숫자를 이름으로 변경 
 	chart();
 	$("#check2").click(function() { // 계좌 비밀번호
 		var acntList = $("#frm11").serialize();
@@ -11,7 +11,6 @@ $(function() {
 			data : acntList,
 			success : function(data) {
 				if (data == 1) {
-					console.log("맞아요:");
 					html3 += "<a style='color: green;'>성공</a>"
 					checkpw = true;
 					wblist();
@@ -27,7 +26,7 @@ $(function() {
 		})
 
 	});
-	$("#sold_b").click(function() {
+	$("#sold_b").click(function() {//  매도 활성화
 
 		$("#sold_b").css("background", "blue");
 		$("#bought_b").css("background", "white");
@@ -38,7 +37,7 @@ $(function() {
 		$("#price_s").show();
 		$("#sold").show();
 	});
-	$("#bought_b").click(function() {
+	$("#bought_b").click(function() {//  매수 활성화
 
 		$("#bought_b").css("background", "red");
 		$("#sold_b").css("background", "white");
@@ -50,26 +49,24 @@ $(function() {
 		$("#bought").show();
 	});
 
-	$("#cnt_b").keyup(function() {
+	$("#cnt_b").keyup(function() {  // 합계 구하기 매수
 		var sum = 0;
-		console.log("눌림눌림");
 		var a = $("#price_b").val();
 		var b = $("#cnt_b").val();
 		sum = a * b;
 		$("#totalprice").val(sum);
 	});
-	$("#cnt_s").keyup(function() {
+	$("#cnt_s").keyup(function() {  // 합계 구하기 매도
 		var sum = 0;
-		console.log("눌림눌림");
 		var a = $("#price_s").val();
 		var b = $("#cnt_s").val();
 		sum = a * b;
 		$("#totalprice").val(sum);
 	});
-
-	$("#sold").on(
+/////////////////////////////////////////////////////////////////////////////////////////
+	$("#sold").on(  // 미체결 매도 추가하기
 			"click",
-			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+			function() { 
 				if (checkpw == false) {
 					alert("계좌비밀번호를 입력해주세요");
 				} else {
@@ -79,10 +76,7 @@ $(function() {
 						type : "post",
 						data : dataList,
 						dataType : "json",
-						success : function(data) { // 전달받은 data를 JSON 문자열 형태로
-							// 바꾼다
-							alert("ws성공");
-							console.log(data);
+						success : function(data) { 
 							wblist();
 							wslist();
 						},
@@ -96,7 +90,7 @@ $(function() {
 				}
 			});
 
-	$("#sold").on(
+	$("#sold").on(// 체결 매도 추가하기
 			"click",
 			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 				if (checkpw == false) {
@@ -110,8 +104,6 @@ $(function() {
 						dataType : "json",
 						success : function(data) { // 전달받은 data를 JSON 문자열 형태로
 							// 바꾼다
-							alert("s성공");
-							console.log(data);
 							wblist();
 							wslist();
 						},
@@ -125,7 +117,7 @@ $(function() {
 				}
 
 			});
-	$("#bought").on(
+	$("#bought").on(  //매수 버든  체결 bought insert  미체결
 			"click",
 			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 				if (checkpw == false) {
@@ -133,13 +125,13 @@ $(function() {
 				} else {
 					var dataList = $("#frm22").serialize();
 					$.ajax({
-						url : "wbInsert",
+						url : "bInsert",
 						type : "post",
 						data : dataList,
 						dataType : "json",
 						success : function(data) { // 전달받은 data를 JSON 문자열 형태로
 							// 바꾼다
-							alert("wb성공");
+							alert("b성공");
 							console.log(data);
 							wblist();
 							wslist();
@@ -154,7 +146,34 @@ $(function() {
 					});
 				}
 			});
-	$("#select_coin_add").on(
+	$("#bought").on( //매수 버든 wait bought insert 미체결
+			"click",
+			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+				if (checkpw == false) {
+					alert("계좌비밀번호를 입력해주세요");
+				} else {
+					var dataList = $("#frm22").serialize();
+					$.ajax({
+						url : "wbInsert",
+						type : "post",
+						data : dataList,
+						dataType : "json",
+						success : function(data) { 
+							wblist();
+							wslist();
+
+						},
+						error : function(request, status, errorData) {
+							alert("실패" + "error code : " + request.status
+									+ "\n" + "message : "
+									+ request.responseText + "\n" + "error : "
+									+ errorData);
+						}
+					});
+				}
+			});
+	//////////////////////////////////////////////////////////////////////////////////////////
+	$("#select_coin_add").on( // 매수 & 매도 체결로 갈경루  코인계좌에 insert
 			"click",
 			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 				
@@ -165,10 +184,6 @@ $(function() {
 						data : dataList,
 						dataType : "json",
 						success : function(data) { // 전달받은 data를 JSON 문자열 형태로
-							// 바꾼다
-							alert("성공");
-							console.log(data);
-						
 							
 						},
 						error : function(request, status, errorData) {
@@ -180,7 +195,7 @@ $(function() {
 					});
 				
 			});
-	$("#select_coin")
+	$("#select_coin")// 매수 & 매도 체결로 갈경루  코인계좌에 조회
 	.on(
 			"click",
 			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
@@ -197,7 +212,6 @@ $(function() {
 
 								var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>계좌번호</td></tr>";
 
-								console.log(json);
 								if (json.length > 0) {
 									$
 											.each(
@@ -237,7 +251,7 @@ $(function() {
 
 						});
 			});
-	$("#select_acnt")
+	$("#select_acnt")  // 자신의 현재 자산 확인 acnt
 	.on(
 			"click",
 			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
@@ -254,7 +268,6 @@ $(function() {
 						
 						var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>계좌번호</td><td>계좌보유금액</td><td>이메일</td></tr>";
 						
-						console.log(json);
 						if (json.length > 0) {
 							$
 							.each(
@@ -283,37 +296,9 @@ $(function() {
 				
 				});
 			});
-	$("#bought").on(
-			"click",
-			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-				if (checkpw == false) {
-					alert("계좌비밀번호를 입력해주세요");
-				} else {
-					var dataList = $("#frm22").serialize();
-					$.ajax({
-						url : "bInsert",
-						type : "post",
-						data : dataList,
-						dataType : "json",
-						success : function(data) { // 전달받은 data를 JSON 문자열 형태로
-							// 바꾼다
-							alert("b성공");
-							console.log(data);
-							wblist();
-							wslist();
+	
 
-						},
-						error : function(request, status, errorData) {
-							alert("실패" + "error code : " + request.status
-									+ "\n" + "message : "
-									+ request.responseText + "\n" + "error : "
-									+ errorData);
-						}
-					});
-				}
-			});
-
-	$("#ajb")
+	$("#ajb")  // 매수 체결 내역 조회 
 			.on(
 					"click",
 					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
@@ -330,7 +315,6 @@ $(function() {
 
 										var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
 
-										console.log(json);
 										if (json.length > 0) {
 											$
 													.each(
@@ -372,7 +356,7 @@ $(function() {
 
 								});
 					});
-	$("#ajs")
+	$("#ajs")// 매도 체결 내역 조회 
 			.on(
 					"click",
 					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
@@ -389,7 +373,6 @@ $(function() {
 
 										var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
 
-										console.log(json);
 										if (json.length > 0) {
 											$
 													.each(
@@ -431,7 +414,7 @@ $(function() {
 
 								});
 					});
-	var timer1 = setInterval(function() {
+	var timer1 = setInterval(function() { // 1초마다 함수 돌림 ()
 		console.log("1초");
 		alltable();
 		// orderbook();
@@ -441,11 +424,10 @@ $(function() {
 
 });
 
-var coinList = null;
+var coinList = null;    // 전체 리스트 
 var changecoin = "BTC"; // default
 
-function alltable() {
-	console.log("table함수 들어옴");
+function alltable() {  // 전체코인 시세 표
 	var display = new Array();
 	var onedisplay = new Array();
 	var html = "";
@@ -459,13 +441,7 @@ function alltable() {
 				success : function(data) {
 					var search = $("#searchcoin").val().toString();
 					search = search.toUpperCase();
-					$("#searchcoin").on('keyup', function() {
-						// change keyup paste
-						console.log("입력받은 search값 " + search);
-					});
 					if (search == "") {
-						console.log("search 아무것도 안입력했음");
-
 						for (var i = 0; i < coinList.length; i++) {
 							display[i] = [
 									data['data'][coinList[i]]['closing_price'] * 1,
@@ -475,8 +451,6 @@ function alltable() {
 						html = "<table class='table table-striped' id='cointable' ><tr><td>코인명</td><td>현재가</td><td>등락률(24H)</td><td>거래대금</td></tr>";
 						for (var i = 0; i < coinList.length; i++) {
 							thisCoin = i;
-							// console.log(coinList[i] + "의 정보는 다음과 같다" +
-							// display[i]);
 							html += "<tr><td><a href=# onclick='changename("
 									+ thisCoin + ");'>" + coinList[i]
 									+ "</a></td><td>" + display[i][0]
@@ -510,7 +484,7 @@ function alltable() {
 				}
 			});
 };
-function wblist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+function wblist() { // 미체결 매수 ajax함수
 	var dataList = $("#frm22").serialize();
 
 	$
@@ -523,8 +497,6 @@ function wblist() { // 컨트롤러로 부터 리스트를 받아서 출력한�
 				success : function(json) {
 
 					var html1 = "<span>미채결 매수주문내역</span><form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
-
-					console.log(json);
 					if (json.length > 0) {
 						$
 								.each(
@@ -566,7 +538,7 @@ function wblist() { // 컨트롤러로 부터 리스트를 받아서 출력한�
 
 			});
 }
-function wslist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+function wslist() { // 미체결 매도 내용 함수
 	var dataList = $("#frm22").serialize();
 
 	$
@@ -580,7 +552,6 @@ function wslist() { // 컨트롤러로 부터 리스트를 받아서 출력한�
 
 					var html1 = "<br><span>미채결 매도주문내역</span><form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
 
-					console.log(json);
 					if (json.length > 0) {
 						$
 								.each(
@@ -622,7 +593,7 @@ function wslist() { // 컨트롤러로 부터 리스트를 받아서 출력한�
 
 			});
 }
-function chart() {
+function chart() { // 차트
 
 	new TradingView.widget({
 		"width" : 600,
@@ -641,7 +612,7 @@ function chart() {
 	});
 }
 
-function toname(name) {
+function toname(name) { 
 	document.getElementById("coin").value = name;
 };
 
@@ -650,20 +621,16 @@ function changename(listNum) {
 
 	if (checkstring == 'number') {
 		changecoin = coinList[listNum];
-		console.log("changename함수");
 
 	} else {
 		changecoin = listNum;
-		console.log(listNum);
 
 	}
-	console.log(changecoin);
 	toname(changecoin);
 	chart();
 };
 
 function coinname() {
-	console.log("coin name함수")
 
 	$.ajax({
 		url : 'https://api.bithumb.com/public/ticker/ALL_KRW',
@@ -677,22 +644,15 @@ function coinname() {
 		}
 	});
 };
-function removeWaitBought(ubno) {
-	alert("지우러 들어는 왔다" + ubno);
+function removeWaitBought(ubno) {  // 미체결 매수 삭제
 	$.ajax({
 		url : "wbdelete",
 		type : "post",
 		data : {
 			"ubno" : ubno
 		},
-		success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-			if (data > 0) {
-				alert("성공");
-				console.log(data);
-			} else {
-				alert("실패");
-				console.log(data);
-			}
+		success : function(data) { 
+			
 
 		},
 		error : function(request, status, errorData) {
@@ -701,8 +661,7 @@ function removeWaitBought(ubno) {
 		}
 	});
 }
-function removeBought(ubno) {
-	alert("지우러 들어는 왔다" + ubno);
+function removeBought(ubno) {  // 체결 매수 삭제
 	$.ajax({
 		url : "bdelete",
 		type : "post",
@@ -710,14 +669,6 @@ function removeBought(ubno) {
 			"ubno" : ubno
 		},
 		success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-			if (data > 0) {
-				alert("성공");
-				console.log(data);
-			} else {
-				alert("실패");
-				console.log(data);
-			}
-
 		},
 		error : function(request, status, errorData) {
 			alert("실패" + "error code : " + request.status + "\n" + "message : "
@@ -725,8 +676,7 @@ function removeBought(ubno) {
 		}
 	});
 }
-function removeWaitSold(usno) {
-	alert("지우러 들어는 왔다" + usno);
+function removeWaitSold(usno) { // 미체결 매도 삭제
 	$.ajax({
 		url : "wsdelete",
 		type : "post",
@@ -734,13 +684,6 @@ function removeWaitSold(usno) {
 			"usno" : usno
 		},
 		success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-			if (data > 0) {
-				alert("성공");
-				console.log(data);
-			} else {
-				alert("실패");
-				console.log(data);
-			}
 
 		},
 		error : function(request, status, errorData) {
@@ -749,8 +692,7 @@ function removeWaitSold(usno) {
 		}
 	});
 }
-function removeSold(usno) {
-	alert("지우러 들어는 왔다" + usno);
+function removeSold(usno) {  //체결 매도 삭제
 	$.ajax({
 		url : "sdelete",
 		type : "post",
@@ -758,13 +700,6 @@ function removeSold(usno) {
 			"usno" : usno
 		},
 		success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-			if (data > 0) {
-				alert("성공");
-				console.log(data);
-			} else {
-				alert("실패");
-				console.log(data);
-			}
 
 		},
 		error : function(request, status, errorData) {
@@ -773,6 +708,7 @@ function removeSold(usno) {
 		}
 	});
 }
+
 
 // function orderbook() {
 // console.log("orderbook함수");

@@ -10,7 +10,8 @@ header {
 	width: 100%;
 	min-width: 320px;
 	height: 64px;
-	background-color: rgb(0, 0, 0, 0.2);
+	/* 140 */
+	background-color: rgba(0, 0, 0, 0.1);
 	overflow: hidden;
 	margin: 0 auto;
 	text-align: center;
@@ -44,16 +45,19 @@ header {
 	padding: 14px 16px;
 	text-decoration: none;
 	font-size: 16px;
+	border-bottom: 1px solid transparent;
 }
-
-.menutext {
-	color: white;
-	transition: color 0.15s ease-in-out;
-}
-
-.menutext:hover {
-	color: #8C66C8;
+.menu:hover{
+	border-bottom: 3px solid #8C66C8;
 	
+}
+.menu:hover .menutext{
+	color: #8C66C8 !important;
+	
+}
+
+.menutext{
+	color: black;
 }
 .member {
 	float: right;

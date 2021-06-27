@@ -1,12 +1,16 @@
 package com.kh.bts.admin.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -15,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.bts.HomeController;
 import com.kh.bts.admin.model.service.AdminService;
 import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.community.model.service.CommunityService;
@@ -24,12 +30,15 @@ import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.community.model.vo.Rcommunity;
 import com.kh.bts.member.model.service.MemberService;
+import com.kh.bts.member.model.vo.Member;
+import com.kh.bts.mypage.model.service.MypageService;
 import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminCtrl {
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private MemberService mService;
 
@@ -41,8 +50,11 @@ public class AdminCtrl {
 
 	@Autowired
 	private AdminService aService;
+	
+	@Autowired
+	private MypageService myService;
 
-	public static final int LIMIT = 30;
+	public static final int LIMIT = 20;
 
 	@ModelAttribute("countMember")
 	public int countMember() {
@@ -90,7 +102,7 @@ public class AdminCtrl {
 			out.close();
 		}
 	}
-
+	
 // 게시글 신고 등록
 	@RequestMapping(value = "/reportCommunity")
 	public void reportCommunity(HttpServletRequest request, HttpServletResponse response, Community vo,
@@ -173,12 +185,6 @@ public class AdminCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "/ml", method = RequestMethod.GET)
-	public ModelAndView ml(ModelAndView mv) {
-		mv.setViewName("admin/memberList");
-		return mv;
-	}
-
 	@RequestMapping(value = "/cashR", method = RequestMethod.GET)
 	public ModelAndView cashR(ModelAndView mv) {
 		mv.setViewName("admin/cashRegister");
@@ -205,7 +211,7 @@ public class AdminCtrl {
 			if (keyword != null && !keyword.equals(""))
 				mv.addObject("list", cmService.selectSearch(keyword, searchType));
 			else
-				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
+				mv.addObject("list", cmService.selectNoticeList(currentPage, LIMIT));
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);
@@ -218,7 +224,7 @@ public class AdminCtrl {
 	}
 
 	@RequestMapping(value = "/nDetail", method = RequestMethod.GET)
-	public ModelAndView communityDetail(@RequestParam(name = "cno") String cno,
+	public ModelAndView noticeDetail(@RequestParam(name = "cno") String cno,
 			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
 		try {
 			int currentPage = page;
@@ -227,6 +233,81 @@ public class AdminCtrl {
 			mv.addObject("commentList", rcmService.selectList(cno));
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("admin/noticeDetail");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "nWrite", method = RequestMethod.GET)
+	public String noticeInsertForm(ModelAndView mv) {
+		return "admin/noticeWrite";
+	}
+	
+	@RequestMapping(value = "nInsert", method = RequestMethod.POST)
+	public ModelAndView noticeInsert(Community c,
+			@RequestParam(name = "upfile", required = false) MultipartFile report, HttpServletRequest request,
+			ModelAndView mv) {
+		try {
+			if (report != null && !report.equals(""))
+				saveFile(report, request);
+			c.setFilepath(report.getOriginalFilename());
+
+			String email = (String) request.getSession().getAttribute("loginMember");
+			int result = cmService.insertCommunity(c, email);
+			mv.setViewName("redirect:nl");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "nUpdateForm", method = RequestMethod.GET)
+	public ModelAndView communityDetail(@RequestParam(name = "cno") String cno, ModelAndView mv) {
+		try {
+			mv.addObject("community", cmService.selectCommunity(1, cno));
+			mv.setViewName("admin/noticeUpdate");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "nUpdate", method = RequestMethod.POST)
+	public ModelAndView communityUpdate(Community c, @RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam("upfile") MultipartFile report, HttpServletRequest request, ModelAndView mv) {
+		try {
+			if (report != null && !report.equals("")) {
+				removeFile(c.getFilepath(), request);
+				saveFile(report, request);
+			}
+			c.setFilepath(report.getOriginalFilename());
+
+			String email = (String) request.getSession().getAttribute("loginMember");
+			mv.addObject("cno", cmService.updateCommunity(c, email).getCno());
+			mv.addObject("currentPage", page);
+			mv.setViewName("redirect:nDetail");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
+		}
+		return mv;
+	}
+
+	@RequestMapping(value = "nDelete", method = RequestMethod.GET)
+	public ModelAndView communityDelete(@RequestParam(name = "cno") String cno,
+			@RequestParam(name = "page", defaultValue = "1") int page, HttpServletRequest request, ModelAndView mv) {
+		try {
+			Community c = cmService.selectCommunity(1, cno);
+			removeFile(c.getFilepath(), request);
+
+			String email = (String) request.getSession().getAttribute("loginMember");
+			cmService.deleteCommunity(cno, email);
+			mv.addObject("currentPage", page);
+			mv.setViewName("redirect:nl");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");
@@ -256,4 +337,84 @@ public class AdminCtrl {
 		return strResult;
 	}
 
+	private void saveFile(MultipartFile report, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\uploadFiles";
+		File folder = new File(savePath);
+		if (!folder.exists()) {
+			folder.mkdir(); // 폴더가 없다면 생성한다.
+		}
+		String filePath = null;
+		try {
+			// 파일 저장
+			System.out.println(report.getOriginalFilename() + "을 저장합니다.");
+			System.out.println("저장 경로 : " + savePath);
+			filePath = folder + "\\" + report.getOriginalFilename();
+			report.transferTo(new File(filePath)); // 파일을 저장한다
+			System.out.println("파일 명 : " + report.getOriginalFilename());
+			System.out.println("파일 경로 : " + filePath);
+			System.out.println("파일 전송이 완료되었습니다.");
+		} catch (Exception e) {
+			System.out.println("파일 전송 에러 : " + e.getMessage());
+		}
+	}
+	
+	private void removeFile(String filepath, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\uploadFiles";
+		String filePath = savePath + "\\" + filepath;
+		try {
+			// 파일 저장
+			System.out.println(filepath + "을 삭제합니다.");
+			System.out.println("기존 저장 경로 : " + savePath);
+			File delFile = new File(filePath);
+			delFile.delete();
+			System.out.println("파일 삭제가 완료되었습니다.");
+		} catch (Exception e) {
+			System.out.println("파일 삭제 에러 : " + e.getMessage());
+		}
+	}
+	
+	@RequestMapping(value = "/ml", method = RequestMethod.GET)
+	public ModelAndView ml(/*
+							 * @RequestParam(name="page", defaultValue = "1") int page,
+							 * 
+							 * @RequestParam(name="keyword", defaultValue="", required = false) String
+							 * keyword,
+							 * 
+							 * @RequestParam(name="searchType", defaultValue="1") int searchType,
+							 */ ModelAndView mv) {
+		/*
+		 * try { int currentPage = page; int listCount = mService.countMember(); int
+		 * maxPage = (int)((double) listCount / LIMIT + 0.9);
+		 * 
+		 * if(keyword != null && !keyword.equals("")) { mv.addObject("list",
+		 * aService.adminSearchMember(keyword, searchType)); } else {
+		 * mv.addObject("list", aService.adminListMember(currentPage, LIMIT)); }
+		 * mv.addObject("currentPage", currentPage); mv.addObject("maxPage", maxPage);
+		 * mv.addObject("listCount", listCount); mv.setViewName("admin/memberList"); }
+		 * catch (Exception e) { System.out.println(e.getMessage()); }
+		 */
+		mv.setViewName("admin/memberList");
+		List<Member> list = aService.adminListMember();
+		System.out.println(list); //왜 하나밖에 안나오지..?
+		System.out.println(list.size());
+		mv.addObject("list", list);
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/md")
+	public int deleteMember(String email, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println("선택한 이메일"+email);
+		int result = myService.myDelete(email);
+		if (result > 0) {
+			logger.info("회원 탈퇴 성공");
+		} else {
+			logger.info("회원 탈퇴 실패");
+		}
+		return result;
+	}
+	
 }
+

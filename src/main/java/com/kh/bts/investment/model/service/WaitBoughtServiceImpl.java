@@ -37,4 +37,20 @@ public class WaitBoughtServiceImpl implements WaitBoughtService {
 		return wbDao.selectList(acntno);
 	}
 
+
+
+	@Override
+	public List<WaitBought> selectAllCoinListWaitBought() {
+		// TODO Auto-generated method stub
+		return wbDao.selectAllCoinListWaitBought();
+	}
+
+
+
+	@Override
+	public List<WaitBought> selectAllListWaitBought() {
+		// TODO Auto-generated method stub
+		return wbDao.selectAllListWaitBought();
+	}
+
 }

@@ -17,29 +17,29 @@ public class ClikeCtrl {
 	@Autowired
 	private ClikeService lService;
 
-	@RequestMapping(value = "clike", method = RequestMethod.GET)
-	public ModelAndView communityDetail(@RequestParam(name = "cno") String cno, HttpServletRequest request,
+	@RequestMapping(value = "clike", method = RequestMethod.POST)
+	public void communityDetail(@RequestParam(name = "cno") String cno, HttpServletRequest request,
 			HttpServletResponse response, ModelAndView mv) {
+
+		// 이메일 가져오기
+		String email = (String) request.getSession().getAttribute("loginMember");
 
 		// 이미 추천했는지 판단
 		int isLike = 0;
-
 		try {
-			String email = (String) request.getSession().getAttribute("loginMember");
-			isLike = lService.insertClike(email, cno);
-			if (isLike == 1) { // 이미 추천했음 => 추천 취소
-				mv.addObject("community", lService.deleteClike(email, cno));
+
+			isLike = lService.isLike(cno, email);
+			System.out.println("isLike : " + isLike);
+			if (isLike > 0) { // 이미 추천했음 => 추천 취소
+				mv.addObject("community", lService.deleteClike(cno, email));
 
 			} else if (isLike == 0) { // 추천 안했음 => 추천 실행
-				mv.addObject("community", lService.insertClike(email, cno));
+				mv.addObject("community", lService.insertClike(cno, email));
 
 			}
-
-			mv.setViewName("redirect:cDetail");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");
 		}
-		return mv;
 	}
 }

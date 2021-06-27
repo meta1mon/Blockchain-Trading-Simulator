@@ -35,19 +35,18 @@
 }
 
 #write {
-	width: 120px;
-	height: 45px;
-	float: right;
-	border: none;
-	margin-top: 30px;
-	text-align: center;
-	color: #ffffff;
-	background-color: #8C66C8;
-	font-size: 18px;
-	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-		box-shadow 0.15s ease-in-out;
-	position:relative;
-	right:80px;
+	width: 80px;
+    height: 45px;
+    float: right;
+    border: none;
+    margin-top: 30px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #8C66C8;
+    font-size: 18px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    position: relative;
+    right: 40px;
 }
 
 #write:hover {
@@ -66,7 +65,7 @@
 	float: left;
 	clear: both;
 	position:relative;
-	left:60px;
+	left:40px;
 }
 
 #searchType:hover, #searchType:focus {
@@ -75,17 +74,17 @@
 }
 
 #search {
-	width: 650px;
-	height: 45px;
-	top: 0;
-	background-color: #ffffff;
-	border: 3px solid #8C66C8;
-	font-size: 18px;
-	margin-top: 30px;
-	padding: 0;
-	float: left;
-	position:relative;
-	left:80px;
+	    width: 650px;
+    height: 45px;
+    top: 0;
+    background-color: #ffffff;
+    border: 3px solid #8C66C8;
+    font-size: 18px;
+    margin-top: 30px;
+    padding: 0;
+    float: left;
+    position: relative;
+    left: 60px;
 }
 
 #search:hover, #search:focus {
@@ -116,7 +115,7 @@
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
 	position:relative;
-	left:70px;
+	left:50px;
 }
 
 #btnsearch:hover, #btnsearch:focus {

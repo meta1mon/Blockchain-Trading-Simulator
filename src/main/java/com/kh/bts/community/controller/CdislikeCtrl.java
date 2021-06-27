@@ -29,7 +29,7 @@ public class CdislikeCtrl {
 		try {
 
 			isDislike = dlService.isDislike(cno, email);
-			System.out.println("isDislike : " + isDislike);
+			System.out.println("컨트롤러 isDislike : " + isDislike);
 			if (isDislike > 0) { // 이미 추천했음 => 추천 취소
 				dlService.deleteCdislike(cno, email);
 

@@ -11,7 +11,7 @@
 	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 <style>
 .ck.ck-editor {
-	max-width: 1200px;
+	max-width: 1000px;
 }
 
 .ck-editor__editable {
@@ -39,7 +39,7 @@
 	height: 40px;
 	font-size: 15px;
 	box-sizing: border-box;
-	width: 1200px;
+	width: 1000px;
 	background-color: #FBFBFC;
 	border: 1px solid #D5D5D5;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
@@ -132,7 +132,7 @@ input #file-upload-button {
 <body class="content"
 	style="background-image: url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
 	<div
-		style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
+		style="width: 1040px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
 		<div class="comm">글 쓰기</div>
 		<br>
 		<br>
@@ -173,9 +173,7 @@ input #file-upload-button {
 					    } );
 				    </script>
 	</div>
-	<br>
-	<br>
-	<br>
+<br>
 	<br>
 	<br>
 	<br>

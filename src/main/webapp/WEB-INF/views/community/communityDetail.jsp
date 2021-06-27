@@ -15,8 +15,8 @@
 }
 
 .ck.ck-editor {
-	max-width: 1000px;
-	min-width: 1000px;
+	max-width: 800px;
+	min-width: 800px;
 	margin-left: 20px;
 	position: relative;
 	top: 6px;
@@ -71,7 +71,7 @@ none
 
 #table {
 	border: none;
-	width: 1200px;
+	width: 1000px;
 	margin: 0 auto;
 }
 
@@ -173,7 +173,7 @@ none
 	margin: 0 auto;
 	background-color: #FAFAFA;
 	padding: 20px 0 35px 0;
-	width: 1200px;
+	width: 1000px;
 	border-bottom: 1px solid #999;
 }
 
@@ -188,7 +188,7 @@ none
 	margin: 0 auto;
 	font-size: 18px;
 	position: relative;
-	left: 500px;
+	left: 420px;
 	display: inline;
 	color: #d31900;
 }
@@ -198,7 +198,7 @@ none
 	margin: 0 auto;
 	font-size: 18px;
 	position: relative;
-	left: 500px;
+	left: 420px;
 	display: inline;
 }
 
@@ -219,7 +219,7 @@ none
 hr {
 	/* background-color:#black;
    border: 1px solid #black; */
-	width: 1200px;
+	width: 1000px;
 	margin: auto;
 }
 
@@ -291,7 +291,7 @@ hr {
 }
 
 #comment {
-	width: 1160px;
+	width: 960px;
 	margin: 0 40px 0 40px;
 	border-top: 1px solid #eeeeee;
 }
@@ -343,7 +343,7 @@ hr {
 
 #needlogin {
 	margin: 10px auto 0 auto;
-	width: 1200px;
+	width: 1000px;
 	line-height: 200px;
 	text-align: left;
 	color: black;
@@ -419,44 +419,7 @@ $(function(){
           }
        });
        
-// 추천, 비추천
-	function clike() {
-		if(${loginMember == null}) {
-			alert("로그인이 필요합니다");			
-		} else {
-			$.ajax({
-				url : "${pageContext.request.contextPath}/clike",
-				type : "post",
-				data : {
-					"cno" : "${community.cno}",
-					"email": "${loginMember}"
-					
-				},
-				success : function(data) {
-					window.location.reload();
-				}
-			});
-		}
-	};
-	
-	function cdislike() {
-		if(${loginMember == null}) {
-			alert("로그인이 필요합니다");			
-		} else {
-			$.ajax({
-				url : "${pageContext.request.contextPath}/cdislike",
-				type : "post",
-				data : {
-					"cno" : "${community.cno}",
-					"email": "${loginMember}"
-					
-				},
-				success : function(data) {
-					window.location.reload();
-				}
-			});
-		}
-	};
+
 </script>
 
 </head>
@@ -465,7 +428,7 @@ $(function(){
 <body class="content"
 	style="background-image: url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
 	<div
-		style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
+		style="width: 1040px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
 		<div class="comm">커뮤니티</div>
 		<br>
 
@@ -477,8 +440,6 @@ $(function(){
   				  modalFn('my_modal_reply');
    
 			}
-			
-
 		</script>
 		<!-- 게시글 제목 부분 -->
 		<hr style="position: relative; top: 7px;">
@@ -526,16 +487,6 @@ $(function(){
 								<c:param name="cno" value="${community.cno}" />
 							</c:url>
 							<br> <br> <br> <br> <br>
-					<!-- 추천, 비추천 -->
-					<%-- <c:if test="${already == 1 }"> // 컨트롤러에서 sql문 한 번 더 필요.
-					// 너가 10번 게시글 들어갔을 때, clike랑 cdislike 테이블에서 select문으로 where 10번이고 내 이메일;
-					//  조회한 값이 1이거나 아무튼 있으면 사진을 파란색으로
-					// 없으면 회색 사진
-					// 파란 사진
-					</c:if>
-					<c:if test = "${already == 0 }">
-					// 회색사진
-					</c:if> --%>
 							<div id="like" title="추천">
 								<span class="likecnt">${community.likecnt }</span>&nbsp;&nbsp;&nbsp;
 								<img class="img_like" src="resources/assets/img/like.png"
@@ -715,8 +666,6 @@ $(function(){
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
 	<script>
    var bg = null;
    var modal = null;
@@ -835,6 +784,45 @@ $(function(){
 				window.location.reload();
 			}
 		});
+		}
+	};
+	
+	// 추천, 비추천
+	function clike() {
+		if(${loginMember == null}) {
+			alert("로그인이 필요합니다");			
+		} else {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/clike",
+				type : "post",
+				data : {
+					"cno" : "${community.cno}",
+					"email": "${loginMember}"
+					
+				},
+				success : function(data) {
+					window.location.reload();
+				}
+			});
+		}
+	};
+	
+	function cdislike() {
+		if(${loginMember == null}) {
+			alert("로그인이 필요합니다");			
+		} else {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/cdislike",
+				type : "post",
+				data : {
+					"cno" : "${community.cno}",
+					"email": "${loginMember}"
+					
+				},
+				success : function(data) {
+					window.location.reload();
+				}
+			});
 		}
 	};
     </script>

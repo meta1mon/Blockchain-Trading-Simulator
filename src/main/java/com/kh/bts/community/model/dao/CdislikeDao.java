@@ -74,7 +74,7 @@ public class CdislikeDao {
 	}
 	
 	public int isDislike(String cno, String email) {
-		System.out.println(email + "hihi email");
+		System.out.println("cno : " + cno + ", email : " + email);
 		Member vo = sqlSession.selectOne("Member.searchMember", email);
 		if (vo == null) {
 			System.out.println("로그인 오류");
@@ -86,7 +86,7 @@ public class CdislikeDao {
 		cdislike.setCno(cno);
 		cdislike.setEmail(email);
 		int result = sqlSession.selectOne("cdislike.selectIsDislike", cdislike);
-		System.out.println("result : " + result);
+		System.out.println("isDislike Dao result : " + result);
 		return result;
 	}
 	

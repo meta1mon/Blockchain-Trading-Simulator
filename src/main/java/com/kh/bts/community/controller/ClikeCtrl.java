@@ -29,12 +29,12 @@ public class ClikeCtrl {
 		try {
 
 			isLike = lService.isLike(cno, email);
-			System.out.println("isLike : " + isLike);
+			System.out.println("컨트롤러 isLike : " + isLike);
 			if (isLike > 0) { // 이미 추천했음 => 추천 취소
-				mv.addObject("community", lService.deleteClike(cno, email));
+				lService.deleteClike(cno, email);
 
 			} else if (isLike == 0) { // 추천 안했음 => 추천 실행
-				mv.addObject("community", lService.insertClike(cno, email));
+				lService.insertClike(cno, email);
 
 			}
 		} catch (Exception e) {

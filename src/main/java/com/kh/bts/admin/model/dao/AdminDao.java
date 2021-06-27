@@ -50,11 +50,11 @@ public class AdminDao {
 		return list;
 	}
 	
-	public List<Member> adminListMember(/* int startPage, int limit */){
-		/*
-		 * int startRow = (startPage -1)*limit; RowBounds row = new RowBounds(startRow,
-		 * limit);
-		 */
-		return sqlSession.selectList("Member.adminListMember"/* , null, row */);
+	public List<Member> adminListMember(int startPage, int limit){
+		
+		int startRow = (startPage -1)*limit; RowBounds row = new RowBounds(startRow,
+		limit);
+		
+		return sqlSession.selectList("Member.adminListMember", null, row);
 	}
 }

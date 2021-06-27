@@ -376,30 +376,26 @@ public class AdminCtrl {
 	}
 	
 	@RequestMapping(value = "/ml", method = RequestMethod.GET)
-	public ModelAndView ml(/*
-							 * @RequestParam(name="page", defaultValue = "1") int page,
-							 * 
-							 * @RequestParam(name="keyword", defaultValue="", required = false) String
-							 * keyword,
-							 * 
-							 * @RequestParam(name="searchType", defaultValue="1") int searchType,
-							 */ ModelAndView mv) {
-		/*
-		 * try { int currentPage = page; int listCount = mService.countMember(); int
-		 * maxPage = (int)((double) listCount / LIMIT + 0.9);
-		 * 
-		 * if(keyword != null && !keyword.equals("")) { mv.addObject("list",
-		 * aService.adminSearchMember(keyword, searchType)); } else {
-		 * mv.addObject("list", aService.adminListMember(currentPage, LIMIT)); }
-		 * mv.addObject("currentPage", currentPage); mv.addObject("maxPage", maxPage);
-		 * mv.addObject("listCount", listCount); mv.setViewName("admin/memberList"); }
-		 * catch (Exception e) { System.out.println(e.getMessage()); }
-		 */
+	public ModelAndView ml(
+						@RequestParam(name="page", defaultValue = "1") int page,
+						
+						@RequestParam(name="keyword", defaultValue="", required = false) String
+						keyword,
+						
+						@RequestParam(name="searchType", defaultValue="1") int searchType,
+						 ModelAndView mv) {
+		
+		try { int currentPage = page; int listCount = mService.countMember(); int
+		maxPage = (int)((double) listCount / LIMIT + 0.9);
+		
+		if(keyword != null && !keyword.equals("")) { mv.addObject("list",
+		aService.adminSearchMember(keyword, searchType)); } else {
+		mv.addObject("list", aService.adminListMember(currentPage, LIMIT)); }
+		mv.addObject("currentPage", currentPage); mv.addObject("maxPage", maxPage);
+		mv.addObject("listCount", listCount); mv.setViewName("admin/memberList"); }
+		catch (Exception e) { System.out.println(e.getMessage()); }
+		
 		mv.setViewName("admin/memberList");
-		List<Member> list = aService.adminListMember();
-		System.out.println(list); //왜 하나밖에 안나오지..?
-		System.out.println(list.size());
-		mv.addObject("list", list);
 		return mv;
 	}
 	

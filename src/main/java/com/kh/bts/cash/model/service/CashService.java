@@ -4,6 +4,6 @@ import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.cash.model.vo.CashLog;
 
 public interface CashService {
-	public int chargeCash(String email, int won);
+	public int chargeCash(String email, int won, int sellprice);
 	
 }

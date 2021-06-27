@@ -21,6 +21,31 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
 <script type="text/javascript">
+	function removeCoinAcnt(cano) {
+		alert("지우러 들어는 왔다" + cano);
+		$.ajax({
+			url : "coinacntdelete",
+			type : "post",
+			data : {
+				"cano" : cano
+			},
+			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
+				if (data > 0) {
+					alert("성공");
+					console.log(data);
+				} else {
+					alert("실패");
+					console.log(data);
+				}
+
+			},
+			error : function(request, status, errorData) {
+				alert("실패" + "error code : " + request.status + "\n"
+						+ "message : " + request.responseText + "\n"
+						+ "error : " + errorData);
+			}
+		});
+	}
 	function removeWaitBought(ubno) {
 		alert("지우러 들어는 왔다" + ubno);
 		$.ajax({
@@ -219,10 +244,11 @@
 										<tr>
 											<td><button value="" id="bought_b">매수</button>
 												<button value="" id="sold_b">매도</button>
-												<button value="" id="ajwb">ajwb</button>
-												<button value="" id="ajws">ajws</button>
-												<button value="" id="ajb">ajb</button>
-												<button value="" id="ajs">ajs</button></td>
+												<button value="" id="select_coin">select_coin</button>
+												<button value="" id="select_acnt">select_acnt</button>
+												
+												<button value="" id="select_coin_add">select_coin_add</button>
+												<button value="" id="select_coin_insert">select_coin_insert</button></td>
 											<!-- <button value="" id="noaj" onclick="location.href='wblists'">결과나와라</button> -->
 										</tr>
 									</table>

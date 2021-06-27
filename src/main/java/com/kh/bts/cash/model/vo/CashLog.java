@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class CashLog {
 	private int clno;
 	private String cashdate;
-	private String acnto;
+	private String acntno;
 	private String email;
 	private int won;
 	private int sellprice;
@@ -14,11 +14,11 @@ public class CashLog {
 	public CashLog() {
 	}
 
-	public CashLog(int clno, String cashdate, String acnto, String email, int won, int sellprice) {
+	public CashLog(int clno, String cashdate, String acntno, String email, int won, int sellprice) {
 		super();
 		this.clno = clno;
 		this.cashdate = cashdate;
-		this.acnto = acnto;
+		this.acntno = acntno;
 		this.email = email;
 		this.won = won;
 		this.sellprice = sellprice;
@@ -40,12 +40,12 @@ public class CashLog {
 		this.cashdate = cashdate;
 	}
 
-	public String getAcnto() {
-		return acnto;
+	public String getAcntno() {
+		return acntno;
 	}
 
-	public void setAcnto(String acnto) {
-		this.acnto = acnto;
+	public void setAcntno(String acntno) {
+		this.acntno = acntno;
 	}
 
 	public String getEmail() {
@@ -74,7 +74,7 @@ public class CashLog {
 
 	@Override
 	public String toString() {
-		return "CashLog [clno=" + clno + ", cashdate=" + cashdate + ", acnto=" + acnto + ", email=" + email + ", won="
+		return "CashLog [clno=" + clno + ", cashdate=" + cashdate + ", acnto=" + acntno + ", email=" + email + ", won="
 				+ won + ", sellprice=" + sellprice + "]";
 	}
 

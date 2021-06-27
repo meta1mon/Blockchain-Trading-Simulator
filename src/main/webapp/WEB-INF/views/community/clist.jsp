@@ -23,6 +23,9 @@
 	function showInsertForm() {
 		location.href = "cwriteForm";
 	}
+	$(function() {
+		$('.footer-container').css('position','relative');
+	});
 </script>
 
 <style>
@@ -165,6 +168,10 @@
 .replycnt:hover, .replycnt:active {
 	text-decoration: underline;
 }
+#space {
+	height: 100px;
+	border: 1px solid;
+}
 </style>
 </head>
 <%@include file="../main/header.jsp"%>
@@ -234,6 +241,20 @@
 				</tr>
 			</c:if>
 			<c:if test="${listCount ne 0}">
+				<c:forEach var="voNotice" items="${noticeList }" varStatus="status">
+					<tr>
+						<td align="center" style="color: #B85CEF;">공지사항</td>
+						<td align="left">
+							<a	href="cDetail?cno=${voNotice.cno}&page=${currentPage}" class="subject">
+							&nbsp;${voNotice.csubject} </a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
+							class="replycnt">[${voNotice.replycnt}]</a>
+						</td>
+						<td align="center">${voNotice.cwriter}</td>
+						<td align="center" style="font-size: 15px;">${voNotice.cdate}</td>
+						<td align="center">${voNotice.viewcnt}</td>
+						<td align="center">${voNotice.likecnt}</td>
+					</tr>
+				</c:forEach>
 				<c:forEach var="vo" items="${list}" varStatus="status">
 					<tr>
 						<td align="center">${vo.cno}</td>
@@ -297,23 +318,9 @@
 			onclick="window.location='cWriteForm'">
 			<br>
 	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	
 </body>
 <%@include file="../main/footer.jsp"%>
 </html>

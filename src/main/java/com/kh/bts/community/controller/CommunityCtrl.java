@@ -36,10 +36,14 @@ public class CommunityCtrl {
 			int listCount = cmService.totalCount();
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 
-			if (keyword != null && !keyword.equals(""))
+			if (keyword != null && !keyword.equals("")) {
 				mv.addObject("list", cmService.selectSearch(keyword, searchType));
-			else
+				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
+			}
+			else {
 				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
+				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
+			}
 			mv.addObject("plist", cmService.searchpopularList());
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);

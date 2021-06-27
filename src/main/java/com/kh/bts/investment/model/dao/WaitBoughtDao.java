@@ -26,4 +26,13 @@ public class WaitBoughtDao {
 	public List<WaitBought> selectList(String acntno){
 		return sqlSession.selectList("waitBought.selectListWaitBought", acntno);
 	}
+	
+	
+	
+	public List<WaitBought> selectAllCoinListWaitBought(){
+		return sqlSession.selectList("waitBought.selectAllCoinListWaitBought");
+	}
+	public List<WaitBought> selectAllListWaitBought(){
+		return sqlSession.selectList("waitBought.selectAllListWaitBought");
+	}
 }

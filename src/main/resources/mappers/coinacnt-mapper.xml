@@ -6,6 +6,7 @@
 		resultType="CoinAcnt">
 		SELECT * FROM COINACNT WHERE ACNTNO = #{acntno}
 	</select>
+
 	
 	<!-- 미체결 삽입 -->
 	<insert id="insertCoinAcnt" parameterType="CoinAcnt" flushCache="true"

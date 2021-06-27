@@ -51,6 +51,19 @@ public class investmentCtrl {
 	@Autowired
 	private CoinAcntService caService;
 	
+	@RequestMapping("trade")
+	public ModelAndView trade(ModelAndView mav) {
+		List<WaitBought> waitblist = wbService.selectAllCoinListWaitBought();
+		mav.addObject("waitblist",waitblist);
+		List<WaitBought> waitresult = wbService.selectAllListWaitBought();
+		mav.addObject("waitresult",waitresult);
+		System.out.println(waitblist);
+		System.out.println(waitresult);
+		
+		mav.setViewName("investment/trade");
+		return mav;
+	}
+	
 	@RequestMapping("Chatting")
 	public ModelAndView Chatting(ModelAndView mav) {
 		mav.setViewName("sub/chatting");
@@ -72,6 +85,13 @@ public class investmentCtrl {
 		if(loginEmail == null) {
 			System.out.println("비회원입니다");
 		} else {
+			List<WaitBought> waitblist = wbService.selectAllCoinListWaitBought();
+			mav.addObject("waitblist",waitblist);
+			List<WaitBought> waitresult = wbService.selectAllListWaitBought();
+			mav.addObject("waitresult",waitresult);
+			
+			System.out.println(waitblist);
+			System.out.println(waitresult);
 			
 			System.out.println(loginEmail);
 			mav.addObject("email",loginEmail);
@@ -367,6 +387,19 @@ public class investmentCtrl {
 	public void WaitBoughtListService(@RequestParam(name="acntno") String acntno, HttpServletResponse response) {
 		System.out.println(acntno);
 		List<WaitBought> result = wbService.selectListWaitBought(acntno);
+		String[] coinArr = new String[result.size()];
+		for(int i =0; i < result.size(); i ++) {
+			 for (int j = 0; j < i; j++) {
+				 coinArr[i] = result.get(i).getCoin();
+	                if (coinArr[i] == coinArr[j]) {
+	                    i--;
+	                }
+			}
+		}
+		System.out.println(coinArr.length);
+		System.out.println(coinArr[0]);
+		System.out.println(coinArr[1]);
+		System.out.println(coinArr[2]);
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(result);

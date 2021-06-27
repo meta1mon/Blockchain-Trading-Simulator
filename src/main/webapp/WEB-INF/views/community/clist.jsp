@@ -128,21 +128,21 @@
 .ptable {
 	margin: 0 auto 0; 20 px;
 	clear: both;
-	width: 1200px;
+	width: 1000px;
 	border-collapse: collapse;
 }
 
 .ctable {
 	margin: 0 auto 0; 20 px;
 	clear: both;
-	width: 1200px;
+	width: 1000px;
 	border-collapse: collapse;
 }
 
 .ptable tr, .ctable tr {
 	border-bottom: 1px solid #eeeeee;
-	height: 45px;
-	font-size: 17px;
+	height: 35px;
+	font-size: 15px;
 }
 
 .ptable tr:hover, .ctable tr:hover {
@@ -172,7 +172,7 @@
 <body class="content"
 	style="background-image: url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
 	<div
-		style="width: 1240px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
+		style="width: 1040px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
 
 		<div class="comm">커뮤니티</div>
 		<br>
@@ -186,13 +186,13 @@
 			<table class="ptable">
 				<c:forEach var="vo" items="${plist}" varStatus="status">
 					<tr>
-						<td align="center" width="60">${vo.cno}</td>
-						<td align="left" width="370"><a
+						<td align="center" width="60" style="font-size: 13px;">${vo.cno}</td>
+						<td align="left" width="300"><a
 							href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">&nbsp;${vo.csubject}
 						</a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
 							class="replycnt">[${vo.replycnt}]</a></td>
 						<td align="center" width="100">${vo.cwriter}</td>
-						<td align="center" width="110" style="font-size: 15px;">${vo.cdate}</td>
+						<td align="center" width="110" style="font-size: 13px;">${vo.cdate}</td>
 						<td align="center" width="60">${vo.viewcnt}</td>
 						<td align="center" width="60">${vo.likecnt}</td>
 					</tr>
@@ -221,7 +221,7 @@
 		<table class="ctable">
 			<tr>
 				<td align="center" width="60">번호</td>
-				<td align="center" width="370">제목</td>
+				<td align="center" width="300">제목</td>
 				<td align="center" width="100">작성자</td>
 				<td align="center" width="110">작성일</td>
 				<td align="center" width="60">조회</td>

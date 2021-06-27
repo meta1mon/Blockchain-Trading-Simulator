@@ -486,15 +486,15 @@ hr {
 					<br>
 					<!-- 댓글 작성자명, 내용, 날짜 -->
 					<input type="hidden" id="rep_id" name="rep_id" value="${rep.rno}">
-						<a style="display:inline;">
-						<a class="comment_writer">
-							${rep.rwriter} &nbsp; &nbsp;</a>
-						<a class="comment_date">
-							${rep.rdate}</a>
-						<a class="comment_writer">
-							${rep.rcontent}</a>
+						<span style="display:inline;">
+						<span class="comment_writer">
+							${rep.rwriter} &nbsp; &nbsp;</span>
+						<span class="comment_date">
+							${rep.rdate}</span>
+						<span class="comment_writer">
+							${rep.rcontent}</span>
 						
-							</a>
+							</span>
 					<!-- 댓글 수정, 삭제, 신고 버튼 -->
 					<button type="button" class="rupdateConfirm" name="updateConfirm"
 						id="rupdateConfirm" style="display: none;">수정완료</button>
@@ -702,8 +702,6 @@ hr {
     
     
 // 댓글 신고 부분
-
-    
     $("#btnrply").on("click", function() {
   	  var rreport = $("input[name='rreport']:checked").val();
        $.ajax({

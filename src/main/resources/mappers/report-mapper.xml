@@ -3,6 +3,8 @@
 <mapper namespace="report">
 	<resultMap type="Creport" id="Creport">
 	</resultMap>
+	<resultMap type="Rreport" id="Rreport">
+	</resultMap>
 
 	<!-- 신고 게시글 삽입 -->
 	<insert id="insertCreport" parameterType="Creport"
@@ -34,5 +36,11 @@
 	<select id="selectCreport" resultType="arraylist" resultMap="Creport">
 		SELECT CRNO, CNO, CR.CSUBJECT, CR.CCONTENT, CRESPONDENT, CREPORTER, CRREASON, CRDATE FROM CREPORT CR JOIN COMMUNITY USING (CNO)
 		ORDER BY CRDATE DESC
+	</select>
+	
+	<!-- 관리자 페이지 신고 댓글 조회 -->
+	<select id="selectRreport" resultType="arraylist" resultMap="Rreport">
+		SELECT RRNO, RNO, CNO, C.CSUBJECT, RR.RCONTENT, RRESPONDENT, RREPORTER, RRREASON, RRDATE FROM RREPORT RR JOIN COMMUNITY C USING (CNO)
+		ORDER BY RRDATE DESC
 	</select>
 </mapper>

@@ -106,4 +106,10 @@ public class AdminDao {
 		return result;
 	}
 	
+	public List<Rreport> selectRreport(int startPage, int limit){
+		int startRow = (startPage -1)*limit; 
+		RowBounds row = new RowBounds(startRow,	limit);
+		return sqlSession.selectList("report.selectRreport", null, row);
+	}
+	
 }

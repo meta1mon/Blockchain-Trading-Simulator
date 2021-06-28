@@ -94,6 +94,11 @@ public class AdminServiceImpl implements AdminService {
 		result = aDao.countRreport();
 		return result;
 	}
+	
+	@Override
+	public List<Rreport> selectRreport(int startPage, int limit) {
+		return aDao.selectRreport(startPage, limit);
+	}
 
 
 }

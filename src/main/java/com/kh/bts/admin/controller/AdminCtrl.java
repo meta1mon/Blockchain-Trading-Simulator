@@ -327,12 +327,6 @@ public class AdminCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "rr", method = RequestMethod.GET)
-	public ModelAndView rr(ModelAndView mv) {
-		mv.setViewName("admin/replyReport");
-		return mv;
-	}
-
 	private String setLPad(String strContext, int iLen, String strChar) {
 		String strResult = "";
 		StringBuilder sbAddChar = new StringBuilder();
@@ -462,6 +456,24 @@ public class AdminCtrl {
 				System.out.println(e.getMessage()); 
 			}
 		mv.setViewName("admin/communityReport");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/rr", method = RequestMethod.GET)
+	public ModelAndView rr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv) {
+		try { 
+			int currentPage = page; 
+			int listCount = aService.countRreport();
+			int maxPage = (int)((double) listCount / LIMIT + 0.9);
+			
+			mv.addObject("list", aService.selectRreport(currentPage, LIMIT)); 
+			mv.addObject("currentPage", currentPage); 
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("listCount", listCount); 
+			} catch (Exception e) { 
+				System.out.println(e.getMessage()); 
+			}
+		mv.setViewName("admin/replyReport");
 		return mv;
 	}
 }

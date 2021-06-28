@@ -1,15 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>관리자 페이지 - BTS</title>
 <meta charset="UTF-8">
-<link href="${pageContext.request.contextPath}/resources/css/admin.css"
-	rel="stylesheet" type="text/css" />
-<title>Insert title here</title>
 <style>
-#rr #modal {
+#rr #modal{
 	display: none;
 	position: absolute;
 	top: 0;
@@ -27,64 +25,199 @@
 	text-align: center;
 	position: relative;
 }
+
+#rr th, td {
+	padding: 5px !important;
+}
+
+#rr td:not(.center, .right){
+	text-align: left;
+}
+
+#rr {
+	position: absolute;
+	top: calc(50% - 150px);
+	left: calc(50% - 320px);
+}
+
+#page{
+	text-align: center;
+}
+
+#listForm{
+	width: 100%;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
-	function openModal() {
-		$("#modal").css("display", "block");
-	}
+	$(function(){
+		var  openModal = function(event) {
+			$("#modal").css("display", "block");
+			var ele = event.currentTarget.querySelectorAll("td");
+			console.log(ele);
+			for(i=0; i<ele.length; i++){
+				console.log(i+"번째 " + ele[i].innerText);
+			};
+			$("#csubject").val(ele[1].innerText);
+			$("#rrespondent").val(ele[3].innerText);
+			$("#rcontent").val(ele[2].innerText);
+			$("#rreporter").val(ele[4].innerText);
+			$("#rrreason").val(ele[5].innerText);
+			$("#rrdate").val(ele[6].innerText);
+			$("#cno").val(ele[7].innerText);
+		}
+		$(".tr").on("click", openModal);
+		
+		var closeModal = function() {
+			$("#modal").css("display", "none");
+		}
+		
+		$(".close").on("click", closeModal);
+		
+		var detail = function(){
+			location.href="<%=request.getContextPath()%>/cDetail?cno="+$("#cno").val();
+		}
+		
+		$("#detail").on("click", detail);
 
-	function closeModal() {
-		$("#modal").css("display", "none");
-	}
+	})
 </script>
-
+<title>관리자 페이지 - BTS</title>
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
-	<div id="rr" style="position: absolute; top: 300px; left: 400px;">
-		<table border="2">
-			<tr>
-				<th>No.</th>
-				<th>게시글 제목</th>
-				<th>신고자</th>
-				<th>신고 사유</th>
-				<th>피신고자</th>
-				<th>신고 시간</th>
-			</tr>
-			<tr>
-				<td onclick="openModal()" style="cursor: pointer;">1</td>
-				<td onclick="openModal()" style="cursor: pointer;">개미 다죽는다 국가가
-					보상해라</td>
-				<td onclick="openModal()" style="cursor: pointer;">정의로운너구리</td>
-				<td onclick="openModal()" style="cursor: pointer;">혐오표현</td>
-				<td onclick="openModal()" style="cursor: pointer;">anger123</td>
-				<td onclick="openModal()" style="cursor: pointer;">2021-03-22
-					11:23:22</td>
-			</tr>
-		</table>
-		<p>&#60; 1 2 3 &#62;</p>
+	<div id="rr">
+		<div>
+			<table border="1">
+				<tr>
+					<th>신고 번호</th>
+					<th>게시글 제목</th>
+					<th>피신고자</th>
+					<th>신고자</th>
+					<th>신고 사유</th>
+					<th>신고 시간</th>
+				</tr>
+				<c:if test="${listCount eq 0}">
+					<tr>
+						<td colspan="6" align="center">조회된 신고 내역이 없습니다.</td>
+					</tr>
+				</c:if>
+				<c:if test="${listCount ne 0}">
+					<c:forEach var="vo" items="${list}" varStatus="status">
+						<tr class="tr">
+							<td style="cursor: pointer;">${vo.rrno}</td>
+							<td style="cursor: pointer;">${vo.csubject}</td>
+							<td style="cursor: pointer; display: none">${vo.rcontent}</td>
+							<td style="cursor: pointer;">${vo.rrespondent}</td>
+							<td style="cursor: pointer;">${vo.rreporter}</td>
+							<c:choose>
+							<c:when test="${vo.rrreason eq 1}">
+							<td style="cursor: pointer;">나체 이미지 또는 성적 행위</td>
+							</c:when>
+							<c:when test="${vo.rrreason eq 2}">
+							<td style="cursor: pointer;">혐오 발언 또는 폭력적</td>
+							</c:when>
+							<c:when test="${vo.rrreason eq 3}">
+							<td style="cursor: pointer;">증오 또는 학대</td>
+							</c:when>
+							<c:when test="${vo.rrreason eq 4}">
+							<td style="cursor: pointer;">유해하거나 위험한 행위</td>
+							</c:when>
+							<c:when test="${vo.rrreason eq 5}">
+							<td style="cursor: pointer;">스팸 또는 사용자 현혹</td>
+							</c:when>
+							<c:when test="${vo.rrreason eq 6}">
+							<td style="cursor: pointer;">마음에 들지 않습니다.</td>
+							</c:when>
+							</c:choose>
+							<td style="cursor: pointer;">${vo.rrdate}</td>
+							<td style="cursor: pointer; display: none">${vo.cno}</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+				<tr>
+					<td colspan="6">
+						<div id="page">
+							<!-- 앞 페이지 번호 처리 -->
+							<c:if test="${currentPage <= 1}">
+							<i class="fas fa-angle-double-left"></i>
+							</c:if>
+							<c:if test="${currentPage > 1}">
+								<c:url var="rrlistST" value="rr">
+									<c:param name="page" value="${currentPage-1}"/>
+								</c:url>
+								<a href="${rrlistST}"><i class="fas fa-angle-double-left"></i></a>
+							</c:if>
+							<!-- 끝 페이지 번호 처리 -->
+							<c:set var="endPage" value="${maxPage}" />
+							<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
+								<c:if test="${p eq currentPage}">
+									<div class="pageNum"><b>${p}</b></div>
+								</c:if>
+								<c:if test="${p ne currentPage}">
+									<c:url var="rrlistchk" value="rr">
+										<c:param name="page" value="${p}" />
+									</c:url>
+									<a href="${rrlistchk}">${p}</a>
+								</c:if>
+							</c:forEach>
+							<c:if test="${currentPage >= maxPage}">
+								<i class="fas fa-angle-double-right"></i>
+							</c:if>
+							<c:if test="${currentPage < maxPage}">
+								<c:url var="rrlistEND" value="rr">
+									<c:param name="page" value="${currentPage+1}" />
+								</c:url>
+								<a href="${rrlistEND}"><i class="fas fa-angle-double-right"></i></a>
+							</c:if>
+						</div>
+					</td>
+			</table>
+
+		</div>
 		<div id="modal">
 			<div id="contents">
-				<br> 신고자<br> <input type="text" value="정의로운너구리" readonly>
-				<br> 신고 사유<br> <input type="text" value="혐오표현" readonly><br>
-				신고 시간<br> <input type="text" value="2021-03-22 11:23:22"
-					readonly><br>
-				<hr>
-				게시글 제목<br> <input type="text" value="개미 다죽는다 국가가 보상해라" readonly><br>
-				피신고자<br> <input type="text" value="anger123" readonly><br>
-				댓글 내용<br>
-				<textarea cols="22" rows="10" readonly>xx xxx xxxx xxx xx</textarea>
-				<br>
-				<hr>
-				신고 처리 사유<br> <input type="text" value="운영자 마음대로"><br>
-				<br> <br>
-				<button type="button">자세히 보기</button>
+				<table>
+				<tr>
+				<td>게시글 제목</td>
+				<td><input type="text" value="" id="csubject" readonly></td>
+				</tr>
+				<tr>
+				<td>피신고자</td>
+				<td><input type="text" value="" id="rrespondent" readonly></td>
+				</tr>
+				<tr>
+				<td>게시글 내용</td>
+				<td><textarea cols="22" rows="10" id="rcontent" readonly></textarea></td>
+				</tr>
+				<tr>
+				<td>신고자</td>
+				<td><input type="text" value="" id="rreporter" readonly></td>
+				</tr>
+				<tr>
+				<td>신고 사유</td>
+				<td><input type="text" value="" id="rrreason" readonly></td>
+				</tr>
+				<tr>
+				<td>신고 시간</td>
+				<td><input type="text" value="" id="rrdate" readonly></td>
+				</tr>
+				<tr>
+				<td>신고 처리 사유</td>
+				<td><input type="text"></td>
+				</tr>
+				<tr>
+				<td colspan="2">
+				<input type="text" value="" id="cno" style="display: none">
+				<button type="button" id="detail">자세히 보기</button>
 				<button type="button">신고 수리</button>
 				<button type="button">신고 반려</button>
-				<button type="button" onclick="closeModal()">닫기</button>
+				<button type="button" class="close">닫기</button>
+				</td>
+				</tr>
+				</table>
 			</div>
 		</div>
-		<div></div>
+	</div>
 </body>
 </html>

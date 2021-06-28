@@ -399,6 +399,7 @@
 
 		$(function() {
 			$('.table-striped tbody tr:nth-of-type(odd)').css('background-color','rgb(227,200,248, 0.0453)');
+			$('.chart-page').css('background-color','rgb(227,200,248, 0.0453)');
 		}); 
 		
 	</script>

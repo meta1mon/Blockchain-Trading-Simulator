@@ -86,3 +86,46 @@ a, a:active, a:after, a:visited {
 	text-decoration: none;	
 	color: inherit;
 }
+
+.btnGreen {
+	border: 1px solid green;
+	border-radius: 5px;
+	color: green;
+	background: white;
+	height: 35px;
+}
+
+.btnGreen:hover {
+	border: 1px solid green;
+	background: green;
+	color: white;
+	
+}
+.btnRed {
+	border: 1px solid red;
+	border-radius: 5px;
+	color: red;
+	background: white;
+	height: 35px;
+}
+
+.btnRed:hover {
+	border: 1px solid red;
+	background: red;
+	color: white;
+	
+}
+.btnPurple {
+	border: 1px solid rgb(140, 102, 200);
+	border-radius: 5px;
+	color: rgb(140, 102, 200);
+	background: white;
+	height: 35px;
+}
+
+.btnPurple:hover {
+	border: 1px solid rgb(140, 102, 200);
+	background: rgb(140, 102, 200);
+	color: white;
+	
+}

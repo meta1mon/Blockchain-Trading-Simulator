@@ -70,8 +70,8 @@ public class AdminDao {
 	
 	public List<Member> adminListMember(int startPage, int limit){
 		
-		int startRow = (startPage -1)*limit; RowBounds row = new RowBounds(startRow,
-		limit);
+		int startRow = (startPage -1)*limit; 
+		RowBounds row = new RowBounds(startRow,	limit);
 		
 		return sqlSession.selectList("Member.adminListMember", null, row);
 	}
@@ -93,9 +93,17 @@ public class AdminDao {
 		result = sqlSession.selectOne("report.countCreport");
 		return result;
 	}
+	
+	public List<Creport> selectCreport(int startPage, int limit){
+		int startRow = (startPage -1)*limit; 
+		RowBounds row = new RowBounds(startRow,	limit);
+		return sqlSession.selectList("report.selectCreport", null, row);
+	}
+	
 	public int countRreport() {
 		int result=0;
 		result = sqlSession.selectOne("report.countRreport");
 		return result;
 	}
+	
 }

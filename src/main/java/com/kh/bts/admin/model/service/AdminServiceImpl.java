@@ -84,10 +84,16 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	public List<Creport> selectCreport(int startPage, int limit) {
+		return aDao.selectCreport(startPage, limit);
+	}
+	
+	@Override
 	public int countRreport() {
 		int result = 0;
 		result = aDao.countRreport();
 		return result;
 	}
+
 
 }

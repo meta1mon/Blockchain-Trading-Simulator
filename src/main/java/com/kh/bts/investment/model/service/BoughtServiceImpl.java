@@ -4,16 +4,20 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.bts.investment.model.dao.BoughtDao;
 import com.kh.bts.investment.model.vo.Bought;
+import com.kh.bts.investment.model.vo.WaitBought;
 
 @Service("bService")
 public class BoughtServiceImpl implements BoughtService{
 	@Autowired
 	private BoughtDao bDao;
+	
+	@Transactional
 	@Override
-	public int insertBought(Bought vo) {
+	public int insertBought(WaitBought vo) {
 		// TODO Auto-generated method stub
 		return bDao.insertBought(vo);
 	}

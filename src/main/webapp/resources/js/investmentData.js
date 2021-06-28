@@ -606,12 +606,13 @@ function chart() { // 차트
 		"theme" : "light",
 		"style" : "1",
 		"locale" : "kr",
-		"toolbar_bg" : "#f1f3f6",
+		"toolbar_bg" : "rgb(227,200,248, 0.14)",
 		"enable_publishing" : true,
 		"withdateranges" : true,
 		"allow_symbol_change" : true,
 		"container_id" : "tradingview_3fe73"
 	});
+	
 }
 
 function toname(name) {

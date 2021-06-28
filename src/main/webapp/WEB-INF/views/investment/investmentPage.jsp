@@ -172,10 +172,14 @@
 								src="https://s3.tradingview.com/tv.js"></script>
 						</div> <!-- TradingView Widget END -->
 					</td>
-					<td><span>&nbsp;&nbsp;</span></td>
-					<td><input type="text" id="searchcoin" value=""
+					<td>
+						<span>&nbsp;&nbsp;</span>
+					</td>
+					<td>
+						<input type="text" id="searchcoin" value=""
 						style="width: 100%; display: 'block'" placeholder="코인 검색">
-						<div id="cointable_div"></div></td>
+						<div id="cointable_div"></div>
+					</td>
 				</tr>
 			</table>
 
@@ -184,7 +188,7 @@
 				<table id="all_t" class='table table-striped'>
 					<tr>
 						<td>
-							<div id="aaaaa"></div>
+<div id="aaaaa"></div>
 						</td>
 
 
@@ -194,8 +198,9 @@
 									<table>
 										<tr>
 											<td><a href="<%=request.getContextPath()%>/signup"
-												id="join">가입</a><input name="coin" id="coin" type="hidden"
-												value="BTC" readonly="readonly" style="text-align: center;"></td>
+												id="join">가입</a><input name="coin" id="coin"
+													type="hidden" value="BTC" readonly="readonly"
+													style="text-align: center;"></td>
 
 										</tr>
 										<tr>
@@ -214,7 +219,7 @@
 												<button value="" id="sold_b">매도</button>
 												<button value="" id="select_coin">select_coin</button>
 												<button value="" id="select_acnt">select_acnt</button>
-
+												
 												<button value="" id="select_coin_add">select_coin_add</button>
 												<button value="" id="select_coin_insert">select_coin_insert</button></td>
 											<!-- <button value="" id="noaj" onclick="location.href='wblists'">결과나와라</button> -->
@@ -318,9 +323,8 @@
 										<th colspan="1">미체결주문</th>
 									</tr>
 									<tr>
-										<td><div id="aj_wb"></div>
-											<div id="aj_ws"></div></td>
-
+										<td><div id="aj_wb"></div><div id="aj_ws"></div></td>
+										
 									</tr>
 
 									<tr>
@@ -362,9 +366,10 @@
 		});
 
 		$(function() {
-			$('.table-striped tbody tr:nth-of-type(odd)').css(
-					'background-color', 'rgb(227,200,248, 0.0453)');
-		});
+			$('.table-striped tbody tr:nth-of-type(odd)').css('background-color','rgb(227,200,248, 0.0453)');
+			$('.chart-page').css('background-color','rgb(227,200,248, 0.0453)');
+		}); 
+		
 	</script>
 </body>
 </html>

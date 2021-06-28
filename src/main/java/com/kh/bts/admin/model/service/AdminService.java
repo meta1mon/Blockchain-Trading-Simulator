@@ -21,5 +21,6 @@ public interface AdminService {
 	public int totalCybcash();
 	public int countTodayWon();
 	public int countCreport();
+	public List<Creport> selectCreport(int startPage, int limit);
 	public int countRreport();
 }

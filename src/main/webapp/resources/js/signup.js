@@ -319,7 +319,6 @@ $(function() {
 	$("#insert").on("click", function() {
 		console.log("회원가입버튼누름");
 		var dataquery = $("#frmJoin").serialize();
-		// console.log("dataquery: " + dataquery);
 		console.log("이메일: " + checkER + "\n이메일 중복 확인: " + checkED + "\n닉네임: " + checkNN + "\n닉네임 중복 확인: " + checkND + "\n비밀번호: " + checkPR + "\n비밀번호 확인: " + checkPCR + "\n비밀번호 일치: " + checkPE + "\n성인 확인: " + checkBday + "\n연락처 양식: " + checkPN)
 		if(checkER && checkED && checkND && checkNN && checkPR && checkPCR && checkPE && checkBday && checkPN){
 			

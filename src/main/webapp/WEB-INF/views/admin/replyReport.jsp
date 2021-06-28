@@ -7,23 +7,31 @@
 <head>
 <meta charset="UTF-8">
 <style>
-#rr #modal{
+#modal{
 	display: none;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(188, 143, 143, 0.8);
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
-#rr #contents {
-	background-color: white;
-	margin: 100px auto;
-	width: 400px;
-	height: 600px;
-	text-align: center;
-	position: relative;
+#contents table {
+	width: 100%;
+}
+
+#contents {
+	padding: 30px;
+    background-color: white;
+    border: 2px solid rgb(140, 102, 200);
+    border-radius: 5px;
+    top: calc(50% - 200px);
+    left: calc(50% - 100px);
+    width: 400px;
+    height: 365px;
+    text-align: center;
+    position: absolute;
 }
 
 #rr th, td {
@@ -47,6 +55,40 @@
 #listForm{
 	width: 100%;
 }
+
+#detail {
+	height: 35px;
+}
+
+#close {
+	height: 35px;
+}
+
+#contents table td:nth-child(1) {
+	width: 120px;
+	text-align: right;
+}
+
+#contents table td input {
+	width: 270px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 3px;
+}
+
+#rcontent {
+	height: 105px;
+	width: 270px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 3px;
+	font-size: 13.3333px;
+	padding: 1px 2px;
+	text-align: left;
+	background: white;
+}
+
+button {
+	width: 94px;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
@@ -60,7 +102,7 @@
 			};
 			$("#csubject").val(ele[1].innerText);
 			$("#rrespondent").val(ele[3].innerText);
-			$("#rcontent").val(ele[2].innerText);
+			$("#rcontent").html(ele[2].innerText);
 			$("#rreporter").val(ele[4].innerText);
 			$("#rrreason").val(ele[5].innerText);
 			$("#rrdate").val(ele[6].innerText);
@@ -72,7 +114,7 @@
 			$("#modal").css("display", "none");
 		}
 		
-		$(".close").on("click", closeModal);
+		$("#close").on("click", closeModal);
 		
 		var detail = function(){
 			location.href="<%=request.getContextPath()%>/cDetail?cno="+$("#cno").val();
@@ -175,6 +217,7 @@
 			</table>
 
 		</div>
+	</div>
 		<div id="modal">
 			<div id="contents">
 				<table>
@@ -187,8 +230,8 @@
 				<td><input type="text" value="" id="rrespondent" readonly></td>
 				</tr>
 				<tr>
-				<td>게시글 내용</td>
-				<td><textarea cols="22" rows="10" id="rcontent" readonly></textarea></td>
+				<td>댓글 내용</td>
+				<td><div id="rcontent">&nbsp;</div></td>
 				</tr>
 				<tr>
 				<td>신고자</td>
@@ -209,15 +252,14 @@
 				<tr>
 				<td colspan="2">
 				<input type="text" value="" id="cno" style="display: none">
-				<button type="button" id="detail">자세히 보기</button>
-				<button type="button">신고 수리</button>
-				<button type="button">신고 반려</button>
-				<button type="button" class="close">닫기</button>
+				<button type="button" id="accept" class="btnGreen">수리</button>
+				<button type="button" id="deny" class="btnRed">반려</button>
+				<button type="button" id="detail" class="btnPurple">자세히</button>
+				<button type="button" id="close" class="btnPurple">닫기</button>
 				</td>
 				</tr>
 				</table>
 			</div>
 		</div>
-	</div>
 </body>
 </html>

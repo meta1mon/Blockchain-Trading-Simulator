@@ -53,7 +53,7 @@ function go() {
 				</div>
 			</div>
 		</div>
+		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 </body>
-<jsp:include page="../main/footer.jsp"></jsp:include>
 </html>

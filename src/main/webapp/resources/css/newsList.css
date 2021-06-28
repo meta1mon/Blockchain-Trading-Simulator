@@ -145,7 +145,3 @@ a:visited{
 }
 
 #page:hover:not(.active) {background-color: #E3C8F8;} 
-
-#space {
-	height: 100px;
-}

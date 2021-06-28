@@ -19,4 +19,8 @@
 		WHERE ACNTNO = #{acntno} AND BANKPW = #{bankPw}
 	</select>
 	
+	<!-- 전체 가상 투자금 조회 -->
+	<select id="totalCybcash" resultType="int">
+		SELECT SUM(CYBCASH) FROM ACNT
+	</select>
 </mapper>

@@ -6,13 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="${pageContext.request.contextPath}/resources/css/admin.css" rel="stylesheet" type="text/css" />
 <style>
 #mmm th, td {
-	padding: 5px;
+	padding: 5px !important;
 }
 
-#mmm td:not(.del){
+#mmm td:not(.center, .right){
 	text-align: left;
 }
 
@@ -36,17 +35,11 @@
 	background-none;
 }
 
-.del{
-	text-align:center;
-}
 .del:hover{
 color: red;
 }
 </style>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 $(function() {
 	$('form[name=listForm]').on('submit',function(e) {
@@ -98,13 +91,13 @@ $(function() {
 						<tr>
 							<td>${vo.email}</td>
 							<td>${vo.nickname}</td>
-							<td>${vo.gender}</td>
-							<td>${vo.birthdate}</td>
-							<td><fmt:formatNumber value="${vo.cybcash}"
+							<td class="center">${vo.gender}</td>
+							<td class="center">${vo.birthdate}</td>
+							<td class="right money"><fmt:formatNumber value="${vo.cybcash}"
 									pattern="#,###,###,###" /></td>
 							<td>코인 평가 금액</td>
 							<td>자산 총액</td>
-							<td class="del"><input type="button" class="fas fa-trash-alt"
+							<td class="center del"><input type="button" class="fas fa-trash-alt"
 								onclick="deleteMember('${vo.email}')" class="X"></td>
 						</tr>
 					</c:forEach>
@@ -168,6 +161,12 @@ $(function() {
 								}
 							})
 		}
+	</script>
+		<script>
+		$(function(){
+			console.log("시도");
+			$(".money").append("원");
+		})	
 	</script>
 </body>
 </html>

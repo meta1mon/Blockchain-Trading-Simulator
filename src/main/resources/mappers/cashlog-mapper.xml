@@ -19,4 +19,9 @@
 		WHERE NICKNAME LIKE '%'|| #{keyword} ||'%'
 		ORDER BY CASHDATE DESC
 	</select>
+
+	<!-- 신규 충전액 조회 -->
+	<select id="countTodayWon" resultType="int">
+		SELECT NVL(SUM(WON),0) FROM CASHLOG WHERE CASHDATE LIKE TO_CHAR(SYSDATE, 'YYYY-MM-DD%')
+	</select>
 </mapper>

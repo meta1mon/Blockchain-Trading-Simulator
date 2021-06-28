@@ -13,7 +13,7 @@
 	height: 100px;
 }
 #mh td {
-	padding-top: 42px; 
+	padding-top: 42px !important; 
 	text-align: center;
 }
 #mh td:nth-child(2), #mh td:nth-child(3), #mh td:nth-child(4) {
@@ -29,13 +29,16 @@
 }
 
 </style>
+<link href="${pageContext.request.contextPath}/resources/css/admin.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- Font Awesome 4-->
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <style>
 #aa {
@@ -145,9 +148,9 @@
 	<div id="aa" style="height: 100vh; width: 200px; float: left;">
 		<div class="contenedor-menu">
 			<ul class="menu">
-				<li id="index"><a href="${pageContext.request.contextPath}/admin"><img src="${pageContext.request.contextPath}/resources/assets/img/bts_logo.png" width="120" height="50"
-						style="border-radius:5px;"></a></li>
-<%-- 				<li id="home"><a href="${pageContext.request.contextPath}/admin">MAIN<span class="icon"><i class="fa fa-home"></i></span></a></li> --%>
+				<li id="index"><img src="<%request.getContextPath();%>" width="160"
+						height="100" ></li>
+				<li id="home"><a href="${pageContext.request.contextPath}/admin">MAIN<span class="icon"><i class="fa fa-home"></i></span></a></li>
 				<li id="buychart"><a href="#">회원관리<span class="icon"><i
 						class="fa fa-chevron-down"></i></span></a>
 					<ul>

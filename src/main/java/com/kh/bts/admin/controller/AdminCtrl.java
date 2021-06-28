@@ -32,6 +32,7 @@ import com.kh.bts.community.model.vo.Rcommunity;
 import com.kh.bts.member.model.service.MemberService;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.service.MypageService;
+import com.kh.bts.report.model.vo.Acreport;
 import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
@@ -152,6 +153,25 @@ public class AdminCtrl {
 			out.close();
 		}
 
+	}
+// 게시글 신고 수리
+	@RequestMapping(value = "/dealcr", method=RequestMethod.POST)
+	public void insertAcreport(Acreport vo, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		int result = aService.insertAcreport(vo);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ctrl 들어왔다");
+		System.out.println(result);
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+			out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				out.flush();
+				out.close();
+			}
+		}
 	}
 
 // 댓글 신고 등록

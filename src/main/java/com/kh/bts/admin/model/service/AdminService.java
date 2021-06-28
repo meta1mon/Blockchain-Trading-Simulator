@@ -5,11 +5,13 @@ import java.util.List;
 import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.cash.model.vo.CashLog;
 import com.kh.bts.member.model.vo.Member;
+import com.kh.bts.report.model.vo.Acreport;
 import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
 public interface AdminService {
 	public int insertCreport(Creport vo);
+	public int insertAcreport(Acreport vo);
 	public int insertRreport(Rreport vo);
 	public int registerCash(Cash vo);
 	public List<Cash> selectCashAll();

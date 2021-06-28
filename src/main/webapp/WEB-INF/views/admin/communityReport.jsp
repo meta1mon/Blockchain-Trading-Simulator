@@ -56,12 +56,6 @@
 	width: 100%;
 }
 
-#accept{
-}
-
-#deny{
-}
-
 #detail {
 	height: 35px;
 }
@@ -110,9 +104,11 @@ button {
 			$("#crespondent").val(ele[3].innerText);
 			$("#ccontent").html(ele[2].innerText);
 			$("#creporter").val(ele[4].innerText);
-			$("#crreason").val(ele[5].innerText);
-			$("#crdate").val(ele[6].innerText);
-			$("#cno").val(ele[7].innerText);
+			$("#crreasonText").val(ele[5].innerText);
+			$("#crdate").val(ele[7].innerText);
+			$("#cno").val(ele[8].innerText);
+			$("#crno").val(ele[0].innerText);
+			$("#crreason").val(ele[6].innerText);
 		}
 		$(".tr").on("click", openModal);
 		
@@ -161,21 +157,27 @@ button {
 							<c:choose>
 							<c:when test="${vo.crreason eq 1}">
 							<td style="cursor: pointer;">나체 이미지 또는 성적 행위</td>
+							<td style="display:none">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 2}">
 							<td style="cursor: pointer;">혐오 발언 또는 폭력적</td>
+							<td style="display:none">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 3}">
 							<td style="cursor: pointer;">증오 또는 학대</td>
+							<td style="display:none">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 4}">
 							<td style="cursor: pointer;">유해하거나 위험한 행위</td>
+							<td style="display:none">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 5}">
 							<td style="cursor: pointer;">스팸 또는 사용자 현혹</td>
+							<td style="display:none">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 6}">
 							<td style="cursor: pointer;">마음에 들지 않습니다.</td>
+							<td style="display:none">${vo.crreason}</td>
 							</c:when>
 							</c:choose>
 							<td style="cursor: pointer;">${vo.crdate}</td>
@@ -225,46 +227,78 @@ button {
 	</div>
 	<div id="modal">
 			<div id="contents">
-				<table>
-				<tr>
-				<td>게시글 제목</td>
-				<td><input type="text" value="" id="csubject" readonly></td>
-				</tr>
-				<tr>
-				<td>피신고자</td>
-				<td><input type="text" value="" id="crespondent" readonly></td>
-				</tr>
-				<tr>
-				<td class="content">게시글 내용</td>
-				<td><div id="ccontent">&nbsp;</div></td>
-				</tr>
-				<tr>
-				<td>신고자</td>
-				<td><input type="text" value="" id="creporter" readonly></td>
-				</tr>
-				<tr>
-				<td>신고 사유</td>
-				<td><input type="text" value="" id="crreason" readonly></td>
-				</tr>
-				<tr>
-				<td>신고 시간</td>
-				<td><input type="text" value="" id="crdate" readonly></td>
-				</tr>
-				<tr>
-				<td>신고 처리 사유</td>
-				<td><input type="text"></td>
-				</tr>
-				<tr>
-				<td colspan="2">
-				<input type="text" value="" id="cno" style="display: none">
-				<button type="button" id="accept" class="btnGreen">수리</button>
-				<button type="button" id="deny" class="btnRed">반려</button>
-				<button type="button" id="detail" class="btnPurple">자세히</button>
-				<button type="button" id="close" class="btnPurple">닫기</button>
-				</td>
-				</tr>
-				</table>
+				<form id="frmReport">
+					<table>
+						<tr>
+							<td>게시글 제목</td>
+							<td><input type="text" value="" name="csubject" id="csubject" readonly></td>
+						</tr>
+						<tr>
+							<td>피신고자</td>
+							<td><input type="text" value="" name="crespondent" id="crespondent" readonly></td>
+						</tr>
+						<tr>
+							<td class="content">게시글 내용</td>
+							<td><div id="ccontent" class="ccontent">&nbsp;</div></td>
+						</tr>
+						<tr>
+							<td>신고자</td>
+							<td><input type="text" value="" name="creporter" id="creporter" readonly></td>
+						</tr>
+						<tr>
+							<td>신고 사유</td>
+							<td><input type="text" value="" id="crreasonText" readonly></td>
+							<input type="hidden" value="" id="crreason" name="crreason">
+						</tr>
+						<tr>
+							<td>신고 시간</td>
+							<td><input type="text" value="" id="crdate" readonly></td>
+						</tr>
+						<tr>
+							<td>신고 처리 사유</td>
+							<td><input type="text" name="creason" id="creason"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><input type="text" value="" id="cno"
+								style="display: none">
+								<button type="button" id="accept" class="btnGreen deal" value="accept">수리</button>
+								<button type="button" id="deny" class="btnRed deal" value="deny">반려</button>
+								<input type="text" id="buttonvalue" value="" name="cstatus" style="display: none">
+								<button type="button" id="detail" class="btnPurple">자세히</button>
+								<button type="button" id="close" class="btnPurple">닫기</button>
+							</td>
+						</tr>
+					</table>
+						<input type="hidden" value="" name="crno" id="crno">
+				</form>
 			</div>
 		</div>
 </body>
+<script>
+$(function(){
+		$(".deal").on("click",function() {
+ 			var deal = $(".deal").val();
+ 			var btnval = $("#buttonvalue").val(deal);
+			console.log(btnval);
+			console.log("클릭됨");
+			var dataquery = $("#frmReport").serialize();
+			$.ajax({
+			url : "dealcr",
+			type : "POST",
+			data : dataquery,
+			async : true,
+			success : function(data) {
+				alert("처리 완료");
+				location.href = "<%=request.getContextPath()%>/admin/cr";
+			},
+			error : function(request, status, error) {
+				console.log("message:"+request.responseText+"\n"+"error:"+error);
+				alert("error: 처리 실패!");
+				location.href="<%=request.getContextPath()%>/admin/cr";
+			}
+			
+		})
+	})
+})
+</script>
 </html>

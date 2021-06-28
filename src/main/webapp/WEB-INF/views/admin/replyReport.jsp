@@ -220,45 +220,46 @@ button {
 	</div>
 		<div id="modal">
 			<div id="contents">
-				<table>
-				<tr>
-				<td>게시글 제목</td>
-				<td><input type="text" value="" id="csubject" readonly></td>
-				</tr>
-				<tr>
-				<td>피신고자</td>
-				<td><input type="text" value="" id="rrespondent" readonly></td>
-				</tr>
-				<tr>
-				<td>댓글 내용</td>
-				<td><div id="rcontent">&nbsp;</div></td>
-				</tr>
-				<tr>
-				<td>신고자</td>
-				<td><input type="text" value="" id="rreporter" readonly></td>
-				</tr>
-				<tr>
-				<td>신고 사유</td>
-				<td><input type="text" value="" id="rrreason" readonly></td>
-				</tr>
-				<tr>
-				<td>신고 시간</td>
-				<td><input type="text" value="" id="rrdate" readonly></td>
-				</tr>
-				<tr>
-				<td>신고 처리 사유</td>
-				<td><input type="text"></td>
-				</tr>
-				<tr>
-				<td colspan="2">
-				<input type="text" value="" id="cno" style="display: none">
-				<button type="button" id="accept" class="btnGreen">수리</button>
-				<button type="button" id="deny" class="btnRed">반려</button>
-				<button type="button" id="detail" class="btnPurple">자세히</button>
-				<button type="button" id="close" class="btnPurple">닫기</button>
-				</td>
-				</tr>
-				</table>
+				<form id="frmReport">
+					<table>
+						<tr>
+							<td>게시글 제목</td>
+							<td><input type="text" value="" id="csubject" readonly></td>
+						</tr>
+						<tr>
+							<td>피신고자</td>
+							<td><input type="text" value="" id="rrespondent" readonly></td>
+						</tr>
+						<tr>
+							<td>댓글 내용</td>
+							<td><div id="rcontent">&nbsp;</div></td>
+						</tr>
+						<tr>
+							<td>신고자</td>
+							<td><input type="text" value="" id="rreporter" readonly></td>
+						</tr>
+						<tr>
+							<td>신고 사유</td>
+							<td><input type="text" value="" id="rrreason" readonly></td>
+						</tr>
+						<tr>
+							<td>신고 시간</td>
+							<td><input type="text" value="" id="rrdate" readonly></td>
+						</tr>
+						<tr>
+							<td>신고 처리 사유</td>
+							<td><input type="text"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><input type="text" value="" id="cno"
+								style="display: none">
+								<button type="submit" id="accept" class="btnGreen">수리</button>
+								<button type="submit" id="deny" class="btnRed">반려</button>
+								<button type="button" id="detail" class="btnPurple">자세히</button>
+								<button type="button" id="close" class="btnPurple">닫기</button></td>
+						</tr>
+					</table>
+				</form>
 			</div>
 		</div>
 </body>

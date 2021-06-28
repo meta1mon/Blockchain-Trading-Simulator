@@ -43,4 +43,10 @@
 		SELECT RRNO, RNO, CNO, C.CSUBJECT, RR.RCONTENT, RRESPONDENT, RREPORTER, RRREASON, RRDATE FROM RREPORT RR JOIN COMMUNITY C USING (CNO)
 		ORDER BY RRDATE DESC
 	</select>
+	
+	<!-- 신고글 처리 -->
+		<insert id="insertAcreport" parameterType="Acreport"
+		flushCache="true" statementType="PREPARED">
+		INSERT INTO ACREPORT VALUES(#{crno}, #{creporter}, #{crreason}, #{csubject}, #{ccontent}, #{crespondent}, default, #{cstatus}, #{creason})
+	</insert>
 </mapper>

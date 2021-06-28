@@ -2,7 +2,7 @@
 
 #listWrapper {
 	width: 90%;
-	height: 100%;
+	height: calc(100% - 100px);
 	position: absolute;
 	top: 100px;
 	left: 200px;
@@ -14,10 +14,13 @@
 	margin: 70px auto;
 	padding: 20px;
 	border-radius: 4px;
+	position: absolute;
+    top: calc(50% - 350px);
+    left: calc(50% - 420px);
 }
 
 #noticeTitle {
-	margin: 40px 0 20px 20px;
+	margin: 20px;
 	text-align: left;
 	font-size: 25px;
 	color: #FFC000;
@@ -47,7 +50,7 @@
 }
 
 #search {
-	width: 650px;
+	width: 455px;
 	height: 35px;
 	top: 0;
 	background-color: #ffffff;
@@ -85,6 +88,7 @@
 }
 
 #write {
+	margin-top: 20px;
 	width: 125px;
 	height: 35px;
 	float: right;

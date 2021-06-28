@@ -3,15 +3,15 @@ package com.kh.bts.investment.model.vo;
 public class WaitSold {
 	private int usno;
 	private String coin;
-	private float sellcnt;
-	private float sellprice;
+	private double sellcnt;
+	private double sellprice;
 	private String wsdate;
 	private String acntno;
 
 	public WaitSold() {
 	}
 
-	public WaitSold(int usno, String coin, float sellcnt, float sellprice, String wsdate, String acntno) {
+	public WaitSold(int usno, String coin, double sellcnt, double sellprice, String wsdate, String acntno) {
 		super();
 		this.usno = usno;
 		this.coin = coin;
@@ -38,19 +38,19 @@ public class WaitSold {
 		this.coin = coin;
 	}
 
-	public float getSellcnt() {
+	public double getSellcnt() {
 		return sellcnt;
 	}
 
-	public void setSellcnt(float sellcnt) {
+	public void setSellcnt(double sellcnt) {
 		this.sellcnt = sellcnt;
 	}
 
-	public float getSellprice() {
+	public double getSellprice() {
 		return sellprice;
 	}
 
-	public void setSellprice(float sellprice) {
+	public void setSellprice(double sellprice) {
 		this.sellprice = sellprice;
 	}
 

@@ -26,9 +26,9 @@ function go() {
 			<table style="width: 100%" class="shadow">
 				<tr>
 					<td id="c1">
-						<div id="chart">
+<!-- 						<div id="chart"> -->
 							<div id="chart_div"></div>
-						</div>
+<!-- 						</div> -->
 					</td>
 					<td id="c2">
 						<div id="table">
@@ -53,7 +53,7 @@ function go() {
 				</div>
 			</div>
 		</div>
+		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 </body>
-<jsp:include page="../main/footer.jsp"></jsp:include>
 </html>

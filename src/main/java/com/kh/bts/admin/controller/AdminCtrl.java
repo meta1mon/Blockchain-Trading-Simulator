@@ -54,7 +54,7 @@ public class AdminCtrl {
 	@Autowired
 	private MypageService myService;
 
-	public static final int LIMIT = 20;
+	public static final int LIMIT = 10;
 
 	@ModelAttribute("countMember")
 	public int countMember() {
@@ -74,6 +74,23 @@ public class AdminCtrl {
 	@ModelAttribute("totalTodayCount")
 	public int totalTodayCount() {
 		return cmService.totalTodayCount();
+	}
+	
+	@ModelAttribute("totalCybcash")
+	public int totalCybcash() {
+		return aService.totalCybcash();
+	}
+	@ModelAttribute("countTodayWon")
+	public int countTodayWon() {
+		return aService.countTodayWon();
+	}
+	@ModelAttribute("countCreport")
+	public int countCreport() {
+		return aService.countCreport();
+	}
+	@ModelAttribute("countRreport")
+	public int countRreport() {
+		return aService.countRreport();
 	}
 
 // 충전 상품 등록

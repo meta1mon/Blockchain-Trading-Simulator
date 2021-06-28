@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 public class WaitBought {
 	private int ubno;
 	private String coin;
-	private float buycnt;
-	private float buyprice;
+	private double buycnt;
+	private double buyprice;
 	private String wbdate;
 	private String acntno;
 
@@ -15,7 +15,7 @@ public class WaitBought {
 
 	}
 
-	public WaitBought(int ubno, String coin, float buycnt, float buyprice, String wbdate, String acntno) {
+	public WaitBought(int ubno, String coin, double buycnt, double buyprice, String wbdate, String acntno) {
 		super();
 		this.ubno = ubno;
 		this.coin = coin;
@@ -41,19 +41,19 @@ public class WaitBought {
 		this.coin = coin;
 	}
 
-	public float getBuycnt() {
+	public double getBuycnt() {
 		return buycnt;
 	}
 
-	public void setBuycnt(float buycnt) {
+	public void setBuycnt(double buycnt) {
 		this.buycnt = buycnt;
 	}
 
-	public float getBuyprice() {
+	public double getBuyprice() {
 		return buyprice;
 	}
 
-	public void setBuyprice(float buyprice) {
+	public void setBuyprice(double buyprice) {
 		this.buyprice = buyprice;
 	}
 

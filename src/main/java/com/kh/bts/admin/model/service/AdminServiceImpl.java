@@ -62,6 +62,32 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.adminListMember(startPage, limit);
 	}
 
+	@Override
+	public int totalCybcash() {
+		int result = 0;
+		result= aDao.totalCybcash();
+		return result;
+	}
+	
+	@Override
+	public int countTodayWon() {
+		int result =0;
+		result = aDao.countTodayWon();
+		return result;
+	}
 
+	@Override
+	public int countCreport() {
+		int result = 0;
+		result = aDao.countCreport();
+		return result;
+	}
+
+	@Override
+	public int countRreport() {
+		int result = 0;
+		result = aDao.countRreport();
+		return result;
+	}
 
 }

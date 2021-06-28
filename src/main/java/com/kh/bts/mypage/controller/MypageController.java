@@ -197,9 +197,10 @@ public class MypageController {
 		String email = (String) session.getAttribute("loginMember");
 		List<MyRcommunity> list = myService.selectMyRcommunity(email);
 		if(list == null) {
-			System.out.println("");
+			System.out.println("댓글 없음");
+		} else {
+			System.out.println("댓글 있음");
 		}
-		System.out.println(list.get(0).getRcontent());
 		mv.addObject("myRlist", list);
 		mv.setViewName("mypage/myRcommunity");
 		return mv;

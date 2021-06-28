@@ -6,13 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="${pageContext.request.contextPath}/resources/css/admin.css" rel="stylesheet" type="text/css" />
 <style>
 #mmm th, td {
-	padding: 5px;
+	padding: 5px !important;
 }
 
-#mmm td:not(.del){
+#mmm td:not(.center, .right){
 	text-align: left;
 }
 
@@ -36,17 +35,11 @@
 	background-none;
 }
 
-.del{
-	text-align:center;
-}
 .del:hover{
 color: red;
 }
 </style>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 $(function() {
 	$('form[name=listForm]').on('submit',function(e) {
@@ -58,7 +51,7 @@ $(function() {
 	});
 });
 </script>
-
+<title>관리자 페이지 - BTS</title>
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
@@ -98,13 +91,13 @@ $(function() {
 						<tr>
 							<td>${vo.email}</td>
 							<td>${vo.nickname}</td>
-							<td>${vo.gender}</td>
-							<td>${vo.birthdate}</td>
-							<td><fmt:formatNumber value="${vo.cybcash}"
+							<td class="center">${vo.gender}</td>
+							<td class="center">${vo.birthdate}</td>
+							<td class="right money"><fmt:formatNumber value="${vo.cybcash}"
 									pattern="#,###,###,###" /></td>
 							<td>코인 평가 금액</td>
 							<td>자산 총액</td>
-							<td class="del"><input type="button" class="fas fa-trash-alt"
+							<td class="center del"><input type="button" class="fas fa-trash-alt"
 								onclick="deleteMember('${vo.email}')" class="X"></td>
 						</tr>
 					</c:forEach>
@@ -114,35 +107,35 @@ $(function() {
 						<div id="page">
 							<!-- 앞 페이지 번호 처리 -->
 							<c:if test="${currentPage <= 1}">
-								[이전]
+							<i class="fas fa-angle-double-left"></i>
 							</c:if>
 							<c:if test="${currentPage > 1}">
-								<c:url var="clistST" value="clist">
-									<c:param name="page" value="${currentPage-1}" />
+								<c:url var="mlistST" value="ml">
+									<c:param name="page" value="${currentPage-1}"/>
 								</c:url>
-								<a href="${clistST}">[이전]</a>
+								<a href="${mlistST}"><i class="fas fa-angle-double-left"></i></a>
 							</c:if>
 							<!-- 끝 페이지 번호 처리 -->
 							<c:set var="endPage" value="${maxPage}" />
 							<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
 								<c:if test="${p eq currentPage}">
-									<font color="#8C66C8" size="4"><b>[${p}]</b></font>
+									<div class="pageNum"><b>${p}</b></div>
 								</c:if>
 								<c:if test="${p ne currentPage}">
-									<c:url var="clistchk" value="clist">
+									<c:url var="mlistchk" value="ml">
 										<c:param name="page" value="${p}" />
 									</c:url>
-									<a href="${clistchk}">${p}</a>
+									<a href="${mlistchk}">${p}</a>
 								</c:if>
 							</c:forEach>
 							<c:if test="${currentPage >= maxPage}">
-								[다음]
+								<i class="fas fa-angle-double-right"></i>
 							</c:if>
 							<c:if test="${currentPage < maxPage}">
-								<c:url var="clistEND" value="clist">
+								<c:url var="clistEND" value="cl">
 									<c:param name="page" value="${currentPage+1}" />
 								</c:url>
-								<a href="${clistEND}">[다음]</a>
+								<a href="${clistEND}"><i class="fas fa-angle-double-right"></i></a>
 							</c:if>
 						</div>
 					</td>
@@ -168,6 +161,12 @@ $(function() {
 								}
 							})
 		}
+	</script>
+		<script>
+		$(function(){
+			console.log("시도");
+			$(".money").append("원");
+		})	
 	</script>
 </body>
 </html>

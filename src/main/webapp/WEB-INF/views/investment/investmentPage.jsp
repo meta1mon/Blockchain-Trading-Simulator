@@ -188,39 +188,7 @@
 				<table id="all_t" class='table table-striped'>
 					<tr>
 						<td>
-							<table>
-								<tr>
-									<td>현재가</td>
-									<td>수량</td>
-									<td>누적수량</td>
-								</tr>
-								<tr>
-									<td>11111</td>
-									<td>11111</td>
-									<td>1111</td>
-								</tr>
-								<tr>
-									<td>22222</td>
-									<td>22222</td>
-									<td>22222</td>
-								</tr>
-								<tr>
-									<td>333333</td>
-									<td>333333</td>
-									<td>333333</td>
-								</tr>
-								<tr>
-									<td>44444</td>
-									<td>44444</td>
-									<td>44444</td>
-								</tr>
-								<tr>
-									<td>55555</td>
-									<td>55555</td>
-									<td>55555</td>
-
-								</tr>
-							</table>
+<div id="aaaaa"></div>
 						</td>
 
 

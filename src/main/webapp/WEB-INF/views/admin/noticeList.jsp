@@ -90,38 +90,46 @@
 						</c:forEach>
 					</c:if>
 				</table>
-				<!-- 앞 페이지 번호 처리 -->
-				<c:if test="${currentPage <= 1 }">
-					[이전]&nbsp;
-				</c:if>
-				<c:if test="${currentPage >1 }">
-					<c:url var="nlistST" value="nl">
-						<c:param name="page" value="${currentPage-1}" />
-					</c:url>
-					<a href="${nlistST}">[이전]</a>
-				</c:if>
-				<!-- 끝 페이지 번호 처리 -->
-				<c:set var="endPage" value="${maxPage}" />
-				<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
-					<c:if test="${p eq currentPage}">
-						<font color="#8C66C8" size="4"><b>[${p}]</b></font>
-					</c:if>
-					<c:if test="${p ne currentPage}">
-						<c:url var="nlistchk" value="nl">
-							<c:param name="page" value="${p}" />
-						</c:url>
-						<a href="${nlistchk}">${p}</a>
-					</c:if>
-				</c:forEach>
-				<c:if test="${currentPage >= maxPage}">
-					[다음]
-				</c:if>
-				<c:if test="${currentPage < maxPage}">
-					<c:url var="nlistEND" value="nl">
-						<c:param name="page" value="${currentPage+1}" />
-					</c:url>
-					<a href="${nlistEND}">[다음]</a>
-				</c:if>
+				<table class="center" style="width: 100%">
+					<tr>
+						<td colspan="6">
+							<!-- 앞 페이지 번호 처리 --> 
+							<c:if test="${currentPage <= 1 }">
+								<i class="fas fa-angle-double-left"></i>
+							</c:if> 
+							<c:if test="${currentPage >1 }">
+								<c:url var="nlistST" value="nl">
+									<c:param name="page" value="${currentPage-1}" />
+								</c:url>
+								<a href="${nlistST}">
+								<i class="fas fa-angle-double-left"></i>
+								</a>
+							</c:if> 
+							<!-- 끝 페이지 번호 처리 --> 
+							<c:set var="endPage" value="${maxPage}" /> 
+							<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
+								<c:if test="${p eq currentPage}">
+									<div class="pageNum"><b>${p}</b></div>
+								</c:if>
+								<c:if test="${p ne currentPage}">
+									<c:url var="nlistchk" value="nl">
+										<c:param name="page" value="${p}" />
+									</c:url>
+								<a href="${nlistchk}">${p}</a>
+								</c:if>
+							</c:forEach> 
+							<c:if test="${currentPage >= maxPage}">
+								<i class="fas fa-angle-double-right"></i>
+							</c:if> 
+							<c:if test="${currentPage < maxPage}">
+								<c:url var="nlistEND" value="nl">
+									<c:param name="page" value="${currentPage+1}" />
+								</c:url>
+								<a href="${nlistEND}"><i class="fas fa-angle-double-right"></i></a>
+							</c:if>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>

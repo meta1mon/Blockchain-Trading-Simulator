@@ -54,7 +54,7 @@ public class AdminCtrl {
 	@Autowired
 	private MypageService myService;
 
-	public static final int LIMIT = 20;
+	public static final int LIMIT = 10;
 
 	@ModelAttribute("countMember")
 	public int countMember() {

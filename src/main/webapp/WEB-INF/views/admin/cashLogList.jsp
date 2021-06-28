@@ -88,35 +88,35 @@ $(function() {
 					<div id="page">
 						<!-- 앞 페이지 번호 처리 -->
 						<c:if test="${currentPage <= 1}">
-								[이전]
+						<i class="fas fa-angle-double-left"></i>
 							</c:if>
 						<c:if test="${currentPage > 1}">
-							<c:url var="clistST" value="clist">
+							<c:url var="cllistST" value="cll">
 								<c:param name="page" value="${currentPage-1}" />
 							</c:url>
-							<a href="${clistST}">[이전]</a>
+							<a href="${cllistST}"><i class="fas fa-angle-double-left"></i></a>
 						</c:if>
 						<!-- 끝 페이지 번호 처리 -->
 						<c:set var="endPage" value="${maxPage}" />
 						<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
-							<c:if test="${p eq currentPage}">
-								<font color="#8C66C8" size="4"><b>[${p}]</b></font>
-							</c:if>
+								<c:if test="${p eq currentPage}">
+									<div class="pageNum"><b>${p}</b></div>
+								</c:if>
 							<c:if test="${p ne currentPage}">
-								<c:url var="clistchk" value="clist">
+								<c:url var="cllistchk" value="cll">
 									<c:param name="page" value="${p}" />
 								</c:url>
-								<a href="${clistchk}">${p}</a>
+								<a href="${cllistchk}">${p}</a>
 							</c:if>
 						</c:forEach>
 						<c:if test="${currentPage >= maxPage}">
-								[다음]
+							<i class="fas fa-angle-double-right"></i>
 							</c:if>
 						<c:if test="${currentPage < maxPage}">
-							<c:url var="clistEND" value="clist">
+							<c:url var="cllistEND" value="cll">
 								<c:param name="page" value="${currentPage+1}" />
 							</c:url>
-							<a href="${clistEND}">[다음]</a>
+							<a href="${cllistEND}"><i class="fas fa-angle-double-right"></i></a>
 						</c:if>
 					</div>
 				</td>

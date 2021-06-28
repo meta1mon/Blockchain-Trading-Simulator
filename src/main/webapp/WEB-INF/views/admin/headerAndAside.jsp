@@ -117,6 +117,7 @@
 	background: #ffc000;
 	color: white;
 }
+
 </style>
 <script>
 	$(document).ready(function() {
@@ -144,9 +145,9 @@
 	<div id="aa" style="height: 100vh; width: 200px; float: left;">
 		<div class="contenedor-menu">
 			<ul class="menu">
-				<li id="index"><img src="resources/assets/img/bts_logo.png" width="120"
-						height="50" style="border-radius:5px;"></li>
-				<li id="home"><a href="${pageContext.request.contextPath}/admin">MAIN<span class="icon"><i class="fa fa-home"></i></span></a></li>
+				<li id="index"><a href="${pageContext.request.contextPath}/admin"><img src="${pageContext.request.contextPath}/resources/assets/img/bts_logo.png" width="120" height="50"
+						style="border-radius:5px;"></a></li>
+<%-- 				<li id="home"><a href="${pageContext.request.contextPath}/admin">MAIN<span class="icon"><i class="fa fa-home"></i></span></a></li> --%>
 				<li id="buychart"><a href="#">회원관리<span class="icon"><i
 						class="fa fa-chevron-down"></i></span></a>
 					<ul>

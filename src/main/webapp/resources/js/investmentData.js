@@ -461,6 +461,7 @@ function alltable() {  // 전체코인 시세 표
 						}
 						html += "</table>"
 						$("#cointable_div").html(html);
+						$('.table-striped tbody tr:nth-of-type(odd)').css('background-color','rgb(227,200,248, 0.0453)');
 					} else {
 						console.log(search + "검색한 서치값");
 						var onechange = "";
@@ -479,6 +480,7 @@ function alltable() {  // 전체코인 시세 표
 
 						html += "</table>"
 						$("#cointable_div").html(html);
+						$('.table-striped tbody tr:nth-of-type(odd)').css('background-color','rgb(227,200,248, 0.0453)');
 					}
 
 				}

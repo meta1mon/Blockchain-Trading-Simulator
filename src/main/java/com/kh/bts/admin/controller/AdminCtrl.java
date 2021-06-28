@@ -196,11 +196,6 @@ public class AdminCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "/cr", method = RequestMethod.GET)
-	public ModelAndView cr(ModelAndView mv) {
-		mv.setViewName("admin/communityReport");
-		return mv;
-	}
 
 	@RequestMapping(value = "/cashR", method = RequestMethod.GET)
 	public ModelAndView cashR(ModelAndView mv) {
@@ -405,8 +400,8 @@ public class AdminCtrl {
 			} else {
 				mv.addObject("list", aService.adminListMember(currentPage, LIMIT)); 
 			}
-			mv.addObject("currentPage", currentPage); mv.addObject("maxPage", maxPage);
-			mv.addObject("listCount", listCount); mv.setViewName("admin/memberList"); 
+				mv.addObject("currentPage", currentPage); mv.addObject("maxPage", maxPage);
+				mv.addObject("listCount", listCount); 
 			} catch (Exception e) { 
 				System.out.println(e.getMessage()); 
 			}
@@ -443,14 +438,31 @@ public class AdminCtrl {
 		} else {
 			mv.addObject("list", aService.selectCashLog(currentPage, LIMIT)); 
 		}
-		mv.addObject("currentPage", currentPage); mv.addObject("maxPage", maxPage);
-		mv.addObject("listCount", listCount); mv.setViewName("admin/memberList"); 
+		mv.addObject("currentPage", currentPage); 
+		mv.addObject("maxPage", maxPage);
+		mv.addObject("listCount", listCount);
 		} catch (Exception e) { 
 			System.out.println(e.getMessage()); 
 		}
 		mv.setViewName("admin/cashLogList");
 		return mv;
 	}
-	
+	@RequestMapping(value = "/cr", method = RequestMethod.GET)
+	public ModelAndView cr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv) {
+		try { 
+			int currentPage = page; 
+			int listCount = aService.countCreport();
+			int maxPage = (int)((double) listCount / LIMIT + 0.9);
+			
+			mv.addObject("list", aService.selectCreport(currentPage, LIMIT)); 
+			mv.addObject("currentPage", currentPage); 
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("listCount", listCount); 
+			} catch (Exception e) { 
+				System.out.println(e.getMessage()); 
+			}
+		mv.setViewName("admin/communityReport");
+		return mv;
+	}
 }
 

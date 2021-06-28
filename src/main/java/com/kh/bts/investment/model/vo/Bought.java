@@ -6,15 +6,15 @@ import org.springframework.stereotype.Component;
 public class Bought {
 	private int ubno;
 	private String coin;
-	private float buycnt;
-	private float buyprice;
+	private double buycnt;
+	private double buyprice;
 	private String bdate;
 	private String acntno;
 
 	public Bought() {
 	}
 
-	public Bought(int ubno, String coin, float buycnt, float buyprice, String bdate, String acntno) {
+	public Bought(int ubno, String coin, double buycnt, double buyprice, String bdate, String acntno) {
 		super();
 		this.ubno = ubno;
 		this.coin = coin;
@@ -40,19 +40,19 @@ public class Bought {
 		this.coin = coin;
 	}
 
-	public float getBuycnt() {
+	public double getBuycnt() {
 		return buycnt;
 	}
 
-	public void setBuycnt(float buycnt) {
+	public void setBuycnt(double buycnt) {
 		this.buycnt = buycnt;
 	}
 
-	public float getBuyprice() {
+	public double getBuyprice() {
 		return buyprice;
 	}
 
-	public void setBuyprice(float buyprice) {
+	public void setBuyprice(double buyprice) {
 		this.buyprice = buyprice;
 	}
 

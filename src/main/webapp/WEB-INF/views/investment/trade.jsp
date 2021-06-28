@@ -10,20 +10,17 @@
 <script type="text/javascript">
 	$(function() {
 		var alltimer = setInterval(function() { // 1초마다 함수 돌림 ()
-			waittable();
-		}, 1000);
+			livePrice();
+			comparePrice();
+		}, 5000);
 		var allcoinList = $("#nameList").val();
 		var coinArr = allcoinList.slice(1, allcoinList.length - 1).split(", ");
 
-		var allpriceList = $("#priceList").val();
-		var priceArr;
-		
-		
-		
 		var nowprices = [];
-		function waittable() {
-			$
-					.ajax({
+		
+		// 빗썸에서 실시간 가격 받아오기
+		function livePrice() {
+			$.ajax({
 						url : 'https://api.bithumb.com/public/ticker/ALL_KRW',
 						type : "get",
 						cache : false,
@@ -31,28 +28,35 @@
 						success : function(data) {
 							for (var i = 0; i < coinArr.length; i++) {
 								nowprices[i] = [ data['data'][coinArr[i]]['closing_price'] * 1 ]
-								// [140, 240]
-								console.log(nowprices[i]);
 							}
-
 						}
-
 					});
 		}
 		;
 
-		function compare() {
-			for (var i = 0; i < coinList.length; i++) {
-
-				if (priceList[0][i] == display[0]) {
-					//미체결 삭제   ?  글번호는  어찌 가지고 오는가 ?
-					//체결 인설트   미체결정보를 보내줘야함 
-					// 코인인계좌에 insert OR update
-					// 계좌에서  update 
+		// 미체결 매수 내역과 빗썸의 가격을 비교
+		function comparePrice() {
+			priceArr = new Array(coinArr.length);
+			for (var i = 0; i < priceArr.length; i++) { // 코인 종류만큼 돌린다
+				priceArr[i] = new Array($("." + coinArr[i]).length);
+				for (var j = 0; j < priceArr[i].length; j++) { // 해당 코인을 클래스로 가지는 수만큼 돌린다	
+					var rawData = $("." + coinArr[i]).eq(j).val();
+					if (rawData >= 1000) {                            // 소숫점 제거를 위함. 단가 1000원부터는 1원 이상 간격으로 상승함
+						priceArr[i][j] = Math.floor(rawData);
+					} else {
+						priceArr[i][j] = rawData * 1;
+					}
+				}
+			}
+			console.log(priceArr);
+			for (var i = 0; i < priceArr.length; i++) { // 코인 종류만큼 돌린다
+				for (var j = 0; j < priceArr[i].length; j++) { // 해당 코인을 클래스로 가지는 수만큼 돌린다	
+					if (nowprices[i] == priceArr[i][j]) {
+						console.log(coinArr[i] + "코인이 " + priceArr[i][j] + " 가격으로 구매됨");
+					}
 				}
 			}
 		}
-
 	});
 </script>
 
@@ -61,17 +65,12 @@
 
 </head>
 <body>
-	<div>
-		<input id="nameList" value="${waitblist }" type="text"> <input
-			id="priceList" value="${waitresult }" type="text">
-			<br>
-		<c:forEach items="${waitresult }" var="vo" >
+		<input id="nameList" value="${waitblist }" type="hidden"> <br>
+		<c:forEach items="${waitresult }" var="vo">
 			<input name="coin" value="${vo.coin }" type="text">
-			<input name="price" value="${vo.buyprice }" type="text">
 			<input name="ubno" value="${vo.ubno }" type="text">
-			<input class="${vo.coin }" value="${vo.ubno }" type="text">
+			<input class="${vo.coin }" value="${vo.buyprice }" type="text"	style="width: 500px">
+			<br>
 		</c:forEach>
-
-	</div>
 </body>
 </html>

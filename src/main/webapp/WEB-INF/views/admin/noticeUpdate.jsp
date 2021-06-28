@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>관리자 페이지 - BTS</title>
 <meta charset="UTF-8">
 <script	src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>

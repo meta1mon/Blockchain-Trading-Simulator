@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 페이지 - BTS</title>
 <link href="${pageContext.request.contextPath}/resources/css/admin.css"
 	rel="stylesheet" type="text/css" />
 <style>
@@ -40,11 +40,11 @@
 <body class="adminContent">
 	<div>
 		<ul id="mm">
-			<li><p>전체 가상 투자금</p> <img src="#" />
+			<li><p>전체 가상 투자금</p> <img src="resources/assets/img/invest.svg" />
 				<p>1,111,111원</p></li>
-			<li><p>미처리 신고 건수</p> <img src="#" />
+			<li><p>미처리 신고 건수</p> <img src="resources/assets/img/report.svg" />
 				<p>111건</p></li>
-			<li><p>신규 충전액</p> <img src="#" />
+			<li><p>신규 충전액</p> <img src="resources/assets/img/charge.svg" />
 				<p>111,111원</p></li>
 		</ul>
 	</div>

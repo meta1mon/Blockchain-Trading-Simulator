@@ -7,6 +7,14 @@
 		SELECT * FROM COINACNT WHERE ACNTNO = #{acntno}
 	</select>
 
+	<!-- 체결 후, 코인계좌에 삽입 -->
+	<insert id="afterInsertCoinAcnt" parameterType="WaitBought" flushCache="true"
+		statementType="PREPARED">
+		INSERT INTO COINACNT (CANO, COIN, BUYCNT, BUYPRICE, ACNTNO)
+		SELECT SEQ_COINACNT.NEXTVAL, COIN, BUYCNT, BUYPRICE, ACNTNO
+		FROM BOUGHT
+		WHERE COIN = #{coin} AND BUYPRICE = #{buyprice}
+	</insert>
 	
 	<!-- 미체결 삽입 -->
 	<insert id="insertCoinAcnt" parameterType="CoinAcnt" flushCache="true"

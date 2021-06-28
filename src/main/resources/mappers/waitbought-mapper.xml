@@ -16,6 +16,11 @@
 	<delete id="deleteWaitBought" parameterType="Integer"	flushCache="true" statementType="PREPARED">
 		DELETE FROM WAITBOUGHT WHERE UBNO = #{ubno}
 	</delete>
+
+	<!-- 체결 후, 미체결 내역 삭제 -->
+	<delete id="afterBoughtDelete" parameterType="WaitBought"	flushCache="true" statementType="PREPARED">
+		DELETE FROM WAITBOUGHT 	WHERE COIN = #{coin} AND BUYPRICE = #{buyprice}
+	</delete>
 	
 	
 	<select id="selectListWaitBought" parameterType="string" resultType="arraylist" resultMap="resultwaitBought">

@@ -21,8 +21,7 @@
 	<!-- 추천 삭제 -->
 	<delete id="deleteLike" parameterType="Clike" flushCache="true"
 		statementType="PREPARED">
-		DELETE FROM CLIKE WHERE CNO = #{cno} AND EMAIL =
-		#{email}
+		DELETE FROM CLIKE WHERE CNO = #{cno} AND EMAIL = #{email}
 	</delete>
 
 
@@ -35,12 +34,12 @@
 	</update>
 
 	<!-- 해당 게시글 추천 유무 조회 -->
-	<select id="selectIsLike" resultType="int" resultMap="resultClike">
+	<select id="selectIsLike" parameterType="Clike" resultType="int">
 		SELECT COUNT(*) FROM CLIKE WHERE CNO = #{cno} AND EMAIL = #{email}	
 	</select>
 	
 	<!-- 추천 개수 조회 -->
-	<select id="selectLikeCount" resultType="int" resultMap="resultClike">
+	<select id="selectLikeCount" parameterType="Clike" resultType="int">
 		SELECT COUNT(*) FROM CLIKE WHERE CNO = #{cno}
 	</select>
 </mapper>

@@ -11,11 +11,12 @@ header {
 	min-width: 320px;
 	height: 64px;
 	/* 140 */
-	background-color: rgba(0, 0, 0, 0.1);
+	background-color: #E3C8F8;
 	overflow: hidden;
 	margin: 0 auto;
 	text-align: center;
 	z-index: 1001;
+	opacity: 0.7;
 }
 
 .behindheader {

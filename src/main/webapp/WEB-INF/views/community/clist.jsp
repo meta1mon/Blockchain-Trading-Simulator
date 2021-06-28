@@ -173,7 +173,7 @@
 </head>
 <%@include file="../main/header.jsp"%>
 <body class="content"
-	style="background-image: url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
+	style="background-image: url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 270%;">
 	<div
 		style="width: 1040px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
 
@@ -314,6 +314,8 @@
 			type="button" id="write" value="글쓰기"
 			onclick="window.location='cWriteForm'">
 			<br>
+	<br>
+	<br>
 	<br>
 	
 	</div>

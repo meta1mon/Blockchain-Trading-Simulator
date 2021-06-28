@@ -321,12 +321,6 @@ public class AdminCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "cll", method = RequestMethod.GET)
-	public ModelAndView cashLogList(ModelAndView mv) {
-		mv.setViewName("admin/cashLogList");
-		return mv;
-	}
-
 	private String setLPad(String strContext, int iLen, String strChar) {
 		String strResult = "";
 		StringBuilder sbAddChar = new StringBuilder();
@@ -375,30 +369,34 @@ public class AdminCtrl {
 		}
 	}
 	
+//	회원 리스트
 	@RequestMapping(value = "/ml", method = RequestMethod.GET)
 	public ModelAndView ml(
 						@RequestParam(name="page", defaultValue = "1") int page,
-						
-						@RequestParam(name="keyword", defaultValue="", required = false) String
-						keyword,
-						
+						@RequestParam(name="keyword", defaultValue="", required = false) String	keyword,
 						@RequestParam(name="searchType", defaultValue="1") int searchType,
 						 ModelAndView mv) {
 		
-		try { int currentPage = page; int listCount = mService.countMember(); int
-		maxPage = (int)((double) listCount / LIMIT + 0.9);
-		
-		if(keyword != null && !keyword.equals("")) { mv.addObject("list",
-		aService.adminSearchMember(keyword, searchType)); } else {
-		mv.addObject("list", aService.adminListMember(currentPage, LIMIT)); }
-		mv.addObject("currentPage", currentPage); mv.addObject("maxPage", maxPage);
-		mv.addObject("listCount", listCount); mv.setViewName("admin/memberList"); }
-		catch (Exception e) { System.out.println(e.getMessage()); }
-		
+		try { 
+			int currentPage = page; 
+			int listCount = mService.countMember(); 
+			int maxPage = (int)((double) listCount / LIMIT + 0.9);
+			
+			if(keyword != null && !keyword.equals("")) { 
+				mv.addObject("list",
+						aService.adminSearchMember(keyword, searchType)); 
+			} else {
+				mv.addObject("list", aService.adminListMember(currentPage, LIMIT)); 
+			}
+			mv.addObject("currentPage", currentPage); mv.addObject("maxPage", maxPage);
+			mv.addObject("listCount", listCount); mv.setViewName("admin/memberList"); 
+			} catch (Exception e) { 
+				System.out.println(e.getMessage()); 
+			}
 		mv.setViewName("admin/memberList");
 		return mv;
 	}
-	
+//	회원 삭제
 	@ResponseBody
 	@RequestMapping(value="/md")
 	public int deleteMember(String email, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -410,6 +408,31 @@ public class AdminCtrl {
 			logger.info("회원 탈퇴 실패");
 		}
 		return result;
+	}
+	
+//	캐시로그 불러오기
+	@RequestMapping(value = "/cll")
+	public ModelAndView cashLogList(
+			@RequestParam(name="page", defaultValue = "1") int page,
+			@RequestParam(name="keyword", defaultValue="", required = false) String	keyword,
+			 ModelAndView mv) {
+		try { 
+		int currentPage = page; 
+		int listCount = aService.countCashLog(); 
+		int maxPage = (int)((double) listCount / LIMIT + 0.9);
+		
+		if(keyword != null && !keyword.equals("")) { 
+			mv.addObject("list", aService.searchCashLog(keyword)); 
+		} else {
+			mv.addObject("list", aService.selectCashLog(currentPage, LIMIT)); 
+		}
+		mv.addObject("currentPage", currentPage); mv.addObject("maxPage", maxPage);
+		mv.addObject("listCount", listCount); mv.setViewName("admin/memberList"); 
+		} catch (Exception e) { 
+			System.out.println(e.getMessage()); 
+		}
+		mv.setViewName("admin/cashLogList");
+		return mv;
 	}
 	
 }

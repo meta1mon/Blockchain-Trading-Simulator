@@ -11,7 +11,7 @@
 	
 	<!-- 해당 게시글에 대한 댓글 리스트 조회 -->
 	<select id="selectRcommunityAll" parameterType="string" resultType="arraylist" resultMap="resultRcommunity">
-		SELECT * FROM RCOMMUNITY WHERE CNO = #{cno}
+		SELECT * FROM RCOMMUNITY WHERE CNO = #{cno} ORDER BY RDATE DESC
 	</select>
 
 	<!-- 댓글 단일 조회 -->

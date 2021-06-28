@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CashLog">
+	<resultMap type="CashLog" id="CashLog">
+	</resultMap>
+	<select id="selectCashLog"  resultType="arraylist" resultMap="CashLog">
+		SELECT NICKNAME, SELLPRICE, WON, CASHDATE FROM CASHLOG JOIN MEMBER USING (EMAIL)
+		ORDER BY CASHDATE DESC
+	</select>
+	
+	<select id="countCashLog"  resultType="int">
+		SELECT COUNT(*) FROM CASHLOG JOIN MEMBER USING (EMAIL)
+		ORDER BY CASHDATE DESC
+	</select>
+	
+	<!-- 관리자 페이지 캐시 로그 닉네임으로 검색 -->
+	<select id="searchCashLog" parameterType="string" resultType="arraylist" resultMap="CashLog">
+		SELECT NICKNAME, SELLPRICE, WON, CASHDATE FROM CASHLOG JOIN MEMBER USING (EMAIL)
+		WHERE NICKNAME LIKE '%'|| #{keyword} ||'%'
+		ORDER BY CASHDATE DESC
+	</select>
+</mapper>

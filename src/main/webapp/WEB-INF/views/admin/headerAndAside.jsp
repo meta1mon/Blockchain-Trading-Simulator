@@ -50,11 +50,15 @@
 	text-decoration: none;
 }
 
-#aa i .fa {
-	float: right;
+/* #aa i .fa {
+	float: right !important;
 }
 
 #aa i .fas {
+	float: right !important;
+} */
+
+.icon{
 	float: right;
 }
 
@@ -142,27 +146,27 @@
 			<ul class="menu">
 				<li id="index"><img src="<%request.getContextPath();%>" width="160"
 						height="100" ></li>
-				<li id="home"><a href="${pageContext.request.contextPath}/admin">MAIN<i class="fa fa-home"></i></a></li>
-				<li id="buychart"><a href="#">회원관리<i
-						class="fa fa-chevron-down"></i></a>
+				<li id="home"><a href="${pageContext.request.contextPath}/admin">MAIN<span class="icon"><i class="fa fa-home"></i></span></a></li>
+				<li id="buychart"><a href="#">회원관리<span class="icon"><i
+						class="fa fa-chevron-down"></i></span></a>
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/admin/ml">회원 조회 및 탈퇴</a></li>
 					</ul></li>
-				<li id="adminshop"><a href="#">게시판 관리<i
-						class="fa fa-chevron-down"></i></a>
+				<li id="adminshop"><a href="#">게시판 관리<span class="icon"><i
+						class="fa fa-chevron-down"></i></span></a>
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/admin/cr">게시판 신고 리스트</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/rr">댓글 신고 리스트</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/acr">처리한 신고 게시글</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/arr">처리한 신고 댓글</a></li>
 					</ul></li>
-				<li id="adminmember"><a href="#">공지사항 관리<i
-						class="fa fa-chevron-down"></i></a>
+				<li id="adminmember"><a href="#">공지사항 관리<span class="icon"><i
+						class="fa fa-chevron-down"></i></span></a>
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/admin/nl">공지사항 리스트</a></li>
 					</ul></li>
-				<li id="adminmember"><a href="#">충전 상품 관리<i
-						class="fa fa-chevron-down"></i></a>
+				<li id="adminmember"><a href="#">충전 상품 관리<span class="icon"><i
+						class="fa fa-chevron-down"></i></span></a>
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/admin/cashR">충전 상품 등록</a></li>
 					</ul>

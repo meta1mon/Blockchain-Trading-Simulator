@@ -10,6 +10,7 @@ public class CashLog {
 	private String email;
 	private int won;
 	private int sellprice;
+	private String nickname;
 
 	public CashLog() {
 	}
@@ -70,6 +71,14 @@ public class CashLog {
 
 	public void setSellprice(int sellprice) {
 		this.sellprice = sellprice;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	@Override

@@ -29,7 +29,7 @@ public class ClikeDao {
 		
 		if (result > 0) {
 			System.out.println("추천 추가 성공");
-			result2 = sqlSession.update("clike.addLikeCount", clike.getCno());
+			result2 = sqlSession.update("clike.addLikeCount", cno);
 			if (result2 > 0) {
 				System.out.println("추천 +1 성공");
 			} else {
@@ -53,7 +53,8 @@ public class ClikeDao {
 		Clike clike = new Clike();
 		clike.setCno(cno);
 		clike.setEmail(email);
-		int result = sqlSession.delete("clike.deleteLike", cno);
+		System.out.println("clike : " + clike);
+		int result = sqlSession.delete("clike.deleteLike", clike);
 		System.out.println("##############################" + result);
 		int result2;
 		
@@ -73,6 +74,7 @@ public class ClikeDao {
 	}
 	
 	public int isLike(String cno, String email) {
+		System.out.println("cno : " + cno + ", email : " + email);
 		Member vo = sqlSession.selectOne("Member.searchMember", email);
 		if (vo == null) {
 			System.out.println("로그인 오류");
@@ -80,11 +82,11 @@ public class ClikeDao {
 			System.out.println("정상 로그인");
 		}
 		System.out.println("Member vo 받아옴");
-		System.out.println("isLike 수행 시도");
 		Clike clike = new Clike();
 		clike.setCno(cno);
 		clike.setEmail(email);
-		int result = sqlSession.selectOne("clike.selectIsLike", cno);
+		int result = sqlSession.selectOne("clike.selectIsLike", clike);
+		System.out.println("isLike Dao result : " + result);
 		return result;
 	}
 	

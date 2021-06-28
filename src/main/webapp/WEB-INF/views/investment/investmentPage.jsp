@@ -158,7 +158,7 @@
 			<!-- 위젯, 코인 목록 테이블 -->
 			<table id="widgetTB">
 				<tr>
-					<td>
+					<td id="chart1">
 						<!-- TradingView Widget BEGIN -->
 						<div class="tradingview-widget-container">
 							<div id="tradingview_3fe73"></div>
@@ -172,9 +172,14 @@
 								src="https://s3.tradingview.com/tv.js"></script>
 						</div> <!-- TradingView Widget END -->
 					</td>
-					<td><input type="text" id="searchcoin" value=""
-						style="width: 100%; display: 'block'">
-						<div id="cointable_div"></div></td>
+					<td>
+						<span>&nbsp;&nbsp;</span>
+					</td>
+					<td>
+						<input type="text" id="searchcoin" value=""
+						style="width: 100%; display: 'block'" placeholder="코인 검색">
+						<div id="cointable_div"></div>
+					</td>
 				</tr>
 			</table>
 
@@ -183,39 +188,7 @@
 				<table id="all_t" class='table table-striped'>
 					<tr>
 						<td>
-							<table>
-								<tr>
-									<td>현재가</td>
-									<td>수량</td>
-									<td>누적수량</td>
-								</tr>
-								<tr>
-									<td>11111</td>
-									<td>11111</td>
-									<td>1111</td>
-								</tr>
-								<tr>
-									<td>22222</td>
-									<td>22222</td>
-									<td>22222</td>
-								</tr>
-								<tr>
-									<td>333333</td>
-									<td>333333</td>
-									<td>333333</td>
-								</tr>
-								<tr>
-									<td>44444</td>
-									<td>44444</td>
-									<td>44444</td>
-								</tr>
-								<tr>
-									<td>55555</td>
-									<td>55555</td>
-									<td>55555</td>
-
-								</tr>
-							</table>
+<div id="aaaaa"></div>
 						</td>
 
 
@@ -391,6 +364,11 @@
 				'done' : '<i class="fas fa-check done"></i>',
 			}
 		});
+
+		$(function() {
+			$('.table-striped tbody tr:nth-of-type(odd)').css('background-color','rgb(227,200,248, 0.0453)');
+		}); 
+		
 	</script>
 </body>
 </html>

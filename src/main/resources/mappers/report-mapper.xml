@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="report">
+	<resultMap type="Creport" id="Creport">
+	</resultMap>
+	<resultMap type="Rreport" id="Rreport">
+	</resultMap>
 
 	<!-- 신고 게시글 삽입 -->
 	<insert id="insertCreport" parameterType="Creport"
@@ -26,5 +30,17 @@
 	<!-- 신고 댓글 수 세기 -->
 	<select id="countRreport" resultType="int">
 		SELECT COUNT(*) FROM RREPORT
+	</select>
+	
+	<!-- 관리자 페이지 신고글 조회 -->
+	<select id="selectCreport" resultType="arraylist" resultMap="Creport">
+		SELECT CRNO, CNO, CR.CSUBJECT, CR.CCONTENT, CRESPONDENT, CREPORTER, CRREASON, CRDATE FROM CREPORT CR JOIN COMMUNITY USING (CNO)
+		ORDER BY CRDATE DESC
+	</select>
+	
+	<!-- 관리자 페이지 신고 댓글 조회 -->
+	<select id="selectRreport" resultType="arraylist" resultMap="Rreport">
+		SELECT RRNO, RNO, CNO, C.CSUBJECT, RR.RCONTENT, RRESPONDENT, RREPORTER, RRREASON, RRDATE FROM RREPORT RR JOIN COMMUNITY C USING (CNO)
+		ORDER BY RRDATE DESC
 	</select>
 </mapper>

@@ -6,19 +6,34 @@
 		<!-- class와 table의 컬럼명이 동일할 경우, 따로 기입하지 않아도 된다 -->
 	</resultMap>
 
-	<!-- 미체결 삽입 -->
-	<insert id="insertBought" parameterType="Bought" flushCache="true"
-		statementType="PREPARED">
-		INSERT INTO BOUGHT VALUES(
-		SEQ_BOUGHT.NEXTVAL, #{coin}, #{buycnt}, #{buyprice}, default, #{acntno})
+	<!-- 체결로 삽입 ## 정재훈 -->
+	<insert id="insertBought" parameterType="WAITBOUGHT"
+		flushCache="true" statementType="PREPARED">
+		INSERT INTO BOUGHT (UBNO, BDATE, COIN, BUYCNT, BUYPRICE, ACNTNO)
+		SELECT UBNO, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), COIN, BUYCNT,
+		BUYPRICE, ACNTNO
+		FROM WAITBOUGHT
+		WHERE COIN = #{coin} AND BUYPRICE = #{buyprice}
 	</insert>
 
-   <delete id="deleteBought" parameterType="Integer"	flushCache="true" statementType="PREPARED">
-		DELETE FROM BOUGHT WHERE UBNO = #{ubno}
+	<!-- 미체결 삽입 -->
+	<insert id="insertBought11" parameterType="Bought"
+		flushCache="true" statementType="PREPARED">
+		INSERT INTO BOUGHT VALUES(
+		SEQ_BOUGHT.NEXTVAL, #{coin}, #{buycnt}, #{buyprice}, default,
+		#{acntno})
+	</insert>
+
+	<delete id="deleteBought" parameterType="Integer"
+		flushCache="true" statementType="PREPARED">
+		DELETE FROM BOUGHT WHERE UBNO =
+		#{ubno}
 	</delete>
-	
-	<select id="selectListBought" resultType="arraylist" resultMap="resultBought">
-		SELECT * FROM BOUGHT WHERE ACNTNO = #{acntno} ORDER BY BDATE DESC
+
+	<select id="selectListBought" resultType="arraylist"
+		resultMap="resultBought">
+		SELECT * FROM BOUGHT WHERE ACNTNO = #{acntno} ORDER BY BDATE
+		DESC
 	</select>
-	
+
 </mapper>

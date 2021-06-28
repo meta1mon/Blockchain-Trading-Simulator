@@ -9,9 +9,10 @@ public class Rreport {
 	private int rrreason;
 	private String rcontent;
 	private String rrespondent;
-	private String rrdate;
+	private String rrdate; 
 	private String cno;
 	private String rno;
+	private String csubject;
 	
 	public Rreport() {}
 	
@@ -90,6 +91,14 @@ public class Rreport {
 
 	public void setRno(String rno) {
 		this.rno = rno;
+	}
+
+	public String getCsubject() {
+		return csubject;
+	}
+
+	public void setCsubject(String csubject) {
+		this.csubject = csubject;
 	}
 	
 	

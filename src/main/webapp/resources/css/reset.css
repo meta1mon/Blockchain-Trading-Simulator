@@ -13,6 +13,9 @@
     text-decoration: none;
     list-style: none;
     font-family: 'S-CoreDream-5Medium';
+    box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
 
 .shadow{
@@ -39,11 +42,13 @@ html,body {
 
 #wrapper {
 	position:relative;
+	min-height: 100%;
+	padding-bottom: 54px;
 }
 
 #container {
 	height: 100%;
-	padding:20px;
+	padding: 20px;
     width: 1000px;
     margin-left: auto;
     margin-right: auto;

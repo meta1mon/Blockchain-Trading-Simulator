@@ -39,8 +39,6 @@
 		<!-- 			<button class="pageBtn" id="pageNext">다음</button> -->
 				</div>
 			</div>
-			<div id="space">
-			</div>
 <!-- 		</div> -->
 		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>

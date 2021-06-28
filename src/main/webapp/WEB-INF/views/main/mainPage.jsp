@@ -23,12 +23,15 @@ function go() {
 <body>
 	<div id="wrapper">
 		<div id="container">
-			<table style="width: 100%" class="shadow">
+			<table style="width: 100%">
 				<tr>
 					<td id="c1">
 <!-- 						<div id="chart"> -->
 							<div id="chart_div"></div>
 <!-- 						</div> -->
+					</td>
+					<td>
+					 <span>&nbsp;&nbsp;</span>
 					</td>
 					<td id="c2">
 						<div id="table">

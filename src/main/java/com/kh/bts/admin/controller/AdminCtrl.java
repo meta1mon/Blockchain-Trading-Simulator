@@ -75,6 +75,23 @@ public class AdminCtrl {
 	public int totalTodayCount() {
 		return cmService.totalTodayCount();
 	}
+	
+	@ModelAttribute("totalCybcash")
+	public int totalCybcash() {
+		return aService.totalCybcash();
+	}
+	@ModelAttribute("countTodayWon")
+	public int countTodayWon() {
+		return aService.countTodayWon();
+	}
+	@ModelAttribute("countCreport")
+	public int countCreport() {
+		return aService.countCreport();
+	}
+	@ModelAttribute("countRreport")
+	public int countRreport() {
+		return aService.countRreport();
+	}
 
 // 충전 상품 등록
 	@RequestMapping(value = "/cashRegister", method = RequestMethod.POST)

@@ -18,4 +18,8 @@ public interface AdminService {
 	public List<CashLog> searchCashLog(String keyword);
 	public List<Member> adminSearchMember(String keyword, int searchType);
 	public List<Member> adminListMember(int startPage, int limit);
+	public int totalCybcash();
+	public int countTodayWon();
+	public int countCreport();
+	public int countRreport();
 }

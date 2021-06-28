@@ -75,4 +75,27 @@ public class AdminDao {
 		
 		return sqlSession.selectList("Member.adminListMember", null, row);
 	}
+	
+	public int totalCybcash() {
+		int result = 0;
+		result = sqlSession.selectOne("acnt.totalCybcash");
+		return result;
+	}
+	
+	public int countTodayWon() {
+		int result =0;
+		result = sqlSession.selectOne("CashLog.countTodayWon");
+		return result;
+	}
+	
+	public int countCreport() {
+		int result=0;
+		result = sqlSession.selectOne("report.countCreport");
+		return result;
+	}
+	public int countRreport() {
+		int result=0;
+		result = sqlSession.selectOne("report.countRreport");
+		return result;
+	}
 }

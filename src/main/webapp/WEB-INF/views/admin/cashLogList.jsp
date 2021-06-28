@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>관리자 페이지 - BTS</title>
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/admin.css"
 	rel="stylesheet" type="text/css" />
@@ -30,12 +31,13 @@ $(function() {
 }
 
 #cll th, td {
-	padding: 5px;
+	padding: 5px !important;
 }
 
-#mmm td {
+#mmm td:not(.center, .right) {
 	text-align: left;
 }
+
 #page{
 	text-align: center;
 }
@@ -73,11 +75,11 @@ $(function() {
 				<c:forEach var="vo" items="${list}" varStatus="status">
 					<tr>
 						<td>${vo.nickname}</td>
-						<td><fmt:formatNumber value="${vo.sellprice}"
+						<td class="right money"><fmt:formatNumber value="${vo.sellprice}"
 								pattern="#,###,###,###" /></td>
-						<td><fmt:formatNumber value="${vo.won}"
+						<td class="right money"><fmt:formatNumber value="${vo.won}"
 								pattern="#,###,###,###" /></td>
-						<td>${vo.cashdate}</td>
+						<td class="right">${vo.cashdate}</td>
 					</tr>
 				</c:forEach>
 			</c:if>
@@ -120,5 +122,11 @@ $(function() {
 				</td>
 		</table>
 	</div>
+	<script>
+		$(function(){
+			console.log("시도");
+			$(".money").append("원");
+		})	
+	</script>
 </body>
 </html>

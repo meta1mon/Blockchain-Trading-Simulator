@@ -13,7 +13,7 @@
 	height: 100px;
 }
 #mh td {
-	padding-top: 42px; 
+	padding-top: 42px !important; 
 	text-align: center;
 }
 #mh td:nth-child(2), #mh td:nth-child(3), #mh td:nth-child(4) {
@@ -29,13 +29,16 @@
 }
 
 </style>
+<link href="${pageContext.request.contextPath}/resources/css/admin.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- Font Awesome 4-->
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <style>
 #aa {
@@ -117,6 +120,7 @@
 	background: #ffc000;
 	color: white;
 }
+
 </style>
 <script>
 	$(document).ready(function() {

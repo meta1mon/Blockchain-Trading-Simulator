@@ -23,6 +23,9 @@
 	function showInsertForm() {
 		location.href = "cwriteForm";
 	}
+	$(function() {
+		$('.footer-container').css('position','relative');
+	});
 </script>
 
 <style>
@@ -321,5 +324,5 @@
 	</div>
 	
 </body>
-<%@include file="../main/footer.jsp"%>
+<jsp:include page="../main/footer.jsp"></jsp:include>
 </html>

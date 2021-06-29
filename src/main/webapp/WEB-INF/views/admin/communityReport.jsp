@@ -7,23 +7,31 @@
 <head>
 <meta charset="UTF-8">
 <style>
-#cr #modal{
+#modal{
 	display: none;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(188, 143, 143, 0.8);
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
-#cr #contents {
-	background-color: white;
-	margin: 100px auto;
-	width: 400px;
-	height: 600px;
-	text-align: center;
-	position: relative;
+#contents table {
+	width: 100%;
+}
+
+#contents {
+	padding: 30px;
+    background-color: white;
+    border: 2px solid rgb(140, 102, 200);
+    border-radius: 5px;
+    top: calc(50% - 200px);
+    left: calc(50% - 100px);
+    width: 400px;
+    height: 365px;
+    text-align: center;
+    position: absolute;
 }
 
 #cr th, td {
@@ -47,6 +55,44 @@
 #listForm{
 	width: 100%;
 }
+
+#detail {
+	height: 35px;
+}
+
+#close {
+	height: 35px;
+}
+
+#contents table td:nth-child(1) {
+	width: 120px;
+	text-align: right;
+}
+
+#contents table td input {
+	width: 270px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 3px;
+}
+
+#ccontent {
+	height: 105px;
+	width: 270px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 3px;
+	font-size: 13.3333px;
+	padding: 1px 2px;
+	text-align: left;
+	background: white;
+}
+
+button {
+	width: 94px;
+}
+
+.hidden{
+	display: none;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
@@ -58,13 +104,16 @@
 			for(i=0; i<ele.length; i++){
 				console.log(i+"번째 " + ele[i].innerText);
 			};
-			$("#csubject").val(ele[1].innerText);
-			$("#crespondent").val(ele[3].innerText);
-			$("#ccontent").val(ele[2].innerText);
-			$("#creporter").val(ele[4].innerText);
-			$("#crreason").val(ele[5].innerText);
-			$("#crdate").val(ele[6].innerText);
-			$("#cno").val(ele[7].innerText);
+			
+			$("#crno").val(ele[0].innerText); // 신고 번호
+			$("#csubject").val(ele[1].innerText); // 신고하는 게시글 제목
+			$("#ccontent").html(ele[2].innerText); // 신고하는 게시글 내용
+			$("#crespondent").val(ele[3].innerText); // 신고하는 게시글 작성자
+			$("#creporter").val(ele[4].innerText); // 신고자
+			$("#crreasonText").val(ele[5].innerText); // 신고 사유(텍스트)
+			$("#crreason").val(ele[6].innerText); // 신고 사유(DB용)
+			$("#crdate").val(ele[7].innerText); // 신고 날짜
+			$("#cno").val(ele[8].innerText); // 신고하는 글 번호
 		}
 		$(".tr").on("click", openModal);
 		
@@ -72,7 +121,7 @@
 			$("#modal").css("display", "none");
 		}
 		
-		$(".close").on("click", closeModal);
+		$("#close").on("click", closeModal);
 		
 		var detail = function(){
 			location.href="<%=request.getContextPath()%>/cDetail?cno="+$("#cno").val();
@@ -107,31 +156,37 @@
 						<tr class="tr">
 							<td style="cursor: pointer;">${vo.crno}</td>
 							<td style="cursor: pointer;">${vo.csubject}</td>
-							<td style="cursor: pointer; display: none">${vo.ccontent}</td>
+							<td class="hidden">${vo.ccontent}</td>
 							<td style="cursor: pointer;">${vo.crespondent}</td>
 							<td style="cursor: pointer;">${vo.creporter}</td>
 							<c:choose>
 							<c:when test="${vo.crreason eq 1}">
 							<td style="cursor: pointer;">나체 이미지 또는 성적 행위</td>
+							<td class="hidden">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 2}">
 							<td style="cursor: pointer;">혐오 발언 또는 폭력적</td>
+							<td class="hidden">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 3}">
 							<td style="cursor: pointer;">증오 또는 학대</td>
+							<td class="hidden">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 4}">
 							<td style="cursor: pointer;">유해하거나 위험한 행위</td>
+							<td class="hidden">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 5}">
 							<td style="cursor: pointer;">스팸 또는 사용자 현혹</td>
+							<td class="hidden">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 6}">
 							<td style="cursor: pointer;">마음에 들지 않습니다.</td>
+							<td class="hidden">${vo.crreason}</td>
 							</c:when>
 							</c:choose>
 							<td style="cursor: pointer;">${vo.crdate}</td>
-							<td style="cursor: pointer; display: none">${vo.cno}</td>
+							<td class="hidden">${vo.cno}</td>
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -173,51 +228,85 @@
 						</div>
 					</td>
 			</table>
-
-		</div>
-		<div id="modal">
-			<div id="contents">
-				<table>
-				<tr>
-				<td>게시글 제목</td>
-				<td><input type="text" value="" id="csubject" readonly></td>
-				</tr>
-				<tr>
-				<td>피신고자</td>
-				<td><input type="text" value="" id="crespondent" readonly></td>
-				</tr>
-				<tr>
-				<td>게시글 내용</td>
-				<td><textarea cols="22" rows="10" id="ccontent" readonly></textarea></td>
-				</tr>
-				<tr>
-				<td>신고자</td>
-				<td><input type="text" value="" id="creporter" readonly></td>
-				</tr>
-				<tr>
-				<td>신고 사유</td>
-				<td><input type="text" value="" id="crreason" readonly></td>
-				</tr>
-				<tr>
-				<td>신고 시간</td>
-				<td><input type="text" value="" id="crdate" readonly></td>
-				</tr>
-				<tr>
-				<td>신고 처리 사유</td>
-				<td><input type="text"></td>
-				</tr>
-				<tr>
-				<td colspan="2">
-				<input type="text" value="" id="cno" style="display: none">
-				<button type="button" id="detail">자세히 보기</button>
-				<button type="button">신고 수리</button>
-				<button type="button">신고 반려</button>
-				<button type="button" class="close">닫기</button>
-				</td>
-				</tr>
-				</table>
-			</div>
 		</div>
 	</div>
+	<div id="modal">
+			<div id="contents">
+				<form id="frmReport">
+					<table>
+						<tr class="hidden">
+							<td>신고 접수 번호</td>
+							<td><input type="hidden" value="" name="crno" id="crno"></td>
+						</tr>
+						<tr>
+							<td>게시글 제목</td>
+							<td><input type="text" value="" name="csubject" id="csubject" readonly></td>
+						</tr>
+						<tr>
+							<td>피신고자</td>
+							<td><input type="text" value="" name="crespondent" id="crespondent" readonly></td>
+						</tr>
+						<tr>
+							<td class="content">게시글 내용</td>
+							<td><div id="ccontent" class="ccontent">&nbsp;</div></td>
+						</tr>
+						<tr>
+							<td>신고자</td>
+							<td><input type="text" value="" name="creporter" id="creporter" readonly></td>
+						</tr>
+						<tr>
+							<td>신고 사유</td>
+							<td><input type="text" value="" id="crreasonText" readonly></td>
+							<td class="hidden"><input type="hidden" value="" id="crreason" name="crreason"></td>
+						</tr>
+						<tr>
+							<td>신고 시간</td>
+							<td><input type="text" value="" id="crdate" readonly></td>
+						</tr>
+						<tr>
+							<td>신고 처리 사유</td>
+							<td><input type="text" name="creason" id="creason"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><input type="text" value="" id="cno"
+								style="display: none">
+								<button type="button" id="accept" class="btnGreen deal" value="accept">수리</button>
+								<button type="button" id="deny" class="btnRed deal" value="deny">반려</button>
+								<input type="text" id="buttonvalue" value="" name="cstatus" style="display: none">
+								<button type="button" id="detail" class="btnPurple">자세히</button>
+								<button type="button" id="close" class="btnPurple">닫기</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
 </body>
+<script>
+$(function(){
+		$(".deal").on("click",function() {
+ 			var deal = $(".deal").val();
+ 			var btnval = $("#buttonvalue").val(deal);
+			console.log(btnval);
+			console.log("클릭됨");
+			var dataquery = $("#frmReport").serialize();
+			$.ajax({
+			url : "dealcr",
+			type : "POST",
+			data : dataquery,
+			async : true,
+			success : function(data) {
+				alert("처리 완료");
+				location.href = "<%=request.getContextPath()%>/admin/cr";
+			},
+			error : function(request, status, error) {
+				console.log("message:"+request.responseText+"\n"+"error:"+error);
+				alert("error: 처리 실패!");
+				location.href="<%=request.getContextPath()%>/admin/cr";
+			}
+			
+		})
+	})
+})
+</script>
 </html>

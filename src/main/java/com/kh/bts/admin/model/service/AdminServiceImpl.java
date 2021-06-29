@@ -9,6 +9,7 @@ import com.kh.bts.admin.model.dao.AdminDao;
 import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.cash.model.vo.CashLog;
 import com.kh.bts.member.model.vo.Member;
+import com.kh.bts.report.model.vo.Acreport;
 import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
@@ -20,6 +21,10 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int insertCreport(Creport vo) {
 		return aDao.insertCreport(vo);
+	}
+	@Override
+	public int insertAcreport(Acreport vo) {
+		return aDao.insertAcreport(vo);
 	}
 
 	@Override
@@ -98,6 +103,13 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Rreport> selectRreport(int startPage, int limit) {
 		return aDao.selectRreport(startPage, limit);
+	}
+	
+	@Override
+	public int deleteCreport(String crno) {
+		int result = 0;
+		result = aDao.deleteCreport(crno);
+		return result;
 	}
 
 

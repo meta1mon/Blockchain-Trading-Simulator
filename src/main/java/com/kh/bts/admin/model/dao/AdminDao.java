@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.cash.model.vo.CashLog;
 import com.kh.bts.member.model.vo.Member;
+import com.kh.bts.report.model.vo.Acreport;
 import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
@@ -22,7 +23,9 @@ public class AdminDao {
 	public int insertCreport(Creport vo) {
 		return sqlSession.insert("report.insertCreport", vo);
 	}
-	
+	public int insertAcreport(Acreport vo) {
+		return sqlSession.insert("report.insertAcreport", vo);
+	}
 	public int insertRreport(Rreport vo) {
 		return sqlSession.insert("report.insertRreport", vo);
 	}
@@ -110,6 +113,12 @@ public class AdminDao {
 		int startRow = (startPage -1)*limit; 
 		RowBounds row = new RowBounds(startRow,	limit);
 		return sqlSession.selectList("report.selectRreport", null, row);
+	}
+	
+	public int deleteCreport(String crno) {
+		int result = 0;
+		result = sqlSession.delete("report.deleteCreport", crno);
+		return result;
 	}
 	
 }

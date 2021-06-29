@@ -218,12 +218,7 @@
 										<tr>
 											<td><button value="" id="bought_b">매수</button>
 												<button value="" id="sold_b">매도</button>
-												<button value="" id="select_coin">select_coin</button>
-												<button value="" id="select_acnt">select_acnt</button>
 												
-												<button value="" id="select_coin_add">select_coin_add</button>
-												<button value="" id="select_coin_insert">select_coin_insert</button></td>
-											<!-- <button value="" id="noaj" onclick="location.href='wblists'">결과나와라</button> -->
 										</tr>
 									</table>
 									<form id="frm22">
@@ -232,10 +227,10 @@
 												<th colspan="1">보유잔고</th>
 											</tr>
 											<tr>
-												<td>보유 KRW : &nbsp;&nbsp;&nbsp;<input id="cash"
-													placeholder="보유 KRW" value="${acnt.cybcash }원"
-													readonly="readonly"> <br> 매도가능 코인:<input
-													id="cash" placeholder="매도가능 코인"></td>
+												<td>보유 KRW : &nbsp;&nbsp;&nbsp;<input id="cybcash"
+													placeholder="보유 KRW" value=""
+													readonly="readonly"> <br> 매도가능 수량:<input
+													id="coincount" placeholder="매도가능 코인"><button type="button">수량확인</button></td>
 
 											</tr>
 											<tr>
@@ -274,7 +269,7 @@
 													value="0"></td>
 											</tr>
 											<tr>
-												<th colspan="1">주문가능<input id="acntno" name="acntno"
+												<th colspan="1">매수 총자산대비/매수 코인개수 대비<input id="acntno" name="acntno"
 													type="hidden" value="${acnt.acntno }"></th>
 											</tr>
 

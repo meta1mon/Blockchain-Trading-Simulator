@@ -12,14 +12,26 @@
 <script type="text/javascript">
 	$(function() {
 		var alltimer = setInterval(function() { // 1초마다 함수 돌림 ()
-			livePrice();
-			comparePrice();
+			loadValues();
+/* 			livePrice();
+			comparePrice(); */
 		}, 1000);
 		var allcoinList = $("#nameList").val();
 		var coinArr = allcoinList.slice(1, allcoinList.length - 1).split(", ");
 
 		var nowprices = [];
 
+		function loadValues() {
+			$.ajax({
+				url : '${pageContext.request.contextPath}/buyLoad',
+				type : "get",
+				cache : false,
+				success : function(data) {
+					console.log(data.waitblist);					
+
+				}
+			});
+		}
 		// 빗썸에서 실시간 가격 받아오기
 		function livePrice() {
 			$.ajax({
@@ -36,7 +48,7 @@
 						}
 					});
 		}
-		;
+
 
 		// 미체결 매수 내역과 빗썸의 가격을 비교
 		function comparePrice() {
@@ -90,10 +102,7 @@
 	<input id="nameList" value="${waitblist }" type="hidden">
 	<br>
 	<c:forEach items="${waitresult }" var="vo">
-		<input name="coin" value="${vo.coin }" type="text">
-		<input name="ubno" value="${vo.ubno }" type="text">
-		<input class="${vo.coin }" value="${vo.buyprice }" type="text"
-			style="width: 500px">
+		<input class="${vo.coin }" value="${vo.buyprice }" type="hidden" style="width: 500px">
 		<br>
 	</c:forEach>
 </body>

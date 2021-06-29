@@ -91,64 +91,6 @@ $(function() {
 				}
 			});
 
-	$("#sold").on(
-			// 체결 매도 추가하기
-			"click",
-			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-				if (checkpw == false) {
-					alert("계좌비밀번호를 입력해주세요");
-				} else {
-					var dataList = $("#frm22").serialize();
-					$.ajax({
-						url : "sInsert",
-						type : "post",
-						data : dataList,
-						dataType : "json",
-						success : function(data) { // 전달받은 data를 JSON 문자열 형태로
-							// 바꾼다
-							wblist();
-							wslist();
-						},
-						error : function(request, status, errorData) {
-							alert("s실패" + "error code : " + request.status
-									+ "\n" + "message : "
-									+ request.responseText + "\n" + "error : "
-									+ errorData);
-						}
-					});
-				}
-
-			});
-	$("#bought").on(
-			// 매수 버든 체결 bought insert 미체결
-			"click",
-			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-				if (checkpw == false) {
-					alert("계좌비밀번호를 입력해주세요");
-				} else {
-					var dataList = $("#frm22").serialize();
-					$.ajax({
-						url : "bInsert",
-						type : "post",
-						data : dataList,
-						dataType : "json",
-						success : function(data) { // 전달받은 data를 JSON 문자열 형태로
-							// 바꾼다
-							alert("b성공");
-							console.log(data);
-							wblist();
-							wslist();
-
-						},
-						error : function(request, status, errorData) {
-							alert("실패" + "error code : " + request.status
-									+ "\n" + "message : "
-									+ request.responseText + "\n" + "error : "
-									+ errorData);
-						}
-					});
-				}
-			});
 	$("#bought").on(
 			// 매수 버든 wait bought insert 미체결
 			"click",
@@ -176,29 +118,7 @@ $(function() {
 					});
 				}
 			});
-	// ////////////////////////////////////////////////////////////////////////////////////////
-	$("#select_coin_add").on(
-			// 매수 & 매도 체결로 갈경루 코인계좌에 insert
-			"click",
-			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 
-				var dataList = $("#frm22").serialize();
-				$.ajax({
-					url : "coinacntInsert",
-					type : "post",
-					data : dataList,
-					dataType : "json",
-					success : function(data) { // 전달받은 data를 JSON 문자열 형태로
-
-					},
-					error : function(request, status, errorData) {
-						alert("실패" + "error code : " + request.status + "\n"
-								+ "message : " + request.responseText + "\n"
-								+ "error : " + errorData);
-					}
-				});
-
-			});
 	$("#select_coin")
 			// 매수 & 매도 체결로 갈경루 코인계좌에 조회
 			.on(

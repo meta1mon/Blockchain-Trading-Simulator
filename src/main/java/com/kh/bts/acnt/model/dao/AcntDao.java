@@ -15,8 +15,8 @@ public class AcntDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<Acnt> selectList(String email){
-		return sqlSession.selectList("acnt.selectMyAcnt", email);
+	public Acnt selectMyAcnt(String email){
+		return sqlSession.selectOne("acnt.selectMyAcnt", email);
 	}
 	public int cntAcnt(Acnt vo) {
 		int result = 0;

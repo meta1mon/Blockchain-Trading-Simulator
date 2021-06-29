@@ -15,9 +15,9 @@ public class AcntServiceImpl implements AcntService{
 	private AcntDao acntDao;
 
 	@Override
-	public List<Acnt> selectListAcnt(String email) {
+	public Acnt selectMyAcnt(String email) {
 		// TODO Auto-generated method stub
-		return acntDao.selectList(email);
+		return acntDao.selectMyAcnt(email);
 	}
 
 	@Override

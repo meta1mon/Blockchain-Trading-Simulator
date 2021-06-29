@@ -90,10 +90,7 @@
 	<input id="nameList" value="${waitslist }" type="hidden">
 	<br>
 	<c:forEach items="${waitresult }" var="vo">
-		<input name="coin" value="${vo.coin }" type="text">
-		<input name="ubno" value="${vo.usno }" type="text">
-		<input class="${vo.coin }" value="${vo.sellprice }" type="text"
-			style="width: 500px">
+		<input class="${vo.coin }" value="${vo.sellprice }" type="hidden">
 		<br>
 	</c:forEach>
 </body>

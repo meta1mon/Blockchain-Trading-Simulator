@@ -47,23 +47,24 @@ public class investmentCtrl {
 	@Autowired
 	private SoldService sService;
 	@Autowired
-	private AcntService aService;
+	private AcntService acntService;
 	@Autowired
 	private CoinAcntService caService;
 
-	// 미체결 매수 내역 불러오기
-	@RequestMapping("buy")
-	public ModelAndView buy(ModelAndView mav) {
-		List<WaitBought> waitblist = wbService.selectAllCoinListWaitBought();
-		mav.addObject("waitblist", waitblist);
-		List<WaitBought> waitresult = wbService.selectAllListWaitBought();
-		mav.addObject("waitresult", waitresult);
-		System.out.println(waitblist);
-		System.out.println(waitresult);
-
-		mav.setViewName("investment/buy");
-		return mav;
-	}
+	
+	  @RequestMapping("buy") public ModelAndView buy(ModelAndView mv) {
+	  mv.setViewName("investment/buy"); return mv; }
+	 
+	
+	  // 미체결 매수 내역 불러오기
+	  
+	  @ResponseBody
+	  
+	  @RequestMapping("buyLoad") public List<WaitBought>
+	  buyLoad(HttpServletResponse response) { List<WaitBought> waitblist =
+	  wbService.selectAllCoinListWaitBought(); List<WaitBought> waitresult =
+	  wbService.selectAllListWaitBought(); return waitblist; }
+	 
 	
 	// 미체결 매도 내역 불러오기
 	@RequestMapping("sell")
@@ -146,6 +147,7 @@ public class investmentCtrl {
 		return mav;
 	}
 
+	// 모의투자 페이지 진입
 	@RequestMapping("investmentpage")
 	public ModelAndView MainPage(Member vo, ModelAndView mav, HttpServletRequest request) {
 
@@ -154,26 +156,9 @@ public class investmentCtrl {
 		if (loginEmail == null) {
 			System.out.println("비회원입니다");
 		} else {
-			List<WaitBought> waitblist = wbService.selectAllCoinListWaitBought();
-			mav.addObject("waitblist", waitblist);
-			List<WaitBought> waitresult = wbService.selectAllListWaitBought();
-			mav.addObject("waitresult", waitresult);
-
-			System.out.println(waitblist);
-			System.out.println(waitresult);
-
-			System.out.println(loginEmail);
 			mav.addObject("email", loginEmail);
-			List<Acnt> result = aService.selectListAcnt(loginEmail);
-			Acnt acnt = result.get(0);
-			mav.addObject("acnt", acnt);
-			System.out.println("@@" + acnt.getAcntno());
-
-			/*
-			 * String acntno = acnt.getAcntno(); List<CoinAcnt> result1 =
-			 * caService.allselectList(acntno); System.out.println(result1);
-			 * mav.addObject("coinacnt",result1);
-			 */
+			Acnt result = acntService.selectMyAcnt(loginEmail);
+			mav.addObject("acnt", result);
 
 		}
 		mav.setViewName("investment/investmentPage");
@@ -182,11 +167,12 @@ public class investmentCtrl {
 
 	@ResponseBody
 	@RequestMapping(value = "bankpw", method = RequestMethod.POST)
-	public int Check(Acnt vo) throws Exception {
+	public int Check(Acnt vo, HttpSession session) throws Exception {
 
-		int result = aService.cntAcnt(vo);
+		int result = acntService.cntAcnt(vo);
 		if (result > 0) {
 			System.out.println("bankpw성공");
+			session.setAttribute("rightBankPw", "Y");
 		} else {
 			System.out.println("bankpw실패");
 		}
@@ -286,7 +272,7 @@ public class investmentCtrl {
 
 		HttpSession session = request.getSession();
 		String loginEmail = (String) session.getAttribute("loginMember");
-		List<Acnt> result = aService.selectListAcnt(loginEmail);
+		Acnt result = acntService.selectMyAcnt(loginEmail);
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(result);
@@ -465,10 +451,6 @@ public class investmentCtrl {
 				}
 			}
 		}
-		System.out.println(coinArr.length);
-		System.out.println(coinArr[0]);
-		System.out.println(coinArr[1]);
-		System.out.println(coinArr[2]);
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(result);

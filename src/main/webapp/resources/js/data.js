@@ -131,7 +131,7 @@ function chart() {
 						[ '현재', abc ] ]);
 
 				var options = {
-					title : 'BitCoin Trading Simulator'
+					title : 'Blockchain Trading Simulator'
 				};
 
 				var chart = new google.visualization.LineChart(document

@@ -23,7 +23,7 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
 <script type="text/javascript">
-	function removeCoinAcnt(cano) {
+/* 	function removeCoinAcnt(cano) {
 		alert("지우러 들어는 왔다" + cano);
 		$.ajax({
 			url : "coinacntdelete",
@@ -47,7 +47,7 @@
 						+ "error : " + errorData);
 			}
 		});
-	}
+	} */
 	function removeWaitBought(ubno) {
 		alert("지우러 들어는 왔다" + ubno);
 		$.ajax({
@@ -59,6 +59,7 @@
 			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
 				if (data > 0) {
 					alert("성공");
+					wblist();
 					console.log(data);
 				} else {
 					alert("실패");
@@ -73,31 +74,7 @@
 			}
 		});
 	}
-	function removeBought(ubno) {
-		alert("지우러 들어는 왔다" + ubno);
-		$.ajax({
-			url : "bdelete",
-			type : "post",
-			data : {
-				"ubno" : ubno
-			},
-			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-				if (data > 0) {
-					alert("성공");
-					console.log(data);
-				} else {
-					alert("실패");
-					console.log(data);
-				}
 
-			},
-			error : function(request, status, errorData) {
-				alert("실패" + "error code : " + request.status + "\n"
-						+ "message : " + request.responseText + "\n"
-						+ "error : " + errorData);
-			}
-		});
-	}
 	function removeWaitSold(usno) {
 		alert("지우러 들어는 왔다" + usno);
 		$.ajax({
@@ -109,31 +86,7 @@
 			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
 				if (data > 0) {
 					alert("성공");
-					console.log(data);
-				} else {
-					alert("실패");
-					console.log(data);
-				}
-
-			},
-			error : function(request, status, errorData) {
-				alert("실패" + "error code : " + request.status + "\n"
-						+ "message : " + request.responseText + "\n"
-						+ "error : " + errorData);
-			}
-		});
-	}
-	function removeSold(usno) {
-		alert("지우러 들어는 왔다" + usno);
-		$.ajax({
-			url : "sdelete",
-			type : "post",
-			data : {
-				"usno" : usno
-			},
-			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-				if (data > 0) {
-					alert("성공");
+					wslist();
 					console.log(data);
 				} else {
 					alert("실패");
@@ -149,7 +102,6 @@
 		});
 	}
 </script>
-
 <meta charset="UTF-8">
 </head>
 <body>
@@ -218,12 +170,7 @@
 										<tr>
 											<td><button value="" id="bought_b">매수</button>
 												<button value="" id="sold_b">매도</button>
-												<button value="" id="select_coin">select_coin</button>
-												<button value="" id="select_acnt">select_acnt</button>
 												
-												<button value="" id="select_coin_add">select_coin_add</button>
-												<button value="" id="select_coin_insert">select_coin_insert</button></td>
-											<!-- <button value="" id="noaj" onclick="location.href='wblists'">결과나와라</button> -->
 										</tr>
 									</table>
 									<form id="frm22">
@@ -232,10 +179,10 @@
 												<th colspan="1">보유잔고</th>
 											</tr>
 											<tr>
-												<td>보유 KRW : &nbsp;&nbsp;&nbsp;<input id="cash"
-													placeholder="보유 KRW" value="${acnt.cybcash }원"
-													readonly="readonly"> <br> 매도가능 코인:<input
-													id="cash" placeholder="매도가능 코인"></td>
+												<td>보유 KRW : &nbsp;&nbsp;&nbsp;<input id="cybcash"
+													placeholder="보유 KRW" value=""
+													readonly="readonly"> <br> 매도가능 수량:<input
+													id="coincount" placeholder="매도가능 코인"><button type="button">수량확인</button></td>
 
 											</tr>
 											<tr>
@@ -274,7 +221,7 @@
 													value="0"></td>
 											</tr>
 											<tr>
-												<th colspan="1">주문가능<input id="acntno" name="acntno"
+												<th colspan="1">매수 총자산대비/매수 코인개수 대비<input id="acntno" name="acntno"
 													type="hidden" value="${acnt.acntno }"></th>
 											</tr>
 
@@ -333,8 +280,7 @@
 									</tr>
 									<tr>
 
-										<td><div id="aj_b"></div></td>
-										<td><div id="aj_s"></div></td>
+										<td><div id="aj_b"></div><div id="aj_s"></div></td>
 									</tr>
 
 								</table>

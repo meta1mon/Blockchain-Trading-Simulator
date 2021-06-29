@@ -103,6 +103,18 @@ public class AdminDao {
 		return sqlSession.selectList("report.selectCreport", null, row);
 	}
 	
+	public int countAcreport() {
+		int result = 0;
+		result = sqlSession.selectOne("report.countAcreport");
+		return result;
+	}
+	
+	public List<Acreport> selectAcreport(int startPage, int limit){
+		int startRow = (startPage -1)*limit; 
+		RowBounds row = new RowBounds(startRow,	limit);
+		return sqlSession.selectList("report.selectAcreport", null, row);
+	}
+	
 	public int countRreport() {
 		int result=0;
 		result = sqlSession.selectOne("report.countRreport");

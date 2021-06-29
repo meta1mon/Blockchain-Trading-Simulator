@@ -15,6 +15,8 @@ $(function() {
 					checkpw = true;
 					wblist();
 					wslist();
+					blist();
+					slist();
 
 				} else {
 					checkpw = false;
@@ -78,7 +80,6 @@ $(function() {
 						data : dataList,
 						dataType : "json",
 						success : function(data) {
-							wblist();
 							wslist();
 						},
 						error : function(request, status, errorData) {
@@ -91,64 +92,6 @@ $(function() {
 				}
 			});
 
-	$("#sold").on(
-			// 체결 매도 추가하기
-			"click",
-			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-				if (checkpw == false) {
-					alert("계좌비밀번호를 입력해주세요");
-				} else {
-					var dataList = $("#frm22").serialize();
-					$.ajax({
-						url : "sInsert",
-						type : "post",
-						data : dataList,
-						dataType : "json",
-						success : function(data) { // 전달받은 data를 JSON 문자열 형태로
-							// 바꾼다
-							wblist();
-							wslist();
-						},
-						error : function(request, status, errorData) {
-							alert("s실패" + "error code : " + request.status
-									+ "\n" + "message : "
-									+ request.responseText + "\n" + "error : "
-									+ errorData);
-						}
-					});
-				}
-
-			});
-	$("#bought").on(
-			// 매수 버든 체결 bought insert 미체결
-			"click",
-			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-				if (checkpw == false) {
-					alert("계좌비밀번호를 입력해주세요");
-				} else {
-					var dataList = $("#frm22").serialize();
-					$.ajax({
-						url : "bInsert",
-						type : "post",
-						data : dataList,
-						dataType : "json",
-						success : function(data) { // 전달받은 data를 JSON 문자열 형태로
-							// 바꾼다
-							alert("b성공");
-							console.log(data);
-							wblist();
-							wslist();
-
-						},
-						error : function(request, status, errorData) {
-							alert("실패" + "error code : " + request.status
-									+ "\n" + "message : "
-									+ request.responseText + "\n" + "error : "
-									+ errorData);
-						}
-					});
-				}
-			});
 	$("#bought").on(
 			// 매수 버든 wait bought insert 미체결
 			"click",
@@ -164,7 +107,7 @@ $(function() {
 						dataType : "json",
 						success : function(data) {
 							wblist();
-							wslist();
+					
 
 						},
 						error : function(request, status, errorData) {
@@ -176,30 +119,8 @@ $(function() {
 					});
 				}
 			});
-	// ////////////////////////////////////////////////////////////////////////////////////////
-	$("#select_coin_add").on(
-			// 매수 & 매도 체결로 갈경루 코인계좌에 insert
-			"click",
-			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 
-				var dataList = $("#frm22").serialize();
-				$.ajax({
-					url : "coinacntInsert",
-					type : "post",
-					data : dataList,
-					dataType : "json",
-					success : function(data) { // 전달받은 data를 JSON 문자열 형태로
-
-					},
-					error : function(request, status, errorData) {
-						alert("실패" + "error code : " + request.status + "\n"
-								+ "message : " + request.responseText + "\n"
-								+ "error : " + errorData);
-					}
-				});
-
-			});
-	$("#select_coin")
+	/*$("#select_coin")
 			// 매수 & 매도 체결로 갈경루 코인계좌에 조회
 			.on(
 					"click",
@@ -254,8 +175,8 @@ $(function() {
 									}
 
 								});
-					});
-	$("#select_acnt")
+					});*/
+/*	$("#select_acnt")
 			// 자신의 현재 자산 확인 acnt
 			.on(
 					"click",
@@ -296,124 +217,8 @@ $(function() {
 								});
 					});
 
-	$("#ajb")
-			// 매수 체결 내역 조회
-			.on(
-					"click",
-					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-						var dataList = $("#frm22").serialize();
-
-						$
-								.ajax({
-									url : "ajblists",
-									type : "POST",
-									data : dataList,
-									dataType : "json",
-
-									success : function(json) {
-
-										var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
-
-										if (json.length > 0) {
-											$
-													.each(
-															json,
-															function(
-																	entryIndex,
-																	entry) {
-																html1 += "<tr><td>"
-																		+ entry.ubno
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.coin
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.buycnt
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.buyprice
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.bdate
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.acntno
-																		+ "</td>"
-
-																		+ "<td><button class='del' onclick=\"removeBought("
-																		+ entry.ubno
-																		+ ")\">X</button></td></tr>";
-															});
-											html1 += "</table></form>"
-										} else {
-											html1 = "<div>내용이없습니다</div>";
-										}
-
-										$("#aj_b").html(html1);
-
-									}
-
-								});
-					});
-	$("#ajs")
-			// 매도 체결 내역 조회
-			.on(
-					"click",
-					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-						var dataList = $("#frm22").serialize();
-
-						$
-								.ajax({
-									url : "ajslists",
-									type : "POST",
-									data : dataList,
-									dataType : "json",
-
-									success : function(json) {
-
-										var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
-
-										if (json.length > 0) {
-											$
-													.each(
-															json,
-															function(
-																	entryIndex,
-																	entry) {
-																html1 += "<tr><td>"
-																		+ entry.usno
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.coin
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.sellcnt
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.sellprice
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.sdate
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.acntno
-																		+ "</td>"
-
-																		+ "<td><button class='del' onclick=\"removeSold("
-																		+ entry.usno
-																		+ ")\">X</button></td></tr>";
-															});
-											html1 += "</table></form>"
-										} else {
-											html1 = "<div>내용이없습니다</div>";
-										}
-
-										$("#aj_s").html(html1);
-
-									}
-
-								});
-					});
+	
+	*/
 	var timer1 = setInterval(function() { // 1초마다 함수 돌림 ()
 		console.log("1초");
 		alltable();
@@ -509,6 +314,108 @@ function alltable() { // 전체코인 시세 표
 				}
 			});
 };
+function slist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+	var dataList = $("#frm22").serialize();
+
+	$
+			.ajax({
+				url : "ajslists",
+				type : "POST",
+				data : dataList,
+				dataType : "json",
+
+				success : function(json) {
+
+					var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
+
+					if (json.length > 0) {
+						$
+								.each(
+										json,
+										function(
+												entryIndex,
+												entry) {
+											html1 += "<tr><td>"
+													+ entry.usno
+													+ "</td>"
+													+ "<td>"
+													+ entry.coin
+													+ "</td>"
+													+ "<td>"
+													+ entry.sellcnt
+													+ "</td>"
+													+ "<td>"
+													+ entry.sellprice
+													+ "</td>"
+													+ "<td>"
+													+ entry.sdate
+													+ "</td>"
+													+ "<td>"
+													+ entry.acntno
+													+ "</td></tr>";
+										});
+						html1 += "</table></form>"
+					} else {
+						html1 = "<div>내용이없습니다</div>";
+					}
+
+					$("#aj_s").html(html1);
+
+				}
+
+			});
+}
+ function blist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+	var dataList = $("#frm22").serialize();
+
+	$
+			.ajax({
+				url : "ajblists",
+				type : "POST",
+				data : dataList,
+				dataType : "json",
+
+				success : function(json) {
+
+					var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
+
+					if (json.length > 0) {
+						$
+								.each(
+										json,
+										function(
+												entryIndex,
+												entry) {
+											html1 += "<tr><td>"
+													+ entry.ubno
+													+ "</td>"
+													+ "<td>"
+													+ entry.coin
+													+ "</td>"
+													+ "<td>"
+													+ entry.buycnt
+													+ "</td>"
+													+ "<td>"
+													+ entry.buyprice
+													+ "</td>"
+													+ "<td>"
+													+ entry.bdate
+													+ "</td>"
+													+ "<td>"
+													+ entry.acntno
+													+ "</td></tr>";
+										});
+						html1 += "</table></form>"
+					} else {
+						html1 = "<div>내용이없습니다</div>";
+					}
+
+					$("#aj_b").html(html1);
+
+				}
+
+			});
+}
 function wblist() { // 미체결 매수 ajax함수
 	var dataList = $("#frm22").serialize();
 
@@ -546,7 +453,7 @@ function wblist() { // 미체결 매수 ajax함수
 													+ entry.acntno
 													+ "</td>"
 
-													+ "<td><button class='del' onclick=\"removeWaitBought("
+													+ "<td><button type='button' class='del' onclick=\"removeWaitBought("
 													+ entry.ubno
 													+ ")\">X</button><input type='hidden' name='wbno' value='"
 													+ entry.ubno
@@ -601,7 +508,7 @@ function wslist() { // 미체결 매도 내용 함수
 													+ entry.acntno
 													+ "</td>"
 
-													+ "<td><button class='del' onclick=\"removeWaitSold("
+													+ "<td><button type='button' class='del' onclick=\"removeWaitSold("
 													+ entry.usno
 													+ ")\">X</button></td></tr>";
 										});

@@ -3,6 +3,8 @@
 <mapper namespace="report">
 	<resultMap type="Creport" id="Creport">
 	</resultMap>
+	<resultMap type="Acreport" id="Acreport">
+	</resultMap>
 	<resultMap type="Rreport" id="Rreport">
 	</resultMap>
 
@@ -32,7 +34,7 @@
 		SELECT COUNT(*) FROM RREPORT
 	</select>
 	
-	<!-- 관리자 페이지 신고글 조회 -->
+	<!-- 신고글 조회 -->
 	<select id="selectCreport" resultType="arraylist" resultMap="Creport">
 		SELECT CRNO, CNO, CR.CSUBJECT, CR.CCONTENT, CRESPONDENT, CREPORTER, CRREASON, CRDATE FROM CREPORT CR JOIN COMMUNITY USING (CNO)
 		ORDER BY CRDATE DESC
@@ -51,4 +53,15 @@
 	<delete id="deleteCreport" parameterType="string" flushCache="true" statementType="PREPARED">
 		DELETE FROM CREPORT WHERE CRNO = #{crno}
 	</delete>
+	
+	<!-- 처리된 신고글 수 세기 -->
+	<select id="countAcreport" resultType="int">
+		SELECT count(*) FROM ACREPORT
+	</select>
+	
+	<!-- 처리된 신고글 조회 -->
+	<select id="selectAcreport" resultType="arraylist" resultMap="Acreport">
+		SELECT * FROM ACREPORT
+		ORDER BY ACRDATE DESC
+	</select>
 </mapper>

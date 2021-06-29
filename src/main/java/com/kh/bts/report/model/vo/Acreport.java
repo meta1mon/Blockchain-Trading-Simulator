@@ -14,6 +14,7 @@ public class Acreport {
 	private String crdate;
 	private String cstatus;
 	private String creason;
+	private String acrdate;
 
 	public Acreport() {
 	}
@@ -102,6 +103,14 @@ public class Acreport {
 
 	public void setCreason(String creason) {
 		this.creason = creason;
+	}
+
+	public String getAcrdate() {
+		return acrdate;
+	}
+
+	public void setAcrdate(String acrdate) {
+		this.acrdate = acrdate;
 	}
 
 }

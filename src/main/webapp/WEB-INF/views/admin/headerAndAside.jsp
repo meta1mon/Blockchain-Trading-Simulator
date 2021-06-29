@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<title>관리자 페이지 - BTS</title>
 <style>
 #mh {
 	position: absolute;
@@ -148,8 +150,7 @@
 	<div id="aa" style="height: 100vh; width: 200px; float: left;">
 		<div class="contenedor-menu">
 			<ul class="menu">
-				<li id="index"><img src="<%request.getContextPath();%>" width="160"
-						height="100" ></li>
+				<li id="index"><img src="${pageContext.request.contextPath}/resources/assets/img/bts_logo.png" width="120"	height="50" ></li>
 				<li id="home"><a href="${pageContext.request.contextPath}/admin">MAIN<span class="icon"><i class="fa fa-home"></i></span></a></li>
 				<li id="buychart"><a href="#">회원관리<span class="icon"><i
 						class="fa fa-chevron-down"></i></span></a>

@@ -9,7 +9,6 @@
 	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/noticeDetail.css"
 	rel="stylesheet" type="text/css" />
-<title>관리자 페이지 - BTS</title>
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script

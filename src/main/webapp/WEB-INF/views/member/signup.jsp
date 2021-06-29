@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <meta charset="UTF-8">
 <!-- 스타일 -->
 <link rel="stylesheet"
@@ -19,6 +21,7 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet" />
+<title>BTS</title>
 <!-- 스크립트 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>

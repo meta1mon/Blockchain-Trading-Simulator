@@ -26,4 +26,5 @@ public interface AdminService {
 	public List<Creport> selectCreport(int startPage, int limit);
 	public int countRreport();
 	public List<Rreport> selectRreport(int startPage, int limit);
+	public int deleteCreport(String crno);
 }

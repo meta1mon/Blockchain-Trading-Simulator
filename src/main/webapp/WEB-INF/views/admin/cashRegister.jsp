@@ -7,7 +7,6 @@
 <link href="${pageContext.request.contextPath}/resources/css/admin.css"
 	rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>관리자 페이지 - BTS</title>
 <style>
 #cashR {
 	width: 1240px;

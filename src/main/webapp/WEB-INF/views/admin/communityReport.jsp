@@ -75,7 +75,7 @@
 	border-radius: 3px;
 }
 
-#ccontent {
+#ccontentText {
 	height: 105px;
 	width: 270px;
 	border: 1px solid rgba(0, 0, 0, 0.5);
@@ -89,6 +89,10 @@
 button {
 	width: 94px;
 }
+
+.hidden{
+	display: none;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
@@ -100,15 +104,17 @@ button {
 			for(i=0; i<ele.length; i++){
 				console.log(i+"번째 " + ele[i].innerText);
 			};
-			$("#csubject").val(ele[1].innerText);
-			$("#crespondent").val(ele[3].innerText);
-			$("#ccontent").html(ele[2].innerText);
-			$("#creporter").val(ele[4].innerText);
-			$("#crreasonText").val(ele[5].innerText);
-			$("#crdate").val(ele[7].innerText);
-			$("#cno").val(ele[8].innerText);
-			$("#crno").val(ele[0].innerText);
-			$("#crreason").val(ele[6].innerText);
+			
+			$("#crno").val(ele[0].innerText); // 신고 번호
+			$("#csubject").val(ele[1].innerText); // 신고하는 게시글 제목
+			$("#ccontentText").html(ele[2].innerText); // 신고하는 게시글 내용
+			$("#ccontent").val($("#ccontentText").html()); // 신고하는 게시글 내용(DB용)
+			$("#crespondent").val(ele[3].innerText); // 신고하는 게시글 작성자
+			$("#creporter").val(ele[4].innerText); // 신고자
+			$("#crreasonText").val(ele[5].innerText); // 신고 사유(텍스트)
+			$("#crreason").val(ele[6].innerText); // 신고 사유(DB용)
+			$("#crdate").val(ele[7].innerText); // 신고 날짜
+			$("#cno").val(ele[8].innerText); // 신고하는 글 번호
 		}
 		$(".tr").on("click", openModal);
 		
@@ -151,37 +157,37 @@ button {
 						<tr class="tr">
 							<td style="cursor: pointer;">${vo.crno}</td>
 							<td style="cursor: pointer;">${vo.csubject}</td>
-							<td style="cursor: pointer; display: none">${vo.ccontent}</td>
+							<td class="hidden">${vo.ccontent}</td>
 							<td style="cursor: pointer;">${vo.crespondent}</td>
 							<td style="cursor: pointer;">${vo.creporter}</td>
 							<c:choose>
 							<c:when test="${vo.crreason eq 1}">
 							<td style="cursor: pointer;">나체 이미지 또는 성적 행위</td>
-							<td style="display:none">${vo.crreason}</td>
+							<td class="hidden">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 2}">
 							<td style="cursor: pointer;">혐오 발언 또는 폭력적</td>
-							<td style="display:none">${vo.crreason}</td>
+							<td class="hidden">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 3}">
 							<td style="cursor: pointer;">증오 또는 학대</td>
-							<td style="display:none">${vo.crreason}</td>
+							<td class="hidden">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 4}">
 							<td style="cursor: pointer;">유해하거나 위험한 행위</td>
-							<td style="display:none">${vo.crreason}</td>
+							<td class="hidden">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 5}">
 							<td style="cursor: pointer;">스팸 또는 사용자 현혹</td>
-							<td style="display:none">${vo.crreason}</td>
+							<td class="hidden">${vo.crreason}</td>
 							</c:when>
 							<c:when test="${vo.crreason eq 6}">
 							<td style="cursor: pointer;">마음에 들지 않습니다.</td>
-							<td style="display:none">${vo.crreason}</td>
+							<td class="hidden">${vo.crreason}</td>
 							</c:when>
 							</c:choose>
 							<td style="cursor: pointer;">${vo.crdate}</td>
-							<td style="cursor: pointer; display: none">${vo.cno}</td>
+							<td class="hidden">${vo.cno}</td>
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -229,6 +235,10 @@ button {
 			<div id="contents">
 				<form id="frmReport">
 					<table>
+						<tr class="hidden">
+							<td>신고 접수 번호</td>
+							<td><input type="hidden" value="" name="crno" id="crno"></td>
+						</tr>
 						<tr>
 							<td>게시글 제목</td>
 							<td><input type="text" value="" name="csubject" id="csubject" readonly></td>
@@ -239,7 +249,8 @@ button {
 						</tr>
 						<tr>
 							<td class="content">게시글 내용</td>
-							<td><div id="ccontent" class="ccontent">&nbsp;</div></td>
+							<td><div id="ccontentText">&nbsp;</div></td>
+							<td class="hidden"><input type="text" value="" name="ccontent"  id="ccontent"></td>
 						</tr>
 						<tr>
 							<td>신고자</td>
@@ -248,28 +259,36 @@ button {
 						<tr>
 							<td>신고 사유</td>
 							<td><input type="text" value="" id="crreasonText" readonly></td>
-							<input type="hidden" value="" id="crreason" name="crreason">
+							<td class="hidden"><input type="hidden" value="" id="crreason" name="crreason"></td>
 						</tr>
 						<tr>
 							<td>신고 시간</td>
-							<td><input type="text" value="" id="crdate" readonly></td>
+							<td><input type="text" value="" id="crdate" name="crdate" readonly></td>
+						</tr>
+						<tr class="hidden">
+							<td>신고 처리 시간</td>
+							<td><input type="text" value="" name="acrdate" readonly></td>
 						</tr>
 						<tr>
 							<td>신고 처리 사유</td>
 							<td><input type="text" name="creason" id="creason"></td>
 						</tr>
+						<tr class="hidden">
+							<td>신고된 게시글 번호</td>
+							<td><input type="text" value="" name="cno" id="cno"></td>
+						</tr>
+						
 						<tr>
-							<td colspan="2"><input type="text" value="" id="cno"
-								style="display: none">
+							<td colspan="2">
 								<button type="button" id="accept" class="btnGreen deal" value="accept">수리</button>
 								<button type="button" id="deny" class="btnRed deal" value="deny">반려</button>
 								<input type="text" id="buttonvalue" value="" name="cstatus" style="display: none">
+								
 								<button type="button" id="detail" class="btnPurple">자세히</button>
 								<button type="button" id="close" class="btnPurple">닫기</button>
 							</td>
 						</tr>
 					</table>
-						<input type="hidden" value="" name="crno" id="crno">
 				</form>
 			</div>
 		</div>
@@ -277,11 +296,14 @@ button {
 <script>
 $(function(){
 		$(".deal").on("click",function() {
- 			var deal = $(".deal").val();
- 			var btnval = $("#buttonvalue").val(deal);
+ 			var deal = $(this).val();
+ 			console.log(deal);
+ 			$("#buttonvalue").val(deal);
+ 			var btnval = $("#buttonvalue").val();
 			console.log(btnval);
 			console.log("클릭됨");
-			var dataquery = $("#frmReport").serialize();
+			 
+		    var dataquery = $("#frmReport").serialize();
 			$.ajax({
 			url : "dealcr",
 			type : "POST",

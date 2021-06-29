@@ -156,25 +156,28 @@ public class AdminCtrl {
 	}
 // 게시글 신고 수리
 	@RequestMapping(value = "/dealcr", method=RequestMethod.POST)
-	public void insertAcreport(Acreport vo, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		int result = aService.insertAcreport(vo);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ctrl 들어왔다");
-		System.out.println(result);
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-			out.println(result);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (out != null) {
-				out.flush();
-				out.close();
-			}
+	public void insertAcreport(Acreport vo, String crno, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String cstatus = request.getParameter("cstatus");
+		String cno = request.getParameter("cno");
+		int result = aService.insertAcreport(vo); // acreport에 삽입
+		int result2 = aService.deleteCreport(crno); // creport에서 삭제
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~cstatus" + cstatus);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~cno" + cno);
+		if(cstatus.equals("accept")) {
+			int result3 = cmService.deleteCommunity(cno); //community에서 삭제
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("수리 성공");
+			System.out.println("result: " + result + "\n result2: " + result2 + "\n result3: " + result3);
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		}else if(cstatus.equals("deny")) {
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("반려 성공");
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("result: " + result + "\n result2: " + result2);
 		}
 	}
 
-// 댓글 신고 등록
+//	댓글 신고 등록
 	@ResponseBody
 	@RequestMapping(value = "/reportRcommunity")
 	public int reportRcommunity(HttpServletRequest request, Rreport vo) {
@@ -426,7 +429,6 @@ public class AdminCtrl {
 	@ResponseBody
 	@RequestMapping(value="/md")
 	public int deleteMember(String email, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		System.out.println("선택한 이메일"+email);
 		int result = myService.myDelete(email);
 		if (result > 0) {
 			logger.info("회원 탈퇴 성공");

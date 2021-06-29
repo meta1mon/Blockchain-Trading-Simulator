@@ -442,25 +442,46 @@ function alltable() { // 전체코인 시세 표
 					var search = $("#searchcoin").val().toString();
 					search = search.toUpperCase();
 					if (search == "") {
-						for (var i = 0; i < coinList.length; i++) {
+						for (var i = 0; i < (coinList.length) - 1; i++) {
 							display[i] = [
 									data['data'][coinList[i]]['closing_price'] * 1,
 									data['data'][coinList[i]]['fluctate_rate_24H'] * 1,
 									data['data'][coinList[i]]['acc_trade_value_24H'] * 1 ]
 						}
 						html = "<table class='table table-striped' id='cointable' ><tr><td>코인명</td><td>현재가</td><td>등락률(24H)</td><td>거래대금</td></tr>";
-						for (var i = 0; i < coinList.length; i++) {
+						for (var i = 0; i < coinList.length - 1; i++) {
 							thisCoin = i;
 							html += "<tr><td><a href=# onclick='changename("
-									+ thisCoin + ");'>" + coinList[i]
-									+ "</a></td><td>" + display[i][0]
-									+ "</td><td>" + display[i][1] + "%"
-									+ "</td><td>" + display[i][2]
-									+ "</td></tr>";
+									+ thisCoin
+									+ ");'>"
+									+ coinList[i]
+									+ "</a></td><td>"
+									+ display[i][0]
+									+ "</td><td><span class='change_c'>"
+									+ display[i][1]
+									+ "</span><span class='change_cp'>%</span></td><td>"
+									+ display[i][2] + "</td></tr>";
 
 						}
+
 						html += "</table>"
 						$("#cointable_div").html(html);
+
+						for (var i = 0; i < coinList.length - 1; i++) {
+							var num = $(".change_c").eq(i);
+							var percent = $(".change_cp").eq(i);
+							if (num.text() * 1 > 0) {
+								num.css('color', 'red');
+								percent.css('color', 'red');
+							} else if (num.text() * 1 == 0) {
+								num.css('color', 'black');
+								percent.css('color', 'black');
+							} else {
+								num.css('color', 'blue');
+								percent.css('color', 'blue');
+							}
+						}
+
 						$('.table-striped tbody tr:nth-of-type(odd)').css(
 								'background-color', 'rgb(227,200,248, 0.0453)');
 					} else {
@@ -612,7 +633,7 @@ function chart() { // 차트
 		"allow_symbol_change" : true,
 		"container_id" : "tradingview_3fe73"
 	});
-	
+
 }
 
 function toname(name) {
@@ -723,26 +744,27 @@ function orderbook() {
 				cache : false,
 				datatype : "json",
 				success : function(data) {
-					for (var i = 0; i < 15; i++) {
+					for (var i = 0; i < 5; i++) {
 						orderbookarrbid[i] = [
 								data[0]['orderbook_units'][i]['bid_price'] * 1,
 								data[0]['orderbook_units'][i]['bid_size'] * 1 ]
 					}
-					for (var i = 0; i < 15; i++) {
+					for (var i = 0; i < 5; i++) {
 						orderbookarrask[i] = [
 								data[0]['orderbook_units'][i]['ask_price'] * 1,
 								data[0]['orderbook_units'][i]['ask_size'] * 1 ]
 					}
 					html6 = "<table class='table table-striped' ><tr><td>현재가</td><td>수량</td></tr>";
-					for (var i = 14; i > 0; i--) {
-						html6 += "<tr><td>"
-								+ orderbookarrask[i][0] + "</td><td>"
+					for (var i = 4; i >= 0; i--) {
+						html6 += "<tr style='background: red; opacity: 0.3;'><td>"
+								+ orderbookarrask[i][0]
+								+ "</td><td>"
 								+ orderbookarrask[i][1] + "개" + "</td></tr>";
 
 					}
-//					html6 += "<tr><td>구분좀하자 </td></tr>";
-					for (var i = 0; i < 15; i++) {
-						html6 += "<tr><td>"
+					html6 += "<tr><td>구분좀하자 </td></tr>";
+					for (var i = 0; i < 5; i++) {
+						html6 += "<tr  style='background: blue;'><td>"
 								+ orderbookarrbid[i][0] + "</td><td>"
 								+ orderbookarrbid[i][1] + "개" + "</td></tr>";
 

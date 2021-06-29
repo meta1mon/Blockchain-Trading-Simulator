@@ -14,7 +14,8 @@ var changecoin = "BTC"; // default
 
 function changename(listNum) {
 	console.log("changename함수");
-	var coinList2 = [ 'BTC', 'ETH', 'DOGE', 'LTC', 'XRP' ,'ETC', 'ADA', 'TRX','SXP','STRAX'];
+	var coinList2 = [ 'BTC', 'ETH', 'DOGE', 'LTC', 'XRP', 'ETC', 'ADA', 'TRX',
+			'SXP', 'STRAX' ];
 	changecoin = coinList2[listNum];
 
 };
@@ -37,7 +38,8 @@ function coinname() {
 
 function table() {
 	console.log("table함수 들어옴");
-	var coinList = [ 'BTC', 'ETH', 'DOGE', 'LTC', 'XRP','ETC', 'ADA', 'TRX','SXP','STRAX' ];
+	var coinList = [ 'BTC', 'ETH', 'DOGE', 'LTC', 'XRP', 'ETC', 'ADA', 'TRX',
+			'SXP', 'STRAX' ];
 	var display = new Array();
 	var html = "";
 	var thisCoin = null;
@@ -60,14 +62,28 @@ function table() {
 						console.log(coinList[i] + "의 정보는 다음과 같다" + display[i]);
 						html += "<tr><td><a href=# onclick='changename("
 								+ thisCoin + ");'>" + coinList[i]
-								+ "</a></td><td>" + display[i][0] + "</td><td>"
-								+ display[i][1]+"%" + "</td><td>" + display[i][2]
-								+ "</td></tr>";
+								+ "</a></td><td>" + display[i][0] + "</td><td><span class='change_c'>"
+								+ display[i][1] + "</span><span class='change_cp'>%</span></td><td>"
+								+ display[i][2] + "</td></tr>";
 
 					}
 					html += "</table>"
 					$("#cointable_div").html(html);
 
+					for (var i = 0; i < coinList.length ; i++) {
+						var num = $(".change_c").eq(i);
+						var percent = $(".change_cp").eq(i);
+						if (num.text() * 1 > 0) {
+							num.css('color', 'red');
+							percent.css('color', 'red');
+						} else if (num.text() * 1 == 0) {
+							num.css('color', 'black');
+							percent.css('color', 'black');
+						} else {
+							num.css('color', 'blue');
+							percent.css('color', 'blue');
+						}
+					}
 				}
 			});
 };
@@ -91,19 +107,20 @@ function chart() {
 			var abc6 = data['data'][a - 6][2] * 1; // 형변환
 			var abc7 = data['data'][a - 7][2] * 1; // 형변환
 
-//			var now = new Date().getTime();
-//			const curr = new Date();
-//			const utc = curr.getTime() + (curr.getTimezoneOffset() * 60 * 1000);
-//			const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
-//			const kr_curr = new Date(utc + (KR_TIME_DIFF));
-//			var aaa = data['data'][0][0]; // 형변환
-//			var aaa1 = data['data'][0][1]; // 형변환
-//			console.log(now);
-//			console.log(kr_curr);
-//			console.log(kr_curr.getTime());
-//			console.log(aaa1);
-//			console.log(aaa);
-//			console.log(aaa1);
+			// var now = new Date().getTime();
+			// const curr = new Date();
+			// const utc = curr.getTime() + (curr.getTimezoneOffset() * 60 *
+			// 1000);
+			// const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+			// const kr_curr = new Date(utc + (KR_TIME_DIFF));
+			// var aaa = data['data'][0][0]; // 형변환
+			// var aaa1 = data['data'][0][1]; // 형변환
+			// console.log(now);
+			// console.log(kr_curr);
+			// console.log(kr_curr.getTime());
+			// console.log(aaa1);
+			// console.log(aaa);
+			// console.log(aaa1);
 
 			function drawChart() {
 				console.log("drawChart 안에서의 abc 값 : " + abc);

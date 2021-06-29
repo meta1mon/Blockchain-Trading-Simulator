@@ -35,12 +35,10 @@
 	<%@include file="../main/header.jsp"%>
 		<div class="listOut">
 	
-			<div class="comm">베스트 게시글</div>
+			<div class="comm">커뮤니티</div>
 			<br>
 			<br>
-			<br>
-			<br>
-			<br>
+			<div class="bestComm">BEST 게시글</div>
 			<!-- 조회수 상위 5개 인기 게시글 -->
 			<c:if test="${listCount ne 0}">
 				<hr>
@@ -62,8 +60,6 @@
 				<hr>
 			</c:if>
 			
-			<div class="comm">커뮤니티</div>
-	
 			<div class="searchDiv">
 				<form action="clist" name="listForm" method="get">
 					<select id="searchType" name="searchType">

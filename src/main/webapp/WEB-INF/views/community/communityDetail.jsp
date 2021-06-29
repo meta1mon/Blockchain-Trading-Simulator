@@ -502,5 +502,4 @@ alert("code:"+request.status+" n"+"message:"+request.responseText+" n"+"error:"+
    });
 </script>
 </body>
-<%@include file="../main/footer.jsp"%>
 </html>

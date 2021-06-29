@@ -4,7 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <meta charset="UTF-8">
+<link href="${pageContext.request.contextPath}/resources/css/clist.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -23,306 +26,106 @@
 	function showInsertForm() {
 		location.href = "cwriteForm";
 	}
-	$(function() {
-		$('.footer-container').css('position','relative');
-	});
 </script>
 
-<style>
-.comm {
-	margin: 40px 0 20px 20px;
-	text-align: left;
-	font-size: 25px;
-	color: #FFC000;
-	float: left;
-}
 
-#write {
-	width: 90px;
-    height: 45px;
-    float: right;
-    border: none;
-    margin-top: 33px;
-    text-align: center;
-    color: #ffffff;
-    background-color: #8C66C8;
-    font-size: 18px;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    position: relative;
-    right: 20px;
-}
-
-#write:hover {
-	background-color: #A07ADC;
-	box-shadow: 10px 10px 20px 5px #eeeeee;
-}
-
-#searchType {
-	width: 100px;
-	height: 45px;
-	border: 3px solid #8C66C8;
-	font-size: 18px;
-	color: black;
-	margin-top: 33px;
-	padding: 0;
-	float: left;
-	clear: both;
-	position:relative;
-	left:40px;
-}
-
-#searchType:hover, #searchType:focus {
-	color: #8C66C8;
-	transition: color 0.15s ease-in-out;
-}
-
-#search {
-	    width: 650px;
-    height: 45px;
-    top: 0;
-    background-color: #ffffff;
-    border: 3px solid #8C66C8;
-    font-size: 18px;
-    margin-top: 33px;
-    padding: 0;
-    float: left;
-    position: relative;
-    left: 60px;
-}
-
-#search:hover, #search:focus {
-	color: black;
-	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-		box-shadow 0.15s ease-in-out;
-}
-
-#btnsearchVal {
-	background-image:
-		url(https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png);
-	background-size: contain;
-	background-position: 10px center;
-	background-repeat: no-repeat;
-	text-indent: 0;
-}
-
-#btnsearch {
-	width: 80px;
-	height: 45px;
-	padding: 0;
-	border: 2px solid #8C66C8;
-	font-size: 18px;
-	color: #ffffff;
-	background-color: #8C66C8;
-	margin-top: 33px;
-	float: left;
-	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-		box-shadow 0.15s ease-in-out;
-	position:relative;
-	left:10px;
-}
-
-#btnsearch:hover, #btnsearch:focus {
-	color: black;
-	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-		box-shadow 0.15s ease-in-out;
-}
-
-.ptable {
-	margin: 0 auto 0; 20 px;
-	clear: both;
-	width: 1000px;
-	border-collapse: collapse;
-}
-
-.ctable {
-	margin: 0 auto 0; 20 px;
-	clear: both;
-	width: 1000px;
-	border-collapse: collapse;
-}
-
-.ptable tr, .ctable tr {
-	border-bottom: 1px solid #eeeeee;
-	height: 35px;
-	font-size: 15px;
-}
-
-.ptable tr:hover, .ctable tr:hover {
-	background-color: #FCFCFC;
-}
-
-.subject {
-	color: black;
-	text-decoration: none;
-}
-
-.subject:hover, .subject:active {
-	text-decoration: underline;
-}
-
-.replycnt {
-	color: #999;
-	font-size: 15px;
-}
-
-.replycnt:hover, .replycnt:active {
-	text-decoration: underline;
-}
-#space {
-	height: 100px;
-	border: 1px solid;
-}
-
-#page {
-	line-height: 30px;
-    text-align: center;
-    margin-top: 30px;
-}
-
-#leftpage {
-	font-size: 18px;
-    text-decoration: none;
-    color: black;
-    padding: 10px 17px;
-    text-align: center;
-    background-color: #F8F8F8;
-    margin: -2px;
-    position: relative;
-    left: 20px;
-    border-radius: 6px;
-}
-
-#pageNum {
-	font-size: 18px;
-    text-decoration: none;
-    color: black;
-    padding: 10px 12px;
-    text-align: center;
-    background-color: #F8F8F8;
-    position: relative;
-    left: 25px;
-    border-radius: 6px;
-    margin-left: 5px;
-}
-
-#rightpage {
-	font-size: 18px;
-    text-decoration: none;
-    color: black;
-    padding: 10px 17px;
-    text-align: center;
-    background-color: #F8F8F8;
-    margin: -2px;
-    position: relative;
-    left: 20px;
-    border-radius: 6px;
-}
-
-#leftpage:hover, #leftpage:active, #pageNum:hover, #pageNum:active,
-	#rightpage:hover, #rightpage:active {
-	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
-	background-color: #8C66C8;
-	color: white;
-}
-</style>
 </head>
-<%@include file="../main/header.jsp"%>
-<body class="content"
-	style="background-image: url(resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 270%;">
-	<div
-		style="width: 1040px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
-
-		<div class="comm">커뮤니티</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<!-- 조회수 상위 5개 인기 게시글 -->
-		<c:if test="${listCount ne 0}">
+<body>
+	<div id="wrapper">
+	<%@include file="../main/header.jsp"%>
+		<div class="listOut">
+	
+			<div class="comm">베스트 게시글</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<!-- 조회수 상위 5개 인기 게시글 -->
+			<c:if test="${listCount ne 0}">
+				<hr>
+				<table class="ptable">
+					<c:forEach var="vo" items="${plist}" varStatus="status">
+						<tr>
+							<td align="center" width="60" style="font-size: 13px;">${vo.cno}</td>
+							<td align="left" width="300"><a
+								href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">&nbsp;${vo.csubject}
+							</a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
+								class="replycnt">[${vo.replycnt}]</a></td>
+							<td align="center" width="100">${vo.cwriter}</td>
+							<td align="center" width="110" style="font-size: 13px;">${vo.cdate}</td>
+							<td align="center" width="60">${vo.viewcnt}</td>
+							<td align="center" width="60">${vo.likecnt}</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<hr>
+			</c:if>
+			
+			<div class="comm">커뮤니티</div>
+	
+			<div class="searchDiv">
+				<form action="clist" name="listForm" method="get">
+					<select id="searchType" name="searchType">
+						<option value="1">글제목</option>
+						<option value="2">글내용</option>
+						<option value="3">작성자</option>
+					</select> 
+					<input type='search' id="search" name="keyword">
+					<button type=submit id="btnsearch">검색</button>
+				</form>
+				<input type="hidden" name="page" value="${currentPage}"> 
+				<input type="button" id="write" value="글쓰기" onclick="window.location='cWriteForm'">
+			</div>
+			
 			<hr>
-			<table class="ptable">
-				<c:forEach var="vo" items="${plist}" varStatus="status">
+			<table class="ctable">
+				<tr>
+					<td align="center" width="60">번호</td>
+					<td align="center" width="300">제목</td>
+					<td align="center" width="100">작성자</td>
+					<td align="center" width="110">작성일</td>
+					<td align="center" width="60">조회</td>
+					<td align="center" width="60">추천</td>
+				</tr>
+				<!-- 글이 없을 경우 -->
+				<c:if test="${listCount eq 0}">
 					<tr>
-						<td align="center" width="60" style="font-size: 13px;">${vo.cno}</td>
-						<td align="left" width="300"><a
-							href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">&nbsp;${vo.csubject}
-						</a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
-							class="replycnt">[${vo.replycnt}]</a></td>
-						<td align="center" width="100">${vo.cwriter}</td>
-						<td align="center" width="110" style="font-size: 13px;">${vo.cdate}</td>
-						<td align="center" width="60">${vo.viewcnt}</td>
-						<td align="center" width="60">${vo.likecnt}</td>
+						<td colspan="6" align="center"><br> <br> 게시판에 저장된
+							글이없습니다.<br> <br></td>
 					</tr>
-				</c:forEach>
+				</c:if>
+				<c:if test="${listCount ne 0}">
+					<c:forEach var="voNotice" items="${noticeList }" varStatus="status">
+						<tr>
+							<td align="center" style="color: #B85CEF;">공지사항</td>
+							<td align="left">
+								<a	href="cDetail?cno=${voNotice.cno}&page=${currentPage}" class="subject">
+								&nbsp;${voNotice.csubject} </a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
+								class="replycnt">[${voNotice.replycnt}]</a>
+							</td>
+							<td align="center">${voNotice.cwriter}</td>
+							<td align="center" style="font-size: 15px;">${voNotice.cdate}</td>
+							<td align="center">${voNotice.viewcnt}</td>
+							<td align="center">${voNotice.likecnt}</td>
+						</tr>
+					</c:forEach>
+					<c:forEach var="vo" items="${list}" varStatus="status">
+						<tr>
+							<td align="center">${vo.cno}</td>
+							<td align="left"><a
+								href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">&nbsp;${vo.csubject}
+							</a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
+								class="replycnt">[${vo.replycnt}]</a></td>
+							<td align="center">${vo.cwriter}</td>
+							<td align="center" style="font-size: 15px;">${vo.cdate}</td>
+							<td align="center">${vo.viewcnt}</td>
+							<td align="center">${vo.likecnt}</td>
+						</tr>
+					</c:forEach>
+				</c:if>
 			</table>
 			<hr>
-		</c:if>
-
-		<form action="clist" name="listForm" method="get">
-			<select id="searchType" name="searchType">
-				<option value="1">글제목</option>
-				<option value="2">글내용</option>
-				<option value="3">작성자</option>
-			</select> <input type='search' id="search" name="keyword">
-			<button type=submit id="btnsearch">검색</button>
-		</form>
-
-		<input type="hidden" name="page" value="${currentPage}"> <input
-			type="button" id="write" value="글쓰기"
-			onclick="window.location='cWriteForm'"> <br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<hr>
-		<table class="ctable">
-			<tr>
-				<td align="center" width="60">번호</td>
-				<td align="center" width="300">제목</td>
-				<td align="center" width="100">작성자</td>
-				<td align="center" width="110">작성일</td>
-				<td align="center" width="60">조회</td>
-				<td align="center" width="60">추천</td>
-			</tr>
-			<!-- 글이 없을 경우 -->
-			<c:if test="${listCount eq 0}">
-				<tr>
-					<td colspan="6" align="center"><br> <br> 게시판에 저장된
-						글이없습니다.<br> <br></td>
-				</tr>
-			</c:if>
-			<c:if test="${listCount ne 0}">
-				<c:forEach var="voNotice" items="${noticeList }" varStatus="status">
-					<tr>
-						<td align="center" style="color: #B85CEF;">공지사항</td>
-						<td align="left">
-							<a	href="cDetail?cno=${voNotice.cno}&page=${currentPage}" class="subject">
-							&nbsp;${voNotice.csubject} </a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
-							class="replycnt">[${voNotice.replycnt}]</a>
-						</td>
-						<td align="center">${voNotice.cwriter}</td>
-						<td align="center" style="font-size: 15px;">${voNotice.cdate}</td>
-						<td align="center">${voNotice.viewcnt}</td>
-						<td align="center">${voNotice.likecnt}</td>
-					</tr>
-				</c:forEach>
-				<c:forEach var="vo" items="${list}" varStatus="status">
-					<tr>
-						<td align="center">${vo.cno}</td>
-						<td align="left"><a
-							href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">&nbsp;${vo.csubject}
-						</a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
-							class="replycnt">[${vo.replycnt}]</a></td>
-						<td align="center">${vo.cwriter}</td>
-						<td align="center" style="font-size: 15px;">${vo.cdate}</td>
-						<td align="center">${vo.viewcnt}</td>
-						<td align="center">${vo.likecnt}</td>
-					</tr>
-				</c:forEach>
-			</c:if>
-		</table>
-		<hr>
 
 		<!-- 앞 페이지 번호 처리 -->
 		<c:if test="${currentPage <= 1}">
@@ -371,24 +174,21 @@
 			</c:if>
 		</div>
 		
-		<form action="clist" name="listForm" method="get">
-			<select id="searchType" name="searchType">
-				<option value="1">글제목</option>
-				<option value="2">글내용</option>
-				<option value="3">작성자</option>
-			</select> <input type='search' id="search" name="keyword">
-			<button type=submit id="btnsearch">검색</button>
-		</form>
-		<input type="hidden" name="page" value="${currentPage}"> <input
-			type="button" id="write" value="글쓰기"
-			onclick="window.location='cWriteForm'">
-			<br>
-	<br>
-	<br>
-	<br>
-	
+			<div class="searchDiv">
+				<form action="clist" name="listForm" method="get">
+					<select id="searchType" name="searchType">
+						<option value="1">글제목</option>
+						<option value="2">글내용</option>
+						<option value="3">작성자</option>
+					</select> <input type='search' id="search" name="keyword">
+					<button type=submit id="btnsearch">검색</button>
+				</form>
+				<input type="hidden" name="page" value="${currentPage}"> 
+				<input type="button" id="write" value="글쓰기" onclick="window.location='cWriteForm'">
+			</div>
+
+		</div>
+		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
-	
 </body>
-<jsp:include page="../main/footer.jsp"></jsp:include>
 </html>

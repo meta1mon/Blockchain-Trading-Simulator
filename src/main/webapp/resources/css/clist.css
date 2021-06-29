@@ -1,0 +1,219 @@
+@charset "UTF-8";
+
+.listOut {
+	width: 65%;
+	min-width: 1000px;
+	height: 95%;
+	padding: 20px;
+	margin: 25px auto;
+    background-color: #fff;
+    border: 1.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
+}
+
+.comm {
+	margin: 40px 0 20px 20px;
+	text-align: left;
+	font-size: 25px;
+	color: #FFC000;
+	float: left;
+	
+}
+
+.searchDiv {
+/* 	border: 1px solid; */
+	height: 100px;
+	width : 100%;
+	clear: both;
+	display: inline-flex;
+    justify-content: center;
+}
+
+#searchType {
+	width: 100px;
+	height: 45px;
+	border: 3px solid #8C66C8;
+	font-size: 18px;
+	color: black;
+	margin-top: 33px;
+	padding: 0;
+/* 	float: left; */
+/* 	clear: both; */
+/* 	position:relative; */
+/* 	left:40px; */
+}
+
+#searchType:hover, #searchType:focus {
+	color: #8C66C8;
+	transition: color 0.15s ease-in-out;
+}
+
+#search {
+	width: 650px;
+    height: 45px;
+    top: 0;
+    background-color: #ffffff;
+    border: 3px solid #8C66C8;
+    font-size: 18px;
+    margin-top: 33px;
+    padding: 0;
+/*     float: left; */
+/*     position: relative; */
+/*     left: 60px; */
+}
+
+#search:hover, #search:focus {
+	color: black;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+}
+
+#btnsearchVal {
+	background-image:
+		url(https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png);
+	background-size: contain;
+	background-position: 10px center;
+	background-repeat: no-repeat;
+	text-indent: 0;
+}
+
+#btnsearch {
+	width: 80px;
+	height: 45px;
+	padding: 0;
+	border: 2px solid #8C66C8;
+	font-size: 18px;
+	color: #ffffff;
+	background-color: #8C66C8;
+	margin-top: 33px;
+/* 	float: left; */
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+/* 	position:relative; */
+/* 	left:10px; */
+}
+
+#btnsearch:hover, #btnsearch:focus {
+	color: black;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+}
+
+#write {
+	width: 90px;
+    height: 45px;
+/*     float: right; */
+    border: none;
+    margin-left: 5px;
+    margin-top: 33px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #8C66C8;
+    font-size: 18px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+/*     position: relative; */
+/*     right: 20px; */
+}
+
+#write:hover {
+	background-color: #A07ADC;
+	box-shadow: 10px 10px 20px 5px #eeeeee;
+}
+
+.ptable {
+	margin: 0 auto 0; 20 px;
+	clear: both;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.ctable {
+	margin: 0 auto 0; 20 px;
+	clear: both;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.ptable tr, .ctable tr {
+	border-bottom: 1px solid #eeeeee;
+	height: 35px;
+	font-size: 15px;
+}
+
+.ptable tr:hover, .ctable tr:hover {
+	background-color: #FCFCFC;
+}
+
+.subject {
+	color: black;
+	text-decoration: none;
+}
+
+.subject:hover, .subject:active {
+	text-decoration: underline;
+}
+
+.replycnt {
+	color: #999;
+	font-size: 15px;
+}
+
+.replycnt:hover, .replycnt:active {
+	text-decoration: underline;
+}
+#space {
+	height: 100px;
+	border: 1px solid;
+}
+
+#page {
+	line-height: 30px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+#leftpage {
+	font-size: 18px;
+    text-decoration: none;
+    color: black;
+    padding: 10px 17px;
+    text-align: center;
+    background-color: #F8F8F8;
+    margin: -2px;
+    position: relative;
+    left: 20px;
+    border-radius: 6px;
+}
+
+#pageNum {
+	font-size: 18px;
+    text-decoration: none;
+    color: black;
+    padding: 10px 12px;
+    text-align: center;
+    background-color: #F8F8F8;
+    position: relative;
+    left: 25px;
+    border-radius: 6px;
+    margin-left: 5px;
+}
+
+#rightpage {
+	font-size: 18px;
+    text-decoration: none;
+    color: black;
+    padding: 10px 17px;
+    text-align: center;
+    background-color: #F8F8F8;
+    margin: -2px;
+    position: relative;
+    left: 20px;
+    border-radius: 6px;
+}
+
+#leftpage:hover, #leftpage:active, #pageNum:hover, #pageNum:active,
+	#rightpage:hover, #rightpage:active {
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+	background-color: #8C66C8;
+	color: white;
+}

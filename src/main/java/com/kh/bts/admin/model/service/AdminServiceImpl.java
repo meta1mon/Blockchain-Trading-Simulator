@@ -104,6 +104,13 @@ public class AdminServiceImpl implements AdminService {
 	public List<Rreport> selectRreport(int startPage, int limit) {
 		return aDao.selectRreport(startPage, limit);
 	}
+	
+	@Override
+	public int deleteCreport(String crno) {
+		int result = 0;
+		result = aDao.deleteCreport(crno);
+		return result;
+	}
 
 
 }

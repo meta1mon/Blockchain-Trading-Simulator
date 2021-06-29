@@ -156,10 +156,19 @@ public class AdminCtrl {
 	}
 // 게시글 신고 수리
 	@RequestMapping(value = "/dealcr", method=RequestMethod.POST)
-	public void insertAcreport(Acreport vo, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public void insertAcreport(Acreport vo, String crno, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		int result = aService.insertAcreport(vo);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ctrl 들어왔다");
-		System.out.println(result);
+		if (result > 0) {
+			logger.info("처리 성공");
+			int result2 = aService.deleteCreport(crno);
+			if (result2 > 0) {
+				logger.info("삭제 성공");
+			} else {
+				logger.info("삭제 실패");
+			}
+		} else {
+			logger.info("처리 실패");
+		}
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();
@@ -174,7 +183,7 @@ public class AdminCtrl {
 		}
 	}
 
-// 댓글 신고 등록
+//	댓글 신고 등록
 	@ResponseBody
 	@RequestMapping(value = "/reportRcommunity")
 	public int reportRcommunity(HttpServletRequest request, Rreport vo) {
@@ -426,7 +435,6 @@ public class AdminCtrl {
 	@ResponseBody
 	@RequestMapping(value="/md")
 	public int deleteMember(String email, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		System.out.println("선택한 이메일"+email);
 		int result = myService.myDelete(email);
 		if (result > 0) {
 			logger.info("회원 탈퇴 성공");

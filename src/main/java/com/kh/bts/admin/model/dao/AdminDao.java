@@ -115,4 +115,10 @@ public class AdminDao {
 		return sqlSession.selectList("report.selectRreport", null, row);
 	}
 	
+	public int deleteCreport(String crno) {
+		int result = 0;
+		result = sqlSession.delete("report.deleteCreport", crno);
+		return result;
+	}
+	
 }

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <link href="${pageContext.request.contextPath}/resources/css/header.css"
 	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <title>
 	BTS
 </title>
@@ -16,7 +16,7 @@
 	<div class="h_left">
 		<ul>
 			<li class="logo"><a href="<%=request.getContextPath()%>/mainpage"><img
-					src="resources/assets/img/bts_logo.png" style="border-radius:5px;"></a></li>
+					src="<%=request.getContextPath()%>/resources/assets/img/bts_logo.png" style="border-radius:5px;"></a></li>
 			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/aboutus">About Us</a></li>
 			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/investmentpage">모의투자</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/nlist">뉴스</a></li>

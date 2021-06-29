@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
@@ -28,7 +30,6 @@
 	margin: 0 50px;
 }
 </style>
-<title>Insert title here</title>
 </head>
 <body>
 	<div id="wrapper">

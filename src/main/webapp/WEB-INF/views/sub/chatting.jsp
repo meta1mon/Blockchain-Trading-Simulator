@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <link rel="stylesheet"
@@ -10,6 +12,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<title>BTS</title>
 <style>
 * {
 	-ms-overflow-style: none;

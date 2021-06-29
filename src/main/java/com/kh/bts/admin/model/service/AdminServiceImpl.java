@@ -111,6 +111,16 @@ public class AdminServiceImpl implements AdminService {
 		result = aDao.deleteCreport(crno);
 		return result;
 	}
+	@Override
+	public int countAcreport() {
+		int result = 0;
+		result = aDao.countAcreport();
+		return result;
+	}
+	@Override
+	public List<Acreport> selectAcreport(int startPage, int limit) {
+		return aDao.selectAcreport(startPage, limit);
+	}
 
 
 }

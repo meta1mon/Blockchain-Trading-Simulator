@@ -154,26 +154,16 @@ public class AdminCtrl {
 		}
 
 	}
-// 게시글 신고 수리
+// 게시글 신고 처리
 	@RequestMapping(value = "/dealcr", method=RequestMethod.POST)
 	public void insertAcreport(Acreport vo, String crno, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String cstatus = request.getParameter("cstatus");
 		String cno = request.getParameter("cno");
 		int result = aService.insertAcreport(vo); // acreport에 삽입
 		int result2 = aService.deleteCreport(crno); // creport에서 삭제
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~cstatus" + cstatus);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~cno" + cno);
-		if(cstatus.equals("accept")) {
+		if(cstatus.equals("accept")) { //수리일 때
 			int result3 = cmService.deleteCommunity(cno); //community에서 삭제
-			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			System.out.println("수리 성공");
-			System.out.println("result: " + result + "\n result2: " + result2 + "\n result3: " + result3);
-			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		}else if(cstatus.equals("deny")) {
-			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			System.out.println("반려 성공");
-			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			System.out.println("result: " + result + "\n result2: " + result2);
+		}else if(cstatus.equals("deny")) { //반려일 때
 		}
 	}
 
@@ -204,12 +194,6 @@ public class AdminCtrl {
 	@RequestMapping(value = "")
 	public ModelAndView adminMain(ModelAndView mv) {
 		mv.setViewName("admin/adminMain");
-		return mv;
-	}
-
-	@RequestMapping(value = "/acr", method = RequestMethod.GET)
-	public ModelAndView acr(ModelAndView mv) {
-		mv.setViewName("admin/afterCommunityReport");
 		return mv;
 	}
 
@@ -463,6 +447,7 @@ public class AdminCtrl {
 		mv.setViewName("admin/cashLogList");
 		return mv;
 	}
+//	게시판 신고 목록
 	@RequestMapping(value = "/cr", method = RequestMethod.GET)
 	public ModelAndView cr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv) {
 		try { 
@@ -480,7 +465,25 @@ public class AdminCtrl {
 		mv.setViewName("admin/communityReport");
 		return mv;
 	}
-	
+//	게시판 신고 처리 목록
+	@RequestMapping(value = "/acr", method = RequestMethod.GET)
+	public ModelAndView acr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv) {
+		try { 
+			int currentPage = page; 
+			int listCount = aService.countAcreport();
+			int maxPage = (int)((double) listCount / LIMIT + 0.9);
+			
+			mv.addObject("list", aService.selectAcreport(currentPage, LIMIT)); 
+			mv.addObject("currentPage", currentPage); 
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("listCount", listCount); 
+		} catch (Exception e) { 
+			System.out.println(e.getMessage()); 
+		}
+		mv.setViewName("admin/afterCommunityReport");
+		return mv;
+	}
+//	댓글 신고 목록
 	@RequestMapping(value = "/rr", method = RequestMethod.GET)
 	public ModelAndView rr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv) {
 		try { 

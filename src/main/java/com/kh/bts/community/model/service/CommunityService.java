@@ -23,6 +23,8 @@ public interface CommunityService {
 	Community updateCommunity(Community c, String email);
 
 	int deleteCommunity(String cno, String email);
+	
+	int deleteCommunity(String cno);
 
 	List<Community> selectNoticeList(int startPage, int limit);
 }

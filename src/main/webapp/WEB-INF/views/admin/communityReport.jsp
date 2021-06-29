@@ -75,7 +75,7 @@
 	border-radius: 3px;
 }
 
-#ccontent {
+#ccontentText {
 	height: 105px;
 	width: 270px;
 	border: 1px solid rgba(0, 0, 0, 0.5);
@@ -107,7 +107,8 @@ button {
 			
 			$("#crno").val(ele[0].innerText); // 신고 번호
 			$("#csubject").val(ele[1].innerText); // 신고하는 게시글 제목
-			$("#ccontent").html(ele[2].innerText); // 신고하는 게시글 내용
+			$("#ccontentText").html(ele[2].innerText); // 신고하는 게시글 내용
+			$("#ccontent").val($("#ccontentText").html()); // 신고하는 게시글 내용(DB용)
 			$("#crespondent").val(ele[3].innerText); // 신고하는 게시글 작성자
 			$("#creporter").val(ele[4].innerText); // 신고자
 			$("#crreasonText").val(ele[5].innerText); // 신고 사유(텍스트)
@@ -248,7 +249,8 @@ button {
 						</tr>
 						<tr>
 							<td class="content">게시글 내용</td>
-							<td><div id="ccontent" class="ccontent">&nbsp;</div></td>
+							<td><div id="ccontentText">&nbsp;</div></td>
+							<td class="hidden"><input type="text" value="" name="ccontent"  id="ccontent"></td>
 						</tr>
 						<tr>
 							<td>신고자</td>
@@ -261,18 +263,27 @@ button {
 						</tr>
 						<tr>
 							<td>신고 시간</td>
-							<td><input type="text" value="" id="crdate" readonly></td>
+							<td><input type="text" value="" id="crdate" name="crdate" readonly></td>
+						</tr>
+						<tr class="hidden">
+							<td>신고 처리 시간</td>
+							<td><input type="text" value="" name="acrdate" readonly></td>
 						</tr>
 						<tr>
 							<td>신고 처리 사유</td>
 							<td><input type="text" name="creason" id="creason"></td>
 						</tr>
+						<tr class="hidden">
+							<td>신고된 게시글 번호</td>
+							<td><input type="text" value="" name="cno" id="cno"></td>
+						</tr>
+						
 						<tr>
-							<td colspan="2"><input type="text" value="" id="cno"
-								style="display: none">
+							<td colspan="2">
 								<button type="button" id="accept" class="btnGreen deal" value="accept">수리</button>
 								<button type="button" id="deny" class="btnRed deal" value="deny">반려</button>
 								<input type="text" id="buttonvalue" value="" name="cstatus" style="display: none">
+								
 								<button type="button" id="detail" class="btnPurple">자세히</button>
 								<button type="button" id="close" class="btnPurple">닫기</button>
 							</td>
@@ -285,11 +296,14 @@ button {
 <script>
 $(function(){
 		$(".deal").on("click",function() {
- 			var deal = $(".deal").val();
- 			var btnval = $("#buttonvalue").val(deal);
+ 			var deal = $(this).val();
+ 			console.log(deal);
+ 			$("#buttonvalue").val(deal);
+ 			var btnval = $("#buttonvalue").val();
 			console.log(btnval);
 			console.log("클릭됨");
-			var dataquery = $("#frmReport").serialize();
+			 
+		    var dataquery = $("#frmReport").serialize();
 			$.ajax({
 			url : "dealcr",
 			type : "POST",

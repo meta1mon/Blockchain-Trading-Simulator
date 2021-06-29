@@ -9,23 +9,91 @@
 	rel="stylesheet" type="text/css" />
 <title>관리자 페이지 - BTS</title>
 <style>
-#acr #modal {
+#modal{
 	display: none;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(188, 143, 143, 0.8);
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
-#acr #contents {
-	background-color: white;
-	margin: 30px auto;
-	width: 400px;
-	height: 650px;
+#contents table {
+	width: 100%;
+}
+
+#contents {
+	padding: 30px;
+    background-color: white;
+    border: 2px solid rgb(140, 102, 200);
+    border-radius: 5px;
+    top: calc(50% - 200px);
+    left: calc(50% - 100px);
+    width: 400px;
+    height: 365px;
+    text-align: center;
+    position: absolute;
+}
+
+#acr th, td {
+	padding: 5px !important;
+}
+
+#acr td:not(.center, .right){
+	text-align: left;
+}
+
+#acr {
+	position: absolute;
+	top: calc(50% - 150px);
+	left: calc(50% - 320px);
+}
+
+#page{
 	text-align: center;
-	position: relative;
+}
+
+#listForm{
+	width: 100%;
+}
+
+#detail {
+	height: 35px;
+}
+
+#close {
+	height: 35px;
+}
+
+#contents table td:nth-child(1) {
+	width: 120px;
+	text-align: right;
+}
+
+#contents table td input {
+	width: 270px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 3px;
+}
+
+#ccontentText {
+	height: 105px;
+	width: 270px;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 3px;
+	font-size: 13.3333px;
+	padding: 1px 2px;
+	text-align: left;
+	background: white;
+}
+
+button {
+	width: 94px;
+}
+
+.hidden{
+	display: none;
 }
 </style>
 <script>

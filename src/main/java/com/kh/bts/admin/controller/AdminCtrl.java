@@ -157,29 +157,23 @@ public class AdminCtrl {
 // 게시글 신고 수리
 	@RequestMapping(value = "/dealcr", method=RequestMethod.POST)
 	public void insertAcreport(Acreport vo, String crno, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		int result = aService.insertAcreport(vo);
-		if (result > 0) {
-			logger.info("처리 성공");
-			int result2 = aService.deleteCreport(crno);
-			if (result2 > 0) {
-				logger.info("삭제 성공");
-			} else {
-				logger.info("삭제 실패");
-			}
-		} else {
-			logger.info("처리 실패");
-		}
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-			out.println(result);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (out != null) {
-				out.flush();
-				out.close();
-			}
+		String cstatus = request.getParameter("cstatus");
+		String cno = request.getParameter("cno");
+		int result = aService.insertAcreport(vo); // acreport에 삽입
+		int result2 = aService.deleteCreport(crno); // creport에서 삭제
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~cstatus" + cstatus);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~cno" + cno);
+		if(cstatus.equals("accept")) {
+			int result3 = cmService.deleteCommunity(cno); //community에서 삭제
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("수리 성공");
+			System.out.println("result: " + result + "\n result2: " + result2 + "\n result3: " + result3);
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		}else if(cstatus.equals("deny")) {
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("반려 성공");
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("result: " + result + "\n result2: " + result2);
 		}
 	}
 

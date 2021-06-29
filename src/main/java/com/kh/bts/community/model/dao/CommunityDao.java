@@ -98,6 +98,10 @@ public class CommunityDao {
 		int result = sqlSession.delete("community.deleteCommunity", cno);
 		return result;
 	}
+	public int deleteCommunity(String cno) { // 게시글 삭제
+		int result = sqlSession.delete("community.deleteCommunity", cno);
+		return result;
+	}
 
 	public int addReadCount(String cno) { // 게시글 조회수 증가
 		return sqlSession.update("community.addReadCount", cno);

@@ -5,8 +5,8 @@
 }
 
 .ck.ck-editor {
-	max-width: 800px;
-	min-width: 800px;
+	max-width: 80%;
+	min-width: 80%;
 	margin-left: 20px;
 	position: relative;
 	top: 6px;
@@ -293,7 +293,7 @@ hr {
 }
 
 #comment {
-	width: 960px;
+	width: 95%;
 	margin: 0 40px 0 40px;
 	border-top: 1px solid #eeeeee;
 }

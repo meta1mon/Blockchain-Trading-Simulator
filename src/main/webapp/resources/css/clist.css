@@ -12,12 +12,19 @@
 }
 
 .comm {
-	margin: 40px 0 20px 20px;
+	margin: 40px 0 40px 20px;
 	text-align: left;
 	font-size: 25px;
 	color: #FFC000;
 	float: left;
 	
+}
+
+.bestComm {
+	clear: both;
+    font-size: 20px;
+    color: #B85CEF;
+    margin: 20px;
 }
 
 .searchDiv {

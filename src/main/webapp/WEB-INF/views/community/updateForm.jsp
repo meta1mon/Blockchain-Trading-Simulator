@@ -133,7 +133,12 @@
 	box-shadow: 10px 10px 20px 5px #eeeeee;
 }
 </style>
+<script>
 
+$(function() {
+	$('.footer-container').css('position','relative');
+});
+</script>
 </head>
 <%@include file="../main/header.jsp"%>
 <body class="content"

@@ -418,7 +418,9 @@ $(function(){
           }
        });
        
-
+$(function() {
+	$('.footer-container').css('position','relative');
+});
 </script>
 
 </head>

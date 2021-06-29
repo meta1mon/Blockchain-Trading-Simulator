@@ -38,18 +38,18 @@
 }
 
 #write {
-	width: 80px;
+	width: 90px;
     height: 45px;
     float: right;
     border: none;
-    margin-top: 30px;
+    margin-top: 33px;
     text-align: center;
     color: #ffffff;
     background-color: #8C66C8;
     font-size: 18px;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     position: relative;
-    right: 40px;
+    right: 20px;
 }
 
 #write:hover {
@@ -63,7 +63,7 @@
 	border: 3px solid #8C66C8;
 	font-size: 18px;
 	color: black;
-	margin-top: 30px;
+	margin-top: 33px;
 	padding: 0;
 	float: left;
 	clear: both;
@@ -83,7 +83,7 @@
     background-color: #ffffff;
     border: 3px solid #8C66C8;
     font-size: 18px;
-    margin-top: 30px;
+    margin-top: 33px;
     padding: 0;
     float: left;
     position: relative;
@@ -113,12 +113,12 @@
 	font-size: 18px;
 	color: #ffffff;
 	background-color: #8C66C8;
-	margin-top: 30px;
+	margin-top: 33px;
 	float: left;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
 	position:relative;
-	left:50px;
+	left:10px;
 }
 
 #btnsearch:hover, #btnsearch:focus {
@@ -171,6 +171,58 @@
 #space {
 	height: 100px;
 	border: 1px solid;
+}
+
+#page {
+	line-height: 30px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+#leftpage {
+	font-size: 18px;
+    text-decoration: none;
+    color: black;
+    padding: 10px 17px;
+    text-align: center;
+    background-color: #F8F8F8;
+    margin: -2px;
+    position: relative;
+    left: 20px;
+    border-radius: 6px;
+}
+
+#pageNum {
+	font-size: 18px;
+    text-decoration: none;
+    color: black;
+    padding: 10px 12px;
+    text-align: center;
+    background-color: #F8F8F8;
+    position: relative;
+    left: 25px;
+    border-radius: 6px;
+    margin-left: 5px;
+}
+
+#rightpage {
+	font-size: 18px;
+    text-decoration: none;
+    color: black;
+    padding: 10px 17px;
+    text-align: center;
+    background-color: #F8F8F8;
+    margin: -2px;
+    position: relative;
+    left: 20px;
+    border-radius: 6px;
+}
+
+#leftpage:hover, #leftpage:active, #pageNum:hover, #pageNum:active,
+	#rightpage:hover, #rightpage:active {
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+	background-color: #8C66C8;
+	color: white;
 }
 </style>
 </head>
@@ -272,7 +324,7 @@
 		</table>
 		<hr>
 
-		<!-- 앞 페이지 번호 처리 -->
+<%-- 		<!-- 앞 페이지 번호 처리 -->
 		<c:if test="${currentPage <= 1}">
 [이전]&nbsp;
 </c:if>
@@ -303,8 +355,22 @@
 				<c:param name="page" value="${currentPage+1}" />
 			</c:url>
 			<a href="${clistEND}">[다음]</a>
-		</c:if>
+		</c:if> --%>
+		
+<div id="page">
+			<c:if test="${startPage !=1 }">
+				<a href="qnalist?pageNum=${startPage -1 }&search=${search }&searchType=${searchType}" id="leftpage">&#60;</a>
+			</c:if>
 
+			<c:forEach begin="${startPage }" end="${endPage }" var="s" step="1">
+				<a href="qnalist?pageNum=${s }&search=${search }&searchType=${searchType}" id="pageNum">&nbsp;${s }&nbsp;</a>
+			</c:forEach>
+
+			<c:if test="${endPage < pageBoxCnt }">
+				<a href="qnalist?pageNum=${endPage +1 }&search=${search }&searchType=${searchType}" id="rightpage">&#62;</a>
+			</c:if>
+		</div>
+		
 		<form action="clist" name="listForm" method="get">
 			<select id="searchType" name="searchType">
 				<option value="1">글제목</option>

@@ -133,7 +133,12 @@
 	box-shadow: 10px 10px 20px 5px #eeeeee;
 }
 </style>
+<script>
 
+$(function() {
+	$('.footer-container').css('position','relative');
+});
+</script>
 </head>
 <%@include file="../main/header.jsp"%>
 <body class="content"
@@ -146,7 +151,7 @@
 		<br>
 		<br>
 		<br>
-		<form action="cInsert" method="post" enctype="multipart/form-data"
+		<form action="cUpdate" method="post" enctype="multipart/form-data"
 			style="margin-left: 20px">
 			<input type="hidden" name="cno" value="${community.cno}"> <input
 				type="hidden" name="filepath" value="${community.filepath}">

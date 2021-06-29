@@ -418,7 +418,9 @@ $(function(){
           }
        });
        
-
+$(function() {
+	$('.footer-container').css('position','relative');
+});
 </script>
 
 </head>
@@ -519,18 +521,19 @@ $(function(){
 			<c:forEach var="rep" items="${commentList}">
 				<div id="comment">
 					<br>
-					<!-- 댓글 작성자명, 내용, 날짜 -->
+			<!-- 댓글 작성자명, 내용, 날짜 -->
 					<input type="hidden" id="rep_id" name="rep_id" value="${rep.rno}">
 						<span style="display:inline;">
 						<span class="comment_writer">
 							${rep.rwriter} &nbsp; &nbsp;</span>
 						<span class="comment_date">
 							${rep.rdate}</span>
-						<span class="comment_writer">
+						<span class="comment_content">
 							${rep.rcontent}</span>
 						
 							</span>
-					<!-- 댓글 수정, 삭제, 신고 버튼 -->
+			<!-- 댓글 수정, 삭제, 신고 버튼 -->
+					<p>
 					<button type="button" class="rupdateConfirm" name="updateConfirm"
 						id="rupdateConfirm" style="display: none;">수정완료</button>
 					&nbsp;&nbsp;&nbsp;
@@ -539,6 +542,7 @@ $(function(){
 					&nbsp;&nbsp;&nbsp;
 					<button type="button" class="rupdate" name="update" id="rupdate">수정
 						및 삭제</button>
+					</p>
 					<button type="button" class="report" id="popup_open_btn_reply"
 						onclick="rreport(${rep.rno})">신고</button>
 				</div>
@@ -831,23 +835,24 @@ $(function(){
 
    
 //기존 댓글 수정 & 삭제
-$(".update").on('click',function(){
+$(".rupdate").on('click',function(){
    var parentP = $(this).parent();
       var parentDiv = parentP.parent();
-      var commBody = parentDiv.children('.comment-body');
+      var commBody = parentDiv.children('.comment_content');
    var content = commBody.children('p').text().trim();
    
-      if($(this).text() == "수정 및 삭제"){
+      if($(".rupdate").text() == "수정 및 삭제"){
          commBody.append('<textarea style="margin top:7px;" rows="4" cols="70%" class="updateContent" name="updateContent" id="updateContent">'+content+'</textarea>');
-         parentDiv.children('.comment-confirm').show();
-         parentP.children(".delete").toggle("fast");
-         parentP.children(".updateConfirm").toggle("fast");
+
+         parentP.children(".rdelete").toggle("fast");
+         parentP.children(".rupdateConfirm").toggle("fast");
          $(this).text("수정취소");
       } else {
          commBody.children(".updateContent").remove();
-         parentDiv.children('.comment-confirm').hide();
+         
+
          $(this).text("수정 및 삭제");
-         parentP.children(".delete").toggle("fast");
+         parentP.children(".rdelete").toggle("fast");
          parentP.children(".updateConfirm").toggle("fast");
       }
 });
@@ -855,11 +860,6 @@ $(".update").on('click',function(){
    $(".updateConfirm").on('click',function(){
       var parentP = $(this).parent();
          var parentDiv = parentP.parent();
-         if(parentDiv.find('input[name=pwd_chk]').val()!=
-            parentDiv.children('input[name=rep_pwd]').val()){
-               alert(" 비밀번호가 일치하지 않습니다.");
-               return false;
-            } else {
 $.ajax({
 url : "${pageContext.request.contextPath}/rcUpdate",
 method : "POST",
@@ -870,34 +870,28 @@ comments : parentDiv.find('.updateContent').val()
 },
 success : function(data) {
 alert(data);
-parentDiv.find(".comment-body p").text(parentDiv.find('.updateContent').val());
+parentDiv.find(".comment_content").text(parentDiv.find('.updateContent').val());
 }, error : function(request,status,error) {
    
 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
          }
       });
-   }
          
 parentDiv.find(".updateContent").remove();
-parentDiv.find(".comment confirm").val("");
-parentDiv.find(".comment confirm").hide();
+
+
 parentP.children(".updateConfirm").toggle("fast");
-parentP.children(".delete").toggle("fast");
-parentP.children('.update').text("수정 및 삭제");
-$(".delete").on('click',function(){
+parentP.children(".rdelete").toggle("fast");
+parentP.children('.rupdate').text("수정 및 삭제");
+$(".rdelete").on('click',function(){
    var parentP = $(this).parent();
       var parentDiv = parentP.parent();
       
-      if(parentDiv.find('input[name=pwd_chk]').val() != parentDiv.children('input[name=rep_pwd]').val()){
-      alert(" 비밀번호가 일치하지 않습니다.");
-      return false;
-   } else {
    $.ajax({
          url : "${pageContext.request.contextPath}/rcDelete",
          method : "POST",
          data: {
-         comment_id : parentDiv.find("input[name=rep_id]").val(),
-         comment_pwd : parentDiv.find('input[name =pwd_chk]').val()
+         comment_id : parentDiv.find("input[name=rep_id]").val()
          },
          success : function(data) {
          alert(data);
@@ -907,7 +901,6 @@ $(".delete").on('click',function(){
 alert("code:"+request.status+" n"+"message:"+request.responseText+" n"+"error:"+error);
          }
 });
-   }
 });
    });
 </script>

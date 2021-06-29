@@ -7,6 +7,22 @@
 <head>
 <meta charset="UTF-8">
 <style>
+#cr th, td {
+	padding: 5px !important;
+}
+
+#cr td:not(.center, .right){
+	text-align: left;
+}
+
+#cr {
+	position: absolute;
+	top: calc(50% - 350px);
+	left: calc(50% - 442.5px);
+	width: 1085px;
+}
+
+/* 모달 창 공통 */
 #modal{
 	display: none;
 	position: absolute;
@@ -32,28 +48,6 @@
     height: 365px;
     text-align: center;
     position: absolute;
-}
-
-#cr th, td {
-	padding: 5px !important;
-}
-
-#cr td:not(.center, .right){
-	text-align: left;
-}
-
-#cr {
-	position: absolute;
-	top: calc(50% - 150px);
-	left: calc(50% - 320px);
-}
-
-#page{
-	text-align: center;
-}
-
-#listForm{
-	width: 100%;
 }
 
 #detail {
@@ -93,8 +87,39 @@ button {
 .hidden{
 	display: none;
 }
+/*공통*/
+#page{
+	text-align: center;
+}
+
+.page {
+	position: fixed;
+	top: 603.5px;
+}
+.page td {
+	width: 1085px;
+}
+
+#listForm{
+	float:right;
+}
+
+table{
+	width: 100%;
+}
+
+.title{
+	font-size: 25px;
+	color: #fcc000;
+}
+
+.inbl{
+	display: inline-block;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/loadingajax.js"></script>
 <script>
 	$(function(){
 		var  openModal = function(event) {
@@ -136,9 +161,16 @@ button {
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
+<%@include file="../loadingajax.jsp"%>
 	<div id="cr">
+	<p class="title inbl">신고된 게시글 목록</p>
+		<form name="listForm" action="cr" method="get" id="listForm">
+		<input type="search" name="keyword" id="search"	placeholder="검색어를 입력해주세요.">
+		<button type="submit" id="btnsearch">검색</button>
+	</form>
+	<hr>
 		<div>
-			<table border="1">
+			<table>
 				<tr>
 					<th>신고 번호</th>
 					<th>게시글 제목</th>
@@ -155,11 +187,11 @@ button {
 				<c:if test="${listCount ne 0}">
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr class="tr">
-							<td style="cursor: pointer;">${vo.crno}</td>
+							<td class ="center" style="cursor: pointer;">${vo.crno}</td>
 							<td style="cursor: pointer;">${vo.csubject}</td>
 							<td class="hidden">${vo.ccontent}</td>
-							<td style="cursor: pointer;">${vo.crespondent}</td>
-							<td style="cursor: pointer;">${vo.creporter}</td>
+							<td class ="center" style="cursor: pointer;">${vo.crespondent}</td>
+							<td class ="center" style="cursor: pointer;">${vo.creporter}</td>
 							<c:choose>
 							<c:when test="${vo.crreason eq 1}">
 							<td style="cursor: pointer;">나체 이미지 또는 성적 행위</td>
@@ -191,7 +223,7 @@ button {
 						</tr>
 					</c:forEach>
 				</c:if>
-				<tr>
+				<tr class="page">
 					<td colspan="6">
 						<div id="page">
 							<!-- 앞 페이지 번호 처리 -->
@@ -265,10 +297,6 @@ button {
 							<td>신고 시간</td>
 							<td><input type="text" value="" id="crdate" name="crdate" readonly></td>
 						</tr>
-						<tr class="hidden">
-							<td>신고 처리 시간</td>
-							<td><input type="text" value="" name="acrdate" readonly></td>
-						</tr>
 						<tr>
 							<td>신고 처리 사유</td>
 							<td><input type="text" name="creason" id="creason"></td>
@@ -276,6 +304,10 @@ button {
 						<tr class="hidden">
 							<td>신고된 게시글 번호</td>
 							<td><input type="text" value="" name="cno" id="cno"></td>
+						</tr>
+						<tr class="hidden">
+							<td>신고 처리 시간</td>
+							<td><input type="text" value="" name="acrdate" id="acrdate" readonly></td>
 						</tr>
 						
 						<tr>
@@ -310,12 +342,10 @@ $(function(){
 			data : dataquery,
 			async : true,
 			success : function(data) {
-				alert("처리 완료");
 				location.href = "<%=request.getContextPath()%>/admin/cr";
 			},
 			error : function(request, status, error) {
 				console.log("message:"+request.responseText+"\n"+"error:"+error);
-				alert("error: 처리 실패!");
 				location.href="<%=request.getContextPath()%>/admin/cr";
 			}
 			

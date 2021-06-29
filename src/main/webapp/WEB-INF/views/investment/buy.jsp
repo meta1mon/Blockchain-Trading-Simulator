@@ -4,108 +4,116 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<title>BTS</title>
-
-</head>
-<body>
-	<input id="nameList" value="${waitblist }" type="hidden">
-	<br>
-	<c:forEach items="${waitresult }" var="vo">
-		<input class="${vo.coin }" value="${vo.buyprice }" type="hidden" style="width: 500px">
-		<br>
-	</c:forEach>
-	<script type="text/javascript">
+<script type="text/javascript">
 	$(function() {
 		var alltimer = setInterval(function() { // 1초마다 함수 돌림 ()
- 			loadValues();
- 			livePrice();
-			comparePrice();
+			loadValues1();
 		}, 1000);
-		var allcoinList = $("#nameList").val();
 
-		// 코인 이름 배열
-		var coinArr = allcoinList.slice(1, allcoinList.length - 1).split(", ");
-
+		// 실시간 가격 받을 것
 		var nowprices = [];
-
- 		function loadValues() {
+		// 사는 코인 이름 가져오기
+		var buyCoinArr = [];
+		// 사는 코인 객체 리스트 가져오기
+		var buyPriceArr = [];
+		function loadValues1() {
+			// 미체결 매수 코인 종류 불러오기
 			$.ajax({
-				url : '${pageContext.request.contextPath}/buyLoad',
+				url : '${pageContext.request.contextPath}/buyLoad1',
 				type : "get",
 				cache : false,
+				datatype : "json",
 				success : function(data) {
-					console.log(data);					
-					console.log(typeof data);					
-					console.log(data[0]);					
-					console.log(data.get(0));					
-
+					for (var i = 0; i < data.length; i++) {
+						buyCoinArr[i] = data[i];
+					}
+					loadValues2();
 				}
 			});
-		} */
+		}
+		function loadValues2() {
+			//  미체결 매수 내역 중, 가격만 불러오기
+			$.ajax({
+				url : '${pageContext.request.contextPath}/buyLoad2',
+				type : "get",
+				cache : false,
+				datatype : "json",
+				success : function(data) {
+					buyPriceArr = new Array(buyCoinArr.length);
+					for (var i = 0; i < buyPriceArr.length; i++) {
+						buyPriceArr[i] = new Array();
+						for (var j = 0; j < data.length; j++) {
+							if (buyCoinArr[i] == data[j].coin) {
+								var rawData = data[j].buyprice;
+								if (rawData >= 1000) {
+									buyPriceArr[i][j] = Math.floor(rawData);
+								} else {
+									buyPriceArr[i][j] = rawData;
+								}
+							}
+
+						}
+					}
+					livePrice();
+				}
+			});
+		}
 		// 빗썸에서 실시간 가격 받아오기
 		function livePrice() {
-			$.ajax({
+			$
+					.ajax({
 						url : 'https://api.bithumb.com/public/ticker/ALL_KRW',
 						type : "get",
 						cache : false,
 						datatype : "json",
 						success : function(data) {
-							for (var i = 0; i < coinArr.length; i++) {
-								nowprices[i] = [ data['data'][coinArr[i]]['closing_price'] * 1 ]
-								console.log(nowprices[i]);
+							for (var i = 0; i < buyCoinArr.length; i++) {
+								nowprices[i] = [ data['data'][buyCoinArr[i]]['closing_price'] * 1 ]
 							}
-
+							comparePrice();
 						}
 					});
 		}
 
-
 		// 미체결 매수 내역과 빗썸의 가격을 비교
 		function comparePrice() {
-			priceArr = new Array(coinArr.length);
-			for (var i = 0; i < priceArr.length; i++) { // 코인 종류만큼 돌린다
-				priceArr[i] = new Array($("." + coinArr[i]).length);
-				for (var j = 0; j < priceArr[i].length; j++) { // 해당 코인을 클래스로 가지는 수만큼 돌린다	
-					var rawData = $("." + coinArr[i]).eq(j).val();
-					if (rawData >= 1000) { // 소숫점 제거를 위함. 단가 1000원부터는 1원 이상 간격으로 상승함
-						priceArr[i][j] = Math.floor(rawData);
-					} else {
-						priceArr[i][j] = rawData * 1;
-					}
-				}
-			}
-
-			for (var i = 0; i < priceArr.length; i++) { // 코인 종류만큼 돌린다
-				for (var j = 0; j < priceArr[i].length; j++) { // 해당 코인을 클래스로 가지는 수만큼 돌린다	
-					if (nowprices[i] == priceArr[i][j]) {
-						console.log(coinArr[i] + "코인이 " + priceArr[i][j]
+			for (var i = 0; i < buyPriceArr.length; i++) { // 코인 종류만큼 돌린다
+				for (var j = 0; j < buyPriceArr[i].length; j++) { // 해당 코인에 대한 가격 수만큼 돌린다	
+					if (nowprices[i] == buyPriceArr[i][j]) {
+						console.log(buyCoinArr[i] + "코인이 " + buyPriceArr[i][j]
 								+ " 가격으로 구매됨");
 						$.ajax({
 							url : "${pageContext.request.contextPath}/bought",
 							type : "post",
 							data : {
-								"buyCoin" : coinArr[i],
-								"buyPrice" : priceArr[i][j]
+								"buyCoin" : buyCoinArr[i],
+								"buyPrice" : buyPriceArr[i][j]
 							},
 							success : function(data) {
 								if (data > 0) {
 									console.log("구매 성공");
-									window.location.reload();
 								} else {
 									console.log("구매 실패");
 
 								}
 							}
-						})
+						});
 					}
 				}
 			}
 		}
 	});
 </script>
+<title>BTS</title>
+</head>
+<body>
 </body>
 </html>

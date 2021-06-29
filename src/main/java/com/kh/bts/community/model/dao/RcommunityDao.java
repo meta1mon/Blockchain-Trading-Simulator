@@ -47,12 +47,9 @@ public class RcommunityDao {
 		} else {
 			System.out.println("정상 로그인");
 		}
-		System.out.println("############################################## vo 받아");
 		String rwriter = vo.getNickname();
-		System.out.println("############################################## 닉네임  받아");
 		rc.setRwriter(rwriter);
 		int result = sqlSession.insert("rcommunity.insertRcommunity", rc);
-		System.out.println("##############################" + result);
 		int result2;
 		
 		if (result > 0) {

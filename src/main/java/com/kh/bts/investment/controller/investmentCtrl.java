@@ -51,30 +51,20 @@ public class investmentCtrl {
 	@Autowired
 	private CoinAcntService caService;
 
-	@RequestMapping("buy")
-	public ModelAndView buy(ModelAndView mv) {
-		mv.setViewName("investment/buy");
-		return mv;
-	}
-	// 미체결 매수 내역 불러오기
-	@RequestMapping("buyLoad")
-	public void buy(HttpServletResponse response) {
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-		
-		List<WaitBought> waitblist = wbService.selectAllCoinListWaitBought();
-		List<WaitBought> waitresult = wbService.selectAllListWaitBought();
-		out.println(waitblist);
-		out.println(waitresult);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			out.flush();
-			out.close();
-		}
-	}
+	
+	  @RequestMapping("buy") public ModelAndView buy(ModelAndView mv) {
+	  mv.setViewName("investment/buy"); return mv; }
+	 
+	
+	  // 미체결 매수 내역 불러오기
+	  
+	  @ResponseBody
+	  
+	  @RequestMapping("buyLoad") public List<WaitBought>
+	  buyLoad(HttpServletResponse response) { List<WaitBought> waitblist =
+	  wbService.selectAllCoinListWaitBought(); List<WaitBought> waitresult =
+	  wbService.selectAllListWaitBought(); return waitblist; }
+	 
 	
 	// 미체결 매도 내역 불러오기
 	@RequestMapping("sell")
@@ -157,6 +147,7 @@ public class investmentCtrl {
 		return mav;
 	}
 
+	// 모의투자 페이지 진입
 	@RequestMapping("investmentpage")
 	public ModelAndView MainPage(Member vo, ModelAndView mav, HttpServletRequest request) {
 
@@ -165,7 +156,6 @@ public class investmentCtrl {
 		if (loginEmail == null) {
 			System.out.println("비회원입니다");
 		} else {
-			
 			mav.addObject("email", loginEmail);
 			Acnt result = acntService.selectMyAcnt(loginEmail);
 			mav.addObject("acnt", result);
@@ -177,11 +167,12 @@ public class investmentCtrl {
 
 	@ResponseBody
 	@RequestMapping(value = "bankpw", method = RequestMethod.POST)
-	public int Check(Acnt vo) throws Exception {
+	public int Check(Acnt vo, HttpSession session) throws Exception {
 
 		int result = acntService.cntAcnt(vo);
 		if (result > 0) {
 			System.out.println("bankpw성공");
+			session.setAttribute("rightBankPw", "Y");
 		} else {
 			System.out.println("bankpw실패");
 		}
@@ -460,10 +451,6 @@ public class investmentCtrl {
 				}
 			}
 		}
-		System.out.println(coinArr.length);
-		System.out.println(coinArr[0]);
-		System.out.println(coinArr[1]);
-		System.out.println(coinArr[2]);
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(result);

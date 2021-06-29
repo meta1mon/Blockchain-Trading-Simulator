@@ -9,29 +9,43 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>BTS</title>
-<script type="text/javascript">
+
+</head>
+<body>
+	<input id="nameList" value="${waitblist }" type="hidden">
+	<br>
+	<c:forEach items="${waitresult }" var="vo">
+		<input class="${vo.coin }" value="${vo.buyprice }" type="hidden" style="width: 500px">
+		<br>
+	</c:forEach>
+	<script type="text/javascript">
 	$(function() {
 		var alltimer = setInterval(function() { // 1초마다 함수 돌림 ()
-			loadValues();
-/* 			livePrice();
-			comparePrice(); */
+ 			loadValues();
+ 			livePrice();
+			comparePrice();
 		}, 1000);
 		var allcoinList = $("#nameList").val();
+
+		// 코인 이름 배열
 		var coinArr = allcoinList.slice(1, allcoinList.length - 1).split(", ");
 
 		var nowprices = [];
 
-		function loadValues() {
+ 		function loadValues() {
 			$.ajax({
 				url : '${pageContext.request.contextPath}/buyLoad',
 				type : "get",
 				cache : false,
 				success : function(data) {
-					console.log(data.waitblist);					
+					console.log(data);					
+					console.log(typeof data);					
+					console.log(data[0]);					
+					console.log(data.get(0));					
 
 				}
 			});
-		}
+		} */
 		// 빗썸에서 실시간 가격 받아오기
 		function livePrice() {
 			$.ajax({
@@ -93,17 +107,5 @@
 		}
 	});
 </script>
-
-<style>
-</style>
-
-</head>
-<body>
-	<input id="nameList" value="${waitblist }" type="hidden">
-	<br>
-	<c:forEach items="${waitresult }" var="vo">
-		<input class="${vo.coin }" value="${vo.buyprice }" type="hidden" style="width: 500px">
-		<br>
-	</c:forEach>
 </body>
 </html>

@@ -23,7 +23,7 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
 <script type="text/javascript">
-	function removeCoinAcnt(cano) {
+/* 	function removeCoinAcnt(cano) {
 		alert("지우러 들어는 왔다" + cano);
 		$.ajax({
 			url : "coinacntdelete",
@@ -47,7 +47,7 @@
 						+ "error : " + errorData);
 			}
 		});
-	}
+	} */
 	function removeWaitBought(ubno) {
 		alert("지우러 들어는 왔다" + ubno);
 		$.ajax({
@@ -59,6 +59,7 @@
 			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
 				if (data > 0) {
 					alert("성공");
+					wblist();
 					console.log(data);
 				} else {
 					alert("실패");
@@ -73,31 +74,7 @@
 			}
 		});
 	}
-	function removeBought(ubno) {
-		alert("지우러 들어는 왔다" + ubno);
-		$.ajax({
-			url : "bdelete",
-			type : "post",
-			data : {
-				"ubno" : ubno
-			},
-			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-				if (data > 0) {
-					alert("성공");
-					console.log(data);
-				} else {
-					alert("실패");
-					console.log(data);
-				}
 
-			},
-			error : function(request, status, errorData) {
-				alert("실패" + "error code : " + request.status + "\n"
-						+ "message : " + request.responseText + "\n"
-						+ "error : " + errorData);
-			}
-		});
-	}
 	function removeWaitSold(usno) {
 		alert("지우러 들어는 왔다" + usno);
 		$.ajax({
@@ -109,31 +86,7 @@
 			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
 				if (data > 0) {
 					alert("성공");
-					console.log(data);
-				} else {
-					alert("실패");
-					console.log(data);
-				}
-
-			},
-			error : function(request, status, errorData) {
-				alert("실패" + "error code : " + request.status + "\n"
-						+ "message : " + request.responseText + "\n"
-						+ "error : " + errorData);
-			}
-		});
-	}
-	function removeSold(usno) {
-		alert("지우러 들어는 왔다" + usno);
-		$.ajax({
-			url : "sdelete",
-			type : "post",
-			data : {
-				"usno" : usno
-			},
-			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-				if (data > 0) {
-					alert("성공");
+					wslist();
 					console.log(data);
 				} else {
 					alert("실패");
@@ -149,7 +102,6 @@
 		});
 	}
 </script>
-
 <meta charset="UTF-8">
 </head>
 <body>
@@ -328,8 +280,7 @@
 									</tr>
 									<tr>
 
-										<td><div id="aj_b"></div></td>
-										<td><div id="aj_s"></div></td>
+										<td><div id="aj_b"></div><div id="aj_s"></div></td>
 									</tr>
 
 								</table>

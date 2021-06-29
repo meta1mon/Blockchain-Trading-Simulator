@@ -25,40 +25,62 @@ $(function() {
 <style>
 #cll{
 	position: absolute;
-	top: calc(50% - 150px);
-	left: calc(50% - 100px);
+	top: calc(50% - 350px);
+	left: calc(50% - 442.5px);
+	width: 1085px;
 }
+
 
 #cll th, td {
 	padding: 5px !important;
 }
 
-#mmm td:not(.center, .right) {
+#cll td:not(.center, .right) {
 	text-align: left;
 }
 
+/*공통*/
 #page{
 	text-align: center;
 }
-#listForm{
+
+.page {
+	position: fixed;
+	top: 603.5px;
+}
+.page td {
+	width: 1085px;
+}
+
+table{
 	width: 100%;
 }
+
+#listForm{
+	float:right;
+}
+
+.title{
+	font-size: 25px;
+	color: #fcc000;
+}
+
+.inbl{
+	display: inline-block;
+}
+
 </style>
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
 	<div id="cll">
+	<p class="title inbl">충전 내역</p>
+	<form name="listForm" action="cll" method="get" id="listForm">
+		<input type="search" name="keyword" id="search"	placeholder="검색어를 입력해주세요.">
+		<button type="submit" id="btnsearch">검색</button>
+	</form>
+	<hr>
 		<table>
-			<tr>
-				<td colspan="8">
-					<div>
-						<form name="listForm" action="cll" method="get" id="listForm">
-							<input type="search" name="keyword" id="search"	placeholder="검색어를 입력해주세요.">
-							<button type="submit" id="btnsearch">검색</button>
-						</form>
-					</div>
-				</td>
-			</tr>
 			<tr>
 				<th>닉네임</th>
 				<th>결제액</th>
@@ -82,7 +104,7 @@ $(function() {
 					</tr>
 				</c:forEach>
 			</c:if>
-			<tr>
+			<tr class="page">
 				<td colspan="4">
 					<div id="page">
 						<!-- 앞 페이지 번호 처리 -->

@@ -29,8 +29,11 @@
 	src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/loadingajax.js"></script>
 </head>
 <body>
+<jsp:include page="../loadingajax.jsp"></jsp:include>
 	<div class="contents shadow">
 		<table class="w100">
 			<tr>

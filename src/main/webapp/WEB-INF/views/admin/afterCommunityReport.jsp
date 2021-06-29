@@ -8,7 +8,34 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin.css"
 	rel="stylesheet" type="text/css" />
+<script>
+$(function() {
+	$('form[name=listForm]').on('submit',function(e) {
+		if ($('input[name=keyword]').val() == null || $('input[name=keyword]').val() == "") {
+			e.preventDefault();
+		} else {
+			return true;
+		}
+	});
+});
+</script>
 <style>
+#acr th, td {
+	padding: 5px !important;
+}
+
+#acr td:not(.center, .right){
+	text-align: left;
+}
+
+#acr {
+	position: absolute;
+	top: calc(50% - 350px);
+	left: calc(50% - 442.5px);
+	width: 1085px;
+}
+
+/*모달 창 공통*/
 #modal{
 	display: none;
 	position: absolute;
@@ -36,28 +63,6 @@
     position: absolute;
 }
 
-#acr th, td {
-	padding: 5px !important;
-}
-
-#acr td:not(.center, .right){
-	text-align: left;
-}
-
-#acr {
-	position: absolute;
-	top: calc(50% - 150px);
-	left: calc(50% - 480px);
-}
-
-#page{
-	text-align: center;
-}
-
-#listForm{
-	width: 100%;
-}
-
 #detail {
 	height: 35px;
 }
@@ -76,7 +81,6 @@
 	border: 1px solid rgba(0, 0, 0, 0.5);
 	border-radius: 3px;
 }
-
 #ccontentText {
 	height: 105px;
 	width: 270px;
@@ -88,12 +92,41 @@
 	background: white;
 }
 
-button {
+#modal button {
 	width: 100%;
 }
 
 .hidden{
 	display: none;
+}
+
+/*공통*/
+#page{
+	text-align: center;
+}
+
+.page {
+	position: fixed;
+	top: 603.5px;
+}
+.page td {
+	width: 1085px;
+}
+
+#listForm{
+	 float:right;
+}
+
+table{
+	width: 100%;
+}
+
+.title{
+	font-size: 25px;
+	color: #fcc000;
+}
+.inbl{
+	display: inline-block;
 }
 </style>
 <script>
@@ -131,8 +164,14 @@ $(function(){
 <%@include file="headerAndAside.jsp"%>
 <body>
 	<div id="acr">
+	<p class="title inbl">처리된 신고 게시글 목록</p>
+	<form name="listForm" action="acr" method="get" id="listForm">
+		<input type="search" name="keyword" id="search"	placeholder="검색어를 입력해주세요.">
+		<button type="submit" id="btnsearch">검색</button>
+	</form>
+	<hr>
 		<div>
-			<table border="1" class="table">
+			<table>
 				<tr>
 					<th>신고 번호</th>
 					<th>게시글 제목</th>
@@ -152,11 +191,11 @@ $(function(){
 				<c:if test="${listCount ne 0}">
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr class="tr">
-							<td style="cursor: pointer;">${vo.crno}</td>
+							<td class="center" style="cursor: pointer;">${vo.crno}</td>
 							<td style="cursor: pointer;" class="subject">${vo.csubject}</td>
 							<td class="hidden">${vo.ccontent}</td>
-							<td style="cursor: pointer;">${vo.crespondent}</td>
-							<td style="cursor: pointer;">${vo.creporter}</td>
+							<td class="center" style="cursor: pointer;">${vo.crespondent}</td>
+							<td class="center" style="cursor: pointer;">${vo.creporter}</td>
 							<c:choose>
 							<c:when test="${vo.crreason eq 1}">
 							<td style="cursor: pointer;">나체 이미지 또는 성적 행위</td>
@@ -182,17 +221,17 @@ $(function(){
 							<td style="cursor: pointer;">${vo.acrdate}</td>
 							<c:choose>
 							<c:when test="${vo.cstatus eq 'accept'}">
-							<td style="cursor: pointer;">수리</td>
+							<td class="center" style="cursor: pointer; color: green;">수리</td>
 							</c:when>
 							<c:when test="${vo.cstatus eq 'deny'}">
-							<td style="cursor: pointer;">반려</td>
+							<td class="center" style="cursor: pointer; color: red;">반려</td>
 							</c:when>
 							</c:choose>
 						</tr>
 					</c:forEach>
 				</c:if>
-				<tr>
-					<td colspan="9">
+				<tr class="page">
+					<td colspan="9" class="center">
 						<div id="page">
 							<!-- 앞 페이지 번호 처리 -->
 							<c:if test="${currentPage <= 1}">

@@ -34,6 +34,16 @@
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/clist">커뮤니티</a></li>
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/cashShop">충전소</a></li>
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
+                    	<c:choose>
+							<c:when test="${loginMember == null }">
+									<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/login" id="login">로그인</a></li>
+									<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/signup" id="signup">회원가입</a></li>
+							</c:when>
+							<c:when test="${loginMember != null }">
+									<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout" id="logout">로그아웃</a></li>
+									<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/mypage">마이페이지</a></li>
+							</c:when>
+						</c:choose>
                     </ul>
                 </div>
             </div>
@@ -46,11 +56,11 @@
                 <a class="btn btn-primary btn-xl text-uppercase" href="#services">EXPLORE</a>
             </div>
         </header>
-        <!-- BTS-->
+        <!-- 사이트 소개-->
         <section class="page-section" id="services">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase"><!-- BTS --></h2>
+                    <h2 class="section-heading text-uppercase">사이트 소개</h2>
 <!--                     <h3 class="section-subheading text-muted">Blockchain Trading Simulator</h3> -->
                 </div>
                 <div class="row text-center">
@@ -59,42 +69,47 @@
                         <img src="resources/assets/img/bts_logo.png" style="height:2cm; position:relative; right:10px;" alt="..." />
 <!--                             <i class="fas fa-circle fa-stack-2x text-primary"></i> -->
                         </span>
-                        <p class="my-3" style="font-size:18px;">BTS는 회원님께 다양한 서비스와 편의를 제공하는 가상자산 중개 플랫폼입니다.<br>단순한 기술 커뮤니티를 넘어, SW개발자의 기술과 삶을 나누는 공간으로서의 역할을 담당하고 있습니다.</p>
+                        <p class="my-3" style="font-size:18px;">BTS는 회원님께 다양한 서비스와 편의를 제공하는 가상자산 중개 플랫폼입니다.<br>
+                        										투기성 투자를 하는 사람들에게 위험부담 없이 시도할 수 있는 투자 기회와 경험을 제공합니다.<br>
+                        										주식은 모의투자 개념의 프로그램이 이미 많이 활성화 되어있습니다.<br>
+                        										 하지만 암호화폐는 투자를 연습할 공간이 없는 실정이므로, 암호화폐 모의투자 사이트를 기획하게 되었습니다.<br>
+                        										
+</p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Services-->
+        <!-- 서비스 소개-->
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">SERVICES</h2>
+                    <h2 class="section-heading text-uppercase">서비스 소개</h2>
                     <h3 class="section-subheading text-muted">This is the world's leading portal for easy and quick</h3>
                 </div>
                 <div class="row">
                     <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 1-->
+                        <!-- Services item 1-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="resources/assets/img/portfolio/1.jpg" alt="..." />
+                                <img class="img-fluid" src="resources/assets/img/portfolio/investment.jpg" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">모의투자</div>
-                                <div class="portfolio-caption-subheading text-muted">Investment Game</div>
+                                <div class="portfolio-caption-subheading text-muted">Mock Investment</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 2-->
+                        <!-- Services item 2-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="resources/assets/img/portfolio/2.jpg" alt="..." />
+                                <img class="img-fluid" src="resources/assets/img/portfolio/news.jpg" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">뉴스</div>
@@ -103,13 +118,13 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 3-->
+                        <!-- Services item 3-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="resources/assets/img/portfolio/3.jpg" alt="..." />
+                                <img class="img-fluid" src="resources/assets/img/portfolio/prochart.jpg" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">프로차트</div>
@@ -118,13 +133,13 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-                        <!-- Portfolio item 4-->
+                        <!-- Services item 4-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="resources/assets/img/portfolio/4.jpg" alt="..." />
+                                <img class="img-fluid" src="resources/assets/img/portfolio/community.jpg" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">커뮤니티</div>
@@ -133,13 +148,13 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                        <!-- Portfolio item 5-->
+                        <!-- Services item 5-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="resources/assets/img/portfolio/5.jpg" alt="..." />
+                                <img class="img-fluid" src="resources/assets/img/portfolio/cashshop.jpg" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">충전소</div>
@@ -148,13 +163,13 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
-                        <!-- Portfolio item 6-->
+                        <!-- Services item 6-->
                         <div class="portfolio-item">
                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="resources/assets/img/portfolio/6.jpg" alt="..." />
+                                <img class="img-fluid" src="resources/assets/img/portfolio/ranking.jpg" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">랭킹</div>
@@ -166,11 +181,11 @@
             </div>
         </section>
  
-        <!-- Team-->
-        <section class="page-section bg-light" id="team">
+        <!-- 팀 소개-->
+        <section class="page-section bg-light" id="team" style="background-color: white !important;">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+                    <h2 class="section-heading text-uppercase">개발팀 소개</h2>
                     <h3>ARMY</h3>
                     <h3 class="section-subheading text-muted">Aces Recruited Member of Year</h3>
                 </div>
@@ -179,75 +194,93 @@
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="resources/assets/img/user.png" alt="..." />
                             <h4>강수목</h4>
-                            <p class="text-muted">Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-github"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                            <p class="text-muted" style="margin:0;">Developer</p>
+                            <p class="text-muted">강수목@rkdtnahr.com</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="resources/assets/img/user.png" alt="..." />
                             <h4>김도영</h4>
-                            <p class="text-muted">Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-github"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                            <p class="text-muted" style="margin:0;">Developer</p>
+                            <p class="text-muted">김도영@rlaehdud.com</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="resources/assets/img/user.png" alt="..." />
                             <h4>김연준</h4>
-                            <p class="text-muted">Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-github"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                            <p class="text-muted" style="margin:0;">Developer</p>
+                            <p class="text-muted">okip6854q@gmail.com</p>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/yeonjuning" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="resources/assets/img/user.png" alt="..." />
                             <h4>정재훈</h4>
-                            <p class="text-muted">Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-github"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                            <p class="text-muted" style="margin:0;">Developer</p>
+                            <p class="text-muted">정재훈@wjdwogns.com</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="resources/assets/img/user.png" alt="..." />
                             <h4>제승하</h4>
-                            <p class="text-muted">Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-github"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                            <p class="text-muted" style="margin:0;">Developer</p>
+                            <p class="text-muted">제승하@wptmdgk.com</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Clients-->
-        <div class="py-5">
+        <!-- 개발 환경 -->
+        <div class="py-5" style="background-color: #f8f9fa;">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="resources/assets/img/logos/microsoft.svg" alt="..." /></a>
+                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="resources/assets/img/logos/tomcat.png" alt="..." /></a>
                     </div>
                     <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="resources/assets/img/logos/google.svg" alt="..." /></a>
+                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="resources/assets/img/logos/java.png" alt="..." /></a>
                     </div>
                     <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="resources/assets/img/logos/facebook.svg" alt="..." /></a>
+                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="resources/assets/img/logos/oracle.png" alt="..." /></a>
                     </div>
                     <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="resources/assets/img/logos/ibm.svg" alt="..." /></a>
+                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="resources/assets/img/logos/spring.png" alt="..." /></a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 my-3">
+                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="resources/assets/img/logos/html.png" alt="..." /></a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 my-3">
+                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="resources/assets/img/logos/jquery.png" alt="..." /></a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 my-3">
+                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="resources/assets/img/logos/bootstrap.png" alt="..." /></a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 my-3">
+                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="resources/assets/img/logos/ckeditor.png" alt="..." /></a>
                     </div>
                 </div>
             </div>
-            <br><br>
         </div>
+        
+                <!-- Contact-->
+        <section class="page-section" id="contact">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">서포트 & 피드백</h2>
+                    <h3 class="section-subheading text-muted" style="color: azure; font-size: larger;">도움이 필요하시면 <a class="contact_kakao" href="http://pf.kakao.com/_ZhLns/chat" target="_blank">저희에게 연락하십시오.</a> 제품 피드백을 공유하려면<br>
+															제품에 대한 정보는 <a class="contact_comm" href="${pageContext.request.contextPath}/clist">여기에서 커뮤니티를 방문하십시오.</a></h3>
+                </div>
+            </div>
+        </section>
+        
         <!-- SERVICES Modals-->
         <!-- SERVICES item 1 modal popup-->
         <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
@@ -260,22 +293,18 @@
                                 <div class="modal-body">
                                     <!-- Project details-->
                                     <h2 class="text-uppercase">모의투자</h2>
-                                    <p class="item-intro text-muted">Investment Game</p>
-                                    <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/1.jpg" alt="..." />
+                                    <p class="item-intro text-muted">Mock Investment</p>
+                                    <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/investment.jpg" alt="..." />
                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
+                                            <strong>Developer:</strong>
                                             Threads
-                                        </li>
-                                        <li>
-                                            <strong>Category:</strong>
-                                            Illustration
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-times me-1"></i>
-                                        Close Project
+                                        Close Service
                                     </button>
                                 </div>
                             </div>
@@ -296,21 +325,17 @@
                                     <!-- Project details-->
                                     <h2 class="text-uppercase">뉴스</h2>
                                     <p class="item-intro text-muted">NEWS</p>
-                                    <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/2.jpg" alt="..." />
+                                    <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/news.jpg" alt="..." />
                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
+                                            <strong>Developer:</strong>
                                             Explore
-                                        </li>
-                                        <li>
-                                            <strong>Category:</strong>
-                                            Graphic Design
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-times me-1"></i>
-                                        Close Project
+                                        Close Service
                                     </button>
                                 </div>
                             </div>
@@ -331,21 +356,17 @@
                                     <!-- Project details-->
                                     <h2 class="text-uppercase">프로차트</h2>
                                     <p class="item-intro text-muted">Pro Chart</p>
-                                    <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/3.jpg" alt="..." />
+                                    <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/prochart.jpg" alt="..." />
                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
+                                            <strong>Developer:</strong>
                                             Finish
-                                        </li>
-                                        <li>
-                                            <strong>Category:</strong>
-                                            Identity
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-times me-1"></i>
-                                        Close Project
+                                        Close Service
                                     </button>
                                 </div>
                             </div>
@@ -366,21 +387,17 @@
                                     <!-- Project details-->
                                     <h2 class="text-uppercase">커뮤니티</h2>
                                     <p class="item-intro text-muted">Community</p>
-                                    <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/4.jpg" alt="..." />
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                    <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/community.jpg" alt="..." />
+                                    <p>이미지와 게시판이 결합된 커뮤니티 서비스입니다. 투자자 간 주식, 비트코인 등 사회 각 분야에 대한 정보와 의견을 공유할 수 있습니다. 현재 CKEditor5, 파일 첨부, 추천, 비추천 등 다양한 기능을 제공하고 있으며, 자유로운 소통의 장으로 자리매김하고 있습니다.</p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
-                                            Lines
-                                        </li>
-                                        <li>
-                                            <strong>Category:</strong>
-                                            Branding
+                                            <strong>Developer:</strong>
+                                           	김연준
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-times me-1"></i>
-                                        Close Project
+                                        Close Service
                                     </button>
                                 </div>
                             </div>
@@ -401,21 +418,17 @@
                                     <!-- Project details-->
                                     <h2 class="text-uppercase">충전소</h2>
                                     <p class="item-intro text-muted">Cash Shop</p>
-                                    <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/5.jpg" alt="..." />
+                                    <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/cashshop.jpg" alt="..." />
                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
+                                            <strong>Developer:</strong>
                                             Southwest
-                                        </li>
-                                        <li>
-                                            <strong>Category:</strong>
-                                            Website Design
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-times me-1"></i>
-                                        Close Project
+                                        Close Service
                                     </button>
                                 </div>
                             </div>
@@ -436,21 +449,17 @@
                                     <!-- Project details-->
                                     <h2 class="text-uppercase">랭킹</h2>
                                     <p class="item-intro text-muted">Ranking</p>
-                                    <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/6.jpg" alt="..." />
+                                    <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/ranking.jpg" alt="..." />
                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Client:</strong>
+                                            <strong>Developer:</strong>
                                             Window
-                                        </li>
-                                        <li>
-                                            <strong>Category:</strong>
-                                            Photography
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-times me-1"></i>
-                                        Close Project
+                                        Close Service
                                     </button>
                                 </div>
                             </div>

@@ -345,7 +345,7 @@ hr {
 
 #needlogin {
 	margin: 10px auto 0 auto;
-	width: 1000px;
+	width: 100%;
 	line-height: 200px;
 	text-align: left;
 	color: black;

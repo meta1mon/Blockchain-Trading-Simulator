@@ -6,7 +6,6 @@
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <style>
 #mcl {
 	width: 1240px;

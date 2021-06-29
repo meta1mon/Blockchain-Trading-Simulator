@@ -19,6 +19,7 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet" />
+<title>BTS</title>
 <!-- 스크립트 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>

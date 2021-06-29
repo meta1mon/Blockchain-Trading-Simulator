@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ProChart</title>
+<title>BTS</title>
 <style type="text/css">
 * {
 	background-color: black;

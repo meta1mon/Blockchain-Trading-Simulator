@@ -149,7 +149,6 @@
 </script>
 
 <meta charset="UTF-8">
-<title>InvestmentPage</title>
 </head>
 <body>
 	<div id="wrapper">

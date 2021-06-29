@@ -13,7 +13,7 @@
 	href="${pageContext.request.contextPath}/resources/css/member.css">
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
-<title>Insert title here</title>
+<title>BTS</title>
 <style>
 .contents {
 	padding: calc(50vh - 84.5px) 100px !important;

@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
-<title>Insert title here</title>
 <style>
 #rank {
 	width: 1240px;

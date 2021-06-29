@@ -20,8 +20,7 @@
 
 		// 빗썸에서 실시간 가격 받아오기
 		function livePrice() {
-			$
-					.ajax({
+			$.ajax({
 						url : 'https://api.bithumb.com/public/ticker/ALL_KRW',
 						type : "get",
 						cache : false,

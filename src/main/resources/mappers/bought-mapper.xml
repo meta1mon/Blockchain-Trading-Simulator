@@ -7,10 +7,10 @@
 	</resultMap>
 
 	<!-- 체결로 삽입 ## 정재훈 -->
-	<insert id="insertBought" parameterType="WAITBOUGHT"
+	<insert id="insertBought" parameterType="WaitBought"
 		flushCache="true" statementType="PREPARED">
 		INSERT INTO BOUGHT (UBNO, BDATE, COIN, BUYCNT, BUYPRICE, ACNTNO)
-		SELECT UBNO, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), COIN, BUYCNT,
+		SELECT SEQ_BOUGHT.NEXTVAL, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), COIN, BUYCNT,
 		BUYPRICE, ACNTNO
 		FROM WAITBOUGHT
 		WHERE COIN = #{coin} AND BUYPRICE = #{buyprice}

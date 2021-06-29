@@ -52,8 +52,8 @@ public class investmentCtrl {
 	private CoinAcntService caService;
 
 	// 미체결 매수 내역 불러오기
-	@RequestMapping("trade")
-	public ModelAndView trade(ModelAndView mav) {
+	@RequestMapping("buy")
+	public ModelAndView buy(ModelAndView mav) {
 		List<WaitBought> waitblist = wbService.selectAllCoinListWaitBought();
 		mav.addObject("waitblist", waitblist);
 		List<WaitBought> waitresult = wbService.selectAllListWaitBought();
@@ -61,7 +61,21 @@ public class investmentCtrl {
 		System.out.println(waitblist);
 		System.out.println(waitresult);
 
-		mav.setViewName("investment/trade");
+		mav.setViewName("investment/buy");
+		return mav;
+	}
+	
+	// 미체결 매도 내역 불러오기
+	@RequestMapping("sell")
+	public ModelAndView sell(ModelAndView mav) {
+		List<WaitSold> waitslist = wsService.selectAllCoinListWaitSold();
+		mav.addObject("waitslist", waitslist);
+		List<WaitSold> waitresult = wsService.selectAllListWaitSold();
+		mav.addObject("waitresult", waitresult);
+		System.out.println(waitslist);
+		System.out.println(waitresult);
+
+		mav.setViewName("investment/sell");
 		return mav;
 	}
 
@@ -69,9 +83,6 @@ public class investmentCtrl {
 	@RequestMapping("bought")
 	public void bought(@RequestParam("buyCoin") String coin, @RequestParam("buyPrice") double buyprice,
 			HttpServletResponse response) {
-		System.out.println("코인 사러 컨트롤러 들어옴#@#############################");
-		System.out.println(coin);
-		System.out.println(buyprice);
 		WaitBought vo = new WaitBought();
 		vo.setBuyprice(buyprice);
 		vo.setCoin(coin);
@@ -92,6 +103,35 @@ public class investmentCtrl {
 			out.close();
 		}
 
+	}
+	
+	// 미체결 매도 내역을 체결 내역으로 바꾸기
+	@RequestMapping("sold")
+	public void sold(@RequestParam("sellCoin") String coin, @RequestParam("sellPrice") double sellprice,
+			HttpServletResponse response) {
+		System.out.println("코인 팔러 컨트롤러 들어옴#@#############################");
+		System.out.println(coin);
+		System.out.println(sellprice);
+		WaitSold vo = new WaitSold();
+		vo.setSellprice(sellprice);
+		vo.setCoin(coin);
+		int result = sService.insertSold(vo);
+		PrintWriter out = null;
+		try {
+			if (result > 0) {
+				System.out.println("전부 처리 완료");
+				out = response.getWriter();
+				out.print(result);
+			} else {
+				System.out.println("전부 처리 실패");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+		
 	}
 
 	@RequestMapping("Chatting")
@@ -161,26 +201,16 @@ public class investmentCtrl {
 		return mav;
 	}
 
-	@RequestMapping(value = "sInsert")
-	public void SoldInsert(Sold ws, HttpServletResponse response) {
-		int result = sService.insertSold(ws);
-		PrintWriter out = null;
-		try {
-			if (result > 0) {
-				System.out.println("insert성공");
-			} else {
-				System.out.println("insert실패");
-			}
-			out = response.getWriter();
-			out.print(result);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			out.flush();
-			out.close();
-		}
-
-	}
+	/*
+	 * @RequestMapping(value = "sInsert") public void SoldInsert(Sold ws,
+	 * HttpServletResponse response) { int result = sService.insertSold(ws);
+	 * PrintWriter out = null; try { if (result > 0) {
+	 * System.out.println("insert성공"); } else { System.out.println("insert실패"); }
+	 * out = response.getWriter(); out.print(result); } catch (IOException e) {
+	 * e.printStackTrace(); } finally { out.flush(); out.close(); }
+	 * 
+	 * }
+	 */
 
 	@RequestMapping(value = "coinacntInsert")
 	public void CoinAcntInsert(CoinAcnt vo, HttpServletResponse response) {

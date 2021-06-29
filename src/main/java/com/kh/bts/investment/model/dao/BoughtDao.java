@@ -22,19 +22,21 @@ public class BoughtDao {
 		} else {
 			System.out.println("체결 내역으로 이동 실패");
 		}
+
+		// 코인 계좌에 넣기
+		result = sqlSession.insert("coinacnt.afterBoughtCoinAcnt", vo);
+		if (result > 0) {
+			System.out.println("코인 계좌로 삽입 성공");
+		} else {
+			System.out.println("코인 계좌로 삽입 실패");
+		}
+		
 		// 미체결 내역 삭제
 		result = sqlSession.delete("waitBought.afterBoughtDelete", vo);
 		if (result > 0) {
 			System.out.println("미체결 내역 삭제 성공");
 		} else {
 			System.out.println("미체결 내역 삭제 실패");
-		}
-		// 코인 계좌에 넣기
-		result = sqlSession.insert("coinacnt.afterInsertCoinAcnt", vo);
-		if (result > 0) {
-			System.out.println("코인 계좌로 삽입 성공");
-		} else {
-			System.out.println("코인 계좌로 삽입 실패");
 		}
 		return result;
 	}

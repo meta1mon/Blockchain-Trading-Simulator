@@ -7,14 +7,31 @@
 		SELECT * FROM COINACNT WHERE ACNTNO = #{acntno}
 	</select>
 
-	<!-- 체결 후, 코인계좌에 삽입 -->
-	<insert id="afterInsertCoinAcnt" parameterType="WaitBought" flushCache="true"
+	<!-- 매수 체결 후, 코인계좌에 삽입 -->
+	<insert id="afterBoughtCoinAcnt" parameterType="WaitBought" flushCache="true"
 		statementType="PREPARED">
-		INSERT INTO COINACNT (CANO, COIN, BUYCNT, BUYPRICE, ACNTNO)
-		SELECT SEQ_COINACNT.NEXTVAL, COIN, BUYCNT, BUYPRICE, ACNTNO
-		FROM BOUGHT
-		WHERE COIN = #{coin} AND BUYPRICE = #{buyprice}
+	MERGE INTO COINACNT A
+	USING (SELECT * FROM WAITBOUGHT WHERE COIN=#{coin} AND BUYPRICE=#{buyprice}) B
+	ON (A.COIN = B.COIN AND A.ACNTNO = B.ACNTNO)
+	WHEN MATCHED THEN
+	UPDATE
+	SET A.BUYCNT = A.BUYCNT + B.BUYCNT,
+	A.BUYPRICE = (A.BUYPRICE*A.BUYCNT + B.BUYPRICE* B.BUYCNT)/(A.BUYCNT + B.BUYCNT)
+	WHEN NOT MATCHED THEN
+	INSERT (CANO, COIN, BUYCNT, BUYPRICE, ACNTNO)
+	VALUES (SEQ_COINACNT.nextval, B.COIN, B.BUYCNT, B.BUYPRICE, B.ACNTNO)
 	</insert>
+
+	<!-- 매도 체결 후, 코인계좌에서 줄임 -->
+	<update id="afterSoldCoinAcnt" parameterType="WaitSold" flushCache="true"
+		statementType="PREPARED">
+	MERGE INTO COINACNT A
+	USING (SELECT * FROM WAITSOLD WHERE COIN=#{coin} AND SELLPRICE=#{sellprice}) B
+	ON (A.COIN = B.COIN AND A.ACNTNO = B.ACNTNO)
+	WHEN MATCHED THEN
+	UPDATE
+	SET A.BUYCNT = A.BUYCNT - B.SELLCNT
+	</update>
 	
 	<!-- 미체결 삽입 -->
 	<insert id="insertCoinAcnt" parameterType="CoinAcnt" flushCache="true"

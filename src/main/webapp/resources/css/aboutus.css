@@ -392,6 +392,36 @@ progress {
   display: none !important;
 }
 
+.svg-inline--fa.fa-github {
+    width: 30px !important;
+    height: 40px;
+}
+
+.contact_kakao:link{
+	text-decoration:underline;
+}
+
+.contact_kakao:visited{
+	color:azure;
+}
+
+.contact_kakao:hover, .contact_kakao:active{
+	color:#F7E600;
+	text-decoration: none;
+}
+
+.contact_comm:link{
+	text-decoration:underline;
+}
+
+.contact_comm:visited{
+	color:azure;
+}
+
+.contact_comm:hover, .contact_comm:active {
+	color:#E3C8F8;
+	text-decoration: none;
+}
 .lead {
   font-size: 1.25rem;
   font-weight: 300;
@@ -7293,7 +7323,7 @@ textarea.form-control-lg {
 }
 
 .text-dark {
-  color: #212529 !important;
+  color: #212529;
 }
 
 .text-white {
@@ -7305,7 +7335,7 @@ textarea.form-control-lg {
 }
 
 .text-muted {
-  color: #6c757d !important;
+  color: #6c757d;
 }
 
 .text-black-50 {
@@ -11185,7 +11215,7 @@ header.masthead .masthead-heading {
 }
 
 .img-brand {
-  height: 2.75rem;
+  height: 7.75rem;
 }
 
 section#contact {

@@ -841,8 +841,8 @@ $(".rupdate").on('click',function(){
       var commBody = parentDiv.children('.comment_content');
    var content = commBody.children('p').text().trim();
    
-      if($(".rupdate").text() == "수정 및 삭제"){
-         commBody.append('<textarea style="margin top:7px;" rows="4" cols="70%" class="updateContent" name="updateContent" id="updateContent">'+content+'</textarea>');
+      if($(this).text() == "수정 및 삭제"){
+    	  $('.comment_content').append('<textarea style="margin top:7px;" rows="4" cols="70%" class="updateContent" name="updateContent" id="updateContent">'+content+'</textarea>');
 
          parentP.children(".rdelete").toggle("fast");
          parentP.children(".rupdateConfirm").toggle("fast");

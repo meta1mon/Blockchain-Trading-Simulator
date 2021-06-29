@@ -324,7 +324,7 @@
 		</table>
 		<hr>
 
-<%-- 		<!-- 앞 페이지 번호 처리 -->
+		<!-- 앞 페이지 번호 처리 -->
 		<c:if test="${currentPage <= 1}">
 [이전]&nbsp;
 </c:if>
@@ -355,19 +355,19 @@
 				<c:param name="page" value="${currentPage+1}" />
 			</c:url>
 			<a href="${clistEND}">[다음]</a>
-		</c:if> --%>
+		</c:if> 
 		
 <div id="page">
 			<c:if test="${startPage !=1 }">
-				<a href="qnalist?pageNum=${startPage -1 }&search=${search }&searchType=${searchType}" id="leftpage">&#60;</a>
+				<a href="clist?pageNum=${startPage -1 }&search=${search }&searchType=${searchType}" id="leftpage">&#60;</a>
 			</c:if>
 
 			<c:forEach begin="${startPage }" end="${endPage }" var="s" step="1">
-				<a href="qnalist?pageNum=${s }&search=${search }&searchType=${searchType}" id="pageNum">&nbsp;${s }&nbsp;</a>
+				<a href="clist?pageNum=${s }&search=${search }&searchType=${searchType}" id="pageNum">&nbsp;${s }&nbsp;</a>
 			</c:forEach>
 
 			<c:if test="${endPage < pageBoxCnt }">
-				<a href="qnalist?pageNum=${endPage +1 }&search=${search }&searchType=${searchType}" id="rightpage">&#62;</a>
+				<a href="clist?pageNum=${endPage +1 }&search=${search }&searchType=${searchType}" id="rightpage">&#62;</a>
 			</c:if>
 		</div>
 		

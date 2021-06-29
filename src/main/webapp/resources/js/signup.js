@@ -104,6 +104,7 @@ $(function() {
 		$.ajax({
 			url: "emailcheck",
 			type: "post",
+			global: false,
 			dataType: "json",
 			data: {"email" : $("#email").val()},
 			success: function(data){
@@ -123,6 +124,7 @@ $(function() {
 		$.ajax({
 			url: "nickcheck",
 			type: "post",
+			global: false,
 			dataType: "json",
 			data: {"nickname" : $("#nickname").val()},
 			success: function(data){

@@ -161,8 +161,8 @@
 						class="fa fa-chevron-down"></i></span></a>
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/admin/cr">게시판 신고 리스트</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/rr">댓글 신고 리스트</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/acr">처리한 신고 게시글</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/rr">댓글 신고 리스트</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/arr">처리한 신고 댓글</a></li>
 					</ul></li>
 				<li id="adminmember"><a href="#">공지사항 관리<span class="icon"><i

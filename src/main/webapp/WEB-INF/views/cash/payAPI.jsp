@@ -7,6 +7,7 @@
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<title>BTS</title>
 <!-- 가로길이 820 세로길이 600  -->
 <script>
 	$(function() {

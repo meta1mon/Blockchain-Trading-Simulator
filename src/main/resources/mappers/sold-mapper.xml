@@ -6,12 +6,22 @@
 		<!-- class와 table의 컬럼명이 동일할 경우, 따로 기입하지 않아도 된다 -->
 	</resultMap>
 
+	<!-- 체결로 삽입 ## 정재훈 -->
+	<insert id="insertSold" parameterType="WaitSold"
+		flushCache="true" statementType="PREPARED">
+		INSERT INTO SOLD (USNO, SDATE, COIN, SELLCNT, SELLPRICE, ACNTNO)
+		SELECT SEQ_SOLD.NEXTVAL, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), COIN, SELLCNT,
+		SELLPRICE, ACNTNO
+		FROM WAITSOLD
+		WHERE COIN = #{coin} AND SELLPRICE = #{sellprice}
+	</insert>
+	
 	<!-- 미체결 삽입 -->
-	<insert id="insertSold" parameterType="Sold" flushCache="true"
+<!-- 	<insert id="insertSold" parameterType="Sold" flushCache="true"
 		statementType="PREPARED">
 		INSERT INTO SOLD VALUES(
 		SEQ_SOLD.NEXTVAL, #{coin}, #{sellcnt}, #{sellprice}, default, #{acntno})
-	</insert>
+	</insert> -->
 	
     <delete id="deleteSold" parameterType="Integer"	flushCache="true" statementType="PREPARED">
 		DELETE FROM SOLD WHERE USNO = #{usno}

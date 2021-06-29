@@ -1,5 +1,10 @@
 @charset "UTF-8";
-
+#frm11{
+	width: 320px;
+}
+#aaaaa{
+	width: 320px;
+}
 #container {
 	width: 1100px !important;
 }
@@ -51,6 +56,17 @@
 #cointable_div td{
 	width: 25%;
 }
+
+ #cointable_div a{
+ 	color: #8C66C8;
+} 
+ #cointable_div a:visited{
+ 	color: #8C66C8;
+ 	text-decoration: none;
+} 
+ #cointable_div a:active{
+ 	text-decoration: none;
+} 
 
 #alltable {
 	width: 100%;

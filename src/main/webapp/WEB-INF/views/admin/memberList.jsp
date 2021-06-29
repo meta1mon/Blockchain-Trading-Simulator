@@ -51,7 +51,6 @@ $(function() {
 	});
 });
 </script>
-<title>관리자 페이지 - BTS</title>
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>

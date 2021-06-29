@@ -17,8 +17,19 @@
 		DELETE FROM WAITSOLD WHERE USNO = #{usno}
 	</delete>
 	
+	<!-- 체결 후, 미체결 내역 삭제 -->
+	<delete id="afterSoldDelete" parameterType="WaitSold"	flushCache="true" statementType="PREPARED">
+		DELETE FROM WAITSOLD WHERE COIN = #{coin} AND SELLPRICE = #{sellprice}
+	</delete>
+	
 	<select id="selectListWaitSold" resultType="arraylist" resultMap="resultwaitSold">
 		SELECT * FROM WAITSOLD WHERE ACNTNO = #{acntno} ORDER BY WSDATE DESC
 	</select>
 	
+	<select id="selectAllCoinListWaitSold" resultType="string" >
+		SELECT DISTINCT COIN FROM WAITSOLD ORDER BY COIN DESC
+	</select>
+	<select id="selectAllListWaitSold" resultType="arraylist" resultMap="resultwaitSold">
+		SELECT USNO, COIN, SELLCNT, SELLPRICE, ACNTNO FROM WAITSOLD ORDER BY COIN DESC
+	</select>
 </mapper>

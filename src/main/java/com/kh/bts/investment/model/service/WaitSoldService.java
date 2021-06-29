@@ -8,4 +8,6 @@ public interface WaitSoldService {
 	int insertWaitSold(WaitSold vo);
 	int deleteWaitSold(int usno);
 	List<WaitSold> selectListWaitSold(String acntno);
+	List<WaitSold> selectAllCoinListWaitSold();
+	List<WaitSold> selectAllListWaitSold();
 }

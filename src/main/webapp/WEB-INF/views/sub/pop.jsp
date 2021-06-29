@@ -3,7 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <meta charset="UTF-8">
+<title>BTS</title>
 </head>
 <style>
 #icon {
@@ -40,7 +43,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
 <input type="button" id="icon" value="HI" class="before">
-<iframe src="Chatting" width="400px" height="700px" class="chat"></iframe>
+<iframe src="Chatting" width="500px" height="700px" class="chat"></iframe>
 <script>
 	$(function() {
 		/* $(".chat").css("display", "none") */

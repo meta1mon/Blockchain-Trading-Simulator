@@ -9,9 +9,15 @@
 	rel="stylesheet" type="text/css" />
 <style>
 #mr {
-	width: 1240px;
-	margin: 0 auto;
+	width: 65%;
+	min-width: 1024px;
 	text-align: center;
+	height: 50%;
+	padding: 20px;
+	margin: 25px auto;
+	background-color: #fff;
+    border: 1.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 
 #mr table {
@@ -22,7 +28,6 @@
 <body>
 	<div id="wrapper">
 	<jsp:include page="myNav.jsp"></jsp:include>
-		<div id="container">
 		<div id="mr">
 			<table class="ctable">
 				<tr bgcolor="#8C66C8">
@@ -57,7 +62,6 @@
 					</c:forEach>
 				</c:if>
 			</table>
-		</div>
 		</div>
 	</div>
 </body>

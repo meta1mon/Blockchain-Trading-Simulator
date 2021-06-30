@@ -8,9 +8,15 @@
 <meta charset="UTF-8">
 <style>
 #mcl {
-	width: 1240px;
-	margin: 0 auto;
+	width: 65%;
+	min-width: 1024px;
 	text-align: center;
+	height: 50%;
+	padding: 20px;
+	margin: 25px auto;
+	background-color: #fff;
+    border: 1.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 
 #mcl table {
@@ -21,7 +27,6 @@
 <body>
 	<div id="wrapper">
 	<jsp:include page="myNav.jsp"></jsp:include>
-		<div id="container">
 		<div id="mcl">
 			<table border="2">
 				<tr>
@@ -35,7 +40,6 @@
 					<td>5,000,000 원</td>
 				</tr>
 			</table>
-		</div>
 		</div>
 	</div>
 </body>

@@ -1,6 +1,7 @@
 package com.kh.bts.mypage.controller;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.HomeController;
+import com.kh.bts.acnt.model.service.AcntService;
 import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.vo.Community;
@@ -37,6 +39,9 @@ public class MypageController {
 
 	@Autowired
 	private MypageService myService;
+
+	@Autowired
+	private AcntService acntService;
 
 	@RequestMapping(value = "")
 	public ModelAndView mypageEnter(ModelAndView mv) {
@@ -247,8 +252,18 @@ public class MypageController {
 	}
 
 	@RequestMapping(value = "/me")
-	public ModelAndView myEssets(ModelAndView mv) {
+	public ModelAndView myEssets(ModelAndView mv, Member vo, HttpServletRequest request) {
 
+		HttpSession session = request.getSession();
+		String loginEmail = (String) session.getAttribute("loginMember");
+		if (loginEmail == null) {
+			System.out.println("비회원입니다");
+		} else {
+			mv.addObject("email", loginEmail);
+			Acnt result = acntService.selectMyAcnt(loginEmail);
+			mv.addObject("acnt", result);
+		}
+		
 		mv.setViewName("mypage/myEssets");
 		return mv;
 	}

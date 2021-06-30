@@ -4,14 +4,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
 <style>
 #mi {
-	width: 1240px;
-	margin: 0 auto;
+	width: 65%;
+	min-width: 1024px;
 	text-align: center;
+	height: 50%;
+	padding: 20px;
+	margin: 25px auto;
+	background-color: #fff;
+    border: 1.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 
 #mi table {
@@ -128,13 +136,12 @@
 
 		});
 
-	})
+	});
 </script>
 </head>
 <body>
 	<div id="wrapper">
 	<jsp:include page="myNav.jsp"></jsp:include>
-		<div id="container">
 		<div id="mi">
 			<form id="frmChangeInfo">
 				<table border="2">
@@ -205,7 +212,6 @@
 					</tr>
 				</table>
 			</form>
-		</div>
 		</div>
 	</div>
 </body>

@@ -174,7 +174,7 @@
 		</div>
 		
 			<div class="searchDiv">
-				<form action="clist" name="listForm" method="get">
+				<form action="clist" name="bottomlistForm" method="get">
 					<select id="searchType" name="searchType">
 						<option value="1">글제목</option>
 						<option value="2">글내용</option>

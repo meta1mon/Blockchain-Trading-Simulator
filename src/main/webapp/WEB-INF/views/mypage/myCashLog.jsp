@@ -18,21 +18,26 @@
 }
 </style>
 </head>
-<jsp:include page="myHeader.jsp"></jsp:include>
 <body>
-	<div id="mcl">
-		<table border="2">
-			<tr>
-				<th>결제일시</th>
-				<th>결제금액</th>
-				<th>충전금액</th>
-			</tr>
-			<tr>
-				<td>2021-02-22 21:04:23</td>
-				<td>\ 5,000</td>
-				<td>5,000,000 원</td>
-			</tr>
-		</table>
+	<div id="wrapper">
+	<jsp:include page="myHeader.jsp"></jsp:include>
+		<div id="container">
+		<div id="mcl">
+			<table border="2">
+				<tr>
+					<th>결제일시</th>
+					<th>결제금액</th>
+					<th>충전금액</th>
+				</tr>
+				<tr>
+					<td>2021-02-22 21:04:23</td>
+					<td>\ 5,000</td>
+					<td>5,000,000 원</td>
+				</tr>
+			</table>
+		</div>
+		</div>
+		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

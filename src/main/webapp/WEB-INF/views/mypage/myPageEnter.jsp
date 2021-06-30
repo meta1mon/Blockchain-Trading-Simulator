@@ -8,8 +8,9 @@
 	rel="stylesheet" type="text/css" />
 <style>
 #mpe {
-	width: 1240px;
-	margin: 0 auto;
+/* 	border: 1px solid; */
+	width: 100%;
+	margin: 200px auto;
 	text-align: center;
 }
 </style>
@@ -19,12 +20,12 @@
 		<jsp:include page="../main/header.jsp"></jsp:include>
 		<div id="mpe">
 			<h2>비밀번호 확인</h2>
-			<form action="${pageContext.request.contextPath}/mypage/admitEnter"
-				method="post">
+			<form action="${pageContext.request.contextPath}/mypage/admitEnter" method="post">
 				<input type="password" placeholder="비밀번호를 입력하세요" name="password">
 				<button type="submit">확인</button>
 			</form>
 		</div>
+		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

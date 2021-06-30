@@ -115,6 +115,16 @@ public class AdminCtrl {
 		mv.setViewName("admin/cashEdit");
 		return mv;
 	}
+	
+//	충전 상품 수정
+	@ResponseBody
+	@RequestMapping(value="/updateCash", method = RequestMethod.POST)
+	public int updateCash(Cash vo, HttpServletResponse response){
+		logger.info("HHHHHHHHHHHHHHHHHHHH컨트롤러 들어왔다!HHHHHHHHHHHHHHHHHHHH");
+		int result = aService.updateCash(vo);
+		System.out.println(result);
+		return result;
+	}
 
 // 충전 상품 등록
 	@RequestMapping(value = "/cashRegister", method = RequestMethod.POST)

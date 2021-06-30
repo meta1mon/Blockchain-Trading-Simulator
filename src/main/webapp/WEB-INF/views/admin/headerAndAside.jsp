@@ -173,10 +173,7 @@
 				<li id="adminmember"><a href="#">충전 상품 관리<span class="icon"><i
 						class="fa fa-chevron-down"></i></span></a>
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/admin/cashR">충전 상품 등록</a></li>
-					</ul>
-					<ul>
-						<li><a href="${pageContext.request.contextPath}/admin/cashMR">충전 수정·삭제</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/cash">충전 상품 관리</a></li>
 					</ul>
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/admin/cll">충전 내역 리스트</a></li>

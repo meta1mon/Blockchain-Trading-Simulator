@@ -34,6 +34,16 @@ public class AdminDao {
 		return sqlSession.insert("cash.registerCash", vo);
 	}
 	
+	public int updateCash(Cash vo) {
+		int result=0;
+		result = sqlSession.update("cash.updateCash", vo);
+		return result;
+	}
+	
+	public int deleteCash(Cash vo) {
+		return sqlSession.delete("cash.deleteCash", vo);
+	}
+	
 	public List<CashLog> selectCashLog(int startPage, int limit){
 		
 		int startRow = (startPage -1)*limit; RowBounds row = new RowBounds(startRow, limit);

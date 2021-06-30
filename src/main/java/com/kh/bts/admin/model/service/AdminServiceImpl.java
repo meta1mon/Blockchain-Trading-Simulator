@@ -36,6 +36,20 @@ public class AdminServiceImpl implements AdminService {
 	public int registerCash(Cash vo) {
 		return aDao.registerCash(vo);
 	}
+	
+	@Override
+	public int updateCash(Cash vo) {
+		int result = 0;
+		result = aDao.updateCash(vo);
+		return result;
+	}
+	
+	@Override
+	public int deleteCash(Cash vo) {
+		int result = 0;
+		result = aDao.deleteCash(vo);
+		return result;
+	}
 
 
 	@Override

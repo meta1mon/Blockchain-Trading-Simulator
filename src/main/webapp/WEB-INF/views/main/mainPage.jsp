@@ -25,10 +25,10 @@ function go() {
 		<div id="container">
 		
 		
-			<video id="videobcg" width="100%" height="auto" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
-		        <source src="<%=request.getContextPath()%>/resources/assets/mainvideo.mp4" type="video/mp4">
-		        Sorry, your browser does not support HTML5 video.
-		    </video>
+<!-- 			<video id="videobcg" width="100%" height="auto" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0"> -->
+<%-- 		        <source src="<%=request.getContextPath()%>/resources/assets/mainvideo.mp4" type="video/mp4"> --%>
+<!-- 		        Sorry, your browser does not support HTML5 video. -->
+<!-- 		    </video> -->
 		    
 		    
 			<table style="width: 100%">

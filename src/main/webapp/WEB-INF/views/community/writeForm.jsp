@@ -9,10 +9,26 @@
 <link href="${pageContext.request.contextPath}/resources/css/writeForm.css" rel="stylesheet" type="text/css" />
 <meta charset="UTF-8">
 
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+<script>
+$(function() {
+	$('form[name=insertForm]').on(
+			'submit',
+			function(e) {
+				if ($('input[name=csubject]').val() == null || $('input[name=csubject]').val() == "") {
+					alert("제목을 입력하십시오.");
+					e.preventDefault();
+				} else if ($('textarea[name=ccontent]').val() == null || $('textarea[name=ccontent]').val() == ""){
+					alert("내용을 입력하십시오.");
+					e.preventDefault();
+				} else {
+					return true;
+				}
+			});
+});
+</script>
 
 </head>
 <body>
@@ -26,7 +42,7 @@
 			<br>
 			<br>
 			<form action="cInsert" method="post" enctype="multipart/form-data"
-				style="margin-left: 20px">
+				style="margin-left: 20px" name="insertForm">
 				<input id="subject" type="text"
 					placeholder="&nbsp;&nbsp;제목을 입력해 주세요." name="csubject"
 					maxlength="100">

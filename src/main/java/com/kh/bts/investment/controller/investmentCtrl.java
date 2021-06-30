@@ -51,21 +51,23 @@ public class investmentCtrl {
 	@Autowired
 	private CoinAcntService caService;
 
-	
-	  @RequestMapping("buy") public ModelAndView buy(ModelAndView mv) {
-	  mv.setViewName("investment/buy"); return mv; }
-	 
-	
-	  // 미체결 매수 내역 불러오기
-	  
-	  @ResponseBody
-	  
-	  @RequestMapping("buyLoad") public List<WaitBought>
-	  buyLoad(HttpServletResponse response) { List<WaitBought> waitblist =
-	  wbService.selectAllCoinListWaitBought(); List<WaitBought> waitresult =
-	  wbService.selectAllListWaitBought(); return waitblist; }
-	 
-	
+	@RequestMapping("buy")
+	public ModelAndView buy(ModelAndView mv) {
+		mv.setViewName("investment/buy");
+		return mv;
+	}
+
+	// 미체결 매수 내역 불러오기
+
+	@ResponseBody
+
+	@RequestMapping("buyLoad")
+	public List<WaitBought> buyLoad(HttpServletResponse response) {
+		List<WaitBought> waitblist = wbService.selectAllCoinListWaitBought();
+		List<WaitBought> waitresult = wbService.selectAllListWaitBought();
+		return waitblist;
+	}
+
 	// 미체결 매도 내역 불러오기
 	@RequestMapping("sell")
 	public ModelAndView sell(ModelAndView mav) {
@@ -105,7 +107,7 @@ public class investmentCtrl {
 		}
 
 	}
-	
+
 	// 미체결 매도 내역을 체결 내역으로 바꾸기
 	@RequestMapping("sold")
 	public void sold(@RequestParam("sellCoin") String coin, @RequestParam("sellPrice") double sellprice,
@@ -132,7 +134,7 @@ public class investmentCtrl {
 			out.flush();
 			out.close();
 		}
-		
+
 	}
 
 	@RequestMapping("Chatting")
@@ -254,6 +256,35 @@ public class investmentCtrl {
 		try {
 
 			System.out.println("ajax select성공");
+
+			out = response.getWriter();
+			out.print(jsonlist);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+	}
+
+	// ajax
+
+	@RequestMapping(value = "coincount", method = RequestMethod.POST)
+	public void coincount(@RequestParam(name = "acntno") String acntno, @RequestParam(name = "coin") String coin,
+			HttpServletResponse response) {
+		CoinAcnt vo = new CoinAcnt();
+		vo.setAcntno(acntno);
+		vo.setCoin(coin);
+		System.out.println("컨트롤러 들어옴");
+		CoinAcnt result = caService.countcoin(vo);
+		System.out.println(result);
+		PrintWriter out = null;
+		Gson gson = new GsonBuilder().create();
+		String jsonlist = gson.toJson(result);
+
+		try {
+
+			System.out.println("ajax 1111111성공");
 
 			out = response.getWriter();
 			out.print(jsonlist);

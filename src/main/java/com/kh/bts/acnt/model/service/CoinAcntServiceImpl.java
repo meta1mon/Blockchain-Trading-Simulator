@@ -30,6 +30,12 @@ public class CoinAcntServiceImpl implements CoinAcntService{
 		// TODO Auto-generated method stub
 		return coinacntDao.deleteWaitBought(cano);
 	}
+
+	@Override
+	public CoinAcnt countcoin(CoinAcnt vo) {
+		// TODO Auto-generated method stub
+		return coinacntDao.countcoin(vo);
+	}
 	
 	
 }

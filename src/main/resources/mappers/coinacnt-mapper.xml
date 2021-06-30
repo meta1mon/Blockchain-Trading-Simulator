@@ -6,6 +6,11 @@
 		resultType="CoinAcnt">
 		SELECT * FROM COINACNT WHERE ACNTNO = #{acntno}
 	</select>
+	
+	<select id="countCoin" parameterType="CoinAcnt"
+		resultType="CoinAcnt">
+		SELECT * FROM COINACNT WHERE ACNTNO = #{acntno} AND COIN = #{coin}
+	</select>
 
 	<!-- 매수 체결 후, 코인계좌에 삽입 -->
 	<insert id="afterBoughtCoinAcnt" parameterType="WaitBought" flushCache="true"

@@ -4,8 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet" />
@@ -23,31 +27,6 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
 <script type="text/javascript">
-/* 	function removeCoinAcnt(cano) {
-		alert("지우러 들어는 왔다" + cano);
-		$.ajax({
-			url : "coinacntdelete",
-			type : "post",
-			data : {
-				"cano" : cano
-			},
-			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-				if (data > 0) {
-					alert("성공");
-					console.log(data);
-				} else {
-					alert("실패");
-					console.log(data);
-				}
-
-			},
-			error : function(request, status, errorData) {
-				alert("실패" + "error code : " + request.status + "\n"
-						+ "message : " + request.responseText + "\n"
-						+ "error : " + errorData);
-			}
-		});
-	} */
 	function removeWaitBought(ubno) {
 		alert("지우러 들어는 왔다" + ubno);
 		$.ajax({
@@ -125,14 +104,10 @@
 								src="https://s3.tradingview.com/tv.js"></script>
 						</div> <!-- TradingView Widget END -->
 					</td>
-					<td>
-						<span>&nbsp;&nbsp;</span>
-					</td>
-					<td>
-						<input type="text" id="searchcoin" value=""
+					<td><span>&nbsp;&nbsp;</span></td>
+					<td><input type="text" id="searchcoin" value=""
 						style="width: 100%; display: 'block'" placeholder="코인 검색">
-						<div id="cointable_div"></div>
-					</td>
+						<div id="cointable_div"></div></td>
 				</tr>
 			</table>
 
@@ -141,7 +116,7 @@
 				<table id="all_t" class='table table-striped'>
 					<tr>
 						<td>
-<div id="aaaaa"></div>
+							<div id="aaaaa"></div>
 						</td>
 
 
@@ -151,9 +126,8 @@
 									<table>
 										<tr>
 											<td><a href="<%=request.getContextPath()%>/signup"
-												id="join">가입</a><input name="coin" id="coin"
-													type="hidden" value="BTC" readonly="readonly"
-													style="text-align: center;"></td>
+												id="join">가입</a><input name="coin" id="coin" type="hidden"
+												value="BTC" readonly="readonly" style="text-align: center;"></td>
 
 										</tr>
 										<tr>
@@ -170,7 +144,6 @@
 										<tr>
 											<td><button value="" id="bought_b">매수</button>
 												<button value="" id="sold_b">매도</button>
-												
 										</tr>
 									</table>
 									<form id="frm22">
@@ -180,9 +153,10 @@
 											</tr>
 											<tr>
 												<td>보유 KRW : &nbsp;&nbsp;&nbsp;<input id="cybcash"
-													placeholder="보유 KRW" value=""
-													readonly="readonly"> <br> 매도가능 수량:<input
-													id="coincount" placeholder="매도가능 코인"><button type="button">수량확인</button></td>
+													placeholder="보유 KRW" value="" readonly="readonly">
+													<br> 매도가능 수량:<input id="coincount"
+													placeholder="매도가능 코인">
+													<button id="check_cnt" type="button">수량확인</button></td>
 
 											</tr>
 											<tr>
@@ -221,8 +195,10 @@
 													value="0"></td>
 											</tr>
 											<tr>
-												<th colspan="1">매수 총자산대비/매수 코인개수 대비<input id="acntno" name="acntno"
-													type="hidden" value="${acnt.acntno }"></th>
+												<th colspan="1">매수 총자산대비/매수 코인개수 대비<input id="acntno"
+													name="acntno" type="hidden" value="${acnt.acntno }">
+													<input id="hidden" type="hidden"
+													value="${acnt.cybcash }"></th>
 											</tr>
 
 
@@ -271,8 +247,9 @@
 										<th colspan="1">미체결주문</th>
 									</tr>
 									<tr>
-										<td><div id="aj_wb"></div><div id="aj_ws"></div></td>
-										
+										<td><div id="aj_wb"></div>
+											<div id="aj_ws"></div></td>
+
 									</tr>
 
 									<tr>
@@ -280,7 +257,8 @@
 									</tr>
 									<tr>
 
-										<td><div id="aj_b"></div><div id="aj_s"></div></td>
+										<td><div id="aj_b"></div>
+											<div id="aj_s"></div></td>
 									</tr>
 
 								</table>
@@ -313,9 +291,9 @@
 		});
 
 		$(function() {
-			$('.table-striped tbody tr:nth-of-type(odd)').css('background-color','rgb(227,200,248, 0.0453)');
-		}); 
-		
+			$('.table-striped tbody tr:nth-of-type(odd)').css(
+					'background-color', 'rgb(227,200,248, 0.0453)');
+		});
 	</script>
 </body>
 </html>

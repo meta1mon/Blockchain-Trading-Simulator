@@ -2,7 +2,27 @@ $(function() {
 	var checkpw = false;
 	coinname(); // 숫자를 이름으로 변경
 	chart();
+	$("#check_cnt").click(function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+		var dataList4 = $("#frm22").serialize();
+		console.log("여기~!!@!@!!");
+		$.ajax({
+			url : "coincount",
+			type : "post",
+			data : dataList4,
+			dataType : "json",
+			success : function(data) {
+				console.log(data);
+			},
+			error : function(request, status, errorData) {
+				alert("ws실패" + "error code : " + request.status
+						+ "\n" + "message : "
+						+ request.responseText + "\n" + "error : "
+						+ errorData);
+			}
+		});
+	});
 	$("#check2").click(function() { // 계좌 비밀번호
+
 		var acntList = $("#frm11").serialize();
 		var html3 = "";
 		$.ajax({
@@ -12,6 +32,8 @@ $(function() {
 			success : function(data) {
 				if (data == 1) {
 					html3 += "<a style='color: green;'>성공</a>"
+					var cy = $("#hidden").val();
+					$("#cybcash").val(cy + "원");
 					checkpw = true;
 					wblist();
 					wslist();
@@ -107,7 +129,6 @@ $(function() {
 						dataType : "json",
 						success : function(data) {
 							wblist();
-					
 
 						},
 						error : function(request, status, errorData) {
@@ -120,105 +141,46 @@ $(function() {
 				}
 			});
 
-	/*$("#select_coin")
-			// 매수 & 매도 체결로 갈경루 코인계좌에 조회
-			.on(
-					"click",
-					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-						var dataList = $("#frm22").serialize();
-
-						$
-								.ajax({
-									url : "coinacntlists",
-									type : "POST",
-									data : dataList,
-									dataType : "json",
-
-									success : function(json) {
-
-										var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>계좌번호</td></tr>";
-
-										if (json.length > 0) {
-											$
-													.each(
-															json,
-															function(
-																	entryIndex,
-																	entry) {
-																html1 += "<tr><td>"
-																		+ entry.cano
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.coin
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.buycnt
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.buyprice
-																		+ "</td>"
-																		+ "<td>"
-																		+ entry.acntno
-																		+ "</td>"
-
-																		+ "<td><button class='del' onclick=\"removeCoinAcnt("
-																		+ entry.cano
-																		+ ")\">X</button></td></tr>";
-															});
-											html1 += "</table></form>"
-										} else {
-											html1 = "<div>내용이없습니다</div>";
-										}
-
-										$("#aj_b").html(html1);
-
-									}
-
-								});
-					});*/
-/*	$("#select_acnt")
-			// 자신의 현재 자산 확인 acnt
-			.on(
-					"click",
-					function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-						var dataList = $("#frm22").serialize();
-
-						$
-								.ajax({
-									url : "acntlists",
-									type : "POST",
-									data : dataList,
-									dataType : "json",
-
-									success : function(json) {
-
-										var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>계좌번호</td><td>계좌보유금액</td><td>이메일</td></tr>";
-
-										if (json.length > 0) {
-											$.each(json, function(entryIndex,
-													entry) {
-												html1 += "<tr><td>"
-														+ entry.acntno
-														+ "</td>" + "<td>"
-														+ entry.cybcash
-														+ "</td>" + "<td>"
-														+ entry.email
-														+ "</td></tr>";
-											});
-											html1 += "</table></form>"
-										} else {
-											html1 = "<div>내용이없습니다</div>";
-										}
-
-										$("#aj_b").html(html1);
-
-									}
-
-								});
-					});
-
-	
-	*/
+	/*
+	 * $("#select_coin") // 매수 & 매도 체결로 갈경루 코인계좌에 조회 .on( "click", function() { //
+	 * 컨트롤러로 부터 리스트를 받아서 출력한다 var dataList = $("#frm22").serialize(); $ .ajax({
+	 * url : "coinacntlists", type : "POST", data : dataList, dataType : "json",
+	 * 
+	 * success : function(json) {
+	 * 
+	 * var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>계좌번호</td></tr>";
+	 * 
+	 * if (json.length > 0) { $ .each( json, function( entryIndex, entry) {
+	 * html1 += "<tr><td>" + entry.cano + "</td>" + "<td>" + entry.coin + "</td>" + "<td>" +
+	 * entry.buycnt + "</td>" + "<td>" + entry.buyprice + "</td>" + "<td>" +
+	 * entry.acntno + "</td>" + "<td><button class='del'
+	 * onclick=\"removeCoinAcnt(" + entry.cano + ")\">X</button></td></tr>";
+	 * }); html1 += "</table></form>" } else { html1 = "<div>내용이없습니다</div>"; }
+	 * 
+	 * $("#aj_b").html(html1); }
+	 * 
+	 * }); });
+	 */
+	/*
+	 * $("#select_acnt") // 자신의 현재 자산 확인 acnt .on( "click", function() { //
+	 * 컨트롤러로 부터 리스트를 받아서 출력한다 var dataList = $("#frm22").serialize(); $ .ajax({
+	 * url : "acntlists", type : "POST", data : dataList, dataType : "json",
+	 * 
+	 * success : function(json) {
+	 * 
+	 * var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>계좌번호</td><td>계좌보유금액</td><td>이메일</td></tr>";
+	 * 
+	 * if (json.length > 0) { $.each(json, function(entryIndex, entry) { html1 += "<tr><td>" +
+	 * entry.acntno + "</td>" + "<td>" + entry.cybcash + "</td>" + "<td>" +
+	 * entry.email + "</td></tr>"; }); html1 += "</table></form>" } else {
+	 * html1 = "<div>내용이없습니다</div>"; }
+	 * 
+	 * $("#aj_b").html(html1); }
+	 * 
+	 * }); });
+	 * 
+	 * 
+	 */
 	var timer1 = setInterval(function() { // 1초마다 함수 돌림 ()
 		alltable();
 		orderbook();
@@ -330,31 +292,14 @@ function slist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 					var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
 
 					if (json.length > 0) {
-						$
-								.each(
-										json,
-										function(
-												entryIndex,
-												entry) {
-											html1 += "<tr><td>"
-													+ entry.usno
-													+ "</td>"
-													+ "<td>"
-													+ entry.coin
-													+ "</td>"
-													+ "<td>"
-													+ entry.sellcnt
-													+ "</td>"
-													+ "<td>"
-													+ entry.sellprice
-													+ "</td>"
-													+ "<td>"
-													+ entry.sdate
-													+ "</td>"
-													+ "<td>"
-													+ entry.acntno
-													+ "</td></tr>";
-										});
+						$.each(json, function(entryIndex, entry) {
+							html1 += "<tr><td>" + entry.usno + "</td>" + "<td>"
+									+ entry.coin + "</td>" + "<td>"
+									+ entry.sellcnt + "</td>" + "<td>"
+									+ entry.sellprice + "</td>" + "<td>"
+									+ entry.sdate + "</td>" + "<td>"
+									+ entry.acntno + "</td></tr>";
+						});
 						html1 += "</table></form>"
 					} else {
 						html1 = "<div>내용이없습니다</div>";
@@ -366,7 +311,8 @@ function slist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 
 			});
 }
- function blist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+
+function blist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 	var dataList = $("#frm22").serialize();
 
 	$
@@ -381,31 +327,14 @@ function slist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 					var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
 
 					if (json.length > 0) {
-						$
-								.each(
-										json,
-										function(
-												entryIndex,
-												entry) {
-											html1 += "<tr><td>"
-													+ entry.ubno
-													+ "</td>"
-													+ "<td>"
-													+ entry.coin
-													+ "</td>"
-													+ "<td>"
-													+ entry.buycnt
-													+ "</td>"
-													+ "<td>"
-													+ entry.buyprice
-													+ "</td>"
-													+ "<td>"
-													+ entry.bdate
-													+ "</td>"
-													+ "<td>"
-													+ entry.acntno
-													+ "</td></tr>";
-										});
+						$.each(json, function(entryIndex, entry) {
+							html1 += "<tr><td>" + entry.ubno + "</td>" + "<td>"
+									+ entry.coin + "</td>" + "<td>"
+									+ entry.buycnt + "</td>" + "<td>"
+									+ entry.buyprice + "</td>" + "<td>"
+									+ entry.bdate + "</td>" + "<td>"
+									+ entry.acntno + "</td></tr>";
+						});
 						html1 += "</table></form>"
 					} else {
 						html1 = "<div>내용이없습니다</div>";

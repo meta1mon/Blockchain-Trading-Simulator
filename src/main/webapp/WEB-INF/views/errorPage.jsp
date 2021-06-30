@@ -3,11 +3,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
 <meta charset="UTF-8">
 <title>BTS</title>
 <style>
+#wrapper {
+	background-color: #eeeeee;
+	background-size: 100% 270%;
+	text-align: center;
+}
+
+.listout {
+	width: 65%;
+	min-width: 1000px;
+	height: 95%;
+	padding: 20px;
+	margin: 25px auto;
+	background-color: #fff;
+	border: 1.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
+}
+
 .img {
 	margin: auto;
 }
@@ -26,8 +47,8 @@
 
 #oops {
 	font-size: 57px;
-    margin-top: 12px;
-    text-align: center;
+	margin-top: 12px;
+	text-align: center;
 }
 
 #this {
@@ -35,8 +56,8 @@
 	max-width: 380px;
 	margin-top: 25px;
 	line-height: 43px;
-    margin-top: 25px;
-    font-size: 33px;
+	margin-top: 25px;
+	font-size: 33px;
 }
 
 }
@@ -49,12 +70,12 @@
 
 #a {
 	font-size: 13px;
-    line-height: 1;
-    height: 16px;
-    color: #00bfc1;
-    border-bottom: 1px solid #00bfc1;
-    padding-bottom: 2px;
-    margin: auto;
+	line-height: 1;
+	height: 16px;
+	color: #00bfc1;
+	border-bottom: 1px solid #00bfc1;
+	padding-bottom: 2px;
+	margin: auto;
 }
 
 #a:hover {
@@ -63,38 +84,25 @@
 </style>
 </head>
 <%@include file="main/header.jsp"%>
-<body class="content"
-	style="background-color: #eeeeee; background-size: 100% 270%; text-align: center;">
-	<div
-		style="width: 1040px; background-color: #ffffff; margin: 70px auto; padding: 20px; border-radius: 4px;">
-		<img class="img" alt="404 error"
-			src="https://assets.justinmind.com/wp-content/uploads/2019/05/404_2019.gif"
-			data-src="https://assets.justinmind.com/wp-content/uploads/2019/05/404_2019.gif">
-		<div id="error">ERROR</div>
-		<div id="oops">Oops!!</div>
-		<div id="this">
-			This is not the page<br>you are looking for
+<body>
+	<div id="wrapper">
+		<div class="listout">
+			<img class="img" alt="404 error"
+				src="https://assets.justinmind.com/wp-content/uploads/2019/05/404_2019.gif"
+				data-src="https://assets.justinmind.com/wp-content/uploads/2019/05/404_2019.gif">
+			<div id="error">ERROR</div>
+			<div id="oops">Oops!!</div>
+			<div id="this">
+				This is not the page<br>you are looking for
+			</div>
+			<br> <br>
+			<div id="help">Here are some helpful links instead:</div>
+			<a id="a" href="<%=request.getContextPath()%>/mainpage">Home</a>
+			&nbsp; <a id="a" href="javascript:window.history.back();">Back</a> <br>
+			<br> <br>
 		</div>
-		<br> <br>
-		<div id="help">Here are some helpful links instead:</div>
-		<a id="a" href="<%=request.getContextPath()%>/mainpage">Home</a>
-		&nbsp; <a id="a" href="javascript:window.history.back();">Back</a> <br>
-		<br> <br>
+		<br>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 </body>
 <%@include file="main/footer.jsp"%>
 </html>

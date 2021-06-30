@@ -1,6 +1,7 @@
 package com.kh.bts.community.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Community;
+import com.kh.bts.community.model.vo.Rcommunity;
 import com.kh.bts.member.model.vo.Member;
 
 @Controller
@@ -29,7 +31,10 @@ public class CommunityCtrl {
 	@RequestMapping(value = "clist", method = RequestMethod.GET)
 	public ModelAndView communityListService(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
-			@RequestParam(name = "searchType", defaultValue = "1") int searchType, ModelAndView mv) {
+			@RequestParam(name = "searchType", defaultValue = "1") int searchType,
+			@RequestParam(name = "bottomKeyword", defaultValue = "", required = false) String bottomKeyword,
+			@RequestParam(name = "bottomSearchType", defaultValue = "1") int bottomSearchType,
+			ModelAndView mv) {
 		try {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
@@ -44,6 +49,16 @@ public class CommunityCtrl {
 				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 			}
+			
+			if (bottomKeyword != null && !bottomKeyword.equals("")) {
+				mv.addObject("list", cmService.selectSearch(bottomKeyword, bottomSearchType));
+				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
+			}
+			else {
+				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
+				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
+			}
+			
 			mv.addObject("plist", cmService.searchpopularList());
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
@@ -62,8 +77,18 @@ public class CommunityCtrl {
 		try {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
-			mv.addObject("community", cmService.selectCommunity(0, cno));
+			
+			
+			Community vo = cmService.selectCommunity(0, cno);
+			String writerEmail = cmService.returnEmail(vo.getCwriter());
+			
+			List<Rcommunity> list = rcmService.selectList(cno);
+			
+			
+			mv.addObject("community", vo);
 			mv.addObject("commentList", rcmService.selectList(cno));
+			mv.addObject("writerEmail", writerEmail);
+			
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("community/communityDetail");
 		} catch (Exception e) {

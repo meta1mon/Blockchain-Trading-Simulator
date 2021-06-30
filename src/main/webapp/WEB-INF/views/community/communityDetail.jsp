@@ -4,10 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
 <meta charset="UTF-8">
-<link href="${pageContext.request.contextPath}/resources/css/communityDetail.css" rel="stylesheet" type="text/css" />
+<link
+	href="${pageContext.request.contextPath}/resources/css/communityDetail.css"
+	rel="stylesheet" type="text/css" />
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -31,7 +37,7 @@ $(function(){
 </head>
 <body>
 	<div id="wrapper">
-	<%@include file="../main/header.jsp"%>
+		<%@include file="../main/header.jsp"%>
 		<div class="detailOut">
 			<div class="comm">커뮤니티</div>
 			<br>
@@ -57,8 +63,8 @@ $(function(){
 							${community.viewcnt }
 						</div>
 						<div id="replycnt">
-							<img src="resources/assets/img/speechbubble.png" id="speechbubble">
-							${community.replycnt }&nbsp;
+							<img src="resources/assets/img/speechbubble.png"
+								id="speechbubble"> ${community.replycnt }&nbsp;
 						</div>
 						<div id="likecnt">
 							<img src="resources/assets/img/thumb-up.png" id="likey">
@@ -93,25 +99,30 @@ $(function(){
 								<div id="like" title="추천">
 									<span class="likecnt">${community.likecnt }</span>&nbsp;&nbsp;&nbsp;
 									<img class="img_like" src="resources/assets/img/like.png"
-									onclick="clike()">
+										onclick="clike()">
 								</div>
 								&nbsp;&nbsp;&nbsp;
 								<div id="dislike" title="비추천">
 									<img class="img_dislike" src="resources/assets/img/dislike.png"
-										onclick="dislike()">&nbsp;&nbsp;&nbsp;
-										<span class="dislikecnt">${community.dislikecnt }</span>
+										onclick="dislike()">&nbsp;&nbsp;&nbsp; <span
+										class="dislikecnt">${community.dislikecnt }</span>
 								</div>
 								<!-- 게시글 신고, 삭제, 수정 버튼 -->
 							</div>
 							<button type="button" class="report" id="popup_open_btn">신고</button>
-							<button type="button" class="delete"
-								onclick="location.href='${cdelete}'">삭제</button>
-							<button type="button" class="update"
-								onclick="location.href='${cupdate}'">수정</button>
+
+							<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
+							<c:if test="${loginMember == writerEmail }">
+								<button type="button" class="delete"
+									onclick="location.href='${cdelete}'">삭제</button>
+								<button type="button" class="update"
+									onclick="location.href='${cupdate}'">수정</button>
+							</c:if>
+
 						</div></td>
 				</tr>
 			</table>
-	
+
 			<br>
 			<!-- 댓글 리스트 -->
 			<h4>
@@ -123,37 +134,37 @@ $(function(){
 				<c:forEach var="rep" items="${commentList}">
 					<div id="comment">
 						<br>
-				<!-- 댓글 작성자명, 내용, 날짜 -->
+						<!-- 댓글 작성자명, 내용, 날짜 -->
 						<input type="hidden" id="rep_id" name="rep_id" value="${rep.rno}">
-							<span style="display:inline;">
-							<span class="comment_writer">
-								${rep.rwriter} &nbsp; &nbsp;</span>
-							<span class="comment_date">
-								${rep.rdate}</span>
-							<span class="comment_content">
-								${rep.rcontent}</span>
-							
-								</span>
-				<!-- 댓글 수정, 삭제, 신고 버튼 -->
+						<span style="display: inline;"> <span
+							class="comment_writer"> ${rep.rwriter} &nbsp; &nbsp;</span> <span
+							class="comment_date"> ${rep.rdate}</span> <span
+							class="comment_content"> ${rep.rcontent}</span>
+
+						</span>
+						<!-- 댓글 수정, 삭제, 신고 버튼 -->
+						<!-- (아직 미설정)로그인한 유저의 댓글만 수정, 삭제 버튼 보임 -->
+						<%-- 				<c:if test="${loginMember == writerEmail }"> --%>
 						<p>
-						<button type="button" class="rupdateConfirm" name="updateConfirm"
-							id="rupdateConfirm" style="display: none;">수정완료</button>
-						&nbsp;&nbsp;&nbsp;
-						<button type="button" class="rdelete" name="delete" id="rdelete"
-							style="display: none;">삭제하기</button>
-						&nbsp;&nbsp;&nbsp;
-						<button type="button" class="rupdate" name="update" id="rupdate">수정
-							및 삭제</button>
+							<button type="button" class="rupdateConfirm" name="updateConfirm"
+								id="rupdateConfirm" style="display: none;"
+								onclick="replyUpdate(${rep.rno}, ${rep.rcontent});">수정완료</button>
+							&nbsp;&nbsp;&nbsp;
+							<button type="button" class="rdelete" name="delete" id="rdelete"
+								style="display: none;">삭제하기</button>
+							&nbsp;&nbsp;&nbsp;
+							<button type="button" class="rupdate" name="update" id="rupdate">수정
+								및 삭제</button>
 						</p>
 						<button type="button" class="report" id="popup_open_btn_reply"
 							onclick="rreport(${rep.rno})">신고</button>
 					</div>
-	
+
 					<br>
 				</c:forEach>
 			</c:if>
 			<hr>
-	
+
 			<!-- 댓글 작성 영역 -->
 			<div>
 				<c:if test="${loginMember != null }">
@@ -188,10 +199,10 @@ $(function(){
 			<c:url var="clist" value="clist">
 				<c:param name="page" value="${currentPage}" />
 			</c:url>
-	
+
 			<button type="button" id="list" onclick="location.href='${clist}'">목록으로
 				돌아가기</button>
-	
+
 			<!-- 게시글 신고 모달창 -->
 			<div id="my_modal">
 				<form id="frmC">
@@ -215,10 +226,11 @@ $(function(){
 							type="radio" id="reportChoice6" class="reportChoice"
 							name="creport" value="6"> <label for="reportChoice6"
 							class="modal_choise_label">마음에 들지 않습니다.</label> <input
-							type="hidden" name="csubject" value="${community.csubject }" /> <input
-							type="hidden" name="cwriter" value="${community.cwriter }" /> <input
-							type="hidden" name="ccontent" value="${community.ccontent }" /> <input
-							type="hidden" name="cno" value="${community.cno }" />
+							type="hidden" name="csubject" value="${community.csubject }" />
+						<input type="hidden" name="cwriter" value="${community.cwriter }" />
+						<input type="hidden" name="ccontent"
+							value="${community.ccontent }" /> <input type="hidden"
+							name="cno" value="${community.cno }" />
 					</div>
 					<hr
 						style="width: 328px; position: relative; right: 30px; top: 20px;">
@@ -228,12 +240,12 @@ $(function(){
 					</div>
 				</form>
 			</div>
-	
+
 			<script>
 	
 	      </script>
-	
-	
+
+
 			<!-- 댓글 신고 모달창 -->
 			<div id="my_modal_reply">
 				<p>댓글 신고</p>
@@ -257,7 +269,8 @@ $(function(){
 						name="rreport" value="6"> <label for="rreportChoice6"
 						class="modal_choise_label">마음에 들지 않습니다.</label>
 				</div>
-				<hr style="width: 328px; position: relative; right: 30px; top: 20px;">
+				<hr
+					style="width: 328px; position: relative; right: 30px; top: 20px;">
 				<div>
 					<button type="button" id="btncancel" class="modal_close_btn">취소</button>
 					<button type="button" id="btnrply" class="modal_report_btn">신고</button>
@@ -433,53 +446,69 @@ $(function(){
    
 //기존 댓글 수정 & 삭제
 $(".rupdate").on('click',function(){
-   var parentP = $(this).parent();
-      var parentDiv = parentP.parent();
-      var commBody = parentDiv.children('.comment_content');
-   var content = commBody.children('p').text().trim();
    
       if($(this).text() == "수정 및 삭제"){
-    	  $('.comment_content').append('<textarea style="margin top:7px;" rows="4" cols="70%" class="updateContent" name="updateContent" id="updateContent">'+content+'</textarea>');
+    	  $('.comment_content').append('<textarea style="margin top:7px;" rows="4" cols="70%" class="updateContent" name="updateContent" id="editor">'+content+'</textarea>');
 
-         parentP.children(".rdelete").toggle("fast");
-         parentP.children(".rupdateConfirm").toggle("fast");
+         $(".rdelete").show("fast");
+         $(".rupdateConfirm").show("fast");
          $(this).text("수정취소");
       } else {
-         commBody.children(".updateContent").remove();
-         
-
+         $(".updateContent").remove();
          $(this).text("수정 및 삭제");
-         parentP.children(".rdelete").toggle("fast");
-         parentP.children(".updateConfirm").toggle("fast");
+         $(".rdelete").toggle("fast");
+         $(".updateConfirm").toggle("fast");
       }
 });
 
+function replyUpdate(rno, rcontent) {
+	 console.log("클릭하면 들어오나??????????????");
+		$.ajax({
+			url : "${pageContext.request.contextPath}/rcUpdate",
+			method : "POST",
+			async : false,
+			data: {
+				"rno" : rno,
+				"rcontent" : rcontent
+			},
+			success : function(data) {
+				alert(data);
+			},
+			error : function(request,status,error) {
+			   
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		     }
+	      });
+}}}
+
+/* 
    $(".updateConfirm").on('click',function(){
-      var parentP = $(this).parent();
-         var parentDiv = parentP.parent();
-$.ajax({
-url : "${pageContext.request.contextPath}/rcUpdate",
-method : "POST",
-async : false,
-data: {
-comment_id : parentDiv.find("input[name=rep_id]").val(),
-comments : parentDiv.find('.updateContent').val()
-},
-success : function(data) {
-alert(data);
-parentDiv.find(".comment_content").text(parentDiv.find('.updateContent').val());
-}, error : function(request,status,error) {
-   
-alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-         }
-      });
+	   console.log("클릭하면 들어오나??????????????");
+		$.ajax({
+			url : "${pageContext.request.contextPath}/rcUpdate",
+			method : "POST",
+			async : false,
+			data: {
+				"comment_id" : $("input[name=rep_id]").val(),
+				"comments" : $('.updateContent').val()
+			},
+			success : function(data) {
+				alert(data);
+				parentDiv.find(".comment_content").text(parentDiv.find('.updateContent').val());
+			},
+			error : function(request,status,error) {
+			   
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		     }
+	      });
          
-parentDiv.find(".updateContent").remove();
+ */
+/*  $(".updateContent").remove();
 
 
-parentP.children(".updateConfirm").toggle("fast");
-parentP.children(".rdelete").toggle("fast");
-parentP.children('.rupdate').text("수정 및 삭제");
+$(".updateConfirm").toggle("fast");
+$(".rdelete").toggle("fast");
+$('.rupdate').text("수정 및 삭제");
 $(".rdelete").on('click',function(){
    var parentP = $(this).parent();
       var parentDiv = parentP.parent();
@@ -499,7 +528,7 @@ alert("code:"+request.status+" n"+"message:"+request.responseText+" n"+"error:"+
          }
 });
 });
-   });
+   }); */
 </script>
 </body>
 </html>

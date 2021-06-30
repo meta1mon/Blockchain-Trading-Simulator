@@ -46,14 +46,13 @@ public class RcommunityCtrl {
 	
 	@RequestMapping(value = "rcUpdate", method = RequestMethod.POST)
 	public void RcommunityUpdate(HttpServletResponse response, Rcommunity rc) {
+		System.out.println("들어오나??????????????");
 		PrintWriter out = null;
-		JSONObject job = new JSONObject();
 		try {
-			job.put("ack", rcmService.updateRcommunity(rc));
+			int result = rcmService.updateRcommunity(rc);
 			out = response.getWriter();
-			out.append(job.toJSONString());
+			out.print(result);
 		} catch (Exception e) {
-			job.put("ack", -1);
 		} finally {
 			out.flush();
 			out.close();

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,13 +52,13 @@
 	<jsp:include page="myNav.jsp"></jsp:include>
 		<div id="me">
 			<h2>
-				<img width="30px" height="30px"> 내 계좌번호 0020132012
+				<img width="30px" height="30px"> 내 계좌번호 : ${acnt.acntno }
 			</h2>
 			<br>
 			<div>
 				<ul>
-					<li><img width="30px" height="30px">코인 보유액 11111원</li>
-					<li><img width="30px" height="30px">현금 보유액 11111원</li>
+					<li><img width="30px" height="30px">코인 보유액 000원</li>
+					<li><img width="30px" height="30px">현금 보유액 ${acnt.cybcash }원</li>
 					<li><img width="30px" height="30px">총액 22222원</li>
 				</ul>
 			</div>

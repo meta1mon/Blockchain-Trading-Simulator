@@ -267,6 +267,33 @@ public class investmentCtrl {
 	}
 
 	// ajax
+
+	@RequestMapping(value = "coincount", method = RequestMethod.POST)
+	public void coincount(@RequestParam(name = "acntno") String acntno, @RequestParam(name = "coin") String coin,
+			HttpServletResponse response) {
+		CoinAcnt vo = new CoinAcnt();
+		vo.setAcntno(acntno);
+		vo.setCoin(coin);
+		System.out.println("컨트롤러 들어옴");
+		CoinAcnt result = caService.countcoin(vo);
+		System.out.println(result);
+		PrintWriter out = null;
+		Gson gson = new GsonBuilder().create();
+		String jsonlist = gson.toJson(result);
+
+		try {
+
+			System.out.println("ajax 1111111성공");
+
+			out = response.getWriter();
+			out.print(jsonlist);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+	}
 	@RequestMapping(value = "acntlists", method = RequestMethod.POST)
 	public void acntService(@RequestParam(name = "acntno") String acntno, HttpServletRequest request,
 			HttpServletResponse response) {

@@ -7,6 +7,7 @@ import com.kh.bts.acnt.model.vo.CoinAcnt;
 
 public interface CoinAcntService {
 	List<CoinAcnt> allselectList(String acntno);
+	CoinAcnt countcoin(CoinAcnt vo);
 	int insertCoinAcnt(CoinAcnt vo);
 	int deleteCoinAcnt(int cano);
 }

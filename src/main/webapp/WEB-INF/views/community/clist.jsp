@@ -28,9 +28,14 @@
 					}
 				});
 	});
+	
 	function showInsertForm() {
-		location.href = "cwriteForm";
-	}
+			      if(${loginMember == null}) {
+			    	alert("게시글을 작성하려면 로그인이 필요합니다.");
+			      } else {
+			    	  window.location='cWriteForm';
+			      }
+		      }
 </script>
 
 
@@ -73,15 +78,14 @@
 					</select> <input type='search' id="search" name="keyword">
 					<button type=submit id="btnsearch">검색</button>
 				</form>
-				<input type="hidden" name="page" value="${currentPage}"> <input
-					type="button" id="write" value="글쓰기"
-					onclick="window.location='cWriteForm'">
+				<input type="hidden" name="page" value="${currentPage}"> 
+				<input type="button" id="write" class="write" value="글쓰기" onclick="showInsertForm()">
 			</div>
 
 			<hr>
 			<table class="ctable">
 				<tr>
-					<td align="center" width="60">번호</td>
+					<td align="center" width="60" style="font-size: 13px;">번호</td>
 					<td align="center" width="300">제목</td>
 					<td align="center" width="100">작성자</td>
 					<td align="center" width="110">작성일</td>
@@ -98,27 +102,27 @@
 				<c:if test="${listCount ne 0}">
 					<c:forEach var="voNotice" items="${noticeList }" varStatus="status">
 						<tr>
-							<td align="center" style="color: #B85CEF;">공지사항</td>
+							<td align="center" style="color: #B85CEF; font-size: 13px;">공지사항</td>
 							<td align="left"><a
 								href="cDetail?cno=${voNotice.cno}&page=${currentPage}"
 								class="subject"> &nbsp;${voNotice.csubject} </a> <a
 								href="cDetail?cno=${vo.cno}&page=${currentPage}"
 								class="replycnt">[${voNotice.replycnt}]</a></td>
 							<td align="center">${voNotice.cwriter}</td>
-							<td align="center" style="font-size: 15px;">${voNotice.cdate}</td>
+							<td align="center" style="font-size: 13px;">${voNotice.cdate}</td>
 							<td align="center">${voNotice.viewcnt}</td>
 							<td align="center">${voNotice.likecnt}</td>
 						</tr>
 					</c:forEach>
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr>
-							<td align="center">${vo.cno}</td>
+							<td align="center" style="font-size: 13px;">${vo.cno}</td>
 							<td align="left"><a
 								href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">&nbsp;${vo.csubject}
 							</a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
 								class="replycnt">[${vo.replycnt}]</a></td>
 							<td align="center">${vo.cwriter}</td>
-							<td align="center" style="font-size: 15px;">${vo.cdate}</td>
+							<td align="center" style="font-size: 13px;">${vo.cdate}</td>
 							<td align="center">${vo.viewcnt}</td>
 							<td align="center">${vo.likecnt}</td>
 						</tr>
@@ -192,9 +196,8 @@
 					</select> <input type='search' id="search" name="bottomKeyword">
 					<button type=submit id="btnsearch">검색</button>
 				</form>
-				<input type="hidden" name="page" value="${currentPage}"> <input
-					type="button" id="write" value="글쓰기"
-					onclick="window.location='cWriteForm'">
+				<input type="hidden" name="page" value="${currentPage}"> 
+				<input type="button" id="write" class="write" value="글쓰기" onclick="showInsertForm()">
 			</div>
 
 		</div>

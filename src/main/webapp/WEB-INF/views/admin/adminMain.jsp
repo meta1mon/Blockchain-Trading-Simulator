@@ -63,20 +63,21 @@
 				<p>
 				<table style="width: 100%">
 				<tr>
-				<td class="left sub">게시글</td>
-				<td class="right report">${countCreport}</td>
+				
+				<td class="left sub"><a href="${pageContext.request.contextPath}/admin/cr">게시글</a></td>
+				<td class="right report"><a href="${pageContext.request.contextPath}/admin/cr">${countCreport}</a></td>
 				</tr>
 				<tr>
-				<td class="left sub">댓글</td>
-				<td class="right report">${countRreport}</td>
+				<td class="left sub"><a href="${pageContext.request.contextPath}/admin/rr">댓글</a></td>
+				<td class="right report"><a href="${pageContext.request.contextPath}/admin/rr">${countRreport}</a></td>
 				</tr>
 				</table>
 			<li><p>
-					<span class="fas fa-chevron-left"></span>신규 충전액<span class="fas fa-chevron-right"></span>
+					<span class="fas fa-chevron-left"></span><a href="${pageContext.request.contextPath}/admin/cll">신규 충전액</a><span class="fas fa-chevron-right"></span>
 				</p>
 				<div class="img far fa-credit-card"></div>
-				<p class="center money"><fmt:formatNumber value="${countTodayWon}"
-								pattern="#,###,###,###" /></p></li>
+				<p class="center money"><a href="${pageContext.request.contextPath}/admin/cll"><fmt:formatNumber value="${countTodayWon}"
+								pattern="#,###,###,###" /></a></p></li>
 		</ul>
 	</div>
 	<script>

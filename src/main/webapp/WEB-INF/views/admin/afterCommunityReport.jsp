@@ -134,11 +134,7 @@ $(function(){
 	var  openModal = function(event) {
 		$("#modal").css("display", "block");
 		var ele = event.currentTarget.querySelectorAll("td");
-		console.log(ele);
-		for(i=0; i<ele.length; i++){
-			console.log(i+"번째 " + ele[i].innerText);
-		};
-		
+
 		$("#crno").val(ele[0].innerText); // 신고 번호
 		$("#csubject").val(ele[1].innerText); // 신고하는 게시글 제목
 		$("#ccontentText").html(ele[2].innerText); // 신고하는 게시글 내용
@@ -165,6 +161,7 @@ $(function(){
 <body>
 	<div id="acr">
 	<p class="title inbl">처리된 신고 게시글 목록</p>
+	<!-- TODO 검색 기능 넣기 -->
 	<form name="listForm" action="acr" method="get" id="listForm">
 		<input type="search" name="keyword" id="search"	placeholder="검색어를 입력해주세요.">
 		<button type="submit" id="btnsearch">검색</button>
@@ -185,7 +182,7 @@ $(function(){
 				</tr>
 				<c:if test="${listCount eq 0}">
 					<tr>
-						<td colspan="9" align="center">조회된 신고 내역이 없습니다.</td>
+						<td colspan="9" class="center">조회된 신고 내역이 없습니다.</td>
 					</tr>
 				</c:if>
 				<c:if test="${listCount ne 0}">

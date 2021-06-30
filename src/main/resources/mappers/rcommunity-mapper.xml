@@ -43,9 +43,4 @@
 	<update id="updateRcommunity" parameterType="Rcommunity" flushCache="true" statementType="PREPARED" timeout="20">
 		UPDATE RCOMMUNITY SET RCONTENT = #{rcontent} WHERE RNO = #{rno}
 	</update>
-	
-	<!-- 댓글 삭제 -->
-	<delete id="deleteRcommunity" parameterType="Rcommunity" flushCache="true" statementType="PREPARED" timeout="20">
-	DELETE FROM RCOMMUNITY WHERE RNO = #{rno}
-	</delete>
 </mapper>

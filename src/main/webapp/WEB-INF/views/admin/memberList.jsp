@@ -99,7 +99,7 @@ $(function() {
 				</tr>
 				<c:if test="${listCount eq 0}">
 					<tr>
-						<td colspan="8" align="center">조회된 회원이 없습니다.</td>
+						<td colspan="8" class="center">조회된 회원이 없습니다.</td>
 					</tr>
 				</c:if>
 				<c:if test="${listCount ne 0}">
@@ -160,27 +160,33 @@ $(function() {
 		</div>
 	</div>
 	<script>
-		function deleteMember(email){
+		function deleteMember(email) {
+			var isConfirm = confirm(email + "님을 탈퇴시키시겠습니까?\n" + email + "님의 모든 정보가 삭제됩니다.");
+			if (isConfirm) {
 				$.ajax({
-					url: "md",
-					type: "post",
-					dataType: "json",
-					data: {"email": email},
-					success: function(data){
-						console.log(data);
-						alert("선택한 회원을 탈퇴시켰습니다." + data);
-						location.href="ml";
+					url : "md",
+					type : "post",
+					dataType : "json",
+					data : {
+						"email" : email
 					},
-					
-			error : function(request, error) {
-				console.log("message:" + request.responseText + " n" + "error:" + error);
-								}
-							})
+					success : function(data) {
+						location.href = "ml";
+					},
+
+					error : function(request, error) {
+						console.log("message:" + request.responseText + " n"
+								+ "error:" + error);
+					}
+				})
+				alert(email + "님을 탈퇴시켰습니다.");
+			} else {
+				alert("취소하였습니다.");
+			}
 		}
 	</script>
 		<script>
 		$(function(){
-			console.log("시도");
 			$(".money").append("원");
 		})	
 	</script>

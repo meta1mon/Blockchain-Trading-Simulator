@@ -7,6 +7,8 @@
 	</resultMap>
 	<resultMap type="Rreport" id="Rreport">
 	</resultMap>
+	<resultMap type="Arreport" id="Arreport">
+	</resultMap>
 
 	<!-- 신고 게시글 삽입 -->
 	<insert id="insertCreport" parameterType="Creport"
@@ -40,7 +42,7 @@
 		ORDER BY CRDATE DESC
 	</select>
 	
-	<!-- 관리자 페이지 신고 댓글 조회 -->
+	<!-- 신고 댓글 조회 -->
 	<select id="selectRreport" resultType="arraylist" resultMap="Rreport">
 		SELECT RRNO, RNO, CNO, C.CSUBJECT, RR.RCONTENT, RRESPONDENT, RREPORTER, RRREASON, RRDATE FROM RREPORT RR JOIN COMMUNITY C USING (CNO)
 		ORDER BY RRDATE DESC
@@ -54,15 +56,35 @@
 	<delete id="deleteCreport" parameterType="string" flushCache="true" statementType="PREPARED">
 		DELETE FROM CREPORT WHERE CRNO = #{crno}
 	</delete>
+
+	<!-- 신고 댓글 처리 -->
+	<insert id="insertArreport" parameterType="Arreport" flushCache="true" statementType="PREPARED">
+		INSERT INTO ACREPORT VALUES(#{rrno}, #{rreporter}, #{rrreason}, #{csubject}, #{rcontent}, #{rrespondent}, #{rrdate}, #{rstatus}, #{rreason}, default)
+	</insert>
+	
+	<delete id="deleteRreport" parameterType="string" flushCache="true" statementType="PREPARED">
+		DELETE FROM CREPORT WHERE rRNO = #{rrno}
+	</delete>
 	
 	<!-- 처리된 신고글 수 세기 -->
 	<select id="countAcreport" resultType="int">
 		SELECT count(*) FROM ACREPORT
+	</select>
+
+	<!-- 처리된 신고 댓글 수 세기 -->
+	<select id="countArreport" resultType="int">
+		SELECT count(*) FROM ARREPORT
 	</select>
 	
 	<!-- 처리된 신고글 조회 -->
 	<select id="selectAcreport" resultType="arraylist" resultMap="Acreport">
 		SELECT * FROM ACREPORT
 		ORDER BY ACRDATE DESC
+	</select>
+	
+	<!-- 처리된 신고 댓글 조회 -->
+	<select id="selectArreport" resultType="arraylist" resultMap="Arreport">
+		SELECT * FROM ARREPORT
+		ORDER BY ARRDATE DESC
 	</select>
 </mapper>

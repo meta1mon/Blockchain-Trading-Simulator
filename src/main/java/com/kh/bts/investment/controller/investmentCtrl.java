@@ -316,7 +316,6 @@ public class investmentCtrl {
 		try {
 
 			System.out.println("ajax select성공");
-
 			out = response.getWriter();
 			out.print(jsonlist);
 		} catch (IOException e) {

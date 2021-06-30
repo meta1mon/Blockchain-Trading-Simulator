@@ -141,24 +141,22 @@ $(function(){
 							class="comment_date"> ${rep.rdate}</span> <span
 							class="comment_content"> ${rep.rcontent}</span>
 						</span>
-						<!-- 댓글 수정, 삭제, 신고 버튼 -->
-						<!-- (아직 미설정)로그인한 유저의 댓글만 수정, 삭제 버튼 보임 -->
-						<%-- 				<c:if test="${loginMember == writerEmail }"> --%>
-						<p>
-							<button type="button" class="rupdateConfirm" id="rupdateConfirm"
-								style="display: none;"
-								onclick="replyUpdate(${rep.rno}, ${rep.rcontent});">수정완료</button>
-							&nbsp;&nbsp;&nbsp;
-							<button type="button" class="rdelete" id="rdelete"
-								style="display: none;">삭제하기</button>
-							&nbsp;&nbsp;&nbsp;
-							<button type="button" class="rupdate" id="rupdate">수정 및
-								삭제</button>
-						</p>
+							<p>
+ 						<c:if test="${loginMember == rep.email }">
+								<button type="button" class="rupdateConfirm" id="rupdateConfirm"
+									style="display: none;"
+									onclick="replyUpdate(${rep.rno}, ${rep.rcontent});">수정완료</button>
+								&nbsp;&nbsp;&nbsp;
+								<button type="button" class="rdelete" id="rdelete"
+									style="display: none;">삭제하기</button>
+								&nbsp;&nbsp;&nbsp;
+								<button type="button" class="rupdate" id="rupdate">수정 및
+									삭제</button>
+						</c:if>
+							</p>
 						<button type="button" class="report" id="popup_open_btn_reply"
 							onclick="rreport(${rep.rno})">신고</button>
 					</div>
-
 					<br>
 				</c:forEach>
 			</c:if>
@@ -437,21 +435,6 @@ $(function(){
 			});
 		}
 	};
-   
- 	//기존 댓글 수정 & 삭제 왔다갔다.
-	$(".rupdate").on('click',function(){
-	      if($(this).text() == "수정 및 삭제"){
-	    	  $('.comment_content').append('<textarea style="margin top:7px;" rows="4" cols="70%" class="updateContent" name="updateContent" id="editor">'+content+'</textarea>');
-	         $(".rdelete").show("fast");
-	         $(".rupdateConfirm").show("fast");
-	         $(this).text("수정취소");
-	      } else {
-	         $(".updateContent").remove();
-	         $(this).text("수정 및 삭제");
-	         $(".rdelete").toggle("fast");
-	         $(".updateConfirm").toggle("fast");
-	      }
-	});
 	
 	function replyUpdate(rno, rcontent) {
 		 console.log("클릭하면 들어오나??????????????");

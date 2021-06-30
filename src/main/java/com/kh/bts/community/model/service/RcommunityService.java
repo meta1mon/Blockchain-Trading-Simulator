@@ -3,12 +3,13 @@ package com.kh.bts.community.model.service;
 import java.util.List;
 
 import com.kh.bts.community.model.vo.Rcommunity;
+import com.kh.bts.community.model.vo.UserRcommuniyCheck;
 
 public interface RcommunityService {
 
 	int totalCount();
 	
-	List<Rcommunity> selectList(String cno);
+	List<UserRcommuniyCheck> selectRcommunityList(String cno);
 
 	Rcommunity selectRcommunity(String rno);
 

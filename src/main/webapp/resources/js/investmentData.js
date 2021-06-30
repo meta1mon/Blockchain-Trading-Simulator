@@ -220,10 +220,12 @@ $(function() {
 	
 	*/
 	var timer1 = setInterval(function() { // 1초마다 함수 돌림 ()
-		console.log("1초");
 		alltable();
 		orderbook();
-
+		wblist();
+		wslist();
+		blist();
+		slist();
 	}, 1000);
 
 });
@@ -290,7 +292,6 @@ function alltable() { // 전체코인 시세 표
 						$('.table-striped tbody tr:nth-of-type(odd)').css(
 								'background-color', 'rgb(227,200,248, 0.0453)');
 					} else {
-						console.log(search + "검색한 서치값");
 						var onechange = "";
 
 						onedisplay[0] = [
@@ -570,7 +571,6 @@ function coinname() {
 		datatype : "json",
 		success : function(data) {
 			coinList = Object.keys(data['data']);
-			console.log(coinList);
 
 		}
 	});
@@ -643,7 +643,6 @@ function orderbook() {
 	var orderbookarrask = new Array();
 	var a = $("#coin").val();
 	var html6 = "";
-	console.log(a);
 	$
 			.ajax({
 				url : 'https://api.upbit.com/v1/orderbook?markets=KRW-' + a,

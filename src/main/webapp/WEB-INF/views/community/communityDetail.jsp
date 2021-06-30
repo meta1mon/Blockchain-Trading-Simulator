@@ -441,16 +441,16 @@ $(".rupdate").on('click',function(){
       if($(this).text() == "수정 및 삭제"){
     	  $('.comment_content').append('<textarea style="margin top:7px;" rows="4" cols="70%" class="updateContent" name="updateContent" id="updateContent">'+content+'</textarea>');
 
-         parentP.children(".rdelete").toggle("fast");
-         parentP.children(".rupdateConfirm").toggle("fast");
+         $(".rdelete").toggle("fast");
+         $(".rupdateConfirm").toggle("fast");
          $(this).text("수정취소");
       } else {
-         commBody.children(".updateContent").remove();
+         $(".updateContent").remove();
          
 
          $(this).text("수정 및 삭제");
-         parentP.children(".rdelete").toggle("fast");
-         parentP.children(".updateConfirm").toggle("fast");
+         $(".rdelete").toggle("fast");
+         $(".updateConfirm").toggle("fast");
       }
 });
 
@@ -474,12 +474,12 @@ alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+
          }
       });
          
-parentDiv.find(".updateContent").remove();
+$(".updateContent").remove();
 
 
-parentP.children(".updateConfirm").toggle("fast");
-parentP.children(".rdelete").toggle("fast");
-parentP.children('.rupdate').text("수정 및 삭제");
+$(".updateConfirm").toggle("fast");
+$(".rdelete").toggle("fast");
+$('.rupdate').text("수정 및 삭제");
 $(".rdelete").on('click',function(){
    var parentP = $(this).parent();
       var parentDiv = parentP.parent();

@@ -79,5 +79,9 @@ public class CommunityServiceImpl implements CommunityService {
 	public List<Community> selectNoticeList(int startPage, int limit) {
 		return cmDao.selectNoticeList(startPage, limit);
 	}
+	
+	public String returnEmail(String nickName) {
+		return cmDao.returnEmail(nickName);
+	}
 
 }

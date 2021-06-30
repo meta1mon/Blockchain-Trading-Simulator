@@ -104,10 +104,15 @@ $(function(){
 								<!-- 게시글 신고, 삭제, 수정 버튼 -->
 							</div>
 							<button type="button" class="report" id="popup_open_btn">신고</button>
+							
+							<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
+							<c:if test="${loginMember == writerEmail }">
 							<button type="button" class="delete"
 								onclick="location.href='${cdelete}'">삭제</button>
 							<button type="button" class="update"
 								onclick="location.href='${cupdate}'">수정</button>
+								</c:if>
+								
 						</div></td>
 				</tr>
 			</table>
@@ -135,6 +140,8 @@ $(function(){
 							
 								</span>
 				<!-- 댓글 수정, 삭제, 신고 버튼 -->
+				<!-- (아직 미설정)로그인한 유저의 댓글만 수정, 삭제 버튼 보임 -->
+<%-- 				<c:if test="${loginMember == writerEmail }"> --%>
 						<p>
 						<button type="button" class="rupdateConfirm" name="updateConfirm"
 							id="rupdateConfirm" style="display: none;">수정완료</button>
@@ -145,13 +152,14 @@ $(function(){
 						<button type="button" class="rupdate" name="update" id="rupdate">수정
 							및 삭제</button>
 						</p>
+						</c:if>
 						<button type="button" class="report" id="popup_open_btn_reply"
 							onclick="rreport(${rep.rno})">신고</button>
 					</div>
 	
 					<br>
 				</c:forEach>
-			</c:if>
+<%-- 			</c:if> --%>
 			<hr>
 	
 			<!-- 댓글 작성 영역 -->
@@ -433,21 +441,19 @@ $(function(){
    
 //기존 댓글 수정 & 삭제
 $(".rupdate").on('click',function(){
-   var parentP = $(this).parent();
+  /*  var parentP = $(this).parent();
       var parentDiv = parentP.parent();
       var commBody = parentDiv.children('.comment_content');
-   var content = commBody.children('p').text().trim();
+   var content = commBody.children('p').text().trim(); */
    
       if($(this).text() == "수정 및 삭제"){
-    	  $('.comment_content').append('<textarea style="margin top:7px;" rows="4" cols="70%" class="updateContent" name="updateContent" id="updateContent">'+content+'</textarea>');
+    	  $('.comment_content').append('<textarea style="margin top:7px;" rows="4" cols="70%" class="updateContent" name="updateContent" id="editor">'+content+'</textarea>');
 
-         $(".rdelete").toggle("fast");
-         $(".rupdateConfirm").toggle("fast");
+         $(".rdelete").show("fast");
+         $(".rupdateConfirm").show("fast");
          $(this).text("수정취소");
       } else {
          $(".updateContent").remove();
-         
-
          $(this).text("수정 및 삭제");
          $(".rdelete").toggle("fast");
          $(".updateConfirm").toggle("fast");

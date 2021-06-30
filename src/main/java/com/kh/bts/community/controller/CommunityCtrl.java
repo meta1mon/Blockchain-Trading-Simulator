@@ -1,6 +1,7 @@
 package com.kh.bts.community.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Community;
+import com.kh.bts.community.model.vo.Rcommunity;
 import com.kh.bts.member.model.vo.Member;
 
 @Controller
@@ -62,8 +64,18 @@ public class CommunityCtrl {
 		try {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
-			mv.addObject("community", cmService.selectCommunity(0, cno));
+			
+			
+			Community vo = cmService.selectCommunity(0, cno);
+			String writerEmail = cmService.returnEmail(vo.getCwriter());
+			
+			List<Rcommunity> list = rcmService.selectList(cno);
+			
+			
+			mv.addObject("community", vo);
 			mv.addObject("commentList", rcmService.selectList(cno));
+			mv.addObject("writerEmail", writerEmail);
+			
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("community/communityDetail");
 		} catch (Exception e) {

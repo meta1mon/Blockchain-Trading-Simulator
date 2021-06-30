@@ -15,9 +15,7 @@ public class AcntDao {
 	
 	public int updateMyAcnt(Acnt vo) {
 		int result = 0;
-		System.out.println(vo.getAcntno() + "계좌번호 다오 ");
 		result = sqlSession.update("acnt.updateAcnt", vo);
-		System.out.println("다오 안 리절트 값 " + result);
 		return result;
 	} 
 	public Acnt selectMyAcnt(String email){

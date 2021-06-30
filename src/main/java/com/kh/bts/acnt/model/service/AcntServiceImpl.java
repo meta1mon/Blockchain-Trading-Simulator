@@ -1,6 +1,5 @@
 package com.kh.bts.acnt.model.service;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +23,11 @@ public class AcntServiceImpl implements AcntService{
 	public int cntAcnt(Acnt vo) throws Exception {
 		// TODO Auto-generated method stub
 		return acntDao.cntAcnt(vo);
+	}
+
+	@Override
+	public int updateAcnt(Acnt vo) throws Exception {
+		// TODO Auto-generated method stub
+		return acntDao.updateMyAcnt(vo);
 	}
 }

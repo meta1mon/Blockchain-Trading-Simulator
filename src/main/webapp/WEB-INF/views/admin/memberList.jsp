@@ -17,18 +17,10 @@
 
 #mmm{
 	position: absolute;
-	top: calc(50% - 150px);
-	left: calc(50% - 312.5px);
+	top: calc(50% - 350px);
+	left: calc(50% - 442.5px);
+	width: 1085px;
 }
-
-#page{
-	text-align: center;
-}
-
-#listForm{
-	width: 100%;
-}
-
 .X {
 	border: none;
 	outline: none;
@@ -36,7 +28,36 @@
 }
 
 .del:hover{
-color: red;
+	color: red;
+}
+
+/* 공통 */
+#page{
+	text-align: center;
+}
+
+.page {
+	position: fixed;
+	top: 603.5px;
+}
+.page td {
+	width: 1085px;
+}
+
+#listForm{
+	 float:right;
+}
+
+table{
+	width: 100%;
+}
+
+.title{
+	font-size: 25px;
+	color: #fcc000;
+}
+.inbl{
+	display: inline-block;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -55,21 +76,17 @@ $(function() {
 <%@include file="headerAndAside.jsp"%>
 <body>
 	<div id="mmm">
+	<p class="title inbl">회원 목록</p>
+	<form name="listForm" action="ml" method="get" id="listForm">
+		<select name="searchType">
+			<option value="1">이메일</option>
+			<option value="2">닉네임</option>
+		</select> <input type="search" name="keyword" id="search" placeholder="검색어를 입력해주세요.">
+		<button type="submit" id="btnsearch">검색</button>
+	</form>
+	<hr>
 		<div>
-			<table border="1">
-				<tr>
-					<td colspan="8">
-						<div>
-							<form name="listForm" action="ml" method="get" id="listForm">
-								<select name="searchType">
-									<option value="1">이메일</option>
-									<option value="2">닉네임</option>
-								</select> <input type="search" name="keyword" id="search" placeholder="검색어를 입력해주세요.">
-								<button type="submit" id="btnsearch">검색</button>
-							</form>
-						</div>
-					</td>
-				</tr>
+			<table>
 				<tr>
 					<th>이메일</th>
 					<th>닉네임</th>
@@ -101,8 +118,8 @@ $(function() {
 						</tr>
 					</c:forEach>
 				</c:if>
-				<tr>
-					<td colspan="8">
+				<tr class="page">
+					<td colspan="8" class="center">
 						<div id="page">
 							<!-- 앞 페이지 번호 처리 -->
 							<c:if test="${currentPage <= 1}">

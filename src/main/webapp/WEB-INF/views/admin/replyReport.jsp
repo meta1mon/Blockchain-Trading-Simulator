@@ -7,6 +7,22 @@
 <head>
 <meta charset="UTF-8">
 <style>
+#rr th, td {
+	padding: 5px !important;
+}
+
+#rr td:not(.center, .right){
+	text-align: left;
+}
+
+#rr {
+	position: absolute;
+	top: calc(50% - 350px);
+	left: calc(50% - 442.5px);
+	width: 1085px;
+}
+
+/* 모달 창 공통 */
 #modal{
 	display: none;
 	position: absolute;
@@ -34,28 +50,6 @@
     position: absolute;
 }
 
-#rr th, td {
-	padding: 5px !important;
-}
-
-#rr td:not(.center, .right){
-	text-align: left;
-}
-
-#rr {
-	position: absolute;
-	top: calc(50% - 150px);
-	left: calc(50% - 320px);
-}
-
-#page{
-	text-align: center;
-}
-
-#listForm{
-	width: 100%;
-}
-
 #detail {
 	height: 35px;
 }
@@ -75,7 +69,7 @@
 	border-radius: 3px;
 }
 
-#rcontent {
+#rcontentText {
 	height: 105px;
 	width: 270px;
 	border: 1px solid rgba(0, 0, 0, 0.5);
@@ -89,8 +83,43 @@
 button {
 	width: 94px;
 }
+
+.hidden{
+	display: none;
+}
+/*공통*/
+#page{
+	text-align: center;
+}
+
+.page {
+	position: fixed;
+	top: 603.5px;
+}
+.page td {
+	width: 1085px;
+}
+
+#listForm{
+	float:right;
+}
+
+table{
+	width: 100%;
+}
+
+.title{
+	font-size: 25px;
+	color: #fcc000;
+}
+
+.inbl{
+	display: inline-block;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/loadingajax.js"></script>
 <script>
 	$(function(){
 		var  openModal = function(event) {
@@ -100,13 +129,18 @@ button {
 			for(i=0; i<ele.length; i++){
 				console.log(i+"번째 " + ele[i].innerText);
 			};
-			$("#csubject").val(ele[1].innerText);
-			$("#rrespondent").val(ele[3].innerText);
-			$("#rcontent").html(ele[2].innerText);
-			$("#rreporter").val(ele[4].innerText);
-			$("#rrreason").val(ele[5].innerText);
-			$("#rrdate").val(ele[6].innerText);
-			$("#cno").val(ele[7].innerText);
+			
+			$("#rrno").val(ele[0].innerText); // 신고 번호
+			$("#csubject").val(ele[1].innerText); // 신고하는 댓글이 있는 게시글 제목
+			$("#rcontentText").html(ele[2].innerText); // 신고하는 게시글 내용
+			$("#rcontent").val($("#rcontentText").html()); // 신고하는 게시글 내용(DB용)
+			$("#rrespondent").val(ele[3].innerText); // 신고하는 댓글 작성자
+			$("#rreporter").val(ele[4].innerText); // 신고자
+			$("#rrreasonText").val(ele[5].innerText); // 신고 사유(텍스트)
+			$("#rrreason").val(ele[6].innerText); // 신고 사유(DB용)
+			$("#rrdate").val(ele[7].innerText); // 신고 날짜
+			$("#cno").val(ele[8].innerText); // 신고하는 댓글이 있는 글 번호
+			$("#rno").val(ele[9].innerText); // 신고하는 댓글 번호
 		}
 		$(".tr").on("click", openModal);
 		
@@ -128,9 +162,16 @@ button {
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
+<%@include file="../loadingajax.jsp"%>
 	<div id="rr">
+	<p class="title inbl">신고된 댓글 목록</p>
+		<form name="listForm" action="cr" method="get" id="listForm">
+		<input type="search" name="keyword" id="search"	placeholder="검색어를 입력해주세요.">
+		<button type="submit" id="btnsearch">검색</button>
+	</form>
+	<hr>
 		<div>
-			<table border="1">
+			<table>
 				<tr>
 					<th>신고 번호</th>
 					<th>게시글 제목</th>
@@ -147,37 +188,44 @@ button {
 				<c:if test="${listCount ne 0}">
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr class="tr">
-							<td style="cursor: pointer;">${vo.rrno}</td>
+							<td class ="center" style="cursor: pointer;">${vo.rrno}</td>
 							<td style="cursor: pointer;">${vo.csubject}</td>
-							<td style="cursor: pointer; display: none">${vo.rcontent}</td>
-							<td style="cursor: pointer;">${vo.rrespondent}</td>
-							<td style="cursor: pointer;">${vo.rreporter}</td>
+							<td class="hidden">${vo.rcontent}</td>
+							<td class ="center" style="cursor: pointer;">${vo.rrespondent}</td>
+							<td class ="center" style="cursor: pointer;">${vo.rreporter}</td>
 							<c:choose>
 							<c:when test="${vo.rrreason eq 1}">
 							<td style="cursor: pointer;">나체 이미지 또는 성적 행위</td>
+							<td class="hidden">${vo.rrreason}</td>
 							</c:when>
 							<c:when test="${vo.rrreason eq 2}">
 							<td style="cursor: pointer;">혐오 발언 또는 폭력적</td>
+							<td class="hidden">${vo.rrreason}</td>
 							</c:when>
 							<c:when test="${vo.rrreason eq 3}">
 							<td style="cursor: pointer;">증오 또는 학대</td>
+							<td class="hidden">${vo.rrreason}</td>
 							</c:when>
 							<c:when test="${vo.rrreason eq 4}">
 							<td style="cursor: pointer;">유해하거나 위험한 행위</td>
+							<td class="hidden">${vo.rrreason}</td>
 							</c:when>
 							<c:when test="${vo.rrreason eq 5}">
 							<td style="cursor: pointer;">스팸 또는 사용자 현혹</td>
+							<td class="hidden">${vo.rrreason}</td>
 							</c:when>
 							<c:when test="${vo.rrreason eq 6}">
 							<td style="cursor: pointer;">마음에 들지 않습니다.</td>
+							<td class="hidden">${vo.rrreason}</td>
 							</c:when>
 							</c:choose>
 							<td style="cursor: pointer;">${vo.rrdate}</td>
-							<td style="cursor: pointer; display: none">${vo.cno}</td>
+							<td class="hidden">${vo.cno}</td>
+							<td class="hidden">${vo.rno}</td>
 						</tr>
 					</c:forEach>
 				</c:if>
-				<tr>
+				<tr class="page">
 					<td colspan="6">
 						<div id="page">
 							<!-- 앞 페이지 번호 처리 -->
@@ -185,7 +233,7 @@ button {
 							<i class="fas fa-angle-double-left"></i>
 							</c:if>
 							<c:if test="${currentPage > 1}">
-								<c:url var="rrlistST" value="rr">
+								<c:url var="rrlistST" value="cr">
 									<c:param name="page" value="${currentPage-1}"/>
 								</c:url>
 								<a href="${rrlistST}"><i class="fas fa-angle-double-left"></i></a>
@@ -197,7 +245,7 @@ button {
 									<div class="pageNum"><b>${p}</b></div>
 								</c:if>
 								<c:if test="${p ne currentPage}">
-									<c:url var="rrlistchk" value="rr">
+									<c:url var="rrlistchk" value="cr">
 										<c:param name="page" value="${p}" />
 									</c:url>
 									<a href="${rrlistchk}">${p}</a>
@@ -207,7 +255,7 @@ button {
 								<i class="fas fa-angle-double-right"></i>
 							</c:if>
 							<c:if test="${currentPage < maxPage}">
-								<c:url var="rrlistEND" value="rr">
+								<c:url var="rrlistEND" value="cr">
 									<c:param name="page" value="${currentPage+1}" />
 								</c:url>
 								<a href="${rrlistEND}"><i class="fas fa-angle-double-right"></i></a>
@@ -215,52 +263,100 @@ button {
 						</div>
 					</td>
 			</table>
-
 		</div>
 	</div>
-		<div id="modal">
+	<div id="modal">
 			<div id="contents">
 				<form id="frmReport">
 					<table>
+						<tr class="hidden">
+							<td>신고 접수 번호</td>
+							<td><input type="hidden" value="" name="crno" id="crno"></td>
+						</tr>
 						<tr>
 							<td>게시글 제목</td>
-							<td><input type="text" value="" id="csubject" readonly></td>
+							<td><input type="text" value="" name="csubject" id="csubject" readonly></td>
 						</tr>
 						<tr>
 							<td>피신고자</td>
-							<td><input type="text" value="" id="rrespondent" readonly></td>
+							<td><input type="text" value="" name="rrespondent" id="rrespondent" readonly></td>
 						</tr>
 						<tr>
-							<td>댓글 내용</td>
-							<td><div id="rcontent">&nbsp;</div></td>
+							<td class="content">댓글 내용</td>
+							<td><div id="rcontentText">&nbsp;</div></td>
+							<td class="hidden"><input type="text" value="" name="rcontent"  id="rcontent"></td>
 						</tr>
 						<tr>
 							<td>신고자</td>
-							<td><input type="text" value="" id="rreporter" readonly></td>
+							<td><input type="text" value="" name="rreporter" id="rreporter" readonly></td>
 						</tr>
 						<tr>
 							<td>신고 사유</td>
-							<td><input type="text" value="" id="rrreason" readonly></td>
+							<td><input type="text" value="" id="rrreasonText" readonly></td>
+							<td class="hidden"><input type="hidden" value="" id="rrreason" name="rrreason"></td>
 						</tr>
 						<tr>
 							<td>신고 시간</td>
-							<td><input type="text" value="" id="rrdate" readonly></td>
+							<td><input type="text" value="" id="rrdate" name="rrdate" readonly></td>
 						</tr>
 						<tr>
 							<td>신고 처리 사유</td>
-							<td><input type="text"></td>
+							<td><input type="text" name="rreason" id="rreason"></td>
 						</tr>
+						<tr class="hidden">
+							<td>신고된 게시글 번호</td>
+							<td><input type="text" value="" name="cno" id="cno"></td>
+						</tr>
+						<tr class="hidden">
+							<td>신고된 댓글 번호</td>
+							<td><input type="text" value="" name="rno" id="rno"></td>
+						</tr>
+						<tr class="hidden">
+							<td>신고 처리 시간</td>
+							<td><input type="text" value="" name="arrdate" id="arrdate" readonly></td>
+						</tr>
+						
 						<tr>
-							<td colspan="2"><input type="text" value="" id="cno"
-								style="display: none">
-								<button type="submit" id="accept" class="btnGreen">수리</button>
-								<button type="submit" id="deny" class="btnRed">반려</button>
+							<td colspan="2">
+								<button type="button" id="accept" class="btnGreen deal" value="accept">수리</button>
+								<button type="button" id="deny" class="btnRed deal" value="deny">반려</button>
+								<input type="text" id="buttonvalue" value="" name="rstatus" style="display: none">
+								
 								<button type="button" id="detail" class="btnPurple">자세히</button>
-								<button type="button" id="close" class="btnPurple">닫기</button></td>
+								<button type="button" id="close" class="btnPurple">닫기</button>
+							</td>
 						</tr>
 					</table>
 				</form>
 			</div>
 		</div>
 </body>
+<script>
+$(function(){
+		$(".deal").on("click",function() {
+ 			var deal = $(this).val();
+ 			console.log(deal);
+ 			$("#buttonvalue").val(deal);
+ 			var btnval = $("#buttonvalue").val();
+			console.log(btnval);
+			console.log("클릭됨");
+			 
+		    var dataquery = $("#frmReport").serialize();
+			$.ajax({
+			url : "dealrr",
+			type : "POST",
+			data : dataquery,
+			async : true,
+			success : function(data) {
+				location.href = "<%=request.getContextPath()%>/admin/cr";
+			},
+			error : function(request, status, error) {
+				console.log("message:"+request.responseText+"\n"+"error:"+error);
+				location.href="<%=request.getContextPath()%>/admin/cr";
+			}
+			
+		})
+	})
+})
+</script>
 </html>

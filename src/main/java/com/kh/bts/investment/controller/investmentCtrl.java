@@ -51,35 +51,37 @@ public class investmentCtrl {
 	@Autowired
 	private CoinAcntService caService;
 
-	@RequestMapping("buy")
-	public ModelAndView buy(ModelAndView mv) {
-		mv.setViewName("investment/buy");
-		return mv;
-	}
-
-	// 미체결 매수 내역 불러오기
-
+	// 미체결 매수 코인 종류 불러오기
 	@ResponseBody
-
-	@RequestMapping("buyLoad")
-	public List<WaitBought> buyLoad(HttpServletResponse response) {
+	@RequestMapping("buyLoad1")
+	public List<WaitBought> buyLoad1(HttpServletResponse response) {
 		List<WaitBought> waitblist = wbService.selectAllCoinListWaitBought();
-		List<WaitBought> waitresult = wbService.selectAllListWaitBought();
+		System.out.println(waitblist);
 		return waitblist;
 	}
 
-	// 미체결 매도 내역 불러오기
-	@RequestMapping("sell")
-	public ModelAndView sell(ModelAndView mav) {
+	// 미체결 매수 내역 전체 불러오기
+	@ResponseBody
+	@RequestMapping("buyLoad2")
+	public List<WaitBought> buyLoad2(HttpServletResponse response) {
+		List<WaitBought> waitresult = wbService.selectAllListWaitBought();
+		return waitresult;
+	}
+	// 미체결 매도 코인 종류 불러오기
+	@ResponseBody
+	@RequestMapping("sellLoad1")
+	public List<WaitSold> sellLoad1(HttpServletResponse response) {
 		List<WaitSold> waitslist = wsService.selectAllCoinListWaitSold();
-		mav.addObject("waitslist", waitslist);
-		List<WaitSold> waitresult = wsService.selectAllListWaitSold();
-		mav.addObject("waitresult", waitresult);
 		System.out.println(waitslist);
-		System.out.println(waitresult);
-
-		mav.setViewName("investment/sell");
-		return mav;
+		return waitslist;
+	}
+	
+	// 미체결 매도 내역 전체 불러오기
+	@ResponseBody
+	@RequestMapping("sellLoad2")
+	public List<WaitSold> sellLoad2(HttpServletResponse response) {
+		List<WaitSold> waitresult = wsService.selectAllListWaitSold();
+		return waitresult;
 	}
 
 	// 미체결 매수 내역을 체결 내역으로 바꾸기
@@ -112,9 +114,6 @@ public class investmentCtrl {
 	@RequestMapping("sold")
 	public void sold(@RequestParam("sellCoin") String coin, @RequestParam("sellPrice") double sellprice,
 			HttpServletResponse response) {
-		System.out.println("코인 팔러 컨트롤러 들어옴#@#############################");
-		System.out.println(coin);
-		System.out.println(sellprice);
 		WaitSold vo = new WaitSold();
 		vo.setSellprice(sellprice);
 		vo.setCoin(coin);
@@ -295,8 +294,6 @@ public class investmentCtrl {
 			out.close();
 		}
 	}
-
-	// ajax
 	@RequestMapping(value = "acntlists", method = RequestMethod.POST)
 	public void acntService(@RequestParam(name = "acntno") String acntno, HttpServletRequest request,
 			HttpServletResponse response) {

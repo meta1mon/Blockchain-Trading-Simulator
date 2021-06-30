@@ -44,7 +44,7 @@ html,body {
 	position:relative;
 	min-height: 100%;
 	padding-bottom: 54px;
-	background-color: rgba(242, 242, 242, 0.15);
+	background-color: rgba(242, 242, 242, 0.3);
 }
 
 #container {

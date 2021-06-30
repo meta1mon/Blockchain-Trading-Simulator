@@ -182,6 +182,7 @@ public class AdminCtrl {
 		vo.setRno(oracleRno);
 		vo.setRreporter(rreporter);
 		vo.setCno(vo2.getCno());
+		System.out.println(vo2.getCno() + "의심중 ~~~~" );
 		vo.setRcontent(vo2.getRcontent());
 		vo.setRrespondent(vo2.getRwriter());
 		vo.setRrreason(vo.getRrreason());

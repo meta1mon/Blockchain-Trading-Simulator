@@ -26,58 +26,62 @@
 }
 </style>
 </head>
-<jsp:include page="myHeader.jsp"></jsp:include>
 <body>
-	<div id="mpu">
-		<h2>비밀번호 변경</h2>
-		<form action="${pageContext.request.contextPath}/mypage/passChange"
-			method="post" style="border: 1px solid black;">
-			<table>
-				<tr>
-					<td colspan="2">비밀번호*</td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="password" name="pw" id="pw"
-						placeholder="비밀번호를 입력해주세요."></td>
-				</tr>
-				<tr>
-					<td colspan="2"><p class="alert pwReg">&nbsp;</p></td>
-				</tr>
-				<tr>
-					<td colspan="2">비밀번호 확인*</td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="password" name="pwCh" id="pwCh"
-						placeholder="비밀번호를 다시 한 번 입력해주세요."></td>
-				</tr>
-				<tr>
-					<td colspan="2"><p class="alert pwCh">&nbsp;</p></td>
-				</tr>
-			</table>
-			<button type="submit" id="changePw" onclick="return passChange();">비밀번호
-				수정</button>
-		</form>
-
-
-
-		<form action="${pageContext.request.contextPath}/mypage/bankPwChange"
-			method="post" style="border: 1px solid black;">
-			<table>
-				<tr>
-					<td>계좌 비밀번호</td>
-					<td colspan="2"><input type="password" name="bankPw"
-						id="bankPw1" class="pin1" placeholder="계좌 비밀번호를 입력해주세요"></td>
-				</tr>
-				<tr>
-					<td>계좌 비밀번호 확인</td>
-					<td colspan="2"><input type="password" id="bankPw2"
-						class="pin2" placeholder="계좌 비밀번호를 입력해주세요."></td>
-				</tr>
-
-			</table>
-			<button type="submit" onclick="return bankPwChange();">계좌
-				비밀번호 수정</button>
-		</form>
+	<div id="wrapper">
+	<jsp:include page="myNav.jsp"></jsp:include>
+		<div id="container">
+		<div id="mpu">
+			<h2>비밀번호 변경</h2>
+			<form action="${pageContext.request.contextPath}/mypage/passChange"
+				method="post" style="border: 1px solid black;">
+				<table>
+					<tr>
+						<td colspan="2">비밀번호*</td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="password" name="pw" id="pw"
+							placeholder="비밀번호를 입력해주세요."></td>
+					</tr>
+					<tr>
+						<td colspan="2"><p class="alert pwReg">&nbsp;</p></td>
+					</tr>
+					<tr>
+						<td colspan="2">비밀번호 확인*</td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="password" name="pwCh" id="pwCh"
+							placeholder="비밀번호를 다시 한 번 입력해주세요."></td>
+					</tr>
+					<tr>
+						<td colspan="2"><p class="alert pwCh">&nbsp;</p></td>
+					</tr>
+				</table>
+				<button type="submit" id="changePw" onclick="return passChange();">비밀번호
+					수정</button>
+			</form>
+	
+	
+	
+			<form action="${pageContext.request.contextPath}/mypage/bankPwChange"
+				method="post" style="border: 1px solid black;">
+				<table>
+					<tr>
+						<td>계좌 비밀번호</td>
+						<td colspan="2"><input type="password" name="bankPw"
+							id="bankPw1" class="pin1" placeholder="계좌 비밀번호를 입력해주세요"></td>
+					</tr>
+					<tr>
+						<td>계좌 비밀번호 확인</td>
+						<td colspan="2"><input type="password" id="bankPw2"
+							class="pin2" placeholder="계좌 비밀번호를 입력해주세요."></td>
+					</tr>
+	
+				</table>
+				<button type="submit" onclick="return bankPwChange();">계좌
+					비밀번호 수정</button>
+			</form>
+		</div>
+		</div>
 	</div>
 	<script>
 		// 비밀번호와 비밀번호 확인 일치 여부

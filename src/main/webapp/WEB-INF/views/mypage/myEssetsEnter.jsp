@@ -21,13 +21,18 @@
 }
 </style>
 </head>
-<jsp:include page="myHeader.jsp"></jsp:include>
 <body>
-	<div id="mee">
-		<h2>계좌 비밀번호 확인</h2>
-		<input type="password" placeholder="계좌 비밀번호를 입력해주세요" id="bankPw"
-			name="accountPassword" class="pin3">
-		<button type="button" id="enterBtn">확인</button>
+	<div id="wrapper">
+	<jsp:include page="myNav.jsp"></jsp:include>
+		<div id="container">
+		<div id="mee">
+			<h2>계좌 비밀번호 확인</h2>
+			<input type="password" placeholder="계좌 비밀번호를 입력해주세요" id="bankPw"
+				name="accountPassword" class="pin3">
+			<button type="button" id="enterBtn">확인</button>
+		</div>
+		</div>
+		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 	<script>
 		$("#enterBtn").click(function() {

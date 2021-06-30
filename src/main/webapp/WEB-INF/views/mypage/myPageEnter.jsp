@@ -25,7 +25,6 @@
 				<button type="submit">확인</button>
 			</form>
 		</div>
-		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

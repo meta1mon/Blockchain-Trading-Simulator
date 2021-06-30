@@ -28,7 +28,7 @@
 </head>
 <body>
 	<div id="wrapper">
-	<jsp:include page="myHeader.jsp"></jsp:include>
+	<jsp:include page="myNav.jsp"></jsp:include>
 		<div id="container">
 		<div id="mpu">
 			<h2>비밀번호 변경</h2>
@@ -82,7 +82,6 @@
 			</form>
 		</div>
 		</div>
-		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 	<script>
 		// 비밀번호와 비밀번호 확인 일치 여부

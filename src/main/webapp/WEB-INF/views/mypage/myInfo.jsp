@@ -133,7 +133,7 @@
 </head>
 <body>
 	<div id="wrapper">
-	<jsp:include page="myHeader.jsp"></jsp:include>
+	<jsp:include page="myNav.jsp"></jsp:include>
 		<div id="container">
 		<div id="mi">
 			<form id="frmChangeInfo">
@@ -207,7 +207,6 @@
 			</form>
 		</div>
 		</div>
-		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

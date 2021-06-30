@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.HomeController;
 import com.kh.bts.admin.model.service.AdminService;
+import com.kh.bts.cash.model.service.CashService;
 import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.service.RcommunityService;
@@ -54,6 +55,9 @@ public class AdminCtrl {
 	
 	@Autowired
 	private MypageService myService;
+	
+	@Autowired
+	private CashService cashService;
 
 	public static final int LIMIT = 10;
 
@@ -93,6 +97,24 @@ public class AdminCtrl {
 	public int countRreport() {
 		return aService.countRreport();
 	}
+// 충전 상품 목록 불러오기
+	@RequestMapping(value = "/cash", method = RequestMethod.GET)
+	public ModelAndView cashR(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
+		try {
+			int currentPage = page;
+			int listCount = cashService.countTotalCash();
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+			
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("listCount", listCount);
+			mv.addObject("list", cashService.selectTotalCash(currentPage, LIMIT)); 
+		} catch (Exception e) { 
+			System.out.println(e.getMessage()); 
+		}
+		mv.setViewName("admin/cashEdit");
+		return mv;
+	}
 
 // 충전 상품 등록
 	@RequestMapping(value = "/cashRegister", method = RequestMethod.POST)
@@ -112,7 +134,7 @@ public class AdminCtrl {
 				System.out.println("상품 등록 실패");
 				out.print("<script>alert('상품 등록 실패')</script>");
 			}
-			out.print("<script>location.href='cashMR'</script>");
+			out.print("<script>location.href='cash'</script>");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -201,19 +223,6 @@ public class AdminCtrl {
 	@RequestMapping(value = "/arr", method = RequestMethod.GET)
 	public ModelAndView arr(ModelAndView mv) {
 		mv.setViewName("admin/afterReplyReport");
-		return mv;
-	}
-
-
-	@RequestMapping(value = "/cashR", method = RequestMethod.GET)
-	public ModelAndView cashR(ModelAndView mv) {
-		mv.setViewName("admin/cashRegister");
-		return mv;
-	}
-
-	@RequestMapping(value = "/cashMR", method = RequestMethod.GET)
-	public ModelAndView cashMR(ModelAndView mv) {
-		mv.setViewName("admin/cashModifyRemove");
 		return mv;
 	}
 

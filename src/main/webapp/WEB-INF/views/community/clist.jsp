@@ -174,12 +174,12 @@
 		</div>
 		
 			<div class="searchDiv">
-				<form action="clist" name="bottomlistForm" method="get">
-					<select id="searchType" name="searchType">
+				<form action="clist" name="bottomListForm" method="get">
+					<select id="searchType" name="bottomSearchType">
 						<option value="1">글제목</option>
 						<option value="2">글내용</option>
 						<option value="3">작성자</option>
-					</select> <input type='search' id="search" name="keyword">
+					</select> <input type='search' id="search" name="bottomKeyword">
 					<button type=submit id="btnsearch">검색</button>
 				</form>
 				<input type="hidden" name="page" value="${currentPage}"> 

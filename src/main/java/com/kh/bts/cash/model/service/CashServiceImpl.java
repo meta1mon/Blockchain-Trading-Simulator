@@ -16,7 +16,17 @@ public class CashServiceImpl implements CashService {
 
 	@Autowired
 	private CashDao cashDao;
-
+	
+	@Override
+	public List<Cash> selectTotalCash(int startPage, int limit){
+		return cashDao.selectTotalCash(startPage, limit);
+	}
+	
+	@Override
+	public int countTotalCash() {
+		return cashDao.countTotalCash();
+	}
+	
 	@Transactional
 	@Override
 	public int chargeCash(String email, int won, int sellprice) {

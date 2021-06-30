@@ -254,6 +254,7 @@ table{
 							</c:if>
 						</div>
 					</td>
+					</tr>
 			</table>
 		</div>
 	</div>

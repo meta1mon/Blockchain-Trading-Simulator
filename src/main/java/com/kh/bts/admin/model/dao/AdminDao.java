@@ -36,8 +36,7 @@ public class AdminDao {
 	
 	public List<CashLog> selectCashLog(int startPage, int limit){
 		
-		int startRow = (startPage -1)*limit; RowBounds row = new RowBounds(startRow,
-		limit);
+		int startRow = (startPage -1)*limit; RowBounds row = new RowBounds(startRow, limit);
 		
 		return sqlSession.selectList("CashLog.selectCashLog", null, row);
 	}
@@ -51,6 +50,7 @@ public class AdminDao {
 	public List<CashLog> searchCashLog(String keyword){
 		return sqlSession.selectList("CashLog.searchCashLog", keyword);
 	}
+	
 	public List<Member> adminSearchMember(String keyword, int searchType){
 		List<Member> list = new ArrayList<Member>();
 		if(keyword != null) {

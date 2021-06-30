@@ -8,7 +8,11 @@ import com.kh.bts.cash.model.vo.CashLog;
 
 public interface CashService {
 	public int chargeCash(String email, int won, int sellprice);
-
+	
+	public List<Cash> selectTotalCash(int startPage, int limit);
+	
+	public int countTotalCash();
+	
 	public List<Cash> selectNowCash();
 	
 	public List<Cash> selectOldCash();

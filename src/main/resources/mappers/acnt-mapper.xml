@@ -19,6 +19,13 @@
 		WHERE ACNTNO = #{acntno} AND BANKPW = #{bankPw}
 	</select>
 	
+	<!-- 금액 변경 -->
+	<update id="updateAcnt" parameterType="Acnt">
+		UPDATE ACNT
+		SET CYBCASH = #{cybcash}
+		WHERE ACNTNO = #{acntno}
+	</update>
+	
 	<!-- 전체 가상 투자금 조회 -->
 	<select id="totalCybcash" resultType="int">
 		SELECT SUM(CYBCASH) FROM ACNT

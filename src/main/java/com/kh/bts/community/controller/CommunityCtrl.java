@@ -31,7 +31,10 @@ public class CommunityCtrl {
 	@RequestMapping(value = "clist", method = RequestMethod.GET)
 	public ModelAndView communityListService(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
-			@RequestParam(name = "searchType", defaultValue = "1") int searchType, ModelAndView mv) {
+			@RequestParam(name = "searchType", defaultValue = "1") int searchType,
+			@RequestParam(name = "bottomKeyword", defaultValue = "", required = false) String bottomKeyword,
+			@RequestParam(name = "bottomSearchType", defaultValue = "1") int bottomSearchType,
+			ModelAndView mv) {
 		try {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
@@ -46,6 +49,16 @@ public class CommunityCtrl {
 				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 			}
+			
+			if (bottomKeyword != null && !bottomKeyword.equals("")) {
+				mv.addObject("list", cmService.selectSearch(bottomKeyword, bottomSearchType));
+				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
+			}
+			else {
+				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
+				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
+			}
+			
 			mv.addObject("plist", cmService.searchpopularList());
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);

@@ -269,7 +269,7 @@ public class AdminCtrl {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
 			mv.addObject("community", cmService.selectCommunity(0, cno));
-			mv.addObject("commentList", rcmService.selectList(cno));
+			mv.addObject("commentList", rcmService.selectRcommunityList(cno));
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("admin/noticeDetail");
 		} catch (Exception e) {

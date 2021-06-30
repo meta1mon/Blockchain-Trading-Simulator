@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.bts.community.model.dao.RcommunityDao;
 import com.kh.bts.community.model.vo.Rcommunity;
+import com.kh.bts.community.model.vo.UserRcommuniyCheck;
 
 @Service("rcmService")
 public class RcommunityServiceImpl implements RcommunityService {
@@ -18,8 +19,8 @@ public class RcommunityServiceImpl implements RcommunityService {
 		return rcmDao.listCount();
 	}
 	
-	public List<Rcommunity> selectList(String cno) { // 게시글에 해당하는 댓글 조회
-		return rcmDao.selectList(cno);
+	public List<UserRcommuniyCheck> selectRcommunityList(String cno) { // 게시글에 해당하는 댓글 조회
+		return rcmDao.selectRcommunityList(cno);
 	}
 
 	public Rcommunity selectRcommunity(String rno) { // 단일 댓글 조회

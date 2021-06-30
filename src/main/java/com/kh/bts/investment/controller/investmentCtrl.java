@@ -290,7 +290,6 @@ public class investmentCtrl {
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(result);
-
 		try {
 
 			System.out.println("ajax select성공");
@@ -316,7 +315,6 @@ public class investmentCtrl {
 		try {
 
 			System.out.println("ajax select성공");
-
 			out = response.getWriter();
 			out.print(jsonlist);
 		} catch (IOException e) {
@@ -548,14 +546,9 @@ public class investmentCtrl {
 	@RequestMapping(value = "coinupdate", method = RequestMethod.POST)
 	public void update(Acnt vo ,@RequestParam(name = "acntno") String acntno, @RequestParam(name = "cybcash") int cybcash,
 			HttpServletResponse response) throws Exception {
-//		Acnt vo = new Acnt();
-		System.out.println(acntno+"나오냐");
-		System.out.println(cybcash+"나오냐");
 		vo.setAcntno(acntno);
 		vo.setCybcash(cybcash);
 		int result = acntService.updateAcnt(vo);
-		System.out.println("@@@@@@@@@@@ 나오냐 "+ vo);
-		System.out.println("@@@@@@@@@@@ 나오냐 "+ result);
 		PrintWriter out = null;
 
 		try {

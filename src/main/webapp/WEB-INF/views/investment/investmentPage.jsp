@@ -26,60 +26,10 @@
 <script src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
+
 <script type="text/javascript">
-	function removeWaitBought(ubno) {
-		alert("지우러 들어는 왔다" + ubno);
-		$.ajax({
-			url : "wbdelete",
-			type : "post",
-			data : {
-				"ubno" : ubno
-			},
-			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-				if (data > 0) {
-					alert("성공");
-					wblist();
-					console.log(data);
-				} else {
-					alert("실패");
-					console.log(data);
-				}
 
-			},
-			error : function(request, status, errorData) {
-				alert("실패" + "error code : " + request.status + "\n"
-						+ "message : " + request.responseText + "\n"
-						+ "error : " + errorData);
-			}
-		});
-	}
 
-	function removeWaitSold(usno) {
-		alert("지우러 들어는 왔다" + usno);
-		$.ajax({
-			url : "wsdelete",
-			type : "post",
-			data : {
-				"usno" : usno
-			},
-			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
-				if (data > 0) {
-					alert("성공");
-					wslist();
-					console.log(data);
-				} else {
-					alert("실패");
-					console.log(data);
-				}
-
-			},
-			error : function(request, status, errorData) {
-				alert("실패" + "error code : " + request.status + "\n"
-						+ "message : " + request.responseText + "\n"
-						+ "error : " + errorData);
-			}
-		});
-	}
 </script>
 <meta charset="UTF-8">
 </head>
@@ -220,8 +170,8 @@
 											</tr>
 											<tr>
 												<td colspan="1"><input id="totalprice" type="text"
-													value="0"><input id="updateprice" name="updateprice" type="text"
-													value=""><button type="button" id="up">up</button></td>
+													value="0"><input id="updateprice"
+													name="updateprice" type="text" value=""></td>
 											</tr>
 											<tr>
 												<th colspan="1">매수 총자산대비/매수 코인개수 대비<input id="acntno"
@@ -281,7 +231,7 @@
 
 		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
-
+	<!--가상 키보드 부분  -->
 	<script type="text/javascript">
 		//pinpad 생성
 		new pinpad({

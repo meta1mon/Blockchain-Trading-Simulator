@@ -11,6 +11,8 @@
 			alias="Community" />
 		<typeAlias type="com.kh.bts.community.model.vo.Rcommunity"
 			alias="Rcommunity" />
+		<typeAlias type="com.kh.bts.community.model.vo.UserRcommuniyCheck"
+			alias="UserRcommuniyCheck" />
 		<typeAlias type="com.kh.bts.community.model.vo.Clike"
 			alias="Clike" />
 		<typeAlias type="com.kh.bts.community.model.vo.Cdislike"

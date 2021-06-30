@@ -38,7 +38,7 @@
 	</select>
 	<!-- 기한 내의 충전 상품 리스트 불러오기 -->
 	<select id="selectNowCash" resultType="arraylist"	resultMap="resultCash">
-		SELECT * FROM CASH WHERE STARTDATE <![CDATA[<=]]> SYSDATE AND ENDDATE <![CDATA[>=]]> SYSDATE
+		SELECT * FROM CASH WHERE STARTDATE <![CDATA[<=]]> SYSDATE AND ENDDATE <![CDATA[>=]]> SYSDATE ORDER BY PRICE
 	</select>
 
 	<!-- 기한 지난 충전 상품 리스트 불러오기 -->

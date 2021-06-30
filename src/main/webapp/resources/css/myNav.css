@@ -23,6 +23,11 @@
 	width: 15%;
 }
 
-#myM a {
+#myM a{
+	color: black;
 	text-decoration: none;
+}
+
+#myM a:hover, #myM a:active {
+	text-decoration: underline;
 }

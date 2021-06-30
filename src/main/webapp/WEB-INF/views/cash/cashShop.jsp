@@ -4,8 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
@@ -48,7 +52,7 @@
 						<td>KRW</td>
 						<td>할인율</td>
 					</tr>
-					<c:forEach items="${cashList }" var="cashVo" varStatus="status">
+					<c:forEach items="${nowList }" var="cashVo" varStatus="status">
 						<tr>
 							<td>${cashVo.won }원</td>
 							<td>${cashVo.sellprice }원</td>
@@ -58,7 +62,7 @@
 							<td><input type="hidden" name="currentPrice${status.count }"
 								value="${cashVo.sellprice }" readonly></td>
 							<td><input type="button" value="선택"
-							onclick="buyCash(currentPrice${status.count }, currentWon${status.count })"></td>
+								onclick="buyCash(currentPrice${status.count }, currentWon${status.count })"></td>
 						</tr>
 						<tr>
 					</c:forEach>
@@ -79,6 +83,23 @@
 				<tr>
 					<td colspan="3"><button type="button" onclick="openPayment();">결제하기</button></td>
 				</tr>
+			</table>
+			<table>
+				<tr>
+					<td>할인 종료 상품</td>
+				</tr>
+				<tr>
+					<td>모의 투자 충전 금액</td>
+					<td>KRW</td>
+					<td>할인율</td>
+				</tr>
+				<c:forEach items="${oldList }" var="cashVo" varStatus="status">
+					<tr>
+						<td>${cashVo.won }원</td>
+						<td>${cashVo.sellprice }원</td>
+						<td>${cashVo.discountrate }%</td>
+					</tr>
+				</c:forEach>
 			</table>
 		</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include>

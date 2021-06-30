@@ -112,5 +112,10 @@ public class CommunityDao {
 		RowBounds row = new RowBounds(startRow, limit);
 		return sqlSession.selectList("community.selectNoticeList", null, row);
 	}
+	
+	public String returnEmail(String nickName) {
+		String result = sqlSession.selectOne("Member.returnEmail", nickName);
+		return result;
+	}
 
 }

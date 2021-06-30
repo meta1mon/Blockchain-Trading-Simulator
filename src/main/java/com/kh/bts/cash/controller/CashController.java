@@ -17,21 +17,26 @@ import com.kh.bts.cash.model.vo.Cash;
 @Controller
 public class CashController {
 	@Autowired
-	private AdminService aService;
-
-	@Autowired
 	private CashService cashService;
 
-	// 충전 상품 불러오기
+	// 판매 중인 충전 상품 불러오기
 	@RequestMapping(value = "/cashShop")
 	public ModelAndView cashShop(Cash vo, ModelAndView mav) {
-		List<Cash> list = aService.selectCashAll();
-		if (list == null) {
+		List<Cash> nowList = cashService.selectNowCash();
+		if (nowList == null) {
 			System.out.println("캐시 리스트 비어있음");
 		} else {
 			System.out.println("캐시 리스트 들어있음");
 		}
-		mav.addObject("cashList", list);
+		
+		List<Cash> oldList = cashService.selectOldCash();
+		if (oldList == null) {
+			System.out.println("캐시 리스트 비어있음");
+		} else {
+			System.out.println("캐시 리스트 들어있음");
+		}
+		mav.addObject("nowList", nowList);
+		mav.addObject("oldList", oldList);
 		mav.setViewName("cash/cashShop");
 		return mav;
 	}

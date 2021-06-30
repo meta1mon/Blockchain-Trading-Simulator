@@ -125,10 +125,6 @@ table{
 		var  openModal = function(event) {
 			$("#modal").css("display", "block");
 			var ele = event.currentTarget.querySelectorAll("td");
-			console.log(ele);
-			for(i=0; i<ele.length; i++){
-				console.log(i+"번째 " + ele[i].innerText);
-			};
 			
 			$("#rrno").val(ele[0].innerText); // 신고 번호
 			$("#csubject").val(ele[1].innerText); // 신고하는 댓글이 있는 게시글 제목
@@ -165,10 +161,6 @@ table{
 <%@include file="../loadingajax.jsp"%>
 	<div id="rr">
 	<p class="title inbl">신고된 댓글 목록</p>
-		<form name="listForm" action="cr" method="get" id="listForm">
-		<input type="search" name="keyword" id="search"	placeholder="검색어를 입력해주세요.">
-		<button type="submit" id="btnsearch">검색</button>
-	</form>
 	<hr>
 		<div>
 			<table>
@@ -182,7 +174,7 @@ table{
 				</tr>
 				<c:if test="${listCount eq 0}">
 					<tr>
-						<td colspan="6" align="center">조회된 신고 내역이 없습니다.</td>
+						<td colspan="6" class="center">조회된 신고 내역이 없습니다.</td>
 					</tr>
 				</c:if>
 				<c:if test="${listCount ne 0}">
@@ -262,6 +254,7 @@ table{
 							</c:if>
 						</div>
 					</td>
+					</tr>
 			</table>
 		</div>
 	</div>
@@ -335,11 +328,8 @@ table{
 $(function(){
 		$(".deal").on("click",function() {
  			var deal = $(this).val();
- 			console.log(deal);
  			$("#buttonvalue").val(deal);
  			var btnval = $("#buttonvalue").val();
-			console.log(btnval);
-			console.log("클릭됨");
 			 
 		    var dataquery = $("#frmReport").serialize();
 			$.ajax({

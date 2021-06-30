@@ -124,15 +124,16 @@
 			<hr>
 
 		<!-- 앞 페이지 번호 처리 -->
-		<c:if test="${currentPage <= 1}">
-[이전]&nbsp;
+<c:if test="${currentPage <= 1}">
+	&#60;&nbsp;
 </c:if>
 		<c:if test="${currentPage > 1}">
 			<c:url var="clistST" value="clist">
 				<c:param name="page" value="${currentPage-1}" />
 			</c:url>
-			<a href="${clistST}">[이전]</a>
+			<a href="${clistST}&search=${keyword }&searchType=${searchType}">&#60;</a>
 		</c:if>
+		
 		<!-- 끝 페이지 번호 처리 -->
 		<c:set var="endPage" value="${maxPage}" />
 		<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
@@ -143,40 +144,42 @@
 				<c:url var="clistchk" value="clist">
 					<c:param name="page" value="${p}" />
 				</c:url>
-				<a href="${clistchk}">${p}</a>
+				<a href="${clistchk}&search=${keyword }&searchType=${searchType}">${p}</a>
 			</c:if>
 		</c:forEach>
-		<c:if test="${currentPage >= maxPage}">
-[다음]
+		
+<c:if test="${currentPage >= maxPage}">
+	&#62;
 </c:if>
+
 		<c:if test="${currentPage < maxPage}">
 			<c:url var="clistEND" value="clist">
 				<c:param name="page" value="${currentPage+1}" />
 			</c:url>
-			<a href="${clistEND}">[다음]</a>
+			<a href="${clistEND}&search=${keyword }&searchType=${searchType}">&#62;</a>
 		</c:if> 
 		
 <div id="page">
 			<c:if test="${startPage !=1 }">
-				<a href="clist?pageNum=${startPage -1 }&search=${search }&searchType=${searchType}" id="leftpage">&#60;</a>
+				<a href="clist?pageNum=${startPage -1 }&search=${keyword }&searchType=${searchType}" id="leftpage">&#60;</a>
 			</c:if>
 
-			<c:forEach begin="${startPage }" end="${endPage }" var="s" step="1">
-				<a href="clist?pageNum=${s }&search=${search }&searchType=${searchType}" id="pageNum">&nbsp;${s }&nbsp;</a>
+			<c:forEach begin="${startPage }" end="${maxPage }" var="s" step="1">
+				<a href="clist?pageNum=${s }&search=${keyword }&searchType=${searchType}" id="pageNum">&nbsp;${s }&nbsp;</a>
 			</c:forEach>
 
-			<c:if test="${endPage < pageBoxCnt }">
-				<a href="clist?pageNum=${endPage +1 }&search=${search }&searchType=${searchType}" id="rightpage">&#62;</a>
+			<c:if test="${maxPage < pageBoxCnt }">
+				<a href="clist?pageNum=${maxPage +1 }&search=${keyword }&searchType=${searchType}" id="rightpage">&#62;</a>
 			</c:if>
 		</div>
 		
 			<div class="searchDiv">
-				<form action="clist" name="listForm" method="get">
-					<select id="searchType" name="searchType">
+				<form action="clist" name="bottomListForm" method="get">
+					<select id="searchType" name="bottomSearchType">
 						<option value="1">글제목</option>
 						<option value="2">글내용</option>
 						<option value="3">작성자</option>
-					</select> <input type='search' id="search" name="keyword">
+					</select> <input type='search' id="search" name="bottomKeyword">
 					<button type=submit id="btnsearch">검색</button>
 				</form>
 				<input type="hidden" name="page" value="${currentPage}"> 

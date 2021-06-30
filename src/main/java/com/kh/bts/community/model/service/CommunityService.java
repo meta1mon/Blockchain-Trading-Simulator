@@ -27,4 +27,6 @@ public interface CommunityService {
 	int deleteCommunity(String cno);
 
 	List<Community> selectNoticeList(int startPage, int limit);
+	
+	public String returnEmail(String nickName);
 }

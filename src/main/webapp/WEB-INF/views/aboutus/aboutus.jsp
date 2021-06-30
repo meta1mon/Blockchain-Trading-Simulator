@@ -36,12 +36,12 @@
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
                     	<c:choose>
 							<c:when test="${loginMember == null }">
-									<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/login" id="login">로그인</a></li>
 									<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/signup" id="signup">회원가입</a></li>
+									<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/login" id="login">로그인</a></li>
 							</c:when>
 							<c:when test="${loginMember != null }">
-									<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout" id="logout">로그아웃</a></li>
 									<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/mypage">마이페이지</a></li>
+									<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout" id="logout">로그아웃</a></li>
 							</c:when>
 						</c:choose>
                     </ul>

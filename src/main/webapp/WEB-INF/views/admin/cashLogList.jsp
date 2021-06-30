@@ -75,6 +75,7 @@ table{
 <body>
 	<div id="cll">
 	<p class="title inbl">충전 내역</p>
+	<!-- TODO 검색 기능 넣기 -->
 	<form name="listForm" action="cll" method="get" id="listForm">
 		<input type="search" name="keyword" id="search"	placeholder="검색어를 입력해주세요.">
 		<button type="submit" id="btnsearch">검색</button>
@@ -89,7 +90,7 @@ table{
 			</tr>
 			<c:if test="${listCount eq 0}">
 				<tr>
-					<td colspan="8" align="center">조회된 기록이 없습니다.</td>
+					<td colspan="8" class="center">조회된 기록이 없습니다.</td>
 				</tr>
 			</c:if>
 			<c:if test="${listCount ne 0}">
@@ -141,6 +142,7 @@ table{
 						</c:if>
 					</div>
 				</td>
+				</tr>
 		</table>
 	</div>
 	<script>

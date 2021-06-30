@@ -2,25 +2,50 @@ $(function() {
 	var checkpw = false;
 	coinname(); // 숫자를 이름으로 변경
 	chart();
-	$("#check_cnt").click(function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-		var dataList4 = $("#frm22").serialize();
-		console.log("여기~!!@!@!!");
-		$.ajax({
-			url : "coincount",
-			type : "post",
-			data : dataList4,
-			dataType : "json",
-			success : function(data) {
-				console.log(data);
-			},
-			error : function(request, status, errorData) {
-				alert("ws실패" + "error code : " + request.status
-						+ "\n" + "message : "
-						+ request.responseText + "\n" + "error : "
-						+ errorData);
-			}
-		});
-	});
+	$("#check_cnt").click(
+			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+				var dataList4 = $("#frm22").serialize();
+				console.log("여기~!!@!@!!");
+				$.ajax({
+					url : "coincount",
+					type : "post",
+					data : dataList4,
+					dataType : "json",
+					success : function(data) {
+						if (data == null) {
+							$("#coincount").val(0);
+
+						} else {
+							$("#coincount").val(data.buycnt);
+
+						}
+					},
+					error : function(request, status, errorData) {
+						alert("ws실패" + "error code : " + request.status + "\n"
+								+ "message : " + request.responseText + "\n"
+								+ "error : " + errorData);
+					}
+				});
+			});
+	$("#up").click(
+			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+//				var dataList4 = $("#frm22").serialize();
+				console.log("dddddddddddddddddd");
+				$.ajax({
+					url : "coinupdate",
+					type : "post",
+					data : {"acntno" : $("#acntno").val(),
+						"cybcash" : $("#updateprice").val()},
+					success : function(data) {
+						alert(data + "나와~~~~~~~~~~~~~~~~~");
+					},
+					error : function(request, status, errorData) {
+						alert("ws실패" + "error code : " + request.status + "\n"
+								+ "message : " + request.responseText + "\n"
+								+ "error : " + errorData);
+					}
+				});
+			});
 	$("#check2").click(function() { // 계좌 비밀번호
 
 		var acntList = $("#frm11").serialize();
@@ -33,7 +58,7 @@ $(function() {
 				if (data == 1) {
 					html3 += "<a style='color: green;'>성공</a>"
 					var cy = $("#hidden").val();
-					$("#cybcash").val(cy + "원");
+					$("#cybcash").val(cy);
 					checkpw = true;
 					wblist();
 					wslist();
@@ -77,15 +102,25 @@ $(function() {
 		var sum = 0;
 		var a = $("#price_b").val();
 		var b = $("#cnt_b").val();
+		var now = $("#cybcash").val();
+		
 		sum = a * b;
+		
 		$("#totalprice").val(sum);
+		 
+		$("#updateprice").val(now-sum);
 	});
 	$("#cnt_s").keyup(function() { // 합계 구하기 매도
 		var sum = 0;
 		var a = $("#price_s").val();
 		var b = $("#cnt_s").val();
+		var now = $("#cybcash").val();
+		
 		sum = a * b;
+		
 		$("#totalprice").val(sum);
+		
+		$("#updateprice").val(now+sum);
 	});
 	// ///////////////////////////////////////////////////////////////////////////////////////
 	$("#sold").on(
@@ -184,22 +219,27 @@ $(function() {
 	var timer1 = setInterval(function() { // 1초마다 함수 돌림 ()
 		alltable();
 		orderbook();
-		wblist();
-		wslist();
-		blist();
-		slist();
+		if (checkpw == true) {
+			wblist();
+			wslist();
+			blist();
+			slist();
+		}
+
 	}, 1000);
 
 });
 
 var coinList = null; // 전체 리스트
 var changecoin = "BTC"; // default
-
+var ch_title = "BTC";
 function alltable() { // 전체코인 시세 표
 	var display = new Array();
+	var titdisplay = new Array();
 	var onedisplay = new Array();
 
 	var html = "";
+	var title = "";
 	var thisCoin = null;
 	$
 			.ajax({
@@ -217,7 +257,14 @@ function alltable() { // 전체코인 시세 표
 									data['data'][coinList[i]]['fluctate_rate_24H'] * 1,
 									data['data'][coinList[i]]['acc_trade_value_24H'] * 1 ]
 						}
+						titdisplay[0] = [
+								data['data'][ch_title]['closing_price'] * 1,
+								data['data'][ch_title]['fluctate_rate_24H'] * 1,
+								data['data'][ch_title]['acc_trade_value_24H'] * 1,
+								data['data'][ch_title]['min_price'] * 1,
+								data['data'][ch_title]['max_price'] * 1 ]
 						html = "<table class='table table-striped' id='cointable' ><tr><td>코인명</td><td>현재가</td><td>등락률(24H)</td><td>거래대금</td></tr>";
+						title = "<table class='table table-striped' id='tit'><tr>";
 						for (var i = 0; i < coinList.length - 1; i++) {
 							thisCoin = i;
 							html += "<tr><td><a href=# onclick='changename("
@@ -232,9 +279,16 @@ function alltable() { // 전체코인 시세 표
 									+ display[i][2] + "</td></tr>";
 
 						}
+						title += "<td>" + ch_title + "</td><td>현재가:"
+								+ titdisplay[0][0] + "</td><td>전일대비:"
+								+ titdisplay[0][1] + "</td><td>저가:"
+								+ titdisplay[0][3] + "</td><td>고가:"
+								+ titdisplay[0][4] + "</td></tr>"
 
 						html += "</table>"
+						title += "</table>"
 						$("#cointable_div").html(html);
+						$("#title").html(title);
 
 						for (var i = 0; i < coinList.length - 1; i++) {
 							var num = $(".change_c").eq(i);
@@ -289,7 +343,7 @@ function slist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 
 				success : function(json) {
 
-					var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
+					var html1 = "<br><span>채결 매도주문내역</span><form id='frm24'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매도가격</td><td>매도날짜</td><td>계좌번호</td></tr>";
 
 					if (json.length > 0) {
 						$.each(json, function(entryIndex, entry) {
@@ -324,7 +378,7 @@ function blist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 
 				success : function(json) {
 
-					var html1 = "<form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
+					var html1 = "<span>채결 매수주문내역</span><form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
 
 					if (json.length > 0) {
 						$.each(json, function(entryIndex, entry) {
@@ -358,7 +412,7 @@ function wblist() { // 미체결 매수 ajax함수
 
 				success : function(json) {
 
-					var html1 = "<span>미채결 매수주문내역</span><form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
+					var html1 = "<span>미채결 매수주문내역</span><form id='frm20'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td><td>주문취소</td></tr>";
 					if (json.length > 0) {
 						$
 								.each(
@@ -412,7 +466,7 @@ function wslist() { // 미체결 매도 내용 함수
 
 				success : function(json) {
 
-					var html1 = "<br><span>미채결 매도주문내역</span><form id='frm23'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
+					var html1 = "<br><span>미채결 매도주문내역</span><form id='frm29'><table class='table table-striped' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매도가격</td><td>매도날짜</td><td>계좌번호</td><td>주문취소</td></tr>";
 
 					if (json.length > 0) {
 						$
@@ -482,9 +536,10 @@ function changename(listNum) {
 
 	if (checkstring == 'number') {
 		changecoin = coinList[listNum];
-
+		ch_title = coinList[listNum];
 	} else {
 		changecoin = listNum;
+		ch_title = listNum;
 
 	}
 	toname(changecoin);

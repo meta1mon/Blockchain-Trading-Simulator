@@ -90,6 +90,12 @@
 			<!-- 위젯, 코인 목록 테이블 -->
 			<table id="widgetTB">
 				<tr>
+					<td>
+						<div id="title"></div>
+
+					</td>
+				</tr>
+				<tr>
 					<td id="chart1">
 						<!-- TradingView Widget BEGIN -->
 						<div class="tradingview-widget-container">
@@ -140,6 +146,28 @@
 							<c:when test="${loginMember != null }">
 
 								<td>
+									<form id="frm11">
+
+
+										<table>
+
+											<tr>
+												<th><span>회원계좌번호 : ${acnt.acntno } </span> <span
+													id="su"></span><input name="acntno" type="hidden"
+													value="${acnt.acntno }"></th>
+
+
+
+											</tr>
+											<tr>
+												<td>계좌비밀번호 : <input class="password2" id="bankpw"
+													name="bankPw" type="password" placeholder="비밀번호">
+													<button id="check2" type="button">확인</button></td>
+											</tr>
+
+
+										</table>
+									</form>
 									<table>
 										<tr>
 											<td><button value="" id="bought_b">매수</button>
@@ -192,13 +220,13 @@
 											</tr>
 											<tr>
 												<td colspan="1"><input id="totalprice" type="text"
-													value="0"></td>
+													value="0"><input id="updateprice" name="updateprice" type="text"
+													value=""><button type="button" id="up">up</button></td>
 											</tr>
 											<tr>
 												<th colspan="1">매수 총자산대비/매수 코인개수 대비<input id="acntno"
 													name="acntno" type="hidden" value="${acnt.acntno }">
-													<input id="hidden" type="hidden"
-													value="${acnt.cybcash }"></th>
+													<input id="hidden" type="hidden" value="${acnt.cybcash }"></th>
 											</tr>
 
 
@@ -224,48 +252,29 @@
 							</c:when>
 						</c:choose>
 
-						<td>
-							<form id="frm11">
-
-
-								<table>
-
-									<tr>
-										<th><span>회원계좌번호 : ${acnt.acntno } </span> <span id="su"></span><input
-											name="acntno" type="hidden" value="${acnt.acntno }">
-										</th>
-
-
-
-									</tr>
-									<tr>
-										<td>계좌비밀번호 : <input class="password2" id="bankpw"
-											name="bankPw" type="password" placeholder="비밀번호">
-											<button id="check2" type="button">확인</button></td>
-									</tr>
-									<tr>
-										<th colspan="1">미체결주문</th>
-									</tr>
-									<tr>
-										<td><div id="aj_wb"></div>
-											<div id="aj_ws"></div></td>
-
-									</tr>
-
-									<tr>
-										<th colspan="1">체결주문</th>
-									</tr>
-									<tr>
-
-										<td><div id="aj_b"></div>
-											<div id="aj_s"></div></td>
-									</tr>
-
-								</table>
-							</form>
-						</td>
 					</tr>
 				</table>
+				<table id="wb_ws" class='table table-striped'>
+
+					<tr>
+						<th colspan="1">미체결주문</th>
+					</tr>
+					<tr>
+						<td><div id="aj_wb"></div>
+							<div id="aj_ws"></div></td>
+
+					</tr>
+
+					<tr>
+						<th colspan="1">체결주문</th>
+					</tr>
+					<tr>
+
+						<td><div id="aj_b"></div>
+							<div id="aj_s"></div></td>
+					</tr>
+				</table>
+
 			</div>
 		</div>
 

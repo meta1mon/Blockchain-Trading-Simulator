@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +30,6 @@ import com.kh.bts.investment.model.vo.Bought;
 import com.kh.bts.investment.model.vo.Sold;
 import com.kh.bts.investment.model.vo.WaitBought;
 import com.kh.bts.investment.model.vo.WaitSold;
-import com.kh.bts.member.model.service.MemberService;
 import com.kh.bts.member.model.vo.Member;
 
 @Controller
@@ -67,6 +65,7 @@ public class investmentCtrl {
 		List<WaitBought> waitresult = wbService.selectAllListWaitBought();
 		return waitresult;
 	}
+
 	// 미체결 매도 코인 종류 불러오기
 	@ResponseBody
 	@RequestMapping("sellLoad1")
@@ -75,7 +74,7 @@ public class investmentCtrl {
 		System.out.println(waitslist);
 		return waitslist;
 	}
-	
+
 	// 미체결 매도 내역 전체 불러오기
 	@ResponseBody
 	@RequestMapping("sellLoad2")
@@ -188,17 +187,6 @@ public class investmentCtrl {
 		return mav;
 	}
 
-	/*
-	 * @RequestMapping(value = "sInsert") public void SoldInsert(Sold ws,
-	 * HttpServletResponse response) { int result = sService.insertSold(ws);
-	 * PrintWriter out = null; try { if (result > 0) {
-	 * System.out.println("insert성공"); } else { System.out.println("insert실패"); }
-	 * out = response.getWriter(); out.print(result); } catch (IOException e) {
-	 * e.printStackTrace(); } finally { out.flush(); out.close(); }
-	 * 
-	 * }
-	 */
-
 	@RequestMapping(value = "coinacntInsert")
 	public void CoinAcntInsert(CoinAcnt vo, HttpServletResponse response) {
 
@@ -244,7 +232,6 @@ public class investmentCtrl {
 
 	}
 
-	// ajax
 	@RequestMapping(value = "coinacntlists", method = RequestMethod.POST)
 	public void coinacntService(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
 		List<CoinAcnt> result = caService.allselectList(acntno);
@@ -265,8 +252,6 @@ public class investmentCtrl {
 			out.close();
 		}
 	}
-
-	// ajax
 
 	@RequestMapping(value = "coincount", method = RequestMethod.POST)
 	public void coincount(@RequestParam(name = "acntno") String acntno, @RequestParam(name = "coin") String coin,
@@ -294,6 +279,7 @@ public class investmentCtrl {
 			out.close();
 		}
 	}
+
 	@RequestMapping(value = "acntlists", method = RequestMethod.POST)
 	public void acntService(@RequestParam(name = "acntno") String acntno, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -319,7 +305,6 @@ public class investmentCtrl {
 		}
 	}
 
-	// ajax
 	@RequestMapping(value = "ajslists", method = RequestMethod.POST)
 	public void SoldListService(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
 		System.out.println(acntno);
@@ -392,7 +377,6 @@ public class investmentCtrl {
 
 	}
 
-	// ajax
 	@RequestMapping(value = "ajwslists", method = RequestMethod.POST)
 	public void WaitSoldListService(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
 		System.out.println(acntno);
@@ -448,9 +432,6 @@ public class investmentCtrl {
 		try {
 			if (result > 0) {
 				System.out.println("insert성공");
-				// 계좌 비밀번호 입력하면 => 계좌 비밀번호가 맞는가! 체크하고. 맞으면매수 매도 버튼 열림과 동시에, 현금액이랑 코인 계좌 정보 알아오고,
-				// + 미체결 주문 내용까지
-				// 매수 매도 버튼 눌렀을 때 미체결 테이블에 ㅑㅜㄴㄷ 하면서 동시에 ㅑㅜㄴㄷㄳ 포함한 전체 미체결 내역을 갖고 돌아ㅇ와
 			} else {
 				System.out.println("insert실패");
 			}
@@ -465,7 +446,6 @@ public class investmentCtrl {
 
 	}
 
-// ajax 
 	@RequestMapping(value = "ajwblists", method = RequestMethod.POST)
 	public void WaitBoughtListService(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
 		System.out.println(acntno);
@@ -500,7 +480,6 @@ public class investmentCtrl {
 	@RequestMapping(value = "wbdelete", method = RequestMethod.POST)
 	public void WaitBoughtdelete(@RequestParam(name = "ubno") int ubno, HttpServletResponse response) {
 		System.out.println("WBDelete@@@@@@");
-		// @RequestParam(name="wbno") int wbno,
 		System.out.println(ubno);
 		int result = wbService.deleteWaitBought(ubno);
 		PrintWriter out = null;
@@ -521,23 +500,8 @@ public class investmentCtrl {
 
 	}
 
-////////////////////////////////////// bought 부분 //////////////////////////
-	/*
-	 * @RequestMapping(value = "bInsert") public void BoughtInsert(Bought b,
-	 * HttpServletResponse response) { System.out.println(b.getCoin() + "코인이름"); int
-	 * result = bService.insertBought(b); PrintWriter out = null; try { if (result >
-	 * 0) { System.out.println("binsert성공"); // 계좌 비밀번호 입력하면 => 계좌 비밀번호가 맞는가! 체크하고.
-	 * 맞으면매수 매도 버튼 열림과 동시에, 현금액이랑 코인 계좌 정보 알아오고, // + 미체결 주문 내용까지 // 매수 매도 버튼 눌렀을 때
-	 * 미체결 테이블에 ㅑㅜㄴㄷ 하면서 동시에 ㅑㅜㄴㄷㄳ 포함한 전체 미체결 내역을 갖고 돌아ㅇ와 } else {
-	 * System.out.println("binsert실패"); } out = response.getWriter();
-	 * out.print(result); } catch (IOException e) { e.printStackTrace(); } finally {
-	 * out.flush(); out.close(); }
-	 * 
-	 * }
-	 */
-	// ajax
 	@RequestMapping(value = "ajblists", method = RequestMethod.POST)
-	public void BoughtListService(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
+	public void BoughtList(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
 		System.out.println(acntno);
 		List<Bought> result = bService.selectListBought(acntno);
 		PrintWriter out = null;
@@ -581,22 +545,34 @@ public class investmentCtrl {
 
 	}
 
-/////////////////////////////////////////////////////////////////////////  연습코드 ///////////////////////////////////////////////////		
-//// ajax 아닌버젼
-//	@RequestMapping(value = "wblists", method = RequestMethod.GET)
-//	public ModelAndView WaitBoughtListService2(@RequestParam(name="acntno") String acntno,ModelAndView mv) {
-//		// DB에서 ID 가지고 acnt 읽어오기
-//		System.out.println("아무거나11111");
-//		System.out.println(acntno);
-//		List<WaitBought> result = wbService.selectListWaitBought("b12345678");
-//		for (int i = 0; i < result.size(); i++) {
-//			System.out.println(result.get(i).getCoin());
-//		}
-//		System.out.println(result.size() + "크기 입니다.");
-//
-//		mv.addObject("wblists", result);
-//		mv.setViewName("investment/investmentPage");
-//		System.out.println("아무거나2222222");
-//		return mv;
-//	}
+	@RequestMapping(value = "coinupdate", method = RequestMethod.POST)
+	public void update(Acnt vo ,@RequestParam(name = "acntno") String acntno, @RequestParam(name = "cybcash") int cybcash,
+			HttpServletResponse response) throws Exception {
+//		Acnt vo = new Acnt();
+		System.out.println(acntno+"나오냐");
+		System.out.println(cybcash+"나오냐");
+		vo.setAcntno(acntno);
+		vo.setCybcash(cybcash);
+		int result = acntService.updateAcnt(vo);
+		System.out.println("@@@@@@@@@@@ 나오냐 "+ vo);
+		System.out.println("@@@@@@@@@@@ 나오냐 "+ result);
+		PrintWriter out = null;
+
+		try {
+			if (result > 0) {
+				System.out.println("update 성공");
+			} else {
+				System.out.println("update 실패");
+			}
+			out = response.getWriter();
+			out.print(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+
+	}
+
 }

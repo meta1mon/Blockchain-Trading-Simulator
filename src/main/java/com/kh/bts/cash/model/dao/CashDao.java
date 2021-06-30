@@ -2,6 +2,7 @@ package com.kh.bts.cash.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,17 @@ public class CashDao {
 
 	@Autowired
 	private SqlSession sqlSession;
+	// 전체 상품
+	public List<Cash> selectTotalCash(int startPage, int limit){
+		int startRow = (startPage -1)*limit; RowBounds row = new RowBounds(startRow, limit);
+	    return sqlSession.selectList("cash.selectTotalCash", null, row);
+	}
+	// 전체 상품 개수
+	public int countTotalCash() {
+		int result=0;
+		result = sqlSession.selectOne("cash.countTotalCash");
+		return result;
+	}
 
 	// 현재 판매중인 충전 상품
 	public List<Cash> selectNowCash() {

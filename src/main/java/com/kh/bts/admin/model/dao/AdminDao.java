@@ -34,10 +34,6 @@ public class AdminDao {
 		return sqlSession.insert("cash.registerCash", vo);
 	}
 	
-	public List<Cash> selectCashAll() {
-		return sqlSession.selectList("cash.selectCashAll");
-	}
-	
 	public List<CashLog> selectCashLog(int startPage, int limit){
 		
 		int startRow = (startPage -1)*limit; RowBounds row = new RowBounds(startRow,

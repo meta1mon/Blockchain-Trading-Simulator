@@ -37,10 +37,6 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.registerCash(vo);
 	}
 
-	@Override
-	public List<Cash> selectCashAll() {
-		return aDao.selectCashAll();
-	}
 
 	@Override
 	public int countCashLog() {

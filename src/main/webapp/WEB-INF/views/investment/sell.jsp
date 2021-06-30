@@ -13,7 +13,7 @@
 $(function() {
 	var alltimer = setInterval(function() { // 1초마다 함수 돌림 ()
 		loadValues1();
-	}, 4000);
+	}, 1000);
 
 	// 실시간 가격 받을 것
 	var nowprices = [];

@@ -4,6 +4,10 @@
 	font-weight: lighter
 }
 
+.modifyBtn{
+	margin: 10px;
+}
+
 .ck.ck-editor {
 	max-width: 80%;
 	min-width: 80%;

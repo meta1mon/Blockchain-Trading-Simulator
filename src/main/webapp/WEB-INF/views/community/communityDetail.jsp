@@ -140,12 +140,14 @@ $(function(){
 							class="comment_writer"> ${rep.rwriter} &nbsp; &nbsp;</span> <span
 							class="comment_date"> ${rep.rdate}</span> <span
 							class="comment_content"> ${rep.rcontent}</span>
-						 	<textarea style="display: none;"
-								placeholder="댓글 쓰기" class="updateEditor" id="text${status.index }" name="rcontent" maxlength="4000"
-								onfocus="if(this.value == '댓글 수정') { this.value = ''; }"
-								onblur="if(this.value == '') { this.value ='댓글 수정'; }"></textarea>
+							<div id="text${status.index }">
+							</div>
+<!-- 						 	<textarea style="display: none;" -->
+<%-- 								placeholder="댓글 쓰기" class="updateEditor" id="text${status.index }" name="rcontent" maxlength="4000" --%>
+<!-- 								onfocus="if(this.value == '댓글 수정') { this.value = ''; }" -->
+<!-- 								onblur="if(this.value == '') { this.value ='댓글 수정'; }"></textarea> -->
 						 </span>
-						<p>
+						<p class="modifyBtn">
 							<!-- 댓글 작성자에게만 수정 삭제 버튼이 보임 -->
 							<c:if test="${loginMember == rep.email }">
 								<button type="button" class="makeBtn"
@@ -422,11 +424,12 @@ $(function(){
 	// 댓글 수정 버튼 생성
 	function makeUpdateBtn(index) {
 		console.log(index);
-		$(".comment_content").eq(index).css("display", "none");
-		$(".makeBtn").eq(index).css("display", "none");
-		$(".updateEditor").eq(index).css("display", "block");
-		$(".submitRUpdate").eq(index).css("display", "inline");
-		$(".cancleRUpdate").eq(index).css("display", "inline");
+		$(".comment_content").eq(index).hide();
+		$(".makeBtn").eq(index).hide();
+// 		$(this).css("display", "none");
+		$(".updateEditor").eq(index).show();
+		$(".submitRUpdate").eq(index).show();
+		$(".cancleRUpdate").eq(index).show();
 		var id = '#text' + index;
 		ClassicEditor.create( document.querySelector( id ), {
 		    cloudServices: {
@@ -442,11 +445,11 @@ $(function(){
 	// 댓글 수정 취소 버튼 클릭 시
 	function updateRCancle(index) {
 		var id = '#text' + index;
-		$(".comment_content").eq(index).css("display", "inline");
-		$(".makeBtn").eq(index).css("display", "inline");
-		$(".submitRUpdate").eq(index).css("display", "none");
-		$(".cancleRUpdate").eq(index).css("display", "none");
- 		$(".ck").eq(index).css("display", "none");
+		$(".comment_content").eq(index).show();
+		$(".makeBtn").eq(index).show();
+		$(".submitRUpdate").eq(index).hide();
+		$(".cancleRUpdate").eq(index).hide();
+ 		$(".ck").eq(index).hide();
 	}
 	
 	// 댓글 수정 버튼 클릭 시

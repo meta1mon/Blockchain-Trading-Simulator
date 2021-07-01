@@ -16,4 +16,6 @@ public interface MypageService {
 	public int myDelete(String email);
 	public Acnt myAcnt(String email);
 	public List<MyRcommunity> selectMyRcommunity(String email);
+	public float myTotalCoin(Acnt vo);
+	public int coinListCount(Acnt vo);
 }

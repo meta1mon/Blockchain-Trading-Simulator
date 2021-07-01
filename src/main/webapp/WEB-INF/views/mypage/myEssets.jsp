@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,29 +57,63 @@
 			<br>
 			<div>
 				<ul>
-					<li><img width="30px" height="30px">코인 보유액 000원</li>
+					<li><img width="30px" height="30px">코인 보유액 ${totalCoin }원</li>
 					<li><img width="30px" height="30px">현금 보유액 ${acnt.cybcash }원</li>
-					<li><img width="30px" height="30px">총액 22222원</li>
+					<li><img width="30px" height="30px">총액  ${totalAssets }원</li>
 				</ul>
 			</div>
+			
+			<h2>보유코인 목록</h2>
+			
 			<table>
 				<tr>
-					<th>거래 구분</th>
-					<th>종목</th>
-					<th>수량</th>
-					<th>단가</th>
-					<th>총 거래액</th>
-					<th>거래 일시</th>
+					<th>보유코인</th>
+					<th>보유수량</th>
+					<th>매수평균가</th>
+					<th>매수금액</th>
+					<th>평가금액</th>
+					<th>평가손익</th>
 				</tr>
-				<tr>
-					<td>매수</td>
-					<td>DOGE</td>
-					<td>2.333332</td>
-					<td>520 원</td>
-					<td>1040.666664 원</td>
-					<td>2021-02-22</td>
-				</tr>
+				<c:if test="${v eq 0 }">
+					<tr>
+						<td colspan="6" align="center"><br> <br> 
+						보유한 코인이 없습니다.<br> <br></td>
+					</tr>
+				</c:if>
+				<c:if test="${v ne 0 }">
+					<c:forEach var="vS" items="${vList }" varStatus="status">
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</c:forEach>
+				</c:if>
 			</table>
+			
+			
+			<!-- 기존 테이블 -->
+<!-- 			<table> -->
+<!-- 				<tr> -->
+<!-- 					<th>거래 구분</th> -->
+<!-- 					<th>종목</th> -->
+<!-- 					<th>수량</th> -->
+<!-- 					<th>단가</th> -->
+<!-- 					<th>총 거래액</th> -->
+<!-- 					<th>거래 일시</th> -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td>매수</td> -->
+<!-- 					<td>DOGE</td> -->
+<!-- 					<td>2.333332</td> -->
+<!-- 					<td>520 원</td> -->
+<!-- 					<td>1040.666664 원</td> -->
+<!-- 					<td>2021-02-22</td> -->
+<!-- 				</tr> -->
+<!-- 			</table> -->
 		</div>
 	</div>
 </html>

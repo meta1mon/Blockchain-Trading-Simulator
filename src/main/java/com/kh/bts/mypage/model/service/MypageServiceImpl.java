@@ -63,4 +63,14 @@ public class MypageServiceImpl implements MypageService {
 		return myDao.selectMyRcommunity(email);
 	}
 
+	@Override
+	public float myTotalCoin(Acnt vo) {
+		return myDao.myTotalCoin(vo);
+	}
+
+	@Override
+	public int coinListCount(Acnt vo) {
+		return myDao.coinListCount(vo);
+	}
+
 }

@@ -256,12 +256,24 @@ public class MypageController {
 
 		HttpSession session = request.getSession();
 		String loginEmail = (String) session.getAttribute("loginMember");
+		
+		
 		if (loginEmail == null) {
 			System.out.println("비회원입니다");
 		} else {
 			mv.addObject("email", loginEmail);
 			Acnt result = acntService.selectMyAcnt(loginEmail);
+			float totalCoin =  myService.myTotalCoin(result);
+			
+			int totalAssets = (int)totalCoin+result.getCybcash();
+			
+			int coinListCount = myService.coinListCount(result);
+			System.out.println("coinListCount : " + coinListCount);
+			
 			mv.addObject("acnt", result);
+			mv.addObject("totalCoin", totalCoin);
+			mv.addObject("totalAssets", totalAssets);
+			
 		}
 		
 		mv.setViewName("mypage/myEssets");

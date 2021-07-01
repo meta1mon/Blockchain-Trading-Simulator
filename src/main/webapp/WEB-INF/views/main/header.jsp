@@ -7,9 +7,21 @@
 	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>
 	BTS
 </title>
+<script>
+	$(function() {
+		$('ul .menu').each(function() {
+			$(this).css("cursor", "pointer");
+			$(this).on("click", function() {
+				var link = $(this).children(".menutext").attr("href");
+				location.href = link;
+			})
+		});
+	})
+</script>
 <header>
 <div class="behindheader"></div><br>
 	<div class="header">

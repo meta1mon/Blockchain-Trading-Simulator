@@ -1,6 +1,14 @@
 @charset "UTF-8";
 header {
-	height: 64px;
+/* 	height: 64px; */
+	height: 50px;
+}
+. header a, . header a:active, . header a:visited {
+	text-decoration: none;
+}
+
+.header a {
+	display: block;
 }
 .header {
 	position: fixed;
@@ -9,9 +17,11 @@ header {
 	right: 0;
 	width: 100%;
 	min-width: 320px;
-	height: 64px;
+/* 	height: 64px; */
+	height: 50px;
 	/* 140 */
-	background-color: #E3C8F8;
+/* 	background-color: #E3C8F8; */
+	background-color: #8c66c8;
 	overflow: hidden;
 	margin: 0 auto;
 	text-align: center;
@@ -21,17 +31,18 @@ header {
 
 .behindheader {
 	width: 100%;
-	height: 64px;
+/* 	height: 64px; */
+	height: 50px;
 }
 
 .h_left {
-	margin: 6.5px 0 0 0;
+/* 	margin: 6.5px 0 0 0; */
 	width: 900px;
 	float: left;
 }
 
 .h_right {
-	margin: 6.5px 10px 0 0;
+	/* margin: 6.5px 10px 0 0; */
 	width: 300px;
 	float: right;
 }
@@ -47,18 +58,19 @@ header {
 	text-decoration: none;
 	font-size: 16px;
 	border-bottom: 1px solid transparent;
+	line-height: 1.5;
 }
 .menu:hover{
-	border-bottom: 3px solid #8C66C8;
-	
+/* 	border-bottom: 3px solid #8C66C8; */
+	background: white;
 }
 .menu:hover .menutext{
 	color: #8C66C8 !important;
-	
 }
 
 .menutext{
-	color: black;
+/* 	color: black; */
+	color: white;
 }
 .member {
 	float: right;

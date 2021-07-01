@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,6 +58,17 @@
 	padding: 10px;
 }
 
+.historyTable {
+	width : 80%;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.historyTable th, td {
+	border: 1px solid black;
+	padding: 10px;
+}
+
 </style>
 </head>
 <body>
@@ -75,8 +87,9 @@
 				</ul>
 			</div>
 			
+			<c:set var ="numtest3" value="123.456"/>
+
 			<h2>보유코인 목록</h2>
-			
 			<table id="coinTable">
 				<tr>
 					<th>보유코인</th>
@@ -96,14 +109,102 @@
 					<c:forEach var="coin" items="${coinList }" varStatus="status">
 						<tr>
 							<td>${coin.coin }</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td><fmt:formatNumber value="${coin.buycnt }" pattern="#,###,###,###" /></td>
+							<td><fmt:formatNumber value="${coin.buyprice }" pattern="#,###,###,###" /></td>
+							<td><fmt:formatNumber value="${coin.buycnt*coin.buyprice }" pattern="#,###,###,###" /></td>
+							<td>
+								<!-- 평가금액 : api 이용해서 js로 처리 -->
+							</td>
+							<td>
+								<!-- 평가손익 : api 이용해서 js로 처리 -->
+							</td>
 						</tr>
 					</c:forEach>
 				</c:if>
+			</table>
+			
+			<h2>미체결</h2>
+			
+			<h3>미체결 매수주문내역</h3>
+			<table class="historyTable">
+				<tr>
+					<th>접수번호</th>
+					<th>코인종류 </th>
+					<th>코인개수 </th>
+					<th>매수가격 </th>
+					<th>매수날짜 </th>
+				</tr>
+				<c:forEach var="wblist" items="${wBoughtResult }" varStatus="status">
+					<tr>
+						<td>${wblist.ubno }</td>
+						<td>${wblist.coin }</td>
+						<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###" /></td>
+						<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###" /></td>
+						<td>${wblist.wbdate }</td>
+					</tr>
+				</c:forEach>
+			</table>
+			
+			<h3>미체결 매도주문내역</h3>
+			<table class="historyTable">
+				<tr>
+					<th>접수번호</th>
+					<th>코인종류 </th>
+					<th>코인개수 </th>
+					<th>매수가격 </th>
+					<th>매수날짜 </th>
+				</tr>
+				<c:forEach var="wslist" items="${wSoldResult }" varStatus="status">
+					<tr>
+						<td>${wslist.usno }</td>
+						<td>${wslist.coin }</td>
+						<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###" /></td>
+						<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###" /></td>
+						<td>${wslist.wsdate }</td>
+					</tr>
+				</c:forEach>
+			</table>
+			
+			<h2>체결</h2>
+			
+			<h3>체결 매수주문내역</h3>
+			<table class="historyTable">
+				<tr>
+					<th>접수번호</th>
+					<th>코인종류 </th>
+					<th>코인개수 </th>
+					<th>매수가격 </th>
+					<th>매수날짜 </th>
+				</tr>
+				<c:forEach var="wblist" items="${wBoughtResult }" varStatus="status">
+					<tr>
+						<td>${wblist.ubno }</td>
+						<td>${wblist.coin }</td>
+						<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###" /></td>
+						<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###" /></td>
+						<td>${wblist.wbdate }</td>
+					</tr>
+				</c:forEach>
+			</table>
+			
+			<h3>체결 매도주문내역</h3>
+			<table class="historyTable">
+				<tr>
+					<th>접수번호</th>
+					<th>코인종류 </th>
+					<th>코인개수 </th>
+					<th>매수가격 </th>
+					<th>매수날짜 </th>
+				</tr>
+				<c:forEach var="wslist" items="${wSoldResult }" varStatus="status">
+					<tr>
+						<td>${wslist.usno }</td>
+						<td>${wslist.coin }</td>
+						<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###" /></td>
+						<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###" /></td>
+						<td>${wslist.wsdate }</td>
+					</tr>
+				</c:forEach>
 			</table>
 			
 			

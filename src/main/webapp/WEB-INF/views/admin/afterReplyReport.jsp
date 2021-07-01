@@ -128,6 +128,38 @@ table{
 .inbl{
 	display: inline-block;
 }
+
+#list {
+	table-layout:fixed;
+}
+
+#list td{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#list tr:not(.page) td:nth-child(1) {
+	width: 122.625px;
+}      
+#list tr:not(.page) td:nth-child(2) {
+	width: 146.8px;
+}      
+#list tr:not(.page) td:nth-child(3) {
+	width: 113.28px;
+}       
+#list tr:not(.page) td:nth-child(4) {
+	width: 89.11px;
+}       
+#list tr:not(.page) td:nth-child(5), 
+#list tr:not(.page) td:nth-child(6), 
+#list tr:not(.page) td:nth-child(7), 
+#list tr:not(.page) td:nth-child(8) {
+	width: 122.63px;
+}       
+#list tr:not(.page) td:nth-child(9) {
+	width: 122.69px;
+}
 </style>
 <script>
 $(function(){
@@ -160,7 +192,7 @@ $(function(){
 <%@include file="headerAndAside.jsp"%>
 <body>
 	<div id="arr">
-	<p class="title inbl">처리된 신고 게시글 목록</p>
+	<p class="title inbl">처리된 신고 댓글 목록</p>
 	<!-- TODO 검색 기능 넣기 -->
 	<form name="listForm" action="arr" method="get" id="listForm">
 		<input type="search" name="keyword" id="search"	placeholder="검색어를 입력해주세요.">
@@ -168,7 +200,7 @@ $(function(){
 	</form>
 	<hr>
 		<div>
-			<table>
+			<table id="list">
 				<tr>
 					<th>신고 번호</th>
 					<th>게시글 제목</th>

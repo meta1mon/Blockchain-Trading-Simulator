@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.bts.acnt.model.vo.Acnt;
+import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.dao.MypageDao;
@@ -64,13 +65,18 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public float myTotalCoin(Acnt vo) {
+	public int myTotalCoin(Acnt vo) {
 		return myDao.myTotalCoin(vo);
 	}
 
 	@Override
 	public int coinListCount(Acnt vo) {
 		return myDao.coinListCount(vo);
+	}
+
+	@Override
+	public List<CoinAcnt> selectMyCoinAcnt(String acntno) {
+		return myDao.selectMyCoinAcnt(acntno);
 	}
 
 }

@@ -45,6 +45,18 @@
 #me table {
 	margin: 10px auto 0 auto;
 }
+
+#coinTable {
+	width : 80%;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+#coinTable th, td {
+	border: 1px solid black;
+	padding: 10px;
+}
+
 </style>
 </head>
 <body>
@@ -65,7 +77,7 @@
 			
 			<h2>보유코인 목록</h2>
 			
-			<table>
+			<table id="coinTable">
 				<tr>
 					<th>보유코인</th>
 					<th>보유수량</th>
@@ -74,16 +86,16 @@
 					<th>평가금액</th>
 					<th>평가손익</th>
 				</tr>
-				<c:if test="${v eq 0 }">
+				<c:if test="${coinListCount eq 0 }">
 					<tr>
 						<td colspan="6" align="center"><br> <br> 
 						보유한 코인이 없습니다.<br> <br></td>
 					</tr>
 				</c:if>
-				<c:if test="${v ne 0 }">
-					<c:forEach var="vS" items="${vList }" varStatus="status">
+				<c:if test="${coinListCount ne 0 }">
+					<c:forEach var="coin" items="${coinList }" varStatus="status">
 						<tr>
-							<td></td>
+							<td>${coin.coin }</td>
 							<td></td>
 							<td></td>
 							<td></td>

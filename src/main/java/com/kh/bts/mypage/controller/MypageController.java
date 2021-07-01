@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.bts.HomeController;
 import com.kh.bts.acnt.model.service.AcntService;
 import com.kh.bts.acnt.model.vo.Acnt;
+import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.service.MemberService;
@@ -263,17 +264,21 @@ public class MypageController {
 		} else {
 			mv.addObject("email", loginEmail);
 			Acnt result = acntService.selectMyAcnt(loginEmail);
-			float totalCoin =  myService.myTotalCoin(result);
 			
-			int totalAssets = (int)totalCoin+result.getCybcash();
+			int totalCoin =  myService.myTotalCoin(result);
+			
+			int totalAssets = totalCoin+result.getCybcash();
 			
 			int coinListCount = myService.coinListCount(result);
-			System.out.println("coinListCount : " + coinListCount);
+			
+			List<CoinAcnt> coinList = myService.selectMyCoinAcnt(result.getAcntno());
+			
 			
 			mv.addObject("acnt", result);
 			mv.addObject("totalCoin", totalCoin);
 			mv.addObject("totalAssets", totalAssets);
-			
+			mv.addObject("coinListCount", coinListCount);
+			mv.addObject("coinList", coinList);
 		}
 		
 		mv.setViewName("mypage/myEssets");

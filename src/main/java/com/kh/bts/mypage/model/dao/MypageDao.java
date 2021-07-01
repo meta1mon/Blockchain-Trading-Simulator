@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.bts.acnt.model.vo.Acnt;
+import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.vo.MyRcommunity;
@@ -76,12 +77,19 @@ public class MypageDao {
 		return sqlSession.selectOne("acnt.selectMyAcnt", email);
 	}
 
-	public float myTotalCoin(Acnt vo) {
+	public int myTotalCoin(Acnt vo) {
+		if(sqlSession.selectOne("mypage.myTotalCoin", vo) == null) {
+			return 0;
+		} 
 		return sqlSession.selectOne("mypage.myTotalCoin", vo);
 	}
 
 	public int coinListCount(Acnt vo) {
 		return sqlSession.selectOne("mypage.coinListCount", vo);
+	}
+
+	public List<CoinAcnt> selectMyCoinAcnt(String acntno) {
+		return sqlSession.selectList("coinacnt.selectMyCoinAcnt", acntno);
 	}
 
 }

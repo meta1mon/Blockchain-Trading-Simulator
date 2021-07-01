@@ -79,7 +79,8 @@
 }
 
 #a:hover {
-	text-decoration: none;
+	border: none;
+	color: #14D3D5;
 }
 </style>
 </head>

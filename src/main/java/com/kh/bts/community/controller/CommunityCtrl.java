@@ -45,17 +45,12 @@ public class CommunityCtrl {
 			if (keyword != null && !keyword.equals("")) {
 				mv.addObject("list", cmService.selectSearch(keyword, searchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-			}
-			else {
-				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
-				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-			}
-			
-			if (bottomKeyword != null && !bottomKeyword.equals("")) {
+				
+			} else if (bottomKeyword != null && !bottomKeyword.equals("")) {
 				mv.addObject("list", cmService.selectSearch(bottomKeyword, bottomSearchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-			}
-			else {
+				
+			} else {
 				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 			}

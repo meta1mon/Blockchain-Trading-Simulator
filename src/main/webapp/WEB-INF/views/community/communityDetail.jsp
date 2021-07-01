@@ -131,7 +131,7 @@ $(function(){
 			</h4>
 			<hr style="position: relative; top: 1px;">
 			<c:if test="${!empty commentList}">
-				<c:forEach var="rep" items="${commentList}">
+				<c:forEach var="rep" items="${commentList}" varStatus="status">
 					<div id="comment">
 						<br>
 						<!-- 댓글 작성자명, 내용, 날짜 -->
@@ -140,20 +140,26 @@ $(function(){
 							class="comment_writer"> ${rep.rwriter} &nbsp; &nbsp;</span> <span
 							class="comment_date"> ${rep.rdate}</span> <span
 							class="comment_content"> ${rep.rcontent}</span>
-						</span>
-							<p>
- 						<c:if test="${loginMember == rep.email }">
-								<button type="button" class="rupdateConfirm" id="rupdateConfirm"
-									style="display: none;"
-									onclick="replyUpdate(${rep.rno}, ${rep.rcontent});">수정완료</button>
-								&nbsp;&nbsp;&nbsp;
-								<button type="button" class="rdelete" id="rdelete"
-									style="display: none;">삭제하기</button>
-								&nbsp;&nbsp;&nbsp;
-								<button type="button" class="rupdate" id="rupdate">수정 및
-									삭제</button>
-						</c:if>
-							</p>
+						 	<textarea style="display: none;"
+								placeholder="댓글 쓰기" class="updateEditor" id="text${status.index }" name="rcontent" maxlength="4000"
+								onfocus="if(this.value == '댓글 수정') { this.value = ''; }"
+								onblur="if(this.value == '') { this.value ='댓글 수정'; }"></textarea>
+						 </span>
+						<p>
+							<!-- 댓글 작성자에게만 수정 삭제 버튼이 보임 -->
+							<c:if test="${loginMember == rep.email }">
+								<button type="button" class="makeBtn"
+									onclick="makeUpdateBtn(${status.index })">수정하기</button>
+								<button type="button" class="submitRUpdate"
+									onclick="replyUpdate(${rep.rno}, ${rep.rcontent })"
+									style="display: none;">수정완료</button>
+								<button type="button" class="cancleRUpdate"
+									onclick="updateRCancle(${status.index })"
+									style="display: none;">수정취소</button>
+								<button type="button"
+									onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</button>
+							</c:if>
+						</p>
 						<button type="button" class="report" id="popup_open_btn_reply"
 							onclick="rreport(${rep.rno})">신고</button>
 					</div>
@@ -325,12 +331,12 @@ $(function(){
     Element.prototype.setStyle = function(styles) {
         for (var k in styles) this.style[k] = styles[k];
         return this;
-    };
+    }
 
     document.getElementById('popup_open_btn').addEventListener('click', function() {
         // 모달창 띄우기
         modalFn('my_modal');
-    });
+    })
     
 	// 게시글 신고 부분
       <!-- 게시글 신고 전송 ajax -->
@@ -351,7 +357,7 @@ $(function(){
                
             }
          });
-      });
+      })
     
     
     
@@ -374,30 +380,29 @@ $(function(){
              
           }
        });
-    });
+    })
 
 
-	
+	// 비추천
 	function dislike() {
 		if(${loginMember == null}) {
 			alert("로그인이 필요합니다");			
 		} else {
-		$.ajax({
-			url : "${pageContext.request.contextPath}/cdislike",
-			type : "post",
-			data : {
-				cno : "${community.cno}"
-			},
-			datatype : "json",
-			success : function(data) {
-				alert(data);
-				window.location.reload();
-			}
-		});
+			$.ajax({
+				url : "${pageContext.request.contextPath}/cdislike",
+				type : "post",
+				data : {
+					cno : "${community.cno}"
+				},
+				datatype : "json",
+				success : function(data) {
+					window.location.reload();
+				}
+			});
 		}
-	};
+	}
 	
-	// 추천, 비추천
+	// 추천
 	function clike() {
 		if(${loginMember == null}) {
 			alert("로그인이 필요합니다");			
@@ -406,53 +411,76 @@ $(function(){
 				url : "${pageContext.request.contextPath}/clike",
 				type : "post",
 				data : {
-					"cno" : "${community.cno}",
-					"email": "${loginMember}"
-					
+					"cno" : "${community.cno}"
 				},
 				success : function(data) {
 					window.location.reload();
 				}
 			});
 		}
-	};
-	
-	function cdislike() {
-		if(${loginMember == null}) {
-			alert("로그인이 필요합니다");			
-		} else {
-			$.ajax({
-				url : "${pageContext.request.contextPath}/cdislike",
-				type : "post",
-				data : {
-					"cno" : "${community.cno}",
-					"email": "${loginMember}"
-					
-				},
-				success : function(data) {
-					window.location.reload();
-				}
-			});
-		}
-	};
-	
-	function replyUpdate(rno, rcontent) {
-		 console.log("클릭하면 들어오나??????????????");
-			$.ajax({
-				url : "${pageContext.request.contextPath}/rcUpdate",
-				method : "POST",
-				async : false,
-				data: {
-					"rno" : rno,
-					"rcontent" : rcontent
-				},
-				success : function(data) {
-					alert(data);
-				}, error : function(request,status,error) {
-					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			     	}
-		    });
 	}
+	// 댓글 수정 버튼 생성
+	function makeUpdateBtn(index) {
+		console.log(index);
+		$(".comment_content").eq(index).css("display", "none");
+		$(".makeBtn").eq(index).css("display", "none");
+		$(".updateEditor").eq(index).css("display", "block");
+		$(".submitRUpdate").eq(index).css("display", "inline");
+		$(".cancleRUpdate").eq(index).css("display", "inline");
+		var id = '#text' + index;
+		ClassicEditor.create( document.querySelector( id ), {
+		    cloudServices: {
+		        tokenUrl: 'https://81478.cke-cs.com/token/dev/de0d9159dc2b7ce3ecb85191c28f789217b087f58ae6880e30d89820724d',
+		        uploadUrl: 'https://81478.cke-cs.com/easyimage/upload/'
+		    }
+		} )
+		.catch( error => {
+		    console.error( error );
+		} );
+	}
+	
+	// 댓글 수정 취소 버튼 클릭 시
+	function updateRCancle(index) {
+		var id = '#text' + index;
+		$(".comment_content").eq(index).css("display", "inline");
+		$(".makeBtn").eq(index).css("display", "inline");
+		$(".submitRUpdate").eq(index).css("display", "none");
+		$(".cancleRUpdate").eq(index).css("display", "none");
+ 		$(".ck").eq(index).css("display", "none");
+	}
+	
+	// 댓글 수정 버튼 클릭 시
+	function replyUpdate(rno, rcontent) {
+		$("#newRcontent").text();
+		$.ajax({
+			url : "${pageContext.request.contextPath}/rcUpdate",
+			type : "post",
+			data : {
+				"rno" : rno,
+				"rcontent": rcontent
+			},
+			success : function(data) {
+				window.location.reload();
+			}
+		})
+	}
+	
+	// 댓글 삭제   -- 새로고침을 사용 중인데 추후 수정해야 할듯
+	function replyDelete(rno, cno) {
+		console.log("지우는 함수 실행");
+		$.ajax({
+			url : "${pageContext.request.contextPath}/rcDelete",
+			type : "post",
+			data : {
+				"rno" : rno,
+				"cno" : cno
+			},
+			success : function(data) {
+				window.location.reload();
+			}
+		});
+	}
+	
 </script>
 </body>
 </html>

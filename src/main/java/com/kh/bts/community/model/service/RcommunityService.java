@@ -17,5 +17,5 @@ public interface RcommunityService {
 
 	int updateRcommunity(Rcommunity rc);
 
-	int deleteRcommunity(Rcommunity rc);
+	int deleteRcommunity(String rno, String cno);
 }

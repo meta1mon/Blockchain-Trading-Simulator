@@ -37,6 +37,12 @@
 		UPDATE COMMUNITY SET REPLYCNT = REPLYCNT+1 WHERE CNO = #{cno}
 	</update>
 	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteRcommunity" parameterType="string"
+		flushCache="true" statementType="PREPARED">
+		DELETE FROM RCOMMUNITY WHERE RNO = #{rno}
+	</delete>
+	
 	<!-- 댓글 삭제 시 댓글 수 -1 -->
 	<update id="updateDelReplyCnt" parameterType="string"
 		flushCache="true" statementType="PREPARED">

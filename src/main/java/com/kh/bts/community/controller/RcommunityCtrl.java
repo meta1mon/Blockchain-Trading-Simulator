@@ -61,19 +61,29 @@ public class RcommunityCtrl {
 	
 	@RequestMapping(value = "rcDelete", method = RequestMethod.POST)
 	public void RcommunityDelete(HttpServletResponse response, Rcommunity rc) {
-		
+		System.out.println("들오나 함수 딜맃트?");
+		String oracleRno = setLPad(rc.getRno(), 5, "0");
+		String oracleCno = setLPad(rc.getCno(), 5, "0");
+		int result = rcmService.deleteRcommunity(oracleRno, oracleCno);
 		PrintWriter out = null;
-		JSONObject job = new JSONObject();
 		try {
-			job.put("ack", rcmService.deleteRcommunity(rc));
 			out = response.getWriter();
-			out.append(job.toJSONString());
+			out.print(result);
 		} catch (Exception e) {
-			job.put("ack", -1);
 		} finally {
 			out.flush();
 			out.close();
 		}
+	}
+	
+	private String setLPad(String strContext, int iLen, String strChar) {
+		String strResult = "";
+		StringBuilder sbAddChar = new StringBuilder();
+		for (int i = strContext.length(); i < iLen; i++) { // iLen길이 만큼 strChar문자로 채운다.
+			sbAddChar.append(strChar);
+		}
+		strResult = sbAddChar + strContext; // LPAD이므로, 채울문자열 + 원래문자열로 Concate한다.
+		return strResult;
 	}
 	
 }

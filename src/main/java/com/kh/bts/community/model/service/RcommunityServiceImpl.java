@@ -38,8 +38,8 @@ public class RcommunityServiceImpl implements RcommunityService {
 	}
 
 	@Transactional
-	public int deleteRcommunity(Rcommunity rc) { // 댓글 삭제
-		return rcmDao.deleteRcommunity(rc);
+	public int deleteRcommunity(String rno, String cno) { // 댓글 삭제
+		return rcmDao.deleteRcommunity(rno, cno);
 	}
 
 }

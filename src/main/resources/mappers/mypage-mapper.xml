@@ -58,6 +58,9 @@
 		= #{cwriter} ORDER BY CDATE DESC
 	</select>
 
-
-
-</mapper>
+<!-- 임의로 막 적은거 , 스케쥴에 쓰려고... 프로시저 호출하는 방법
+	<select id="asdb" parameterType="hashmap">
+		call 프로시저이름(#{a}, #{b})
+	</select>
+ -->
+ </mapper>

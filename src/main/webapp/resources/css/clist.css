@@ -51,7 +51,7 @@
 }
 
 #searchType:hover, #searchType:focus {
-	color: #8C66C8;
+	color: #643EA0;
 	transition: color 0.15s ease-in-out;
 }
 
@@ -71,6 +71,7 @@
 
 #search:hover, #search:focus {
 	color: black;
+	box-shadow: 2px 3px 5px 4px #eaeaea;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
 }
@@ -102,6 +103,7 @@
 
 #btnsearch:hover, #btnsearch:focus {
 	color: black;
+	box-shadow: 2px 3px 5px 4px #eaeaea;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
 }
@@ -124,7 +126,8 @@
 
 #write:hover {
 	background-color: #A07ADC;
-	box-shadow: 10px 10px 20px 5px #eeeeee;
+	box-shadow: 2px 3px 5px 4px #eaeaea;
+	color:black;
 }
 
 .ptable {

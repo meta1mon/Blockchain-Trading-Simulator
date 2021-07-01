@@ -272,7 +272,7 @@ function alltable() { // 전체코인 시세 표
 								data['data'][search]['closing_price'] * 1,
 								data['data'][search]['fluctate_rate_24H'] * 1,
 								data['data'][search]['acc_trade_value_24H'] * 1 ]
-						html = "<table class='table table-striped' ><tr><td>코인명</td><td>현재가</td><td>등락률(24H)</td><td>거래대금</td></tr>";
+						html = "<table style='height : 146px; table-layout : fixed;' class='table table-striped' ><tr><td width= '78.08px !important'>코인명</td><td width= '91.36px !important'>현재가</td><td width= '78.77px !important'>등락률(24H)</td><td width= '164.31px !important'>거래대금</td></tr>";
 
 						html += "<tr><td><a href=# onclick='changename(\""
 								+ search + "\");'>" + search + "</a></td><td>"
@@ -494,7 +494,8 @@ function wslist() { // 미체결 매도 내용 함수
 function chart() { // 차트
 
 	new TradingView.widget({
-		
+		"height" : "650",
+		"width" : "850",
 		"symbol" : "BITHUMB:" + changecoin + "KRW",
 		"interval" : "5",
 		"timezone" : "Asia/Seoul",
@@ -704,27 +705,27 @@ function orderbook() {
 				cache : false,
 				datatype : "json",
 				success : function(data) {
-					for (var i = 0; i < 5; i++) {
+					for (var i = 0; i < 15; i++) {
 						orderbookarrbid[i] = [
 								data[0]['orderbook_units'][i]['bid_price'] * 1,
 								data[0]['orderbook_units'][i]['bid_size'] * 1 ]
 					}
-					for (var i = 0; i < 5; i++) {
+					for (var i = 0; i < 15; i++) {
 						orderbookarrask[i] = [
 								data[0]['orderbook_units'][i]['ask_price'] * 1,
 								data[0]['orderbook_units'][i]['ask_size'] * 1 ]
 					}
-					html6 = "<table class='table table-striped' ><tr><td>현재가</td><td>수량</td></tr>";
-					for (var i = 4; i >= 0; i--) {
-						html6 += "<tr style='background: red; opacity: 0.3;'><td>"
+					html6 = "<table id='orderbook_t' class='table table-striped' ><tr><td>현재가</td><td>수량</td></tr>";
+					for (var i = 14; i >= 0; i--) {
+						html6 += "<tr style='background: rgba(255,51,0,0.5) !important;'><td><a >"
 								+ orderbookarrask[i][0]
-								+ "</td><td>"
+								+ "<a/a></td><td>"
 								+ orderbookarrask[i][1] + "개" + "</td></tr>";
 
 					}
 					html6 += "<tr><td>구분좀하자 </td></tr>";
-					for (var i = 0; i < 5; i++) {
-						html6 += "<tr  style='background: blue;'><td>"
+					for (var i = 0; i < 15; i++) {
+						html6 += "<tr  style='background: rgba(33,150,243, 0.5) !important;'><td>"
 								+ orderbookarrbid[i][0] + "</td><td>"
 								+ orderbookarrbid[i][1] + "개" + "</td></tr>";
 

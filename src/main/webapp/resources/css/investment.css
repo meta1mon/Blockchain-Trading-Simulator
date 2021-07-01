@@ -1,52 +1,71 @@
 @charset "UTF-8";
-.div1, .div2, .div3, .div4, .div5, .div6{
-	padding: 5px;
 
+.div1, .div2, .div3, .div4, .div5, .div6 {
+	padding: 5px;
 }
-.div1 *, .div2 *, .div3 *, .div4 *, .div5 *, .div6 *{
+
+.div1 *, .div2 *, .div4 *, .div5 *, .div6 * {
 	background: #f8f9fa;
+}
+.btn_bs{
+	width: 45%;
 }
 .parent {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
-	grid-template-rows: repeat(6, 1fr);
-	grid-column-gap: 0px;
-	grid-row-gap: 0px;
+	grid-template-rows: repeat(5, 1fr);
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+#title {
+	height: 100%;
 }
 
 .div1 {
 	grid-area: 1/1/2/5;
-	height: 50%;
+	height: 100px;
 }
 
 .div2 {
 	grid-area: 2/1/4/5;
-	top : 200px;
+	height: 700px ;
+	width : 937px;
+	top: 170px;
 	position: absolute;
 }
-#chart1{
+
+#chart1 {
 	left: -50px;
+	
 }
 
 .div3 {
 	grid-area: 4/1/6/3;
+	height: 548px;
 }
 
 .div4 {
 	grid-area: 4/3/6/5;
+	height: 548px;
 }
 
 .div5 {
 	grid-area: 1/5/7/6;
 }
 
-.div6 {
+/* .div6 {
 	grid-area: 6/1/7/5;
+	height: 10px;
 }
-
-#cointable_div { 
+ */
+#cointable_div {
 	overflow: auto;
-	height: 1000px;
+	height: 1348px;
+}
+#aaaaa {
+	overflow: auto;
+	height: 548px;
 }
 
 #sold_b {

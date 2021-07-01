@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
 	type="image/x-icon" />
@@ -28,14 +29,24 @@
 	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
 
 <script type="text/javascript">
-	
+window.addEventListener('scroll', function(){
+	var div = document.getElementByClassName("div3");
+	let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위치
+	let windowHeight = div.innerHeight; // 스크린 창
+	let fullHeight = document.body.scrollHeight; //  margin 값은 포함 x
+
+	if(scrollLocation + windowHeight >= fullHeight){
+		console.log('끝')
+	}
+})
 </script>
 <meta charset="UTF-8">
 </head>
 <body>
 	<div id="wrapper">
 		<jsp:include page="../main/header.jsp"></jsp:include>
-		<div id="container" style="width: 1400px !important; background: white !important;">
+		<div id="container"
+			style="width: 1400px !important; background: white !important;">
 			<div class="parent">
 				<!-- 위젯, 코인 목록 테이블 -->
 				<div class="div1">
@@ -111,10 +122,10 @@
 
 									</table>
 								</form>
-								<table>
+								<table style="width: 100%; padding-left: 20px;">
 									<tr>
-										<td><button value="" id="bought_b">매수</button>
-											<button value="" id="sold_b">매도</button>
+										<td><button class="btn_bs" id="bought_b">매수</button>
+											<button class="btn_bs" id="sold_b">매도</button></td>
 									</tr>
 								</table>
 								<form id="frm22">
@@ -195,33 +206,34 @@
 
 						</c:when>
 					</c:choose>
-				</div>
-
-				<div class="div6">
-
-					<table id="wb_ws" class='table table-striped'>
-
-						<tr>
-							<th colspan="1">미체결주문</th>
-						</tr>
-						<tr>
-							<td><div id="aj_wb"></div>
-								<div id="aj_ws"></div></td>
-
-						</tr>
-
-						<tr>
-							<th colspan="1">체결주문</th>
-						</tr>
-						<tr>
-
-							<td><div id="aj_b"></div>
-								<div id="aj_s"></div></td>
-						</tr>
-					</table>
+					<div class="div6"></div>
 				</div>
 
 			</div>
+			<div class="div7">
+
+				<table id="wb_ws" class='table table-striped'>
+
+					<tr>
+						<th colspan="1">미체결주문</th>
+					</tr>
+					<tr>
+						<td><div id="aj_wb"></div>
+							<div id="aj_ws"></div></td>
+
+					</tr>
+
+					<tr>
+						<th colspan="1">체결주문</th>
+					</tr>
+					<tr>
+
+						<td><div id="aj_b"></div>
+							<div id="aj_s"></div></td>
+					</tr>
+				</table>
+			</div>
+
 		</div>
 
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.bts.community.model.vo.Rcommunity;
+import com.kh.bts.community.model.vo.UserRcommuniyCheck;
 import com.kh.bts.member.model.vo.Member;
 
 @Repository("rcmDao")
@@ -18,7 +19,7 @@ public class RcommunityDao {
 		return sqlSession.selectOne("rcommunity.countRcommunity");
 	}
 	
-	public List<Rcommunity> selectList(String cno) { // 게시글에 해당하는 댓글 조회
+	public List<UserRcommuniyCheck> selectRcommunityList(String cno) { // 게시글에 해당하는 댓글 조회
 		return sqlSession.selectList("rcommunity.selectRcommunityAll", cno);
 	}
 	

@@ -4,14 +4,18 @@
 	<resultMap type="Rcommunity" id="resultRcommunity">
 	</resultMap>
 	
+	<resultMap type="UserRcommuniyCheck" id="resultUserRcommuniyCheck">
+	</resultMap>
+	
+	
 	<!-- 댓글 전체 개수 조회 -->
 	<select id="countRcommunityALl" resultType="int">
 		SELECT count(*) FROM RCOMMUNITY
 	</select>
 	
 	<!-- 해당 게시글에 대한 댓글 리스트 조회 -->
-	<select id="selectRcommunityAll" parameterType="string" resultType="arraylist" resultMap="resultRcommunity">
-		SELECT * FROM RCOMMUNITY WHERE CNO = #{cno} ORDER BY RDATE DESC
+	<select id="selectRcommunityAll" parameterType="string" resultType="arraylist" resultMap="resultUserRcommuniyCheck">
+		SELECT RNO, A.RWRITER, RCONTENT, RDATE, CNO, EMAIL FROM RCOMMUNITY A JOIN MEMBER B ON A.RWRITER = B.NICKNAME WHERE CNO=#{cno}
 	</select>
 
 	<!-- 댓글 단일 조회 -->

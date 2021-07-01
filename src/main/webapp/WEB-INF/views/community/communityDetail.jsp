@@ -140,26 +140,23 @@ $(function(){
 							class="comment_writer"> ${rep.rwriter} &nbsp; &nbsp;</span> <span
 							class="comment_date"> ${rep.rdate}</span> <span
 							class="comment_content"> ${rep.rcontent}</span>
-
 						</span>
-						<!-- 댓글 수정, 삭제, 신고 버튼 -->
-						<!-- (아직 미설정)로그인한 유저의 댓글만 수정, 삭제 버튼 보임 -->
-						<%-- 				<c:if test="${loginMember == writerEmail }"> --%>
-						<p>
-							<button type="button" class="rupdateConfirm" name="updateConfirm"
-								id="rupdateConfirm" style="display: none;"
-								onclick="replyUpdate(${rep.rno}, ${rep.rcontent});">수정완료</button>
-							&nbsp;&nbsp;&nbsp;
-							<button type="button" class="rdelete" name="delete" id="rdelete"
-								style="display: none;">삭제하기</button>
-							&nbsp;&nbsp;&nbsp;
-							<button type="button" class="rupdate" name="update" id="rupdate">수정
-								및 삭제</button>
-						</p>
+							<p>
+ 						<c:if test="${loginMember == rep.email }">
+								<button type="button" class="rupdateConfirm" id="rupdateConfirm"
+									style="display: none;"
+									onclick="replyUpdate(${rep.rno}, ${rep.rcontent});">수정완료</button>
+								&nbsp;&nbsp;&nbsp;
+								<button type="button" class="rdelete" id="rdelete"
+									style="display: none;">삭제하기</button>
+								&nbsp;&nbsp;&nbsp;
+								<button type="button" class="rupdate" id="rupdate">수정 및
+									삭제</button>
+						</c:if>
+							</p>
 						<button type="button" class="report" id="popup_open_btn_reply"
 							onclick="rreport(${rep.rno})">신고</button>
 					</div>
-
 					<br>
 				</c:forEach>
 			</c:if>
@@ -335,7 +332,7 @@ $(function(){
         modalFn('my_modal');
     });
     
-// 게시글 신고 부분
+	// 게시글 신고 부분
       <!-- 게시글 신고 전송 ajax -->
       $("#btnreport").on("click", function() {
          var dataList = $("#frmC").serialize();
@@ -358,7 +355,7 @@ $(function(){
     
     
     
-// 댓글 신고 부분
+	// 댓글 신고 부분
     $("#btnrply").on("click", function() {
   	  var rreport = $("input[name='rreport']:checked").val();
        $.ajax({
@@ -438,97 +435,24 @@ $(function(){
 			});
 		}
 	};
-    </script>
-
-
-	<script>
-
-   
-//기존 댓글 수정 & 삭제
-$(".rupdate").on('click',function(){
-   
-      if($(this).text() == "수정 및 삭제"){
-    	  $('.comment_content').append('<textarea style="margin top:7px;" rows="4" cols="70%" class="updateContent" name="updateContent" id="editor">'+content+'</textarea>');
-
-         $(".rdelete").show("fast");
-         $(".rupdateConfirm").show("fast");
-         $(this).text("수정취소");
-      } else {
-         $(".updateContent").remove();
-         $(this).text("수정 및 삭제");
-         $(".rdelete").toggle("fast");
-         $(".updateConfirm").toggle("fast");
-      }
-});
-
-function replyUpdate(rno, rcontent) {
-	 console.log("클릭하면 들어오나??????????????");
-		$.ajax({
-			url : "${pageContext.request.contextPath}/rcUpdate",
-			method : "POST",
-			async : false,
-			data: {
-				"rno" : rno,
-				"rcontent" : rcontent
-			},
-			success : function(data) {
-				alert(data);
-			},
-			error : function(request,status,error) {
-			   
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		     }
-	      });
-}}}
-
-/* 
-   $(".updateConfirm").on('click',function(){
-	   console.log("클릭하면 들어오나??????????????");
-		$.ajax({
-			url : "${pageContext.request.contextPath}/rcUpdate",
-			method : "POST",
-			async : false,
-			data: {
-				"comment_id" : $("input[name=rep_id]").val(),
-				"comments" : $('.updateContent').val()
-			},
-			success : function(data) {
-				alert(data);
-				parentDiv.find(".comment_content").text(parentDiv.find('.updateContent').val());
-			},
-			error : function(request,status,error) {
-			   
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		     }
-	      });
-         
- */
-/*  $(".updateContent").remove();
-
-
-$(".updateConfirm").toggle("fast");
-$(".rdelete").toggle("fast");
-$('.rupdate').text("수정 및 삭제");
-$(".rdelete").on('click',function(){
-   var parentP = $(this).parent();
-      var parentDiv = parentP.parent();
-      
-   $.ajax({
-         url : "${pageContext.request.contextPath}/rcDelete",
-         method : "POST",
-         data: {
-         comment_id : parentDiv.find("input[name=rep_id]").val()
-         },
-         success : function(data) {
-         alert(data);
-         parentDiv.remove();
-         }, error : function(request,status,error){
-            
-alert("code:"+request.status+" n"+"message:"+request.responseText+" n"+"error:"+error);
-         }
-});
-});
-   }); */
+	
+	function replyUpdate(rno, rcontent) {
+		 console.log("클릭하면 들어오나??????????????");
+			$.ajax({
+				url : "${pageContext.request.contextPath}/rcUpdate",
+				method : "POST",
+				async : false,
+				data: {
+					"rno" : rno,
+					"rcontent" : rcontent
+				},
+				success : function(data) {
+					alert(data);
+				}, error : function(request,status,error) {
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			     	}
+		    });
+	}
 </script>
 </body>
 </html>

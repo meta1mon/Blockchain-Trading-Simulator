@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +9,15 @@
 	rel="stylesheet" type="text/css" />
 <style>
 #me {
-	width: 1240px;
-	margin: 0 auto;
+	width: 65%;
+	min-width: 1024px;
 	text-align: center;
+	height: 50%;
+	padding: 20px;
+	margin: 25px auto;
+	background-color: #fff;
+    border: 1.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 
 #me div {
@@ -43,16 +50,15 @@
 <body>
 	<div id="wrapper">
 	<jsp:include page="myNav.jsp"></jsp:include>
-		<div id="container">
 		<div id="me">
 			<h2>
-				<img width="30px" height="30px"> 내 계좌번호 0020132012
+				<img width="30px" height="30px"> 내 계좌번호 : ${acnt.acntno }
 			</h2>
 			<br>
 			<div>
 				<ul>
-					<li><img width="30px" height="30px">코인 보유액 11111원</li>
-					<li><img width="30px" height="30px">현금 보유액 11111원</li>
+					<li><img width="30px" height="30px">코인 보유액 000원</li>
+					<li><img width="30px" height="30px">현금 보유액 ${acnt.cybcash }원</li>
 					<li><img width="30px" height="30px">총액 22222원</li>
 				</ul>
 			</div>
@@ -74,7 +80,6 @@
 					<td>2021-02-22</td>
 				</tr>
 			</table>
-		</div>
 		</div>
 	</div>
 </html>

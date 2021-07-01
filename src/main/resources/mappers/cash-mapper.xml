@@ -11,6 +11,23 @@
 		#{discountrate}, #{sellprice}, #{won}, #{startdate}, #{enddate},
 		default)
 	</insert>
+	<!-- 충전 상품 수정 -->
+	<update id="updateCash" parameterType="Cash" flushCache="true"
+		statementType="PREPARED">
+		UPDATE CASH SET
+		WON = #{won},
+		PRICE = #{price},
+		DISCOUNTRATE = #{discountrate},
+		STARTDATE = #{startdate},
+		ENDDATE = #{enddate}
+		WHERE CASHNO = #{cashno}
+	</update>
+	<!-- 충전 상품 삭제 -->
+	<delete id="deleteCash" parameterType="Cash" flushCache="true"
+		statementType="PREPARED">
+		DELETE FROM CASH
+		WHERE CASHNO = #{cashno}
+	</delete>
 	<!-- 충전 상품 리스트 전체 -->
 	<select id="selectTotalCash" resultType="arraylist" resultMap="resultCash">
 		SELECT * FROM CASH ORDER BY STARTDATE DESC, ENDDATE DESC, PRICE DESC 
@@ -21,7 +38,7 @@
 	</select>
 	<!-- 기한 내의 충전 상품 리스트 불러오기 -->
 	<select id="selectNowCash" resultType="arraylist"	resultMap="resultCash">
-		SELECT * FROM CASH WHERE STARTDATE <![CDATA[<=]]> SYSDATE AND ENDDATE <![CDATA[>=]]> SYSDATE
+		SELECT * FROM CASH WHERE STARTDATE <![CDATA[<=]]> SYSDATE AND ENDDATE <![CDATA[>=]]> SYSDATE ORDER BY PRICE
 	</select>
 
 	<!-- 기한 지난 충전 상품 리스트 불러오기 -->

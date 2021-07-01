@@ -109,8 +109,8 @@ $(function() {
 							<td>${vo.nickname}</td>
 							<td class="center">${vo.gender}</td>
 							<td class="center">${vo.birthdate}</td>
-							<td class="right money"><fmt:formatNumber value="${vo.cybcash}"
-									pattern="#,###,###,###" /></td>
+							<td class="right money">
+							<fmt:formatNumber value="${vo.cybcash}" pattern="#,###,###,###" /></td>
 							<td>코인 평가 금액</td>
 							<td>자산 총액</td>
 							<td class="center del"><input type="button" class="fas fa-trash-alt"

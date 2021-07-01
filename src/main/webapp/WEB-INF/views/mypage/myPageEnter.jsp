@@ -8,10 +8,15 @@
 	rel="stylesheet" type="text/css" />
 <style>
 #mpe {
-/* 	border: 1px solid; */
-	width: 100%;
 	margin: 200px auto;
+	width: 65%;
+	min-width: 1024px;
 	text-align: center;
+	height: 50%;
+	padding: 20px;
+	background-color: #fff;
+    border: 1.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 </style>
 </head>

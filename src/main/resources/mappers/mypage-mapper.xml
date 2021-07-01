@@ -57,7 +57,20 @@
 		SELECT * FROM COMMUNITY WHERE CWRITER
 		= #{cwriter} ORDER BY CDATE DESC
 	</select>
-
-
+	
+	<!-- 내 계좌 기준으로 모든 종류의 코인 평가 금액 합산 -->
+	<select id="myTotalCoin" parameterType="Acnt" resultType="float">
+		SELECT SUM(BUYCNT*BUYPRICE) FROM COINACNT WHERE ACNTNO = #{acntno}
+	</select>
+	
+	<!-- 내 코인 종류 수 조회-->
+	<select id="countCoinList" parameterType="Acnt" resultType="int">
+		SELECT count(*) FROM COINACNT WHERE ACNTNO = #{acntno}
+	</select>
+<!-- 임의로 막 적은거 , 스케쥴에 쓰려고... 프로시저 호출하는 방법
+	<select id="asdb" parameterType="hashmap">
+		call 프로시저이름(#{a}, #{b})
+	</select>
+ -->
 
 </mapper>

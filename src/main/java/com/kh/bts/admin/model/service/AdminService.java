@@ -14,7 +14,8 @@ public interface AdminService {
 	public int insertAcreport(Acreport vo);
 	public int insertRreport(Rreport vo);
 	public int registerCash(Cash vo);
-
+	public int updateCash(Cash vo);
+	public int deleteCash(Cash vo);
 	public int countCashLog();
 	public List<CashLog> selectCashLog(int startPage, int limit);
 	public List<CashLog> searchCashLog(String keyword);

@@ -131,7 +131,7 @@ $(function(){
 			</h4>
 			<hr style="position: relative; top: 1px;">
 			<c:if test="${!empty commentList}">
-				<c:forEach var="rep" items="${commentList}">
+				<c:forEach var="rep" items="${commentList}" varStatus="status">
 					<div id="comment">
 						<br>
 						<!-- 댓글 작성자명, 내용, 날짜 -->
@@ -140,26 +140,31 @@ $(function(){
 							class="comment_writer"> ${rep.rwriter} &nbsp; &nbsp;</span> <span
 							class="comment_date"> ${rep.rdate}</span> <span
 							class="comment_content"> ${rep.rcontent}</span>
-
-						</span>
-						<!-- 댓글 수정, 삭제, 신고 버튼 -->
-						<!-- (아직 미설정)로그인한 유저의 댓글만 수정, 삭제 버튼 보임 -->
-						<%-- 				<c:if test="${loginMember == writerEmail }"> --%>
-						<p>
-							<button type="button" class="rupdateConfirm" name="updateConfirm"
-								id="rupdateConfirm" style="display: none;"
-								onclick="replyUpdate(${rep.rno}, ${rep.rcontent});">수정완료</button>
-							&nbsp;&nbsp;&nbsp;
-							<button type="button" class="rdelete" name="delete" id="rdelete"
-								style="display: none;">삭제하기</button>
-							&nbsp;&nbsp;&nbsp;
-							<button type="button" class="rupdate" name="update" id="rupdate">수정
-								및 삭제</button>
+							<div id="text${status.index }">
+							</div>
+<!-- 						 	<textarea style="display: none;" -->
+<%-- 								placeholder="댓글 쓰기" class="updateEditor" id="text${status.index }" name="rcontent" maxlength="4000" --%>
+<!-- 								onfocus="if(this.value == '댓글 수정') { this.value = ''; }" -->
+<!-- 								onblur="if(this.value == '') { this.value ='댓글 수정'; }"></textarea> -->
+						 </span>
+						<p class="modifyBtn">
+							<!-- 댓글 작성자에게만 수정 삭제 버튼이 보임 -->
+							<c:if test="${loginMember == rep.email }">
+								<button type="button" class="makeBtn"
+									onclick="makeUpdateBtn(${status.index })">수정하기</button>
+								<button type="button" class="submitRUpdate"
+									onclick="replyUpdate(${rep.rno}, ${rep.rcontent })"
+									style="display: none;">수정완료</button>
+								<button type="button" class="cancleRUpdate"
+									onclick="updateRCancle(${status.index })"
+									style="display: none;">수정취소</button>
+								<button type="button"
+									onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</button>
+							</c:if>
 						</p>
 						<button type="button" class="report" id="popup_open_btn_reply"
 							onclick="rreport(${rep.rno})">신고</button>
 					</div>
-
 					<br>
 				</c:forEach>
 			</c:if>
@@ -328,14 +333,14 @@ $(function(){
     Element.prototype.setStyle = function(styles) {
         for (var k in styles) this.style[k] = styles[k];
         return this;
-    };
+    }
 
     document.getElementById('popup_open_btn').addEventListener('click', function() {
         // 모달창 띄우기
         modalFn('my_modal');
-    });
+    })
     
-// 게시글 신고 부분
+	// 게시글 신고 부분
       <!-- 게시글 신고 전송 ajax -->
       $("#btnreport").on("click", function() {
          var dataList = $("#frmC").serialize();
@@ -354,11 +359,11 @@ $(function(){
                
             }
          });
-      });
+      })
     
     
     
-// 댓글 신고 부분
+	// 댓글 신고 부분
     $("#btnrply").on("click", function() {
   	  var rreport = $("input[name='rreport']:checked").val();
        $.ajax({
@@ -377,30 +382,29 @@ $(function(){
              
           }
        });
-    });
+    })
 
 
-	
+	// 비추천
 	function dislike() {
 		if(${loginMember == null}) {
 			alert("로그인이 필요합니다");			
 		} else {
-		$.ajax({
-			url : "${pageContext.request.contextPath}/cdislike",
-			type : "post",
-			data : {
-				cno : "${community.cno}"
-			},
-			datatype : "json",
-			success : function(data) {
-				alert(data);
-				window.location.reload();
-			}
-		});
+			$.ajax({
+				url : "${pageContext.request.contextPath}/cdislike",
+				type : "post",
+				data : {
+					cno : "${community.cno}"
+				},
+				datatype : "json",
+				success : function(data) {
+					window.location.reload();
+				}
+			});
 		}
-	};
+	}
 	
-	// 추천, 비추천
+	// 추천
 	function clike() {
 		if(${loginMember == null}) {
 			alert("로그인이 필요합니다");			
@@ -409,126 +413,77 @@ $(function(){
 				url : "${pageContext.request.contextPath}/clike",
 				type : "post",
 				data : {
-					"cno" : "${community.cno}",
-					"email": "${loginMember}"
-					
+					"cno" : "${community.cno}"
 				},
 				success : function(data) {
 					window.location.reload();
 				}
 			});
 		}
-	};
+	}
+	// 댓글 수정 버튼 생성
+	function makeUpdateBtn(index) {
+		console.log(index);
+		$(".comment_content").eq(index).hide();
+		$(".makeBtn").eq(index).hide();
+// 		$(this).css("display", "none");
+		$(".updateEditor").eq(index).show();
+		$(".submitRUpdate").eq(index).show();
+		$(".cancleRUpdate").eq(index).show();
+		var id = '#text' + index;
+		ClassicEditor.create( document.querySelector( id ), {
+		    cloudServices: {
+		        tokenUrl: 'https://81478.cke-cs.com/token/dev/de0d9159dc2b7ce3ecb85191c28f789217b087f58ae6880e30d89820724d',
+		        uploadUrl: 'https://81478.cke-cs.com/easyimage/upload/'
+		    }
+		} )
+		.catch( error => {
+		    console.error( error );
+		} );
+	}
 	
-	function cdislike() {
-		if(${loginMember == null}) {
-			alert("로그인이 필요합니다");			
-		} else {
-			$.ajax({
-				url : "${pageContext.request.contextPath}/cdislike",
-				type : "post",
-				data : {
-					"cno" : "${community.cno}",
-					"email": "${loginMember}"
-					
-				},
-				success : function(data) {
-					window.location.reload();
-				}
-			});
-		}
-	};
-    </script>
-
-
-	<script>
-
-   
-//기존 댓글 수정 & 삭제
-$(".rupdate").on('click',function(){
-   
-      if($(this).text() == "수정 및 삭제"){
-    	  $('.comment_content').append('<textarea style="margin top:7px;" rows="4" cols="70%" class="updateContent" name="updateContent" id="editor">'+content+'</textarea>');
-
-         $(".rdelete").show("fast");
-         $(".rupdateConfirm").show("fast");
-         $(this).text("수정취소");
-      } else {
-         $(".updateContent").remove();
-         $(this).text("수정 및 삭제");
-         $(".rdelete").toggle("fast");
-         $(".updateConfirm").toggle("fast");
-      }
-});
-
-function replyUpdate(rno, rcontent) {
-	 console.log("클릭하면 들어오나??????????????");
+	// 댓글 수정 취소 버튼 클릭 시
+	function updateRCancle(index) {
+		var id = '#text' + index;
+		$(".comment_content").eq(index).show();
+		$(".makeBtn").eq(index).show();
+		$(".submitRUpdate").eq(index).hide();
+		$(".cancleRUpdate").eq(index).hide();
+ 		$(".ck").eq(index).hide();
+	}
+	
+	// 댓글 수정 버튼 클릭 시
+	function replyUpdate(rno, rcontent) {
+		$("#newRcontent").text();
 		$.ajax({
 			url : "${pageContext.request.contextPath}/rcUpdate",
-			method : "POST",
-			async : false,
-			data: {
+			type : "post",
+			data : {
 				"rno" : rno,
-				"rcontent" : rcontent
+				"rcontent": rcontent
 			},
 			success : function(data) {
-				alert(data);
-			},
-			error : function(request,status,error) {
-			   
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		     }
-	      });
-}}}
-
-/* 
-   $(".updateConfirm").on('click',function(){
-	   console.log("클릭하면 들어오나??????????????");
+				window.location.reload();
+			}
+		})
+	}
+	
+	// 댓글 삭제   -- 새로고침을 사용 중인데 추후 수정해야 할듯
+	function replyDelete(rno, cno) {
+		console.log("지우는 함수 실행");
 		$.ajax({
-			url : "${pageContext.request.contextPath}/rcUpdate",
-			method : "POST",
-			async : false,
-			data: {
-				"comment_id" : $("input[name=rep_id]").val(),
-				"comments" : $('.updateContent').val()
+			url : "${pageContext.request.contextPath}/rcDelete",
+			type : "post",
+			data : {
+				"rno" : rno,
+				"cno" : cno
 			},
 			success : function(data) {
-				alert(data);
-				parentDiv.find(".comment_content").text(parentDiv.find('.updateContent').val());
-			},
-			error : function(request,status,error) {
-			   
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		     }
-	      });
-         
- */
-/*  $(".updateContent").remove();
-
-
-$(".updateConfirm").toggle("fast");
-$(".rdelete").toggle("fast");
-$('.rupdate').text("수정 및 삭제");
-$(".rdelete").on('click',function(){
-   var parentP = $(this).parent();
-      var parentDiv = parentP.parent();
-      
-   $.ajax({
-         url : "${pageContext.request.contextPath}/rcDelete",
-         method : "POST",
-         data: {
-         comment_id : parentDiv.find("input[name=rep_id]").val()
-         },
-         success : function(data) {
-         alert(data);
-         parentDiv.remove();
-         }, error : function(request,status,error){
-            
-alert("code:"+request.status+" n"+"message:"+request.responseText+" n"+"error:"+error);
-         }
-});
-});
-   }); */
+				window.location.reload();
+			}
+		});
+	}
+	
 </script>
 </body>
 </html>

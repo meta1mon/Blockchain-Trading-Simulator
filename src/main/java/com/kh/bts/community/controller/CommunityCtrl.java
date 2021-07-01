@@ -17,6 +17,7 @@ import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.community.model.vo.Rcommunity;
+import com.kh.bts.community.model.vo.UserRcommuniyCheck;
 import com.kh.bts.member.model.vo.Member;
 
 @Controller
@@ -44,17 +45,12 @@ public class CommunityCtrl {
 			if (keyword != null && !keyword.equals("")) {
 				mv.addObject("list", cmService.selectSearch(keyword, searchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-			}
-			else {
-				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
-				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-			}
-			
-			if (bottomKeyword != null && !bottomKeyword.equals("")) {
+				
+			} else if (bottomKeyword != null && !bottomKeyword.equals("")) {
 				mv.addObject("list", cmService.selectSearch(bottomKeyword, bottomSearchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-			}
-			else {
+				
+			} else {
 				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 			}
@@ -82,11 +78,11 @@ public class CommunityCtrl {
 			Community vo = cmService.selectCommunity(0, cno);
 			String writerEmail = cmService.returnEmail(vo.getCwriter());
 			
-			List<Rcommunity> list = rcmService.selectList(cno);
+			List<UserRcommuniyCheck> list = rcmService.selectRcommunityList(cno);
 			
 			
 			mv.addObject("community", vo);
-			mv.addObject("commentList", rcmService.selectList(cno));
+			mv.addObject("commentList", rcmService.selectRcommunityList(cno));
 			mv.addObject("writerEmail", writerEmail);
 			
 			mv.addObject("currentPage", currentPage);

@@ -76,4 +76,12 @@ public class MypageDao {
 		return sqlSession.selectOne("acnt.selectMyAcnt", email);
 	}
 
+	public float myTotalCoin(Acnt vo) {
+		return sqlSession.selectOne("mypage.myTotalCoin", vo);
+	}
+
+	public int coinListCount(Acnt vo) {
+		return sqlSession.selectOne("mypage.coinListCount", vo);
+	}
+
 }

@@ -9,7 +9,7 @@ public class AboutUsCtrl {
 	
 	
 	@RequestMapping("aboutus")
-	public ModelAndView MainPage(ModelAndView mav) {
+	public ModelAndView aboutUs(ModelAndView mav) {
 		mav.setViewName("aboutus/aboutus");
 		return mav;
 	}

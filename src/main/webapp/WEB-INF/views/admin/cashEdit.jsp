@@ -74,6 +74,36 @@ input[type=submit] {
 }
 
 </style>
+<script>
+function deleteCash(cashno){
+	console.log("삭제합니다.");
+	console.log(cashno);
+	var dataquery = $("#frmCashEdit").serialize();
+		console.log("dataquery:" + dataquery);
+		var isConfirm = confirm(cashno + "번 상품을 삭제하시겠습니까?");
+		if(isConfirm){
+			$.ajax({
+				url : 'deleteCash',
+				type : 'post',
+				data : dataquery,
+				sync : true,
+				success : function(data) {
+					console.log(data);
+					alert("상품 삭제 완료!");
+					location.href = "cash";
+				},
+				error : function(request, status, error) {
+					console.log("error: 상품 삭제 실패!");
+					console.log("code:" + request.status + "\n" + "message:"
+							+ request.responseText + "\n" + "error:" + error);
+				}
+	
+			})
+		}else{
+			alert("취소하였습니다.")
+		}
+	}
+</script>
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
@@ -128,7 +158,7 @@ input[type=submit] {
 
 							<td colspan="2" class="center default">
 							<input type="button" class="edit" value="수정"> 
-							<input type="button" class="del" value="삭제">
+							<input type="button" class="del" value="삭제" onclick="deleteCash('${vo.cashno}')">
 								</td>
 
 							<td colspan="2" class="center editmode" style="display: none">
@@ -348,14 +378,6 @@ input[type=submit] {
  				})
 			}
 			$(".done").on("click", done);
-			
-			var del = function(){
-				console.log("삭제합니다.");
-			}
-			$(".del").on("click", del);
-			
-			
-			
 			
 		})	
 	</script>

@@ -2,10 +2,12 @@ package com.kh.bts.community.model.service;
 
 import java.util.List;
 
+import com.kh.bts.Paging;
 import com.kh.bts.community.model.vo.Community;
 
 public interface CommunityService {
-
+	public List<Community> selectAllCommunityList(Paging vo);
+	
 	List<Community> selectSearch(String keyword, int searchType);
 
 	List<Community> selectList(int startPage, int limit);

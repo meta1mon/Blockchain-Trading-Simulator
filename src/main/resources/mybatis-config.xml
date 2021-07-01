@@ -42,6 +42,8 @@
 			alias="Cash" />
 		<typeAlias type="com.kh.bts.cash.model.vo.CashLog"
 			alias="CashLog" />
+		<typeAlias type="com.kh.bts.Paging"
+			alias="Paging" />
 	</typeAliases>
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
 		<mapper resource="mappers/member-mapper.xml" />

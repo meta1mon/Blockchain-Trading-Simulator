@@ -1,100 +1,70 @@
 @charset "UTF-8";
-#frm11{
-	width: 320px;
-}
-#aaaaa{
-	width: 320px;
-}
-#container {
-	width: 1100px !important;
-}
-#widgetTB{
-	width: 100%;
-	height: 500px;
-}
-
-/* td{
-	padding: 0px;
-	margin: 0px;
-} */
-
-#chart1 {
-	vertical-align: top; 
-}
-
-.tradingview-widget-container{
-	background-color: #fff;
-	border: 1px solid transparent;
-	border-color: #E3C8F8;
-	border-radius: 4px;
-  	box-shadow: 1px 2px 3px rgb(90 90 90/ 35%);
-  	height: 100%;
-}
-
-#searchcoin {
-	font-size: 16px;
-	height: 35px;
+.div1, .div2, .div3, .div4, .div5, .div6{
 	padding: 5px;
-	margin-bottom: 15px;
-	border: 1px solid transparent;
-	border-color: #E3C8F8;
-	border-radius: 4px;
-  	box-shadow: 1px 2px 3px rgb(90 90 90/ 35%);
+
+}
+.div1 *, .div2 *, .div3 *, .div4 *, .div5 *, .div6 *{
+	background: #f8f9fa;
+}
+.parent {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(6, 1fr);
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
 }
 
-#cointable_div {
-	width: 450px;
-	font-size: small;
+.div1 {
+	grid-area: 1/1/2/5;
+	height: 50%;
+}
+
+.div2 {
+	grid-area: 2/1/4/5;
+	top : 200px;
+	position: absolute;
+}
+#chart1{
+	left: -50px;
+}
+
+.div3 {
+	grid-area: 4/1/6/3;
+}
+
+.div4 {
+	grid-area: 4/3/6/5;
+}
+
+.div5 {
+	grid-area: 1/5/7/6;
+}
+
+.div6 {
+	grid-area: 6/1/7/5;
+}
+
+#cointable_div { 
 	overflow: auto;
-	height: 500px;
-	background-color: #fff;
-	border: 1px solid transparent;
-	border-color: #E3C8F8;
-	border-radius: 4px;
-  	box-shadow: 1px 2px 3px rgb(90 90 90/ 35%);
-}
-#cointable_div td{
-	width: 25%;
+	height: 1000px;
 }
 
- #cointable_div a{
- 	color: #8C66C8;
-} 
- #cointable_div a:visited{
- 	color: #8C66C8;
- 	text-decoration: none;
-} 
- #cointable_div a:active{
- 	text-decoration: none;
-} 
-
-#alltable {
-	width: 100%;
-}
-
-#all_t {
-	width: 100%;	
-	height: 100%;
-	background-color: #fff;
-	border: 1px solid transparent;
-	border-color: #E3C8F8;
-	border-radius: 4px;
-  	box-shadow: 1px 2px 3px rgb(90 90 90/ 35%);
-}
-
-#sold_b{
+#sold_b {
 	background: ccc;
 }
-#bought_b{
+
+#bought_b {
 	background: red;
-	
 }
-#price_s{
+
+#price_s {
 	display: none;
 }
-#cnt_s{
+
+#cnt_s {
 	display: none;
 }
-#sold{
+
+#sold {
 	display: none;
 }

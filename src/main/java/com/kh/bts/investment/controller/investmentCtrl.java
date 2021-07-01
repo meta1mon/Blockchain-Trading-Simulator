@@ -568,5 +568,32 @@ public class investmentCtrl {
 		}
 
 	}
+	@RequestMapping(value = "coinacntupdate", method = RequestMethod.POST)
+	public void coinacntupdate(CoinAcnt vo ,@RequestParam(name = "acntno") String acntno, @RequestParam(name = "updatecoin") int buycnt,
+			@RequestParam(name = "coin") String coin,HttpServletResponse response) throws Exception {
+		vo.setAcntno(acntno);
+		vo.setBuycnt(buycnt);
+		vo.setCoin(coin);
+		System.out.println(acntno);
+		System.out.println(buycnt);
+		System.out.println(coin);
+		int result = caService.updateCoinAcnt(vo);
+		PrintWriter out = null;
+		try {
+			if (result > 0) {
+				System.out.println("update 성공");
+			} else {
+				System.out.println("update 실패");
+			}
+			out = response.getWriter();
+			out.print(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+		
+	}
 
 }

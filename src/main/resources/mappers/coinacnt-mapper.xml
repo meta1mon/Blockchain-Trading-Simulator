@@ -12,6 +12,15 @@
 		SELECT * FROM COINACNT WHERE ACNTNO = #{acntno} AND COIN = #{coin}
 	</select>
 
+
+    <!-- 금액 변경 -->
+	<update id="updateCoinAcnt" parameterType="CoinAcnt">
+		UPDATE COINACNT
+		SET BUYCNT = #{buycnt}
+		WHERE ACNTNO = #{acntno} ANAD COIN = #{coin}
+	</update>
+	
+	
 	<!-- 매수 체결 후, 코인계좌에 삽입 -->
 	<insert id="afterBoughtCoinAcnt" parameterType="WaitBought" flushCache="true"
 		statementType="PREPARED">

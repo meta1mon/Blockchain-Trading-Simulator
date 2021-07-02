@@ -1,7 +1,6 @@
 $(function() {
 	coinname();
 	var timer1 = setInterval(function() {
-		console.log("1초");
 		table();
 
 		chart();
@@ -13,7 +12,6 @@ var coinList = null;
 var changecoin = "BTC"; // default
 
 function changename(listNum) {
-	console.log("changename함수");
 	var coinList2 = [ 'BTC', 'ETH', 'DOGE', 'LTC', 'XRP', 'ETC', 'ADA', 'TRX',
 			'SXP', 'STRAX' ];
 	changecoin = coinList2[listNum];
@@ -21,7 +19,6 @@ function changename(listNum) {
 };
 
 function coinname() {
-	console.log("coinname함수")
 
 	$.ajax({
 		url : 'https://api.bithumb.com/public/ticker/ALL_KRW',
@@ -30,14 +27,12 @@ function coinname() {
 		datatype : "json",
 		success : function(data) {
 			coinList = Object.keys(data['data']);
-			console.log(coinList);
 
 		}
 	});
 };
 
 function table() {
-	console.log("table함수 들어옴");
 	var coinList = [ 'BTC', 'ETH', 'DOGE', 'LTC', 'XRP', 'ETC', 'ADA', 'TRX',
 			'SXP', 'STRAX' ];
 	var display = new Array();
@@ -59,7 +54,6 @@ function table() {
 					html = "<table class='table table-striped' ><tr><td>코인명</td><td>현재가</td><td>등락률(24H)</td><td>거래대금</td></tr>";
 					for (var i = 0; i < coinList.length; i++) {
 						thisCoin = i;
-						console.log(coinList[i] + "의 정보는 다음과 같다" + display[i]);
 						html += "<tr><td><a href=# onclick='changename("
 								+ thisCoin + ");'>" + coinList[i]
 								+ "</a></td><td>" + display[i][0] + "</td><td><span class='change_c'>"
@@ -89,7 +83,6 @@ function table() {
 };
 
 function chart() {
-	console.log("aaa함수 들어옴")
 	$.ajax({
 		url : 'https://api.bithumb.com/public/candlestick/' + changecoin
 				+ '_KRW/1h',
@@ -107,23 +100,9 @@ function chart() {
 			var abc6 = data['data'][a - 6][2] * 1; // 형변환
 			var abc7 = data['data'][a - 7][2] * 1; // 형변환
 
-			// var now = new Date().getTime();
-			// const curr = new Date();
-			// const utc = curr.getTime() + (curr.getTimezoneOffset() * 60 *
-			// 1000);
-			// const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
-			// const kr_curr = new Date(utc + (KR_TIME_DIFF));
-			// var aaa = data['data'][0][0]; // 형변환
-			// var aaa1 = data['data'][0][1]; // 형변환
-			// console.log(now);
-			// console.log(kr_curr);
-			// console.log(kr_curr.getTime());
-			// console.log(aaa1);
-			// console.log(aaa);
-			// console.log(aaa1);
+	
 
 			function drawChart() {
-				console.log("drawChart 안에서의 abc 값 : " + abc);
 				var data = google.visualization.arrayToDataTable([
 						[ '1H', changecoin + '_KRW' ], [ '7시간전', abc7 ],
 						[ '6시간전', abc6 ], [ '5시간전', abc5 ], [ '4시간전', abc4 ],

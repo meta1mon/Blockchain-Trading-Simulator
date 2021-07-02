@@ -54,7 +54,6 @@ public class investmentCtrl {
 	@RequestMapping("buyLoad1")
 	public List<WaitBought> buyLoad1(HttpServletResponse response) {
 		List<WaitBought> waitblist = wbService.selectAllCoinListWaitBought();
-		System.out.println(waitblist);
 		return waitblist;
 	}
 
@@ -71,7 +70,6 @@ public class investmentCtrl {
 	@RequestMapping("sellLoad1")
 	public List<WaitSold> sellLoad1(HttpServletResponse response) {
 		List<WaitSold> waitslist = wsService.selectAllCoinListWaitSold();
-		System.out.println(waitslist);
 		return waitslist;
 	}
 
@@ -171,12 +169,10 @@ public class investmentCtrl {
 
 		int result = acntService.cntAcnt(vo);
 		if (result > 0) {
-			System.out.println("bankpw성공");
 			session.setAttribute("rightBankPw", "Y");
 		} else {
 			System.out.println("bankpw실패");
 		}
-		System.out.println(result);
 
 		return result;
 	}
@@ -211,8 +207,6 @@ public class investmentCtrl {
 
 	@RequestMapping(value = "coinacntdelete", method = RequestMethod.POST)
 	public void CoinAcntdelete(@RequestParam(name = "cano") int cano, HttpServletResponse response) {
-
-		System.out.println(cano);
 		int result = caService.deleteCoinAcnt(cano);
 		PrintWriter out = null;
 		try {
@@ -240,9 +234,6 @@ public class investmentCtrl {
 		String jsonlist = gson.toJson(result);
 
 		try {
-
-			System.out.println("ajax select성공");
-
 			out = response.getWriter();
 			out.print(jsonlist);
 		} catch (IOException e) {
@@ -259,17 +250,12 @@ public class investmentCtrl {
 		CoinAcnt vo = new CoinAcnt();
 		vo.setAcntno(acntno);
 		vo.setCoin(coin);
-		System.out.println("컨트롤러 들어옴");
 		CoinAcnt result = caService.countcoin(vo);
-		System.out.println(result);
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(result);
 
 		try {
-
-			System.out.println("ajax 1111111성공");
-
 			out = response.getWriter();
 			out.print(jsonlist);
 		} catch (IOException e) {
@@ -291,9 +277,6 @@ public class investmentCtrl {
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(result);
 		try {
-
-			System.out.println("ajax select성공");
-
 			out = response.getWriter();
 			out.print(jsonlist);
 		} catch (IOException e) {
@@ -327,16 +310,13 @@ public class investmentCtrl {
 
 	@RequestMapping(value = "sdelete", method = RequestMethod.POST)
 	public void Solddelete(@RequestParam(name = "usno") int usno, HttpServletResponse response) {
-		System.out.println("SDelete@@@@@@");
-
-		System.out.println(usno);
 		int result = sService.deleteSold(usno);
 		PrintWriter out = null;
 		try {
 			if (result > 0) {
-				System.out.println("wbdelete 성공");
+				System.out.println("sdelete 성공");
 			} else {
-				System.out.println("wbdelete 실패");
+				System.out.println("sdelete 실패");
 			}
 			out = response.getWriter();
 			out.print(result);
@@ -352,17 +332,13 @@ public class investmentCtrl {
 //////////////////////////////////////waitsold 부분 //////////////////////////
 	@RequestMapping(value = "wsInsert")
 	public void WaitSoldInsert(WaitSold ws, HttpServletResponse response) {
-		System.out.println(ws.getCoin() + "코인이름");
-		System.out.println(ws.getSellcnt() + "코인수 ");
-		System.out.println(ws.getAcntno() + "코인수 ");
-		System.out.println(ws.getSellprice() + "코인수 ");
 		int result = wsService.insertWaitSold(ws);
 		PrintWriter out = null;
 		try {
 			if (result > 0) {
-				System.out.println("insert성공");
+				System.out.println("wsInsert성공");
 			} else {
-				System.out.println("insert실패");
+				System.out.println("wsInsert실패");
 			}
 			out = response.getWriter();
 			out.print(result);
@@ -377,16 +353,12 @@ public class investmentCtrl {
 
 	@RequestMapping(value = "ajwslists", method = RequestMethod.POST)
 	public void WaitSoldListService(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
-		System.out.println(acntno);
 		List<WaitSold> result = wsService.selectListWaitSold(acntno);
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(result);
 
 		try {
-
-			System.out.println("ajax select성공");
-
 			out = response.getWriter();
 			out.print(jsonlist);
 		} catch (IOException e) {
@@ -399,16 +371,13 @@ public class investmentCtrl {
 
 	@RequestMapping(value = "wsdelete", method = RequestMethod.POST)
 	public void WaitSolddelete(@RequestParam(name = "usno") int usno, HttpServletResponse response) {
-		System.out.println("WSDelete@@@@@@");
-
-		System.out.println(usno);
 		int result = wsService.deleteWaitSold(usno);
 		PrintWriter out = null;
 		try {
 			if (result > 0) {
-				System.out.println("wbdelete 성공");
+				System.out.println("wsdelete 성공");
 			} else {
-				System.out.println("wbdelete 실패");
+				System.out.println("wsdelete 실패");
 			}
 			out = response.getWriter();
 			out.print(result);
@@ -424,14 +393,13 @@ public class investmentCtrl {
 //////////////////////////////////////wait bought 부분 //////////////////////////
 	@RequestMapping(value = "wbInsert")
 	public void WaitBoughtInsert(WaitBought wb, HttpServletResponse response) {
-		System.out.println(wb.getCoin() + "코인이름");
 		int result = wbService.insertWaitBought(wb);
 		PrintWriter out = null;
 		try {
 			if (result > 0) {
-				System.out.println("insert성공");
+				System.out.println("wbInsert성공");
 			} else {
-				System.out.println("insert실패");
+				System.out.println("wbInsert실패");
 			}
 			out = response.getWriter();
 			out.print(result);
@@ -446,7 +414,6 @@ public class investmentCtrl {
 
 	@RequestMapping(value = "ajwblists", method = RequestMethod.POST)
 	public void WaitBoughtListService(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
-		System.out.println(acntno);
 		List<WaitBought> result = wbService.selectListWaitBought(acntno);
 		String[] coinArr = new String[result.size()];
 		for (int i = 0; i < result.size(); i++) {
@@ -462,9 +429,6 @@ public class investmentCtrl {
 		String jsonlist = gson.toJson(result);
 
 		try {
-
-			System.out.println("ajax select성공");
-
 			out = response.getWriter();
 			out.print(jsonlist);
 		} catch (IOException e) {
@@ -477,8 +441,6 @@ public class investmentCtrl {
 
 	@RequestMapping(value = "wbdelete", method = RequestMethod.POST)
 	public void WaitBoughtdelete(@RequestParam(name = "ubno") int ubno, HttpServletResponse response) {
-		System.out.println("WBDelete@@@@@@");
-		System.out.println(ubno);
 		int result = wbService.deleteWaitBought(ubno);
 		PrintWriter out = null;
 		try {
@@ -500,16 +462,12 @@ public class investmentCtrl {
 
 	@RequestMapping(value = "ajblists", method = RequestMethod.POST)
 	public void BoughtList(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
-		System.out.println(acntno);
 		List<Bought> result = bService.selectListBought(acntno);
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(result);
 
 		try {
-
-			System.out.println("ajax select성공");
-
 			out = response.getWriter();
 			out.print(jsonlist);
 		} catch (IOException e) {
@@ -522,8 +480,6 @@ public class investmentCtrl {
 
 	@RequestMapping(value = "bdelete", method = RequestMethod.POST)
 	public void Boughtdelete(@RequestParam(name = "ubno") int ubno, HttpServletResponse response) {
-		System.out.println("BDelete@@@@@@");
-		System.out.println(ubno);
 		int result = bService.deleteBought(ubno);
 		PrintWriter out = null;
 		try {
@@ -553,9 +509,9 @@ public class investmentCtrl {
 
 		try {
 			if (result > 0) {
-				System.out.println("update 성공");
+				System.out.println("coinupdate 성공");
 			} else {
-				System.out.println("update 실패");
+				System.out.println("coinupdate 실패");
 			}
 			out = response.getWriter();
 			out.print(result);
@@ -568,21 +524,18 @@ public class investmentCtrl {
 
 	}
 	@RequestMapping(value = "coinacntupdate", method = RequestMethod.POST)
-	public void coinacntupdate(CoinAcnt vo ,@RequestParam(name = "acntno") String acntno, @RequestParam(name = "updatecoin") int buycnt,
+	public void coinacntupdate(CoinAcnt vo ,@RequestParam(name = "acntno") String acntno, @RequestParam(name = "buycnt") int buycnt,
 			@RequestParam(name = "coin") String coin,HttpServletResponse response) throws Exception {
 		vo.setAcntno(acntno);
 		vo.setBuycnt(buycnt);
 		vo.setCoin(coin);
-		System.out.println(acntno);
-		System.out.println(buycnt);
-		System.out.println(coin);
 		int result = caService.updateCoinAcnt(vo);
 		PrintWriter out = null;
 		try {
 			if (result > 0) {
-				System.out.println("update 성공");
+				System.out.println("coinacntupdate 성공");
 			} else {
-				System.out.println("update 실패");
+				System.out.println("coinacntupdate 실패");
 			}
 			out = response.getWriter();
 			out.print(result);

@@ -34,12 +34,6 @@
 	border-right: solid black 1px;
 }
 
-#money span {
-	padding: 10px;
-	line-height: 30px;
-	vertical-align: middle; 
-}
-
 #me table {
 	margin: 10px auto 0 auto;
 }

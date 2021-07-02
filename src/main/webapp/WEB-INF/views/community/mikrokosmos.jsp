@@ -11,11 +11,10 @@
 	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
 	type="image/x-icon" />
 <meta charset="UTF-8">
-<link href="${pageContext.request.contextPath}/resources/css/clist.css"
+<link href="${pageContext.request.contextPath}/resources/css/mikrokosmos.css"
 	rel="stylesheet" type="text/css" />
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script> -->
+ <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function() {
 		var n = 0;
@@ -118,8 +117,199 @@
 </style>
 </head>
 <body>
+<%@include file="../main/header.jsp"%>
+    <!-- navigation -->
+    <nav>
+      <div class="nav-container">
+        <div class="nav-1">
+<!--             <img class="logo_instagram_txt" src="resources/assets/img/logo_text.png" alt="logo_text"> -->
+        </div>
+        <input id="searchInput" type="search" class="input-search" placeholder="검색">
+        <div class="nav-2">
+<!--           <img src="resources/assets/img/home.png" alt="홈"> -->
+<!--           <img src="resources/assets/img/dm.png" alt="DM"> -->
+<!--           <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/explore.png" alt="탐색"> -->
+<!--           <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png" alt="하트"> -->
+<!--           <img class="pic" src="https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/s150x150/71022783_513111249480681_2188078115513696256_n.jpg?_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_ohc=7Rl_bMO8TN4AX9C-AKS&oh=64741fc0f2635ebb63f94d5285798e08&oe=5F6A0524" alt="마이페이지"> -->
+        </div>
+      </div>
+    </nav>
+    <!-- main -->
+    <main>
+      <div class="feeds">
+        <!-- article -->
+			<c:forEach items="${commuList }" var="vo" varStatus="status">
+        <article>
+          <header>
+            <div class="profile-of-article">
+              <img class="img-profile pic" src="resources/assets/img/user.png" alt="..">
+              <span class="userID main-id point-span">${vo.cwriter }</span>
+            </div>
+						<button type="button"
+							onclick="communityUpdateFn(${status.index })">수정</button>
+						<button type="button"
+							onclick="communityDeleteFn(${status.index })">삭제</button>
+						<button type="button">신고</button>
+						<img class="icon-react icon-more" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png" alt="more">
+          </header>
+          <div class="main-image">
+<!--             <img src="" alt="dlwlrma님의 피드 사진" class="mainPic"> -->
+            &nbsp;${vo.ccontent }
+            <div class="description">
+              <p><span class="at-tag">@wkorea @gucci</span> 🌱</p>
+            </div>
+          </div>
+          <div class="icons-react">
+            <div class="icons-left">
+              <img class="icon-react" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png" alt="하트">
+              <img class="icon-react" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png" alt="말풍선">
+              <img class="icon-react" src="resources/assets/img/dm.png" alt="DM">  
+            </div>
+<!--             <img class="icon-react" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/bookmark.png" alt="북마크"> -->
+          </div>
+          <!-- article text data -->
+          <div class="reaction">
+            <div class="liked-people">
+              <p><span class="point-span">${vo.likecnt }</span> <span class="point-span">명</span>이 좋아합니다</p>
+            </div>
+           <!--  <div class="description">
+              <p><span class="point-span userID">dlwlrma</span><span class="at-tag">@wkorea @gucci</span> 🌱</p>
+            </div> -->
+            <div class="comment-section">
+              <ul class="comments">
+                <li>
+                  <span><span class="point-span userID">postmalone</span>내가 입으면 더 잘어울릴 것 같아</span>
+                  <div>
+                    <img class="comment-more" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png" alt="more">
+                    <div class="comment-like">
+                      <img class="comment-heart" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png" alt="하트">
+                      <img class="comment-heart-liked" src="resources/assets/img/liked.png" alt="좋아요된하트">
+                    </div>
+                  </div>
+                </li>
+                <!-- input 값 여기에 추가 -->
+              </ul>
+              <div class="time-log">
+                <span>${vo.cdate }</span>
+              </div>
+            </div>
+          </div>
+          <div class="hl"></div>
+          <div class="comment">
+            <input id="input-comment" class="input-comment" name="rcontent" maxlength="4000" type="text" placeholder="댓글 달기..." >
+            <button type="submit" class="submit-comment" onclick="rcommunityInsertFn(${status.index})">게시</button>
+          </div>
+        </article>
+        </c:forEach>
+        
+
+      </div>
+      <!-- main-right -->
+      <div class="main-right">
+        <div class="myProfile">
+          <img class="pic" src="resources/assets/img/user.png" alt="..">
+          <div>
+            <span class="userID point-span">thisisyourhyung</span>
+            <span class="sub-span">JIHYUNG LEE</span>  
+          </div>
+        </div>
+        <!-- story section -->
+        <div class="section-story">
+          <div class="menu-title">
+            <span class="sub-title">스토리</span>
+            <span class="find-more">모두 보기</span>
+          </div>
+          <ul class="story-list">
+            <li>
+              <div class="gradient-wrap">
+                <img class="img-profile story" src="resources/assets/img/user.png" alt="..">
+              </div>
+              <div class="profile-text">
+                <span class="userID point-span">wecode_bootcamp</span>
+                <span class="sub-span">12분 전</span>  
+              </div>
+            </li>
+            <li>
+              <div class="gradient-wrap">
+                <img class="img-profile story" src="resources/assets/img/user.png" alt="..">
+              </div>
+              <div class="profile-text">
+                <span class="userID point-span">han_ye_seul</span>
+                <span class="sub-span">28분 전</span>  
+              </div>
+            </li>
+            <li>
+              <div class="gradient-wrap">
+                <img class="img-profile story" src="resources/assets/img/user.png" alt="..">
+              </div>
+              <div class="profile-text">
+                <span class="userID point-span">dntlrdl</span>
+                <span class="sub-span">40분 전</span>  
+              </div>
+            </li>
+            <li>
+              <div class="gradient-wrap">
+                <img class="img-profile story" src="resources/assets/img/user.png" alt="..">
+              </div>
+              <div class="profile-text">
+                <span class="userID point-span">i_icaruswalks</span>
+                <span class="sub-span">56분 전</span>  
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- recommendation section -->
+        <div class="section-recommend">
+          <div class="menu-title">
+            <span class="sub-title">회원님을 위한 추천</span>
+            <span class="find-more">모두 보기</span>
+          </div>
+          <ul class="recommend-list">
+            <li>
+              <div class="recommend-friend-profile">
+                <img class="img-profile" src="resources/assets/img/user.png" alt="..">
+                <div class="profile-text">
+                  <span class="userID point-span">renebaebae</span>
+                  <span class="sub-span">hi_sseulgi님 외 2명이 팔로우합니다</span>
+                </div>
+              </div>
+              <span class="btn-follow">팔로우</span>
+            </li>
+            <li>
+              <div class="recommend-friend-profile">
+                <img class="img-profile" src="resources/assets/img/user.png" alt="..">
+                <div class="profile-text">
+                  <span class="userID point-span">_jeongjaehyun</span>
+                  <span class="sub-span">johnnyjsuh님이 팔로우합니다</span>  
+                </div>
+              </div>
+              <span class="btn-follow">팔로우</span>
+            </li>
+            <li>
+              <div class="recommend-friend-profile">
+                <img class="img-profile" src="resources/assets/img/user.png" alt="..">
+                <div class="profile-text">
+                  <span class="userID point-span">leehi_hi</span>
+                  <span class="sub-span">jennierubyjane님 외 5명이 팔로우합...</span>  
+                </div>
+              </div>
+              <span class="btn-follow">팔로우</span>
+            </li>
+          </ul>
+        </div>
+        <footer>
+          <p class="insta-sccript">
+            소개 ∙ 도움말 ∙ 홍보 센터 ∙ API ∙ 채용 정보 ∙ 개인정보처리방침 ∙ <br>약관 ∙ 위치 ∙ 인기계정 ∙ 해시태그 ∙ 언어
+            <br><br>
+            © 2020 INSTAGRAM FROM FACEBOOK
+          </p>
+        </footer>
+      </div>
+    </main>
+    <script src="resources/js/main.js"></script>
+    
 	<div id="wrapper">
-		<%@include file="../main/header.jsp"%>
+<%-- 		<%@include file="../main/header.jsp"%> --%>
 		<div class="listOut">
 
 			<div class="comm">소우주</div>

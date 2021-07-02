@@ -151,7 +151,7 @@
 				<c:set var="endPage" value="${maxPage}" />
 				<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
 					<c:if test="${p eq currentPage}">
-						<font color="#8C66C8" size="4" class="pageNum"><b>${p}</b></font>
+						<font color="#8C66C8" class="pageNum"><b>${p}</b></font>
 					</c:if>
 					<c:if test="${p ne currentPage}">
 						<c:url var="clistchk" value="clist">

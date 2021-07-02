@@ -23,7 +23,7 @@
 .bestComm {
 	clear: both;
     font-size: 20px;
-    color: #B85CEF;
+/*     color: #B85CEF; */
     margin: 20px;
 }
 
@@ -38,9 +38,9 @@
 
 #searchType {
 	width: 100px;
-	height: 45px;
-	border: 3px solid #8C66C8;
-	font-size: 18px;
+	height: 40px;
+	border: 2px solid #8C66C8;
+	font-size: 17px;
 	color: black;
 	margin-top: 33px;
 	padding: 0;
@@ -57,11 +57,11 @@
 
 #search {
 	width: 650px;
-    height: 45px;
+    height: 40px;
     top: 0;
     background-color: #ffffff;
-    border: 3px solid #8C66C8;
-    font-size: 18px;
+    border: 2px solid #8C66C8;
+    font-size: 17px;
     margin-top: 33px;
     padding: 0;
 /*     float: left; */
@@ -87,10 +87,10 @@
 
 #btnsearch {
 	width: 80px;
-	height: 45px;
+	height: 40px;
 	padding: 0;
 	border: 2px solid #8C66C8;
-	font-size: 18px;
+	font-size: 17px;
 	color: #ffffff;
 	background-color: #8C66C8;
 	margin-top: 33px;
@@ -110,7 +110,7 @@
 
 #write {
 	width: 90px;
-    height: 45px;
+    height: 40px;
 /*     float: right; */
     border: none;
     margin-left: 5px;
@@ -118,14 +118,14 @@
     text-align: center;
     color: #ffffff;
     background-color: #8C66C8;
-    font-size: 18px;
+    font-size: 17px;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 /*     position: relative; */
 /*     right: 20px; */
 }
 
 #write:hover {
-	background-color: #A07ADC;
+/* 	background-color: #A07ADC; */
 	box-shadow: 2px 3px 5px 4px #eaeaea;
 	color:black;
 }
@@ -183,20 +183,18 @@
 }
 
 #leftpage {
-	font-size: 18px;
     text-decoration: none;
     color: black;
     padding: 10px 17px;
     text-align: center;
     background-color: #F8F8F8;
-    margin: -2px;
+/*     margin: -2px; */
     position: relative;
     left: 20px;
     border-radius: 6px;
 }
 
 .pageNum {
-	font-size: 18px;
     text-decoration: none;
     color: black;
     padding: 10px 12px;
@@ -209,19 +207,18 @@
 }
 
 #rightpage {
-	font-size: 18px;
     text-decoration: none;
     color: black;
     padding: 10px 17px;
     text-align: center;
     background-color: #F8F8F8;
-    margin: -2px;
+/*     margin: -2px; */
     position: relative;
-    left: 20px;
+    left: 30px;
     border-radius: 6px;
 }
 
-#leftpage:hover, #leftpage:active, #pageNum:hover, #pageNum:active,
+#leftpage:hover, #leftpage:active, .pageNum:hover, .pageNum:active,
 	#rightpage:hover, #rightpage:active {
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
 	background-color: #8C66C8;

@@ -21,6 +21,7 @@ public class CommunityDao {
 		List<Community> list = sqlSession.selectList("community.selectCommunityList", vo);
 		return list;
 	}
+	
 	public List<Community> searchList(int startPage, int limit, String keyword, int searchType) { // 검색한 게시글 조회
 		List<Community> list = new ArrayList<Community>();
 		int startRow = (startPage - 1) * limit;

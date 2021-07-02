@@ -33,8 +33,8 @@ public class CommunityCtrl {
 
 	@Autowired
 	private RcommunityService rcmService;
-	public static final int LIMIT = 10;
-	public static final int PAGE_BOX = 3;
+	public static final int LIMIT = 30;
+//	public static final int PAGE_BOX = 3;
 	
 	@RequestMapping("insta")
 	public ModelAndView insta(ModelAndView mav) {

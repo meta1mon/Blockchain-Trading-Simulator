@@ -78,9 +78,6 @@ public class MypageDao {
 	}
 
 	public int myTotalCoin(Acnt vo) {
-		if(sqlSession.selectOne("mypage.myTotalCoin", vo) == null) {
-			return 0;
-		} 
 		return sqlSession.selectOne("mypage.myTotalCoin", vo);
 	}
 

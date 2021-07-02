@@ -108,14 +108,17 @@
 				<c:if test="${coinListCount ne 0 }">
 					<c:forEach var="coin" items="${coinList }" varStatus="status">
 						<tr>
-							<td>${coin.coin }</td>
-							<td><fmt:formatNumber value="${coin.buycnt }" pattern="#,###,###,###" /></td>
-							<td><fmt:formatNumber value="${coin.buyprice }" pattern="#,###,###,###" /></td>
-							<td><fmt:formatNumber value="${coin.buycnt*coin.buyprice }" pattern="#,###,###,###" /></td>
+							<td class="coinName">${coin.coin }</td>
+							<td class="coinCount"><fmt:formatNumber value="${coin.buycnt }" pattern="#,###,###,###" /></td>
+							<td><fmt:formatNumber value="${coin.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
 							<td>
+								<fmt:formatNumber value="${coin.buycnt*coin.buyprice }" pattern="#,###,###,###" />&nbsp;원
+								<input class="buyAvg" type="hidden" value="${coin.buycnt*coin.buyprice }"/>
+							</td>
+							<td class="coinValue">
 								<!-- 평가금액 : api 이용해서 js로 처리 -->
 							</td>
-							<td>
+							<td class="coinProfit">
 								<!-- 평가손익 : api 이용해서 js로 처리 -->
 							</td>
 						</tr>
@@ -139,7 +142,7 @@
 						<td>${wblist.ubno }</td>
 						<td>${wblist.coin }</td>
 						<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###" /></td>
-						<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###" /></td>
+						<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
 						<td>${wblist.wbdate }</td>
 					</tr>
 				</c:forEach>
@@ -159,7 +162,7 @@
 						<td>${wslist.usno }</td>
 						<td>${wslist.coin }</td>
 						<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###" /></td>
-						<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###" /></td>
+						<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###" />&nbsp;원</td>
 						<td>${wslist.wsdate }</td>
 					</tr>
 				</c:forEach>
@@ -176,13 +179,13 @@
 					<th>매수가격 </th>
 					<th>매수날짜 </th>
 				</tr>
-				<c:forEach var="wblist" items="${wBoughtResult }" varStatus="status">
+				<c:forEach var="blist" items="${boughtResult }" varStatus="status">
 					<tr>
-						<td>${wblist.ubno }</td>
-						<td>${wblist.coin }</td>
-						<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###" /></td>
-						<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###" /></td>
-						<td>${wblist.wbdate }</td>
+						<td>${blist.ubno }</td>
+						<td>${blist.coin }</td>
+						<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###" /></td>
+						<td><fmt:formatNumber value="${blist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
+						<td>${blist.bdate }</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -196,37 +199,20 @@
 					<th>매수가격 </th>
 					<th>매수날짜 </th>
 				</tr>
-				<c:forEach var="wslist" items="${wSoldResult }" varStatus="status">
+				<c:forEach var="slist" items="${soldResult }" varStatus="status">
 					<tr>
-						<td>${wslist.usno }</td>
-						<td>${wslist.coin }</td>
-						<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###" /></td>
-						<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###" /></td>
-						<td>${wslist.wsdate }</td>
+						<td>${slist.usno }</td>
+						<td>${slist.coin }</td>
+						<td><fmt:formatNumber value="${slist.sellcnt }" pattern="#,###,###,###" /></td>
+						<td><fmt:formatNumber value="${slist.sellprice }" pattern="#,###,###,###" />&nbsp;원</td>
+						<td>${slist.sdate }</td>
 					</tr>
 				</c:forEach>
 			</table>
 			
-			
-			<!-- 기존 테이블 -->
-<!-- 			<table> -->
-<!-- 				<tr> -->
-<!-- 					<th>거래 구분</th> -->
-<!-- 					<th>종목</th> -->
-<!-- 					<th>수량</th> -->
-<!-- 					<th>단가</th> -->
-<!-- 					<th>총 거래액</th> -->
-<!-- 					<th>거래 일시</th> -->
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<!-- 					<td>매수</td> -->
-<!-- 					<td>DOGE</td> -->
-<!-- 					<td>2.333332</td> -->
-<!-- 					<td>520 원</td> -->
-<!-- 					<td>1040.666664 원</td> -->
-<!-- 					<td>2021-02-22</td> -->
-<!-- 				</tr> -->
-<!-- 			</table> -->
+		
 		</div>
 	</div>
+	<script type="text/javascript"	src="${pageContext.request.contextPath}/resources/js/myEssets.js"></script>
+</body>
 </html>

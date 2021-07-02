@@ -82,18 +82,18 @@ public class CommunityCtrl {
 			int listCount = cmService.totalCount(); // 게시글 개수
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9); //게시글 개수 /
 
-			if (keyword != null && !keyword.equals("")) {
+			if (!keyword.equals("")) {  // 상단 검색 내용 있음
 				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword, searchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 				
-			} else if (bottomKeyword != null && !bottomKeyword.equals("")) {
+			} else if (!bottomKeyword.equals("")) {  // 하단 검색 내용 있음
 				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, bottomKeyword, bottomSearchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 				
-			} else if (keyword == null && keyword.equals(""))  {
+			} else if (keyword.equals(""))  {  // 상단 검색 내용 없음
 				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword, searchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-			} else {
+			} else {  // 하단 검색 내용 없음
 				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, bottomKeyword, bottomSearchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 			}

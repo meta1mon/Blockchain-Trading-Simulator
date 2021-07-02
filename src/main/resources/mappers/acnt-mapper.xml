@@ -36,6 +36,6 @@
 		flushCache="true" statementType="PREPARED">
 		UPDATE ACNT
 		SET CYBCASH = CYBCASH + (#{sellcnt} * #{sellprice})
-		WHERE ACNTNO = #{acntno}
+		WHERE ACNTNO = (SELECT ACNTNO FROM WAITSOLD WHERE COIN=#{coin} AND SELLPRICE=#{sellprice})
 	</update>
 </mapper>

@@ -258,7 +258,7 @@ public class AdminCtrl {
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 
 			if (keyword != null && !keyword.equals(""))
-				mv.addObject("list", cmService.selectSearch(keyword, searchType));
+				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword, searchType));
 			else
 				mv.addObject("list", cmService.selectNoticeList(currentPage, LIMIT));
 			mv.addObject("currentPage", currentPage);

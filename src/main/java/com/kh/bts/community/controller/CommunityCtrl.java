@@ -27,8 +27,9 @@ public class CommunityCtrl {
 
 	@Autowired
 	private RcommunityService rcmService;
-	public static final int LIMIT = 30;
-
+	public static final int LIMIT = 10;
+	public static final int PAGE_BOX = 3;
+	
 	@RequestMapping(value = "clist", method = RequestMethod.GET)
 	public ModelAndView communityListService(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
@@ -39,19 +40,22 @@ public class CommunityCtrl {
 		try {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
-			int listCount = cmService.totalCount();
-			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+			int listCount = cmService.totalCount(); // 게시글 개수
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9); //게시글 개수 /
 
 			if (keyword != null && !keyword.equals("")) {
-				mv.addObject("list", cmService.selectSearch(keyword, searchType));
+				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword, searchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 				
 			} else if (bottomKeyword != null && !bottomKeyword.equals("")) {
-				mv.addObject("list", cmService.selectSearch(bottomKeyword, bottomSearchType));
+				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, bottomKeyword, bottomSearchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 				
+			} else if (keyword == null && keyword.equals(""))  {
+				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword, searchType));
+				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 			} else {
-				mv.addObject("list", cmService.selectList(currentPage, LIMIT));
+				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, bottomKeyword, bottomSearchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 			}
 			

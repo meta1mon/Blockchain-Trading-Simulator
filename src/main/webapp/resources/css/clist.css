@@ -195,7 +195,7 @@
     border-radius: 6px;
 }
 
-#pageNum {
+.pageNum {
 	font-size: 18px;
     text-decoration: none;
     color: black;

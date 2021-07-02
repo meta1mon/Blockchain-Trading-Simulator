@@ -22,18 +22,21 @@ public class CommunityDao {
 		return list;
 	}
 	
-	public List<Community> searchList(String keyword, int searchType) { // 검색한 게시글 조회
+	public List<Community> searchList(int startPage, int limit, String keyword, int searchType) { // 검색한 게시글 조회
 		List<Community> list = new ArrayList<Community>();
+		int startRow = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(startRow, limit);
+		
 		if (keyword != null) {
 			switch (searchType) {
 			case 1: //제목으로 검색
-				list = sqlSession.selectList("community.searchListSubject", keyword);
+				list = sqlSession.selectList("community.searchListSubject", keyword, row);
 				break;
 			case 2: //내용으로 검색
-				list = sqlSession.selectList("community.searchListContent", keyword);
+				list = sqlSession.selectList("community.searchListContent", keyword, row);
 				break;
 			case 3: //작성자명으로 검색
-				list = sqlSession.selectList("community.searchListWriter", keyword);
+				list = sqlSession.selectList("community.searchListWriter", keyword, row);
 				break;
 			default:
 				System.out.println("dao 오류");
@@ -53,11 +56,11 @@ public class CommunityDao {
 		return sqlSession.selectList("community.searchpopularList");
 	}
 
-	public int listCount() { // 게시글 전체 개수 조회
+	public int listCount() { // 게시글 개수 조회
 		return sqlSession.selectOne("community.countCommunity");
 	}
 	
-	public int listTodayCount() { // 오늘 게시글 전페 개수 조회
+	public int listTodayCount() { // 오늘 게시글 전체 개수 조회
 		return sqlSession.selectOne("community.countTodayCommunity");
 	}
 

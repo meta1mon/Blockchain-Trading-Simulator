@@ -13,7 +13,7 @@
 $(function() {
 	var alltimer = setInterval(function() { // 1초마다 함수 돌림 ()
 		loadValues1();
-	}, 1000);
+	}, 2000);
 
 	// 실시간 가격 받을 것
 	var nowprices = [];
@@ -84,7 +84,7 @@ $(function() {
 	function comparePrice() {
 		for (var i = 0; i < sellPriceArr.length; i++) { // 코인 종류만큼 돌린다
 			for (var j = 0; j < sellPriceArr[i].length; j++) { // 해당 코인에 대한 가격 수만큼 돌린다	
-				if (nowprices[i] == sellPriceArr[i][j]) {
+				if (nowprices[i] >= sellPriceArr[i][j]) {
 					console.log(sellCoinArr[i] + "코인이 " + sellPriceArr[i][j]
 							+ " 가격으로 판매됨");
 					$.ajax({

@@ -135,6 +135,7 @@
       </div>
     </nav>
     <!-- main -->
+    <div id="wrapper">
     <main>
       <div class="feeds">
         <!-- article -->
@@ -306,6 +307,7 @@
         </footer>
       </div>
     </main>
+    </div>
     <script src="resources/js/main.js"></script>
     
 	<div id="wrapper">

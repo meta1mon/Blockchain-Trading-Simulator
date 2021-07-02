@@ -26,7 +26,7 @@
 
 .ck .ck-editor__main > .ck-editor__editable:not(.ck-focused)
 {
-border:none;}
+}
 .detailOut {
 	width: 65%;
 	min-width: 1000px;

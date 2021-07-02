@@ -70,7 +70,13 @@ public class RcommunityDao {
 
 	public int updateRcommunity(Rcommunity rc) { // 댓글 수정
 		System.out.println(rc);
-		return sqlSession.update("rcommunity.updateRcommunity", rc);
+		int result = sqlSession.update("rcommunity.updateRcommunity", rc);
+		if (result > 0) {
+			System.out.println("댓글 수정 성공");
+		} else {
+			System.out.println("댓글 수정 실패");
+		}
+		return result;
 	}
 
 	public int deleteRcommunity(String rno, String cno) { // 댓글 삭제

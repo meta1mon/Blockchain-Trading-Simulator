@@ -412,6 +412,7 @@ $(function(){
           data : rInsertData,
           success : function(data) {
         	  alert("댓글 작성 완료");
+         	 window.location.reload();
           }
    	})
    }
@@ -447,6 +448,7 @@ $(function(){
          },
          success : function(data) {
         	 alert("댓글 수정완료")
+        	 window.location.reload();
          }
       })
    }
@@ -462,6 +464,7 @@ $(function(){
          },
          success : function(data) {
         	 alert("댓글 삭제 완료");
+        	 window.location.reload();
          }
       });
    }

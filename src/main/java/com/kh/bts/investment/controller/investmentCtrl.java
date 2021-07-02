@@ -110,10 +110,13 @@ public class investmentCtrl {
 	// 미체결 매도 내역을 체결 내역으로 바꾸기
 	@RequestMapping("sold")
 	public void sold(@RequestParam("sellCoin") String coin, @RequestParam("sellPrice") double sellprice,
+			@RequestParam("sellAcntno") String acntno, @RequestParam("sellCnt") double sellcnt,
 			HttpServletResponse response) {
 		WaitSold vo = new WaitSold();
 		vo.setSellprice(sellprice);
 		vo.setCoin(coin);
+		vo.setAcntno(acntno);
+		vo.setSellcnt(sellcnt);
 		int result = sService.insertSold(vo);
 		PrintWriter out = null;
 		try {
@@ -500,8 +503,8 @@ public class investmentCtrl {
 	}
 
 	@RequestMapping(value = "coinupdate", method = RequestMethod.POST)
-	public void update(Acnt vo ,@RequestParam(name = "acntno") String acntno, @RequestParam(name = "cybcash") int cybcash,
-			HttpServletResponse response) throws Exception {
+	public void update(Acnt vo, @RequestParam(name = "acntno") String acntno,
+			@RequestParam(name = "cybcash") int cybcash, HttpServletResponse response) throws Exception {
 		vo.setAcntno(acntno);
 		vo.setCybcash(cybcash);
 		int result = acntService.updateAcnt(vo);
@@ -523,9 +526,11 @@ public class investmentCtrl {
 		}
 
 	}
+
 	@RequestMapping(value = "coinacntupdate", method = RequestMethod.POST)
-	public void coinacntupdate(CoinAcnt vo ,@RequestParam(name = "acntno") String acntno, @RequestParam(name = "buycnt") int buycnt,
-			@RequestParam(name = "coin") String coin,HttpServletResponse response) throws Exception {
+	public void coinacntupdate(CoinAcnt vo, @RequestParam(name = "acntno") String acntno,
+			@RequestParam(name = "buycnt") int buycnt, @RequestParam(name = "coin") String coin,
+			HttpServletResponse response) throws Exception {
 		vo.setAcntno(acntno);
 		vo.setBuycnt(buycnt);
 		vo.setCoin(coin);
@@ -545,7 +550,7 @@ public class investmentCtrl {
 			out.flush();
 			out.close();
 		}
-		
+
 	}
 
 }

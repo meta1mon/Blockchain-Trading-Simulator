@@ -7,23 +7,40 @@
 .div1 *, .div2 *, .div4 *, .div5 *, .div6 * {
 	background: #f8f9fa;
 }
-.btn_bs{
+
+.btn_bs {
 	width: 48.5%;
-	
 }
-#bought{
+
+.pinpad-dimmed {
+	width: 100%;
+	min-height: 100%;
+	height: 2000px !important; 
+	position: absolute;
+	display: grid;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	z-index: 1000000;
+}
+
+#bought {
 	background: red;
 	width: 100%;
 	color: white;
 }
-#sold{
+
+#sold {
 	background: blue;
 	width: 100%;
 	color: white;
 }
-.b_c{
+
+.b_c {
 	width: 20%;
 }
+
 .parent {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -43,15 +60,14 @@
 
 .div2 {
 	grid-area: 2/1/4/5;
-	height: 700px ;
-	width : 937px;
+	height: 700px;
+	width: 937px;
 	top: 170px;
 	position: absolute;
 }
 
 #chart1 {
 	left: -50px;
-	
 }
 
 .div3 {
@@ -77,6 +93,7 @@
 	overflow: auto;
 	height: 1348px;
 }
+
 #aaaaa {
 	overflow: auto;
 	height: 548px;

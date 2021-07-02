@@ -13,7 +13,6 @@
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/mikrokosmos.css"
 	rel="stylesheet" type="text/css" />
-<!-- <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script> -->
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -118,6 +117,7 @@
 </head>
 <body>
 <%@include file="../main/header.jsp"%>
+    <div id="wrapper">
     <!-- navigation -->
     <nav>
       <div class="nav-container">
@@ -135,7 +135,7 @@
       </div>
     </nav>
     <!-- main -->
-    <div id="wrapper">
+
     <main>
       <div class="feeds">
         <!-- article -->
@@ -146,40 +146,42 @@
               <img class="img-profile pic" src="resources/assets/img/user.png" alt="..">
               <span class="userID main-id point-span">${vo.cwriter }</span>
             </div>
-						<button type="button"
+						<button type="button" class="cupdate"
 							onclick="communityUpdateFn(${status.index })">수정</button>
-						<button type="button"
+						<button type="button" class="cdelete"
 							onclick="communityDeleteFn(${status.index })">삭제</button>
-						<button type="button">신고</button>
+						<button type="button">신고</button> class="creport"
 						<img class="icon-react icon-more" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png" alt="more">
           </header>
           <div class="main-image">
 <!--             <img src="" alt="dlwlrma님의 피드 사진" class="mainPic"> -->
             &nbsp;${vo.ccontent }
             <div class="description">
-              <p><span class="at-tag">@wkorea @gucci</span> 🌱</p>
+              <p><span class="at-tag">@bts @wkorea @gucci</span> 🌱</p>
             </div>
           </div>
           <div class="icons-react">
             <div class="icons-left">
-              <img class="icon-react" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png" alt="하트">
-              <img class="icon-react" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png" alt="말풍선">
-              <img class="icon-react" src="resources/assets/img/dm.png" alt="DM">  
+              <img class="thumbsup" onclick="" src="resources/assets/img/thumbsup.png" alt="추천">  
+              <img class="thumbsup-liked" onclick="" src="resources/assets/img/thumbs-up.png" alt="추천">  
+              <img class="thumbsdown" onclick="" src="resources/assets/img/thumbsdown.png" alt="비추천">  
+              <img class="thumbsdown-disliked" onclick="" src="resources/assets/img/thumbs-down.png" alt="비추천">  
+              <img class="reply" id="popup_open" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png" alt="댓글">
             </div>
 <!--             <img class="icon-react" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/bookmark.png" alt="북마크"> -->
           </div>
           <!-- article text data -->
           <div class="reaction">
             <div class="liked-people">
-              <p><span class="point-span">${vo.likecnt }</span> <span class="point-span">명</span>이 좋아합니다</p>
+              <p><span class="point-span">${vo.likecnt }</span>명이 좋아합니다</p>
             </div>
            <!--  <div class="description">
               <p><span class="point-span userID">dlwlrma</span><span class="at-tag">@wkorea @gucci</span> 🌱</p>
             </div> -->
             <div class="comment-section">
               <ul class="comments">
-                <li>
-                  <span><span class="point-span userID">postmalone</span>내가 입으면 더 잘어울릴 것 같아</span>
+               <!--   <li>
+                  <span class="reply_open" id="popup_open_btn">댓글 0개 보기</span>
                   <div>
                     <img class="comment-more" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png" alt="more">
                     <div class="comment-like">
@@ -187,7 +189,7 @@
                       <img class="comment-heart-liked" src="resources/assets/img/liked.png" alt="좋아요된하트">
                     </div>
                   </div>
-                </li>
+                </li> -->
                 <!-- input 값 여기에 추가 -->
               </ul>
               <div class="time-log">
@@ -306,12 +308,35 @@
           </p>
         </footer>
       </div>
+          
+        <!-- 댓글 모달창 -->
+			<div id="my_modal_reply">
+				<p>댓글 </p>
+				<div class="modal_report_div">
+					
+				</div>
+				<hr
+					style="width: 328px; position: relative; right: 30px; top: 20px;">
+				<div>
+					<button type="button" id="btncancel" class="modal_close_btn">취소</button>
+					<button type="button" id="btnrply" class="modal_report_btn">신고</button>
+				</div>
+			</div>
+			
+						<div id="moreDiv"></div>
+			<button type="button" onclick="moreInsta()">더보기</button>
     </main>
+    <jsp:include page="../main/footer.jsp"></jsp:include>
     </div>
+
+			
     <script src="resources/js/main.js"></script>
     
-	<div id="wrapper">
-<%-- 		<%@include file="../main/header.jsp"%> --%>
+
+			
+			
+<%-- 	<div id="wrapper">
+		<%@include file="../main/header.jsp"%>
 		<div class="listOut">
 
 			<div class="comm">소우주</div>
@@ -389,6 +414,6 @@
 			</div>
 		</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include>
-	</div>
+	</div> --%>
 </body>
 </html>

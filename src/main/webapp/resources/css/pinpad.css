@@ -18,7 +18,9 @@
 	padding:0;
 	z-index:1000000;
 }
-
+.table td, .table th {
+    border-top: 0px !important;
+}
 body.pinpad-noscroll {
 	overflow-y : hidden;
 }

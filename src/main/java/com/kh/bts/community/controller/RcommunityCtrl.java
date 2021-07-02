@@ -47,6 +47,8 @@ public class RcommunityCtrl {
 	@RequestMapping(value = "rcUpdate", method = RequestMethod.POST)
 	public void RcommunityUpdate(HttpServletResponse response, Rcommunity rc) {
 		System.out.println("들어오나??????????????");
+		System.out.println(rc.getRno());
+		System.out.println(rc.getRcontent());
 		PrintWriter out = null;
 		try {
 			int result = rcmService.updateRcommunity(rc);

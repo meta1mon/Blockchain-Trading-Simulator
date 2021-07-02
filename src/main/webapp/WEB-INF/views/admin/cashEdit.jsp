@@ -63,8 +63,7 @@ input[type=date]{
 	width: calc(100% - 27px);
 }
 input[type=button] {
-	width: calc(50% - 2.4px);
-	border: 1px solid rgba(0,0,0,0.3);
+	width: calc(50% - 2.8px);
 	border-radius: 5px;
 	outline: none;
 }
@@ -73,7 +72,89 @@ input[type=submit] {
 	width: 100%;
 }
 
+#list {
+	table-layout:fixed;
+}
+
+#list td{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#list tr:not(.page) td:nth-child(1), #list tr:not(.page) td:nth-child(2){
+	width: 196.78px;
+}      
+#list tr:not(.page) td:nth-child(3) {
+	width: 196.3px;
+}      
+#list tr:not(.page) td:nth-child(4), #list tr:not(.page) td:nth-child(5) {
+	width: 169.8px;
+}
+
+.edit, .regCash{
+	border: 1px solid #8c66c8 !important;
+	background: white;
+	color: #8c66c8;
+}
+
+.edit:hover, .regCash:hover {
+	background: #8c66c8;
+	color: white;
+}
+
+.del, .cancel {
+	border: 1px solid red;
+	background: white;
+	color: red;
+} 
+
+.del:hover, .cancel:hover {
+	background: red;
+	color: white;
+} 
+
+.done {
+	border: 1px solid green;
+	background: white;
+	color: green;
+}
+
+.done:hover {
+	background: green;
+	color: white;
+}     
 </style>
+<script>
+function deleteCash(cashno){
+	console.log("삭제합니다.");
+	console.log(cashno);
+	var dataquery = $("#frmCashEdit").serialize();
+		console.log("dataquery:" + dataquery);
+		var isConfirm = confirm(cashno + "번 상품을 삭제하시겠습니까?");
+		if(isConfirm){
+			$.ajax({
+				url : 'deleteCash',
+				type : 'post',
+				data : dataquery,
+				sync : true,
+				success : function(data) {
+					console.log(data);
+					alert("상품 삭제 완료!");
+					location.href = "cash";
+				},
+				error : function(request, status, error) {
+					console.log("error: 상품 삭제 실패!");
+					console.log("code:" + request.status + "\n" + "message:"
+							+ request.responseText + "\n" + "error:" + error);
+				}
+	
+			})
+		}else{
+			alert("취소하였습니다.")
+		}
+	}
+</script>
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
@@ -81,7 +162,7 @@ input[type=submit] {
 		<p class="title">충전 상품 관리</p>
 		<hr>
 		<div>
-				<table>
+				<table id="list">
 					<tr>
 						<td class="center">충전금</td>
 						<td class="center">판매가</td>
@@ -126,12 +207,12 @@ input[type=submit] {
 							<input class="right read info enddate" type="date" name="enddate" value="${vo.enddate}" readonly="readonly">
 							</td>
 
-							<td colspan="2" class="center default">
+							<td colspan="2" class="center default" style="width: 95.58px">
 							<input type="button" class="edit" value="수정"> 
-							<input type="button" class="del" value="삭제">
+							<input type="button" class="del" value="삭제" onclick="deleteCash('${vo.cashno}')">
 								</td>
 
-							<td colspan="2" class="center editmode" style="display: none">
+							<td colspan="2" class="center editmode" style="display: none; width: 95.58px">
 								<input type="button" class="done" value="완료"> 
 								<input type="button" class="cancel" value="취소">
 							</td>
@@ -191,7 +272,7 @@ input[type=submit] {
 						<td class="right"><input type="number" min="0" max="100" name="discountrate" class="right"><span>%</span></td>
 						<td class="right"><input type="date" name="startdate" id="startdatereg" class="right"></td>
 						<td class="right"><input type="date" name="enddate" id="enddatereg" min="" class="right"></td>
-						<td colspan="2" class="center"><input type="submit" value="등록"></td>
+						<td colspan="2" class="center"><input type="submit" class="regCash" value="등록"></td>
 					</tr>
 					</form>
 				</table>
@@ -207,7 +288,6 @@ input[type=submit] {
 			
 			var setMinDateReg = function(){
 				var startdatereg = $("#startdatereg").val();
-				console.log(startdatereg);
 				if(startdatereg != null && startdatereg != "" && startdatereg != undefined){
 					console.log("설정합니다.");
 					$("#enddatereg").attr("min", startdatereg);
@@ -222,7 +302,6 @@ input[type=submit] {
 			var edit = function(){
 				var index = $(this).parents("#item").index(); 
 				index = index/2 +1;
-				console.log(index);
 				console.log($(this).val());
  				for(var i=0; i<8; i++){
 				var ele = $('tr:eq(' + index +') > td:nth-child('+i+') > input');
@@ -282,7 +361,6 @@ input[type=submit] {
 				console.log("취소하겠습니다.")
 				var index = $(this).parents("#item").index(); 
 				index = index/2 +1;
-				console.log(index);
 				console.log($(this).val());
  				for(var i=0; i<8; i++){
 				var ele = $('tr:eq(' + index +') > td:nth-child('+i+') > input');
@@ -336,7 +414,6 @@ input[type=submit] {
  					data: dataquery,
  					sync : true,
 					success : function(data) {
-						console.log(data);
 						alert("상품 수정 완료!");
 						location.href = "cash";
 					},
@@ -348,14 +425,6 @@ input[type=submit] {
  				})
 			}
 			$(".done").on("click", done);
-			
-			var del = function(){
-				console.log("삭제합니다.");
-			}
-			$(".del").on("click", del);
-			
-			
-			
 			
 		})	
 	</script>

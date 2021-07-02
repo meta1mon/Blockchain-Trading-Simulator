@@ -4,6 +4,10 @@
 	font-weight: lighter
 }
 
+.modifyBtn {
+	margin: 10px;
+}
+
 .ck.ck-editor {
 	max-width: 80%;
 	min-width: 80%;
@@ -20,49 +24,19 @@
 	background: white;
 }
 
-.ck
-
-
-.ck-editor__main
->
-.ck-editor__editable
-
-
-:not
-
- 
-
-(
-.ck-focused
-
- 
-
-)
+.ck .ck-editor__main > .ck-editor__editable:not(.ck-focused)
 {
-border
-
-
-:
-
- 
-
-none
-
-
-;
-}
-
+border:none;}
 .detailOut {
 	width: 65%;
 	min-width: 1000px;
 	height: 95%;
 	padding: 20px;
 	margin: 25px auto;
-    background-color: #fff;
-    border: 1.5px solid #E3C8F8;
+	background-color: #fff;
+	border: 1.5px solid #E3C8F8;
 	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
-
 .comm {
 	margin: 40px 0 20px 20px;
 	text-align: left;

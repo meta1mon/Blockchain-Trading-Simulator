@@ -1,10 +1,9 @@
 @charset "UTF-8";
 
 @font-face {
-     font-family: 'S-CoreDream-5Medium';
-     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
-     font-weight: normal;
-     font-style: normal;
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-style: normal;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -26,7 +25,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	font-family: 'S-CoreDream-5Medium';
+	font-family: 'NanumSquareRound';
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -54,7 +53,7 @@ table {
 /* 스크롤 숨기기 */
 *{
 	-ms-overflow-style: none;
-	font-family: 'S-CoreDream-5Medium';
+	font-family: 'NanumSquareRound';
 }
 
 *::-webkit-scrollbar {

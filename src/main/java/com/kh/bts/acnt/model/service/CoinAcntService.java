@@ -10,4 +10,5 @@ public interface CoinAcntService {
 	CoinAcnt countcoin(CoinAcnt vo);
 	int insertCoinAcnt(CoinAcnt vo);
 	int deleteCoinAcnt(int cano);
+	public int updateCoinAcnt(CoinAcnt vo) throws Exception;
 }

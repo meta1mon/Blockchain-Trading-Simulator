@@ -24,7 +24,7 @@ $(function() {
 	padding: 5px !important;
 }
 
-#acr td:not(.center, .right){
+#acr td:not (.center, .right ){
 	text-align: left;
 }
 
@@ -36,7 +36,7 @@ $(function() {
 }
 
 /*모달 창 공통*/
-#modal{
+#modal {
 	display: none;
 	position: absolute;
 	top: 0;
@@ -52,15 +52,15 @@ $(function() {
 
 #contents {
 	padding: 30px;
-    background-color: white;
-    border: 2px solid rgb(140, 102, 200);
-    border-radius: 5px;
-    top: calc(50% - 200px);
-    left: calc(50% - 100px);
-    width: 400px;
-    height: 428px;
-    text-align: center;
-    position: absolute;
+	background-color: white;
+	border: 2px solid rgb(140, 102, 200);
+	border-radius: 5px;
+	top: calc(50% - 200px);
+	left: calc(50% - 100px);
+	width: 400px;
+	height: 428px;
+	text-align: center;
+	position: absolute;
 }
 
 #detail {
@@ -81,6 +81,7 @@ $(function() {
 	border: 1px solid rgba(0, 0, 0, 0.5);
 	border-radius: 3px;
 }
+
 #ccontentText {
 	height: 105px;
 	width: 270px;
@@ -96,37 +97,72 @@ $(function() {
 	width: 100%;
 }
 
-.hidden{
+.hidden {
 	display: none;
 }
 
 /*공통*/
-#page{
+#page {
 	text-align: center;
 }
 
 .page {
+	width: 1085px;
 	position: fixed;
 	top: 603.5px;
 }
+
 .page td {
 	width: 1085px;
 }
 
-#listForm{
-	 float:right;
+#listForm {
+	float: right;
 }
 
-table{
+table {
 	width: 100%;
 }
 
-.title{
+.title {
 	font-size: 25px;
 	color: #fcc000;
 }
-.inbl{
+
+.inbl {
 	display: inline-block;
+}
+
+#list {
+	table-layout:fixed;
+}
+
+#list td{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#list tr:not(.page) td:nth-child(1) {
+	width: 122.625px;
+}      
+#list tr:not(.page) td:nth-child(2) {
+	width: 146.8px;
+}      
+#list tr:not(.page) td:nth-child(3) {
+	width: 113.28px;
+}       
+#list tr:not(.page) td:nth-child(4) {
+	width: 89.11px;
+}       
+#list tr:not(.page) td:nth-child(5), 
+#list tr:not(.page) td:nth-child(6), 
+#list tr:not(.page) td:nth-child(7), 
+#list tr:not(.page) td:nth-child(8) {
+	width: 122.63px;
+}       
+#list tr:not(.page) td:nth-child(9) {
+	width: 122.69px;
 }
 </style>
 <script>
@@ -168,7 +204,7 @@ $(function(){
 	</form>
 	<hr>
 		<div>
-			<table>
+			<table id="list">
 				<tr>
 					<th>신고 번호</th>
 					<th>게시글 제목</th>
@@ -194,34 +230,34 @@ $(function(){
 							<td class="center" style="cursor: pointer;">${vo.crespondent}</td>
 							<td class="center" style="cursor: pointer;">${vo.creporter}</td>
 							<c:choose>
-							<c:when test="${vo.crreason eq 1}">
-							<td style="cursor: pointer;">나체 이미지 또는 성적 행위</td>
-							</c:when>
-							<c:when test="${vo.crreason eq 2}">
-							<td style="cursor: pointer;">혐오 발언 또는 폭력적</td>
-							</c:when>
-							<c:when test="${vo.crreason eq 3}">
-							<td style="cursor: pointer;">증오 또는 학대</td>
-							</c:when>
-							<c:when test="${vo.crreason eq 4}">
-							<td style="cursor: pointer;">유해하거나 위험한 행위</td>
-							</c:when>
-							<c:when test="${vo.crreason eq 5}">
-							<td style="cursor: pointer;">스팸 또는 사용자 현혹</td>
-							</c:when>
-							<c:when test="${vo.crreason eq 6}">
-							<td style="cursor: pointer;">마음에 들지 않습니다.</td>
-							</c:when>
+								<c:when test="${vo.crreason eq 1}">
+									<td style="cursor: pointer;">나체 이미지 또는 성적 행위</td>
+								</c:when>                      
+								<c:when test="${vo.crreason eq 2}">
+									<td style="cursor: pointer;">혐오 발언 또는 폭력적</td>
+								</c:when>                      
+								<c:when test="${vo.crreason eq 3}">
+									<td style="cursor: pointer;">증오 또는 학대</td>
+								</c:when>                      
+								<c:when test="${vo.crreason eq 4}">
+									<td style="cursor: pointer;">유해하거나 위험한 행위</td>
+								</c:when>                      
+								<c:when test="${vo.crreason eq 5}">
+									<td style="cursor: pointer;">스팸 또는 사용자 현혹</td>
+								</c:when>                      
+								<c:when test="${vo.crreason eq 6}">
+									<td style="cursor: pointer;">마음에 들지 않습니다.</td>
+								</c:when>
 							</c:choose>
 							<td style="cursor: pointer;">${vo.crdate}</td>
 							<td style="cursor: pointer;">${vo.creason}</td>
 							<td style="cursor: pointer;">${vo.acrdate}</td>
 							<c:choose>
 							<c:when test="${vo.cstatus eq 'accept'}">
-							<td class="center" style="cursor: pointer; color: green;">수리</td>
+							<td class="center" style="cursor: pointer;color: green;">수리</td>
 							</c:when>
 							<c:when test="${vo.cstatus eq 'deny'}">
-							<td class="center" style="cursor: pointer; color: red;">반려</td>
+							<td class="center" style="cursor: pointer;color: red;">반려</td>
 							</c:when>
 							</c:choose>
 						</tr>

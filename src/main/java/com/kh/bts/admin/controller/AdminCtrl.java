@@ -125,6 +125,16 @@ public class AdminCtrl {
 		System.out.println(result);
 		return result;
 	}
+	
+//	충전 상품 삭제
+	@ResponseBody
+	@RequestMapping(value="/deleteCash", method = RequestMethod.POST)
+	public int deleteCash(Cash vo, HttpServletResponse response){
+		logger.info("HHHHHHHHHHHHHHHHHHHH컨트롤러 들어왔다!HHHHHHHHHHHHHHHHHHHH");
+		int result = aService.deleteCash(vo);
+		System.out.println(result);
+		return result;
+	}
 
 // 충전 상품 등록
 	@RequestMapping(value = "/cashRegister", method = RequestMethod.POST)

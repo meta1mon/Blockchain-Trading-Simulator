@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.bts.Paging;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.vo.Member;
 
@@ -16,6 +17,10 @@ public class CommunityDao {
 	@Autowired
 	private SqlSession sqlSession;
 
+	public List<Community> selectAllCommunityList(Paging vo) {
+		List<Community> list = sqlSession.selectList("community.selectCommunityList", vo);
+		return list;
+	}
 	public List<Community> searchList(int startPage, int limit, String keyword, int searchType) { // 검색한 게시글 조회
 		List<Community> list = new ArrayList<Community>();
 		int startRow = (startPage - 1) * limit;

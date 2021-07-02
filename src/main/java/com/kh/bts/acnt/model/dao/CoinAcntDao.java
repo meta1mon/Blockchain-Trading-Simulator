@@ -14,6 +14,12 @@ public class CoinAcntDao {
 	@Autowired
 	private SqlSession sqlSession;
 
+	public int updateMyCoinAcnt(CoinAcnt vo) {
+		int result = 0;
+		result = sqlSession.update("coinacnt.updateCoinAcnt", vo);
+		return result;
+	} 
+	
 	public List<CoinAcnt> allselectList(String acntno){
 		return sqlSession.selectList("coinacnt.selectMyCoinAcnt", acntno);
 	}

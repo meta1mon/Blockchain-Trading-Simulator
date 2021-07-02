@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.bts.Paging;
 import com.kh.bts.community.model.dao.CommunityDao;
 import com.kh.bts.community.model.vo.Community;
 
@@ -14,6 +15,11 @@ public class CommunityServiceImpl implements CommunityService {
 	@Autowired
 	private CommunityDao cmDao;
 
+	@Override
+	public List<Community> selectAllCommunityList(Paging vo) {
+		return cmDao.selectAllCommunityList(vo);
+	}
+	
 	@Override
 	public List<Community> selectSearch(int startPage, int limit, String keyword, int searchType) {
 		return cmDao.searchList(startPage, limit, keyword, searchType);
@@ -83,5 +89,6 @@ public class CommunityServiceImpl implements CommunityService {
 	public String returnEmail(String nickName) {
 		return cmDao.returnEmail(nickName);
 	}
+
 
 }

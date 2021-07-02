@@ -2,6 +2,7 @@ package com.kh.bts.mypage.controller;
 
 import java.io.IOException;
 
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -21,8 +22,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.bts.HomeController;
 import com.kh.bts.acnt.model.service.AcntService;
 import com.kh.bts.acnt.model.vo.Acnt;
+import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.vo.Community;
+import com.kh.bts.investment.model.service.BoughtService;
+import com.kh.bts.investment.model.service.SoldService;
+import com.kh.bts.investment.model.service.WaitBoughtService;
+import com.kh.bts.investment.model.service.WaitSoldService;
+import com.kh.bts.investment.model.vo.Bought;
+import com.kh.bts.investment.model.vo.Sold;
+import com.kh.bts.investment.model.vo.WaitBought;
+import com.kh.bts.investment.model.vo.WaitSold;
 import com.kh.bts.member.model.service.MemberService;
 import com.kh.bts.member.model.service.MemberServiceImpl;
 import com.kh.bts.member.model.vo.Member;
@@ -42,7 +52,16 @@ public class MypageController {
 
 	@Autowired
 	private AcntService acntService;
-
+	
+	@Autowired
+	private WaitBoughtService wbService;
+	@Autowired
+	private WaitSoldService wsService;
+	@Autowired
+	private BoughtService bService;
+	@Autowired
+	private SoldService sService;
+	
 	@RequestMapping(value = "")
 	public ModelAndView mypageEnter(ModelAndView mv) {
 		mv.setViewName("mypage/myPageEnter");
@@ -256,12 +275,37 @@ public class MypageController {
 
 		HttpSession session = request.getSession();
 		String loginEmail = (String) session.getAttribute("loginMember");
+		
+		
 		if (loginEmail == null) {
 			System.out.println("비회원입니다");
 		} else {
 			mv.addObject("email", loginEmail);
-			Acnt result = acntService.selectMyAcnt(loginEmail);
-			mv.addObject("acnt", result);
+			Acnt acntResult = acntService.selectMyAcnt(loginEmail);
+			
+			int totalCoin =  myService.myTotalCoin(acntResult);
+			
+			int totalAssets = totalCoin+acntResult.getCybcash();
+			
+			int coinListCount = myService.coinListCount(acntResult);
+			
+			List<CoinAcnt> coinList = myService.selectMyCoinAcnt(acntResult.getAcntno());
+			
+			List<WaitBought> wBoughtResult = wbService.selectListWaitBought(acntResult.getAcntno());
+			List<WaitSold> wSoldResult = wsService.selectListWaitSold(acntResult.getAcntno());
+			List<Bought> boughtResult = bService.selectListBought(acntResult.getAcntno());
+			List<Sold> soldResult = sService.selectListSold(acntResult.getAcntno());
+			
+			mv.addObject("acnt", acntResult);
+			mv.addObject("totalCoin", totalCoin);
+			mv.addObject("totalAssets", totalAssets);
+			mv.addObject("coinListCount", coinListCount);
+			mv.addObject("coinList", coinList);
+			mv.addObject("wBoughtResult", wBoughtResult);
+			mv.addObject("wSoldResult", wSoldResult);
+			mv.addObject("boughtResult", boughtResult);
+			mv.addObject("soldResult", soldResult);
+			
 		}
 		
 		mv.setViewName("mypage/myEssets");

@@ -36,6 +36,12 @@ public class CoinAcntServiceImpl implements CoinAcntService{
 		// TODO Auto-generated method stub
 		return coinacntDao.countcoin(vo);
 	}
+
+	@Override
+	public int updateCoinAcnt(CoinAcnt vo) throws Exception {
+		// TODO Auto-generated method stub
+		return coinacntDao.updateMyCoinAcnt(vo);
+	}
 	
 	
 }

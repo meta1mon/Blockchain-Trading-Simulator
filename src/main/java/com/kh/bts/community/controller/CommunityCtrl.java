@@ -1,9 +1,12 @@
 package com.kh.bts.community.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.kh.bts.Paging;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Community;
@@ -29,6 +35,39 @@ public class CommunityCtrl {
 	private RcommunityService rcmService;
 	public static final int LIMIT = 10;
 	public static final int PAGE_BOX = 3;
+	
+	@RequestMapping("insta")
+	public ModelAndView insta(ModelAndView mav) {
+		Paging vo = new Paging(1, 4);
+		List<Community> list = cmService.selectAllCommunityList(vo);
+		mav.addObject("commuList", list);
+		mav.addObject("nowPage", vo);
+		mav.setViewName("community/mikrokosmos");
+		return mav;
+	}
+	
+	@RequestMapping("moreInsta")
+	public void moreInsta(Paging vo, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		System.out.println("ajax로 들어옴");
+		System.out.println(vo.getStart());
+		System.out.println(vo.getPlus());
+		List<Community> list = cmService.selectAllCommunityList(vo);
+		PrintWriter out = null;
+		Gson gson = new GsonBuilder().create();
+		String jsonlist = gson.toJson(list);
+		try {
+			out = response.getWriter();
+			out.print(jsonlist);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+		
+	}
 	
 	@RequestMapping(value = "clist", method = RequestMethod.GET)
 	public ModelAndView communityListService(@RequestParam(name = "page", defaultValue = "1") int page,

@@ -2,31 +2,6 @@ $(function() {
 	var checkpw = false;
 	coinname(); // 숫자를 이름으로 변경
 	chart();
-	$("#check_cnt").click(
-			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-				var dataList4 = $("#frm22").serialize();
-				$.ajax({
-					url : "coincount",
-					type : "post",
-					data : dataList4,
-					dataType : "json",
-					success : function(data) {
-						if (data == null) {
-							$("#coincount").val(0);
-
-						} else {
-							$("#coincount").val(data.buycnt);
-
-						}
-					},
-					error : function(request, status, errorData) {
-						alert("ws실패" + "error code : " + request.status + "\n"
-								+ "message : " + request.responseText + "\n"
-								+ "error : " + errorData);
-					}
-				});
-			});
-
 	$("#check2").click(function() { // 계좌 비밀번호
 
 		var acntList = $("#frm11").serialize();
@@ -38,8 +13,8 @@ $(function() {
 			success : function(data) {
 				if (data == 1) {
 					html3 += "<a style='color: green;'>성공</a>"
-//					var cy = $("#hidden").val();
-//					$("#cybcash").val(cy);
+					// var cy = $("#hidden").val();
+					// $("#cybcash").val(cy);
 					checkpw = true;
 					wblist();
 					wslist();
@@ -82,51 +57,71 @@ $(function() {
 	$("#cnt_b").keyup(function() { // 합계 구하기 매수
 		var sum = 0;
 		var a = $("#price_b").val();
-		var b = $("#cnt_b").val();
+		var b = $("#cnt_b").val()*1;
 		var now = $("#cybcash").val();
-
 		sum = a * b;
-
-		$("#totalprice").val(sum);
-
-		$("#updateprice").val(now - sum);
+		var tsum = (sum).toFixed(0);
+		$("#totalprice").val(tsum);
+		$("#updateprice").val(now - tsum);
+		
+		var csum = 0;
+		var c = $("#coincount").val()*1;
+		console.log(c);
+		csum  = c + b;	
+		console.log(csum);
+		$("#updatecoin").val(csum);
 	});
 	$("#cnt_s").keyup(function() { // 합계 구하기 매도
 		var sum = 0;
 		var a = $("#price_s").val();
 		var b = $("#cnt_s").val();
 		var now = $("#cybcash").val();
-
 		sum = a * b;
+		var tsum = (sum).toFixed(0);
+		$("#totalprice").val(tsum);
+		$("#updateprice").val(now + tsum);
+		
+		var csum = 0;
+		var c = $("#coincount").val();
+		csum  = c - b;	
+		$("#updatecoin").val(csum);
 
-		$("#totalprice").val(sum);
-
-		$("#updateprice").val(now + sum);
 	});
 	// ///////////////////////////////////////////////////////////////////////////////////////
 	$("#sold").on(
 			// 미체결 매도 추가하기
 			"click",
 			function() {
-				if (checkpw == false) {
-					alert("계좌비밀번호를 입력해주세요");
-				} else {
-					var dataList = $("#frm22").serialize();
-					$.ajax({
-						url : "wsInsert",
-						type : "post",
-						data : dataList,
-						dataType : "json",
-						success : function(data) {
-							wslist();
-						},
-						error : function(request, status, errorData) {
-							alert("ws실패" + "error code : " + request.status
-									+ "\n" + "message : "
-									+ request.responseText + "\n" + "error : "
-									+ errorData);
+				if (confirm("매도 주문을 체결하시겠습니까 ?")) {
+					if (checkpw == false) {
+						alert("계좌비밀번호를 입력해주세요");
+					} else {
+						var ch = $("#totalprice").val();
+						if (ch < 5000) {
+							alert("최소주문금액이 작습니다.");
+						} else {
+
+							var dataList = $("#frm22").serialize();
+							$.ajax({
+								url : "wsInsert",
+								type : "post",
+								data : dataList,
+								dataType : "json",
+								success : function(data) {
+									wslist();
+								},
+								error : function(request, status, errorData) {
+									alert("ws실패" + "error code : "
+											+ request.status + "\n"
+											+ "message : "
+											+ request.responseText + "\n"
+											+ "error : " + errorData);
+								}
+							});
 						}
-					});
+					}
+				} else {
+					alert("매도주문이 취소 되었습니다.");
 				}
 			});
 
@@ -134,27 +129,46 @@ $(function() {
 			// 매수 버든 wait bought insert 미체결
 			"click",
 			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-				if (checkpw == false) {
-					alert("계좌비밀번호를 입력해주세요");
-				} else {
-					var dataList = $("#frm22").serialize();
-					$.ajax({
-						url : "wbInsert",
-						type : "post",
-						data : dataList,
-						dataType : "json",
-						success : function(data) {
-							up();
-							wblist();
+				if (confirm("매도 주문을 체결하시겠습니까 ?")) {
+					if (checkpw == false) {
+						alert("계좌비밀번호를 입력해주세요");
+					} else {
+						var ch = $("#totalprice").val();
+						if (ch < 5000) {
+							alert("최소주문금액이 작습니다.");
+						} else {
+							var price = $("#updateprice").val();
+							if (price < 0) {
+								alert("보유현금을 확인해주세요");
+							} else {
 
-						},
-						error : function(request, status, errorData) {
-							alert("실패" + "error code : " + request.status
-									+ "\n" + "message : "
-									+ request.responseText + "\n" + "error : "
-									+ errorData);
+								var dataList = $("#frm22").serialize();
+								$
+										.ajax({
+											url : "wbInsert",
+											type : "post",
+											data : dataList,
+											dataType : "json",
+											success : function(data) {
+												up();
+												wblist();
+
+											},
+											error : function(request, status,
+													errorData) {
+												alert("실패" + "error code : "
+														+ request.status + "\n"
+														+ "message : "
+														+ request.responseText
+														+ "\n" + "error : "
+														+ errorData);
+											}
+										});
+							}
 						}
-					});
+					}
+				} else {
+					alert("매수주문이 취소 되었습니다.");
 				}
 			});
 
@@ -167,6 +181,7 @@ $(function() {
 			blist();
 			slist();
 			acnt();
+			coinacnt();
 		}
 
 	}, 1000);
@@ -257,7 +272,7 @@ function alltable() { // 전체코인 시세 표
 								data['data'][search]['closing_price'] * 1,
 								data['data'][search]['fluctate_rate_24H'] * 1,
 								data['data'][search]['acc_trade_value_24H'] * 1 ]
-						html = "<table class='table table-striped' ><tr><td>코인명</td><td>현재가</td><td>등락률(24H)</td><td>거래대금</td></tr>";
+						html = "<table style='height : 146px; table-layout : fixed;' class='table table-striped' ><tr><td width= '78.08px !important'>코인명</td><td width= '91.36px !important'>현재가</td><td width= '78.77px !important'>등락률(24H)</td><td width= '164.31px !important'>거래대금</td></tr>";
 
 						html += "<tr><td><a href=# onclick='changename(\""
 								+ search + "\");'>" + search + "</a></td><td>"
@@ -274,6 +289,29 @@ function alltable() { // 전체코인 시세 표
 				}
 			});
 };
+function coinacnt() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+	var dataList4 = $("#frm22").serialize();
+	$.ajax({
+		url : "coincount",
+		type : "post",
+		data : dataList4,
+		dataType : "json",
+		success : function(data) {
+			if (data == null) {
+				$("#coincount").val(0);
+
+			} else {
+				$("#coincount").val(data.buycnt);
+
+			}
+		},
+		error : function(request, status, errorData) {
+			alert("ws실패" + "error code : " + request.status + "\n"
+					+ "message : " + request.responseText + "\n" + "error : "
+					+ errorData);
+		}
+	});
+}
 function up() { // acnt 돈계산 부분
 	$.ajax({
 		url : "coinupdate",
@@ -291,20 +329,36 @@ function up() { // acnt 돈계산 부분
 		}
 	});
 }
+function upcoin() { // coin 돈계산 부분
+	$.ajax({
+		url : "coinacntupdate",
+		type : "post",
+		data : {
+			"acntno" : $("#acntno").val(),
+			"coin" : $("#coin").val(),
+			"buycnt" : $("#updatecoin").val()
+		},
+		success : function(data) {
+		},
+		error : function(request, status, errorData) {
+			alert("ws실패" + "error code : " + request.status + "\n"
+					+ "message : " + request.responseText + "\n" + "error : "
+					+ errorData);
+		}
+	});
+}
 function acnt() { // acnt 돈계산 부분
+
 	$.ajax({
 		url : "acntlists",
 		type : "post",
+		dataType : "json",
 		data : {
 			"acntno" : $("#acntno").val()
 		},
 		success : function(data) {
-			console.log(data);
-			console.log(data[0]);
-			console.log(data[0].acntno);
-			console.log(data.cybcash);
-			console.log(data["cybcash"]);
-//			$("#cybcash").val();	
+
+			$("#cybcash").val(data.cybcash);
 		},
 		error : function(request, status, errorData) {
 			alert("ws실패" + "error code : " + request.status + "\n"
@@ -440,8 +494,8 @@ function wslist() { // 미체결 매도 내용 함수
 function chart() { // 차트
 
 	new TradingView.widget({
-		"width" : 600,
-		"height" : 490,
+		"height" : "650",
+		"width" : "850",
 		"symbol" : "BITHUMB:" + changecoin + "KRW",
 		"interval" : "5",
 		"timezone" : "Asia/Seoul",
@@ -489,7 +543,7 @@ function coinname() {
 		}
 	});
 };
-function removeWaitBought(ubno,buycnt,buyprice) {
+function removeWaitBought(ubno, buycnt, buyprice) {
 	if (confirm("매수를 취하시려면 예를 누르시고 매수를 취소하지 않으시려면 아니오를 눌러주세요")) {
 		$.ajax({
 			url : "wbdelete",
@@ -500,8 +554,8 @@ function removeWaitBought(ubno,buycnt,buyprice) {
 			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
 				if (data > 0) {
 					alert("매수가 정상적으로 취소 되었습니다.");
-					var returnprice =buycnt*buyprice;
-					var cc = returnprice + $("#cybcash").val()*1;
+					var returnprice = buycnt * buyprice;
+					var cc = returnprice + $("#cybcash").val() * 1;
 					returnup(cc);
 
 				} else {
@@ -585,9 +639,13 @@ function wblist() { // 미체결 매수 ajax함수
 													+ "<td>"
 													+ entry.acntno
 													+ "</td>"
-												
+
 													+ "<td><button type='button' class='del' onclick=\"removeWaitBought("
-													+ entry.ubno  + ", " + entry.buycnt +", "+ entry.buyprice
+													+ entry.ubno
+													+ ", "
+													+ entry.buycnt
+													+ ", "
+													+ entry.buyprice
 													+ ")\">X</button></td></tr>";
 										});
 						html1 += "</table></form>"
@@ -601,7 +659,7 @@ function wblist() { // 미체결 매수 ajax함수
 
 			});
 }
-function returnup(price) { 
+function returnup(price) {
 	$.ajax({
 		url : "coinupdate",
 		type : "post",
@@ -647,27 +705,27 @@ function orderbook() {
 				cache : false,
 				datatype : "json",
 				success : function(data) {
-					for (var i = 0; i < 5; i++) {
+					for (var i = 0; i < 15; i++) {
 						orderbookarrbid[i] = [
 								data[0]['orderbook_units'][i]['bid_price'] * 1,
 								data[0]['orderbook_units'][i]['bid_size'] * 1 ]
 					}
-					for (var i = 0; i < 5; i++) {
+					for (var i = 0; i < 15; i++) {
 						orderbookarrask[i] = [
 								data[0]['orderbook_units'][i]['ask_price'] * 1,
 								data[0]['orderbook_units'][i]['ask_size'] * 1 ]
 					}
-					html6 = "<table class='table table-striped' ><tr><td>현재가</td><td>수량</td></tr>";
-					for (var i = 4; i >= 0; i--) {
-						html6 += "<tr style='background: red; opacity: 0.3;'><td>"
+					html6 = "<table id='orderbook_t' class='table table-striped' ><tr><td>현재가</td><td>수량</td></tr>";
+					for (var i = 14; i >= 0; i--) {
+						html6 += "<tr style='background: rgba(255,51,0,0.5) !important;'><td><a >"
 								+ orderbookarrask[i][0]
-								+ "</td><td>"
+								+ "<a/a></td><td>"
 								+ orderbookarrask[i][1] + "개" + "</td></tr>";
 
 					}
 					html6 += "<tr><td>구분좀하자 </td></tr>";
-					for (var i = 0; i < 5; i++) {
-						html6 += "<tr  style='background: blue;'><td>"
+					for (var i = 0; i < 15; i++) {
+						html6 += "<tr  style='background: rgba(33,150,243, 0.5) !important;'><td>"
 								+ orderbookarrbid[i][0] + "</td><td>"
 								+ orderbookarrbid[i][1] + "개" + "</td></tr>";
 

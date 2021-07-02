@@ -41,7 +41,9 @@ public class AdminDao {
 	}
 	
 	public int deleteCash(Cash vo) {
-		return sqlSession.delete("cash.deleteCash", vo);
+		int result = 0;
+		result = sqlSession.delete("cash.deleteCash", vo);
+		return result;
 	}
 	
 	public List<CashLog> selectCashLog(int startPage, int limit){

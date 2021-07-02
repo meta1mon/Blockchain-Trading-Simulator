@@ -81,7 +81,7 @@
 }
 
 button {
-	width: 94px;
+	width: 90px;
 }
 
 .hidden{
@@ -115,6 +115,38 @@ table{
 
 .inbl{
 	display: inline-block;
+}
+
+#list {
+	table-layout:fixed;
+}
+
+#list td{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#list tr:not(.page) td:nth-child(1) {
+	width: 122.625px;
+}      
+#list tr:not(.page) td:nth-child(2) {
+	width: 146.8px;
+}      
+#list tr:not(.page) td:nth-child(3) {
+	width: 113.28px;
+}       
+#list tr:not(.page) td:nth-child(4) {
+	width: 89.11px;
+}       
+#list tr:not(.page) td:nth-child(5), 
+#list tr:not(.page) td:nth-child(6), 
+#list tr:not(.page) td:nth-child(7), 
+#list tr:not(.page) td:nth-child(8) {
+	width: 122.63px;
+}       
+#list tr:not(.page) td:nth-child(9) {
+	width: 122.69px;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -163,7 +195,7 @@ table{
 	<p class="title inbl">신고된 댓글 목록</p>
 	<hr>
 		<div>
-			<table>
+			<table id="list">
 				<tr>
 					<th>신고 번호</th>
 					<th>게시글 제목</th>

@@ -19,11 +19,12 @@ public class SoldDao {
 		int result = sqlSession.insert("sold.insertSold", vo);
 		if (result > 0) {
 			System.out.println("체결 내역으로 정상 이동");
-
-			// 코인 계좌에서 빼기
-			result = sqlSession.update("coinacnt.afterSoldCoinAcnt", vo);
+			
+			// 판매액만큼 돈을 넣어주기
+			result = sqlSession.insert("acnt.plusSoldPrice", vo);
 			if (result > 0) {
-				System.out.println("코인 계좌로 삽입 성공");
+				System.out.println("계좌로 삽입 성공");
+				
 				// 미체결 내역 삭제
 				result = sqlSession.delete("waitSold.afterSoldDelete", vo);
 				if (result > 0) {
@@ -32,7 +33,7 @@ public class SoldDao {
 					System.out.println("미체결 내역 삭제 실패");
 				}
 			} else {
-				System.out.println("코인 계좌로 삽입 실패");
+				System.out.println("계좌로 삽입 실패");
 			}
 		} else {
 			System.out.println("체결 내역으로 이동 실패");

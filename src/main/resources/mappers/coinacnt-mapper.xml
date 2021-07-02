@@ -36,7 +36,7 @@
 	VALUES (SEQ_COINACNT.nextval, B.COIN, B.BUYCNT, B.BUYPRICE, B.ACNTNO)
 	</insert>
 
-	<!-- 매도 체결 후, 코인계좌에서 줄임 -->
+<!-- 매도 체결 후, 코인계좌에서 줄임
 	<update id="afterSoldCoinAcnt" parameterType="WaitSold" flushCache="true"
 		statementType="PREPARED">
 	MERGE INTO COINACNT A
@@ -45,7 +45,7 @@
 	WHEN MATCHED THEN
 	UPDATE
 	SET A.BUYCNT = A.BUYCNT - B.SELLCNT
-	</update>
+	</update> -->
 	
 	<!-- 미체결 삽입 -->
 	<insert id="insertCoinAcnt" parameterType="CoinAcnt" flushCache="true"

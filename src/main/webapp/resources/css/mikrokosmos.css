@@ -232,6 +232,7 @@ nav {
     justify-content: center;
     background-color: white;
     border-bottom: 1px solid #DBDBDB;
+    opacity: 0.7;
 }
 .nav-container {
     max-width: 1000px;
@@ -372,15 +373,30 @@ header {
     align-items: center;
     justify-content: space-between;
 }
-.icon-react {
+.icon-react, .thumbsup, .thumbsup-liked, .thumbsdown, .thumbsdown-disliked, .reply {
     width: 24px;
     height: 24px;
+    cursor: pointer;
 }
+
+img.thumbsup {
+    display: inline-block;
+}
+img.thumbsup-liked {
+    display: none;
+}
+img.thumbsdown {
+    display: inline-block;
+}
+img.thumbsdown-disliked {
+    display: none;
+}
+
 .icons-left {
     display: flex;
     align-items: center;
 }
-.icons-left .icon-react {
+.icons-left .icon-react, .thumbsup, .thumbsup-liked, .thumbsdown, .thumbsdown-disliked, .reply {
     margin-right: 12px;
 }
 /* article text data */
@@ -412,6 +428,7 @@ header {
 }
 span.at-tag {
     color: #00376B;
+    padding: 0 16px;
 }
 ul.comments {
     margin-top: 5px;
@@ -487,6 +504,7 @@ button.submit-comment {
     padding: 4px;
     font-size: 14px;
     font-weight: 600;
+    cursor: pointer;
 }
 .submit-comment:disabled {
     color: #B9DFFC;
@@ -580,3 +598,47 @@ ul.story-list .profile-text {
     align-items: flex-start;
 }
 
+#my_modal, #my_modal_reply {
+	display: none;
+	width: 270px;
+	height: 320px;
+	padding: 30px;
+	background-color: #fefefe;
+	border: 1px solid #888;
+	border-radius: 5px;
+	transition: all 0.3s ease;
+}
+
+.modal_div {
+	margin-top: 10px;
+}
+
+#my_modal .modal_close_btn, #my_modal_reply .modal_close_btn {
+	position: absolute;
+	bottom: 20px;
+	right: 65px;
+	border: none;
+	background-color: #fefefe;
+	font-size: 16px;
+	padding: 3px 10px;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+}
+
+#my_modal .modal_report_btn, #my_modal_reply .modal_report_btn {
+	position: absolute;
+	bottom: 20px;
+	right: 15px;
+	border: none;
+	background-color: #fefefe;
+	color: #065fd4;
+	font-size: 16px;
+	padding: 3px 10px;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+}
+
+#my_modal .modal_close_btn:hover, #my_modal .modal_report_btn:hover {
+	background-color: #ffffff;
+	box-shadow: 5px 5px 10px 3px #eeeeee;
+}

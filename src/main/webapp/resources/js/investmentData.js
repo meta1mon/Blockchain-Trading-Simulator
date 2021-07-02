@@ -57,34 +57,34 @@ $(function() {
 	$("#cnt_b").keyup(function() { // 합계 구하기 매수
 		var sum = 0;
 		var a = $("#price_b").val();
-		var b = $("#cnt_b").val()*1;
+		var b = $("#cnt_b").val() * 1;
 		var now = $("#cybcash").val();
 		sum = a * b;
 		var tsum = (sum).toFixed(0);
 		$("#totalprice").val(tsum);
 		$("#updateprice").val(now - tsum);
-		
+
 		var csum = 0;
-		var c = $("#coincount").val()*1;
+		var c = $("#coincount").val() * 1;
 		console.log(c);
-		csum  = c + b;	
+		csum = c + b;
 		console.log(csum);
 		$("#updatecoin").val(csum);
 	});
 	$("#cnt_s").keyup(function() { // 합계 구하기 매도
-		var sum = 0;
-		var a = $("#price_s").val();
-		var b = $("#cnt_s").val();
-		var now = $("#cybcash").val();
-		sum = a * b;
-		var tsum = (sum).toFixed(0);
-		$("#totalprice").val(tsum);
-		$("#updateprice").val(now + tsum);
-		
-		var csum = 0;
-		var c = $("#coincount").val();
-		csum  = c - b;	
-		$("#updatecoin").val(csum);
+		var sum1 = 0;
+		var a1 = $("#price_s").val();
+		var b1 = $("#cnt_s").val()*1;
+		var now1 = $("#cybcash").val()*1;
+		sum1 = a1 * b1;
+		var tsum1 = (sum1).toFixed(0);
+		$("#totalprice").val(tsum1);
+		$("#updateprice").val(now1*1 + tsum1*1);
+
+		var csum1 = 0;
+		var c1 = $("#coincount").val()*1;
+		csum1 = c1 - b1;
+		$("#updatecoin").val(csum1);
 
 	});
 	// ///////////////////////////////////////////////////////////////////////////////////////
@@ -109,6 +109,12 @@ $(function() {
 								dataType : "json",
 								success : function(data) {
 									wslist();
+									$("#price_b").val("");
+									$("#price_s").val("");
+
+									$("#cnt_b").val("");
+									$("#cnt_s").val("");
+
 								},
 								error : function(request, status, errorData) {
 									alert("ws실패" + "error code : "
@@ -129,7 +135,7 @@ $(function() {
 			// 매수 버든 wait bought insert 미체결
 			"click",
 			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
-				if (confirm("매도 주문을 체결하시겠습니까 ?")) {
+				if (confirm("매수 주문을 체결하시겠습니까 ?")) {
 					if (checkpw == false) {
 						alert("계좌비밀번호를 입력해주세요");
 					} else {
@@ -152,6 +158,11 @@ $(function() {
 											success : function(data) {
 												up();
 												wblist();
+												$("#price_b").val("");
+												$("#price_s").val("");
+
+												$("#cnt_b").val("");
+												$("#cnt_s").val("");
 
 											},
 											error : function(request, status,
@@ -692,7 +703,26 @@ function removeWaitSold(usno) { // 미체결 매도 삭제
 		}
 	});
 }
+function ob_p(num) {
+	$("#price_b").val(num);
+	$("#price_s").val(num);
+}
+function buyp(){
+//	x(수량) = 현금 * % / 코인가격
+$(this).each(function(index, item){
+	var ca = $("#cybcash").val();
 
+	var pa = $(".b_c").index(this);
+/*	var pa = $(".b_c").eq(index).val();
+	console.log(pa);*/
+	var pr = $("#price_b").val();
+	var sum = ca*pa/pr;
+	var sumc = Math.floor(sum);
+	$("#cnt_b").val(sumc);
+	
+	});
+
+}
 function orderbook() {
 	var orderbookarrbid = new Array();
 	var orderbookarrask = new Array();
@@ -717,16 +747,21 @@ function orderbook() {
 					}
 					html6 = "<table id='orderbook_t' class='table table-striped' ><tr><td>현재가</td><td>수량</td></tr>";
 					for (var i = 14; i >= 0; i--) {
-						html6 += "<tr style='background: rgba(255,51,0,0.5) !important;'><td><a >"
+						html6 += "<tr style='background: rgba(255,51,0,0.5) !important;'><td><a href='#'  style='color : black !important;' onclick='ob_p("
 								+ orderbookarrask[i][0]
-								+ "<a/a></td><td>"
+								+ ");'>"
+								+ orderbookarrask[i][0]
+								+ "</a></td><td>"
 								+ orderbookarrask[i][1] + "개" + "</td></tr>";
 
 					}
 					html6 += "<tr><td>구분좀하자 </td></tr>";
 					for (var i = 0; i < 15; i++) {
-						html6 += "<tr  style='background: rgba(33,150,243, 0.5) !important;'><td>"
-								+ orderbookarrbid[i][0] + "</td><td>"
+						html6 += "<tr  style='background: rgba(33,150,243, 0.5) !important;'><td><a href='#'  style='color : black !important;' onclick='ob_p("
+								+ orderbookarrask[i][0]
+								+ ");'>"
+								+ orderbookarrbid[i][0]
+								+ "</a></td><td>"
 								+ orderbookarrbid[i][1] + "개" + "</td></tr>";
 
 					}

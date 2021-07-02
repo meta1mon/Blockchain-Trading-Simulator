@@ -8,7 +8,19 @@
 	background: #f8f9fa;
 }
 .btn_bs{
-	width: 45%;
+	width: 48.5%;
+	
+}
+#bought{
+	background: red;
+	width: 100%;
+}
+#sold{
+	background: blue;
+	width: 100%;
+}
+.b_c{
+	width: 20%;
 }
 .parent {
 	display: grid;

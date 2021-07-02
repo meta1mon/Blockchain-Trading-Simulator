@@ -10,7 +10,6 @@
 		SELECT * FROM (SELECT ROWNUM R, D.* FROM (SELECT * FROM COMMUNITY ORDER BY CNO DESC) D) WHERE R BETWEEN #{start} AND #{start}+#{plus}
 	</select>
 
-
 	<!-- 검색한 게시글 조회 -->
 	<select id="searchListSubject" parameterType="string"
 		resultType="arraylist" resultMap="resultCommunity">

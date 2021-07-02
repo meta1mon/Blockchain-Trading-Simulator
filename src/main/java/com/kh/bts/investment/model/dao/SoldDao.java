@@ -16,12 +16,13 @@ public class SoldDao {
 
 	public int insertSold(WaitSold vo) { // 글 입력
 		// 체결 내역으로 옮기기
+		System.out.println(vo + "111111111111111111111111111111111");
 		int result = sqlSession.insert("sold.insertSold", vo);
 		if (result > 0) {
 			System.out.println("체결 내역으로 정상 이동");
-			
+			System.out.println(vo + "22222222222222222222222222222222222222222");
 			// 판매액만큼 돈을 넣어주기
-			result = sqlSession.insert("acnt.plusSoldPrice", vo);
+			result = sqlSession.update("acnt.plusSoldPrice", vo);
 			if (result > 0) {
 				System.out.println("계좌로 삽입 성공");
 				

@@ -13,7 +13,7 @@
 $(function() {
 	var alltimer = setInterval(function() { // 1초마다 함수 돌림 ()
 		loadValues1();
-	}, 2000);
+	}, 3000);
 
 	// 실시간 가격 받을 것
 	var nowprices = [];
@@ -21,6 +21,10 @@ $(function() {
 	var sellCoinArr = [];
 	// 사는 코인 객체 리스트 가져오기
 	var sellPriceArr = [];
+	// 사는 코인 계좌 리스트 가져오기
+	var sellAcntArr = [];
+	// 사는 코인 수량 리스트 가져오기
+	var sellCntArr = [];
 	function loadValues1() {
 		// 미체결 매수 코인 종류 불러오기
 		$.ajax({
@@ -45,8 +49,11 @@ $(function() {
 			datatype : "json",
 			success : function(data) {
 				sellPriceArr = new Array(sellCoinArr.length);
+				sellAcntArr = new Array(sellCoinArr.length)
 				for (var i = 0; i < sellPriceArr.length; i++) {
 					sellPriceArr[i] = new Array();
+					sellAcntArr[i] = new Array();
+					sellCntArr[i] = new Array();
 					for (var j = 0; j < data.length; j++) {
 						if (sellCoinArr[i] == data[j].coin) {
 							var rawData = data[j].sellprice;
@@ -55,6 +62,8 @@ $(function() {
 							} else {
 								sellPriceArr[i][j] = rawData;
 							}
+							sellAcntArr[i][j] = data[j].acntno;
+							sellCntArr[i][j] = data[j].sellcnt;
 						}
 
 					}
@@ -92,7 +101,9 @@ $(function() {
 						type : "post",
 						data : {
 							"sellCoin" : sellCoinArr[i],
-							"sellPrice" : sellPriceArr[i][j]
+							"sellPrice" : sellPriceArr[i][j],
+							"sellAcntno" : sellAcntArr[i][j],
+							"sellCnt" : sellCntArr[i][j]
 						},
 						success : function(data) {
 							if (data > 0) {

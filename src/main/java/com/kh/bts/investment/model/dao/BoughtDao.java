@@ -19,7 +19,7 @@ public class BoughtDao {
 		int result = sqlSession.insert("bought.insertBought", vo);
 		if (result > 0) {
 			System.out.println("체결 내역으로 정상 이동");
-			// 코인 계좌에 넣기
+			// 구매한 코인 계좌에 넣기
 			result = sqlSession.insert("coinacnt.afterBoughtCoinAcnt", vo);
 			if (result > 0) {
 				System.out.println("코인 계좌로 삽입 성공");

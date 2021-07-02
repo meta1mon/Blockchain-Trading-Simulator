@@ -34,6 +34,7 @@ import com.kh.bts.member.model.service.MemberService;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.service.MypageService;
 import com.kh.bts.report.model.vo.Acreport;
+import com.kh.bts.report.model.vo.Arreport;
 import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
@@ -120,7 +121,6 @@ public class AdminCtrl {
 	@ResponseBody
 	@RequestMapping(value="/updateCash", method = RequestMethod.POST)
 	public int updateCash(Cash vo, HttpServletResponse response){
-		logger.info("HHHHHHHHHHHHHHHHHHHH컨트롤러 들어왔다!HHHHHHHHHHHHHHHHHHHH");
 		int result = aService.updateCash(vo);
 		System.out.println(result);
 		return result;
@@ -130,7 +130,6 @@ public class AdminCtrl {
 	@ResponseBody
 	@RequestMapping(value="/deleteCash", method = RequestMethod.POST)
 	public int deleteCash(Cash vo, HttpServletResponse response){
-		logger.info("HHHHHHHHHHHHHHHHHHHH컨트롤러 들어왔다!HHHHHHHHHHHHHHHHHHHH");
 		int result = aService.deleteCash(vo);
 		System.out.println(result);
 		return result;
@@ -148,11 +147,9 @@ public class AdminCtrl {
 		try {
 			out = response.getWriter();
 			if (result > 0) {
-				System.out.println("상품 등록 완료");
 				out.print("<script>alert('상품 등록이 완료되었습니다.')</script>");
 			} else {
-				System.out.println("상품 등록 실패");
-				out.print("<script>alert('상품 등록 실패')</script>");
+				out.print("<script>alert('상품 등록에 실패하였습니다.')</script>");
 			}
 			out.print("<script>location.href='cash'</script>");
 		} catch (IOException e) {
@@ -233,16 +230,37 @@ public class AdminCtrl {
 
 		return result;
 	}
+	// 댓글 신고 처리
+		@RequestMapping(value = "/dealrr", method=RequestMethod.POST)
+		public void insertArreport(Arreport vo, String rrno, HttpServletRequest request, HttpServletResponse response) throws Exception{
+			String rstatus = request.getParameter("rstatus");
+			String cno = request.getParameter("cno");
+			String rno = request.getParameter("rno");
+			String csubject = request.getParameter("csubject");
+			vo.setCsubject(csubject);
+			System.out.println("==============================================================");
+			System.out.println(rstatus);
+			System.out.println(cno);
+			System.out.println(rno);
+			System.out.println(csubject);
+			System.out.println("vo.getCsubject(): " + vo.getCsubject());
+			int result = aService.insertArreport(vo); // arreport에 삽입
+			int result2 = aService.deleteRreport(rrno); // rreport에서 삭제
+			System.out.println(result);
+			System.out.println(result2);
+			System.out.println("==============================================================");
+			if(rstatus.equals("accept")) { //수리일 때
+				int result3 = rcmService.deleteRcommunity(rno, cno); //Rcommunity에서 삭제
+				System.out.println(result3);
+				System.out.println("==============================================================");
+			}else if(rstatus.equals("deny")) { //반려일 때
+				System.out.println("==============================================================");
+			}
+		}
 
 	@RequestMapping(value = "")
 	public ModelAndView adminMain(ModelAndView mv) {
 		mv.setViewName("admin/adminMain");
-		return mv;
-	}
-
-	@RequestMapping(value = "/arr", method = RequestMethod.GET)
-	public ModelAndView arr(ModelAndView mv) {
-		mv.setViewName("admin/afterReplyReport");
 		return mv;
 	}
 
@@ -529,6 +547,24 @@ public class AdminCtrl {
 				System.out.println(e.getMessage()); 
 			}
 		mv.setViewName("admin/replyReport");
+		return mv;
+	}
+//	댓글 신고 처리 목록
+	@RequestMapping(value = "/arr", method = RequestMethod.GET)
+	public ModelAndView arr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv) {
+		try { 
+			int currentPage = page; 
+			int listCount = aService.countArreport();
+			int maxPage = (int)((double) listCount / LIMIT + 0.9);
+			
+			mv.addObject("list", aService.selectArreport(currentPage, LIMIT)); 
+			mv.addObject("currentPage", currentPage); 
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("listCount", listCount); 
+		} catch (Exception e) { 
+			System.out.println(e.getMessage()); 
+		}
+		mv.setViewName("admin/afterReplyReport");
 		return mv;
 	}
 }

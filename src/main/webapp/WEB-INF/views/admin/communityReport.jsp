@@ -359,6 +359,7 @@ $(function(){
  			var btnval = $("#buttonvalue").val();
 			 
 		    var dataquery = $("#frmReport").serialize();
+		    console.log(dataquery);
 			$.ajax({
 			url : "dealcr",
 			type : "POST",

@@ -249,10 +249,10 @@ $(function(){
 							<td style="cursor: pointer;">${vo.rreason}</td>
 							<td style="cursor: pointer;">${vo.arrdate}</td>
 							<c:choose>
-							<c:when test="${vo.cstatus eq 'accept'}">
+							<c:when test="${vo.rstatus eq 'accept'}">
 							<td class="center" style="cursor: pointer; color: green;">수리</td>
 							</c:when>
-							<c:when test="${vo.cstatus eq 'deny'}">
+							<c:when test="${vo.rstatus eq 'deny'}">
 							<td class="center" style="cursor: pointer; color: red;">반려</td>
 							</c:when>
 							</c:choose>

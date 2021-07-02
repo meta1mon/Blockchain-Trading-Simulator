@@ -1,5 +1,7 @@
 function coinValue() {
 
+	$(".tabcontent").eq(0).show(); // 보유코인 목록 탭 기본값 : show()
+	
 	$.ajax({
 		url : 'https://api.bithumb.com/public/ticker/ALL_KRW',
 		type : "get",
@@ -28,5 +30,16 @@ function coinValue() {
 		}
 	});
 };
+
+$('.tablinks').click(function(){
+	
+	for (var i = 0; i < $('.tabcontent').length; i++) {
+		$('.tabcontent').hide();
+	}
+	
+	$(".tabcontent").eq($(this).index()).show();
+	
+});
+
 
 coinValue();

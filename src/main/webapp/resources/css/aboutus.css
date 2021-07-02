@@ -44,10 +44,9 @@
 }
 
 @font-face {
-     font-family: 'S-CoreDream-5Medium';
-     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
-     font-weight: normal;
-     font-style: normal;
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-style: normal;
 }
 
 * {
@@ -55,7 +54,8 @@
 	padding: 0;
     text-decoration: none;
     list-style: none;
-    font-family: 'S-CoreDream-5Medium';
+    font-family: NanumSquareRound;
+	font-weight: 600;
 }
 
 @media (prefers-reduced-motion: no-preference) {

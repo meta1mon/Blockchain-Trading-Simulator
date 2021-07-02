@@ -8,7 +8,7 @@ import com.kh.bts.community.model.vo.Community;
 public interface CommunityService {
 	public List<Community> selectAllCommunityList(Paging vo);
 	
-	List<Community> selectSearch(String keyword, int searchType);
+	List<Community> selectSearch(int startPage, int limit, String keyword, int searchType);
 
 	List<Community> selectList(int startPage, int limit);
 

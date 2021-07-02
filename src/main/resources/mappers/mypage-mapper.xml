@@ -60,7 +60,7 @@
 	
 	<!-- 내 계좌 기준으로 모든 종류의 코인 평가 금액 합산 -->
 	<select id="myTotalCoin" parameterType="Acnt" resultType="int">
-		SELECT SUM(BUYCNT*BUYPRICE) FROM COINACNT WHERE ACNTNO = #{acntno}
+		SELECT NVL(SUM(BUYCNT*BUYPRICE), 0) FROM COINACNT WHERE ACNTNO = #{acntno}
 	</select>
 	
 	<!-- 내 코인 종류 수 조회-->

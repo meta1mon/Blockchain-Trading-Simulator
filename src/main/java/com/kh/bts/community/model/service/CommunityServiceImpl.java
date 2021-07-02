@@ -21,8 +21,8 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-	public List<Community> selectSearch(String keyword, int searchType) {
-		return cmDao.searchList(keyword, searchType);
+	public List<Community> selectSearch(int startPage, int limit, String keyword, int searchType) {
+		return cmDao.searchList(startPage, limit, keyword, searchType);
 	}
 
 	@Override

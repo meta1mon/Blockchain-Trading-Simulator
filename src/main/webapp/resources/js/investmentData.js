@@ -1,5 +1,5 @@
 $(function() {
-	var checkpw = false; //2차 비밀번호 변수
+	var checkpw = false; // 2차 비밀번호 변수
 	coinname(); // 숫자를 이름으로 변경
 	chart(); // 차트 변수
 	$("#check2").click(function() { // 계좌 비밀번호
@@ -28,9 +28,11 @@ $(function() {
 		})
 
 	});
-///////////////////////////////        CSS     /////////////////////////////////////////////////
+	// ///////////////////////////// CSS
+	// /////////////////////////////////////////////////
 	$("#sold_b").click(function() {// 매도 활성화 css
-
+		$("#sold_b").css("color","white");
+		$("#bought_b").css("color","black");
 		$("#sold_b").css("background", "blue");
 		$("#bought_b").css("background", "white");
 		$("#cnt_b").hide();
@@ -41,7 +43,8 @@ $(function() {
 		$("#sold").show();
 	});
 	$("#bought_b").click(function() {// 매수 활성화 css
-
+		$("#bought_b").css("color","white");
+		$("#sold_b").css("color","black");
 		$("#bought_b").css("background", "red");
 		$("#sold_b").css("background", "white");
 		$("#cnt_s").hide();
@@ -51,8 +54,8 @@ $(function() {
 		$("#price_b").show();
 		$("#bought").show();
 	});
-////////////////      총합계산           ///////////////////////////
-	$("#cnt_b").keyup(function() { // 합계 구하기 매수
+	// ////////////// 총합계산 ///////////////////////////
+	$("#cnt_b").blur(function() { // 합계 구하기 매수
 		var sum = 0;
 		var a = $("#price_b").val();
 		var b = $("#cnt_b").val() * 1;
@@ -67,25 +70,27 @@ $(function() {
 		csum = c + b;
 		$("#updatecoin").val(csum);
 	});
-	$("#cnt_s").keyup(function() { // 합계 구하기 매도
+	$("#cnt_s").blur(function() { // 합계 구하기 매도
 		var sum1 = 0;
 		var a1 = $("#price_s").val();
-		var b1 = $("#cnt_s").val()*1;
-		var now1 = $("#cybcash").val()*1;
+		var b1 = $("#cnt_s").val() * 1;
+		var now1 = $("#cybcash").val() * 1;
 		sum1 = a1 * b1;
 		var tsum1 = (sum1).toFixed(0);
 		$("#totalprice").val(tsum1);
-		$("#updateprice").val(now1*1 + tsum1*1);
+		$("#updateprice").val(now1 * 1 + tsum1 * 1);
 
 		var csum1 = 0;
-		var c1 = $("#coincount").val()*1;
+		var c1 = $("#coincount").val() * 1;
 		csum1 = c1 - b1;
 		$("#updatecoin").val(csum1);
 
 	});
-///////////////////////////////////////////////////////////////////////////////////////
-	$("#sold").on(// 미체결 매도 추가하기
-			"click",function() {
+	// /////////////////////////////////////////////////////////////////////////////////////
+	$("#sold").on(
+			// 미체결 매도 추가하기
+			"click",
+			function() {
 				if (confirm("매도 주문을 체결하시겠습니까 ?")) {
 					if (checkpw == false) {
 						alert("계좌비밀번호를 입력해주세요");
@@ -97,30 +102,34 @@ $(function() {
 							var coin = $("#updatecoin").val();
 							if (coin < 0) {
 								alert("보유코인을 확인해주세요");
-							}else{
+							} else {
 								var dataList = $("#frm22").serialize();
-								$.ajax({
-									url : "wsInsert",
-									type : "post",
-									data : dataList,
-									dataType : "json",
-									success : function(data) {
-										coinacntupdate();
-										wslist();
-										$("#price_b").val("");
-										$("#price_s").val("");
-										$("#cnt_b").val("");
-										$("#cnt_s").val("");
-										
-									},
-									error : function(request, status, errorData) {
-										alert("wsInsert" + "error code : "
-												+ request.status + "\n"
-												+ "message : "
-												+ request.responseText + "\n"
-												+ "error : " + errorData);
-									}
-								});
+								$
+										.ajax({
+											url : "wsInsert",
+											type : "post",
+											data : dataList,
+											dataType : "json",
+											success : function(data) {
+												coinacntupdate();
+												wslist();
+												$("#price_b").val("");
+												$("#price_s").val("");
+												$("#cnt_b").val("");
+												$("#cnt_s").val("");
+
+											},
+											error : function(request, status,
+													errorData) {
+												alert("wsInsert"
+														+ "error code : "
+														+ request.status + "\n"
+														+ "message : "
+														+ request.responseText
+														+ "\n" + "error : "
+														+ errorData);
+											}
+										});
 							}
 						}
 					}
@@ -129,8 +138,10 @@ $(function() {
 				}
 			});
 
-	$("#bought").on(// 매수 버든 wait bought insert 미체결
-			"click",function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
+	$("#bought").on(
+			// 매수 버든 wait bought insert 미체결
+			"click",
+			function() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 				if (confirm("매수 주문을 체결하시겠습니까 ?")) {
 					if (checkpw == false) {
 						alert("계좌비밀번호를 입력해주세요");
@@ -162,7 +173,8 @@ $(function() {
 											},
 											error : function(request, status,
 													errorData) {
-												alert("wbInsert" + "error code : "
+												alert("wbInsert"
+														+ "error code : "
 														+ request.status + "\n"
 														+ "message : "
 														+ request.responseText
@@ -193,12 +205,11 @@ $(function() {
 	}, 1000);
 
 });
-///////////// 함수 정의 부분 ///////////////////////
-//전역변수 
+// /////////// 함수 정의 부분 ///////////////////////
+// 전역변수
 var coinList = null; // 전체 리스트
 var changecoin = "BTC"; // default
 var ch_title = "BTC";
-
 
 function alltable() { // 전체코인 시세 표
 	var display = new Array();
@@ -246,10 +257,15 @@ function alltable() { // 전체코인 시세 표
 									+ display[i][2] + "</td></tr>";
 
 						}
-						title += "<td style='text-align : center; vertical-align: middle;'><h1>" + ch_title + "</h1></td><td style='text-align : center;'><h2>현재가</h2><a class='t_cha'style='text-align : center;'>"
-								+ titdisplay[0][0] + "</a></td><td style='text-align : center;'><h2>전일대비</h2><a class='t_cha'style='text-align : center;'>"
-								+ titdisplay[0][1] + "</a></td><td style='text-align : center;'><h2>저가</h2><a class='t_ch' style='color : blue;text-align : center;'>"
-								+ titdisplay[0][3] + "</a></td><td style='text-align : center;'><h2>고가</h2><a class='t_ch' style='color : red;text-align : center;'>"
+						title += "<td style='text-align : center; vertical-align: middle;'><h1>"
+								+ ch_title
+								+ "</h1></td><td style='text-align : center;'><h2>현재가</h2><a class='t_cha'style='text-align : center;'>"
+								+ titdisplay[0][0]
+								+ "</a></td><td style='text-align : center;'><h2>전일대비</h2><a class='t_cha'style='text-align : center;'>"
+								+ titdisplay[0][1]
+								+ "</a></td><td style='text-align : center;'><h2>저가</h2><a class='t_ch' style='color : blue;text-align : center;'>"
+								+ titdisplay[0][3]
+								+ "</a></td><td style='text-align : center;'><h2>고가</h2><a class='t_ch' style='color : red;text-align : center;'>"
 								+ titdisplay[0][4] + "</a></td></tr>"
 
 						html += "</table>"
@@ -271,11 +287,11 @@ function alltable() { // 전체코인 시세 표
 								percent.css('color', 'blue');
 							}
 						}
-						if(titdisplay[0][1]>0){
+						if (titdisplay[0][1] > 0) {
 							$(".t_cha").css('color', 'red');
-						}else{
+						} else {
 							$(".t_cha").css('color', 'blue');
-							
+
 						}
 
 						$('.table-striped tbody tr:nth-of-type(odd)').css(
@@ -304,8 +320,8 @@ function alltable() { // 전체코인 시세 표
 				}
 			});
 };
-//////////////////////   update  환산 하는 부분   ///////////////////////////////
-function returncoinfn(tc) { //매도 취소시 코인 반환 update 문
+// //////////////////// update 환산 하는 부분 ///////////////////////////////
+function returncoinfn(tc) { // 매도 취소시 코인 반환 update 문
 	$.ajax({
 		url : "coinacntupdate",
 		type : "post",
@@ -351,7 +367,7 @@ function coinacntupdate() { // 코인계산 부분
 			"coin" : $("#coin").val()
 		},
 		success : function(data) {
-			
+
 		},
 		error : function(request, status, errorData) {
 			alert("coinacntupdate" + "error code : " + request.status + "\n"
@@ -378,7 +394,7 @@ function upcoin() { // coin 돈계산 부분
 		}
 	});
 }
-///////////////////////////   계좌 조회 부분     /////////////////////////
+// ///////////////////////// 계좌 조회 부분 /////////////////////////
 function coinacnt() { // 모의투자 접속시 컨트롤러로 부터 보유코인 리스트를 받아서 출력한다 (실시간)
 	var dataList4 = $("#frm22").serialize();
 	$.ajax({
@@ -422,7 +438,8 @@ function acnt() { // acnt select list 계좌 금액 체크
 		}
 	});
 }
-//////////////////////////////////  체결  & 미체결 list ///////////////////////////////////////////////////////
+// //////////////////////////////// 체결 & 미체결 list
+// ///////////////////////////////////////////////////////
 function slist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 	var dataList = $("#frm22").serialize();
 
@@ -588,7 +605,7 @@ function wslist() { // 미체결 매도 내용 함수
 
 													+ "<td><button type='button' class='del' onclick=\"removeWaitSold("
 													+ entry.usno
-													+", "
+													+ ", "
 													+ entry.sellcnt
 													+ ")\">X</button></td></tr>";
 										});
@@ -603,7 +620,7 @@ function wslist() { // 미체결 매도 내용 함수
 
 			});
 }
-/////////////////////////////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////////////////////////
 function chart() { // 차트
 
 	new TradingView.widget({
@@ -699,10 +716,10 @@ function removeWaitSold(usno, sellcnt) {
 			success : function(data) { // 전달받은 data를 JSON 문자열 형태로 바꾼다
 				if (data > 0) {
 					alert("매도가 정상적으로 취소 되었습니다.");
-					var returncoin =  sellcnt*1 ;
-					var tc = sellcnt*1 + $("#coincount").val()*1;
+					var returncoin = sellcnt * 1;
+					var tc = sellcnt * 1 + $("#coincount").val() * 1;
 					returncoinfn(tc);
-					
+
 				} else {
 					alert("BTS : 문의요망");
 				}
@@ -739,29 +756,32 @@ function returnup(price) {
 	});
 }
 
+// 매수 매도 버튼
+function buyp(a) {
+	// x(수량) = 현금 * % / 코인가격
 
-//매수 매도 버튼 
-function buyp(){
-//	x(수량) = 현금 * % / 코인가격
-$(this).each(function(index, item){
 	var ca = $("#cybcash").val();
 
-	var pa = $(".b_c").index(this);
+	var pa = a*1;
 
 	var pr = $("#price_b").val();
-	var sum = ca*pa/pr;
+	var sum = ca * pa / pr;
 	var sumc = Math.floor(sum);
 	$("#cnt_b").val(sumc);
-	
-	});
-
+	$("#cnt_b").focus();
+	//  수량 = 코인수 * %
+	var buypcoin =$("#coincount").val();
+	var sumcc = buypcoin * a;
+	var sumccc = Math.floor(sumcc);
+	$("#cnt_s").val(sumccc);
+	$("#cnt_s").focus();
 }
-//호가창에서 가격 클릭시 입력하는 함수
+// 호가창에서 가격 클릭시 입력하는 함수
 function ob_p(num) {
 	$("#price_b").val(num);
 	$("#price_s").val(num);
 }
-//호가창 받아오는 함수
+// 호가창 받아오는 함수
 function orderbook() {
 	var orderbookarrbid = new Array();
 	var orderbookarrask = new Array();
@@ -797,7 +817,7 @@ function orderbook() {
 					html6 += "<tr><td>구분좀하자 </td></tr>";
 					for (var i = 0; i < 15; i++) {
 						html6 += "<tr  style='background: rgba(33,150,243, 0.5) !important;'><td><a href='#'  style='color : black !important;' onclick='ob_p("
-								+ orderbookarrask[i][0]
+								+ orderbookarrbid[i][0]
 								+ ");'>"
 								+ orderbookarrbid[i][0]
 								+ "</a></td><td>"

@@ -118,9 +118,9 @@
 									</tr>
 								</table>
 								<form id="frm22">
-									<table>
+									<table style=" width: 100%;">
 										<tr>
-											<th style=" font-size: 20px !important;" colspan="1">보유잔고</th>
+											<th style=" font-size: 20px !important; width: 100%;" colspan="1">보유잔고</th>
 										</tr>
 										<tr>
 											<td>보유 KRW : &nbsp;&nbsp;&nbsp;<input id="cybcash"
@@ -164,8 +164,8 @@
 										<tr>
 											<td colspan="1"><input id="totalprice" type="text"
 												value="0"><input id="updateprice" name="updateprice"
-												type="text" value=""><input id="updatecoin"
-												name="updatecoin" type="text" value=""><br></td>
+												type="hidden" value=""><input id="updatecoin"
+												name="updatecoin" type="hidden" value=""><br></td>
 										</tr>
 										<tr>
 											<th style="font-size: 20px !important;" colspan="1">수량 <input id="acntno"
@@ -175,10 +175,10 @@
 
 
 										<tr>
-											<td style="text-align: center;"  colspan="1" ><button type="button" class="b_c" value="0.1" onclick="buyp()">10%</button>
-												<button type="button" class="b_c" value="0.25" onclick="buyp()">25%</button>
-												<button type="button" class="b_c" value="0.50" onclick="buyp()">50%</button>
-												<button type="button" class="b_c" value="1" onclick="buyp()">100%</button><br><br></td>
+											<td style="text-align: center;"  colspan="1" ><button type="button" class="b_c" value="0.1" onclick="buyp(0.1)">10%</button>
+												<button type="button" class="b_c" value="0.25" onclick="buyp(0.25)">25%</button>
+												<button type="button" class="b_c" value="0.50" onclick="buyp(0.5)">50%</button>
+												<button type="button" class="b_c" value="1" onclick="buyp(1)">100%</button><br><br></td>
 										</tr>
 										<tr>
 											<td  style="text-align: center;" colspan="1"><button id="bought" type="button">매수</button>

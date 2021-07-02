@@ -14,10 +14,12 @@
 #bought{
 	background: red;
 	width: 100%;
+	color: white;
 }
 #sold{
 	background: blue;
 	width: 100%;
+	color: white;
 }
 .b_c{
 	width: 20%;
@@ -86,6 +88,7 @@
 
 #bought_b {
 	background: red;
+	color: white;
 }
 
 #price_s {

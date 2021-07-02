@@ -28,18 +28,7 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
 
-<script type="text/javascript">
-window.addEventListener('scroll', function(){
-	var div = document.getElementByClassName("div3");
-	let scrollLocation = document.documentElement.scrollTop; // 현재 스크롤바 위치
-	let windowHeight = div.innerHeight; // 스크린 창
-	let fullHeight = document.body.scrollHeight; //  margin 값은 포함 x
 
-	if(scrollLocation + windowHeight >= fullHeight){
-		console.log('끝')
-	}
-})
-</script>
 <meta charset="UTF-8">
 </head>
 <body>
@@ -124,51 +113,51 @@ window.addEventListener('scroll', function(){
 								</form>
 								<table style="width: 100%; padding-left: 20px;">
 									<tr>
-										<td><button class="btn_bs" id="bought_b">매수</button>
-											<button class="btn_bs" id="sold_b">매도</button></td>
+										<td style="text-align: center;"><button class="btn_bs" id="bought_b">매수</button>
+											<button class="btn_bs" id="sold_b">매도</button><br></td>
 									</tr>
 								</table>
 								<form id="frm22">
 									<table>
 										<tr>
-											<th colspan="1">보유잔고</th>
+											<th style=" font-size: 20px !important;" colspan="1">보유잔고</th>
 										</tr>
 										<tr>
 											<td>보유 KRW : &nbsp;&nbsp;&nbsp;<input id="cybcash"
-												placeholder="보유 KRW" value="" readonly="readonly">
+												placeholder="보유 KRW" value="" readonly="readonly"><br>
 											</td>
 
 										</tr>
 										<tr>
-											<th colspan="1">코인종류</th>
+											<th style="font-size: 20px !important;" colspan="1">코인종류</th>
 										</tr>
 										<tr>
-											<td colspan="1"><input name="coin" id="coin" type="text"
+											<td colspan="1">코인 이름 : <input name="coin" id="coin" type="text"
 												value="BTC" readonly="readonly" style="text-align: center;"><br>
-												보유 코인:<input id="coincount" placeholder="보유 코인"></td>
+												보유 코인 : <input style="text-align: center;" id="coincount" placeholder="보유 코인"><br></td>
 										</tr>
 
 										<tr>
-											<th colspan="1">가격</th>
+											<th style="font-size: 20px !important;" colspan="1">가격</th>
 										</tr>
 										<tr>
-											<td colspan="1"><input id="price_b" type="text"
-												name="buyprice"> <input id="price_s" type="text"
-												name="sellprice"></td>
+											<td colspan="1"><input style="text-align: center;" id="price_b" type="text"
+												name="buyprice"> <input style="text-align: center;" id="price_s" type="text"
+												name="sellprice"><br></td>
 
 										</tr>
 										<tr>
-											<th colspan="1">수량</th>
+											<th style="font-size: 20px !important;" colspan="1">수량</th>
 
 										</tr>
 										<tr>
-											<td colspan="1"><input id="cnt_b" type="text"
-												name="buycnt"><input id="cnt_s" type="text"
-												name="sellcnt"></td>
+											<td colspan="1"><input style="text-align: center;" id="cnt_b" type="text"
+												name="buycnt"><input style="text-align: center;" id="cnt_s" type="text"
+												name="sellcnt"><br></td>
 										</tr>
 										<tr>
-											<th colspan="1">총액
-												<h6>최소주문금액 KRW 5,000</h6>
+											<th style="font-size: 20px !important;" colspan="1">총액
+												<a>최소주문금액 KRW 5,000</a>
 											</th>
 
 										</tr>
@@ -176,23 +165,23 @@ window.addEventListener('scroll', function(){
 											<td colspan="1"><input id="totalprice" type="text"
 												value="0"><input id="updateprice" name="updateprice"
 												type="text" value=""><input id="updatecoin"
-												name="updatecoin" type="text" value=""></td>
+												name="updatecoin" type="text" value=""><br></td>
 										</tr>
 										<tr>
-											<th colspan="1">매수 총자산대비/매수 코인개수 대비<input id="acntno"
+											<th style="font-size: 20px !important;" colspan="1">수량 <input id="acntno"
 												name="acntno" type="hidden" value="${acnt.acntno }">
 												<input id="hidden" type="hidden" value="${acnt.cybcash }"></th>
 										</tr>
 
 
 										<tr>
-											<td colspan="1"><button value="10%">10%</button>
-												<button value="25%">25%</button>
-												<button value="50%">50%</button>
-												<button value="100%">100%</button></td>
+											<td style="text-align: center;"  colspan="1" ><button type="button" class="b_c" value="0.1" onclick="buyp()">10%</button>
+												<button type="button" class="b_c" value="0.25" onclick="buyp()">25%</button>
+												<button type="button" class="b_c" value="0.50" onclick="buyp()">50%</button>
+												<button type="button" class="b_c" value="1" onclick="buyp()">100%</button><br><br></td>
 										</tr>
 										<tr>
-											<td colspan="1"><button id="bought" type="button">매수</button>
+											<td  style="text-align: center;" colspan="1"><button id="bought" type="button">매수</button>
 												<button id="sold" type="button">매도</button></td>
 
 										</tr>

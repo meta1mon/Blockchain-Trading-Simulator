@@ -199,7 +199,7 @@ table{
 <body>
 <%@include file="../loadingajax.jsp"%>
 	<div id="rr">
-	<p class="title inbl">신고된 댓글 목록</p>
+	<p class="title inbl">신고된 댓글 조회</p>
 	<hr>
 		<div>
 			<table id="list">

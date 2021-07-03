@@ -160,6 +160,13 @@ table{
 #list tr:not(.page) td:nth-child(9) {
 	width: 122.69px;
 }
+#frmSearch {
+	float: right;
+}
+
+#frmSearch * {
+	display: inline-block;
+}
 </style>
 <script>
 $(function(){
@@ -189,35 +196,56 @@ $(function(){
 })
 </script>
 <script>
-function itemChange(){
-	 var opt = $("searchType:selected").val();
-	 if(opt == "4"){
-		 $("#status").css("display", "block");
+$(function(){
+	$("#rstatusSelect").css("display", "inline-block");
+	$("#search").css("display", "inline-block");
+	$("#btnsearch").css("display", "inline-block");
+	$("#btnsearch2").css("display", "inline-block");
+
+var test = function(){
+	 var opt = $("#searchType option:selected");
+	 console.log("이벤트 동작")
+	 console.log(opt.val());
+	 if(opt.val() == '4'){
+		 $("#search").css("display", "none");
+		 $("#btnsearch").css("display", "none");
+		 $("#rstatusSelect").css("display", "inline-block");
+		 $("#btnsearch2").css("display", "inline-block");
 	 } else {
-		 $("#status").css("display", "none");
+		 $("#rstatusSelect").css("display", "none");
+		 $("#btnsearch2").css("display", "none");
+		 $("#search").css("display", "inline-block");
+		 $("#btnsearch").css("display", "inline-block");
 	 }
 }
+	
+	$(window).on("load", test);
+	$("#searchType").on("change", test);
+})
 </script>
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
 	<div id="arr">
-	<p class="title inbl">처리된 신고 댓글 목록</p>
-	<!-- TODO 검색 기능 넣기 -->
-	<form name="listForm" action="arr" method="get" id="listForm">
-		<select id="searchType" name="searchType">
-						<option value="1">게시글 제목</option>
-						<option value="2">피신고자</option>
-						<option value="3">신고자</option>
-						<option value="4">처리 상태</option>
-		</select>
-		<input type="search" name="keyword" id="search"	placeholder="검색어를 입력해주세요.">
-		<select name="keyword" id="status">
-			<option value="accept">수리</option>
-			<option value="deny">반려</option>
-		</select>
-		<button type="submit" id="btnsearch">검색</button>
-	</form>
+	<p class="title inbl">처리된 신고 댓글 조회</p>
+	<div id="frmSearch">
+			<form action="arr" method="get">
+				<select id="searchType" name="searchType">
+					<option value="1" selected>게시글 제목</option>
+					<option value="2">피신고자</option>
+					<option value="3">신고자</option>
+					<option value="4">처리 상태</option>
+				</select> <input type="search" name="keyword" id="search" placeholder="검색어를 입력해주세요.">
+				<button type="submit" id="btnsearch" class="inbl">검색</button>
+			</form>
+			<form action="arr" method="get">
+				<select id="rstatusSelect" name="rstatus">
+					<option value="accept">수리</option>
+					<option value="deny">반려</option>
+				</select>
+				<button type="submit" id="btnsearch2" class="inbl">검색</button>
+			</form>
+		</div>
 	<hr>
 		<div>
 			<table id="list">

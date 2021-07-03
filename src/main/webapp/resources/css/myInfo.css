@@ -68,6 +68,74 @@
 
 .infoField:focus {outline:none;}
 
+input[id="cb1"] + label {
+	display: block;
+	width: 16px;
+	height: 16px;
+	border: 2px solid #E3C8F8;
+	cursor: pointer;
+	border-radius: 3px;
+}
+
+input[id="cb1"]:checked + label {
+	background-color: #343A40;
+}
+
+input[id="cb1"] {
+	display: none;
+}
+
+input[id="cb2"] + label {
+	display: block;
+	width: 16px;
+	height: 16px;
+	border: 2px solid #E3C8F8;
+	cursor: pointer;
+	border-radius: 3px;
+}
+
+input[id="cb2"]:checked + label {
+	background-color: #343A40;
+}
+
+input[id="cb2"] {
+	display: none;
+}
+
+input[id="cb3"] + label {
+	display: block;
+	width: 16px;
+	height: 16px;
+	border: 2px solid #E3C8F8;
+	cursor: pointer;
+	border-radius: 3px;
+}
+
+input[id="cb3"]:checked + label {
+	background-color: #343A40;
+}
+
+input[id="cb3"] {
+	display: none;
+}
+
+
+input[id="cb4"] + label {
+	display: block;
+	width: 16px;
+	height: 16px;
+	border: 2px solid #E3C8F8;
+	cursor: pointer;
+	border-radius: 3px;
+}
+
+input[id="cb4"]:checked + label {
+	background-color: #343A40;
+}
+
+input[id="cb4"] {
+	display: none;
+}
 
 .infoBtn {
 	height: 30px;

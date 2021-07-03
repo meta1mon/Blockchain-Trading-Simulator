@@ -173,12 +173,24 @@ $(function() {
 					<tr>
 						<th>수신 동의</th>
 						<c:if test="${myInfo.mailing == null }">
-							<td class="none"><input type="checkbox"	onclick="return(false);"></td>
-							<td class="insert"><input type="checkbox" name="mailing"></td>
+							<td class="none">
+								<input type="checkbox"	onclick="return(false);" id="cb1">
+								<label for="cb1"></label>
+							</td>
+							<td class="insert">
+								<input type="checkbox" name="mailing" id="cb2">
+								<label for="cb2"></label>
+							</td>
 						</c:if>
 						<c:if test="${myInfo.mailing != null }">
-							<td class="none"><input type="checkbox" checked	onclick="return(false);"></td>
-							<td class="insert"><input type="checkbox" name="mailing" checked></td>
+							<td class="none">
+								<input type="checkbox" checked	onclick="return(false);" id="cb3">
+								<label for="cb3"></label>
+							</td>
+							<td class="insert">
+								<input type="checkbox" name="mailing" checked  id="cb4">
+								<label for="cb4"></label>
+							</td>
 						</c:if>
 					</tr>
 					<tr>

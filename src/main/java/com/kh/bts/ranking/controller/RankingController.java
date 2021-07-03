@@ -16,7 +16,7 @@ public class RankingController {
 	private RankingService rankService;
 
 	// 일일 랭크 삽입
-	@RequestMapping("/ranking")
+	@RequestMapping("/hh")
 	public ModelAndView dayli(ModelAndView mav) {
 		List<CoinAcnt> list = rankService.selectAllCoinAcnt();
 		mav.setViewName("rank/ranking");

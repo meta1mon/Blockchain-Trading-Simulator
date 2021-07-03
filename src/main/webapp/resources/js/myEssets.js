@@ -26,13 +26,16 @@ function coinValue() {
 						var buyAvg = parseInt($('.buyAvg').eq(i).val());
 
 						var coinProfit = coinValue - buyAvg;
-						var coinProfitPcnt = (coinValue / buyAvg - 1) * 100;
-						var nCoinProfit = coinProfit.toString().replace(
-								/\B(?=(\d{3})+(?!\d))/g, ","); // 세자리수 콤마
+						var nCoinProfit = coinProfit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 세자리수 콤마
 						
-						$('.coinProfit').eq(i).html(
-								coinProfitPcnt.toFixed(2) + "&nbsp;%<br>"
-										+ nCoinProfit + "&nbsp;원");
+						console.log("매수금액: "+buyAvg);
+						console.log("매수금액raw: "+$('.buyAvg').eq(i).val());
+						console.log("평가금액: "+coinValue);
+//						console.log("평가손익 퍼센트: ");
+						
+						var coinProfitPcnt = ((coinValue/buyAvg) - 1) * 100;
+						
+						$('.coinProfit').eq(i).html(coinProfitPcnt.toFixed(2) + "&nbsp;%<br>"+ nCoinProfit + "&nbsp;원");
 						
 						totalcoin += coinValue;
 

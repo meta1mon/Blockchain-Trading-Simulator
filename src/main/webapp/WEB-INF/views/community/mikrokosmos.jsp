@@ -146,12 +146,19 @@
               <img class="img-profile pic" src="resources/assets/img/user.png" alt="..">
               <span class="userID main-id point-span">${vo.cwriter }</span>
             </div>
-						<button type="button" class="cupdate"
-							onclick="communityUpdateFn(${status.index })">수정</button>
-						<button type="button" class="cdelete"
-							onclick="communityDeleteFn(${status.index })">삭제</button>
-						<button type="button">신고</button> class="creport"
-						<img class="icon-react icon-more" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png" alt="more">
+					<div class="dropdown" style="float:left;">
+						<div class="icon-react icon-more" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
+          					<div class="dropdown-content" style="left:0;;">
+								  <a href="#" class="report" id="popup_open_btn">신고</a>
+								  <!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
+								  <c:if test="${loginMember == writerEmail }">
+								  <a href="${cupdate}" class="update">수정</a>
+								  <a href="${cdelete}" class="delete">삭제</a>
+								  </c:if>
+							  </div>
+						</div>
+					</div>
+					<!--  src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png" -->
           </header>
           <div class="main-image">
 <!--             <img src="" alt="dlwlrma님의 피드 사진" class="mainPic"> -->
@@ -190,18 +197,31 @@
                     </div>
                   </div>
                 </li> -->
-                <!-- input 값 여기에 추가 -->
               </ul>
               <div class="time-log">
                 <span>${vo.cdate }</span>
               </div>
             </div>
           </div>
+          <!-- 댓글 작성 부분 -->
+          <div>
           <div class="hl"></div>
+				<c:if test="${loginMember != null }">
+					<form id="writeRcommunity">
+						<div class="comment">
+							<input type="hidden" name="cno" value="${community.cno }">
+			            	<input id="input-comment" type="text" class="input-comment" name="rcontent" maxlength="4000" placeholder="댓글 달기..." >
+			            	<button type="submit" class="submit-comment" onclick="rcommunityInsertFn(${status.index})">게시</button>
+						</div>
+					</form>
+				</c:if>
+			</div>
+			<c:if test="${loginMember == null }">
           <div class="comment">
-            <input id="input-comment" class="input-comment" name="rcontent" maxlength="4000" type="text" placeholder="댓글 달기..." >
-            <button type="submit" class="submit-comment" onclick="rcommunityInsertFn(${status.index})">게시</button>
+            <input class="input-comment" type="text" placeholder="댓글을 작성하려면 로그인이 필요합니다." >
+            <button type="submit" class="submit-comment">게시</button>
           </div>
+          </c:if>
         </article>
         </c:forEach>
         
@@ -311,17 +331,29 @@
           
         <!-- 댓글 모달창 -->
 			<div id="my_modal_reply">
-				<p>댓글 </p>
-				<div class="modal_report_div">
-					
-				</div>
-				<hr
-					style="width: 328px; position: relative; right: 30px; top: 20px;">
-				<div>
-					<button type="button" id="btncancel" class="modal_close_btn">취소</button>
-					<button type="button" id="btnrply" class="modal_report_btn">신고</button>
-				</div>
+				<button type="button" id="btncancel" class="modal_close_btn">X</button>
+         <!-- 댓글 작성 부분 -->
+          <div>
+          
+				<c:if test="${loginMember != null }">
+					<form id="writeRcommunity">
+						<div class="comment">
+							<input type="hidden" name="cno" value="${community.cno }">
+			            	<input id="input-comment" type="text" class="modal-input-comment" name="rcontent" maxlength="4000" placeholder="댓글 달기..." >
+			            	<button type="submit" class="submit-comment" onclick="rcommunityInsertFn(${status.index})">게시</button>
+						</div>
+					</form>
+				</c:if>
 			</div>
+			<c:if test="${loginMember == null }">
+          <div class="comment">
+            <input class="modal-input-comment" type="text" placeholder="댓글을 작성하려면 로그인이 필요합니다." >
+            <button type="submit" class="submit-comment">게시</button>
+          </div>
+          </c:if>
+          <div class="modal-hl"></div>
+			</div>
+			
 			
 						<div id="moreDiv"></div>
 			<button type="button" onclick="moreInsta()">더보기</button>

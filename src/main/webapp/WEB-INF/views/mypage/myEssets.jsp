@@ -21,11 +21,15 @@
 			<div id="money">
 				<ul>
 					<li><img src="${pageContext.request.contextPath}/resources/assets/img/icon_bitcoin.svg" width="30px" height="30px">
-						<span>코인 보유액&nbsp; ${totalCoin }&nbsp;&nbsp;&nbsp;원</span></li>
+<%-- 						<span>코인 보유액&nbsp; ${totalCoin }&nbsp;&nbsp;&nbsp;원</span></li> --%>
+						<span>코인 보유액&nbsp; <span id="totalcoin"></span>&nbsp;&nbsp;&nbsp;원</span></li>
 					<li><img src="${pageContext.request.contextPath}/resources/assets/img/icon_won.svg" width="30px" height="30px">
-						<span>현금 보유액&nbsp; ${acnt.cybcash }&nbsp;&nbsp;&nbsp;원</span></li>
+						<span>현금 보유액&nbsp; <fmt:formatNumber value="${acnt.cybcash }" pattern="#,###,###,###" />&nbsp;&nbsp;&nbsp;원</span>
+						<input id="cash" type="hidden" value="${acnt.cybcash }"/>
+					</li>
 					<li><img src="${pageContext.request.contextPath}/resources/assets/img/icon_wallet.svg" width="30px" height="30px">
-						<span>총 보유자산 &nbsp; ${totalAssets }&nbsp;&nbsp;&nbsp;원</span></li>
+<%-- 						<span>총 보유자산 &nbsp; ${totalAssets }&nbsp;&nbsp;&nbsp;원</span></li> --%>
+						<span>총 보유자산 &nbsp; <span id="totalAssets"></span>&nbsp;&nbsp;&nbsp;원</span></li>
 				</ul>
 			</div>
 
@@ -54,6 +58,7 @@
 					</c:if>
 					<c:if test="${coinListCount ne 0 }">
 						<c:forEach var="coin" items="${coinList }" varStatus="status">
+							<c:if test="${coin.buycnt>0 }">
 							<tr>
 								<td class="coinName">${coin.coin }</td>
 								<td class="coinCount"><fmt:formatNumber value="${coin.buycnt }" pattern="#,###,###,###.########" />
@@ -70,6 +75,7 @@
 <!-- 									평가손익 : api 이용해서 js로 처리 -->
 								</td>
 							</tr>
+							</c:if>
 						</c:forEach>
 					</c:if>
 				</table>
@@ -88,13 +94,15 @@
 						<th>매수날짜 </th>
 					</tr>
 					<c:forEach var="blist" items="${boughtResult }" varStatus="status">
-						<tr>
-							<td>${blist.ubno }</td>
-							<td>${blist.coin }</td>
-							<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###" /></td>
-							<td><fmt:formatNumber value="${blist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
-							<td>${blist.bdate }</td>
-						</tr>
+						<c:if test="${status.index <5}">
+							<tr>
+								<td>${blist.ubno }</td>
+								<td>${blist.coin }</td>
+								<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###" /></td>
+								<td><fmt:formatNumber value="${blist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td>${blist.bdate }</td>
+							</tr>
+						</c:if>
 					</c:forEach>
 				</table>
 				

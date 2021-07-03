@@ -6,57 +6,66 @@
 		resultType="CoinAcnt">
 		SELECT * FROM COINACNT WHERE ACNTNO = #{acntno}
 	</select>
-	
+
 	<select id="countCoin" parameterType="CoinAcnt"
 		resultType="CoinAcnt">
-		SELECT * FROM COINACNT WHERE ACNTNO = #{acntno} AND COIN = #{coin}
+		SELECT * FROM COINACNT WHERE ACNTNO = #{acntno} AND COIN =
+		#{coin}
 	</select>
 
 
-    <!-- 금액 변경 -->
+	<!-- 금액 변경 -->
 	<update id="updateCoinAcnt" parameterType="CoinAcnt">
 		UPDATE COINACNT
-		SET BUYCNT = #{buycnt} 
+		SET
+		BUYCNT = #{buycnt}
 		WHERE ACNTNO = #{acntno} AND COIN = #{coin}
 	</update>
-	
-	
+
+
 	<!-- 매수 체결 후, 코인계좌에 삽입 -->
-	<insert id="afterBoughtCoinAcnt" parameterType="WaitBought" flushCache="true"
-		statementType="PREPARED">
-	MERGE INTO COINACNT A
-	USING (SELECT * FROM WAITBOUGHT WHERE COIN=#{coin} AND BUYPRICE=#{buyprice}) B
-	ON (A.COIN = B.COIN AND A.ACNTNO = B.ACNTNO)
-	WHEN MATCHED THEN
-	UPDATE
-	SET A.BUYCNT = A.BUYCNT + B.BUYCNT,
-	A.BUYPRICE = (A.BUYPRICE*A.BUYCNT + B.BUYPRICE* B.BUYCNT)/(A.BUYCNT + B.BUYCNT)
-	WHEN NOT MATCHED THEN
-	INSERT (CANO, COIN, BUYCNT, BUYPRICE, ACNTNO)
-	VALUES (SEQ_COINACNT.nextval, B.COIN, B.BUYCNT, B.BUYPRICE, B.ACNTNO)
+	<insert id="afterBoughtCoinAcnt" parameterType="WaitBought"
+		flushCache="true" statementType="PREPARED">
+		MERGE INTO COINACNT A
+		USING (SELECT *
+		FROM WAITBOUGHT WHERE COIN=#{coin} AND
+		BUYPRICE=#{buyprice}) B
+		ON
+		(A.COIN = B.COIN AND A.ACNTNO = B.ACNTNO)
+		WHEN MATCHED THEN
+		UPDATE
+		SET
+		A.BUYCNT = A.BUYCNT + B.BUYCNT,
+		A.BUYPRICE = (A.BUYPRICE*A.BUYCNT +
+		B.BUYPRICE* B.BUYCNT)/(A.BUYCNT + B.BUYCNT)
+		WHEN NOT MATCHED THEN
+		INSERT (CANO, COIN, BUYCNT, BUYPRICE, ACNTNO)
+		VALUES
+		(SEQ_COINACNT.nextval, B.COIN, B.BUYCNT, B.BUYPRICE, B.ACNTNO)
 	</insert>
 
-<!-- 매도 체결 후, 코인계좌에서 줄임
-	<update id="afterSoldCoinAcnt" parameterType="WaitSold" flushCache="true"
-		statementType="PREPARED">
-	MERGE INTO COINACNT A
-	USING (SELECT * FROM WAITSOLD WHERE COIN=#{coin} AND SELLPRICE=#{sellprice}) B
-	ON (A.COIN = B.COIN AND A.ACNTNO = B.ACNTNO)
-	WHEN MATCHED THEN
-	UPDATE
-	SET A.BUYCNT = A.BUYCNT - B.SELLCNT
-	</update> -->
-	
+	<!-- 매도 체결 후 코인 개수가 0 인 경우 매입 단가를 0으로 만듬 -->
+
+	<update id="makePriceZero">
+		UPDATE COINACNT
+		SET
+		BUYPRICE = 0
+		WHERE
+		BUYCNT = 0
+	</update>
+
 	<!-- 미체결 삽입 -->
-	<insert id="insertCoinAcnt" parameterType="CoinAcnt" flushCache="true"
-		statementType="PREPARED">
+	<insert id="insertCoinAcnt" parameterType="CoinAcnt"
+		flushCache="true" statementType="PREPARED">
 		INSERT INTO COINACNT VALUES(
 		SEQ_COINACNT.NEXTVAL, #{coin}, #{buycnt}, #{buyprice}, #{acntno})
 	</insert>
-	
-	<delete id="deleteCoinAcnt" parameterType="Integer"	flushCache="true" statementType="PREPARED">
-		DELETE FROM COINACNT WHERE CANO = #{cano}
+
+	<delete id="deleteCoinAcnt" parameterType="Integer"
+		flushCache="true" statementType="PREPARED">
+		DELETE FROM COINACNT WHERE CANO =
+		#{cano}
 	</delete>
 
-	
+
 </mapper>

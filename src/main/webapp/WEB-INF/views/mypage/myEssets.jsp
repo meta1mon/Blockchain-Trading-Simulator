@@ -56,7 +56,8 @@
 						<c:forEach var="coin" items="${coinList }" varStatus="status">
 							<tr>
 								<td class="coinName">${coin.coin }</td>
-								<td class="coinCount"><fmt:formatNumber value="${coin.buycnt }" pattern="#,###,###,###.########" /></td>
+								<td class="coinCount"><fmt:formatNumber value="${coin.buycnt }" pattern="#,###,###,###.########" />
+								<input type="hidden" class="nCoincnt" value="${coin.buycnt }"> </td>
 								<td><fmt:formatNumber value="${coin.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
 								<td>
 									<fmt:formatNumber value="${coin.buycnt*coin.buyprice }" pattern="#,###,###,###" />&nbsp;원

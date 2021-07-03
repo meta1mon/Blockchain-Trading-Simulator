@@ -16,7 +16,7 @@
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function() {
-		var n = 0;
+		/* var n = 0;
 		for(var i =0; i < 5; i++) {
 			var id = "#ckeditor"+n;
 			ClassicEditor
@@ -30,7 +30,7 @@
 		        console.error( error );
 		    } );
 			n++;
-		}
+		} */
 		
 		
 		$('form[name=listForm]').on('submit',	function(e) {
@@ -114,10 +114,85 @@
 	background-color: lightpurple;
 }
 </style>
+<style>
+	#modalWrapper {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.3);
+		z-index: 10000000000000000000000;
+	}
+	
+	#modal {
+		border: 1px solid black;
+		border-radius: 5px;
+		background: white;
+		width: 450px;
+		height: 450px;
+		position: absolute;
+		top: calc(50% - 255px);
+		left: calc(50% - 225px);
+		
+	}
+</style>
+<script type="text/javascript">
+$(function(){
+	$("#modalWrapper").css("display", "none");
+	$("#modal").css("display", "none");
+	$("#popup_open_btn").on("click", function(){
+		console.log("클릭 이벤트")
+		openModal();
+	})
+	
+	function openModal(){
+		$("#modalWrapper").css("display", "block");
+		$("#modal").css("display", "block");
+		$("#modalWrapper").css("overflow", "hidden");
+		$("body").css("overflow", "hidden");
+	}
+})
+</script>
 </head>
 <body>
 <%@include file="../main/header.jsp"%>
-    <div id="wrapper">
+	<div id="modalWrapper">
+		<div id="modal">
+		<ul style="padding: 100px">
+			<li>
+				<input type="radio" id="reportChoice1" class="reportChoice" name="creport" value="1"> 
+				<label for="reportChoice1" class="modal_choise_label">나체 이미지 또는 성적 행위</label>
+			</li>
+			<li>
+				<input type="radio" id="reportChoice2" class="reportChoice"	name="creport" value="2"> 
+				<label for="reportChoice2" class="modal_choise_label">혐오 발언 또는 폭력적</label></li>
+			<li>
+				<input type="radio" id="reportChoice3" class="reportChoice" name="creport" value="3"> 
+				<label for="reportChoice3" class="modal_choise_label">증오 또는 학대</label>
+			</li>
+			<li>
+				<input type="radio" id="reportChoice4" class="reportChoice"	name="creport" value="4"> 
+				<label for="reportChoice4" class="modal_choise_label">유해하거나 위험한 행위</label>
+			</li>
+			<li>
+				<input type="radio" id="reportChoice5" class="reportChoice" name="creport" value="5">
+				<label for="reportChoice5" class="modal_choise_label">스팸 또는 사용자 현혹</label>
+			</li>
+			<li>
+				<input type="radio" id="reportChoice6" class="reportChoice" name="creport" value="6">
+				<label for="reportChoice6" class="modal_choise_label">마음에 들지 않습니다.</label>
+			</li>
+			<li>
+				<input type="hidden" name="csubject" value="${community.csubject }" />
+				<input type="hidden" name="cwriter" value="${community.cwriter }" />
+				<input type="hidden" name="ccontent" value="${community.ccontent }" /> 
+				<input type="hidden" name="cno" value="${community.cno }" />
+			</li>
+		</ul>
+		</div>
+	</div>
+	<div id="wrapper">
     <!-- navigation -->
     <nav>
       <div class="nav-container">

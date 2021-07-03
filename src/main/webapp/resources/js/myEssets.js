@@ -56,3 +56,65 @@ $('.tablinks').click(function() {
 	$(".tabcontent").eq($(this).index()).show();
 
 });
+
+var bExpandBool = Boolean(false);
+
+$('#bExpand').click(function() {
+	console.log("show 클릭됨!");
+	if(bExpandBool == false) {
+		$('.blist').show();
+		bExpandBool= true;
+		$('#bExpand').val("접기");
+	} else if(bExpandBool == true) {
+		$('.blist').hide();
+		bExpandBool= false;
+		$('#bExpand').val("더 보기");
+	}
+});
+
+var sExpandBool = Boolean(false);
+
+$('#sExpand').click(function() {
+	console.log("show 클릭됨!");
+	if(sExpandBool == false) {
+		$('.slist').show();
+		sExpandBool= true;
+		$('#sExpand').val("접기");
+	} else if(sExpandBool == true) {
+		$('.slist').hide();
+		sExpandBool= false;
+		$('#sExpand').val("더 보기");
+	}
+});
+
+
+var wbExpandBool = Boolean(false);
+
+$('#wbExpand').click(function() {
+	console.log("show 클릭됨!");
+	if(wbExpandBool == false) {
+		$('.wblist').show();
+		wbExpandBool= true;
+		$('#wbExpand').val("접기");
+	} else if(wbExpandBool == true) {
+		$('.wblist').hide();
+		wbExpandBool= false;
+		$('#wbExpand').val("더 보기");
+	}
+});
+
+var wsExpandBool = Boolean(false);
+
+$('#wsExpand').click(function() {
+	console.log("show 클릭됨!");
+	if(wsExpandBool == false) {
+		$('.wslist').show();
+		wsExpandBool= true;
+		$('#wsExpand').val("접기");
+	} else if(wsExpandBool == true) {
+		$('.wslist').hide();
+		wsExpandBool= false;
+		$('#wsExpand').val("더 보기");
+	}
+});
+

@@ -40,7 +40,9 @@ function coinValue() {
 //					console.log("totalcoin: "+ totalcoin);
 					$('#totalcoin').html(totalcoin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 //					console.log("cash: "+$("#cash").val());
-					$('#totalAssets').html(($("#cash").val()+totalcoin).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+					var totalAssets = parseInt($("#cash").val())+totalcoin;
+					console.log("totalAssets: "+totalAssets);
+					$('#totalAssets').html(totalAssets.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 				}
 			});
 };

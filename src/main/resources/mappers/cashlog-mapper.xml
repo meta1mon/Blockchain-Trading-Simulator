@@ -24,4 +24,10 @@
 	<select id="countTodayWon" resultType="int">
 		SELECT NVL(SUM(WON),0) FROM CASHLOG WHERE CASHDATE LIKE TO_CHAR(SYSDATE, 'YYYY-MM-DD%')
 	</select>
+	
+	<!-- 마이페이지 캐시 로그 -->
+	<select id="selectMyCashLog" parameterType="string" resultType="arraylist" resultMap="CashLog">
+		SELECT * FROM CASHLOG WHERE EMAIL = #{email}
+		ORDER BY CASHDATE DESC
+	</select>
 </mapper>

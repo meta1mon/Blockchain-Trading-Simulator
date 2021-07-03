@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.acnt.model.vo.CoinAcnt;
+import com.kh.bts.cash.model.vo.CashLog;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.vo.MyRcommunity;
@@ -87,6 +88,9 @@ public class MypageDao {
 
 	public List<CoinAcnt> selectMyCoinAcnt(String acntno) {
 		return sqlSession.selectList("coinacnt.selectMyCoinAcnt", acntno);
+	}
+	public List<CashLog> selectMyCashLog(String email) {
+		return sqlSession.selectList("CashLog.selectMyCashLog", email);
 	}
 
 }

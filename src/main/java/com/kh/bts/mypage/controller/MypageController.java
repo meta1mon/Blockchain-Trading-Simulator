@@ -23,6 +23,7 @@ import com.kh.bts.HomeController;
 import com.kh.bts.acnt.model.service.AcntService;
 import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.acnt.model.vo.CoinAcnt;
+import com.kh.bts.cash.model.service.CashService;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.investment.model.service.BoughtService;
@@ -325,7 +326,18 @@ public class MypageController {
 	}
 
 	@RequestMapping(value = "/mcl")
-	public ModelAndView myCashLog(ModelAndView mv) {
+	public ModelAndView myCashLog(ModelAndView mv, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String loginEmail = (String) session.getAttribute("loginMember");
+		try {
+			mv.addObject("email", loginEmail);
+			System.out.println(loginEmail);
+			mv.addObject("list", myService.selectMyCashLog(loginEmail));
+			System.out.println(myService.selectMyCashLog(loginEmail));
+			mv.addObject("listCount", myService.selectMyCashLog(loginEmail).size());
+		} catch(Exception e) {
+			
+		}
 		mv.setViewName("mypage/myCashLog");
 		return mv;
 	}

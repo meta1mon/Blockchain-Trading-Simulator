@@ -10,6 +10,7 @@ import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.cash.model.vo.CashLog;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.report.model.vo.Acreport;
+import com.kh.bts.report.model.vo.Arreport;
 import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
@@ -30,6 +31,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int insertRreport(Rreport vo) {
 		return aDao.insertRreport(vo);
+	}
+	
+	@Override
+	public int insertArreport(Arreport vo) {
+		return aDao.insertArreport(vo);
 	}
 
 	@Override
@@ -122,14 +128,30 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 	@Override
+	public int deleteRreport(String rrno) {
+		int result = 0;
+		result = aDao.deleteRreport(rrno);
+		return result;
+	}
+	@Override
 	public int countAcreport() {
 		int result = 0;
 		result = aDao.countAcreport();
 		return result;
 	}
 	@Override
+	public int countArreport() {
+		int result = 0;
+		result = aDao.countArreport();
+		return result;
+	}
+	@Override
 	public List<Acreport> selectAcreport(int startPage, int limit) {
 		return aDao.selectAcreport(startPage, limit);
+	}
+	@Override
+	public List<Arreport> selectArreport(int startPage, int limit) {
+		return aDao.selectArreport(startPage, limit);
 	}
 
 

@@ -169,6 +169,13 @@ table{
 			$("#rrdate").val(ele[7].innerText); // 신고 날짜
 			$("#cno").val(ele[8].innerText); // 신고하는 댓글이 있는 글 번호
 			$("#rno").val(ele[9].innerText); // 신고하는 댓글 번호
+			for(var i=0; i<ele.length; i++){
+				console.log("============================");
+				console.log(ele[i]);
+				console.log(ele[i].innerText);
+				console.log(ele[i].html);
+				console.log("============================");
+			}
 		}
 		$(".tr").on("click", openModal);
 		
@@ -296,7 +303,7 @@ table{
 					<table>
 						<tr class="hidden">
 							<td>신고 접수 번호</td>
-							<td><input type="hidden" value="" name="crno" id="crno"></td>
+							<td><input type="hidden" value="" name="rrno" id="rrno"></td>
 						</tr>
 						<tr>
 							<td>게시글 제목</td>
@@ -364,17 +371,18 @@ $(function(){
  			var btnval = $("#buttonvalue").val();
 			 
 		    var dataquery = $("#frmReport").serialize();
+		    dataquery = decodeURIComponent(dataquery);
+		    console.log(dataquery);
 			$.ajax({
 			url : "dealrr",
 			type : "POST",
 			data : dataquery,
 			async : true,
 			success : function(data) {
-				location.href = "<%=request.getContextPath()%>/admin/cr";
+				location.href = "<%=request.getContextPath()%>/admin/rr";
 			},
 			error : function(request, status, error) {
 				console.log("message:"+request.responseText+"\n"+"error:"+error);
-				location.href="<%=request.getContextPath()%>/admin/cr";
 			}
 			
 		})

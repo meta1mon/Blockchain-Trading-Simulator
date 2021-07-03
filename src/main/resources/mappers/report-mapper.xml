@@ -59,11 +59,12 @@
 
 	<!-- 신고 댓글 처리 -->
 	<insert id="insertArreport" parameterType="Arreport" flushCache="true" statementType="PREPARED">
-		INSERT INTO ACREPORT VALUES(#{rrno}, #{rreporter}, #{rrreason}, #{csubject}, #{rcontent}, #{rrespondent}, #{rrdate}, #{rstatus}, #{rreason}, default)
+		INSERT INTO ARREPORT(rrno, rreporter, rrreason, rcontent, rrespondent, rrdate, rstatus, rreason, arrdate, csubject)
+					  VALUES(#{rrno}, #{rreporter}, #{rrreason}, #{rcontent}, #{rrespondent}, #{rrdate}, #{rstatus}, #{rreason}, default, #{csubject})
 	</insert>
 	
 	<delete id="deleteRreport" parameterType="string" flushCache="true" statementType="PREPARED">
-		DELETE FROM CREPORT WHERE rRNO = #{rrno}
+		DELETE FROM RREPORT WHERE RRNO = #{rrno}
 	</delete>
 	
 	<!-- 처리된 신고글 수 세기 -->

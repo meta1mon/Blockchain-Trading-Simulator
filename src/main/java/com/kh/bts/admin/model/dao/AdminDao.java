@@ -12,6 +12,7 @@ import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.cash.model.vo.CashLog;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.report.model.vo.Acreport;
+import com.kh.bts.report.model.vo.Arreport;
 import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
@@ -28,6 +29,9 @@ public class AdminDao {
 	}
 	public int insertRreport(Rreport vo) {
 		return sqlSession.insert("report.insertRreport", vo);
+	}
+	public int insertArreport(Arreport vo) {
+		return sqlSession.insert("report.insertArreport", vo);
 	}
 	
 	public int registerCash(Cash vo) {
@@ -116,11 +120,21 @@ public class AdminDao {
 		result = sqlSession.selectOne("report.countAcreport");
 		return result;
 	}
+	public int countArreport() {
+		int result = 0;
+		result = sqlSession.selectOne("report.countArreport");
+		return result;
+	}
 	
 	public List<Acreport> selectAcreport(int startPage, int limit){
 		int startRow = (startPage -1)*limit; 
 		RowBounds row = new RowBounds(startRow,	limit);
 		return sqlSession.selectList("report.selectAcreport", null, row);
+	}
+	public List<Arreport> selectArreport(int startPage, int limit){
+		int startRow = (startPage -1)*limit; 
+		RowBounds row = new RowBounds(startRow,	limit);
+		return sqlSession.selectList("report.selectArreport", null, row);
 	}
 	
 	public int countRreport() {
@@ -138,6 +152,11 @@ public class AdminDao {
 	public int deleteCreport(String crno) {
 		int result = 0;
 		result = sqlSession.delete("report.deleteCreport", crno);
+		return result;
+	}
+	public int deleteRreport(String rrno) {
+		int result = 0;
+		result = sqlSession.delete("report.deleteRreport", rrno);
 		return result;
 	}
 	

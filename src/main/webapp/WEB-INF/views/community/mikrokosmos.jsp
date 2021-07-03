@@ -146,11 +146,14 @@
               <img class="img-profile pic" src="resources/assets/img/user.png" alt="..">
               <span class="userID main-id point-span">${vo.cwriter }</span>
             </div>
-						<button type="button" class="cupdate"
-							onclick="communityUpdateFn(${status.index })">수정</button>
-						<button type="button" class="cdelete"
-							onclick="communityDeleteFn(${status.index })">삭제</button>
-						<button type="button">신고</button> class="creport"
+							<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
+							<c:if test="${loginMember == writerEmail }">
+								<button type="button" class="update"
+									onclick="location.href='${cupdate}'">수정</button>
+								<button type="button" class="delete"
+									onclick="location.href='${cdelete}'">삭제</button>
+							</c:if>
+							<button type="button" class="report" id="popup_open_btn">신고</button>
 						<img class="icon-react icon-more" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png" alt="more">
           </header>
           <div class="main-image">
@@ -190,18 +193,31 @@
                     </div>
                   </div>
                 </li> -->
-                <!-- input 값 여기에 추가 -->
               </ul>
               <div class="time-log">
                 <span>${vo.cdate }</span>
               </div>
             </div>
           </div>
+          <!-- 댓글 작성 부분 -->
+          <div>
           <div class="hl"></div>
+				<c:if test="${loginMember != null }">
+					<form id="writeRcommunity">
+						<div class="comment">
+							<input type="hidden" name="cno" value="${community.cno }">
+			            	<input id="input-comment" type="text" class="input-comment" name="rcontent" maxlength="4000" placeholder="댓글 달기..." >
+			            	<button type="submit" class="submit-comment" onclick="rcommunityInsertFn(${status.index})">게시</button>
+						</div>
+					</form>
+				</c:if>
+			</div>
+			<c:if test="${loginMember == null }">
           <div class="comment">
-            <input id="input-comment" class="input-comment" name="rcontent" maxlength="4000" type="text" placeholder="댓글 달기..." >
-            <button type="submit" class="submit-comment" onclick="rcommunityInsertFn(${status.index})">게시</button>
+            <input class="input-comment" type="text" placeholder="댓글을 작성하려면 로그인이 필요합니다." >
+            <button type="submit" class="submit-comment">게시</button>
           </div>
+          </c:if>
         </article>
         </c:forEach>
         

@@ -192,7 +192,7 @@ table{
 <body>
 <%@include file="../loadingajax.jsp"%>
 	<div id="cr">
-	<p class="title inbl">신고된 게시글 목록</p>
+	<p class="title inbl">신고된 게시글 조회</p>
 		<hr>
 		<div>
 			<table id="list">

@@ -285,7 +285,7 @@ public class MypageController {
 			
 			int totalCoin =  myService.myTotalCoin(acntResult);
 			
-			int totalAssets = totalCoin+acntResult.getCybcash();
+			long totalAssets = totalCoin+acntResult.getCybcash();
 			
 			int coinListCount = myService.coinListCount(acntResult);
 			

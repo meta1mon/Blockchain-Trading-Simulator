@@ -35,7 +35,7 @@
 	</update>
 
 	<!-- 전체 가상 투자금 조회 -->
-	<select id="totalCybcash" resultType="int">
+	<select id="totalCybcash" resultType="long">
 		SELECT SUM(CYBCASH) FROM
 		ACNT
 	</select>

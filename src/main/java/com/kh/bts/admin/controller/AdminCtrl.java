@@ -83,7 +83,7 @@ public class AdminCtrl {
 	}
 	
 	@ModelAttribute("totalCybcash")
-	public int totalCybcash() {
+	public long totalCybcash() {
 		return aService.totalCybcash();
 	}
 	@ModelAttribute("countTodayWon")
@@ -515,16 +515,27 @@ public class AdminCtrl {
 	}
 //	게시판 신고 처리 목록
 	@RequestMapping(value = "/acr", method = RequestMethod.GET)
-	public ModelAndView acr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv) {
+	public ModelAndView acr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv,
+							@RequestParam(name="keyword", defaultValue="", required = false) String	keyword,
+							@RequestParam(name="cstatus", defaultValue="", required = false) String cstatus,
+							@RequestParam(name="searchType", defaultValue="1") int searchType) {
 		try { 
 			int currentPage = page; 
 			int listCount = aService.countAcreport();
 			int maxPage = (int)((double) listCount / LIMIT + 0.9);
 			
-			mv.addObject("list", aService.selectAcreport(currentPage, LIMIT)); 
+			 if (keyword != null && !keyword.equals("")) {
+			 mv.addObject("list", aService.searchAcreport(keyword, searchType));
+			 } else if (cstatus != null && !cstatus.equals("")) {
+				mv.addObject("list", aService.searchAcreportByCstatus(cstatus, searchType));
+			} else {
+				mv.addObject("list", aService.selectAcreport(currentPage, LIMIT));
+			}
 			mv.addObject("currentPage", currentPage); 
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount); 
+			
+
 		} catch (Exception e) { 
 			System.out.println(e.getMessage()); 
 		}
@@ -551,18 +562,26 @@ public class AdminCtrl {
 	}
 //	댓글 신고 처리 목록
 	@RequestMapping(value = "/arr", method = RequestMethod.GET)
-	public ModelAndView arr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv) {
-		try { 
-			int currentPage = page; 
+	public ModelAndView arr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv,							@RequestParam(name="keyword", defaultValue="", required = false) String	keyword,
+							@RequestParam(name="rstatus", defaultValue="", required = false) String rstatus,
+							@RequestParam(name="searchType", defaultValue="1") int searchType) {
+		try {
+			int currentPage = page;
 			int listCount = aService.countArreport();
-			int maxPage = (int)((double) listCount / LIMIT + 0.9);
-			
-			mv.addObject("list", aService.selectArreport(currentPage, LIMIT)); 
-			mv.addObject("currentPage", currentPage); 
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+
+			if (keyword != null && !keyword.equals("")) {
+				mv.addObject("list", aService.searchArreport(keyword, searchType));
+			} else if (rstatus != null && !rstatus.equals("")) {
+				mv.addObject("list", aService.searchArreportByRstatus(rstatus, searchType));
+			} else {
+				mv.addObject("list", aService.selectArreport(currentPage, LIMIT));
+			}
+			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
-			mv.addObject("listCount", listCount); 
-		} catch (Exception e) { 
-			System.out.println(e.getMessage()); 
+			mv.addObject("listCount", listCount);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		mv.setViewName("admin/afterReplyReport");
 		return mv;

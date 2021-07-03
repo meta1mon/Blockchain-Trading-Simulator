@@ -504,7 +504,7 @@ public class investmentCtrl {
 
 	@RequestMapping(value = "coinupdate", method = RequestMethod.POST)
 	public void update(Acnt vo, @RequestParam(name = "acntno") String acntno,
-			@RequestParam(name = "cybcash") int cybcash, HttpServletResponse response) throws Exception {
+			@RequestParam(name = "cybcash") long cybcash, HttpServletResponse response) throws Exception {
 		vo.setAcntno(acntno);
 		vo.setCybcash(cybcash);
 		int result = acntService.updateAcnt(vo);

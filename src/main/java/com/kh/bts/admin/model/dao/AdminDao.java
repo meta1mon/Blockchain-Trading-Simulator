@@ -91,8 +91,8 @@ public class AdminDao {
 		return sqlSession.selectList("Member.adminListMember", null, row);
 	}
 	
-	public int totalCybcash() {
-		int result = 0;
+	public long totalCybcash() {
+		long result = 0;
 		result = sqlSession.selectOne("acnt.totalCybcash");
 		return result;
 	}

@@ -83,7 +83,7 @@ public class AdminCtrl {
 	}
 	
 	@ModelAttribute("totalCybcash")
-	public int totalCybcash() {
+	public long totalCybcash() {
 		return aService.totalCybcash();
 	}
 	@ModelAttribute("countTodayWon")

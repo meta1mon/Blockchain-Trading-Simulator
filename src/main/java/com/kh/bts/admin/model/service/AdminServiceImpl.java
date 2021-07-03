@@ -84,8 +84,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int totalCybcash() {
-		int result = 0;
+	public long totalCybcash() {
+		long result = 0;
 		result= aDao.totalCybcash();
 		return result;
 	}

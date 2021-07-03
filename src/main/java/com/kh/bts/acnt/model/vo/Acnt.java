@@ -6,14 +6,14 @@ import org.springframework.stereotype.Component;
 public class Acnt {
 	private String acntno;
 	private String email;
-	private int cybcash;
+	private long cybcash;
 	private int bankPw;
 
 	public Acnt() {
 	}
 
 
-	public Acnt(String acntno, String email, int cybcash, int bankPw) {
+	public Acnt(String acntno, String email, long cybcash, int bankPw) {
 		super();
 		this.acntno = acntno;
 		this.email = email;
@@ -30,11 +30,11 @@ public class Acnt {
 		this.acntno = acntno;
 	}
 
-	public int getCybcash() {
+	public long getCybcash() {
 		return cybcash;
 	}
 
-	public void setCybcash(int cybcash) {
+	public void setCybcash(long cybcash) {
 		this.cybcash = cybcash;
 	}
 

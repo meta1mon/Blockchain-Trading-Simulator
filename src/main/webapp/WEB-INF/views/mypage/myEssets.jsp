@@ -54,6 +54,7 @@
 					</c:if>
 					<c:if test="${coinListCount ne 0 }">
 						<c:forEach var="coin" items="${coinList }" varStatus="status">
+							<c:if test="${coin.buycnt>0 }">
 							<tr>
 								<td class="coinName">${coin.coin }</td>
 								<td class="coinCount"><fmt:formatNumber value="${coin.buycnt }" pattern="#,###,###,###.########" />
@@ -70,6 +71,7 @@
 <!-- 									평가손익 : api 이용해서 js로 처리 -->
 								</td>
 							</tr>
+							</c:if>
 						</c:forEach>
 					</c:if>
 				</table>

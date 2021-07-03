@@ -1,12 +1,11 @@
 $(function() {
+	$(".tabcontent").eq(0).show(); // 보유코인 목록 탭 기본값 : show()
 	var alltimer = setInterval(function() { // 1초마다 함수 돌림 ()
 		coinValue();
 	}, 1000);
 });
 
 function coinValue() {
-
-	$(".tabcontent").eq(0).show(); // 보유코인 목록 탭 기본값 : show()
 
 	$
 			.ajax({

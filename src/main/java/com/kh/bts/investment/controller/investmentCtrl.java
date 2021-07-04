@@ -31,6 +31,7 @@ import com.kh.bts.investment.model.vo.Sold;
 import com.kh.bts.investment.model.vo.WaitBought;
 import com.kh.bts.investment.model.vo.WaitSold;
 import com.kh.bts.member.model.vo.Member;
+import com.kh.bts.mypage.model.service.MypageService;
 
 @Controller
 public class investmentCtrl {
@@ -48,7 +49,51 @@ public class investmentCtrl {
 	private AcntService acntService;
 	@Autowired
 	private CoinAcntService caService;
+	@Autowired
+	private MypageService myService;
+	
+	
+	@RequestMapping(value = "mpopup")
+	public ModelAndView myEssets(ModelAndView mv, Member vo, HttpServletRequest request) {
 
+		HttpSession session = request.getSession();
+		String loginEmail = (String) session.getAttribute("loginMember");
+		
+		
+		if (loginEmail == null) {
+			System.out.println("비회원입니다");
+		} else {
+			mv.addObject("email", loginEmail);
+			Acnt acntResult = acntService.selectMyAcnt(loginEmail);
+			
+			int totalCoin =  myService.myTotalCoin(acntResult);
+			
+			int totalAssets = totalCoin+acntResult.getCybcash();
+			
+			int coinListCount = myService.coinListCount(acntResult);
+			
+			List<CoinAcnt> coinList = myService.selectMyCoinAcnt(acntResult.getAcntno());
+			
+			List<WaitBought> wBoughtResult = wbService.selectListWaitBought(acntResult.getAcntno());
+			List<WaitSold> wSoldResult = wsService.selectListWaitSold(acntResult.getAcntno());
+			List<Bought> boughtResult = bService.selectListBought(acntResult.getAcntno());
+			List<Sold> soldResult = sService.selectListSold(acntResult.getAcntno());
+			
+			mv.addObject("acnt", acntResult);
+			mv.addObject("totalCoin", totalCoin);
+			mv.addObject("totalAssets", totalAssets);
+			mv.addObject("coinListCount", coinListCount);
+			mv.addObject("coinList", coinList);
+			mv.addObject("wBoughtResult", wBoughtResult);
+			mv.addObject("wSoldResult", wSoldResult);
+			mv.addObject("boughtResult", boughtResult);
+			mv.addObject("soldResult", soldResult);
+			
+		}
+		
+		mv.setViewName("investment/mpopup");
+		return mv;
+	}
 	// 미체결 매수 코인 종류 불러오기
 	@ResponseBody
 	@RequestMapping("buyLoad1")

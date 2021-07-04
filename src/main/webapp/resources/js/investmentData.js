@@ -2,6 +2,7 @@ $(function() {
 	var checkpw = false; // 2차 비밀번호 변수
 	coinname(); // 숫자를 이름으로 변경
 	chart(); // 차트 변수
+	
 	$("#check2").click(function() { // 계좌 비밀번호
 		var acntList = $("#frm11").serialize();
 		var checkhtml = "";
@@ -18,6 +19,7 @@ $(function() {
 					blist();
 					slist();
 					acnt();
+					$("#icon").css("display", "block");
 				} else {
 					checkpw = false;
 					alert("계좌 비밀번호를 확인해 주세요 ");
@@ -28,11 +30,15 @@ $(function() {
 		})
 
 	});
+	$("#abcd").on("click",function() {
+		console.log("asdfafdasadsfafdsadsfasfd");
+	});
+
 	// ///////////////////////////// CSS
 	// /////////////////////////////////////////////////
 	$("#sold_b").click(function() {// 매도 활성화 css
-		$("#sold_b").css("color","white");
-		$("#bought_b").css("color","black");
+		$("#sold_b").css("color", "white");
+		$("#bought_b").css("color", "black");
 		$("#sold_b").css("background", "blue");
 		$("#bought_b").css("background", "white");
 		$("#cnt_b").hide();
@@ -43,8 +49,8 @@ $(function() {
 		$("#sold").show();
 	});
 	$("#bought_b").click(function() {// 매수 활성화 css
-		$("#bought_b").css("color","white");
-		$("#sold_b").css("color","black");
+		$("#bought_b").css("color", "white");
+		$("#sold_b").css("color", "black");
 		$("#bought_b").css("background", "red");
 		$("#sold_b").css("background", "white");
 		$("#cnt_s").hide();
@@ -210,13 +216,14 @@ $(function() {
 var coinList = null; // 전체 리스트
 var changecoin = "BTC"; // default
 var ch_title = "BTC";
+var display = new Array();
+var html = "";
 
 function alltable() { // 전체코인 시세 표
-	var display = new Array();
 	var titdisplay = new Array();
 	var onedisplay = new Array();
 
-	var html = "";
+	
 	var title = "";
 	var thisCoin = null;
 	$
@@ -230,25 +237,41 @@ function alltable() { // 전체코인 시세 표
 					search = search.toUpperCase();
 					if (search == "") {
 						for (var i = 0; i < (coinList.length) - 1; i++) {
+							var a = Object.keys(data['data']);
+							var b = a[i];
 							display[i] = [
-									data['data'][coinList[i]]['closing_price'] * 1,
-									data['data'][coinList[i]]['fluctate_rate_24H'] * 1,
-									data['data'][coinList[i]]['acc_trade_value_24H'] * 1 ]
+									data['data'][b]['closing_price'] * 1,
+									data['data'][b]['fluctate_rate_24H'] * 1,
+									data['data'][b]['acc_trade_value_24H'] * 1,
+									b ]
 						}
+						// //////////// 정렬 부분 ////////////
+						function pricedown(){
+							display.sort(function(a, b) {
+								return a[0] - b[0];
+							});
+						}
+						function priceup(){
+							display.sort(function(a, b) {
+								return b[0] - a[0];
+							});
+						}
+						
 						titdisplay[0] = [
 								data['data'][ch_title]['closing_price'] * 1,
 								data['data'][ch_title]['fluctate_rate_24H'] * 1,
 								data['data'][ch_title]['acc_trade_value_24H'] * 1,
 								data['data'][ch_title]['min_price'] * 1,
 								data['data'][ch_title]['max_price'] * 1 ]
-						html = "<table class='table table-striped' id='cointable' ><tr><td>코인명</td><td>현재가</td><td>등락률(24H)</td><td>거래대금</td></tr>";
+						html = "<table class='table table-striped' id='cointable' ><tr><td>코인명</td><td>현재가<button id='abcd' type='button' >down</button></td><td>등락률(24H)</td><td>거래대금</td></tr>";
 						title = "<table class='table table-striped' id='tit'><tr>";
+
 						for (var i = 0; i < coinList.length - 1; i++) {
 							thisCoin = i;
-							html += "<tr><td><a href=# onclick='changename("
-									+ thisCoin
-									+ ");'>"
-									+ coinList[i]
+							html += "<tr><td><a href=# onclick='changename(\""
+									+ display[i][3]
+									+ "\");'>"
+									+ display[i][3]
 									+ "</a></td><td>"
 									+ display[i][0]
 									+ "</td><td><span class='change_c'>"
@@ -320,6 +343,7 @@ function alltable() { // 전체코인 시세 표
 				}
 			});
 };
+
 // //////////////////// update 환산 하는 부분 ///////////////////////////////
 function returncoinfn(tc) { // 매도 취소시 코인 반환 update 문
 	$.ajax({
@@ -762,15 +786,15 @@ function buyp(a) {
 
 	var ca = $("#cybcash").val();
 
-	var pa = a*1;
+	var pa = a * 1;
 
 	var pr = $("#price_b").val();
 	var sum = ca * pa / pr;
 	var sumc = Math.floor(sum);
 	$("#cnt_b").val(sumc);
 	$("#cnt_b").focus();
-	//  수량 = 코인수 * %
-	var buypcoin =$("#coincount").val();
+	// 수량 = 코인수 * %
+	var buypcoin = $("#coincount").val();
 	var sumcc = buypcoin * a;
 	var sumccc = Math.floor(sumcc);
 	$("#cnt_s").val(sumccc);
@@ -804,23 +828,31 @@ function orderbook() {
 								data[0]['orderbook_units'][i]['ask_price'] * 1,
 								data[0]['orderbook_units'][i]['ask_size'] * 1 ]
 					}
-					html6 = "<table id='orderbook_t' class='table table-striped' ><tr><td>현재가</td><td>수량</td></tr>";
+					html6 = "<table id='orderbook_t' class='table table-striped'style='text-align : center;' ><tr><td>현재가</td><td>수량</td></tr>";
 					for (var i = 14; i >= 0; i--) {
-						html6 += "<tr style='background: rgba(255,51,0,0.5) !important;'><td><a href='#'  style='color : black !important;' onclick='ob_p("
+						html6 += "<tr><td><a href='#'  style='color : black !important;' onclick='ob_p("
+								// html6 += "<tr style='background:
+								// rgba(255,51,0,0.5) !important;'><td><a
+								// href='#' style='color : black !important;'
+								// onclick='ob_p("
 								+ orderbookarrask[i][0]
 								+ ");'>"
 								+ orderbookarrask[i][0]
-								+ "</a></td><td>"
+								+ "</a>원</td><td>"
 								+ orderbookarrask[i][1] + "개" + "</td></tr>";
 
 					}
-					html6 += "<tr><td>구분좀하자 </td></tr>";
+					// html6 += "<tr><td>구분좀하자 </td></tr>";
 					for (var i = 0; i < 15; i++) {
-						html6 += "<tr  style='background: rgba(33,150,243, 0.5) !important;'><td><a href='#'  style='color : black !important;' onclick='ob_p("
+						html6 += "<tr><td><a href='#'  style='color : black !important;' onclick='ob_p("
+								// html6 += "<tr style='background:
+								// rgba(33,150,243, 0.5) !important;'><td><a
+								// href='#' style='color : black !important;'
+								// onclick='ob_p("
 								+ orderbookarrbid[i][0]
 								+ ");'>"
 								+ orderbookarrbid[i][0]
-								+ "</a></td><td>"
+								+ "</a>원</td><td>"
 								+ orderbookarrbid[i][1] + "개" + "</td></tr>";
 
 					}

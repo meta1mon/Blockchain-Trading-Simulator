@@ -1,0 +1,98 @@
+@charset "UTF-8";
+#wrapper, body{
+	height: 25% !impartant;
+	width: 25% !impartant;
+}
+#me {
+	text-align: center;
+	padding: 20px;
+	margin: 25px auto;
+	background-color: #fff;
+    border: 1.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
+}
+
+#money {
+	width: 100%;
+	height : 50px;
+	margin: 0 auto;
+	
+}
+
+
+#me table {
+	margin: 10px auto 0 auto;
+}
+
+/* 탭 메뉴 시작 */
+.tab {
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
+}
+
+.tablinks {
+	background-color: inherit;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 10%;
+	transition 0.3s;
+}
+
+.tablinks:hover {
+  	background-color: #ddd;
+}
+
+.tablinksActive {
+  	background-color: #ccc;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 10%;
+}
+
+.tabcontent {
+  /* display: none; */
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+/* 탭 메뉴 끝 */
+
+#coinTable {
+	width : 80%;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+#coinTable th, td {
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.historyTable {
+	width : 80%;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.historyTable th, td {
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.expandBtn {
+	height: 30px;
+	font-size: 16px;
+	background-color: #fff;
+	color: #8C66C8,;
+	padding: 0px 8px;
+	border: 1px solid transparent;
+	border-color: #E3C8F8;
+  	border-radius: 4px;
+  	cursor: pointer;
+  	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
+  	margin: 10px;
+}

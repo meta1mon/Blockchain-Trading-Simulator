@@ -26,14 +26,16 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
-
+	src="${pageContext.request.contextPath}/resources/js/investmentData.js">
+	
+</script>
 
 <meta charset="UTF-8">
 </head>
 <body>
 	<div id="wrapper">
 		<jsp:include page="../main/header.jsp"></jsp:include>
+		<jsp:include page='popup.jsp'></jsp:include>
 		<div id="container"
 			style="width: 1400px !important; background: white !important;">
 			<div class="parent">
@@ -113,14 +115,17 @@
 								</form>
 								<table style="width: 100%; padding-left: 20px;">
 									<tr>
-										<td style="text-align: center;"><button class="btn_bs" id="bought_b">매수</button>
-											<button class="btn_bs" id="sold_b">매도</button><br></td>
+										<td style="text-align: center;"><button class="btn_bs"
+												id="bought_b">매수</button>
+											<button class="btn_bs" id="sold_b">매도</button>
+											<br></td>
 									</tr>
 								</table>
 								<form id="frm22">
-									<table style=" width: 100%;">
+									<table style="width: 100%;">
 										<tr>
-											<th style=" font-size: 20px !important; width: 100%;" colspan="1">보유잔고</th>
+											<th style="font-size: 20px !important; width: 100%;"
+												colspan="1">보유잔고</th>
 										</tr>
 										<tr>
 											<td>보유 KRW : &nbsp;&nbsp;&nbsp;<input id="cybcash"
@@ -132,17 +137,20 @@
 											<th style="font-size: 20px !important;" colspan="1">코인종류</th>
 										</tr>
 										<tr>
-											<td colspan="1">코인 이름 : <input name="coin" id="coin" type="text"
-												value="BTC" readonly="readonly" style="text-align: center;"><br>
-												보유 코인 : <input style="text-align: center;" id="coincount" placeholder="보유 코인"><br></td>
+											<td colspan="1">코인 이름 : <input name="coin" id="coin"
+												type="text" value="BTC" readonly="readonly"
+												style="text-align: center;"><br> 보유 수량 : <input
+												style="text-align: center;" id="coincount"
+												placeholder="보유 코인"><br></td>
 										</tr>
 
 										<tr>
 											<th style="font-size: 20px !important;" colspan="1">가격</th>
 										</tr>
 										<tr>
-											<td colspan="1"><input style="text-align: center;" id="price_b" type="text"
-												name="buyprice"> <input style="text-align: center;" id="price_s" type="text"
+											<td colspan="1"><input style="text-align: center;"
+												id="price_b" type="text" name="buyprice"> <input
+												style="text-align: center;" id="price_s" type="text"
 												name="sellprice"><br></td>
 
 										</tr>
@@ -151,13 +159,14 @@
 
 										</tr>
 										<tr>
-											<td colspan="1"><input style="text-align: center;" id="cnt_b" type="text"
-												name="buycnt"><input style="text-align: center;" id="cnt_s" type="text"
+											<td colspan="1"><input style="text-align: center;"
+												id="cnt_b" type="text" name="buycnt"><input
+												style="text-align: center;" id="cnt_s" type="text"
 												name="sellcnt"><br></td>
 										</tr>
 										<tr>
-											<th style="font-size: 20px !important;" colspan="1">총액
-												<a>최소주문금액 KRW 5,000</a>
+											<th style="font-size: 20px !important;" colspan="1">총액 <a>최소주문금액
+													KRW 5,000</a>
 											</th>
 
 										</tr>
@@ -168,20 +177,28 @@
 												name="updatecoin" type="hidden" value=""><br></td>
 										</tr>
 										<tr>
-											<th style="font-size: 20px !important;" colspan="1">수량 <input id="acntno"
-												name="acntno" type="hidden" value="${acnt.acntno }">
-												<input id="hidden" type="hidden" value="${acnt.cybcash }"></th>
+											<th style="font-size: 20px !important;" colspan="1">수량 <input
+												id="acntno" name="acntno" type="hidden"
+												value="${acnt.acntno }"> <input id="hidden"
+												type="hidden" value="${acnt.cybcash }"></th>
 										</tr>
 
 
 										<tr>
-											<td style="text-align: center;"  colspan="1" ><button type="button" class="b_c" value="0.1" onclick="buyp(0.1)">10%</button>
-												<button type="button" class="b_c" value="0.25" onclick="buyp(0.25)">25%</button>
-												<button type="button" class="b_c" value="0.50" onclick="buyp(0.5)">50%</button>
-												<button type="button" class="b_c" value="1" onclick="buyp(1)">100%</button><br><br></td>
+											<td style="text-align: center;" colspan="1"><button
+													type="button" class="b_c" value="0.1" onclick="buyp(0.1)">10%</button>
+												<button type="button" class="b_c" value="0.25"
+													onclick="buyp(0.25)">25%</button>
+												<button type="button" class="b_c" value="0.50"
+													onclick="buyp(0.5)">50%</button>
+												<button type="button" class="b_c" value="1"
+													onclick="buyp(1)">100%</button>
+												<br>
+											<br></td>
 										</tr>
 										<tr>
-											<td  style="text-align: center;" colspan="1"><button id="bought" type="button">매수</button>
+											<td style="text-align: center;" colspan="1"><button
+													id="bought" type="button">매수</button>
 												<button id="sold" type="button">매도</button></td>
 
 										</tr>

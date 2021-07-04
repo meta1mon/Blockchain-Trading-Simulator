@@ -1,5 +1,28 @@
 @charset "UTF-8";
 
+#listWrapper {
+	width: 90%;
+	height: calc(100% - 100px);
+	position: absolute;
+	top: 10%;
+	left: 200px;
+	background-color: rgba(242, 242, 242, 0.3);
+}
+
+#listOut {
+	width: 65%;
+	min-width: 1000px;
+	background-color: #ffffff;
+	margin: 70px auto;
+	padding: 20px;
+	border-radius: 4px;
+	position: absolute;
+    top: 3%;
+    left: 5%;
+    border: 1.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
+}
+
 #noticeTitle {
 	margin: 20px;
 	text-align: left;
@@ -94,4 +117,24 @@
 	width: 85%;
 /* 	border: 1px double; */
 	border-collapse: collapse;
+}
+
+.noticeList tr {
+	border-bottom: 1px solid #eeeeee;
+	height: 35px;
+	font-size: 15px;
+}
+
+.noticeList tr {
+	background-color: #FCFCFC;
+}
+
+
+.subject {
+	color: black;
+	text-decoration: none;
+}
+
+.subject:hover, .subject:active {
+	text-decoration: underline;
 }

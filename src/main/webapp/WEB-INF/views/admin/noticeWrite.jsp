@@ -15,7 +15,7 @@
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
-	<div id="writeWrapper" style="background-image:url(../resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
+	<div id="writeWrapper">
 		<div id="writeOut">
 			<div class="comm">글 쓰기</div><br><br><br><br><br>
 			<form action="nInsert" method="post" enctype="multipart/form-data" style="margin-left:20px">

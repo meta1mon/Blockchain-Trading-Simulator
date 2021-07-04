@@ -1,8 +1,8 @@
 $(function() {
+	var bnum = 1; // 차트 종류
 	var checkpw = false; // 2차 비밀번호 변수
 	coinname(); // 숫자를 이름으로 변경
 	chart(); // 차트 변수
-	
 	$("#check2").click(function() { // 계좌 비밀번호
 		var acntList = $("#frm11").serialize();
 		var checkhtml = "";
@@ -30,7 +30,6 @@ $(function() {
 		})
 
 	});
-	
 
 	// ///////////////////////////// CSS
 	// /////////////////////////////////////////////////
@@ -196,6 +195,7 @@ $(function() {
 
 	var timer1 = setInterval(function() { // 1초마다 함수 돌림 ()
 		alltable();
+		qwer(bnum);
 		orderbook();
 		if (checkpw == true) {
 			wblist();
@@ -215,13 +215,59 @@ var coinList = null; // 전체 리스트
 var changecoin = "BTC"; // default
 var ch_title = "BTC";
 var display = new Array();
+var displays = new Array();
 var html = "";
+var bnum = 2; // 차트 종류
+function qwer(bnum) {
+	if (bnum == 1) {   //price down
+		display.sort(function(a, b) {
+			return a[0] - b[0];
+		});
+	} else if (bnum == 2) { //price up
+		display.sort(function(a, b) {
+			return b[0] - a[0];
+		});
+	}else if (bnum == 3) { //fr down
+		display.sort(function(a, b) {
+			return a[1] - b[1];
+		});
+	}else if (bnum == 4) { //fr up
+		display.sort(function(a, b) {
+			return b[1] - a[1];
+		});
+	}else if (bnum == 5) { //at down
+		display.sort(function(a, b) {
+			return a[2] - b[2];
+		});
+	}else if (bnum == 6) { //at up
+		display.sort(function(a, b) {
+			return b[2] - a[2];
+		});
+	}
 
+}
+function click1(){
+	bnum= 1;
+}
+function click2(){
+	bnum= 2;
+}
+function click3(){
+	bnum= 3;
+}
+function click4(){
+	bnum= 4;
+}
+function click5(){
+	bnum= 5;
+}
+function click6(){
+	bnum= 6;
+}
 function alltable() { // 전체코인 시세 표
 	var titdisplay = new Array();
 	var onedisplay = new Array();
 
-	
 	var title = "";
 	var thisCoin = null;
 	$
@@ -244,24 +290,16 @@ function alltable() { // 전체코인 시세 표
 									b ]
 						}
 						// //////////// 정렬 부분 ////////////
-						function pricedown(){
-							display.sort(function(a, b) {
-								return a[0] - b[0];
-							});
-						}
-						function priceup(){
-							display.sort(function(a, b) {
-								return b[0] - a[0];
-							});
-						}
-						
+
+						qwer(bnum);
+
 						titdisplay[0] = [
 								data['data'][ch_title]['closing_price'] * 1,
 								data['data'][ch_title]['fluctate_rate_24H'] * 1,
 								data['data'][ch_title]['acc_trade_value_24H'] * 1,
 								data['data'][ch_title]['min_price'] * 1,
 								data['data'][ch_title]['max_price'] * 1 ]
-						html = "<table class='table table-striped' id='cointable' ><tr><td>코인명</td><td>현재가<button id='abcd' type='button' >down</button></td><td>등락률(24H)</td><td>거래대금</td></tr>";
+						html = "<table class='table table-striped' id='cointable' ><tr><td>코인명</td><td>현재가</td><td>등락률(24H)</td><td>거래대금</td></tr>";
 						title = "<table class='table table-striped' id='tit'><tr>";
 
 						for (var i = 0; i < coinList.length - 1; i++) {
@@ -284,7 +322,7 @@ function alltable() { // 전체코인 시세 표
 								+ titdisplay[0][0]
 								+ "</a></td><td style='text-align : center;'><h2>전일대비</h2><a class='t_cha'style='text-align : center;'>"
 								+ titdisplay[0][1]
-								+ "</a></td><td style='text-align : center;'><h2>저가</h2><a class='t_ch' style='color : blue;text-align : center;'>"
+								+ "%</a></td><td style='text-align : center;'><h2>저가</h2><a class='t_ch' style='color : blue;text-align : center;'>"
 								+ titdisplay[0][3]
 								+ "</a></td><td style='text-align : center;'><h2>고가</h2><a class='t_ch' style='color : red;text-align : center;'>"
 								+ titdisplay[0][4] + "</a></td></tr>"

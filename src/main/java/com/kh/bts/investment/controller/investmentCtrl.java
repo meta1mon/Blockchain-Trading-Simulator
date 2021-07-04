@@ -218,9 +218,14 @@ public class investmentCtrl {
 		return result;
 	}
 
-	@RequestMapping("1sChart")
+	@RequestMapping("btmichart")
 	public ModelAndView MainPaged(ModelAndView mav) {
-		mav.setViewName("investment/1sChart");
+		mav.setViewName("investment/btmichart");
+		return mav;
+	}
+	@RequestMapping("btaichart")
+	public ModelAndView MainPagedc(ModelAndView mav) {
+		mav.setViewName("investment/btaichart");
 		return mav;
 	}
 

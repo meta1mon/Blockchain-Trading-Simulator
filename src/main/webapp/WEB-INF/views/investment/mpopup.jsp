@@ -28,8 +28,10 @@
 		<h2>
 			<img
 				src="${pageContext.request.contextPath}/resources/assets/img/icon_acnt.svg"
-				width="30px" height="30px"> 내 계좌번호 : ${acnt.acntno }
-			<img id="push" src="${pageContext.request.contextPath}/resources/assets/img/icon_wallet.svg" width="30px" height="30px">
+				width="30px" height="30px"> 내 계좌번호 : ${acnt.acntno } <img
+				id="push"
+				src="${pageContext.request.contextPath}/resources/assets/img/icon_wallet.svg"
+				width="30px" height="30px">
 		</h2>
 		<br>
 		<div id="money">
@@ -76,8 +78,10 @@
 							<td><fmt:formatNumber value="${coin.buyprice }"
 									pattern="#,###,###,###" />&nbsp;원</td>
 							<td><fmt:formatNumber value="${coin.buycnt*coin.buyprice }"
-									pattern="#,###,###,###" />&nbsp;원 <input class="buyAvg"
-								type="hidden" value="${coin.buycnt*coin.buyprice }" /></td>
+									pattern="#,###,###,###,###" />&nbsp;원 <input class="buyAvg"
+								type="hidden"
+								value="<fmt:formatNumber value="${coin.buycnt*coin.buyprice }" pattern="#############"/>" />
+							</td>
 							<td class="coinValue">
 								<!-- 									평가금액 : api 이용해서 js로 처리 -->
 							</td>

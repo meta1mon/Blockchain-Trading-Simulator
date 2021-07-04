@@ -64,6 +64,28 @@
 				<div class="div5">
 					<input type="text" id="searchcoin" value=""
 						style="width: 100%; display: 'block'" placeholder="코인 검색">
+					<table>
+						<tr>
+							<td width= '78.08px !important'></td>
+							<td width= '91.36px !important'><img
+								src="${pageContext.request.contextPath}/resources/assets/img/down-arrow.svg"
+								width="30px" height="30px" onclick="click1()"> <img
+								src="${pageContext.request.contextPath}/resources/assets/img/up-arrow.svg"
+								width="30px" height="30px" onclick="click2()"></td>
+							<td width= '78.77px !important'><img
+								src="${pageContext.request.contextPath}/resources/assets/img/down-arrow.svg"
+								width="30px" height="30px" onclick="click3()"> <img
+								src="${pageContext.request.contextPath}/resources/assets/img/up-arrow.svg"
+								width="30px" height="30px" onclick="click4()"></td>
+							<td width= '164.31px !important'><img
+								src="${pageContext.request.contextPath}/resources/assets/img/down-arrow.svg"
+								width="30px" height="30px" onclick="click5()"> <img
+								src="${pageContext.request.contextPath}/resources/assets/img/up-arrow.svg"
+								width="30px" height="30px" onclick="click6()"></td>
+						</tr>
+					</table>
+
+
 					<div id="cointable_div"></div>
 				</div>
 
@@ -117,8 +139,7 @@
 									<tr>
 										<td style="text-align: center;"><button class="btn_bs"
 												id="bought_b">매수</button>
-											<button class="btn_bs" id="sold_b">매도</button>
-											<br></td>
+											<button class="btn_bs" id="sold_b">매도</button> <br></td>
 									</tr>
 								</table>
 								<form id="frm22">
@@ -192,9 +213,7 @@
 												<button type="button" class="b_c" value="0.50"
 													onclick="buyp(0.5)">50%</button>
 												<button type="button" class="b_c" value="1"
-													onclick="buyp(1)">100%</button>
-												<br>
-											<br></td>
+													onclick="buyp(1)">100%</button> <br> <br></td>
 										</tr>
 										<tr>
 											<td style="text-align: center;" colspan="1"><button

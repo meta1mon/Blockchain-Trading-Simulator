@@ -39,7 +39,7 @@ figure {
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script
-	src="${pageContext.request.contextPath}/resources/js/chart.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/btmichart.js"></script>
 
 </body>
 </html>

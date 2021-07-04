@@ -141,7 +141,6 @@ $(function(){
 						<textarea class="newRcontent" style="display: none;"
 								maxlength="4000">${rep.rcontent }</textarea>
 						</span>
-						<p class="modifyBtn">
 							<!-- 댓글 작성자에게만 수정 삭제 버튼이 보임 -->
 							<c:if test="${loginMember == rep.email }">
 								<button type="button" class="makeBtn"
@@ -155,7 +154,6 @@ $(function(){
 								<button type="button"
 									onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</button>
 							</c:if>
-						</p>
 						<button type="button" class="report" id="popup_open_btn_reply"
 							onclick="rreport(${rep.rno})">신고</button>
 					</div>
@@ -215,7 +213,7 @@ $(function(){
 							type="hidden" name="csubject" value="${community.csubject }" />
 						<input type="hidden" name="cwriter" value="${community.cwriter }" />
 						<input type="hidden" name="ccontent"
-							value="${community.ccontent }" /> <input type="hidden"
+							value="${community.ccontent }" style="display: none"/> <input type="hidden"
 							name="cno" value="${community.cno }" />
 					</div>
 					<hr
@@ -226,11 +224,6 @@ $(function(){
 					</div>
 				</form>
 			</div>
-
-			<script>
-   
-         </script>
-
 
 			<!-- 댓글 신고 모달창 -->
 			<div id="my_modal_reply">

@@ -14,9 +14,9 @@
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body >
-	<div id="updateWrapper" style="background-image: url(../resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
+	<div id="updateWrapper">
 		<div id="updateOut">
-			<div class="comm">글 쓰기</div>
+			<div class="comm">수정하기</div>
 			<br>
 			<br>
 			<br>

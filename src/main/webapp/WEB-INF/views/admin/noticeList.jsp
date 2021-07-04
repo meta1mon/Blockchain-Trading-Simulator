@@ -28,7 +28,7 @@
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
-	<div id="listWrapper" style="background-image:url(../resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: cover;">
+	<div id="listWrapper">
 		<div id="listOut">
 			<div id="noticeTitle">
 				공지사항
@@ -77,7 +77,7 @@
 							<tr>
 								<td align="center">${vo.cno}</td>
 								<td align="left">
-									<a	href="nDetail?cno=${vo.cno}&page=${currentPage}">
+									<a	href="nDetail?cno=${vo.cno}&page=${currentPage}" class="subject">
 									&nbsp;${vo.csubject} </a>
 									${vo.replycnt}
 								</td>

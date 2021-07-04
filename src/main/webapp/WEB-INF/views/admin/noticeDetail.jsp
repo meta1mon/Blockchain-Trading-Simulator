@@ -16,10 +16,10 @@
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
-	<div id="detailWrapper" style="background-image:url(../resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: 100% 200%;">
+	<div id="detailWrapper">
 		<div id="detailOut">
 			<div class="comm">
-				커뮤니티
+				공지사항
 			</div>
 			<br>
 			<hr>

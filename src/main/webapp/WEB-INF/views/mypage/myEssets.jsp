@@ -15,18 +15,18 @@
 	<jsp:include page="myNav.jsp"></jsp:include>
 		<div id="me">
 			<h2>
-				<img src="${pageContext.request.contextPath}/resources/assets/img/icon_acnt.svg" width="30px" height="30px"> 내 계좌번호 : ${acnt.acntno }
+				<img class="icon" src="${pageContext.request.contextPath}/resources/assets/img/icon_acnt.svg" width="30px" height="30px"> 내 계좌번호 : ${acnt.acntno }
 			</h2>
 			<br>
 			<div id="money">
 				<ul>
-					<li><img src="${pageContext.request.contextPath}/resources/assets/img/icon_bitcoin.svg" width="30px" height="30px">
+					<li><img class="icon" src="${pageContext.request.contextPath}/resources/assets/img/icon_bitcoin.svg" width="30px" height="30px">
 						<span>코인 보유액&nbsp; <span id="totalcoin"></span>&nbsp;&nbsp;&nbsp;원</span></li>
-					<li><img src="${pageContext.request.contextPath}/resources/assets/img/icon_won.svg" width="30px" height="30px">
+					<li><img class="icon" src="${pageContext.request.contextPath}/resources/assets/img/icon_won.svg" width="30px" height="30px">
 						<span>현금 보유액&nbsp; <fmt:formatNumber value="${acnt.cybcash }" pattern="#,###,###,###,###" />&nbsp;&nbsp;&nbsp;원</span>
 						<input id="cash" type="hidden" value="${acnt.cybcash }"/>
 					</li>
-					<li><img src="${pageContext.request.contextPath}/resources/assets/img/icon_wallet.svg" width="30px" height="30px">
+					<li><img class="icon" src="${pageContext.request.contextPath}/resources/assets/img/icon_wallet.svg" width="30px" height="30px">
 						<span>총 보유자산 &nbsp; <span id="totalAssets"></span>&nbsp;&nbsp;&nbsp;원</span></li>
 				</ul>
 			</div>

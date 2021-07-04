@@ -6,18 +6,25 @@
 
 #detailWrapper {
 	width: 90%;
-	height: 100%%;
+	height: calc(100% - 100px);
 	position: absolute;
-	top: 100px;
+	top: 10%;
 	left: 200px;
+	background-color: rgba(242, 242, 242, 0.3);
 }
 
 #detailOut {
-	width: 70%;
+	width: 65%;
+	min-width: 1000px;
 	background-color: #ffffff;
 	margin: 70px auto;
 	padding: 20px;
 	border-radius: 4px;
+	position: absolute;
+    top: 3%;
+    left: 5%;
+    border: 1.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 
 .ck.ck-editor {

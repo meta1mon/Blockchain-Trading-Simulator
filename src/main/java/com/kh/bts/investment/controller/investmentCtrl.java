@@ -68,26 +68,19 @@ public class investmentCtrl {
 			
 			int totalCoin =  myService.myTotalCoin(acntResult);
 			
-			int totalAssets = totalCoin+acntResult.getCybcash();
+			long totalAssets = totalCoin+acntResult.getCybcash();
 			
 			int coinListCount = myService.coinListCount(acntResult);
 			
 			List<CoinAcnt> coinList = myService.selectMyCoinAcnt(acntResult.getAcntno());
 			
-			List<WaitBought> wBoughtResult = wbService.selectListWaitBought(acntResult.getAcntno());
-			List<WaitSold> wSoldResult = wsService.selectListWaitSold(acntResult.getAcntno());
-			List<Bought> boughtResult = bService.selectListBought(acntResult.getAcntno());
-			List<Sold> soldResult = sService.selectListSold(acntResult.getAcntno());
-			
+		
 			mv.addObject("acnt", acntResult);
 			mv.addObject("totalCoin", totalCoin);
 			mv.addObject("totalAssets", totalAssets);
 			mv.addObject("coinListCount", coinListCount);
 			mv.addObject("coinList", coinList);
-			mv.addObject("wBoughtResult", wBoughtResult);
-			mv.addObject("wSoldResult", wSoldResult);
-			mv.addObject("boughtResult", boughtResult);
-			mv.addObject("soldResult", soldResult);
+
 			
 		}
 		

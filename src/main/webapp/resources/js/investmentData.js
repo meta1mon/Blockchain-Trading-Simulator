@@ -30,9 +30,7 @@ $(function() {
 		})
 
 	});
-	$("#abcd").on("click",function() {
-		console.log("asdfafdasadsfafdsadsfasfd");
-	});
+	
 
 	// ///////////////////////////// CSS
 	// /////////////////////////////////////////////////

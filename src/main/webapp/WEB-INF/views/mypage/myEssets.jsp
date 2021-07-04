@@ -21,11 +21,13 @@
 			<div id="money">
 				<ul>
 					<li><img src="${pageContext.request.contextPath}/resources/assets/img/icon_bitcoin.svg" width="30px" height="30px">
-						<span>코인 보유액&nbsp; ${totalCoin }&nbsp;&nbsp;&nbsp;원</span></li>
+						<span>코인 보유액&nbsp; <span id="totalcoin"></span>&nbsp;&nbsp;&nbsp;원</span></li>
 					<li><img src="${pageContext.request.contextPath}/resources/assets/img/icon_won.svg" width="30px" height="30px">
-						<span>현금 보유액&nbsp; ${acnt.cybcash }&nbsp;&nbsp;&nbsp;원</span></li>
+						<span>현금 보유액&nbsp; <fmt:formatNumber value="${acnt.cybcash }" pattern="#,###,###,###" />&nbsp;&nbsp;&nbsp;원</span>
+						<input id="cash" type="hidden" value="${acnt.cybcash }"/>
+					</li>
 					<li><img src="${pageContext.request.contextPath}/resources/assets/img/icon_wallet.svg" width="30px" height="30px">
-						<span>총 보유자산 &nbsp; ${totalAssets }&nbsp;&nbsp;&nbsp;원</span></li>
+						<span>총 보유자산 &nbsp; <span id="totalAssets"></span>&nbsp;&nbsp;&nbsp;원</span></li>
 				</ul>
 			</div>
 
@@ -77,8 +79,6 @@
 				</table>
 			</div>
 			
-			
-			
 			<div id="deal" class="tabcontent">
 				<h3>체결 매수주문내역</h3>
 				<table class="historyTable">
@@ -90,15 +90,28 @@
 						<th>매수날짜 </th>
 					</tr>
 					<c:forEach var="blist" items="${boughtResult }" varStatus="status">
-						<tr>
-							<td>${blist.ubno }</td>
-							<td>${blist.coin }</td>
-							<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###" /></td>
-							<td><fmt:formatNumber value="${blist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
-							<td>${blist.bdate }</td>
-						</tr>
+						<c:if test="${status.index <4}">
+							<tr>
+								<td>${blist.ubno }</td>
+								<td>${blist.coin }</td>
+								<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###" /></td>
+								<td><fmt:formatNumber value="${blist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td>${blist.bdate }</td>
+							</tr>
+						</c:if>
+						<c:if test="${status.index>=4 }">
+							<tr class="blist" style="display: none;">
+								<td>${blist.ubno }</td>
+								<td>${blist.coin }</td>
+								<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###" /></td>
+								<td><fmt:formatNumber value="${blist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td>${blist.bdate }</td>
+							</tr>
+						</c:if>
+						
 					</c:forEach>
 				</table>
+				<input type="button" id="bExpand" value="내역 더 보기" class="expandBtn"></input>
 				
 				<h3>체결 매도주문내역</h3>
 				<table class="historyTable">
@@ -110,15 +123,27 @@
 						<th>매수날짜 </th>
 					</tr>
 					<c:forEach var="slist" items="${soldResult }" varStatus="status">
-						<tr>
-							<td>${slist.usno }</td>
-							<td>${slist.coin }</td>
-							<td><fmt:formatNumber value="${slist.sellcnt }" pattern="#,###,###,###" /></td>
-							<td><fmt:formatNumber value="${slist.sellprice }" pattern="#,###,###,###" />&nbsp;원</td>
-							<td>${slist.sdate }</td>
-						</tr>
+						<c:if test="${status.index <4}">
+							<tr>
+								<td>${slist.usno }</td>
+								<td>${slist.coin }</td>
+								<td><fmt:formatNumber value="${slist.sellcnt }" pattern="#,###,###,###" /></td>
+								<td><fmt:formatNumber value="${slist.sellprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td>${slist.sdate }</td>
+							</tr>
+						</c:if>
+						<c:if test="${status.index >=4}">
+							<tr class="slist" style="display: none;">
+								<td>${slist.usno }</td>
+								<td>${slist.coin }</td>
+								<td><fmt:formatNumber value="${slist.sellcnt }" pattern="#,###,###,###" /></td>
+								<td><fmt:formatNumber value="${slist.sellprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td>${slist.sdate }</td>
+							</tr>
+						</c:if>
 					</c:forEach>
 				</table>  
+				<input type="button" id="sExpand" value="내역 더 보기" class="expandBtn"></input>
 			</div>
 			
 			
@@ -135,15 +160,27 @@
 						<th>매수날짜 </th>
 					</tr>
 					<c:forEach var="wblist" items="${wBoughtResult }" varStatus="status">
-						<tr>
-							<td>${wblist.ubno }</td>
-							<td>${wblist.coin }</td>
-							<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###" /></td>
-							<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
-							<td>${wblist.wbdate }</td>
-						</tr>
+						<c:if test="${status.index <4}">
+							<tr>
+								<td>${wblist.ubno }</td>
+								<td>${wblist.coin }</td>
+								<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###" /></td>
+								<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td>${wblist.wbdate }</td>
+							</tr>
+						</c:if>
+						<c:if test="${status.index >=4}">
+							<tr class="wblist" style="display: none;">
+								<td>${wblist.ubno }</td>
+								<td>${wblist.coin }</td>
+								<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###" /></td>
+								<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td>${wblist.wbdate }</td>
+							</tr>
+						</c:if>
 					</c:forEach>
 				</table>
+				<input type="button" id="wbExpand" value="내역 더 보기" class="expandBtn"></input>
 				
 				<h3>미체결 매도주문내역</h3>
 				<table class="historyTable">
@@ -155,15 +192,28 @@
 						<th>매수날짜 </th>
 					</tr>
 					<c:forEach var="wslist" items="${wSoldResult }" varStatus="status">
-						<tr>
-							<td>${wslist.usno }</td>
-							<td>${wslist.coin }</td>
-							<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###" /></td>
-							<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###" />&nbsp;원</td>
-							<td>${wslist.wsdate }</td>
-						</tr>
+						<c:if test="${status.index <4}">
+							<tr>
+								<td>${wslist.usno }</td>
+								<td>${wslist.coin }</td>
+								<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###" /></td>
+								<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td>${wslist.wsdate }</td>
+							</tr>
+						</c:if>
+						<c:if test="${status.index >=4}">
+							<tr class="wslist" style="display: none;">
+								<td>${wslist.usno }</td>
+								<td>${wslist.coin }</td>
+								<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###" /></td>
+								<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td>${wslist.wsdate }</td>
+							</tr>
+						</c:if>
 					</c:forEach>
 				</table>
+				<input type="button" id="wsExpand" value="내역 더 보기" class="expandBtn"></input>
+				
 			</div>
 			
 			

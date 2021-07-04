@@ -155,15 +155,15 @@
 				<li id="buychart"><a href="#">회원관리<span class="icon"><i
 						class="fa fa-chevron-down"></i></span></a>
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/admin/ml">회원 조회 및 탈퇴</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/ml">회원 관리</a></li>
 					</ul></li>
 				<li id="adminshop"><a href="#">게시판 관리<span class="icon"><i
 						class="fa fa-chevron-down"></i></span></a>
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/admin/cr">게시판 신고 리스트</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/acr">처리한 신고 게시글</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/rr">댓글 신고 리스트</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/arr">처리한 신고 댓글</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/cr">신고된 게시글 조회</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/acr">처리된 신고 게시글 조회</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/rr">신고된 댓글 조회</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/arr">처리된 신고 댓글 조회</a></li>
 					</ul></li>
 				<li id="adminmember"><a href="#">공지사항 관리<span class="icon"><i
 						class="fa fa-chevron-down"></i></span></a>

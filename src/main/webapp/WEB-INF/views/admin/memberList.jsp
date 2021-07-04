@@ -76,7 +76,7 @@ $(function() {
 <%@include file="headerAndAside.jsp"%>
 <body>
 	<div id="mmm">
-	<p class="title inbl">회원 목록</p>
+	<p class="title inbl">회원 관리</p>
 	<form name="listForm" action="ml" method="get" id="listForm">
 		<select name="searchType">
 			<option value="1">이메일</option>

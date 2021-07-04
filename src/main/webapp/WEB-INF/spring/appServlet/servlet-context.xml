@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -13,6 +14,12 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
+	<!-- 태스크, 스케쥴 작업용 코드 -->
+	<context:component-scan
+		base-package="com.kh.bts" />
+	<task:scheduler id="jobScheduler" pool-size="10" />
+	<task:annotation-driven scheduler="jobScheduler" />
+<!-- 	<task:annotation-driven /> -->
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
 
@@ -21,7 +28,7 @@
 
 	<!-- Spring MVC AOP 어노테이션 자동 등록 -->
 	<aop:aspectj-autoproxy />
-	
+
 	<!-- Multipart 파일 업로드 관련 bean 등록 -->
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
@@ -40,17 +47,19 @@
 
 	<context:component-scan
 		base-package="com.kh.bts" />
-		
-		<!-- 메일 보내기 -->
-	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+
+	<!-- 메일 보내기 -->
+	<beans:bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<beans:property name="host" value="smtp.gmail.com" />
 		<beans:property name="port" value="587" />
-		<beans:property name="username" value="Aces.Recruited.Member@gmail.com" />
+		<beans:property name="username"
+			value="Aces.Recruited.Member@gmail.com" />
 		<beans:property name="password" value="army210609" />
 		<beans:property name="defaultEncoding" value="utf-8" />
 
 
-	<!-- email 요청시는 SMTP -->
+		<!-- email 요청시는 SMTP -->
 		<beans:property name="javaMailProperties">
 			<beans:props>
 				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
@@ -60,6 +69,6 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-	
-	<task:annotation-driven/>
+
+
 </beans:beans>

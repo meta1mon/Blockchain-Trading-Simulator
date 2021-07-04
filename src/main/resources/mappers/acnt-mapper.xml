@@ -6,36 +6,47 @@
 		resultType="Acnt">
 		SELECT * FROM ACNT WHERE EMAIL = #{email}
 	</select>
+	
+	<!-- 계좌번호로 이메일 받아오기 -->
+	<select id="returnEmail" parameterType="string"
+		resultType="string">
+		SELECT EMAIL FROM ACNT WHERE ACNTNO = #{acntno}
+	</select>
 
 	<!-- 코인 계좌 정보 가져오기 -->
 	<select id="selectMyAcntCOINACNT" parameterType="string"
 		resultType="CoinAcnt">
 		SELECT * FROM COINACNT WHERE ACNTNO = #{acntno}
 	</select>
-	
+
 	<!-- 2차 비번 -->
 	<select id="cntAcnt" parameterType="Acnt" resultType="int">
-		SELECT COUNT(*) FROM ACNT
+		SELECT
+		COUNT(*) FROM ACNT
 		WHERE ACNTNO = #{acntno} AND BANKPW = #{bankPw}
 	</select>
-	
+
 	<!-- 금액 변경 -->
 	<update id="updateAcnt" parameterType="Acnt">
 		UPDATE ACNT
-		SET CYBCASH = #{cybcash}
+		SET CYBCASH =
+		#{cybcash}
 		WHERE ACNTNO = #{acntno}
 	</update>
-	
+
 	<!-- 전체 가상 투자금 조회 -->
 	<select id="totalCybcash" resultType="long">
-		SELECT SUM(CYBCASH) FROM ACNT
+		SELECT SUM(CYBCASH) FROM
+		ACNT
 	</select>
-	
+
 	<!-- 매도 체결 시, 판매액 삽입 -->
 	<update id="plusSoldPrice" parameterType="WaitSold"
 		flushCache="true" statementType="PREPARED">
 		UPDATE ACNT
-		SET CYBCASH = CYBCASH + (#{sellcnt} * #{sellprice})
-		WHERE ACNTNO = (SELECT ACNTNO FROM WAITSOLD WHERE COIN=#{coin} AND SELLPRICE=#{sellprice})
+		SET CYBCASH = CYBCASH +
+		(#{sellcnt} * #{sellprice})
+		WHERE ACNTNO = (SELECT ACNTNO FROM WAITSOLD
+		WHERE COIN=#{coin} AND SELLPRICE=#{sellprice})
 	</update>
 </mapper>

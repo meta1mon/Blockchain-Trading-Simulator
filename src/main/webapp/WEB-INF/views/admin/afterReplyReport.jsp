@@ -29,10 +29,14 @@ $(function() {
 }
 
 #arr {
-	position: absolute;
-	top: calc(50% - 350px);
-	left: calc(50% - 442.5px);
+	margin-top: 100px;
 	width: 1085px;
+}
+#wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
 }
 
 /*모달 창 공통*/
@@ -226,6 +230,7 @@ var test = function(){
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
+<div id="wrapper">
 	<div id="arr">
 	<p class="title inbl">처리된 신고 댓글 조회</p>
 	<div id="frmSearch">
@@ -400,6 +405,7 @@ var test = function(){
 					</table>
 				</form>
 			</div>
+		</div>
 		</div>
 </body>
 </html>

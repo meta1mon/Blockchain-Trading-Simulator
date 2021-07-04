@@ -95,8 +95,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public int countTodayWon() {
-		int result =0;
+	public long countTodayWon() {
+		long result =0;
 		result = aDao.countTodayWon();
 		return result;
 	}

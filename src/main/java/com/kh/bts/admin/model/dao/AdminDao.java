@@ -97,8 +97,8 @@ public class AdminDao {
 		return result;
 	}
 	
-	public int countTodayWon() {
-		int result =0;
+	public long countTodayWon() {
+		long result =0;
 		result = sqlSession.selectOne("CashLog.countTodayWon");
 		return result;
 	}

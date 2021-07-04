@@ -131,7 +131,6 @@ public class AdminCtrl {
 	@RequestMapping(value="/deleteCash", method = RequestMethod.POST)
 	public int deleteCash(Cash vo, HttpServletResponse response){
 		int result = aService.deleteCash(vo);
-		System.out.println(result);
 		return result;
 	}
 

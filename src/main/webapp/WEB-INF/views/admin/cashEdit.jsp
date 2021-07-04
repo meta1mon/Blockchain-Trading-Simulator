@@ -132,14 +132,14 @@ input[type=submit] {
 function deleteCash(cashno){
 	console.log("삭제합니다.");
 	console.log(cashno);
-	var dataquery = $("#frmCashEdit").serialize();
-		console.log("dataquery:" + dataquery);
 		var isConfirm = confirm(cashno + "번 상품을 삭제하시겠습니까?");
 		if(isConfirm){
 			$.ajax({
 				url : 'deleteCash',
 				type : 'post',
-				data : dataquery,
+				data : {
+					"cashno":cashno					
+				},
 				sync : true,
 				success : function(data) {
 					console.log(data);

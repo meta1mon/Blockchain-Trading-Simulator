@@ -179,7 +179,7 @@
 						<li><a href="${pageContext.request.contextPath}/admin/cll">충전 내역 리스트</a></li>
 					</ul>
 				</li>
-				<li id="adminmember" style="width: 200px; margin-top: auto; position: absolute; bottom: 0px;"><a href="#">1:1 문의 관리</a></li>
+				<li id="adminmember" style="width: 200px; margin-top: auto; position: absolute; bottom: 0px;"><a href="https://center-pf.kakao.com/_ZhLns/dashboard">1:1 문의 관리</a></li>
 			</ul>
 
 		</div>

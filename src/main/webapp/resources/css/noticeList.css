@@ -1,24 +1,5 @@
 @charset "UTF-8";
 
-#listWrapper {
-	width: 90%;
-	height: calc(100% - 100px);
-	position: absolute;
-	top: 100px;
-	left: 200px;
-}
-
-#listOut {
-	width: 70%;
-	background-color: #ffffff;
-	margin: 70px auto;
-	padding: 20px;
-	border-radius: 4px;
-	position: absolute;
-    top: calc(50% - 350px);
-    left: calc(50% - 420px);
-}
-
 #noticeTitle {
 	margin: 20px;
 	text-align: left;

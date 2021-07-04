@@ -25,10 +25,22 @@
 				});
 	});
 </script>
+<style>
+#listWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
+}
+#listOut {
+margin-top: 100px;
+	width: 1085px;
+}
+</style>
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
-	<div id="listWrapper" style="background-image:url(../resources/assets/img/bgpuple.png); background-repeat: no-repeat; background-size: cover;">
+	<div id="listWrapper">
 		<div id="listOut">
 			<div id="noticeTitle">
 				공지사항

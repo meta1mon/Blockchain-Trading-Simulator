@@ -329,8 +329,8 @@ hr {
 
 #my_modal, #my_modal_reply {
 	display: none;
-	width: 270px;
-	height: 320px;
+	width: 330px;
+    height: 380px;
 	padding: 30px;
 	background-color: #fefefe;
 	border: 1px solid #888;

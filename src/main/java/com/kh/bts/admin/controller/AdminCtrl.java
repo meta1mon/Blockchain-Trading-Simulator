@@ -87,7 +87,7 @@ public class AdminCtrl {
 		return aService.totalCybcash();
 	}
 	@ModelAttribute("countTodayWon")
-	public int countTodayWon() {
+	public long countTodayWon() {
 		return aService.countTodayWon();
 	}
 	@ModelAttribute("countCreport")
@@ -131,7 +131,6 @@ public class AdminCtrl {
 	@RequestMapping(value="/deleteCash", method = RequestMethod.POST)
 	public int deleteCash(Cash vo, HttpServletResponse response){
 		int result = aService.deleteCash(vo);
-		System.out.println(result);
 		return result;
 	}
 

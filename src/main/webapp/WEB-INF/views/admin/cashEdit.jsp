@@ -11,12 +11,15 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
 #cashR {
-	position: absolute;
-	top: calc(50% - 350px);
-	left: calc(50% - 442.5px);
+	margin-top: 100px;
 	width: 1085px;
 }
-
+#wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
+}
 #cashR table {
 	width: 100%;
 }
@@ -129,14 +132,14 @@ input[type=submit] {
 function deleteCash(cashno){
 	console.log("삭제합니다.");
 	console.log(cashno);
-	var dataquery = $("#frmCashEdit").serialize();
-		console.log("dataquery:" + dataquery);
 		var isConfirm = confirm(cashno + "번 상품을 삭제하시겠습니까?");
 		if(isConfirm){
 			$.ajax({
 				url : 'deleteCash',
 				type : 'post',
-				data : dataquery,
+				data : {
+					"cashno":cashno					
+				},
 				sync : true,
 				success : function(data) {
 					console.log(data);
@@ -157,125 +160,128 @@ function deleteCash(cashno){
 </script>
 </head>
 <%@include file="headerAndAside.jsp"%>
+
 <body>
-	<div id="cashR">
-		<p class="title">충전 상품 관리</p>
-		<hr>
-		<div>
-				<table id="list">
-					<tr>
-						<td class="center">충전금</td>
-						<td class="center">판매가</td>
-						<td class="center">할인률</td>
-						<td class="center">이벤트 시작일자</td>
-						<td class="center">이벤트 종료일자</td>
-						<td colspan="2" class="center">&nbsp;</td>
-					</tr>
-					<c:if test="${listCount eq 0}">
+<div id="wrapper">
+		<div id="cashR">
+			<p class="title">충전 상품 관리</p>
+			<hr>
+			<div>
+					<table id="list">
 						<tr>
-							<td colspan="7" class="center">조회된 상품이 없습니다.</td>
+							<td class="center">충전금</td>
+							<td class="center">판매가</td>
+							<td class="center">할인률</td>
+							<td class="center">이벤트 시작일자</td>
+							<td class="center">이벤트 종료일자</td>
+							<td colspan="2" class="center">&nbsp;</td>
 						</tr>
-					</c:if>
-				<c:if test="${listCount ne 0}">
-					<c:forEach var="vo" items="${list}" varStatus="status">
-						<form id="frmCashEdit">
-						<tr id="item">
-							<td style="display: none">
-								<input class="info" type="hidden" name="cashno" id="cashno" value="${vo.cashno}">
-							</td>
-
-							<td class="money right">
-							<span class="show right"><fmt:formatNumber value="${vo.won}" pattern="#,###,###,###" /></span> 
-							<input class="right read info hide won" type="number" name="won" value="${vo.won}" readonly="readonly">
-							<span>원</span>
-							</td>
-
-							<td class="money right">
-							<span class="show right"><fmt:formatNumber value="${vo.price}" pattern="#,###,###,###" /></span> 
-							<input class="right read info hide price" type="number" name="price" value="${vo.price}" readonly="readonly">
-							<span>원</span>
-							</td>
-
-							<td class="center percent">
-							<input class="right read info discountrate" type="number" name="discountrate" value="${vo.discountrate}" readonly="readonly"><span>%</span></td>
-
-							<td class="center">
-							<input class="right read info startdate" type="date" name="startdate"value="${vo.startdate}" readonly="readonly">
-							</td>
-
-							<td class="center">
-							<input class="right read info enddate" type="date" name="enddate" value="${vo.enddate}" readonly="readonly">
-							</td>
-
-							<td colspan="2" class="center default" style="width: 95.58px">
-							<input type="button" class="edit" value="수정"> 
-							<input type="button" class="del" value="삭제" onclick="deleteCash('${vo.cashno}')">
+						<c:if test="${listCount eq 0}">
+							<tr>
+								<td colspan="7" class="center">조회된 상품이 없습니다.</td>
+							</tr>
+						</c:if>
+					<c:if test="${listCount ne 0}">
+						<c:forEach var="vo" items="${list}" varStatus="status">
+							<form id="frmCashEdit">
+							<tr id="item">
+								<td style="display: none">
+									<input class="info" type="hidden" name="cashno" id="cashno" value="${vo.cashno}">
 								</td>
-
-							<td colspan="2" class="center editmode" style="display: none; width: 95.58px">
-								<input type="button" class="done" value="완료"> 
-								<input type="button" class="cancel" value="취소">
+	
+								<td class="money right">
+								<span class="show right"><fmt:formatNumber value="${vo.won}" pattern="#,###,###,###" /></span> 
+								<input class="right read info hide won" type="number" name="won" value="${vo.won}" readonly="readonly">
+								<span>원</span>
+								</td>
+	
+								<td class="money right">
+								<span class="show right"><fmt:formatNumber value="${vo.price}" pattern="#,###,###,###" /></span> 
+								<input class="right read info hide price" type="number" name="price" value="${vo.price}" readonly="readonly">
+								<span>원</span>
+								</td>
+	
+								<td class="center percent">
+								<input class="right read info discountrate" type="number" name="discountrate" value="${vo.discountrate}" readonly="readonly"><span>%</span></td>
+	
+								<td class="center">
+								<input class="right read info startdate" type="date" name="startdate"value="${vo.startdate}" readonly="readonly">
+								</td>
+	
+								<td class="center">
+								<input class="right read info enddate" type="date" name="enddate" value="${vo.enddate}" readonly="readonly">
+								</td>
+	
+								<td colspan="2" class="center default" style="width: 95.58px">
+								<input type="button" class="edit" value="수정"> 
+								<input type="button" class="del" value="삭제" onclick="deleteCash('${vo.cashno}')">
+									</td>
+	
+								<td colspan="2" class="center editmode" style="display: none; width: 95.58px">
+									<input type="button" class="done" value="완료"> 
+									<input type="button" class="cancel" value="취소">
+								</td>
+							</tr>
+							</form>
+						</c:forEach>
+					</c:if>
+					<!-- 페이징 -->
+						<tr class="page">
+							<td colspan="7">
+								<div id="page">
+									<!-- 앞 페이지 번호 처리 -->
+									<c:if test="${currentPage <= 1}">
+										<i class="fas fa-angle-double-left"></i>
+									</c:if>
+									<c:if test="${currentPage > 1}">
+										<c:url var="cashlistST" value="cash">
+											<c:param name="page" value="${currentPage-1}" />
+										</c:url>
+										<a href="${cashlistST}"><i class="fas fa-angle-double-left"></i></a>
+									</c:if>
+									<!-- 끝 페이지 번호 처리 -->
+									<c:set var="endPage" value="${maxPage}" />
+									<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
+										<c:if test="${p eq currentPage}">
+											<div class="pageNum">
+												<b>${p}</b>
+											</div>
+										</c:if>
+										<c:if test="${p ne currentPage}">
+											<c:url var="cashlistchk" value="cash">
+												<c:param name="page" value="${p}" />
+											</c:url>
+											<a href="${cashlistchk}">${p}</a>
+										</c:if>
+									</c:forEach>
+									<c:if test="${currentPage >= maxPage}">
+										<i class="fas fa-angle-double-right"></i>
+									</c:if>
+									<c:if test="${currentPage < maxPage}">
+										<c:url var="cashlistEND" value="cash">
+											<c:param name="page" value="${currentPage+1}" />
+										</c:url>
+										<a href="${cashlistEND}"><i class="fas fa-angle-double-right"></i></a>
+									</c:if>
+								</div>
 							</td>
+						</tr>
+	
+						<!-- 충전상품 등록 부분 -->
+						<form action="${pageContext.request.contextPath}/admin/cashRegister" method="post">
+						<tr class="register">
+							<td class="right">
+							<input type="number" min="0" name="won" class="right"><span>원</span>
+							</td>
+							<td class="right"><input type="number" min="0" name="price" class="right"><span>원</span></td>
+							<td class="right"><input type="number" min="0" max="100" name="discountrate" class="right"><span>%</span></td>
+							<td class="right"><input type="date" name="startdate" id="startdatereg" class="right"></td>
+							<td class="right"><input type="date" name="enddate" id="enddatereg" min="" class="right"></td>
+							<td colspan="2" class="center"><input type="submit" class="regCash" value="등록"></td>
 						</tr>
 						</form>
-					</c:forEach>
-				</c:if>
-				<!-- 페이징 -->
-					<tr class="page">
-						<td colspan="7">
-							<div id="page">
-								<!-- 앞 페이지 번호 처리 -->
-								<c:if test="${currentPage <= 1}">
-									<i class="fas fa-angle-double-left"></i>
-								</c:if>
-								<c:if test="${currentPage > 1}">
-									<c:url var="cashlistST" value="cash">
-										<c:param name="page" value="${currentPage-1}" />
-									</c:url>
-									<a href="${cashlistST}"><i class="fas fa-angle-double-left"></i></a>
-								</c:if>
-								<!-- 끝 페이지 번호 처리 -->
-								<c:set var="endPage" value="${maxPage}" />
-								<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
-									<c:if test="${p eq currentPage}">
-										<div class="pageNum">
-											<b>${p}</b>
-										</div>
-									</c:if>
-									<c:if test="${p ne currentPage}">
-										<c:url var="cashlistchk" value="cash">
-											<c:param name="page" value="${p}" />
-										</c:url>
-										<a href="${cashlistchk}">${p}</a>
-									</c:if>
-								</c:forEach>
-								<c:if test="${currentPage >= maxPage}">
-									<i class="fas fa-angle-double-right"></i>
-								</c:if>
-								<c:if test="${currentPage < maxPage}">
-									<c:url var="cashlistEND" value="cash">
-										<c:param name="page" value="${currentPage+1}" />
-									</c:url>
-									<a href="${cashlistEND}"><i class="fas fa-angle-double-right"></i></a>
-								</c:if>
-							</div>
-						</td>
-					</tr>
-
-					<!-- 충전상품 등록 부분 -->
-					<form action="${pageContext.request.contextPath}/admin/cashRegister" method="post">
-					<tr class="register">
-						<td class="right">
-						<input type="number" min="0" name="won" class="right"><span>원</span>
-						</td>
-						<td class="right"><input type="number" min="0" name="price" class="right"><span>원</span></td>
-						<td class="right"><input type="number" min="0" max="100" name="discountrate" class="right"><span>%</span></td>
-						<td class="right"><input type="date" name="startdate" id="startdatereg" class="right"></td>
-						<td class="right"><input type="date" name="enddate" id="enddatereg" min="" class="right"></td>
-						<td colspan="2" class="center"><input type="submit" class="regCash" value="등록"></td>
-					</tr>
-					</form>
-				</table>
+					</table>
+			</div>
 		</div>
 	</div>
 	<script>

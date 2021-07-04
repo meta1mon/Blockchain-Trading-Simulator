@@ -23,7 +23,7 @@ function addComment() {
 
     let likedBtn = document.createElement('img');
     likedBtn.classList.add("comment-heart-liked");
-    likedBtn.src = "img/liked.png";
+    likedBtn.src = "../assets/img/liked.png";
     likedBtn.alt = "좋아요된하트";
 
     let commentLike = document.createElement('div');
@@ -102,7 +102,7 @@ commentLike.forEach(function(event) {
 
 // 비추천
 
-let commentDislike = document.querySelectorAll('.icons-left');
+let commentDislike = document.querySelectorAll('.icons-middle');
 commentDislike.forEach(function(event) {
 	event.addEventListener('click', function() {
 		var likeBtn = this.querySelector('.thumbsdown');
@@ -118,6 +118,49 @@ commentDislike.forEach(function(event) {
 	})
 })
 
+   // 게시글 신고 부분
+      <!-- 게시글 신고 전송 ajax -->
+      $("#btnreport").on("click", function() {
+         var dataList = $("#frmC").serialize();
+         $.ajax({
+            url : "${pageContext.request.contextPath}/admin/reportCommunity",
+            type : "post",
+            data : dataList,
+            success : function(data) {
+               if(data > 0) {
+                  alert("신고 접수 되었습니다!");
+               } else {
+                  alert("신고 접수 실패! 관리자에게 문의하세요!");                  
+               }
+               bg.remove();
+               modal.style.display = 'none';
+               
+            }
+         });
+      })
+    
+    
+    
+   // 댓글 신고 부분
+    $("#btnrply").on("click", function() {
+       var rreport = $("input[name='rreport']:checked").val();
+       $.ajax({
+          url : "${pageContext.request.contextPath}/admin/reportRcommunity",
+          type : "post",
+          data : {"rrreason" : rreport,
+             "rno" : rno},
+          success : function(data) {
+             if(data > 0) {
+                alert("신고 접수 되었습니다!");
+             } else {
+                alert("신고 접수 실패! 관리자에게 문의하세요!");                  
+             }
+             bg.remove();
+             modal.style.display = 'none';
+             
+          }
+       });
+    })
 
 //   // 비추천
 //   function dislike() {
@@ -157,8 +200,7 @@ commentDislike.forEach(function(event) {
 //   }
    
    
-// 댓글 모달창
-   var bg = null;
+ var bg = null;
    var modal = null;
    function modalFn(id) {
         var zIndex = 9999;
@@ -175,7 +217,7 @@ commentDislike.forEach(function(event) {
             height: '100%',
             overflow: 'auto',
             // 레이어 색갈은 여기서 바꾸면 됨
-            backgroundColor: 'rgba(0,0,0,0.8)'
+            backgroundColor: 'rgba(0,0,0,0.3)'
         });
         document.body.append(bg);
 
@@ -188,7 +230,7 @@ commentDislike.forEach(function(event) {
         modal.setStyle({
             position: 'fixed',
             display: 'block',
-            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
 
             // 시꺼먼 레이어 보다 한칸 위에 보이기
             zIndex: zIndex + 1,
@@ -208,7 +250,7 @@ commentDislike.forEach(function(event) {
         return this;
     }
 
-    document.getElementById('popup_open').addEventListener('click', function() {
+    document.getElementById('popup_open_btn').addEventListener('click', function() {
         // 모달창 띄우기
-        modalFn('my_modal_reply');
+        modalFn('modal_report');
     })

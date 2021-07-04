@@ -57,9 +57,7 @@ var test = function(){
 }
 
 #acr {
-	position: absolute;
-	top: calc(50% - 350px);
-	left: calc(50% - 442.5px);
+	margin-top: 100px;
 	width: 1085px;
 }
 
@@ -196,6 +194,14 @@ table {
 #frmSearch * {
 	display: inline-block;
 }
+
+
+#wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
+}
 </style>
 <script>
 $(function(){
@@ -236,6 +242,7 @@ $(function(){
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
+<div id="wrapper">
 	<div id="acr">
 	<p class="title inbl">처리된 신고 게시글 조회</p>
 		<div id="frmSearch">
@@ -410,6 +417,7 @@ $(function(){
 					</table>
 				</form>
 			</div>
+		</div>
 		</div>
 </body>
 </html>

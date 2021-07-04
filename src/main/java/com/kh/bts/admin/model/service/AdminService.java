@@ -24,7 +24,7 @@ public interface AdminService {
 	public List<Member> adminSearchMember(String keyword, int searchType);
 	public List<Member> adminListMember(int startPage, int limit);
 	public long totalCybcash();
-	public int countTodayWon();
+	public long countTodayWon();
 	public int countCreport();
 	public List<Creport> selectCreport(int startPage, int limit);
 	public int countAcreport();

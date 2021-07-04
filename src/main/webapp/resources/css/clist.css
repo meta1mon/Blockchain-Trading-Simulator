@@ -23,12 +23,10 @@
 .bestComm {
 	clear: both;
     font-size: 20px;
-/*     color: #B85CEF; */
     margin: 20px;
 }
 
 .searchDiv {
-/* 	border: 1px solid; */
 	height: 100px;
 	width : 100%;
 	clear: both;
@@ -44,10 +42,6 @@
 	color: black;
 	margin-top: 33px;
 	padding: 0;
-/* 	float: left; */
-/* 	clear: both; */
-/* 	position:relative; */
-/* 	left:40px; */
 }
 
 #searchType:hover, #searchType:focus {
@@ -56,17 +50,20 @@
 }
 
 #search {
-	width: 650px;
+	width: 600px;
     height: 40px;
     top: 0;
     background-color: #ffffff;
     border: 2px solid #8C66C8;
     font-size: 17px;
-    margin-top: 33px;
+    margin: 33px 0 0 20px;
     padding: 0;
-/*     float: left; */
-/*     position: relative; */
-/*     left: 60px; */
+    text-indent: 7%;
+    background-image:
+		url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAACI0lEQVRIie2Uv2sTcRjGP+/lKqZNLUVrp2wq/mhBJxddWnF0SOsVEhpwKEUCgv9A5zgLocGtUq+cQZCMWg/r5FAQWkFXaatEEfxRhFzu+zqkwZL2rqeufZY7eO95Pt/vA/fCoQ6QRA08z0sHoc4IMqlwDugHNgVZVqPVQsFZ/WeA69YuG8xjIBvhU5DKz+9f787OzgZxACsi3AeyCq8Vcq2mfWJwIHNU1BpRpQz8Ai31Hxt8pKqRLey5QbsW3gNZFa0esaTkOE7YbVpc9C5i8Rw4LiqlfP5mJdENglBnOiePCgcoFJw3onoLQEXnfN+3EwEEmdx5vRcV3lE+P1VHWAOGtxqNq4kACucBwqa9Ehf+xyArO88LiQBAH4Ax37YT5av+ABDIJAVsAaTS6VNJACKcaYPYTAYQfQFgGatwULjneUPAdcCEKV4mA4QyD6gId1y3dinKpKoShNynXU296DgfEgHav79UgF6DefbQ9W7sd/LFpdoSMAWgYspR4bDPqqhWqz2ZgUEXZWLnizVUVkTMNiqntV1L3y7L2zCwx4rFXCMRANoVuG7ttorOAcNdYwPUVUzZUuuBwkgcJHaP+L5vb3z6ciWljKqYXsTaCC191el8YeHJSbuntawwIrDeCuzxbkgsIIk8zxsKDMsoo8A700qNTU9PfOzM92zTv5XjOJ/Dpn1NYB04a9nh093z/wYAFIu5RiuwxxFWgdgddqg9+g0TJuLzCuoJngAAAABJRU5ErkJggg==");
+	background-size: 20px;
+	background-repeat: no-repeat;
+	background-position: 2% center;
 }
 
 #search:hover, #search:focus {
@@ -74,6 +71,16 @@
 	box-shadow: 2px 3px 5px 4px #eaeaea;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
+}
+
+#search::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+	height: 14px;
+	width: 14px;
+	background-repeat: no-repeat;
+	background-size: 13px;
+	background-position: center left;
+	background-image: url('../assets/img/cancel.png');
 }
 
 #btnsearchVal {
@@ -85,6 +92,7 @@
 	text-indent: 0;
 }
 
+
 #btnsearch {
 	width: 80px;
 	height: 40px;
@@ -93,12 +101,12 @@
 	font-size: 17px;
 	color: #ffffff;
 	background-color: #8C66C8;
-	margin-top: 33px;
-/* 	float: left; */
+	margin: 33px 14px 0 0;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
-/* 	position:relative; */
-/* 	left:10px; */
+	position:relative;
+	right:6px;
+	cursor: pointer;
 }
 
 #btnsearch:hover, #btnsearch:focus {
@@ -111,7 +119,6 @@
 #write {
 	width: 90px;
     height: 40px;
-/*     float: right; */
     border: none;
     margin-left: 5px;
     margin-top: 33px;
@@ -120,12 +127,10 @@
     background-color: #8C66C8;
     font-size: 17px;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-/*     position: relative; */
-/*     right: 20px; */
+	cursor: pointer;
 }
 
 #write:hover {
-/* 	background-color: #A07ADC; */
 	box-shadow: 2px 3px 5px 4px #eaeaea;
 	color:black;
 }

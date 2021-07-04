@@ -98,6 +98,7 @@ input #file-upload-button {
 	font-size: 15px;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
+	cursor: pointer;
 }
 
 #cancel {
@@ -114,6 +115,7 @@ input #file-upload-button {
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
 	display: inline;
+	cursor: pointer;
 }
 
 #submit:hover, #submit:active {

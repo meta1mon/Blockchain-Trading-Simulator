@@ -164,7 +164,7 @@
 	margin: 0 auto;
 	font-size: 18px;
 	position: relative;
-	left: 420px;
+	left: 40%;
 	display: inline;
 	color: #d31900;
 }
@@ -174,7 +174,7 @@
 	margin: 0 auto;
 	font-size: 18px;
 	position: relative;
-	left: 420px;
+	left: 40%;
 	display: inline;
 }
 
@@ -249,6 +249,7 @@ hr {
 	float: right;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
+	cursor: pointer;
 }
 
 .delete {
@@ -264,6 +265,7 @@ hr {
 	float: right;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
+	cursor: pointer;
 }
 
 #comment {
@@ -300,6 +302,7 @@ hr {
 	float: right;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
+	cursor: pointer;
 }
 
 #rsubmit:hover, #rsubmit:active {

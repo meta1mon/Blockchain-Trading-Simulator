@@ -43,6 +43,7 @@
 	background-color: #FBFBFC;
 	border: 1px solid #D5D5D5;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+	
 }
 
 #subject:hover, #subject:focus {
@@ -106,6 +107,7 @@
 	font-size: 15px;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
+	cursor: pointer;
 }
 
 #cancel {
@@ -122,6 +124,7 @@
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
 	display: inline;
+	cursor: pointer;
 }
 
 #submit:hover, #submit:active {

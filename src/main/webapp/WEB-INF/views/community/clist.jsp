@@ -75,7 +75,7 @@
 						<option value="1">글제목</option>
 						<option value="2">글내용</option>
 						<option value="3">작성자</option>
-					</select> <input type='search' id="search" name="keyword">
+					</select> <input type='search' id="search" name="keyword" placeholder="">
 					<button type=submit id="btnsearch">검색</button>
 				</form>
 <%-- 				<input type="hidden" name="page" value="${currentPage}">  --%>

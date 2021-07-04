@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.member.model.vo.Member;
+import com.kh.bts.ranking.model.vo.Daily;
 
 @Repository("mDao")
 public class MemberDAO {
@@ -21,6 +22,16 @@ public class MemberDAO {
 			result = sqlSession.insert("Member.insertAcnt", vo2);
 			if (result > 0) {
 				System.out.println("memberDao에서 계좌 삽입 성공");
+				Daily vo3 = new Daily();
+				vo3.setEmail(vo.getEmail());
+				vo3.setNickname(vo.getNickname());
+				vo3.setAcntno(vo2.getAcntno());
+				result = sqlSession.insert("ranking.insertDaily", vo3);
+				if (result > 0) {
+					System.out.println("Daily 랭크 참가 완료");
+				} else {
+					System.out.println("Daily 랭크 참가 실패");
+				}
 			} else {
 				System.out.println("memberDao에서 계좌 삽입 실패");
 			}
@@ -86,18 +97,18 @@ public class MemberDAO {
 	public Member loginMember(Member vo) throws Exception {
 		return sqlSession.selectOne("Member.loginMember", vo);
 	}
-	
+
 	// 전체 회원 수 조회
 	public int countMember() {
-		int result =0;
-		result= sqlSession.selectOne("Member.countMember");
+		int result = 0;
+		result = sqlSession.selectOne("Member.countMember");
 		return result;
 	}
-	
+
 	// 오늘 가입 회원 수 조회
 	public int countTodayMember() {
-		int result =0;
-		result= sqlSession.selectOne("Member.countTodayMember");
+		int result = 0;
+		result = sqlSession.selectOne("Member.countTodayMember");
 		return result;
 	}
 }

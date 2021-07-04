@@ -30,8 +30,13 @@ public class RankingServiceImpl implements RankingService{
 	}
 
 	@Override
-	public int insertDaily(Daily vo) {
-		return rankDao.insertDaily(vo);
+	public int updateDaily(Daily vo) {
+		return rankDao.updateDaily(vo);
+	}
+
+	@Override
+	public List<Daily> selectDaily() {
+		return rankDao.selectDaily();
 	}
 
 }

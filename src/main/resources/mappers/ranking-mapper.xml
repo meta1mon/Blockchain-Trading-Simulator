@@ -2,12 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ranking">
 	<resultMap type="Daily" id="resultDaily"></resultMap>
+	<!-- Daily 수익률 변경 -->
+	<update id="updateDaily" parameterType="Daily" flushCache="true"
+		statementType="PREPARED">
+		UPDATE DAILY
+		SET OLDESSET = #{oldesset},
+		NEWESSET =	#{newesset},
+		YIELD = ((#{newesset}/#{oldesset})-1)*100
+		WHERE ACNTNO = #{acntno}
+	</update>
 	
-	<insert id="insertDaily" parameterType="Daily"
-		flushCache="true" statementType="PREPARED">
+	<!-- 회원가입 시, Daily 랭킹에 참가 -->
+	<insert id="insertDaily" parameterType="Daily" flushCache="true"
+		statementType="PREPARED">
 		INSERT INTO DAILY VALUES(
-		#{acntno}, #{email}, #{nickname}, #{oldesset}, #{newesset}, ((#{newesset}/#{oldesset}) -1)*100 
+			#{acntno}, #{email}, #{nickname}, 0, default, 0
 		)
 	</insert>
-	
+
+	<!-- Daily 랭킹 가져오기 -->
+	<select id="selectDaily" resultMap="resultDaily">
+		SELECT * FROM DAILY ORDER BY
+		YIELD DESC
+	</select>
+
+	<!-- Daily 계좌번호로 과거 자산 가져오기 -->
+	<select id="selectOldEsset" parameterType="string"
+		resultType="long">
+		SELECT OLDESSET FROM DAILY WHERE ACNTNO = #{acntno}
+	</select>
 </mapper>

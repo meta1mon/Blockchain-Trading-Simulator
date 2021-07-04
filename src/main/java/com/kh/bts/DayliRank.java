@@ -15,10 +15,10 @@ public class DayliRank {
 	@Autowired
 	private RankingService rankService;
 
-	// 매 분마다
-	@Scheduled(cron = "0 0/1 * 1/1 * ?")
-	public void gt() {
-		System.out.println("ㅗㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑ");
-	}
-	
+	/*
+	 * // 매 분마다
+	 * 
+	 * @Scheduled(cron = "0 0/1 * 1/1 * ?") public void gt() {
+	 * System.out.println("ㅗㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑㅗㅑ"); }
+	 */
 }

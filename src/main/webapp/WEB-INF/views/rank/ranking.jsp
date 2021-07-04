@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,21 +40,10 @@
 						<img src="#" width="300px" height="300px">
 					</div>
 					<div>
-						<p>2등 닉네임</p>
+						<p>2등 ${second.nickname }</p>
 					</div>
 					<div>
-						<p>수익률 %</p>
-					</div>
-				</li>
-				<li>
-					<div>
-						<img src="#" width="300px" height="300px">
-					</div>
-					<div>
-						<p>1등 닉네임</p>
-					</div>
-					<div>
-						<p>수익률 %</p>
+						<p>수익률 ${second.yield } %</p>
 					</div>
 				</li>
 				<li>
@@ -60,16 +51,27 @@
 						<img src="#" width="300px" height="300px">
 					</div>
 					<div>
-						<p>3등 닉네임</p>
+						<p>1등 ${first.nickname }</p>
 					</div>
 					<div>
-						<p>수익률 %</p>
+						<p>수익률 ${first.yield } %</p>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="#" width="300px" height="300px">
+					</div>
+					<div>
+						<p>3등 ${third.nickname }</p>
+					</div>
+					<div>
+						<p>수익률 ${third.yield } %</p>
 					</div>
 				</li>
 			</ul>
 	
 			<hr style="clear: both;">
-			<p>전체 참가 인원 : 12032 명</p>
+			<p>전체 참가 인원 : ${other.size() } 명</p>
 	
 			<table border="2">
 				<tr>
@@ -77,21 +79,14 @@
 					<th>닉네임</th>
 					<th>수익률</th>
 				</tr>
+				<c:forEach items="${other }" var="rank" begin="3" varStatus="status">
 				<tr>
-					<td>4위</td>
-					<td>4등 닉네임</td>
-					<td>수익률 %</td>
+					<td>${status.index +1 } 위</td>
+					<td>${rank.nickname }</td>
+ 					<td><fmt:formatNumber value="${rank.yield }" pattern="##,###.##" /> %</td>
+					<%-- <td>${rank.yield } %</td> --%>
 				</tr>
-				<tr>
-					<td>4위</td>
-					<td>4등 닉네임</td>
-					<td>수익률 %</td>
-				</tr>
-				<tr>
-					<td>4위</td>
-					<td>4등 닉네임</td>
-					<td>수익률 %</td>
-				</tr>
+				</c:forEach>
 				<tr>
 					<td colspan="3">&nbsp;</td>
 				</tr>

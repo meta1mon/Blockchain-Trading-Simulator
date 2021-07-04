@@ -91,14 +91,14 @@ public class AdminDao {
 		return sqlSession.selectList("Member.adminListMember", null, row);
 	}
 	
-	public int totalCybcash() {
-		int result = 0;
+	public long totalCybcash() {
+		long result = 0;
 		result = sqlSession.selectOne("acnt.totalCybcash");
 		return result;
 	}
 	
-	public int countTodayWon() {
-		int result =0;
+	public long countTodayWon() {
+		long result =0;
 		result = sqlSession.selectOne("CashLog.countTodayWon");
 		return result;
 	}
@@ -158,6 +158,49 @@ public class AdminDao {
 		int result = 0;
 		result = sqlSession.delete("report.deleteRreport", rrno);
 		return result;
+	}
+
+	public List<Acreport> searchAcreport(String keyword, int searchType) {
+		List<Acreport> list = new ArrayList<Acreport>();
+		if (keyword != null) {
+			switch (searchType) {
+			case 1:
+				list = sqlSession.selectList("report.searchCsubject", keyword);
+				break;
+			case 2:
+				list = sqlSession.selectList("report.searchCrespondent", keyword);
+				break;
+			case 3:
+				list = sqlSession.selectList("report.searchCreporter", keyword);
+			}
+		}
+		return list;
+	}
+	public List<Acreport> searchAcreportByCstatus(String cstatus, int searchType) {
+		List<Acreport> list = new ArrayList<Acreport>();
+		list = sqlSession.selectList("report.searchCstatus", cstatus);
+		return list;
+	}
+	public List<Arreport> searchArreport(String keyword, int searchType) {
+		List<Arreport> list = new ArrayList<Arreport>();
+		if (keyword != null) {
+			switch (searchType) {
+			case 1:
+				list = sqlSession.selectList("report.searchCsubject2", keyword);
+				break;
+			case 2:
+				list = sqlSession.selectList("report.searchRrespondent", keyword);
+				break;
+			case 3:
+				list = sqlSession.selectList("report.searchRreporter", keyword);
+			}
+		}
+		return list;
+	}
+	public List<Arreport> searchArreportByRstatus(String rstatus, int searchType) {
+		List<Arreport> list = new ArrayList<Arreport>();
+		list = sqlSession.selectList("report.searchRstatus", rstatus);
+		return list;
 	}
 	
 }

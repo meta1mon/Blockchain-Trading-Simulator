@@ -16,9 +16,7 @@
 }
 
 #cr {
-	position: absolute;
-	top: calc(50% - 350px);
-	left: calc(50% - 442.5px);
+	margin-top: 100px;
 	width: 1085px;
 }
 
@@ -149,6 +147,13 @@ table{
 #list tr:not(.page) td:nth-child(9) {
 	width: 122.69px;
 }
+
+#wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript"
@@ -189,10 +194,11 @@ table{
 <title>관리자 페이지 - BTS</title>
 </head>
 <%@include file="headerAndAside.jsp"%>
-<body>
 <%@include file="../loadingajax.jsp"%>
+<body>
+	<div id="wrapper">
 	<div id="cr">
-	<p class="title inbl">신고된 게시글 목록</p>
+	<p class="title inbl">신고된 게시글 조회</p>
 		<hr>
 		<div>
 			<table id="list">
@@ -349,6 +355,7 @@ table{
 					</table>
 				</form>
 			</div>
+		</div>
 		</div>
 </body>
 <script>

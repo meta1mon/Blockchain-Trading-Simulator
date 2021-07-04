@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ranking">
+	<resultMap type="Daily" id="resultDaily"></resultMap>
+	
+	<insert id="insertDaily" parameterType="Daily"
+		flushCache="true" statementType="PREPARED">
+		INSERT INTO DAILY VALUES(
+		#{acntno}, #{email}, #{nickname}, #{oldesset}, #{newesset}, ((#{newesset}/#{oldesset}) -1)*100 
+		)
+	</insert>
+	
+</mapper>

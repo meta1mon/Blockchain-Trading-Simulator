@@ -77,6 +77,10 @@ public class AdminServiceImpl implements AdminService {
 	public List<Member> adminSearchMember(String keyword, int searchType) {
 		return aDao.adminSearchMember(keyword, searchType);
 	}
+	@Override
+	public List<Acreport> searchAcreport(String keyword, int searchType) {
+		return aDao.searchAcreport(keyword, searchType);
+	}
 
 	@Override
 	public List<Member> adminListMember(int startPage, int limit) {
@@ -84,15 +88,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int totalCybcash() {
-		int result = 0;
+	public long totalCybcash() {
+		long result = 0;
 		result= aDao.totalCybcash();
 		return result;
 	}
 	
 	@Override
-	public int countTodayWon() {
-		int result =0;
+	public long countTodayWon() {
+		long result =0;
 		result = aDao.countTodayWon();
 		return result;
 	}
@@ -152,6 +156,19 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Arreport> selectArreport(int startPage, int limit) {
 		return aDao.selectArreport(startPage, limit);
+	}
+	@Override
+	public List<Acreport> searchAcreportByCstatus(String cstatus, int searchType) {
+		return aDao.searchAcreportByCstatus(cstatus, searchType);
+	}
+	@Override
+	public List<Arreport> searchArreport(String keyword, int searchType) {
+		return aDao.searchArreport(keyword, searchType);
+	}
+	@Override
+	public List<Arreport> searchArreportByRstatus(String rstatus, int searchType) {
+		// TODO Auto-generated method stub
+		return aDao.searchArreportByRstatus(rstatus, searchType);
 	}
 
 

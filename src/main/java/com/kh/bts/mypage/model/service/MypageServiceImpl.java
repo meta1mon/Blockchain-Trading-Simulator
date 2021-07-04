@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.acnt.model.vo.CoinAcnt;
+import com.kh.bts.cash.model.vo.CashLog;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.dao.MypageDao;
@@ -77,6 +78,10 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public List<CoinAcnt> selectMyCoinAcnt(String acntno) {
 		return myDao.selectMyCoinAcnt(acntno);
+	}
+	@Override
+	public List<CashLog> selectMyCashLog(String email) {
+		return myDao.selectMyCashLog(email);
 	}
 
 }

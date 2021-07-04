@@ -16,10 +16,10 @@
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function() {
-		var n = 0;
+		/* var n = 0;
 		for(var i =0; i < 5; i++) {
 			var id = "#ckeditor"+n;
-			ClassicEditor
+		/* 	ClassicEditor
 		    .create( document.querySelector( id ), {
 		        cloudServices: {
 		            tokenUrl: 'https://81478.cke-cs.com/token/dev/de0d9159dc2b7ce3ecb85191c28f789217b087f58ae6880e30d89820724d',
@@ -28,9 +28,9 @@
 		    } )
 		    .catch( error => {
 		        console.error( error );
-		    } );
+		    } ); */
 			n++;
-		}
+		} */
 		
 		
 		$('form[name=listForm]').on('submit',	function(e) {
@@ -114,23 +114,91 @@
 	background-color: lightpurple;
 }
 </style>
+<style>
+	#modalWrapper {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.3);
+		z-index: 10000000000000000000000;
+	}
+	
+	#modal {
+		border: 1px solid black;
+		border-radius: 5px;
+		background: white;
+		width: 450px;
+		height: 450px;
+		position: absolute;
+		top: calc(50% - 255px);
+		left: calc(50% - 225px);
+		
+	}
+</style>
+<script type="text/javascript">
+/*  $(function(){
+	$("#modalWrapper").css("display", "none");
+	$("#modal").css("display", "none");
+	$("#reply_popup_open").on("click", function(){
+		console.log("클릭 이벤트")
+		openModal();
+	})
+	$("#reply_popup_close").on("click", function(){
+		console.log("클릭 이벤트")
+		closeModal();
+	})
+	
+	function openModal(){
+		$("#modalWrapper").css("display", "block");
+		$("#modal").css("display", "block");
+		$("#modalWrapper").css("overflow", "hidden");
+		$("body").css("overflow", "hidden");
+		
+	function closeModal(){
+		$("#modalWrapper").css("display", "none");
+		$("#modal").css("display", "none");
+		$("#modalWrapper").css("overflow", "visible");
+		$("body").css("overflow", "visible");
+	}
+})  */
+
+
+var rno = 0;
+function rreport(nowRno) {
+      rno = nowRno;
+      console.log(rno);
+       modalFn('modal_report_reply');
+
+}
+
+function reply(nowRno) {
+      rno = nowRno;
+      console.log(rno);
+       modalFn('modal_reply');
+
+}
+</script>
 </head>
 <body>
 <%@include file="../main/header.jsp"%>
-    <div id="wrapper">
+	<div id="wrapper">
     <!-- navigation -->
     <nav>
       <div class="nav-container">
         <div class="nav-1">
-<!--             <img class="logo_instagram_txt" src="resources/assets/img/logo_text.png" alt="logo_text"> -->
         </div>
-        <input id="searchInput" type="search" class="input-search" placeholder="검색">
+        <form action="clist" name="listForm" method="get" style="width: 340px;">
+					<select id="searchType" class="searchType" name="searchType">
+						<option value="1">글제목</option>
+						<option value="2">글내용</option>
+						<option value="3">작성자</option>
+					</select> 
+        	<input id="searchInput" type="search" class="input-search" name="keyword" placeholder="검색">
+					<button type=submit id="btnsearch" style="display:none;"></button>
+		</form>
         <div class="nav-2">
-<!--           <img src="resources/assets/img/home.png" alt="홈"> -->
-<!--           <img src="resources/assets/img/dm.png" alt="DM"> -->
-<!--           <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/explore.png" alt="탐색"> -->
-<!--           <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png" alt="하트"> -->
-<!--           <img class="pic" src="https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/s150x150/71022783_513111249480681_2188078115513696256_n.jpg?_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_ohc=7Rl_bMO8TN4AX9C-AKS&oh=64741fc0f2635ebb63f94d5285798e08&oe=5F6A0524" alt="마이페이지"> -->
         </div>
       </div>
     </nav>
@@ -160,43 +228,34 @@
 					</div>
 					<!--  src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png" -->
           </header>
-          <div class="main-image">
-<!--             <img src="" alt="dlwlrma님의 피드 사진" class="mainPic"> -->
-            &nbsp;${vo.ccontent }
-            <div class="description">
-              <p><span class="at-tag">@bts @wkorea @gucci</span> 🌱</p>
+			<div class="main-image">
+				<div class="subject">${vo.csubject }</div>
+				<div class="content">${vo.ccontent }</div>
+	            <div class="description">
+				<p><span class="at-tag">@bts @wkorea @gucci</span></p>
             </div>
           </div>
+          <!-- 게시글 추천, 비추천, 댓글 작성 -->
           <div class="icons-react">
             <div class="icons-left">
               <img class="thumbsup" onclick="" src="resources/assets/img/thumbsup.png" alt="추천">  
               <img class="thumbsup-liked" onclick="" src="resources/assets/img/thumbs-up.png" alt="추천">  
+             </div>
+             <div class="icons-middle">
               <img class="thumbsdown" onclick="" src="resources/assets/img/thumbsdown.png" alt="비추천">  
               <img class="thumbsdown-disliked" onclick="" src="resources/assets/img/thumbs-down.png" alt="비추천">  
-              <img class="reply" id="popup_open" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png" alt="댓글">
+              </div>
+              <div class="icons-right">
+              <img class="reply" onclick="reply(${rep.rno})" id="reply_popup_open" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png" alt="댓글">
             </div>
-<!--             <img class="icon-react" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/bookmark.png" alt="북마크"> -->
           </div>
-          <!-- article text data -->
+          <!-- 추천 수 -->
           <div class="reaction">
             <div class="liked-people">
-              <p><span class="point-span">${vo.likecnt }</span>명이 좋아합니다</p>
+              <p><span class="point-span">${vo.likecnt }</span>명이 추천합니다</p>
             </div>
-           <!--  <div class="description">
-              <p><span class="point-span userID">dlwlrma</span><span class="at-tag">@wkorea @gucci</span> 🌱</p>
-            </div> -->
             <div class="comment-section">
               <ul class="comments">
-               <!--   <li>
-                  <span class="reply_open" id="popup_open_btn">댓글 0개 보기</span>
-                  <div>
-                    <img class="comment-more" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png" alt="more">
-                    <div class="comment-like">
-                      <img class="comment-heart" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png" alt="하트">
-                      <img class="comment-heart-liked" src="resources/assets/img/liked.png" alt="좋아요된하트">
-                    </div>
-                  </div>
-                </li> -->
               </ul>
               <div class="time-log">
                 <span>${vo.cdate }</span>
@@ -207,10 +266,10 @@
           <div>
           <div class="hl"></div>
 				<c:if test="${loginMember != null }">
-					<form id="writeRcommunity">
+					<form>
 						<div class="comment">
 							<input type="hidden" name="cno" value="${community.cno }">
-			            	<input id="input-comment" type="text" class="input-comment" name="rcontent" maxlength="4000" placeholder="댓글 달기..." >
+			            	<input type="text" class="input-comment" name="rcontent" maxlength="4000" placeholder="댓글 달기..." >
 			            	<button type="submit" class="submit-comment" onclick="rcommunityInsertFn(${status.index})">게시</button>
 						</div>
 					</form>
@@ -328,41 +387,119 @@
           </p>
         </footer>
       </div>
-          
-        <!-- 댓글 모달창 -->
-			<div id="my_modal_reply">
-				<button type="button" id="btncancel" class="modal_close_btn">X</button>
-         <!-- 댓글 작성 부분 -->
-          <div>
-          
-				<c:if test="${loginMember != null }">
-					<form id="writeRcommunity">
+
+			<!-- 댓글 작성, 게시글 신고, 댓글 신고 모달창 -->
+
+			<!-- 댓글 모달창 -->
+			<div id="modal_reply">
+					<button type="button" id="reply_popup_close"
+						class="modal_close_btn"
+						style="position: absolute; top: 10px; right: 10px; border: none; background-color: #fefefe; font-size: 14px;">X</button>
+					<!-- 댓글 작성 부분 -->
+					<div>
+
+						<c:if test="${loginMember != null }">
+							<form>
+								<div class="comment">
+									<input type="hidden" name="cno" value="${community.cno }">
+									<input type="text" class="modal-input-comment" name="rcontent"
+										maxlength="4000" placeholder="댓글 달기...">
+									<button type="submit" class="submit-comment"
+										onclick="rcommunityInsertFn(${status.index})">게시</button>
+								</div>
+							</form>
+						</c:if>
+					</div>
+					<c:if test="${loginMember == null }">
 						<div class="comment">
-							<input type="hidden" name="cno" value="${community.cno }">
-			            	<input id="input-comment" type="text" class="modal-input-comment" name="rcontent" maxlength="4000" placeholder="댓글 달기..." >
-			            	<button type="submit" class="submit-comment" onclick="rcommunityInsertFn(${status.index})">게시</button>
+							<input class="modal-input-comment" type="text"
+								placeholder="댓글을 작성하려면 로그인이 필요합니다.">
+							<button type="submit" class="submit-comment">게시</button>
 						</div>
-					</form>
-				</c:if>
+					</c:if>
+					<div class="modal-hl"></div>
+
+					<button type="button" class="report" id="popup_open_btn_reply"
+						onclick="rreport(${rep.rno})">신고</button>
 			</div>
-			<c:if test="${loginMember == null }">
-          <div class="comment">
-            <input class="modal-input-comment" type="text" placeholder="댓글을 작성하려면 로그인이 필요합니다." >
-            <button type="submit" class="submit-comment">게시</button>
-          </div>
-          </c:if>
-          <div class="modal-hl"></div>
+
+			<!-- 게시글 신고 모달창 -->
+			<div id="modal_report">
+				<form id="frmC">
+					<p>게시글 신고</p>
+					<div class="modal_report_div">
+						<input type="radio" id="reportChoice1" class="reportChoice"
+							name="creport" value="1"> <label for="reportChoice1"
+							class="modal_choise_label">나체 이미지 또는 성적 행위</label> <br> <input
+							type="radio" id="reportChoice2" class="reportChoice"
+							name="creport" value="2"> <label for="reportChoice2"
+							class="modal_choise_label">혐오 발언 또는 폭력적</label> <br> <input
+							type="radio" id="reportChoice3" class="reportChoice"
+							name="creport" value="3"> <label for="reportChoice3"
+							class="modal_choise_label">증오 또는 학대</label> <br> <input
+							type="radio" id="reportChoice4" class="reportChoice"
+							name="creport" value="4"> <label for="reportChoice4"
+							class="modal_choise_label">유해하거나 위험한 행위</label> <br> <input
+							type="radio" id="reportChoice5" class="reportChoice"
+							name="creport" value="5"> <label for="reportChoice5"
+							class="modal_choise_label">스팸 또는 사용자 현혹</label> <br> <input
+							type="radio" id="reportChoice6" class="reportChoice"
+							name="creport" value="6"> <label for="reportChoice6"
+							class="modal_choise_label">마음에 들지 않습니다.</label> <input
+							type="hidden" name="csubject" value="${community.csubject }" />
+						<input type="hidden" name="cwriter" value="${community.cwriter }" />
+						<input type="hidden" name="ccontent"
+							value="${community.ccontent }" /> <input type="hidden"
+							name="cno" value="${community.cno }" />
+					</div>
+					<hr
+						style="width: 328px; position: relative; right: 30px; top: 20px;">
+					<div>
+						<button type="button" id="btncancel" class="modal_close_btn">취소</button>
+						<button type="submit" id="btnreport" class="modal_report_btn">신고</button>
+					</div>
+				</form>
 			</div>
-			
-			
-						<div id="moreDiv"></div>
+
+			<!-- 댓글 신고 모달창 -->
+			<div id="modal_report_reply">
+				<p>댓글 신고</p>
+				<div class="modal_report_div">
+					<input type="radio" id="rreportChoice1" class="reportChoice"
+						name="rreport" value="1"> <label for="rreportChoice1"
+						class="modal_choise_label">나체 이미지 또는 성적 행위</label> <br> <input
+						type="radio" id="rreportChoice2" class="reportChoice"
+						name="rreport" value="2"> <label for="rreportChoice2"
+						class="modal_choise_label">혐오 발언 또는 폭력적</label> <br> <input
+						type="radio" id="rreportChoice3" class="reportChoice"
+						name="rreport" value="3"> <label for="rreportChoice3"
+						class="modal_choise_label">증오 또는 학대</label> <br> <input
+						type="radio" id="rreportChoice4" class="reportChoice"
+						name="rreport" value="4"> <label for="rreportChoice4"
+						class="modal_choise_label">유해하거나 위험한 행위</label> <br> <input
+						type="radio" id="rreportChoice5" class="reportChoice"
+						name="rreport" value="5"> <label for="rreportChoice5"
+						class="modal_choise_label">스팸 또는 사용자 현혹</label> <br> <input
+						type="radio" id="rreportChoice6" class="reportChoice"
+						name="rreport" value="6"> <label for="rreportChoice6"
+						class="modal_choise_label">마음에 들지 않습니다.</label>
+				</div>
+				<hr
+					style="width: 328px; position: relative; right: 30px; top: 20px;">
+				<div>
+					<button type="button" id="btncancel" class="modal_close_btn">취소</button>
+					<button type="button" id="btnrply" class="modal_report_btn">신고</button>
+				</div>
+			</div>
+
+			<div id="moreDiv"></div>
 			<button type="button" onclick="moreInsta()">더보기</button>
     </main>
     <jsp:include page="../main/footer.jsp"></jsp:include>
     </div>
 
 			
-    <script src="resources/js/main.js"></script>
+    <script src="resources/js/mikrokosmos.js"></script>
     
 
 			

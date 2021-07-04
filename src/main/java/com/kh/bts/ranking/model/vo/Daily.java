@@ -3,18 +3,18 @@ package com.kh.bts.ranking.model.vo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Dayli {
+public class Daily {
 	private String acntno;
 	private String email;
 	private String nickname;
-	private int oldesset;
-	private int newesset;
+	private long oldesset;
+	private long newesset;
 	private double yield;
 
-	public Dayli() {
+	public Daily() {
 	}
 
-	public Dayli(String acntno, String email, String nickname, int oldesset, int newesset, double yield) {
+	public Daily(String acntno, String email, String nickname, long oldesset, long newesset, double yield) {
 		super();
 		this.acntno = acntno;
 		this.email = email;
@@ -48,19 +48,19 @@ public class Dayli {
 		this.nickname = nickname;
 	}
 
-	public int getOldesset() {
+	public long getOldesset() {
 		return oldesset;
 	}
 
-	public void setOldesset(int oldesset) {
+	public void setOldesset(long oldesset) {
 		this.oldesset = oldesset;
 	}
 
-	public int getNewesset() {
+	public long getNewesset() {
 		return newesset;
 	}
 
-	public void setNewesset(int newesset) {
+	public void setNewesset(long newesset) {
 		this.newesset = newesset;
 	}
 

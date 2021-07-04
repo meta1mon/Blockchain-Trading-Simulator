@@ -16,10 +16,14 @@
 }
 
 #mmm{
-	position: absolute;
-	top: calc(50% - 350px);
-	left: calc(50% - 442.5px);
+	margin-top: 100px;
 	width: 1085px;
+}
+#wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
 }
 .X {
 	border: none;
@@ -75,8 +79,9 @@ $(function() {
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
+<div id="wrapper">
 	<div id="mmm">
-	<p class="title inbl">회원 목록</p>
+	<p class="title inbl">회원 관리</p>
 	<form name="listForm" action="ml" method="get" id="listForm">
 		<select name="searchType">
 			<option value="1">이메일</option>
@@ -162,6 +167,7 @@ $(function() {
 			</table>
 
 		</div>
+	</div>
 	</div>
 	<script>
 		$(function() {

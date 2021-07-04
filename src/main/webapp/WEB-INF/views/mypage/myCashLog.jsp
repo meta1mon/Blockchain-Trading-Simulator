@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,17 +30,27 @@
 	<div id="wrapper">
 	<jsp:include page="myNav.jsp"></jsp:include>
 		<div id="mcl">
-			<table border="2">
+			<table>
 				<tr>
 					<th>결제일시</th>
 					<th>결제금액</th>
 					<th>충전금액</th>
 				</tr>
+ 			<c:if test="${listCount eq 0}">
 				<tr>
-					<td>2021-02-22 21:04:23</td>
-					<td>\ 5,000</td>
-					<td>5,000,000 원</td>
+					<td colspan="3">
+						표시할 충전 내역이 없습니다.
+					</td>
+			</c:if>
+			<c:if test="${listCount ne 0}">
+				<c:forEach var="cashLog" items="${list}" varStatus="status">
+				<tr>
+					<td>${cashLog.cashdate}</td>
+					<td><fmt:formatNumber value="${cashLog.sellprice}" pattern="#,###,###,###" /></td>
+					<td><fmt:formatNumber value="${cashLog.won}" pattern="#,###,###,###" /></td>
 				</tr>
+				</c:forEach>
+			</c:if>
 			</table>
 		</div>
 	</div>

@@ -83,9 +83,44 @@
 		ORDER BY ACRDATE DESC
 	</select>
 	
+	<!-- 처리된 신고글 검색 -->
+	<select id="searchCsubject" parameterType="string" resultType="arraylist" resultMap="Acreport">
+		SELECT * FROM ACREPORT
+		WHERE CSUBJECT LIKE '%'||#{keyword}||'%'
+	</select>
+	<select id="searchCrespondent" parameterType="string" resultType="arraylist" resultMap="Acreport">
+		SELECT * FROM ACREPORT
+		WHERE CRESPONDENT LIKE '%'||#{keyword}||'%'
+	</select>
+	<select id="searchCreporter" parameterType="string" resultType="arraylist" resultMap="Acreport">
+		SELECT * FROM ACREPORT
+		WHERE CREPORTER LIKE '%'||#{keyword}||'%'
+	</select>
+	<select id="searchCstatus" parameterType="string" resultType="arraylist" resultMap="Acreport">
+		SELECT * FROM ACREPORT
+		WHERE CSTATUS = #{cstatus}
+	</select>
+	
 	<!-- 처리된 신고 댓글 조회 -->
 	<select id="selectArreport" resultType="arraylist" resultMap="Arreport">
 		SELECT * FROM ARREPORT
 		ORDER BY ARRDATE DESC
+	</select>
+	<!-- 처리된 댓글 검색 -->
+	<select id="searchCsubject2" parameterType="string" resultType="arraylist" resultMap="Arreport">
+		SELECT * FROM ARREPORT
+		WHERE CSUBJECT LIKE '%'||#{keyword}||'%'
+	</select>
+	<select id="searchRrespondent" parameterType="string" resultType="arraylist" resultMap="Arreport">
+		SELECT * FROM ARREPORT
+		WHERE RRESPONDENT LIKE '%'||#{keyword}||'%'
+	</select>
+	<select id="searchRreporter" parameterType="string" resultType="arraylist" resultMap="Arreport">
+		SELECT * FROM ARREPORT
+		WHERE RREPORTER LIKE '%'||#{keyword}||'%'
+	</select>
+	<select id="searchRstatus" parameterType="string" resultType="arraylist" resultMap="Arreport">
+		SELECT * FROM ARREPORT
+		WHERE RSTATUS = #{rstatus}
 	</select>
 </mapper>

@@ -19,7 +19,7 @@ public class Member {
 	private String mailing;
 	private String reqAgr;
 	
-	private int cybcash;
+	private long cybcash;
 
 	public String getEmail() {
 		return email;
@@ -101,11 +101,11 @@ public class Member {
 		this.reqAgr = reqAgr;
 	}
 
-	public int getCybcash() {
+	public long getCybcash() {
 		return cybcash;
 	}
 
-	public void setCybcash(int cybcash) {
+	public void setCybcash(long cybcash) {
 		this.cybcash = cybcash;
 	}
 

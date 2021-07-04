@@ -70,10 +70,24 @@
 		#{cano}
 	</delete>
 
+	<!-- 코인만 가져오기, 랭킹용 -->
+	<select id="selectAllCoin" resultType="string">
+		SELECT DISTINCT COIN FROM
+		COINACNT WHERE BUYCNT != 0
+
+	</select>
+	
+	<!-- 계좌만 가져오기, 랭킹용 -->
+	<select id="selectAllAcntno" resultType="string">
+		SELECT DISTINCT ACNTNO
+		FROM COINACNT
+		WHERE BUYCNT != 0 ORDER BY ACNTNO
+	</select>
+
 	<!-- 전체 코인계좌 정보 가져오기, 랭킹용 -->
 	<select id="selectAllCoinAcnt" resultType="arraylist"
 		resultMap="resultCoinAcnt">
-		SELECT * FROM COINACNT ORDER BY ACNTNO
+		SELECT * FROM COINACNT WHERE BUYCNT != 0 ORDER BY ACNTNO
 	</select>
 
 </mapper>

@@ -18,9 +18,8 @@ function coinValue() {
 					for (var i = 0; i < $('.coinName').length; i++) {
 						var coinName = $('.coinName').eq(i).html();
 						var coinCount = $('.nCoincnt').eq(i).val();
-						var coinValue = parseInt(data['data'][coinName]['closing_price']
-								* coinCount);
-						var nCoinValue = coinValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 세자리수 콤마
+						var coinValue = parseInt(data['data'][coinName]['closing_price']* coinCount); //평가금액 raw
+						var nCoinValue = coinValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 평가금액 세자리 수 콤마 표시
 						
 						$('.coinValue').eq(i).html(nCoinValue + "&nbsp;원");
 						var buyAvg = parseInt($('.buyAvg').eq(i).val());
@@ -28,10 +27,10 @@ function coinValue() {
 						var coinProfit = coinValue - buyAvg;
 						var nCoinProfit = coinProfit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 세자리수 콤마
 						
-						console.log("매수금액: "+buyAvg);
-						console.log("매수금액raw: "+$('.buyAvg').eq(i).val());
-						console.log("평가금액: "+coinValue);
-//						console.log("평가손익 퍼센트: ");
+//						console.log((i+1)+"번째 "+"매수금액raw: "+$('.buyAvg').eq(i).val());
+//						console.log((i+1)+"번째 "+"매수금액 parseInt: "+buyAvg);
+//						console.log((i+1)+"번째 "+"매수금액 BigInt: "+BigInt($('.buyAvg').eq(i).val()));
+//						console.log((i+1)+"번째 "+"평가금액raw: "+coinValue);
 						
 						var coinProfitPcnt = ((coinValue/buyAvg) - 1) * 100;
 						
@@ -44,7 +43,7 @@ function coinValue() {
 					$('#totalcoin').html(totalcoin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 //					console.log("cash: "+$("#cash").val());
 					var totalAssets = parseInt($("#cash").val())+totalcoin;
-					console.log("totalAssets: "+totalAssets);
+//					console.log("totalAssets: "+totalAssets);
 					$('#totalAssets').html(totalAssets.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 				}
 			});

@@ -23,7 +23,7 @@
 					<li><img src="${pageContext.request.contextPath}/resources/assets/img/icon_bitcoin.svg" width="30px" height="30px">
 						<span>코인 보유액&nbsp; <span id="totalcoin"></span>&nbsp;&nbsp;&nbsp;원</span></li>
 					<li><img src="${pageContext.request.contextPath}/resources/assets/img/icon_won.svg" width="30px" height="30px">
-						<span>현금 보유액&nbsp; <fmt:formatNumber value="${acnt.cybcash }" pattern="#,###,###,###" />&nbsp;&nbsp;&nbsp;원</span>
+						<span>현금 보유액&nbsp; <fmt:formatNumber value="${acnt.cybcash }" pattern="#,###,###,###,###" />&nbsp;&nbsp;&nbsp;원</span>
 						<input id="cash" type="hidden" value="${acnt.cybcash }"/>
 					</li>
 					<li><img src="${pageContext.request.contextPath}/resources/assets/img/icon_wallet.svg" width="30px" height="30px">
@@ -59,12 +59,12 @@
 							<c:if test="${coin.buycnt>0 }">
 							<tr>
 								<td class="coinName">${coin.coin }</td>
-								<td class="coinCount"><fmt:formatNumber value="${coin.buycnt }" pattern="#,###,###,###.########" />
+								<td class="coinCount"><fmt:formatNumber value="${coin.buycnt }" pattern="#,###,###,###,###.########" />
 								<input type="hidden" class="nCoincnt" value="${coin.buycnt }"> </td>
-								<td><fmt:formatNumber value="${coin.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td><fmt:formatNumber value="${coin.buyprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>
-									<fmt:formatNumber value="${coin.buycnt*coin.buyprice }" pattern="#,###,###,###" />&nbsp;원
-									<input class="buyAvg" type="hidden" value="${coin.buycnt*coin.buyprice }"/>
+									<fmt:formatNumber value="${coin.buycnt*coin.buyprice }" pattern="#,###,###,###,###" />&nbsp;원
+									<input class="buyAvg" type="hidden" value="<fmt:formatNumber value="${coin.buycnt*coin.buyprice }" pattern="#############"/>"/>
 								</td>
 								<td class="coinValue">
 <!-- 									평가금액 : api 이용해서 js로 처리 -->
@@ -94,8 +94,8 @@
 							<tr>
 								<td>${blist.ubno }</td>
 								<td>${blist.coin }</td>
-								<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###" /></td>
-								<td><fmt:formatNumber value="${blist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${blist.buyprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${blist.bdate }</td>
 							</tr>
 						</c:if>
@@ -103,8 +103,8 @@
 							<tr class="blist" style="display: none;">
 								<td>${blist.ubno }</td>
 								<td>${blist.coin }</td>
-								<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###" /></td>
-								<td><fmt:formatNumber value="${blist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${blist.buyprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${blist.bdate }</td>
 							</tr>
 						</c:if>
@@ -127,8 +127,8 @@
 							<tr>
 								<td>${slist.usno }</td>
 								<td>${slist.coin }</td>
-								<td><fmt:formatNumber value="${slist.sellcnt }" pattern="#,###,###,###" /></td>
-								<td><fmt:formatNumber value="${slist.sellprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td><fmt:formatNumber value="${slist.sellcnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${slist.sellprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${slist.sdate }</td>
 							</tr>
 						</c:if>
@@ -136,8 +136,8 @@
 							<tr class="slist" style="display: none;">
 								<td>${slist.usno }</td>
 								<td>${slist.coin }</td>
-								<td><fmt:formatNumber value="${slist.sellcnt }" pattern="#,###,###,###" /></td>
-								<td><fmt:formatNumber value="${slist.sellprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td><fmt:formatNumber value="${slist.sellcnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${slist.sellprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${slist.sdate }</td>
 							</tr>
 						</c:if>
@@ -164,8 +164,8 @@
 							<tr>
 								<td>${wblist.ubno }</td>
 								<td>${wblist.coin }</td>
-								<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###" /></td>
-								<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${wblist.wbdate }</td>
 							</tr>
 						</c:if>
@@ -173,8 +173,8 @@
 							<tr class="wblist" style="display: none;">
 								<td>${wblist.ubno }</td>
 								<td>${wblist.coin }</td>
-								<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###" /></td>
-								<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${wblist.wbdate }</td>
 							</tr>
 						</c:if>
@@ -196,8 +196,8 @@
 							<tr>
 								<td>${wslist.usno }</td>
 								<td>${wslist.coin }</td>
-								<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###" /></td>
-								<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${wslist.wsdate }</td>
 							</tr>
 						</c:if>
@@ -205,8 +205,8 @@
 							<tr class="wslist" style="display: none;">
 								<td>${wslist.usno }</td>
 								<td>${wslist.coin }</td>
-								<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###" /></td>
-								<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###" />&nbsp;원</td>
+								<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${wslist.wsdate }</td>
 							</tr>
 						</c:if>

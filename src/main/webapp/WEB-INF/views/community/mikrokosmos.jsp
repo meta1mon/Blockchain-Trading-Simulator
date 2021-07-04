@@ -19,7 +19,7 @@
 		var n = 0;
 		for(var i =0; i < 5; i++) {
 			var id = "#ckeditor"+n;
-			ClassicEditor
+		/* 	ClassicEditor
 		    .create( document.querySelector( id ), {
 		        cloudServices: {
 		            tokenUrl: 'https://81478.cke-cs.com/token/dev/de0d9159dc2b7ce3ecb85191c28f789217b087f58ae6880e30d89820724d',
@@ -28,7 +28,7 @@
 		    } )
 		    .catch( error => {
 		        console.error( error );
-		    } );
+		    } ); */
 			n++;
 		}
 		
@@ -207,10 +207,10 @@
           <div>
           <div class="hl"></div>
 				<c:if test="${loginMember != null }">
-					<form id="writeRcommunity">
+					<form>
 						<div class="comment">
 							<input type="hidden" name="cno" value="${community.cno }">
-			            	<input id="input-comment" type="text" class="input-comment" name="rcontent" maxlength="4000" placeholder="댓글 달기..." >
+			            	<input type="text" class="input-comment" name="rcontent" maxlength="4000" placeholder="댓글 달기..." >
 			            	<button type="submit" class="submit-comment" onclick="rcommunityInsertFn(${status.index})">게시</button>
 						</div>
 					</form>
@@ -331,15 +331,15 @@
           
         <!-- 댓글 모달창 -->
 			<div id="my_modal_reply">
-				<button type="button" id="btncancel" class="modal_close_btn">X</button>
+				<button type="button" class="modal_close_btn">X</button>
          <!-- 댓글 작성 부분 -->
           <div>
           
 				<c:if test="${loginMember != null }">
-					<form id="writeRcommunity">
+					<form>
 						<div class="comment">
 							<input type="hidden" name="cno" value="${community.cno }">
-			            	<input id="input-comment" type="text" class="modal-input-comment" name="rcontent" maxlength="4000" placeholder="댓글 달기..." >
+			            	<input type="text" class="modal-input-comment" name="rcontent" maxlength="4000" placeholder="댓글 달기..." >
 			            	<button type="submit" class="submit-comment" onclick="rcommunityInsertFn(${status.index})">게시</button>
 						</div>
 					</form>
@@ -362,7 +362,7 @@
     </div>
 
 			
-    <script src="resources/js/main.js"></script>
+    <script src="resources/js/mikrokosmos.js"></script>
     
 
 			

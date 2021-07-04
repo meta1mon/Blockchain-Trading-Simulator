@@ -23,7 +23,7 @@ function addComment() {
 
     let likedBtn = document.createElement('img');
     likedBtn.classList.add("comment-heart-liked");
-    likedBtn.src = "img/liked.png";
+    likedBtn.src = "../assets/img/liked.png";
     likedBtn.alt = "좋아요된하트";
 
     let commentLike = document.createElement('div');

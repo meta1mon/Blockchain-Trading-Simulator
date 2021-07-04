@@ -20,49 +20,52 @@ import com.kh.bts.ranking.model.vo.Daily;
 public class RankingController {
 	@Autowired
 	private RankingService rankService;
-
-	// 랭킹 페이지로 이동
-	@RequestMapping("/hirank")
-	public ModelAndView hirank(ModelAndView mav) {
-		List<CoinAcnt> list = rankService.selectAllCoinAcnt();
-		mav.addObject("coinAcnt", list);
-		mav.setViewName("rank/testRank");
+	
+	// Daily 랭킹 페이지로 이동
+	@RequestMapping("/ranking")
+	public ModelAndView ranking(ModelAndView mav) {
+		List<Daily> list = rankService.selectDaily();
+		mav.addObject("first", list.get(0));
+		mav.addObject("second", list.get(1));
+		mav.addObject("third", list.get(2));
+		mav.addObject("other", list);
+		mav.setViewName("rank/ranking");
 		return mav;
 	}
 
-	// 코인계좌에 존재하는 코인만 가져오기
+	// 데일리 랭킹 계산하는 페이지로 이동(코인계좌 전부 가져감)
+	@RequestMapping("/calc")
+	public ModelAndView calcYield(ModelAndView mav) {
+		List<CoinAcnt> list = rankService.selectAllCoinAcnt();
+		mav.addObject("coinAcnt", list);
+		mav.setViewName("rank/calcYield");
+		return mav;
+	}
+
+	// 코인 보유자의 데일리 랭킹 변경
 	@ResponseBody
-	@RequestMapping("/insertRank")
-	public int insertRank(@RequestParam(name = "acntno") String acntno,
+	@RequestMapping("/updateRank")
+	public int updateRank(@RequestParam(name = "acntno") String acntno,
 			@RequestParam(name = "appraisal") long appraisal) {
 		Daily vo = new Daily();
 		vo.setAcntno(acntno);
 		vo.setNewesset(appraisal);
-		int result = rankService.insertDaily(vo);
+		int result = rankService.updateDaily(vo);
 		return result;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// 코인계좌에 존재하는 코인만 가져오기
+	// 코인 미보유자의 데일리 랭킹처리
+	@ResponseBody
+	@RequestMapping("/noCoinRank")
+	public int noCoinRank(@RequestParam(name="acnt") String acntStr) {
+		System.out.println("ㅇㅁㄴ라ㅓㄷㅈ바;ㅗ랴ㅐㅈㅁ;러ㅏㅣㅁㄴ;ㅇ러ㅏㅣㅁㅇㄴ;ㅗ호ㅕㅈ댜ㅓ리만ㅇ;러ㅏㅇ님;러ㅏㅁㄴ이;ㅓ리");
+		System.out.println(acntStr + "asdf");
+		return 0;
+	}
+
+
+
+	// 코인계좌에 존재하는 코인만 가져오기(코인수량 0은 제외)
 	@ResponseBody
 	@RequestMapping("/coinLoad")
 	public List<String> coinLoad(ModelAndView mav) {
@@ -70,34 +73,12 @@ public class RankingController {
 		return list;
 	}
 
-	// 코인계좌에 존재하는 계좌만 가져오기
+	// 코인계좌에 존재하는 계좌만 가져오기(코인수량 0은 제외)
 	@ResponseBody
 	@RequestMapping("/coinLoad2")
 	public List<String> coinLoad2() {
 		List<String> list = rankService.selectAllAcntno();
 		return list;
-	}
-
-	// 코인계좌의 모든 내용 불러오기
-	@ResponseBody
-	@RequestMapping("/coinAcntLoad")
-	public List<CoinAcnt> coinAcntLoad() {
-		List<CoinAcnt> list = rankService.selectAllCoinAcnt();
-		return list;
-	}
-
-	// 랭킹 페이지로 이동
-	@RequestMapping("/ranking")
-	public ModelAndView ranking(ModelAndView mav) {
-		mav.setViewName("rank/ranking");
-		return mav;
-	}
-
-	// 랭킹 페이지로 이동
-	@RequestMapping("/daily1")
-	public ModelAndView asdfdaily(ModelAndView mav) {
-		mav.setViewName("rank/liveRank");
-		return mav;
 	}
 
 }

@@ -9,5 +9,6 @@ public interface RankingService {
 	public List<String> coinLoad();
 	public List<String> selectAllAcntno();
 	public List<CoinAcnt> selectAllCoinAcnt();
-	public int insertDaily(Daily vo);
+	public int updateDaily(Daily vo);
+	public List<Daily> selectDaily();
 }

@@ -7,10 +7,10 @@
 		SELECT * FROM ACNT WHERE EMAIL = #{email}
 	</select>
 	
-	<!-- 계좌번호로 이메일 받아오기 -->
+	<!-- 계좌번호로 이메일과 보유 현금 받아오기 -->
 	<select id="returnEmail" parameterType="string"
-		resultType="string">
-		SELECT EMAIL FROM ACNT WHERE ACNTNO = #{acntno}
+		resultType="Acnt">
+		SELECT EMAIL, CYBCASH FROM ACNT WHERE ACNTNO = #{acntno}
 	</select>
 
 	<!-- 코인 계좌 정보 가져오기 -->

@@ -24,12 +24,15 @@ $(function() {
 </script>
 <style>
 #cll{
-	position: absolute;
-	top: calc(50% - 350px);
-	left: calc(50% - 442.5px);
+	margin-top: 100px;
 	width: 1085px;
 }
-
+#wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
+}
 
 #cll th, td {
 	padding: 5px !important;
@@ -73,6 +76,7 @@ table{
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
+<div id="wrapper">
 	<div id="cll">
 	<p class="title inbl">충전 내역</p>
 	<!-- TODO 검색 기능 넣기 -->
@@ -144,6 +148,7 @@ table{
 				</td>
 				</tr>
 		</table>
+	</div>
 	</div>
 	<script>
 		$(function(){

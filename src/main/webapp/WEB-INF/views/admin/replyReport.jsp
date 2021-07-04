@@ -16,10 +16,14 @@
 }
 
 #rr {
-	position: absolute;
-	top: calc(50% - 350px);
-	left: calc(50% - 442.5px);
+	margin-top: 100px;
 	width: 1085px;
+}
+#wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
 }
 
 /* 모달 창 공통 */
@@ -196,8 +200,9 @@ table{
 <title>관리자 페이지 - BTS</title>
 </head>
 <%@include file="headerAndAside.jsp"%>
-<body>
 <%@include file="../loadingajax.jsp"%>
+<body>
+<div id="wrapper">
 	<div id="rr">
 	<p class="title inbl">신고된 댓글 조회</p>
 	<hr>
@@ -361,6 +366,7 @@ table{
 					</table>
 				</form>
 			</div>
+		</div>
 		</div>
 </body>
 <script>

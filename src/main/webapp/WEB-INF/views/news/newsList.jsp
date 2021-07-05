@@ -16,7 +16,7 @@
 <!-- 		<div id="container"> -->
 			<div id="newsList">
 				<div class="newsSearch">
-					<input type="text" id="search" placeholder="검색어를 입력해주세요" maxlength="40"> 
+					<input type="text" id="search" placeholder="검색어를 입력해주세요" maxlength="40" value="${keyword}"> 
 					<input type="submit" id="searchBtn" value="검색">
 				</div>
 				<div class="headLine">

@@ -9,7 +9,7 @@
 <title>BTS</title>
 </head>
 <style>
-#icon {
+#icon1 {
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
@@ -17,7 +17,7 @@
 	top: 70px;
 	right: 5px;
 }
-.before{
+.before1{
 	border: 1px solid rgb(140, 102, 200);
 	background: white;
 	color: rgb(140, 102, 200);
@@ -27,12 +27,12 @@
 	color: white;
 }
 
-#icon:hover {
+#icon1:hover {
 	background-color: rgb(140, 102, 200);
 	color: white;
 }
 
-.chat {
+.chatt {
 	position: fixed;
 	top: 120px;
 	right: 5px;
@@ -42,15 +42,15 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
-<input type="button" id="icon" value="HI" class="before">
-<iframe src="Chatting" width="500px" height="700px" class="chat"></iframe>
+<input type="button" id="icon1" value="Chat" class="before1">
+<iframe src="Chatting" width="500px" height="500px" class="chatt"></iframe>
 <script>
 	$(function() {
-		/* $(".chat").css("display", "none") */
+		 $(".chatt").css("display", "none") 
 		var show = function() {
-			$(".chat").toggle();
+			$(".chatt").toggle();
 		}
-		$("#icon").on("click", show);
+		$("#icon1").on("click", show);
 
 	})
 </script>

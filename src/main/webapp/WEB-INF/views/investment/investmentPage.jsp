@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +37,7 @@
 	<div id="wrapper">
 		<jsp:include page="../main/header.jsp"></jsp:include>
 		<jsp:include page='popup.jsp'></jsp:include>
+		<jsp:include page="../sub/pop.jsp"></jsp:include>
 		<div id="container"
 			style="width: 1400px !important; background: white !important;">
 			<div class="parent">
@@ -65,7 +67,7 @@
 					<input type="text" id="searchcoin" value=""
 						style="width: 100%; display: 'block'" placeholder="코인 검색">
 					<table>
-						<tr>
+						<tr style='text-align: center'>
 							<td width= '78.08px !important'></td>
 							<td width= '91.36px !important'><img
 								src="${pageContext.request.contextPath}/resources/assets/img/down-arrow.svg"
@@ -96,16 +98,16 @@
 				<div class="div4" id="all_t">
 					<c:choose>
 						<c:when test="${loginMember == null }">
-							<td>
+							<td >
 								<table class='table table-striped'>
 									<tr>
-										<td><a href="<%=request.getContextPath()%>/signup"
+										<td style="text-align: center; font-size: 30px !important; vertical-align: middle;"><a style="text-align: center; font-size: 30px !important;"  href="<%=request.getContextPath()%>/signup"
 											id="join">가입</a><input name="coin" id="coin" type="hidden"
 											value="BTC" readonly="readonly" style="text-align: center;"></td>
 
 									</tr>
 									<tr>
-										<td><a href="<%=request.getContextPath()%>/login"
+										<td style="text-align: center; font-size: 30px !important;vertical-align: middle;"><a style="text-align: center; font-size: 30px !important;" href="<%=request.getContextPath()%>/login"
 											id="signup" id="login">로그인</a></td>
 									</tr>
 								</table>
@@ -162,7 +164,7 @@
 												type="text" value="BTC" readonly="readonly"
 												style="text-align: center;"><br> 보유 수량 : <input
 												style="text-align: center;" id="coincount"
-												placeholder="보유 코인"><br></td>
+												placeholder="보유 코인" value=""><br></td>
 										</tr>
 
 										<tr>

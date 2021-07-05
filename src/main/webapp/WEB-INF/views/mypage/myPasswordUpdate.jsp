@@ -7,6 +7,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/member.css"
+	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/pinpad.css"
@@ -29,6 +31,27 @@
 
 #mpu table {
 	margin: 0 auto;
+	width: 500px;
+}
+
+form {
+	padding: 20px;
+}
+
+form input {
+	width: 100%;
+}
+
+.btn1 {
+	width: 300px;
+}
+
+.alert {
+	height: 18px !important;
+}
+
+.star{
+	color: red;
 }
 </style>
 </head>
@@ -38,10 +61,10 @@
 		<div id="mpu">
 			<h1 class="title">비밀번호 변경</h1>
 			<form action="${pageContext.request.contextPath}/mypage/passChange"
-				method="post" style="border: 1px solid black;">
+				method="post" style="border-bottom: 1px solid black;">
 				<table>
 					<tr>
-						<th>비밀번호*</th>
+						<td>비밀번호<span class="star">*</span></td>
 						<td><input type="password" name="pw" id="pw"
 							placeholder="비밀번호를 입력해주세요."></td>
 					</tr>
@@ -49,7 +72,7 @@
 						<td colspan="2"><p class="alert pwReg">&nbsp;</p></td>
 					</tr>
 					<tr>
-						<th>비밀번호 확인*</td>
+						<td>비밀번호 확인<span class="star">*</span></td>
 						<td><input type="password" name="pwCh" id="pwCh"
 							placeholder="비밀번호를 다시 한 번 입력해주세요."></td>
 					</tr>
@@ -57,28 +80,29 @@
 						<td colspan="2"><p class="alert pwCh">&nbsp;</p></td>
 					</tr>
 				</table>
-				<button type="submit" id="changePw" onclick="return passChange();">비밀번호
-					수정</button>
+				<button type="submit" id="changePw" onclick="return passChange();" class="btn1">비밀번호 수정</button>
 			</form>
-
-
+			<br>
 			<h1 class="title">계좌 비밀번호 변경</h1>
 			<form action="${pageContext.request.contextPath}/mypage/bankPwChange"
-				method="post" style="border: 1px solid black;">
+				method="post">
 				<table>
 					<tr>
-						<th>계좌 비밀번호</th>
-						<td colspan="2"><input type="password" name="bankPw"
-							id="bankPw1" class="pin1" placeholder="계좌 비밀번호를 입력해주세요"></td>
+						<th>계좌 비밀번호<span class="star">*</span></th>
+						<td colspan="2"><input type="password" name="bankPw" id="bankPw1" class="pin1" placeholder="계좌 비밀번호를 입력해주세요"></td>
 					</tr>
 					<tr>
-						<th>계좌 비밀번호 확인</th>
-						<td colspan="2"><input type="password" id="bankPw2"
-							class="pin2" placeholder="계좌 비밀번호를 입력해주세요."></td>
+						<td colspan="2"><p class="alert bankPwCh">&nbsp;</p></td>
 					</tr>
-
+					<tr>
+						<th>계좌 비밀번호 확인<span class="star">*</span></th>
+						<td colspan="2"><input type="password" id="bankPw2" class="pin2" placeholder="계좌 비밀번호를 입력해주세요."></td>
+					</tr>
+					<tr>
+						<td colspan="2"><p class="alert bankPwChCh">&nbsp;</p></td>
+					</tr>
 				</table>
-				<button type="submit" onclick="return bankPwChange();">계좌
+				<button type="submit" onclick="return bankPwChange();" class="btn1">계좌
 					비밀번호 수정</button>
 			</form>
 		</div>
@@ -142,20 +166,38 @@
 	</script>
 	<script>
 		// 은행 비밀번호와 은행 비밀번호 확인 일치 여부
-
 		function bankPwChange() {
 			var bankPw1 = $("#bankPw1").val();
 			var bankPw2 = $("#bankPw2").val();
-			if ((bankPw1.length != 0 && bankPw2.length != 0)
+			if(bankPw1.length == 0) {
+				$(".bankPwCh").html("계좌 비밀번호를 입력해주세요.");
+				$(".bankPwChCh").html("&nbsp;");
+				return false;
+			} else if(bankPw2.length == 0) {
+				$(".bankPwCh").html("&nbsp;");
+				$(".bankPwChCh").html("계좌 비밀번호 확인을 입력해주세요.");
+				return false;
+			} else if(bankPw1.length != 0 && bankPw2.length != 0 && bankPw1 != bankPw2) {
+				$(".bankPwCh").html("&nbsp;");
+				$(".bankPwChCh").html("계좌 비밀번호가 일치하지 않습니다.");
+				return false;
+			} else if(bankPw1.length != 0 && bankPw2.length != 0 && bankPw1 == bankPw2){
+				$(".bankPwCh").html("&nbsp;");
+				$(".bankPwChCh").html("&nbsp;");
+				return true;
+			}
+			
+			/* if ((bankPw1.length != 0 && bankPw2.length != 0)
 					&& (bankPw1 == bankPw2)) {
+				$(".bankPwCh").html("&nbsp;");
 			} else if (bankPw1.length == 0 || bankPw2.length == 0) {
-				alert("계좌 비밀번호를 입력해주세요");
 				return false;
 			} else {
-				alert("계좌 비밀번호가 일치하지 않습니다. 다시 입력하세요");
+				$(".bankPwCh").html("계좌 비밀번호가 일치하지 않습니다.");
 				return false;
 			}
-			return true;
+			$(".bankPwCh").html("&nbsp;");
+			return true; */
 
 		}
 		new pinpad({

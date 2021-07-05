@@ -24,7 +24,6 @@ public class CoinAcntDao {
 		return sqlSession.selectList("coinacnt.selectMyCoinAcnt", acntno);
 	}
 	public CoinAcnt countcoin(CoinAcnt vo){
-		System.out.println("다오 안 " + vo.getAcntno());
 		return sqlSession.selectOne("coinacnt.countCoin", vo);
 	}
 	public int insertCoinAcnt(CoinAcnt vo) { // 글 입력

@@ -55,57 +55,45 @@
 //    });
 //})
 
-//게시글은 .Dropdown, 댓글은 .replyDropdown
+// 게시글, 댓글 드랍다운 메뉴 클릭 시 열기/닫기
+$('.dropdown').click(function() {
+	console.log("클릭함");
+	console.log("클릭dropdown 상위 article idx: " + $(this).parents('article').index());
+	$('.dropdown-content').eq($(this).parents('article').index()).show();
+	});
 
-//	var dropdown = document.getElementById('dropdown';)
-window.onload = function() {
-	
-	var dropdown = document.getElementsByClassName('dropdown')
-	var replyDropdown = document.getElementsByClassName('replyDropdown')
-	var dropdownContent = document.getElementById('dropdown-content')
-	
-	   function dropdown() {
-	   if (dropdownContent.style.display === 'none') {
-		   console.log("none입니다!!!!!!!!!!!!!!!!!!!!!!!!");
-		   dropdownContent.style.display = 'block';
-	   }
-	}
+$('.replyDropdown').click(function() {
+	console.log("클릭함");
+	console.log("클릭dropdown 상위 article idx: " + $(this).parents('article').index());
+	$('.dropdown-content').eq($(this).parents('article').index()).show();
+	});
 
-}
+$('.dropdown-content').click(function() {
+	console.log("클릭함");
+	console.log("클릭dropdown 상위 article idx: " + $(this).parents('article').index());
+	$('.dropdown-content').eq($(this).parents('article').index()).hide();
+	});
 
-// 추천 시 아이콘 변경
-let commentLike = document.querySelectorAll('.icons-left');
-commentLike.forEach(function(event) {
-    event.addEventListener('click', function() {
-        var likeBtn = this.querySelector('.thumbsup');
-        var likedBtn = this.querySelector('.thumbsup-liked');
-
-        if (likeBtn.style.display === 'none') {
-            likeBtn.style.display = 'inline-block';
-            likedBtn.style.display = 'none';
-        } else {
-            likeBtn.style.display = 'none';
-            likedBtn.style.display = 'inline-block';
-        }
-    })
-})
-
-// 비추천 시 아이콘 변경
-let commentDislike = document.querySelectorAll('.icons-middle');
-commentDislike.forEach(function(event) {
-	event.addEventListener('click', function() {
-		var likeBtn = this.querySelector('.thumbsdown');
-		var likedBtn = this.querySelector('.thumbsdown-disliked');
-		
-		if (likeBtn.style.display === 'none') {
-			likeBtn.style.display = 'inline-block';
-			likedBtn.style.display = 'none';
-		} else {
-			likeBtn.style.display = 'none';
-			likedBtn.style.display = 'inline-block';
-		}
-	})
-})
+$(document).mouseup(function (e){
+    var dropdown = $('.dropdown-content');
+    var modalReply = $('#modal_reply');
+    var modalReport = $('#modal_report');
+    var modalReportReply = $('#modal_report_reply');
+    if( dropdown.has(e.target).length === 0){
+    	dropdown.css('display','none');
+    }
+//    if( modalReply.has(e.target).length === 0){
+//    	modalReply.css('display','none');
+//    	bg.remove();
+//    	modal.style.display = 'none';
+//    }
+//    if( modalReply.has(e.target).length === 0){
+//    	modalReply.css('display','none');
+//      bgReply.remove();
+//      modalReply.style.display = 'none';
+//    }
+   
+  });
 
    // 게시글 신고 부분
       <!-- 게시글 신고 전송 ajax -->
@@ -150,43 +138,6 @@ commentDislike.forEach(function(event) {
           }
        });
     })
-
-   // 추천
-//   function clike() {
-//      if(${loginMember == null}) {
-//         alert("로그인이 필요합니다");         
-//      } else {
-//         $.ajax({
-//            url : "${pageContext.request.contextPath}/clike",
-//            type : "post",
-//            data : {
-//               "cno" : "${community.cno}"
-//            },
-//            success : function(data) {
-//               window.location.reload();
-//            }
-//         });
-//      }
-//   }
-    
-   // 비추천
-//   function dislike() {
-//      if(${loginMember == null}) {
-//         alert("로그인이 필요합니다");         
-//      } else {
-//         $.ajax({
-//            url : "${pageContext.request.contextPath}/cdislike",
-//            type : "post",
-//            data : {
-//               cno : "${community.cno}"
-//            },
-//            datatype : "json",
-//            success : function(data) {
-//               window.location.reload();
-//            }
-//         });
-//      }
-//   }
 
       // 댓글 삽입
    function rplyInsert() {
@@ -262,6 +213,7 @@ commentDislike.forEach(function(event) {
 
         // 모달 div 뒤에 희끄무레한 레이어
         bg = document.createElement('div');
+        bg.class = 'bg';
         bg.setStyle({
             position: 'fixed',
             zIndex: zIndex,
@@ -306,15 +258,15 @@ commentDislike.forEach(function(event) {
     
     
     // 댓글 모달
-    var bg = null;
-   var modal = null;
+    var bgReply = null;
+   var modalReply = null;
    function modalReplyFn(id) {
         var zIndex = 9999;
-        modal = document.getElementById(id);
+        modalReply = document.getElementById(id);
 
         // 모달 div 뒤에 희끄무레한 레이어
-        bg = document.createElement('div');
-        bg.setStyle({
+        bgReply = document.createElement('div');
+        bgReply.setStyle({
             position: 'fixed',
             zIndex: zIndex,
             left: '0px',
@@ -323,17 +275,17 @@ commentDislike.forEach(function(event) {
             height: '100%',
             overflow: 'auto',
             // 레이어 색갈은 여기서 바꾸면 됨
-            backgroundColor: 'rgba(0,0,0,0.3)'
+            backgroundColor: 'rgba(0,0,0,0.1)'
         });
-        document.body.append(bg);
+        document.body.append(bgReply);
 
         // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-        modal.querySelector('.modal_reply_close_btn').addEventListener('click', function() {
-            bg.remove();
-            modal.style.display = 'none';
+        modalReply.querySelector('.modal_reply_close_btn').addEventListener('click', function() {
+        	bgReply.remove();
+        	modalReply.style.display = 'none';
         });
 
-        modal.setStyle({
+        modalReply.setStyle({
             position: 'fixed',
             display: 'block',
             boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',

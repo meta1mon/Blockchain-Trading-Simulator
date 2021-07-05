@@ -1,5 +1,5 @@
 var page = 1;
-var search = '';
+var search = $('#search').val();
 
 $('#searchBtn').click(function(){
 	
@@ -46,11 +46,12 @@ function newsHeadLine() {
 					token : "$2y$10$hUvFjpPSDU5Gx6vp20vhGOg6Nuib3IZBzZk4cR5f.uGbRtMKN.S2m"
 				},
 				success : function(data) {
-					console.log(typeof(data));
+					var ajaxSearch = $('#search').val();
+//					console.log(typeof(data));
 					// 헤드라인 : 최신 기사 10개만 출력
 					for (var i = 0; i < 10; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
-						$(".scroll").append('<a class="atitle" href="ncontent?news_id='+data.data[i].id+'"><span class="headList" id="headTime">&#128344;'+newsTime+'&nbsp;&nbsp;</span><span class="headList">'+data.data[i].title+'</span></a>&nbsp;&nbsp;&nbsp;&nbsp;');
+						$(".scroll").append('<a class="atitle" href="ncontent?news_id='+data.data[i].id+'&news_keyword='+ajaxSearch+'"><span class="headList" id="headTime">&#128344;'+newsTime+'&nbsp;&nbsp;</span><span class="headList">'+data.data[i].title+'</span></a>&nbsp;&nbsp;&nbsp;&nbsp;');
 						$(".atitle").css("color","black");
 					}
 				}
@@ -72,18 +73,19 @@ function newsList(page, search) {
 					keyword : search
 				},
 				success : function(data) {
-					
+					var ajaxSearch = $('#search').val();
+//					console.log("search값: " + ajaxSearch);
 					$("#raw1").empty(); // 각 클래스 내용 비워주기
 					$("#raw2").empty();
 					// 뉴스목록 
 					for (var i = p; i < p+3; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
-						$("#raw1").append('<a class="alist1" href="ncontent?news_id='+data.data[i].id+'"><div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div></a>');
+						$("#raw1").append('<a class="alist1" href="ncontent?news_id='+data.data[i].id+'&news_keyword='+ajaxSearch+'"><div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div></a>');
 						$(".alist1").css("color","black");
 					}
 					for (var i = p+3; i < p+6; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
-						$("#raw2").append('<a class="alist2" href="ncontent?news_id='+data.data[i].id+'"><div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div></a>');
+						$("#raw2").append('<a class="alist2" href="ncontent?news_id='+data.data[i].id+'&news_keyword='+ajaxSearch+'"><div class="newsLabel"><img class="newsThumbnail" src="'+data.data[i].thumbnail+'"><div id="newsTitle">'+data.data[i].title+'</div><div id="newsTime">&#128344;'+newsTime+'</div></div></a>');
 						$(".alist2").css("color","black");
 					}
 //					console.log("console total : "+data.total);  

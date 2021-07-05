@@ -25,6 +25,8 @@ import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.community.model.vo.Rcommunity;
 import com.kh.bts.community.model.vo.UserRcommuniyCheck;
 import com.kh.bts.member.model.vo.Member;
+import com.kh.bts.ranking.model.service.RankingService;
+import com.kh.bts.ranking.model.vo.Daily;
 
 @Controller
 public class CommunityCtrl {
@@ -33,19 +35,29 @@ public class CommunityCtrl {
 
 	@Autowired
 	private RcommunityService rcmService;
+
+	@Autowired
+	private RankingService rankService;
+
 	public static final int LIMIT = 30;
 //	public static final int PAGE_BOX = 3;
-	
+
 	@RequestMapping("insta")
 	public ModelAndView insta(ModelAndView mav) {
 		Paging vo = new Paging(1, 4);
 		List<Community> list = cmService.selectAllCommunityList(vo);
 		mav.addObject("commuList", list);
 		mav.addObject("nowPage", vo);
+
+		List<Daily> list1 = rankService.selectDaily();
+		mav.addObject("first", list1.get(0));
+		mav.addObject("second", list1.get(1));
+		mav.addObject("third", list1.get(2));
+		mav.addObject("other", list1);
 		mav.setViewName("community/mikrokosmos");
 		return mav;
 	}
-	
+
 	@RequestMapping("moreInsta")
 	public void moreInsta(Paging vo, HttpServletResponse response) {
 		response.setCharacterEncoding("UTF-8");
@@ -66,38 +78,37 @@ public class CommunityCtrl {
 			out.flush();
 			out.close();
 		}
-		
+
 	}
-	
+
 	@RequestMapping(value = "clist", method = RequestMethod.GET)
 	public ModelAndView communityListService(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
 			@RequestParam(name = "searchType", defaultValue = "1") int searchType,
 			@RequestParam(name = "bottomKeyword", defaultValue = "", required = false) String bottomKeyword,
-			@RequestParam(name = "bottomSearchType", defaultValue = "1") int bottomSearchType,
-			ModelAndView mv) {
+			@RequestParam(name = "bottomSearchType", defaultValue = "1") int bottomSearchType, ModelAndView mv) {
 		try {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
 			int listCount = cmService.totalCount(); // 게시글 개수
-			int maxPage = (int) ((double) listCount / LIMIT + 0.9); //게시글 개수 /
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9); // 게시글 개수 /
 
-			if (!keyword.equals("")) {  // 상단 검색 내용 있음
+			if (!keyword.equals("")) { // 상단 검색 내용 있음
 				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword, searchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-				
-			} else if (!bottomKeyword.equals("")) {  // 하단 검색 내용 있음
+
+			} else if (!bottomKeyword.equals("")) { // 하단 검색 내용 있음
 				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, bottomKeyword, bottomSearchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-				
-			} else if (keyword.equals(""))  {  // 상단 검색 내용 없음
+
+			} else if (keyword.equals("")) { // 상단 검색 내용 없음
 				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword, searchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-			} else {  // 하단 검색 내용 없음
+			} else { // 하단 검색 내용 없음
 				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, bottomKeyword, bottomSearchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 			}
-			
+
 			mv.addObject("plist", cmService.searchpopularList());
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
@@ -116,18 +127,16 @@ public class CommunityCtrl {
 		try {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
-			
-			
+
 			Community vo = cmService.selectCommunity(0, cno);
 			String writerEmail = cmService.returnEmail(vo.getCwriter());
-			
+
 			List<UserRcommuniyCheck> list = rcmService.selectRcommunityList(cno);
-			
-			
+
 			mv.addObject("community", vo);
 			mv.addObject("commentList", rcmService.selectRcommunityList(cno));
 			mv.addObject("writerEmail", writerEmail);
-			
+
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("community/communityDetail");
 		} catch (Exception e) {

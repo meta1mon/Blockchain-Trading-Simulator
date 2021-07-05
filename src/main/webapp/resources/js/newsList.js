@@ -46,11 +46,12 @@ function newsHeadLine() {
 					token : "$2y$10$hUvFjpPSDU5Gx6vp20vhGOg6Nuib3IZBzZk4cR5f.uGbRtMKN.S2m"
 				},
 				success : function(data) {
-					console.log(typeof(data));
+					var ajaxSearch = $('#search').val();
+//					console.log(typeof(data));
 					// 헤드라인 : 최신 기사 10개만 출력
 					for (var i = 0; i < 10; i++) {
 						var newsTime = dateDiffer(data.data[i].pubdate);
-						$(".scroll").append('<a class="atitle" href="ncontent?news_id='+data.data[i].id+'"><span class="headList" id="headTime">&#128344;'+newsTime+'&nbsp;&nbsp;</span><span class="headList">'+data.data[i].title+'</span></a>&nbsp;&nbsp;&nbsp;&nbsp;');
+						$(".scroll").append('<a class="atitle" href="ncontent?news_id='+data.data[i].id+'&news_keyword='+ajaxSearch+'"><span class="headList" id="headTime">&#128344;'+newsTime+'&nbsp;&nbsp;</span><span class="headList">'+data.data[i].title+'</span></a>&nbsp;&nbsp;&nbsp;&nbsp;');
 						$(".atitle").css("color","black");
 					}
 				}

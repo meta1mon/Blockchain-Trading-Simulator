@@ -61,6 +61,6 @@
 		</c:choose>
 	</div>
 </div>
-<%-- <jsp:include page="../investment/sell.jsp"></jsp:include>
-<jsp:include page="../investment/buy.jsp"></jsp:include> --%>
+ <jsp:include page="../investment/sell.jsp"></jsp:include>
+<jsp:include page="../investment/buy.jsp"></jsp:include> 
 </header>

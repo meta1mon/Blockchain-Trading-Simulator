@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,7 +164,7 @@
 												type="text" value="BTC" readonly="readonly"
 												style="text-align: center;"><br> 보유 수량 : <input
 												style="text-align: center;" id="coincount"
-												placeholder="보유 코인"><br></td>
+												placeholder="보유 코인" value=""><br></td>
 										</tr>
 
 										<tr>

@@ -175,6 +175,21 @@ function clike() {
             window.location.reload();
          }
       });
+      let commentLike = document.querySelectorAll('.icons-left');
+      commentLike.forEach(function(event) {
+          event.addEventListener('click', function() {
+              var likeBtn = this.querySelector('.thumbsup');
+              var likedBtn = this.querySelector('.thumbsup-liked');
+
+              if (likeBtn.style.display === 'none') {
+                  likeBtn.style.display = 'inline-block';
+                  likedBtn.style.display = 'none';
+              } else {
+                  likeBtn.style.display = 'none';
+                  likedBtn.style.display = 'inline-block';
+              }
+          })
+      })
    }
 }
  
@@ -194,6 +209,21 @@ function dislike() {
             window.location.reload();
          }
       });
+      let commentDislike = document.querySelectorAll('.icons-middle');
+      commentDislike.forEach(function(event) {
+      	event.addEventListener('click', function() {
+      		var likeBtn = this.querySelector('.thumbsdown');
+      		var likedBtn = this.querySelector('.thumbsdown-disliked');
+      		
+      		if (likeBtn.style.display === 'none') {
+      			likeBtn.style.display = 'inline-block';
+      			likedBtn.style.display = 'none';
+      		} else {
+      			likeBtn.style.display = 'none';
+      			likedBtn.style.display = 'inline-block';
+      		}
+      	})
+      })
    }
 }
 
@@ -231,7 +261,7 @@ function dislike() {
 								<img class="img-profile pic" src="resources/assets/img/user.png"
 									alt=".."> <span class="userID main-id point-span">${vo.cwriter }</span>
 							</div>
-							<div class="dropdown" style="float: right;" onclick="dropdown()">
+							<div class="dropdown" style="float: right;">
 								<div class="icon-react icon-more"
 									style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
 									<div class="dropdown-content" style="left: 0;">
@@ -320,7 +350,7 @@ function dislike() {
 			</div>
 			<!-- main-right -->
 			<div class="main-right">
-				<!-- story section -->
+				<!-- 랭킹 section -->
 				<div class="section-story">
 					<div class="menu-title">
 						<span class="sub-title">랭킹</span> <span class="find-more" onclick="location.href='ranking'">모두
@@ -330,43 +360,45 @@ function dislike() {
 						<li>
 							<div class="gradient-wrap">
 								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
+									src="resources/assets/img/gold_medal.png" alt="..">
 							</div>
 							<div class="profile-text">
-								<span class="userID point-span">elonmusk</span> <span
+								<span class="userID point-span">${first.nickname }</span> <span
 									class="sub-span">1등</span>
 							</div>
 						</li>
 						<li>
 							<div class="gradient-wrap">
 								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
+									src="resources/assets/img/silver_medal.png" alt="..">
 							</div>
 							<div class="profile-text">
-								<span class="userID point-span">han_ye_seul</span> <span
+								<span class="userID point-span">${second.nickname }</span> <span
 									class="sub-span">2등</span>
 							</div>
 						</li>
 						<li>
 							<div class="gradient-wrap">
 								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
+									src="resources/assets/img/bronze_medal.png" alt="..">
 							</div>
 							<div class="profile-text">
-								<span class="userID point-span">dntlrdl</span> <span
+								<span class="userID point-span">${third.nickname }</span> <span
 									class="sub-span">3등</span>
 							</div>
 						</li>
+						<c:forEach items="${other }" var="rank" begin="3" varStatus="status">
 						<li>
 							<div class="gradient-wrap">
 								<img class="img-profile story"
 									src="resources/assets/img/user.png" alt="..">
 							</div>
 							<div class="profile-text">
-								<span class="userID point-span">i_icaruswalks</span> <span
-									class="sub-span">4등</span>
+								<span class="userID point-span">${rank.nickname }</span> <span
+									class="sub-span">${status.index +1 }등</span>
 							</div>
 						</li>
+						</c:forEach>
 					</ul>
 				</div>
 				<!-- recommendation section -->
@@ -422,7 +454,7 @@ function dislike() {
 			<!-- 댓글 모달창 -->
 			<div id="modal_reply">
 				<button type="button" id="reply_popup_close"
-					class="modal_reply_close_btn">X</button>
+					class="modal_reply_close_btn"></button>
 				<!-- 댓글 작성 부분 -->
 				<div>
 					<c:if test="${loginMember != null }">
@@ -458,7 +490,7 @@ function dislike() {
 								<span class="userID point-span">wecode_bootcamp</span><span
 									class="sub-span">12분 전</span><br> <span
 									class="content-span">저스틴 비버의 어쿠스틱 라이브 😮</span>
-								<div class="replyDropdown" style="float: right;" onclick="dropdown()">
+								<div class="replyDropdown" style="float: right;">
 									<div class="icon-react icon-more"
 										style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
 										<div class="dropdown-content" style="left: 0;">

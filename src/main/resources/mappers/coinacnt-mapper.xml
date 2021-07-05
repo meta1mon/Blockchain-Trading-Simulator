@@ -3,6 +3,8 @@
 <mapper namespace="coinacnt">
 	<resultMap type="CoinAcnt" id="resultCoinAcnt">
 	</resultMap>
+	<resultMap type="Acnt" id="resultAcnt">
+	</resultMap>
 
 	<!-- 계좌 정보 가져오기 -->
 	<select id="selectMyCoinAcnt" parameterType="string"
@@ -76,7 +78,7 @@
 		COINACNT WHERE BUYCNT != 0
 
 	</select>
-	
+
 	<!-- 계좌만 가져오기, 랭킹용 -->
 	<select id="selectAllAcntno" resultType="string">
 		SELECT DISTINCT ACNTNO
@@ -90,4 +92,12 @@
 		SELECT * FROM COINACNT WHERE BUYCNT != 0 ORDER BY ACNTNO
 	</select>
 
+	<!-- 보유 코인 없는 유저 정보 가져오기, 랭킹용 -->
+	<select id="selectNoCoinAcnt" resultType="arraylist"
+		resultMap="resultAcnt">
+		SELECT * FROM ACNT WHERE ACNTNO NOT IN(
+		SELECT DISTINCT ACNTNO
+		FROM COINACNT
+		WHERE BUYCNT != 0)
+	</select>
 </mapper>

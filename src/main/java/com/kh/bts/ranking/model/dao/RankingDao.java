@@ -27,7 +27,7 @@ public class RankingDao {
 		return list;
 	}
 
-	// 코인계좌 전부 가져감
+	// 코인계좌 전부 가져감(코인수량 0은 제외)
 	public List<CoinAcnt> selectAllCoinAcnt() {
 		List<CoinAcnt> list = sqlSession.selectList("coinacnt.selectAllCoinAcnt");
 		return list;
@@ -37,16 +37,41 @@ public class RankingDao {
 	public int updateDaily(Daily vo) {
 		Acnt vo2 = sqlSession.selectOne("acnt.returnEmail", vo.getAcntno());
 		vo.setEmail(vo2.getEmail());
+		
+		// 코인 평가금과 보유 현금액을 업데이트
 		vo.setNewesset(vo.getNewesset() + vo2.getCybcash());
 		String nickname = sqlSession.selectOne("Member.returnNickname", vo.getEmail());
 		vo.setNickname(nickname);
 		long oldesset = sqlSession.selectOne("ranking.selectOldEsset", vo.getAcntno());
+		
 		vo.setOldesset(oldesset);
 		int result = sqlSession.update("ranking.updateDaily", vo);
 		if (result > 0) {
 			System.out.println("데일리 수익률에 평가금 반영 성공");
 		} else {
 			System.out.println("데일리 수익률에 평가금 반영 실패");
+		}
+		return result;
+	}
+	
+	public int updateDailyNoCoin() {
+		List<Acnt> list = sqlSession.selectList("coinacnt.selectNoCoinAcnt");
+		int result = 0;
+		for (int i = 0; i < list.size(); i++) {
+			Acnt vo = list.get(i);
+			long cybcash = vo.getCybcash();
+			Daily vo2 = new Daily();
+			vo2.setNewesset(cybcash);
+			vo2.setAcntno(vo.getAcntno());
+			long oldesset = sqlSession.selectOne("ranking.selectOldEsset", vo.getAcntno());
+			vo2.setOldesset(oldesset);
+			result = sqlSession.update("ranking.updateDaily", vo2);
+			if(result > 0) {
+				System.out.println(i+"번째 noCoin 유저 변경 성공");
+			} else {
+				System.out.println(i+"번째 noCoin 유저 변경 실패");
+				break;
+			}
 		}
 		return result;
 	}

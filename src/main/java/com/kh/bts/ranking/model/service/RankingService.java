@@ -11,4 +11,5 @@ public interface RankingService {
 	public List<CoinAcnt> selectAllCoinAcnt();
 	public int updateDaily(Daily vo);
 	public List<Daily> selectDaily();
+	public int updateDailyNoCoin();
 }

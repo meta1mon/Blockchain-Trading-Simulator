@@ -110,7 +110,7 @@ public class MypageController {
 
 	// 비밀번호 변경
 	@RequestMapping(value = "/passChange")
-	public ModelAndView passChange(ModelAndView mv, HttpServletRequest request, @RequestParam(name = "pw") String pw) {
+	public void passChange(ModelAndView mv, HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "pw") String pw) {
 		logger.info("비밀번호 변경하러 들어옴");
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("loginMember");
@@ -124,8 +124,11 @@ public class MypageController {
 		} else {
 			logger.info("비밀번호 변경 실패");
 		}
-		mv.setViewName("main/mainPage");
-		return mv;
+		try {
+			response.sendRedirect("/bts");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// 계좌 비밀번호 변경

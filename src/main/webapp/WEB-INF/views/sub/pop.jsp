@@ -33,6 +33,7 @@
 }
 
 .chatt {
+	z-index : 9998;
 	position: fixed;
 	top: 120px;
 	right: 5px;

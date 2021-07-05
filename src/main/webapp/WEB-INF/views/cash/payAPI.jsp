@@ -53,7 +53,7 @@
 						"sellprice" : $("#childPrice").val()
 					},
 					success : function(data) {
-						alert("충전 완료!! db 확인해보즈아아")
+						window.close();
 					}
 				});
 			} else {

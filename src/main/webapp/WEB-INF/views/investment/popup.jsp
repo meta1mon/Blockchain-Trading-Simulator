@@ -40,6 +40,7 @@
 }
 
 .chat {
+	z-index : 9999;
 	position : fixed;
 	top: 120px;
 	right: 5px;

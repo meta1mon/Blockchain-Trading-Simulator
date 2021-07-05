@@ -10,7 +10,6 @@
 <script type="text/javascript">
 	$(function() {
 		$("#push").click(function() {
-			console.log("asdf");
 			location.href = location.href;
 		});
 

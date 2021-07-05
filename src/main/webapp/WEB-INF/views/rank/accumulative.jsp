@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+// 누적 수익률
+// 10분 기준?으로 돌리까 생각 중
 	$(function() {
 		// 실시간 가격 받을 것
 		var nowprices = [];
@@ -14,6 +16,7 @@
 		var acntNoArr = new Array();
 		var appraisalArr = [];
 		var acntNoStr = "";
+		var criteria = 0; // 0 - 누적, 1 - 데일리, 2 - 위클리, 3 - 먼슬리
 		loadCoin();
 
 		// 코인 이름 distinct로 받아오기(보유량이 0이면 안가져옴)
@@ -52,7 +55,7 @@
 
 		}
 
-				// 실시간 코인 가격 불러오기
+				// 실시간 코인 가격 불러오기 자바 // url get json parsing
 		 function livePrice() {
 			 	$.ajax({
 					 url : 'https://api.bithumb.com/public/ticker/ALL_KRW',
@@ -95,12 +98,13 @@
 				 type : "post",
 				 cache : false,
 				 data : { "acntno" : acntNoArr[i],
-				 "appraisal" : appraisalArr[i] },
+				 "appraisal" : appraisalArr[i],
+				 "criteria" : criteria},
 				 success : function(data) {
 					 if(data > 0) {
-					 	console.log("Daily 랭크 반영 성공");
+					 	console.log("Accumulative 랭크 반영 성공");
 					 } else {
-					 	console.log("Daily 랭크 반영 실패");
+					 	console.log("Accumulative 랭크 반영 실패");
 					 }
 				}
 		 	});
@@ -110,11 +114,12 @@
 			$.ajax({
 				url : '${pageContext.request.contextPath}/noCoinRank',
 				type : "post",
+				data : { "criteria" : criteria},
 				success : function(data) {
 					if (data > 0) {
-						alert("코인미보유자 랭킹 처리 성공");
+						console.log("코인미보유자 랭킹 처리 성공");
 					} else {
-						alert("코인미보유자 랭킹 처리 실패");
+						console.log("코인미보유자 랭킹 처리 실패");
 					}
 				}
 			});

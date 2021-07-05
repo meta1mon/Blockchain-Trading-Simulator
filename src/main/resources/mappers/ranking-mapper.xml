@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ranking">
 	<resultMap type="Daily" id="resultDaily"></resultMap>
+	<resultMap type="Accumulative" id="resultAccumulative"></resultMap>
+	
 	<!-- Daily 수익률 변경 -->
 	<update id="updateDaily" parameterType="Daily" flushCache="true"
 		statementType="PREPARED">
@@ -14,10 +16,33 @@
 		#{acntno}
 	</update>
 
+	<!-- Accumulative 수익률 변경, 모든 랭킹 VO는 Daily와 동일하기 때문에, Daily를 매개변수로 넣는다 -->
+	<update id="updateAccumulative" parameterType="Daily"
+		flushCache="true" statementType="PREPARED">
+		UPDATE ACCUMULATIVE
+		SET OLDESSET =
+		#{oldesset},
+		NEWESSET = #{newesset},
+		YIELD =
+		((#{newesset}/#{oldesset})-1)*100
+		WHERE ACNTNO =
+		#{acntno}
+	</update>
+
 	<!-- 회원가입 시, Daily 랭킹에 참가 -->
 	<insert id="insertDaily" parameterType="Daily" flushCache="true"
 		statementType="PREPARED">
 		INSERT INTO DAILY VALUES(
+		#{acntno}, #{email},
+		#{nickname}, DEFAULT, DEFAULT, 0
+		)
+	</insert>
+
+	<!-- 회원가입 시, Accumulative 랭킹에 참가, 모든 랭킹 VO는 Daily와 동일하기 때문에, Daily를 매개변수로 
+		넣는다 -->
+	<insert id="insertAccumulative" parameterType="Daily"
+		flushCache="true" statementType="PREPARED">
+		INSERT INTO ACCUMULATIVE VALUES(
 		#{acntno}, #{email}, #{nickname}, 0, default, 0
 		)
 	</insert>
@@ -40,6 +65,26 @@
 		resultType="int">
 		select b.* from (select rownum, a.* from (select * from
 		daily order by yield desc) a) b where email= #{email}
+	</select>
+
+	<!-- Accumulative 랭킹 가져오기 -->
+	<select id="selectAccumulative" resultType="arraylist"
+		resultMap="resultAccumulative">
+		SELECT * FROM Accumulative ORDER BY
+		YIELD DESC
+	</select>
+
+	<!-- 나의 Accumulative 정보 가져오기 -->
+	<select id="selectMyAccumulative" parameterType="string"
+		resultType="Accumulative">
+		SELECT * FROM Accumulative WHERE EMAIL = #{email}
+	</select>
+
+	<!-- 나의 Accumulative 순위 가져오기 -->
+	<select id="selectMyAccumulativeRank" parameterType="string"
+		resultType="int">
+		select b.* from (select rownum, a.* from (select * from
+		Accumulative order by yield desc) a) b where email= #{email}
 	</select>
 
 	<!-- Daily 계좌번호로 과거 자산 가져오기 -->

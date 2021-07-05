@@ -29,6 +29,12 @@ public class MemberDAO {
 				result = sqlSession.insert("ranking.insertDaily", vo3);
 				if (result > 0) {
 					System.out.println("Daily 랭크 참가 완료");
+					result = sqlSession.insert("ranking.insertAccumulative", vo3);
+					if (result > 0) {
+						System.out.println("Accumulative 랭크 참가 완료");
+					} else {
+						System.out.println("Accumulative 랭크 참가 실패");
+					}
 				} else {
 					System.out.println("Daily 랭크 참가 실패");
 				}

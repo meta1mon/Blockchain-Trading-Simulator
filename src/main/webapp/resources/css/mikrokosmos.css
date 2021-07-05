@@ -182,6 +182,7 @@ article {
 
 .section-recommend {
 	height: 180px;
+	overflow-y: auto;
 }
 /* article */
 header {
@@ -210,6 +211,14 @@ header {
 
 .main-id {
 	margin-left: 14px;
+}
+
+.subject {
+	padding: 0 16px 6px 16px;
+}
+
+.content p{
+	padding: 0 16px;
 }
 
 .dropdown {
@@ -260,7 +269,6 @@ header {
 /* .dropdown:hover .dropbtn, .replyDropdown:hover .dropbtn {
 	background-color: #3e8e41;
 } */
-
 .icon-more {
 	justify-self: end;
 	background-size: 24px 24px;
@@ -459,7 +467,7 @@ button.submit-comment:focus {
 	font-size: 12px;
 	font-weight: 600;
 	color: #262626;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 .story-list li, .recommend-list li {
@@ -542,6 +550,7 @@ ul.story-list .profile-text {
 	padding: 3px 10px;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
+	cursor:pointer;
 }
 
 #modal_report .modal_report_btn, #modal_report_reply .modal_report_btn {
@@ -555,6 +564,7 @@ ul.story-list .profile-text {
 	padding: 3px 10px;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
+	cursor:pointer;
 }
 
 #modal_report .modal_close_btn:hover, #modal_report .modal_report_btn:hover
@@ -584,8 +594,10 @@ ul.story-list .profile-text {
 }
 
 .modal-hl {
-	border-top: 1px solid #DBDBDB;
-	width: 430px;
+	border-top: 1px solid #efefef;
+	width: 468px;
+    position: relative;
+    right: 30px;
 }
 
 .modal-input-comment {
@@ -599,12 +611,18 @@ ul.story-list .profile-text {
 }
 
 .modal_reply_close_btn {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	border: none;
-	background-color: #fefefe;
-	font-size: 14px;
+	    position: absolute;
+    top: 8px;
+    right: 8px;
+    border: none;
+    background-color: #fefefe;
+    height: 17px;
+    width: 17px;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: center left;
+    background-image: url(../assets/img/cancel.png);
+    cursor:pointer;
 }
 
 .modal_reply_close_btn:hover {

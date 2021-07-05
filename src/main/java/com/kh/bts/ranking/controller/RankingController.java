@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.ranking.model.service.RankingService;
+import com.kh.bts.ranking.model.vo.Accumulative;
 import com.kh.bts.ranking.model.vo.Daily;
 
 @Controller
@@ -23,7 +24,7 @@ public class RankingController {
 	private RankingService rankService;
 
 	// Daily 랭킹 페이지로 이동
-	@RequestMapping("/ranking")
+	@RequestMapping("/rankDaily")
 	public ModelAndView ranking(ModelAndView mav, HttpSession session) {
 		List<Daily> list = rankService.selectDaily();
 
@@ -39,18 +40,50 @@ public class RankingController {
 		mav.addObject("second", list.get(1));
 		mav.addObject("third", list.get(2));
 		mav.addObject("other", list);
-		mav.addObject("my", vo);		
-		mav.addObject("rank", rank);		
-		mav.setViewName("rank/ranking");
+		mav.addObject("my", vo);
+		mav.addObject("rank", rank);
+		mav.setViewName("rank/rankDaily");
+		return mav;
+	}
+	
+	// Accumulative 랭킹 페이지로 이동
+	@RequestMapping("/rankAccumulative")
+	public ModelAndView accumRank(ModelAndView mav, HttpSession session) {
+		List<Accumulative> list = rankService.selectAccumulative();
+		
+		String email = (String) session.getAttribute("loginMember");
+		Accumulative vo = null;
+		int rank = 0;
+		if (email != null) {
+			vo = rankService.selectMyAccumulative(email);
+			rank = rankService.selectMyAccumulativeRank(email);
+		}
+		
+		mav.addObject("first", list.get(0));
+		mav.addObject("second", list.get(1));
+		mav.addObject("third", list.get(2));
+		mav.addObject("other", list);
+		mav.addObject("my", vo);
+		mav.addObject("rank", rank);
+		mav.setViewName("rank/rankAccumulative");
 		return mav;
 	}
 
 	// 데일리 랭킹 계산하는 페이지로 이동(코인계좌 전부 가져감)
-	@RequestMapping("/calc")
+	@RequestMapping("/calcD")
 	public ModelAndView calcYield(ModelAndView mav) {
 		List<CoinAcnt> list = rankService.selectAllCoinAcnt();
 		mav.addObject("coinAcnt", list);
-		mav.setViewName("rank/calcYield");
+		mav.setViewName("rank/daily");
+		return mav;
+	}
+	
+	// 누적 랭킹 계산하는 페이지로 이동(코인계좌 전부 가져감)
+	@RequestMapping("/calcA")
+	public ModelAndView calcAccum(ModelAndView mav) {
+		List<CoinAcnt> list = rankService.selectAllCoinAcnt();
+		mav.addObject("coinAcnt", list);
+		mav.setViewName("rank/accumulative");
 		return mav;
 	}
 
@@ -58,19 +91,21 @@ public class RankingController {
 	@ResponseBody
 	@RequestMapping("/updateRank")
 	public int updateRank(@RequestParam(name = "acntno") String acntno,
-			@RequestParam(name = "appraisal") long appraisal) {
+			@RequestParam(name = "appraisal") long appraisal, @RequestParam(name = "criteria") int criteria) {
 		Daily vo = new Daily();
 		vo.setAcntno(acntno);
 		vo.setNewesset(appraisal);
-		int result = rankService.updateDaily(vo);
+		int result = rankService.updateDaily(vo, criteria);
+
 		return result;
 	}
 
 	// 코인 미보유자의 데일리 랭킹처리
 	@ResponseBody
 	@RequestMapping("/noCoinRank")
-	public int noCoinRank() {
-		int result = rankService.updateDailyNoCoin();
+	public int noCoinRank(@RequestParam(name = "criteria") int criteria) {
+		int result = 0;
+		result = rankService.updateDailyNoCoin(criteria);
 		return result;
 	}
 

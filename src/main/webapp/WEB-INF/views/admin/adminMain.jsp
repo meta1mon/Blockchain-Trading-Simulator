@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/admin.css"
 	rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
 #mm li:not(.sub) {
 	float: left;
@@ -43,6 +44,11 @@
 
 .fa-chevron-left, .fa-chevron-right {
 	color: #ffc000;
+}
+
+.report a:hover, .money a:hover {
+	color: red;
+	font-weight: bold;
 }
 </style>
 </head>

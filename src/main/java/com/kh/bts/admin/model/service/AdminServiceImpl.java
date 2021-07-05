@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.bts.admin.model.dao.AdminDao;
 import com.kh.bts.cash.model.vo.Cash;
@@ -19,30 +20,37 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminDao aDao;
 	
+	@Transactional
 	@Override
 	public int insertCreport(Creport vo) {
 		return aDao.insertCreport(vo);
 	}
+	
+	@Transactional
 	@Override
 	public int insertAcreport(Acreport vo) {
 		return aDao.insertAcreport(vo);
 	}
-
+	
+	@Transactional
 	@Override
 	public int insertRreport(Rreport vo) {
 		return aDao.insertRreport(vo);
 	}
 	
+	@Transactional
 	@Override
 	public int insertArreport(Arreport vo) {
 		return aDao.insertArreport(vo);
 	}
 
+	@Transactional
 	@Override
 	public int registerCash(Cash vo) {
 		return aDao.registerCash(vo);
 	}
 	
+	@Transactional
 	@Override
 	public int updateCash(Cash vo) {
 		int result = 0;
@@ -50,6 +58,7 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 	
+	@Transactional
 	@Override
 	public int deleteCash(Cash vo) {
 		int result = 0;
@@ -125,12 +134,14 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.selectRreport(startPage, limit);
 	}
 	
+	@Transactional
 	@Override
 	public int deleteCreport(String crno) {
 		int result = 0;
 		result = aDao.deleteCreport(crno);
 		return result;
 	}
+	@Transactional
 	@Override
 	public int deleteRreport(String rrno) {
 		int result = 0;

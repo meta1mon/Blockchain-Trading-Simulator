@@ -100,7 +100,7 @@ table{
 			<c:if test="${listCount ne 0}">
 				<c:forEach var="vo" items="${list}" varStatus="status">
 					<tr>
-						<td>${vo.nickname}</td>
+						<td class="center">${vo.nickname}</td>
 						<td class="right money"><fmt:formatNumber value="${vo.sellprice}"
 								pattern="#,###,###,###" /></td>
 						<td class="right money"><fmt:formatNumber value="${vo.won}"

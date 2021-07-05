@@ -71,6 +71,9 @@ $(function() {
 		var csum = 0;
 		var c = $("#coincount").val() * 1;
 		csum = c + b;
+		console.log(csum);
+		console.log(csum);
+		console.log(csum);
 		$("#updatecoin").val(csum);
 	});
 	$("#cnt_s").blur(function() { // 합계 구하기 매도

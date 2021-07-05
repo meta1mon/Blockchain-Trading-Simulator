@@ -300,7 +300,8 @@ public class investmentCtrl {
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(result);
-
+		
+		
 		try {
 			out = response.getWriter();
 			out.print(jsonlist);
@@ -473,7 +474,6 @@ public class investmentCtrl {
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(result);
-
 		try {
 			out = response.getWriter();
 			out.print(jsonlist);
@@ -572,11 +572,12 @@ public class investmentCtrl {
 
 	@RequestMapping(value = "coinacntupdate", method = RequestMethod.POST)
 	public void coinacntupdate(CoinAcnt vo, @RequestParam(name = "acntno") String acntno,
-			@RequestParam(name = "buycnt") int buycnt, @RequestParam(name = "coin") String coin,
+			@RequestParam(name = "buycnt") double buycnt, @RequestParam(name = "coin") String coin,
 			HttpServletResponse response) throws Exception {
 		vo.setAcntno(acntno);
 		vo.setBuycnt(buycnt);
 		vo.setCoin(coin);
+
 		int result = caService.updateCoinAcnt(vo);
 		PrintWriter out = null;
 		try {

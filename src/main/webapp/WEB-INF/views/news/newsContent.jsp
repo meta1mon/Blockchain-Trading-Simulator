@@ -13,8 +13,8 @@
 <body>
 	<div id="wrapper">
 		<jsp:include page="../main/header.jsp"></jsp:include>
-		<div id="container">
 			<input type="hidden" id="news_id" value="${news_id }">
+			<input type="hidden" id="news_keyword" value="${news_keyword }">
 			<div class="contentWrapper">
 				<div id="newsContent">
 					<!-- newsContent.js의 newsContent() 함수 참조 -->
@@ -29,9 +29,6 @@
 					<p class="copyright">Copyright © 뉴스1, 무단전재 및 재배포 금지</p>
 				</div>
 			</div>
-		</div>
-		<div id="space">
-		</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 	<script type="text/javascript"	src="${pageContext.request.contextPath}/resources/js/newsContent.js"></script>

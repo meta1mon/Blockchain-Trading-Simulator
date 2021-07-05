@@ -302,7 +302,7 @@ function alltable() { // 전체코인 시세 표
 								data['data'][ch_title]['acc_trade_value_24H'] * 1,
 								data['data'][ch_title]['min_price'] * 1,
 								data['data'][ch_title]['max_price'] * 1 ]
-						html = "<table class='table table-striped' id='cointable' ><tr><td>코인명</td><td>현재가</td><td>등락률(24H)</td><td>거래대금</td></tr>";
+						html = "<table class='table table-striped' id='cointable' ><tr><th style='position: sticky; top: 0px'>코인명</th><th style='position: sticky; top: 0px'>현재가</th><th style='position: sticky; top: 0px'>등락률(24H)</th><th style=' position: sticky; top: 0px;'>거래대금</th></tr>";
 						title = "<table class='table table-striped' id='tit'><tr>";
 
 						for (var i = 0; i < coinList.length - 1; i++) {
@@ -867,7 +867,7 @@ function orderbook() {
 								data[0]['orderbook_units'][i]['ask_price'] * 1,
 								data[0]['orderbook_units'][i]['ask_size'] * 1 ]
 					}
-					html6 = "<table id='orderbook_t' class='table table-striped'style='text-align : center;' ><tr><td>현재가</td><td>수량</td></tr>";
+					html6 = "<table id='orderbook_t' class='table table-striped' style='text-align : center;'><tr><th style=' position: sticky; top: 0px;  background: #f8f9fa;'>현재가</th><th  style=' position: sticky; top: 0px;  background: #f8f9fa;'>수량</th></tr>";
 					for (var i = 14; i >= 0; i--) {
 						html6 += "<tr><td><a href='#'  style='color : black !important;' onclick='ob_p("
 								// html6 += "<tr style='background:

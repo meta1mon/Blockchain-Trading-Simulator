@@ -143,14 +143,18 @@
 				window.location.href = $(this).attr('href');
 			})
 		});
+		
+		$("#index").on("click", function(){
+			location.href='/bts';
+		})
 	});
 </script>
 </head>
 <body>
-	<div id="aa" style="height: 100vh; width: 200px; float: left;">
+	<div id="aa" style='height: 100vh; width: 200px; float: left;'>
 		<div class="contenedor-menu">
 			<ul class="menu">
-				<li id="index"><img src="${pageContext.request.contextPath}/resources/assets/img/bts_logo.png" width="120"	height="50" ></li>
+				<li id="index"><img src="${pageContext.request.contextPath}/resources/assets/img/bts_logo.png" width="120"height="50" ></li>
 				<li id="home"><a href="${pageContext.request.contextPath}/admin">MAIN<span class="icon"><i class="fa fa-home"></i></span></a></li>
 				<li id="buychart"><a href="#">회원관리<span class="icon"><i
 						class="fa fa-chevron-down"></i></span></a>

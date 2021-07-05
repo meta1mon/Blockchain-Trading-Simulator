@@ -67,7 +67,7 @@
 					<input type="text" id="searchcoin" value=""
 						style="width: 100%; display: 'block'" placeholder="코인 검색">
 					<table>
-						<tr>
+						<tr style='text-align: center'>
 							<td width= '78.08px !important'></td>
 							<td width= '91.36px !important'><img
 								src="${pageContext.request.contextPath}/resources/assets/img/down-arrow.svg"

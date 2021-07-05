@@ -6,10 +6,19 @@ import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.ranking.model.vo.Daily;
 
 public interface RankingService {
-	public List<String> coinLoad();
-	public List<String> selectAllAcntno();
-	public List<CoinAcnt> selectAllCoinAcnt();
-	public int updateDaily(Daily vo);
-	public List<Daily> selectDaily();
-	public int updateDailyNoCoin();
+	List<String> coinLoad();
+
+	List<String> selectAllAcntno();
+
+	List<CoinAcnt> selectAllCoinAcnt();
+
+	int updateDaily(Daily vo);
+
+	List<Daily> selectDaily();
+
+	int updateDailyNoCoin();
+
+	Daily selectMyDaily(String email);
+
+	int selectMyDailyRank(String email);
 }

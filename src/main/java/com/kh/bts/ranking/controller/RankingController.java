@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,15 +21,26 @@ import com.kh.bts.ranking.model.vo.Daily;
 public class RankingController {
 	@Autowired
 	private RankingService rankService;
-	
+
 	// Daily 랭킹 페이지로 이동
 	@RequestMapping("/ranking")
-	public ModelAndView ranking(ModelAndView mav) {
+	public ModelAndView ranking(ModelAndView mav, HttpSession session) {
 		List<Daily> list = rankService.selectDaily();
+
+		String email = (String) session.getAttribute("loginMember");
+		Daily vo = null;
+		int rank = 0;
+		if (email != null) {
+			vo = rankService.selectMyDaily(email);
+			rank = rankService.selectMyDailyRank(email);
+		}
+
 		mav.addObject("first", list.get(0));
 		mav.addObject("second", list.get(1));
 		mav.addObject("third", list.get(2));
 		mav.addObject("other", list);
+		mav.addObject("my", vo);		
+		mav.addObject("rank", rank);		
 		mav.setViewName("rank/ranking");
 		return mav;
 	}
@@ -61,8 +73,6 @@ public class RankingController {
 		int result = rankService.updateDailyNoCoin();
 		return result;
 	}
-
-
 
 	// 코인계좌에 존재하는 코인만 가져오기(코인수량 0은 제외)
 	@ResponseBody

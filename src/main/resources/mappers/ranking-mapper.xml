@@ -29,6 +29,6 @@
 	<!-- Daily 계좌번호로 과거 자산 가져오기 -->
 	<select id="selectOldEsset" parameterType="string"
 		resultType="long">
-		SELECT OLDESSET FROM DAILY WHERE ACNTNO = #{acntno}
+		SELECT NEWESSET FROM DAILY WHERE ACNTNO = #{acntno}
 	</select>
 </mapper>

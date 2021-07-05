@@ -57,10 +57,9 @@ public class RankingController {
 	// 코인 미보유자의 데일리 랭킹처리
 	@ResponseBody
 	@RequestMapping("/noCoinRank")
-	public int noCoinRank(@RequestParam(name="acnt") String acntStr) {
-		System.out.println("ㅇㅁㄴ라ㅓㄷㅈ바;ㅗ랴ㅐㅈㅁ;러ㅏㅣㅁㄴ;ㅇ러ㅏㅣㅁㅇㄴ;ㅗ호ㅕㅈ댜ㅓ리만ㅇ;러ㅏㅇ님;러ㅏㅁㄴ이;ㅓ리");
-		System.out.println(acntStr + "asdf");
-		return 0;
+	public int noCoinRank() {
+		int result = rankService.updateDailyNoCoin();
+		return result;
 	}
 
 

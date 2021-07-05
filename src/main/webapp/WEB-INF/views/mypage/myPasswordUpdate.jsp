@@ -23,7 +23,7 @@
 	padding: 20px;
 	margin: 25px auto;
 	background-color: #fff;
-    border: 1.5px solid #E3C8F8;
+	border: 1.5px solid #E3C8F8;
 	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 
@@ -34,27 +34,23 @@
 </head>
 <body>
 	<div id="wrapper">
-	<jsp:include page="myNav.jsp"></jsp:include>
+		<jsp:include page="myNav.jsp"></jsp:include>
 		<div id="mpu">
-			<h2>비밀번호 변경</h2>
+			<h1 class="title">비밀번호 변경</h1>
 			<form action="${pageContext.request.contextPath}/mypage/passChange"
 				method="post" style="border: 1px solid black;">
 				<table>
 					<tr>
-						<td colspan="2">비밀번호*</td>
-					</tr>
-					<tr>
-						<td colspan="2"><input type="password" name="pw" id="pw"
+						<th>비밀번호*</th>
+						<td><input type="password" name="pw" id="pw"
 							placeholder="비밀번호를 입력해주세요."></td>
 					</tr>
 					<tr>
 						<td colspan="2"><p class="alert pwReg">&nbsp;</p></td>
 					</tr>
 					<tr>
-						<td colspan="2">비밀번호 확인*</td>
-					</tr>
-					<tr>
-						<td colspan="2"><input type="password" name="pwCh" id="pwCh"
+						<th>비밀번호 확인*</td>
+						<td><input type="password" name="pwCh" id="pwCh"
 							placeholder="비밀번호를 다시 한 번 입력해주세요."></td>
 					</tr>
 					<tr>
@@ -64,23 +60,23 @@
 				<button type="submit" id="changePw" onclick="return passChange();">비밀번호
 					수정</button>
 			</form>
-	
-	
-	
+
+
+			<h1 class="title">계좌 비밀번호 변경</h1>
 			<form action="${pageContext.request.contextPath}/mypage/bankPwChange"
 				method="post" style="border: 1px solid black;">
 				<table>
 					<tr>
-						<td>계좌 비밀번호</td>
+						<th>계좌 비밀번호</th>
 						<td colspan="2"><input type="password" name="bankPw"
 							id="bankPw1" class="pin1" placeholder="계좌 비밀번호를 입력해주세요"></td>
 					</tr>
 					<tr>
-						<td>계좌 비밀번호 확인</td>
+						<th>계좌 비밀번호 확인</th>
 						<td colspan="2"><input type="password" id="bankPw2"
 							class="pin2" placeholder="계좌 비밀번호를 입력해주세요."></td>
 					</tr>
-	
+
 				</table>
 				<button type="submit" onclick="return bankPwChange();">계좌
 					비밀번호 수정</button>
@@ -91,22 +87,22 @@
 		// 비밀번호와 비밀번호 확인 일치 여부
 		var pass1 = $("input[name=pw]").val();
 		var pass2 = $("input[name=pwCh]").val();
-		
+
 		var flag1 = false;
 		var passEqual = function() {
 			var pass1 = $("input[name=pw]").val();
 			var pass2 = $("input[name=pwCh]").val();
-				if (pass1 == pass2) {
-					$(".pwCh").text("비밀번호가 일치합니다.");
-					$(".pwCh").css("color", "blue");
-					flag1 = true;
-					console.log("일치");
-				} else {
-					$(".pwCh").text("비밀번호가 일치하지 않습니다.");
-					console.log("일치X");
-					flag1 = false;
-				}
-				console.log(flag1 + "일치 여부" + pass1 + "/" + pass2);
+			if (pass1 == pass2) {
+				$(".pwCh").text("비밀번호가 일치합니다.");
+				$(".pwCh").css("color", "blue");
+				flag1 = true;
+				console.log("일치");
+			} else {
+				$(".pwCh").text("비밀번호가 일치하지 않습니다.");
+				console.log("일치X");
+				flag1 = false;
+			}
+			console.log(flag1 + "일치 여부" + pass1 + "/" + pass2);
 		};
 
 		$("input[name=pwCh]").on("keyup", passEqual);
@@ -135,14 +131,15 @@
 			console.log(flag1 + "/" + flag2);
 			console.log(flag1 && flag2);
 			alert("변경하시겠습니까?");
-			if(flag1 && flag2 ) {
+			if (flag1 && flag2) {
 				alert("변경 성공!");
 				return true;
-			};
-				alert("변경 실패!");
-				return false;
+			}
+			;
+			alert("변경 실패!");
+			return false;
 		};
-</script>
+	</script>
 	<script>
 		// 은행 비밀번호와 은행 비밀번호 확인 일치 여부
 

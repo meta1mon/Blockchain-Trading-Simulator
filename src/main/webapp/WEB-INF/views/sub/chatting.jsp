@@ -3,8 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <link rel="stylesheet"
@@ -46,7 +50,9 @@ html, body {
 .columns {
 	width: 400px;
 }
-.column{
+
+.column {
+	
 }
 /* .timestamps{
 	width: 80px;
@@ -65,43 +71,43 @@ html, body {
 	padding: 100px;
 }
 
-#username-input, #login-button{
+#username-input, #login-button {
 	width: 300px;
 	padding: 10px !important;
 }
 
-#username-input{
+#username-input {
 	height: 40px;
 }
-#enter{
+
+#enter {
 	width: 500px;
 	height: 40px;
 	padding: 10px !important;
 }
 
-#username-input:focus, #enter:focus{
+#username-input:focus, #enter:focus {
 	outline: 1px solid rgb(140, 102, 200);
 }
 
-#enter{
-	position: fixed;
+#enter {
+	position: sticky;
 	bottom: 0px;
-	left: 0px;
+	margin-left: -20px;
 }
 
-*{
+* {
 	font-size: small;
 	padding: 0px !important;
 }
 
 p {
-height: 40px;
+	height: 40px;
 }
 
-.users p, .timestamps p{
-padding-top: 7.785px !important;
+.users p, .timestamps p {
+	padding-top: 7.785px !important;
 }
-
 </style>
 </head>
 <body>
@@ -121,20 +127,20 @@ padding-top: 7.785px !important;
 	<div id="main" style="display: none;">
 		<div class="messages-section">
 			<div class="columns">
-				<div class="column has-text-left users" style="float: left; width: 100px;">
+				<div class="column has-text-left users"
+					style="float: left; width: 100px;">
 					<!-- <strong>User</strong> -->
 					<div id="users" class="users"></div>
 				</div>
 				<div class="column has-text-left">
 					<!-- <strong>Message</strong> -->
-					<div id="messages" class="messages" style="float: left; width: 250px;"></div>
+					<div id="messages" class="messages"
+						style="float: left; width: 250px;"></div>
 				</div>
-				<div class="column has-text-left timestamps">
-					<!-- <strong>Datetime</strong> -->
-					<div id="timestamps" class="timestamps"  style="float: left;"></div>
-				</div>
+
 			</div>
-			<input id="enter" class="is-small" type="text" style="margin-top: 10px;"/>
+			<input id="enter" class="is-small" type="text"
+				style="margin-top: 10px;" />
 		</div>
 		<note-count-component></note-count-component>
 	</div>
@@ -144,7 +150,6 @@ padding-top: 7.785px !important;
 		crossorigin="anonymous"></script>
 	<script src="https://asset.talkplus.io/talkplus-js-0.1.5.js"></script>
 
-	<script
-	src="${pageContext.request.contextPath}/resources/js/index.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
 </body>
 </html>

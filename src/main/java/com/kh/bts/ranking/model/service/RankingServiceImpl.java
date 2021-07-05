@@ -47,4 +47,14 @@ public class RankingServiceImpl implements RankingService{
 		return rankDao.updateDailyNoCoin();
 	}
 
+	@Override
+	public Daily selectMyDaily(String email) {
+		return rankDao.selectMyDaily(email);
+	}
+
+	@Override
+	public int selectMyDailyRank(String email) {
+		return rankDao.selectMyDailyRank(email);
+	}
+
 }

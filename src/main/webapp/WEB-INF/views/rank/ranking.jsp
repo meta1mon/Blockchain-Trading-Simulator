@@ -5,8 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
@@ -23,12 +27,22 @@
 	margin: 0 auto;
 }
 
+#rank table th, #rank table td, #rank table a {
+	font-size: 20px;
+}
+
 #rank li {
 	list-style-type: none;
 	float: left;
-	margin: 0 50px;
+	margin: 0 105px;
+}
+
+#rank img {
+	width: 200px;
+	height: 200px;
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<div id="wrapper">
@@ -37,68 +51,94 @@
 			<ul>
 				<li>
 					<div>
-						<img src="#" width="300px" height="300px">
+						<img src="resources/assets/img/silver_medal.png">
 					</div>
 					<div>
 						<p>2등 ${second.nickname }</p>
 					</div>
 					<div>
-						<p>수익률 ${second.yield } %</p>
+						<p>
+							수익률
+							<fmt:formatNumber value="${second.yield }" pattern="##,###.##" />
+							%
+						</p>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="#" width="300px" height="300px">
+						<img src="resources/assets/img/gold_medal.png">
 					</div>
 					<div>
 						<p>1등 ${first.nickname }</p>
 					</div>
 					<div>
-						<p>수익률 ${first.yield } %</p>
+						<p>
+							수익률
+							<fmt:formatNumber value="${first.yield }" pattern="##,###.##" />
+							%
+						</p>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="#" width="300px" height="300px">
+						<img src="resources/assets/img/bronze_medal.png">
 					</div>
 					<div>
 						<p>3등 ${third.nickname }</p>
 					</div>
 					<div>
-						<p>수익률 ${third.yield } %</p>
+						<p>
+							수익률
+							<fmt:formatNumber value="${third.yield }" pattern="##,###.##" />
+							%
+						</p>
 					</div>
 				</li>
 			</ul>
-	
+			
+			<br>
 			<hr style="clear: both;">
-			<p>전체 참가 인원 : ${other.size() } 명</p>
-	
-			<table border="2">
+			<br>
+			
+			<p style="float:left;">전체 참가 인원 : ${other.size() } 명</p>
+
+			<table border="2" style="clear: both;">
 				<tr>
 					<th>순위</th>
 					<th>닉네임</th>
 					<th>수익률</th>
 				</tr>
-				<c:forEach items="${other }" var="rank" begin="3" varStatus="status">
-				<tr>
-					<td>${status.index +1 } 위</td>
-					<td>${rank.nickname }</td>
- 					<td><fmt:formatNumber value="${rank.yield }" pattern="##,###.##" /> %</td>
-					<%-- <td>${rank.yield } %</td> --%>
-				</tr>
+				<c:forEach items="${other }" var="rank" begin="3" end="100"
+					varStatus="status">
+					<tr>
+						<td>${status.index +1 }위</td>
+						<td>${rank.nickname }</td>
+						<td><fmt:formatNumber value="${rank.yield }"
+								pattern="##,###.##" /> %</td>
+					</tr>
 				</c:forEach>
 				<tr>
 					<td colspan="3">&nbsp;</td>
 				</tr>
-				<tr>
-					<td>234위</td>
-					<td>내 닉네임</td>
-					<td>내 수익률 %</td>
-				</tr>
+				<c:if test="${loginMember == null }">
+					<tr>
+						<td colspan="3"><a
+							href="${pageContext.request.contextPath}/login">로그인</a>하여 내 랭킹
+							확인하기</td>
+					</tr>
+				</c:if>
+				<c:if test="${my != null }">
+					<tr>
+						<td>${rank }위</td>
+						<td>${my.nickname }</td>
+						<td><fmt:formatNumber value="${my.yield }"
+								pattern="##,###.##" /> %</td>
+					</tr>
+				</c:if>
 			</table>
-	
-	
-	
+
+
+
 		</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>

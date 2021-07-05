@@ -86,5 +86,29 @@ public class RankingDao {
 		}
 		return list;
 	}
+	
+	// 나의 데일리 랭킹 정보 가져오기
+	public Daily selectMyDaily(String email) {
+		Daily vo = sqlSession.selectOne("ranking.selectMyDaily", email);
+		if (vo != null) {
+			System.out.println("나의 데일리 랭킹 가져오기 성공");
+		} else {
+			System.out.println("나의 데일리 랭킹 가져오기 실패");
+		}
+		return vo;
+	}
+
+	// 나의 데일리 랭킹 정보 가져오기
+	public int selectMyDailyRank(String email) {
+		int result = sqlSession.selectOne("ranking.selectMyDailyRank", email);
+		if (result == 0) {
+			System.out.println("나의 데일리 랭킹 가져오기 성공");
+		} else {
+			System.out.println("나의 데일리 랭킹 가져오기 실패");
+		}
+		return result;
+	}
+	
+	
 
 }

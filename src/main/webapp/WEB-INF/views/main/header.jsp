@@ -46,6 +46,12 @@
 					<li class="menu member"><a class="menutext" href="<%=request.getContextPath()%>/signup" id="signup">회원가입</a></li>
 				</ul>
 			</c:when>
+			<c:when test="${loginMember eq 'admin' }">
+				<ul>
+					<li class="menu member"><a class="menutext" href="<%=request.getContextPath()%>/logout" id="logout">로그아웃</a></li>
+					<li class="menu member"><a class="menutext" href="<%=request.getContextPath()%>/admin">관리자</a></li>
+				</ul>
+			</c:when>
 			<c:when test="${loginMember != null }">
 				<ul>
 					<li class="menu member"><a class="menutext" href="<%=request.getContextPath()%>/logout" id="logout">로그아웃</a></li>

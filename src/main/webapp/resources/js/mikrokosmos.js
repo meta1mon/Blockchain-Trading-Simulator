@@ -1,62 +1,79 @@
-const commentInput = document.getElementsByClassName('input-comment')[0];
-const commentBtn = document.getElementsByClassName('submit-comment')[0];
-const commentList = document.getElementsByClassName('comments')[0];
+//const commentInput = document.getElementsByClassName('input-comment')[0];
+//const commentBtn = document.getElementsByClassName('submit-comment')[0];
+//const commentList = document.getElementsByClassName('comments')[0];
+//
+//// 댓글 달기
+//
+//function addComment() {
+//    var newComment = document.createElement('li')
+//    newComment.innerHTML = `<span><span class="point-span userID">thisisyourhyung</span>` + commentInput.value + `</span>`;
+//
+//    // 코멘트에 더해지는 버튼 생성
+//    let commentBtns = document.createElement('div');
+//
+//    let deleteBtn = document.createElement('img');
+//    deleteBtn.classList.add("comment-more");
+//    deleteBtn.src = "https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png";
+//    deleteBtn.alt = "more";
+//
+//    // 버튼에 함수 선언
+//    deleteBtn.addEventListener('click', function() {
+//        this.parentNode.parentNode.remove();
+//    })
+//
+//    commentBtns.appendChild(deleteBtn);
+//    newComment.appendChild(commentBtns);
+//    commentList.appendChild(newComment);
+//    commentInput.value = "";
+//    commentBtn.disabled = true;
+//}
+//
+//commentBtn.addEventListener('click', function(){
+//    if (commentInput.value) {
+//        addComment();
+//    }
+//})
+//
+//commentInput.addEventListener('keyup', function(e){
+//    if (commentInput.value) {
+//        commentBtn.disabled = false;
+//        if (e.which === 13) {
+//            addComment();
+//        }
+//    }
+//    else {
+//    commentBtn.disabled = true;
+//    }
+//})
+//
+//// 댓글 지우기
+//
+//let deleteBtn = document.querySelectorAll('.comment-more');
+//deleteBtn.forEach(function(event) {
+//    event.addEventListener('click', function() {
+//        this.parentNode.parentNode.remove();
+//    });
+//})
 
-// 댓글 달기
+//게시글은 .Dropdown, 댓글은 .replyDropdown
 
-function addComment() {
-    var newComment = document.createElement('li')
-    newComment.innerHTML = `<span><span class="point-span userID">thisisyourhyung</span>` + commentInput.value + `</span>`;
+//	var dropdown = document.getElementById('dropdown';)
+window.onload = function() {
+	
+	var dropdown = document.getElementsByClassName('dropdown')
+	var replyDropdown = document.getElementsByClassName('replyDropdown')
+	var dropdownContent = document.getElementById('dropdown-content')
+	
+	   function dropdown() {
+	   if (dropdownContent.style.display === 'none') {
+		   console.log("none입니다!!!!!!!!!!!!!!!!!!!!!!!!");
+		   dropdownContent.style.display = 'block';
+	   }
+	}
 
-    // 코멘트에 더해지는 버튼 생성
-    let commentBtns = document.createElement('div');
-
-    let deleteBtn = document.createElement('img');
-    deleteBtn.classList.add("comment-more");
-    deleteBtn.src = "https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png";
-    deleteBtn.alt = "more";
-
-    // 버튼에 함수 선언
-    deleteBtn.addEventListener('click', function() {
-        this.parentNode.parentNode.remove();
-    })
-
-    commentBtns.appendChild(deleteBtn);
-    newComment.appendChild(commentBtns);
-    commentList.appendChild(newComment);
-    commentInput.value = "";
-    commentBtn.disabled = true;
 }
 
-commentBtn.addEventListener('click', function(){
-    if (commentInput.value) {
-        addComment();
-    }
-})
-
-commentInput.addEventListener('keyup', function(e){
-    if (commentInput.value) {
-        commentBtn.disabled = false;
-        if (e.which === 13) {
-            addComment();
-        }
-    }
-    else {
-    commentBtn.disabled = true;
-    }
-})
-
-// 댓글 지우기
-
-let deleteBtn = document.querySelectorAll('.comment-more');
-deleteBtn.forEach(function(event) {
-    event.addEventListener('click', function() {
-        this.parentNode.parentNode.remove();
-    });
-})
-
 // 추천 시 아이콘 변경
-
 let commentLike = document.querySelectorAll('.icons-left');
 commentLike.forEach(function(event) {
     event.addEventListener('click', function() {
@@ -74,7 +91,6 @@ commentLike.forEach(function(event) {
 })
 
 // 비추천 시 아이콘 변경
-
 let commentDislike = document.querySelectorAll('.icons-middle');
 commentDislike.forEach(function(event) {
 	event.addEventListener('click', function() {

@@ -19,9 +19,10 @@ function go() {
 	}
 </script>
 </head>
-<jsp:include page="../main/header.jsp"></jsp:include>
 <body>
+	<jsp:include page="../main/header.jsp"></jsp:include>
 	<div id="wrapper">
+	<jsp:include page="../sub/pop.jsp"></jsp:include>
 		<div id="container">
 
 
@@ -64,9 +65,9 @@ function go() {
 			<div id="btchart" style="text-align: center; border: none;">
 
 				<iframe src="btmichart" width="450px" height="550px" class="chat"
-					style="border-color: #E3C8F8 !important;"></iframe>
+					style="border : 1px solid  #E3C8F8 !important;"></iframe>
 				<iframe src="btaichart" width="450px" height="550px" class="chat"
-				style="border-color: #E3C8F8 !important;"></iframe>
+				style="border : 1px solid  #E3C8F8 !important;"></iframe>
 			</div>
 		</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include>

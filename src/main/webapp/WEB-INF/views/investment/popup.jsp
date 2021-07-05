@@ -20,7 +20,7 @@
 	border-radius: 50%;
 	position: fixed;
 	top: 70px;
-	right: 5px;
+	right: 55px;
 }
 
 .before {

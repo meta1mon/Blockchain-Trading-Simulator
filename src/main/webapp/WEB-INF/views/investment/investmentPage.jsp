@@ -36,6 +36,7 @@
 	<div id="wrapper">
 		<jsp:include page="../main/header.jsp"></jsp:include>
 		<jsp:include page='popup.jsp'></jsp:include>
+		<jsp:include page="../sub/pop.jsp"></jsp:include>
 		<div id="container"
 			style="width: 1400px !important; background: white !important;">
 			<div class="parent">
@@ -96,16 +97,16 @@
 				<div class="div4" id="all_t">
 					<c:choose>
 						<c:when test="${loginMember == null }">
-							<td>
+							<td >
 								<table class='table table-striped'>
 									<tr>
-										<td><a href="<%=request.getContextPath()%>/signup"
+										<td style="text-align: center; font-size: 30px !important; vertical-align: middle;"><a style="text-align: center; font-size: 30px !important;"  href="<%=request.getContextPath()%>/signup"
 											id="join">가입</a><input name="coin" id="coin" type="hidden"
 											value="BTC" readonly="readonly" style="text-align: center;"></td>
 
 									</tr>
 									<tr>
-										<td><a href="<%=request.getContextPath()%>/login"
+										<td style="text-align: center; font-size: 30px !important;vertical-align: middle;"><a style="text-align: center; font-size: 30px !important;" href="<%=request.getContextPath()%>/login"
 											id="signup" id="login">로그인</a></td>
 									</tr>
 								</table>

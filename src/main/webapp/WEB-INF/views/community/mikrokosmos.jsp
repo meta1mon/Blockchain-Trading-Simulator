@@ -360,7 +360,7 @@ function dislike() {
 						<li>
 							<div class="gradient-wrap">
 								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
+									src="resources/assets/img/gold_medal.png" alt="..">
 							</div>
 							<div class="profile-text">
 								<span class="userID point-span">${first.nickname }</span> <span
@@ -370,7 +370,7 @@ function dislike() {
 						<li>
 							<div class="gradient-wrap">
 								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
+									src="resources/assets/img/silver_medal.png" alt="..">
 							</div>
 							<div class="profile-text">
 								<span class="userID point-span">${second.nickname }</span> <span
@@ -380,7 +380,7 @@ function dislike() {
 						<li>
 							<div class="gradient-wrap">
 								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
+									src="resources/assets/img/bronze_medal.png" alt="..">
 							</div>
 							<div class="profile-text">
 								<span class="userID point-span">${third.nickname }</span> <span

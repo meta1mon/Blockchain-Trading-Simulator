@@ -113,7 +113,7 @@
 						
 					</c:forEach>
 				</table>
-				<input type="button" id="bExpand" value="내역 더 보기" class="expandBtn"></input>
+				<input type="button" id="bExpand" value="더 보기" class="expandBtn"></input>
 				
 				<h3>체결 매도주문내역</h3>
 				<table class="historyTable">
@@ -145,7 +145,7 @@
 						</c:if>
 					</c:forEach>
 				</table>  
-				<input type="button" id="sExpand" value="내역 더 보기" class="expandBtn"></input>
+				<input type="button" id="sExpand" value="더 보기" class="expandBtn"></input>
 			</div>
 			
 			
@@ -182,7 +182,7 @@
 						</c:if>
 					</c:forEach>
 				</table>
-				<input type="button" id="wbExpand" value="내역 더 보기" class="expandBtn"></input>
+				<input type="button" id="wbExpand" value="더 보기" class="expandBtn"></input>
 				
 				<h3>미체결 매도주문내역</h3>
 				<table class="historyTable">
@@ -214,7 +214,7 @@
 						</c:if>
 					</c:forEach>
 				</table>
-				<input type="button" id="wsExpand" value="내역 더 보기" class="expandBtn"></input>
+				<input type="button" id="wsExpand" value="더 보기" class="expandBtn"></input>
 				
 			</div>
 			

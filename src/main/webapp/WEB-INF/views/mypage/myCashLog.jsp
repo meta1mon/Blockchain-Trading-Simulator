@@ -19,12 +19,55 @@
 	padding: 20px;
 	margin: 25px auto;
 	background-color: #fff;
-    border: 1.5px solid #E3C8F8;
+    border: 1.5px solid #E3C8F8; 
 	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 
-#mcl table {
-	margin: 0 auto;	
+#chargeTable{
+	margin: 0 auto;
+	width: 50%;
+	border-collapse:collapse;
+	border-top: 2px solid grey;
+	border-left: none;
+	border-right: none;
+ 	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%); 
+}
+
+#chargeTable th, td {
+/* 	width: 150px; */
+/* 	text-align: left; */
+	padding: 5px 10px 5px 0;
+ 	border: 0.1px solid #E3C8F8; 
+	border-left: none;
+	border-right: none;
+}
+
+#chargeTable th {
+	background-color: #f2f2f2;
+}
+
+
+#chargeTable td {
+	padding-right: 35px;
+}
+
+.date {
+	font-size: 11px;
+	font-weight: lighter;
+}
+
+.expandBtn {
+	height: 30px;
+	font-size: 16px;
+	background-color: #fff;
+	color: #8C66C8,;
+	padding: 0px 8px;
+	border: 1px solid transparent;
+	border-color: #E3C8F8;
+  	border-radius: 4px;
+  	cursor: pointer;
+  	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
+  	margin: 20px auto 0;
 }
 </style>
 </head>
@@ -32,29 +75,59 @@
 	<div id="wrapper">
 	<jsp:include page="myNav.jsp"></jsp:include>
 		<div id="mcl">
-			<table>
+			<table id="chargeTable">
 				<tr>
-					<th>결제일시</th>
-					<th>결제금액</th>
-					<th>충전금액</th>
+					<th width="30px" align="center">결 제 금 액</th>
+					<th width="70px" align="center">충 전 금 액</th>
+					<th width="50px" align="center">결 제 일 시</th>
 				</tr>
  			<c:if test="${listCount eq 0}">
 				<tr>
 					<td colspan="3">
 						표시할 충전 내역이 없습니다.
 					</td>
+				</tr>
 			</c:if>
 			<c:if test="${listCount ne 0}">
 				<c:forEach var="cashLog" items="${list}" varStatus="status">
-				<tr>
-					<td>${cashLog.cashdate}</td>
-					<td><fmt:formatNumber value="${cashLog.sellprice}" pattern="#,###,###,###" /></td>
-					<td><fmt:formatNumber value="${cashLog.won}" pattern="#,###,###,###" /></td>
-				</tr>
+					<c:if test="${status.index <4}">
+						<tr>
+							<td align="right"><strong><fmt:formatNumber value="${cashLog.sellprice}" pattern="#,###,###,###,###" /></strong>&nbsp;&nbsp;원</td>
+							<td align="right"><strong><fmt:formatNumber value="${cashLog.won}" pattern="#,###,###,###,###" /></strong>&nbsp;&nbsp;원	</td>
+							<td align="right" class="date">${cashLog.cashdate}</td>
+						</tr>
+					</c:if>
+					<c:if test="${status.index >=4}">
+						<tr class="cashlist" style="display:none;">
+							<td align="right"><strong><fmt:formatNumber value="${cashLog.sellprice}" pattern="#,###,###,###,###" /></strong>&nbsp;&nbsp;원</td>
+							<td align="right"><strong><fmt:formatNumber value="${cashLog.won}" pattern="#,###,###,###,###" /></strong>&nbsp;&nbsp;원	</td>
+							<td align="right" class="date">${cashLog.cashdate}</td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</c:if>
 			</table>
+			<input type="button" id="cExpand" value="더 보기" class="expandBtn"></input>
+			
 		</div>
 	</div>
+<script>
+
+var cExpandBool = Boolean(false);
+
+$('#cExpand').click(function() {
+	console.log("show 클릭됨!");
+	if(cExpandBool == false) {
+		$('.cashlist').show();
+		cExpandBool= true;
+		$('#cExpand').val("접기");
+	} else if(cExpandBool == true) {
+		$('.cashlist').hide();
+		cExpandBool= false;
+		$('#cExpand').val("더 보기");
+	}
+});
+
+</script>
 </body>
 </html>

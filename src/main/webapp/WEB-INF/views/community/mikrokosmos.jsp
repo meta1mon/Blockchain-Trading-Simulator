@@ -107,7 +107,6 @@
 
 	}
 
-
 </script>
 <style>
 .parent>div {
@@ -197,6 +196,7 @@ function dislike() {
       });
    }
 }
+
 </script>
 </head>
 <body>
@@ -231,8 +231,7 @@ function dislike() {
 								<img class="img-profile pic" src="resources/assets/img/user.png"
 									alt=".."> <span class="userID main-id point-span">${vo.cwriter }</span>
 							</div>
-							<div class="dropdown"
-								style="float: right;">
+							<div class="dropdown" style="float: right;" onclick="dropdown()">
 								<div class="icon-react icon-more"
 									style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
 									<div class="dropdown-content" style="left: 0;">
@@ -321,17 +320,10 @@ function dislike() {
 			</div>
 			<!-- main-right -->
 			<div class="main-right">
-				<div class="myProfile">
-					<img class="pic" src="resources/assets/img/user.png" alt="..">
-					<div>
-						<span class="userID point-span">thisisyourhyung</span> <span
-							class="sub-span">JIHYUNG LEE</span>
-					</div>
-				</div>
 				<!-- story section -->
 				<div class="section-story">
 					<div class="menu-title">
-						<span class="sub-title">스토리</span> <span class="find-more">모두
+						<span class="sub-title">랭킹</span> <span class="find-more" onclick="location.href='ranking'">모두
 							보기</span>
 					</div>
 					<ul class="story-list">
@@ -341,8 +333,8 @@ function dislike() {
 									src="resources/assets/img/user.png" alt="..">
 							</div>
 							<div class="profile-text">
-								<span class="userID point-span">wecode_bootcamp</span> <span
-									class="sub-span">12분 전</span>
+								<span class="userID point-span">elonmusk</span> <span
+									class="sub-span">1등</span>
 							</div>
 						</li>
 						<li>
@@ -352,7 +344,7 @@ function dislike() {
 							</div>
 							<div class="profile-text">
 								<span class="userID point-span">han_ye_seul</span> <span
-									class="sub-span">28분 전</span>
+									class="sub-span">2등</span>
 							</div>
 						</li>
 						<li>
@@ -362,7 +354,7 @@ function dislike() {
 							</div>
 							<div class="profile-text">
 								<span class="userID point-span">dntlrdl</span> <span
-									class="sub-span">40분 전</span>
+									class="sub-span">3등</span>
 							</div>
 						</li>
 						<li>
@@ -372,7 +364,7 @@ function dislike() {
 							</div>
 							<div class="profile-text">
 								<span class="userID point-span">i_icaruswalks</span> <span
-									class="sub-span">56분 전</span>
+									class="sub-span">4등</span>
 							</div>
 						</li>
 					</ul>
@@ -380,7 +372,7 @@ function dislike() {
 				<!-- recommendation section -->
 				<div class="section-recommend">
 					<div class="menu-title">
-						<span class="sub-title">회원님을 위한 추천</span> <span class="find-more">모두
+						<span class="sub-title">회원님을 위한 추천</span> <span class="find-more" onclick="location.href='ranking'">모두
 							보기</span>
 					</div>
 					<ul class="recommend-list">
@@ -466,7 +458,7 @@ function dislike() {
 								<span class="userID point-span">wecode_bootcamp</span><span
 									class="sub-span">12분 전</span><br> <span
 									class="content-span">저스틴 비버의 어쿠스틱 라이브 😮</span>
-								<div class="replyDropdown" style="float: right;">
+								<div class="replyDropdown" style="float: right;" onclick="dropdown()">
 									<div class="icon-react icon-more"
 										style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
 										<div class="dropdown-content" style="left: 0;">

@@ -176,7 +176,7 @@ article {
 
 .section-story {
 	height: 212px;
-	margin-bottom: 20px;
+	margin: 50px 0 20px 0;
 	overflow-y: auto;
 }
 
@@ -215,8 +215,10 @@ header {
 .dropdown {
 	position: relative;
 	display: inline-block;
+	width: 24px;
 }
 
+/* 댓글에 커서 올리면  icon-more를 감싸고 있는 replyDropdown 태그가 보인다.*/
 .reply-list li:hover .replyDropdown {
 	position: relative;
 	display: inline-block;
@@ -225,6 +227,7 @@ header {
 .replyDropdown {
 	position: relative;
 	display: none;
+	width: 24px;
 }
 
 .dropdown-content {
@@ -233,30 +236,30 @@ header {
 	right: 0;
 	background-color: #f9f9f9;
 	min-width: 110px;
-	text-align:center;
+	text-align: center;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	z-index: 1;
 }
 
-.dropdown-content a, .replyDropdown a {
+.dropdown-content a {
 	color: black;
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
 }
 
-.dropdown-content a:hover, .replyDropdown a:hover {
+.dropdown-content a:hover {
 	background-color: #f1f1f1;
 }
 
-.dropdown:hover .dropdown-content, .replyDropdown:hover .dropdown-content
+/* .dropdown:hover .dropdown-content, .replyDropdown:hover .dropdown-content
 	{
 	display: block;
-}
+} 
 
-.dropdown:hover .dropbtn, .replyDropdown:hover .dropbtn {
+/* .dropdown:hover .dropbtn, .replyDropdown:hover .dropbtn {
 	background-color: #3e8e41;
-}
+} */
 
 .icon-more {
 	justify-self: end;
@@ -437,32 +440,7 @@ button.submit-comment:focus {
 	outline: none;
 }
 /* main-right */
-.myProfile {
-	height: 56px;
-	margin-top: 10px;
-	margin-bottom: 25px;
-	padding-left: 12px;
-	display: flex;
-	align-items: center;
-}
 
-.myProfile img {
-	width: 56px;
-	height: 56px;
-}
-
-.myProfile div {
-	display: inline-block;
-	margin-left: 14px;
-}
-
-.myProfile div span {
-	display: block;
-}
-
-.myProfile div span.userID {
-	margin-bottom: 4px;
-}
 /* story & recommendation */
 .menu-title {
 	display: flex;
@@ -481,6 +459,7 @@ button.submit-comment:focus {
 	font-size: 12px;
 	font-weight: 600;
 	color: #262626;
+	cursor:pointer;
 }
 
 .story-list li, .recommend-list li {

@@ -35,6 +35,7 @@
 </head>
 <body>
 	<div id="wrapper">
+		
 		<jsp:include page="../main/header.jsp"></jsp:include>
 		<jsp:include page='popup.jsp'></jsp:include>
 		<jsp:include page="../sub/pop.jsp"></jsp:include>
@@ -46,6 +47,7 @@
 					<div id="title"></div>
 				</div>
 				<div class="div2">
+	
 					<div id="chart1">
 						<!-- TradingView Widget BEGIN -->
 						<div class="tradingview-widget-container">
@@ -251,7 +253,7 @@
 					</tr>
 
 					<tr>
-						<th colspan="1">체결주문</th>
+						<th colspan="1">체결주문<div id="bcnt"></div><input type="text" id="s_bcnt" value=""></input></th>
 					</tr>
 					<tr>
 

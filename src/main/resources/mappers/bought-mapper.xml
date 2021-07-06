@@ -35,5 +35,10 @@
 		SELECT * FROM BOUGHT WHERE ACNTNO = #{acntno} ORDER BY BDATE
 		DESC
 	</select>
-
+	<!-- 2차 비번 -->
+	<select id="cntBought" parameterType="Bought" resultType="String">
+		SELECT
+		COUNT(*) FROM BOUGHT
+		WHERE ACNTNO = #{acntno}
+	</select>
 </mapper>

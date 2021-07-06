@@ -48,6 +48,7 @@
 	<div id="wrapper">
 		<jsp:include page="../main/header.jsp"></jsp:include>
 		<div id="rank">
+		<h1>누적 랭킹 페이지</h1>
 			<ul>
 				<li>
 					<div>

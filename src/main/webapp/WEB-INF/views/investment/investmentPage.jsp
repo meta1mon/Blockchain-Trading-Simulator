@@ -30,7 +30,21 @@
 	src="${pageContext.request.contextPath}/resources/js/investmentData.js">
 	
 </script>
-
+<style>
+.popup {
+	position: absolute;
+	bottom: 0px;
+	right: -400px;
+	width: 400px;
+	height: 150px;
+	background: red;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 40px;
+	margin-bottom: 52px;
+	text-align: center;
+}
+</style>
 <meta charset="UTF-8">
 </head>
 <body>
@@ -262,7 +276,9 @@
 					</tr>
 				</table>
 			</div>
-
+				<div id="alertbuy" class="popup">
+					매수가 체결되었습니다.
+				</div>
 		</div>
 
 
@@ -270,7 +286,6 @@
 	</div>
 	<!--가상 키보드 부분  -->
 	<script type="text/javascript">
-		//pinpad 생성
 		new pinpad({
 			ref : {
 				el : '.password2'

@@ -704,7 +704,13 @@ function bcnt() {
 			$("#s_bcnt").val(first);
 
 			if (second != 0 && second != first) {
-				alert("매수 성공");
+				$('.popup').animate({
+						right : '0px',
+					}, 1000, function() {
+						$(this).animate({
+							right : '-400px',
+						}, 3000);
+					});
 			}
 
 		}

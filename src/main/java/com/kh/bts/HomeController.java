@@ -25,4 +25,9 @@ public class HomeController {
 		mav.setViewName("errorPage");
 		return mav;
 	}
+	@RequestMapping("/pract")
+	public ModelAndView pract(ModelAndView mav) {
+		mav.setViewName("rank/pract");
+		return mav;
+	}
 }

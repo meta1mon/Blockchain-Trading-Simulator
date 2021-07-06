@@ -25,9 +25,6 @@
 		// 계좌별 총 코인 평가금을 담음
 		var perCoinValue = [];
 
-		// 랭킹 카테고리 :  0 - 누적, 1 - 데일리, 2 - 위클리, 3 - 먼슬리
-		var criteria = 0;
-
 		var alltimer = setInterval(function() { // 1초마다 함수 돌림 ()
 			getTime();
 		}, 1000);
@@ -42,30 +39,35 @@
 			var second = now.getSeconds(); // 초 0 ~ 59
 			console.log(now);
 
+			// 랭킹 카테고리 :  0 - 누적, 1 - 데일리, 2 - 위클리, 3 - 먼슬리
 			// 누적 : 1시간, 정각
+
 			if (minute == 0 && second == 0) {
-				liveEsset();
+				liveEsset(0);
 				console.log("누적, 정각, 1시간 단위!");
 			}
 
 			// 하루 단위(오전 9시 기준)
 			if (hour == 9 && minute == 0 && second == 0) {
-				alert("Daily, 오전 9시, 1일 단위!");
+				liveEsset(1);
+				console.log("Daily, 오전 9시, 1일 단위!");
 			}
 
 			// 주 단위(월 9시 기준)
 			if (day == 1 && hour == 9 && minute == 0 && second == 0) {
-				alert("Weekly, 월요일 9시, 1주 단위!");
+				liveEsset(2);
+				console.log("Weekly, 월요일 9시, 1주 단위!");
 			}
 
 			// 월 단위(1일 9시 기준)
-			if (day == 1 && hour == 9 && minute == 0 && second == 0) {
-				alert("Monthly, 1일 9시, 1월 단위!");
+			if (date == 1 && hour == 9 && minute == 0 && second == 0) {
+				liveEsset(3);
+				console.log("Monthly, 1일 9시, 1월 단위!");
 			}
 
 		}
 		// 자산 불러오기
-		function liveEsset() {
+		function liveEsset(c1) {
 			$.ajax({
 				url : '${pageContext.request.contextPath}/calc',
 				type : "post",
@@ -75,14 +77,13 @@
 					for (var i = 0; i < data.length; i++) {
 						esset[i] = data[i];
 					}
-
-					loadCoin();
+					loadCoin(c1);
 				}
 			});
 		}
 
 		// 코인 이름 distinct로 받아오기(보유량이 0이면 안가져옴)
-		function loadCoin() {
+		function loadCoin(c2) {
 			$.ajax({
 				url : '${pageContext.request.contextPath}/coinLoad',
 				type : "post",
@@ -92,13 +93,13 @@
 					for (var i = 0; i < data.length; i++) {
 						haveCoin[i] = data[i];
 					}
-					loadCoin2();
+					loadCoin2(c2);
 				}
 			});
 		}
 
 		//  코인계좌의 계좌번호 유니크하게 가져오기
-		function loadCoin2() {
+		function loadCoin2(c3) {
 			$.ajax({
 				url : '${pageContext.request.contextPath}/coinLoad2',
 				type : "post",
@@ -110,15 +111,15 @@
 						acntNoStr += data[i] + ",";
 					}
 
-					livePrice();
+					livePrice(c3);
 
 				}
 			});
 
 		}
 
-		// 실시간 코인 가격 불러오기 자바 // url get json parsing
-		function livePrice() {
+		// 실시간 코인 가격 불러오기
+		function livePrice(c4) {
 			$
 					.ajax({
 						url : 'https://api.bithumb.com/public/ticker/ALL_KRW',
@@ -129,13 +130,13 @@
 							for (var i = 0; i < haveCoin.length; i++) {
 								nowprices[i] = [ data['data'][haveCoin[i]]['closing_price'] * 1 ]
 							}
-							calcPrice();
+							calcPrice(c4);
 						}
 					});
 		}
 
 		// 이 페이지로 들어왔을 때(수익률 계산함수 호출되었을 때) 당시의 총 자산(평가금+현금) 계산
-		function calcPrice() {
+		function calcPrice(c5) {
 			for (var i = 0; i < esset.length; i++) {
 				for (var j = 0; j < haveCoin.length; j++) {
 					if (esset[i].coin == haveCoin[j]) {
@@ -163,7 +164,7 @@
 					data : {
 						"acntno" : acntNoArr[i],
 						"appraisal" : appraisalArr[i],
-						"criteria" : criteria
+						"criteria" : c5
 					},
 					success : function(data) {
 						if (data > 0) {
@@ -180,7 +181,7 @@
 				url : '${pageContext.request.contextPath}/noCoinRank',
 				type : "post",
 				data : {
-					"criteria" : criteria
+					"criteria" : c5
 				},
 				success : function(data) {
 					if (data > 0) {
@@ -196,7 +197,6 @@
 	});
 </script>
 </head>
-<body>
-	누적 수익률 계산 페이지 입니다
+<body>누적 수익률 계산 페이지 입니다
 </body>
 </html>

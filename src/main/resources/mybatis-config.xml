@@ -11,7 +11,8 @@
 			alias="Community" />
 		<typeAlias type="com.kh.bts.community.model.vo.Rcommunity"
 			alias="Rcommunity" />
-		<typeAlias type="com.kh.bts.community.model.vo.UserRcommuniyCheck"
+		<typeAlias
+			type="com.kh.bts.community.model.vo.UserRcommuniyCheck"
 			alias="UserRcommuniyCheck" />
 		<typeAlias type="com.kh.bts.community.model.vo.Clike"
 			alias="Clike" />
@@ -37,17 +38,19 @@
 		<typeAlias type="com.kh.bts.report.model.vo.Creport"
 			alias="Creport" />
 		<typeAlias type="com.kh.bts.report.model.vo.Rreport"
-			alias="Rreport" />		
-		<typeAlias type="com.kh.bts.cash.model.vo.Cash"
-			alias="Cash" />
+			alias="Rreport" />
+		<typeAlias type="com.kh.bts.cash.model.vo.Cash" alias="Cash" />
 		<typeAlias type="com.kh.bts.cash.model.vo.CashLog"
 			alias="CashLog" />
-		<typeAlias type="com.kh.bts.Paging"
-			alias="Paging" />
+		<typeAlias type="com.kh.bts.Paging" alias="Paging" />
 		<typeAlias type="com.kh.bts.ranking.model.vo.Daily"
 			alias="Daily" />
 		<typeAlias type="com.kh.bts.ranking.model.vo.Accumulative"
 			alias="Accumulative" />
+		<typeAlias type="com.kh.bts.ranking.model.vo.Weekly"
+			alias="Weekly" />
+		<typeAlias type="com.kh.bts.ranking.model.vo.Monthly"
+			alias="Monthly" />
 	</typeAliases>
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
 		<mapper resource="mappers/member-mapper.xml" />

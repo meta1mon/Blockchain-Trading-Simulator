@@ -8,126 +8,9 @@
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/admin.css"
 	rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/resources/css/admince.css"
+	rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<style>
-#cashR {
-	margin-top: 100px;
-	width: 1085px;
-}
-#wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    min-height: 100vh;
-}
-#cashR table {
-	width: 100%;
-}
-
-#cashR th, td {
-	padding: 5px !important;
-}
-
-.title{
-	font-size: 25px;
-	color: #fcc000;
-}
-
-.read {
-	 border: none;
-	 outline: none;
-}
-
-.register input{
-	border: 1px solid rgba(0,0,0,0.3);
-	border-radius: 5px;
-	outline: none;
-}
-/*공통*/
-#page{
-	text-align: center;
-}
-
-.page {
-	position: fixed;
-	top: 603.5px;
-}
-.page td {
-	width: 1085px;
-}
-.register input[type=number]{
-	width: calc(100% - 30px);
-}
-input[type=date]{
-	width: 100%;
-}
-
-.money input[type=number]{
-	width: calc(100% - 27px);
-}
-input[type=button] {
-	width: calc(50% - 2.8px);
-	border-radius: 5px;
-	outline: none;
-}
-
-input[type=submit] {
-	width: 100%;
-}
-
-#list {
-	table-layout:fixed;
-}
-
-#list td{
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-#list tr:not(.page) td:nth-child(1), #list tr:not(.page) td:nth-child(2){
-	width: 196.78px;
-}      
-#list tr:not(.page) td:nth-child(3) {
-	width: 196.3px;
-}      
-#list tr:not(.page) td:nth-child(4), #list tr:not(.page) td:nth-child(5) {
-	width: 169.8px;
-}
-
-.edit, .regCash{
-	border: 1px solid #8c66c8 !important;
-	background: white;
-	color: #8c66c8;
-}
-
-.edit:hover, .regCash:hover {
-	background: #8c66c8;
-	color: white;
-}
-
-.del, .cancel {
-	border: 1px solid red;
-	background: white;
-	color: red;
-} 
-
-.del:hover, .cancel:hover {
-	background: red;
-	color: white;
-} 
-
-.done {
-	border: 1px solid green;
-	background: white;
-	color: green;
-}
-
-.done:hover {
-	background: green;
-	color: white;
-}     
-</style>
 <script>
 function deleteCash(cashno){
 	console.log("삭제합니다.");
@@ -157,6 +40,154 @@ function deleteCash(cashno){
 			alert("취소하였습니다.")
 		}
 	}
+$(function(){
+	$(".editmode").attr("display", "none");
+	$(".money .read").css("display", "none");
+	$(".info").css("border", "1px solid transparent");
+	$(".info").css("border-radius", "5px");
+	
+	
+	var setMinDateReg = function(){
+		var startdatereg = $("#startdatereg").val();
+		if(startdatereg != null && startdatereg != "" && startdatereg != undefined){
+			console.log("설정합니다.");
+			$("#enddatereg").attr("min", startdatereg);
+		}
+	}
+	$("#startdatereg").on("keyup", setMinDateReg);
+	$("#startdatereg").on("change", setMinDateReg);
+	
+	
+	// 수정을 누르면 .read의 readonly를 false로 변경
+	// 수정 버튼과 닫기 버튼의 value를 
+	var edit = function(){
+		var index = $(this).parents("#item").index(); 
+		index = index/2 +1;
+		console.log($(this).val());
+			for(var i=0; i<8; i++){
+		var ele = $('tr:eq(' + index +') > td:nth-child('+i+') > input');
+		/* console.log(index + "번째 tr의 "+ i + "번째 정보는 " +  ele.val()); */
+			var info = $('tr:eq(' + index +') > td:nth-child('+i+') > .info');
+			var show = $('tr:eq(' + index +') > td:nth-child('+i+') > .show');
+			var money = $('tr:eq(' + index +') > td:nth-child('+i+') > .hide');
+			var defaultmode = $('tr:eq(' + index +') .default');
+			var editmode = $('tr:eq(' + index +') .editmode');
+			
+			info.attr("readonly", false);
+			show.css("display", "none");
+			money.css("display", "inline");
+			info.css("border", "1px solid rgba(0,0,0,0.3)");
+			info.css("border-radius", "5px");
+			defaultmode.css("display", "none");
+			editmode.css("display", "block");
+		}
+			
+			var setMinDate = function(){
+				console.log("작동")
+				var startdate = $('tr:eq(' + index +') > td:nth-child(5) > input').val();
+				if(startdate != null && startdate != "" && startdate != undefined){
+					console.log("설정합니다.");
+					$("input[name=enddate]").attr("min", startdate);
+				}
+			}
+			$("input[name=startdate]").on("keyup", setMinDate);
+			$("input[name=startdate]").on("change", setMinDate);
+
+			var ele1 = $('tr:eq(' + index +') > td:nth-child(1) > input');
+			var ele2 = $('tr:eq(' + index +') > td:nth-child(2) > input');
+			var ele3 = $('tr:eq(' + index +') > td:nth-child(3) > input');
+			var ele4 = $('tr:eq(' + index +') > td:nth-child(4) > input');
+			var ele5 = $('tr:eq(' + index +') > td:nth-child(5) > input');
+			var ele6 = $('tr:eq(' + index +') > td:nth-child(6) > input');
+			
+			ele2.addClass("modfy");
+			ele3.addClass("modfy");
+			ele4.addClass("modfy");
+			ele5.addClass("modfy");
+			ele6.addClass("modfy");
+			
+			console.log("ele1: " + ele1.val());
+			console.log("ele2: " + ele2.val());
+			console.log("ele3: " + ele3.val());
+			console.log("ele4: " + ele4.val());
+			console.log("ele5: " + ele5.val());
+			console.log("ele6: " + ele6.val());
+			console.log("수정합니다.");
+			
+			
+	}
+	$(".edit").on("click", edit);
+	
+	var cancel = function(){
+		console.log("취소하겠습니다.")
+		var index = $(this).parents("#item").index(); 
+		index = index/2 +1;
+		console.log($(this).val());
+			for(var i=0; i<8; i++){
+		var ele = $('tr:eq(' + index +') > td:nth-child('+i+') > input');
+		/* console.log(index + "번째 tr의 "+ i + "번째 정보는 " +  ele.val()); */
+			var info = $('tr:eq(' + index +') > td:nth-child('+i+') > .info');
+			var show = $('tr:eq(' + index +') > td:nth-child('+i+') > .show');
+			var money = $('tr:eq(' + index +') > td:nth-child('+i+') > .hide');
+			var defaultmode = $('tr:eq(' + index +') .default');
+			var editmode = $('tr:eq(' + index +') .editmode');
+			
+			info.attr("readonly", true);
+			show.css("display", "inline");
+			money.css("display", "none");
+			info.css("border", "1px solid transparent");
+			info.css("border-radius", "5px");
+			defaultmode.css("display", "block");
+			editmode.css("display", "none");
+		}
+		
+	}
+	$(".cancel").on("click", cancel);
+	
+	var done = function(){
+		console.log("완료하겠습니다.")
+		
+		var index = $(this).parents("#item").index(); 
+		index = index/2 +1;
+			var ele1 = $('tr:eq(' + index +') > td:nth-child(1) > input');
+		var ele2 = $('tr:eq(' + index +') > td:nth-child(2) > input');
+		var ele3 = $('tr:eq(' + index +') > td:nth-child(3) > input');
+		var ele4 = $('tr:eq(' + index +') > td:nth-child(4) > input');
+		var ele5 = $('tr:eq(' + index +') > td:nth-child(5) > input');
+		var ele6 = $('tr:eq(' + index +') > td:nth-child(6) > input');
+		
+		$("input[name=won]").val(ele2.val());
+		$("input[name=price]").val(ele3.val());
+		$("input[name=discountrate]").val(ele4.val());
+		$("input[name=startdate]").val(ele5.val());
+		$("input[name=enddate]").val(ele6.val());
+		console.log($("input[name=won]").val());
+		console.log($("input[name=price]").val());
+		console.log($("input[name=discountrate]").val());
+		console.log($("input[name=startdate]").val());
+		console.log($("input[name=enddate]").val());
+		
+			var dataquery = $("#frmCashEdit").serialize();
+			console.log("dataquery:" + dataquery);
+		$.ajax({
+				url: 'updateCash',
+				type: 'post',
+				data: dataquery,
+				sync : true,
+			success : function(data) {
+				alert("상품 수정 완료!");
+				location.href = "cash";
+			},
+			error : function(request, status, error) {
+				console.log("error: 상품 수정 실패!");
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+				
+			})
+	}
+	$(".done").on("click", done);
+	
+})	
 </script>
 </head>
 <%@include file="headerAndAside.jsp"%>
@@ -284,155 +315,5 @@ function deleteCash(cashno){
 			</div>
 		</div>
 	</div>
-	<script>
-		$(function(){
-			$(".editmode").attr("display", "none");
-			$(".money .read").css("display", "none");
-			$(".info").css("border", "1px solid transparent");
-			$(".info").css("border-radius", "5px");
-			
-			
-			var setMinDateReg = function(){
-				var startdatereg = $("#startdatereg").val();
-				if(startdatereg != null && startdatereg != "" && startdatereg != undefined){
-					console.log("설정합니다.");
-					$("#enddatereg").attr("min", startdatereg);
-				}
-			}
-			$("#startdatereg").on("keyup", setMinDateReg);
-			$("#startdatereg").on("change", setMinDateReg);
-			
-			
-			// 수정을 누르면 .read의 readonly를 false로 변경
-			// 수정 버튼과 닫기 버튼의 value를 
-			var edit = function(){
-				var index = $(this).parents("#item").index(); 
-				index = index/2 +1;
-				console.log($(this).val());
- 				for(var i=0; i<8; i++){
-				var ele = $('tr:eq(' + index +') > td:nth-child('+i+') > input');
-				/* console.log(index + "번째 tr의 "+ i + "번째 정보는 " +  ele.val()); */
-					var info = $('tr:eq(' + index +') > td:nth-child('+i+') > .info');
-					var show = $('tr:eq(' + index +') > td:nth-child('+i+') > .show');
-					var money = $('tr:eq(' + index +') > td:nth-child('+i+') > .hide');
-					var defaultmode = $('tr:eq(' + index +') .default');
-					var editmode = $('tr:eq(' + index +') .editmode');
-					
-					info.attr("readonly", false);
-					show.css("display", "none");
-					money.css("display", "inline");
-					info.css("border", "1px solid rgba(0,0,0,0.3)");
-					info.css("border-radius", "5px");
-					defaultmode.css("display", "none");
-					editmode.css("display", "block");
-				}
- 				
-					var setMinDate = function(){
-						console.log("작동")
-						var startdate = $('tr:eq(' + index +') > td:nth-child(5) > input').val();
-						if(startdate != null && startdate != "" && startdate != undefined){
-							console.log("설정합니다.");
-							$("input[name=enddate]").attr("min", startdate);
-						}
-					}
-					$("input[name=startdate]").on("keyup", setMinDate);
-					$("input[name=startdate]").on("change", setMinDate);
-
-					var ele1 = $('tr:eq(' + index +') > td:nth-child(1) > input');
-					var ele2 = $('tr:eq(' + index +') > td:nth-child(2) > input');
-					var ele3 = $('tr:eq(' + index +') > td:nth-child(3) > input');
-					var ele4 = $('tr:eq(' + index +') > td:nth-child(4) > input');
-					var ele5 = $('tr:eq(' + index +') > td:nth-child(5) > input');
-					var ele6 = $('tr:eq(' + index +') > td:nth-child(6) > input');
-					
-					ele2.addClass("modfy");
-					ele3.addClass("modfy");
-					ele4.addClass("modfy");
-					ele5.addClass("modfy");
-					ele6.addClass("modfy");
-					
-					console.log("ele1: " + ele1.val());
-					console.log("ele2: " + ele2.val());
-					console.log("ele3: " + ele3.val());
-					console.log("ele4: " + ele4.val());
-					console.log("ele5: " + ele5.val());
-					console.log("ele6: " + ele6.val());
-					console.log("수정합니다.");
-					
-					
-			}
-			$(".edit").on("click", edit);
-			
-			var cancel = function(){
-				console.log("취소하겠습니다.")
-				var index = $(this).parents("#item").index(); 
-				index = index/2 +1;
-				console.log($(this).val());
- 				for(var i=0; i<8; i++){
-				var ele = $('tr:eq(' + index +') > td:nth-child('+i+') > input');
-				/* console.log(index + "번째 tr의 "+ i + "번째 정보는 " +  ele.val()); */
-					var info = $('tr:eq(' + index +') > td:nth-child('+i+') > .info');
-					var show = $('tr:eq(' + index +') > td:nth-child('+i+') > .show');
-					var money = $('tr:eq(' + index +') > td:nth-child('+i+') > .hide');
-					var defaultmode = $('tr:eq(' + index +') .default');
-					var editmode = $('tr:eq(' + index +') .editmode');
-					
-					info.attr("readonly", true);
-					show.css("display", "inline");
-					money.css("display", "none");
-					info.css("border", "1px solid transparent");
-					info.css("border-radius", "5px");
-					defaultmode.css("display", "block");
-					editmode.css("display", "none");
-				}
-				
-			}
-			$(".cancel").on("click", cancel);
-			
-			var done = function(){
-				console.log("완료하겠습니다.")
-				
-				var index = $(this).parents("#item").index(); 
-				index = index/2 +1;
- 				var ele1 = $('tr:eq(' + index +') > td:nth-child(1) > input');
-				var ele2 = $('tr:eq(' + index +') > td:nth-child(2) > input');
-				var ele3 = $('tr:eq(' + index +') > td:nth-child(3) > input');
-				var ele4 = $('tr:eq(' + index +') > td:nth-child(4) > input');
-				var ele5 = $('tr:eq(' + index +') > td:nth-child(5) > input');
-				var ele6 = $('tr:eq(' + index +') > td:nth-child(6) > input');
-				
-				$("input[name=won]").val(ele2.val());
-				$("input[name=price]").val(ele3.val());
-				$("input[name=discountrate]").val(ele4.val());
-				$("input[name=startdate]").val(ele5.val());
-				$("input[name=enddate]").val(ele6.val());
-				console.log($("input[name=won]").val());
-				console.log($("input[name=price]").val());
-				console.log($("input[name=discountrate]").val());
-				console.log($("input[name=startdate]").val());
-				console.log($("input[name=enddate]").val());
-				
- 				var dataquery = $("#frmCashEdit").serialize();
- 				console.log("dataquery:" + dataquery);
-				$.ajax({
- 					url: 'updateCash',
- 					type: 'post',
- 					data: dataquery,
- 					sync : true,
-					success : function(data) {
-						alert("상품 수정 완료!");
-						location.href = "cash";
-					},
-					error : function(request, status, error) {
-						console.log("error: 상품 수정 실패!");
-						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-					}
- 					
- 				})
-			}
-			$(".done").on("click", done);
-			
-		})	
-	</script>
 </body>
 </html>

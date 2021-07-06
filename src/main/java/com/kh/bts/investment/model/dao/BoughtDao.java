@@ -48,4 +48,7 @@ public class BoughtDao {
 	public List<Bought> selectList(String acntno) {
 		return sqlSession.selectList("bought.selectListBought", acntno);
 	}
+	public String cntBought(String acntno) {
+		return sqlSession.selectOne("bought.cntBought", acntno);
+	}
 }

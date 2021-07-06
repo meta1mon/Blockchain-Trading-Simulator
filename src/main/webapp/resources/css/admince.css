@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+#cashR {
+	margin-top: 100px;
+	width: 1085px;
+}
+#wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
+}
+#cashR table {
+	width: 100%;
+}
+
+#cashR th, td {
+	padding: 5px !important;
+}
+
+.title{
+	font-size: 25px;
+	color: #fcc000;
+}
+
+.read {
+	 border: none;
+	 outline: none;
+}
+
+.register input{
+	border: 1px solid rgba(0,0,0,0.3);
+	border-radius: 5px;
+	outline: none;
+}
+/*공통*/
+#page{
+	text-align: center;
+}
+
+.page {
+	position: fixed;
+	top: 603.5px;
+}
+.page td {
+	width: 1085px;
+}
+.register input[type=number]{
+	width: calc(100% - 30px);
+}
+input[type=date]{
+	width: 100%;
+}
+
+.money input[type=number]{
+	width: calc(100% - 27px);
+}
+input[type=button] {
+	width: calc(50% - 2.8px);
+	border-radius: 5px;
+	outline: none;
+}
+
+input[type=submit] {
+	width: 100%;
+}
+
+#list {
+	table-layout:fixed;
+}
+
+#list td{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#list tr:not(.page) td:nth-child(1), #list tr:not(.page) td:nth-child(2){
+	width: 196.78px;
+}      
+#list tr:not(.page) td:nth-child(3) {
+	width: 196.3px;
+}      
+#list tr:not(.page) td:nth-child(4), #list tr:not(.page) td:nth-child(5) {
+	width: 169.8px;
+}
+
+.edit, .regCash{
+	border: 1px solid #8c66c8 !important;
+	background: white;
+	color: #8c66c8;
+}
+
+.edit:hover, .regCash:hover {
+	background: #8c66c8;
+	color: white;
+}
+
+.del, .cancel {
+	border: 1px solid red;
+	background: white;
+	color: red;
+} 
+
+.del:hover, .cancel:hover {
+	background: red;
+	color: white;
+} 
+
+.done {
+	border: 1px solid green;
+	background: white;
+	color: green;
+}
+
+.done:hover {
+	background: green;
+	color: white;
+}     

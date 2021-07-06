@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+#cll{
+	margin-top: 100px;
+	width: 1085px;
+}
+#wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
+}
+
+#cll th, td {
+	padding: 5px !important;
+}
+
+#cll td:not(.center, .right) {
+	text-align: left;
+}
+
+/*공통*/
+#page{
+	text-align: center;
+}
+
+.page {
+	position: fixed;
+	top: 603.5px;
+}
+.page td {
+	width: 1085px;
+}
+
+table{
+	width: 100%;
+}
+
+#listForm{
+	float:right;
+}
+
+.title{
+	font-size: 25px;
+	color: #fcc000;
+}
+
+.inbl{
+	display: inline-block;
+}
+

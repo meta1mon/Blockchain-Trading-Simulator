@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+#mmm th, td {
+	padding: 5px !important;
+}
+
+#mmm td:not(.center, .right){
+	text-align: left;
+}
+
+#mmm{
+	margin-top: 100px;
+	width: 1085px;
+}
+#wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
+}
+.X {
+	border: none;
+	outline: none;
+	background-none;
+}
+
+.del:hover{
+	color: red;
+}
+
+/* 공통 */
+#page{
+	text-align: center;
+}
+
+.page {
+	position: fixed;
+	top: 603.5px;
+}
+.page td {
+	width: 1085px;
+}
+
+#listForm{
+	 float:right;
+}
+
+table{
+	width: 100%;
+}
+
+.title{
+	font-size: 25px;
+	color: #fcc000;
+}
+.inbl{
+	display: inline-block;
+}

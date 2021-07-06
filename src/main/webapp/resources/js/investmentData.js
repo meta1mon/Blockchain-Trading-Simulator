@@ -3,6 +3,7 @@ $(function() {
 	var checkpw = false; // 2차 비밀번호 변수
 	coinname(); // 숫자를 이름으로 변경
 	chart(); // 차트 변수
+	bcnt();
 	$("#check2").click(function() { // 계좌 비밀번호
 		var acntList = $("#frm11").serialize();
 		var checkhtml = "";
@@ -19,6 +20,7 @@ $(function() {
 					blist();
 					slist();
 					acnt();
+
 					$("#icon").css("display", "block");
 				} else {
 					checkpw = false;
@@ -207,6 +209,7 @@ $(function() {
 			slist();
 			acnt();
 			coinacnt();
+			bcnt();
 		}
 
 	}, 1000);
@@ -222,50 +225,50 @@ var displays = new Array();
 var html = "";
 var bnum = 2; // 차트 종류
 function qwer(bnum) {
-	if (bnum == 1) {   //price down
+	if (bnum == 1) { // price down
 		display.sort(function(a, b) {
 			return a[0] - b[0];
 		});
-	} else if (bnum == 2) { //price up
+	} else if (bnum == 2) { // price up
 		display.sort(function(a, b) {
 			return b[0] - a[0];
 		});
-	}else if (bnum == 3) { //fr down
+	} else if (bnum == 3) { // fr down
 		display.sort(function(a, b) {
 			return a[1] - b[1];
 		});
-	}else if (bnum == 4) { //fr up
+	} else if (bnum == 4) { // fr up
 		display.sort(function(a, b) {
 			return b[1] - a[1];
 		});
-	}else if (bnum == 5) { //at down
+	} else if (bnum == 5) { // at down
 		display.sort(function(a, b) {
 			return a[2] - b[2];
 		});
-	}else if (bnum == 6) { //at up
+	} else if (bnum == 6) { // at up
 		display.sort(function(a, b) {
 			return b[2] - a[2];
 		});
 	}
 
 }
-function click1(){
-	bnum= 1;
+function click1() {
+	bnum = 1;
 }
-function click2(){
-	bnum= 2;
+function click2() {
+	bnum = 2;
 }
-function click3(){
-	bnum= 3;
+function click3() {
+	bnum = 3;
 }
-function click4(){
-	bnum= 4;
+function click4() {
+	bnum = 4;
 }
-function click5(){
-	bnum= 5;
+function click5() {
+	bnum = 5;
 }
-function click6(){
-	bnum= 6;
+function click6() {
+	bnum = 6;
 }
 function alltable() { // 전체코인 시세 표
 	var titdisplay = new Array();
@@ -683,6 +686,38 @@ function wslist() { // 미체결 매도 내용 함수
 
 			});
 }
+// //////////////////// 갯수 확인 /////////////////////////
+
+function bcnt() {
+	var dataList = $("#frm22").serialize();
+	var fisrt = 0;
+	var second = $("#s_bcnt").val();
+	$.ajax({
+		url : "bcnt",
+		type : "POST",
+		data : dataList,
+		dataType : "json",
+
+		success : function(data) {
+			second = $("#s_bcnt").val();
+			first = data;
+			$("#s_bcnt").val(first);
+
+			if (second != 0 && second != first) {
+				$('.popup').animate({
+						right : '0px',
+					}, 1000, function() {
+						$(this).animate({
+							right : '-400px',
+						}, 3000);
+					});
+			}
+
+		}
+
+	});
+}
+
 // ///////////////////////////////////////////////////////////////////////////////////////
 function chart() { // 차트
 

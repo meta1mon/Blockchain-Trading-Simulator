@@ -31,5 +31,14 @@ public class BoughtServiceImpl implements BoughtService{
 		// TODO Auto-generated method stub
 		return bDao.selectList(acntno);
 	}
+	@Override
+	public String cntBought(String acntno) throws Exception {
+		// TODO Auto-generated method stub
+		return bDao.cntBought(acntno);
+	}
+	
+	
+	
+	
 
 }

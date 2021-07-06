@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .listOut {
-	width: 65%;
+	width: 50%;
 	min-width: 1000px;
 	height: 95%;
 	padding: 20px;
@@ -197,6 +197,14 @@
     position: relative;
     left: 20px;
     border-radius: 6px;
+}
+
+#leftpage a, #leftpage a:visited, #rightpage a, #rightpage a:visited  {
+	color:#8C66C8;
+}
+
+#leftpage a:hover, #leftpage a:active, #rightpage a:hover, #rightpage a:active {
+	color:#ffffff;
 }
 
 .pageNum {

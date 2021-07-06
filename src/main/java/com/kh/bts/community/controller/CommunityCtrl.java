@@ -40,11 +40,10 @@ public class CommunityCtrl {
 	private RankingService rankService;
 
 	public static final int LIMIT = 30;
-//	public static final int PAGE_BOX = 3;
 
 	@RequestMapping("insta")
 	public ModelAndView insta(ModelAndView mav) {
-		Paging vo = new Paging(1, 4);
+		Paging vo = new Paging(1, 9);
 		List<Community> list = cmService.selectAllCommunityList(vo);
 		mav.addObject("commuList", list);
 		mav.addObject("nowPage", vo);

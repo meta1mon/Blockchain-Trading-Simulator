@@ -1,0 +1,96 @@
+@charset "UTF-8";
+/* header */
+#mh {
+	position: absolute;
+    width: calc(100% - 200px);
+    left: 200px;
+	height: 100px;
+}
+#mh td {
+	padding-top: 42px !important; 
+	text-align: center;
+}
+#mh td:nth-child(2), #mh td:nth-child(3), #mh td:nth-child(4) {
+	border-left: 1px solid black;
+}
+
+#mh td p {
+	text-align: left;
+}
+
+#mh span {
+	vertical-align: top;
+}
+
+/* aside */
+#aa {
+	background-color: #8c66c8;
+}
+
+#aa li a {
+	font-size: 15px;
+}
+
+#aa a {
+	text-decoration: none;
+}
+
+.icon{
+	float: right;
+}
+
+/* 충전 내역 관리 아래 빈 곳*/
+#aa .contenedor-menu {
+	width: 200px;
+	display: block;
+	line-height: 18px;
+}
+
+#aa .contenedor-menu .menu {
+	width: 100%;
+}
+
+#aa .contenedor-menu ul {
+	list-style: none;
+}
+
+#aa img {
+	padding: 15px 20px;
+}
+
+/* aside 전체 부분 */
+#aa .contenedor-menu .menu li a {
+	color: white;
+	display: block;
+	padding: 15px 20px;
+	background: #8c66c8;
+}
+
+/* aside에 마우스 올릴 때 */
+#aa .contenedor-menu .menu li a:hover {
+	background: #ffc000;
+	color: white;
+}
+
+#aa .contenedor-menu .menu i.fa {
+	font-size: 12px;
+	line-height: 18px;
+	float: right;
+}
+
+#aa .contenedor-menu .menu ul {
+	padding: 0;
+	display: none;
+}
+
+/* aside 메뉴 안쪽 부분 */
+#aa .contenedor-menu .menu ul li a {
+	background: #f2f2f2;
+	color: black;
+}
+
+/* 클린된 메뉴 */
+#aa .contenedor-menu .menu .activado>a {
+	background: #ffc000;
+	color: white;
+}

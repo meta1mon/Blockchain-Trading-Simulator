@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.cash.model.vo.CashLog;
 import com.kh.bts.member.model.vo.Member;
@@ -89,6 +90,13 @@ public class AdminDao {
 		RowBounds row = new RowBounds(startRow,	limit);
 		
 		return sqlSession.selectList("Member.adminListMember", null, row);
+	}
+	
+	public List<CoinAcnt> adminListMemberCoin(){
+		List<CoinAcnt> list = new ArrayList<CoinAcnt>();
+		sqlSession.selectList("resultAcnt.adminListMemberCoin");
+		return list;
+		
 	}
 	
 	public long totalCybcash() {

@@ -178,9 +178,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 	@Override
 	public List<Arreport> searchArreportByRstatus(String rstatus, int searchType) {
-		// TODO Auto-generated method stub
 		return aDao.searchArreportByRstatus(rstatus, searchType);
 	}
-
-
 }

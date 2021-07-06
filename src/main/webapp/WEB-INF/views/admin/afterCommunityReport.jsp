@@ -8,17 +8,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/admin.css"
 	rel="stylesheet" type="text/css" />
-<script>
-$(function() {
-	$('form[name=listForm]').on('submit',function(e) {
-		if ($('input[name=keyword]').val() == null || $('input[name=keyword]').val() == "") {
-			e.preventDefault();
-		} else {
-			return true;
-		}
-	});
-});
-</script>
+<link href="${pageContext.request.contextPath}/resources/css/adminacr.css"
+	rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/admin.js"></script>
 <script>
 $(function(){
 	$("#cstatusSelect").css("display", "inline-block");
@@ -26,10 +18,8 @@ $(function(){
 	$("#btnsearch").css("display", "inline-block");
 	$("#btnsearch2").css("display", "inline-block");
 
-var test = function(){
+var onoff = function(){
 	 var opt = $("#searchType option:selected");
-	 console.log("이벤트 동작")
-	 console.log(opt.val());
 	 if(opt.val() == '4'){
 		 $("#search").css("display", "none");
 		 $("#btnsearch").css("display", "none");
@@ -43,168 +33,9 @@ var test = function(){
 	 }
 }
 	
-	$(window).on("load", test);
-	$("#searchType").on("change", test);
-})
-</script>
-<style>
-#acr th, td {
-	padding: 5px !important;
-}
+	$(window).on("load", onoff);
+	$("#searchType").on("change", onoff);
 
-#acr td:not (.center, .right ){
-	text-align: left;
-}
-
-#acr {
-	margin-top: 100px;
-	width: 1085px;
-}
-
-/*모달 창 공통*/
-#modal {
-	display: none;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
-#contents table {
-	width: 100%;
-}
-
-#contents {
-	padding: 30px;
-	background-color: white;
-	border: 2px solid rgb(140, 102, 200);
-	border-radius: 5px;
-	top: calc(50% - 200px);
-	left: calc(50% - 100px);
-	width: 400px;
-	height: 428px;
-	text-align: center;
-	position: absolute;
-}
-
-#detail {
-	height: 35px;
-}
-
-#close {
-	height: 35px;
-}
-
-#contents table td:nth-child(1) {
-	width: 120px;
-	text-align: right;
-}
-
-#contents table td input {
-	width: 270px;
-	border: 1px solid rgba(0, 0, 0, 0.5);
-	border-radius: 3px;
-}
-
-#ccontentText {
-	height: 105px;
-	width: 270px;
-	border: 1px solid rgba(0, 0, 0, 0.5);
-	border-radius: 3px;
-	font-size: 13.3333px;
-	padding: 1px 2px;
-	text-align: left;
-	background: white;
-}
-
-#modal button {
-	width: 100%;
-}
-
-.hidden {
-	display: none;
-}
-
-/*공통*/
-#page {
-	text-align: center;
-}
-
-.page {
-	width: 1085px;
-	position: fixed;
-	top: 603.5px;
-}
-
-.page td {
-	width: 1085px;
-}
-
-table {
-	width: 100%;
-}
-
-.title {
-	font-size: 25px;
-	color: #fcc000;
-}
-
-.inbl {
-	display: inline-block;
-}
-
-#list {
-	table-layout:fixed;
-}
-
-#list td{
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-#list tr:not(.page) td:nth-child(1) {
-	width: 122.625px;
-}      
-#list tr:not(.page) td:nth-child(2) {
-	width: 146.8px;
-}      
-#list tr:not(.page) td:nth-child(3) {
-	width: 113.28px;
-}       
-#list tr:not(.page) td:nth-child(4) {
-	width: 89.11px;
-}       
-#list tr:not(.page) td:nth-child(5), 
-#list tr:not(.page) td:nth-child(6), 
-#list tr:not(.page) td:nth-child(7), 
-#list tr:not(.page) td:nth-child(8) {
-	width: 122.63px;
-}       
-#list tr:not(.page) td:nth-child(9) {
-	width: 122.69px;
-}
-
-#frmSearch {
-	float: right;
-}
-
-#frmSearch * {
-	display: inline-block;
-}
-
-
-#wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    min-height: 100vh;
-}
-</style>
-<script>
-$(function(){
 	var  openModal = function(event) {
 		$("#modal").css("display", "block");
 		var ele = event.currentTarget.querySelectorAll("td");
@@ -229,15 +60,6 @@ $(function(){
 	$("#close").on("click", closeModal);
 
 })
-</script>
-<script>
- $(function(){
-	
-	$("#search").on("keyup", function(){
-		console.log($("#search").val());
-	});
-	
- })
 </script>
 </head>
 <%@include file="headerAndAside.jsp"%>

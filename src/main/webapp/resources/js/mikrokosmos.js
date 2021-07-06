@@ -66,33 +66,35 @@ $('.replyDropdown').click(function() {
 	console.log("클릭함");
 	console.log("클릭dropdown 상위 article idx: " + $(this).parents('article').index());
 	$('.dropdown-content').eq($(this).parents('article').index()).show();
-	});
-
-$('.dropdown-content').click(function() {
-	console.log("클릭함");
-	console.log("클릭dropdown 상위 article idx: " + $(this).parents('article').index());
-	$('.dropdown-content').eq($(this).parents('article').index()).hide();
+	$(".replyDropdown").mouseleave(function(){$(this).css("display", "block");});
 	});
 
 $(document).mouseup(function (e){
     var dropdown = $('.dropdown-content');
-    var modalReply = $('#modal_reply');
-    var modalReport = $('#modal_report');
-    var modalReportReply = $('#modal_report_reply');
+    var replyDropdownBtn = $('.replyDropdown');
+    var containerReply = $('#modal_reply'); // 댓글 모달창
+    var containerReport = $('#modal_report'); // 게시글 신고 모달창
+    var containerReportReply = $('#modal_report_reply'); //댓글 신고 모달창
+    
     if( dropdown.has(e.target).length === 0){
     	dropdown.css('display','none');
+//    	replyDropdownBtn.css('display','none');
     }
-//    if( modalReply.has(e.target).length === 0){
-//    	modalReply.css('display','none');
-//    	bg.remove();
-//    	modal.style.display = 'none';
+    if( containerReport.has(e.target).length === 0){
+    	containerReport.css('display','none');
+    	bg.remove();
+    	modal.style.display = 'none';
+    }
+    if( containerReportReply.has(e.target).length === 0){ 
+    	containerReportReply.css('display','none');
+    	bgReportReply.remove();
+    	modalReportReply.style.display = 'none';
+    }
+//    if( containerReply.has(e.target).length === 0){ 
+//    	containerReply.css('display','none');
+//    	bgReply.remove();
+//    	modalReply.style.display = 'none';
 //    }
-//    if( modalReply.has(e.target).length === 0){
-//    	modalReply.css('display','none');
-//      bgReply.remove();
-//      modalReply.style.display = 'none';
-//    }
-   
   });
 
    // 게시글 신고 부분
@@ -205,6 +207,7 @@ $(document).mouseup(function (e){
       });
    }
    
+   /*게시글 신고 모달*/
    var bg = null;
    var modal = null;
    function modalFn(id) {
@@ -213,7 +216,6 @@ $(document).mouseup(function (e){
 
         // 모달 div 뒤에 희끄무레한 레이어
         bg = document.createElement('div');
-        bg.class = 'bg';
         bg.setStyle({
             position: 'fixed',
             zIndex: zIndex,
@@ -256,8 +258,59 @@ $(document).mouseup(function (e){
         return this;
     }
     
+    /*댓글 신고 모달*/
+    var bgReportReply = null;
+    var modalReportReply = null;
+    function modalReportReplyFn(id) {
+    	var zIndex = 9999;
+    	modalReportReply = document.getElementById(id);
+    	
+    	// 모달 div 뒤에 희끄무레한 레이어
+    	bgReportReply = document.createElement('div');
+    	bgReportReply.setStyle({
+    		position: 'fixed',
+    		zIndex: zIndex,
+    		left: '0px',
+    		top: '0px',
+    		width: '100%',
+    		height: '100%',
+    		overflow: 'auto',
+    		// 레이어 색갈은 여기서 바꾸면 됨
+    		backgroundColor: 'rgba(0,0,0,0.3)'
+    	});
+    	document.body.append(bgReportReply);
+    	
+    	// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+    	modalReportReply.querySelector('.modal_close_btn').addEventListener('click', function() {
+    		bgReportReply.remove();
+    		modalReportReply.style.display = 'none';
+    	});
+    	
+    	modalReportReply.setStyle({
+    		position: 'fixed',
+    		display: 'block',
+    		boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+    		
+    		// 시꺼먼 레이어 보다 한칸 위에 보이기
+    		zIndex: zIndex + 1,
+    		
+    		// div center 정렬
+    		top: '50%',
+    		left: '50%',
+    		transform: 'translate(-50%, -50%)',
+    		msTransform: 'translate(-50%, -50%)',
+    		webkitTransform: 'translate(-50%, -50%)'
+    	});
+    }
     
-    // 댓글 모달
+    // Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+    Element.prototype.setStyle = function(styles) {
+    	for (var k in styles) this.style[k] = styles[k];
+    	return this;
+    }
+    
+    
+    /* 댓글 모달*/
     var bgReply = null;
    var modalReply = null;
    function modalReplyFn(id) {

@@ -34,8 +34,6 @@
 }
 
 #chargeTable th, td {
-/* 	width: 150px; */
-/* 	text-align: left; */
 	padding: 5px 10px 5px 0;
  	border: 0.1px solid #E3C8F8; 
 	border-left: none;

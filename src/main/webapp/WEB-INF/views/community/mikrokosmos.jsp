@@ -65,7 +65,20 @@
 						var json = JSON.parse(data);
 						if (json.length > 0) {
 							$.each(json,function(idx, insta) {
-								moreHtml += "<br><div class='parent'><div><img	src='<%=request.getContextPath()%>/resources/assets/img/bts_logo.png'"
+								moreHtml += "<article> <header> <div class='profile-of-article'> <img class='img-profile pic' src='resources/assets/img/user.png'> <span class='userID main-id point-span'>" + insta.cwriter +"</span> </div> "
+										+"<div class='dropdown' style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
+										+ "<div class='dropdown-content' style='left: 0;'> <a href='#' onclick='report(${vo.cno})' class='report' id='popup_open_btn'>신고</a> <c:if test='${loginMember == writerEmail }'> <a href='${cupdate}' class='update'>수정</a> + </c:if>"
+										+"</div> </div> </div> </header> <div class='main-image'> <div class='subject'>" + insta.csubject + "</div> <div class='content'>" + insta.ccontent + "</div> <div class='description'>"
+										+"<p> <span class='at-tag'>@bts @wkorea @gucci</span> </p> </div> </div> <div class='icons-react'> <div class='icons-left'> <img class='thumbsup' onclick='clike()' src='resources/assets/img/thumbsup.png'>"
+										+"<img class='thumbsup-liked' onclick='clike()' src='resources/assets/img/thumbs-up.png'> </div> <div class='icons-middle'> <img class='thumbsdown' onclick='dislike()' src='resources/assets/img/thumbsdown.png'>"
+										+"<img class='thumbsdown-disliked' onclick='dislike()' src='resources/assets/img/thumbs-down.png'> </div> <div class='icons-right'> <img class='reply' onclick='reply('rep.rno')' id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png'>"
+										+"</div> </div> <div class='reaction'> <div class='liked-people'> <p> <span class='point-span'>"+insta.likecnt +"</span> 명이 추천합니다</p> </div> <div class='comment-section'> <ul class='comments'> </ul>"
+										+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <form> <div class='comment'> <input type='hidden' name='cno' value="+ insta.cno +">"
+										+"<input type='text' class='input-comment' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick="rcommunityInsertFn('status.index')">게시</button>"
+										+"</div> </form> </c:if> </div> <c:if test='${loginMember == null }'> <div class='comment'> <input class='input-comment' type='text' placeholder='댓글을 작성하려면 로그인이 필요합니다.'>"
+										+"<button type='submit' class='submit-comment'>게시</button> </div> </c:if> </article>";
+									
+							<%-- 		"<br><div class='parent'><div><img	src='<%=request.getContextPath()%>/resources/assets/img/bts_logo.png'"
 								+ "width='25px' height='25px'>" + insta.cwriter + "<span	style='color: red;'>:== 닉네임</span></div>"
 								+ "<div>" + insta.ccontentr +"<span style='color: red;''>:== 내용</span></div>"
 								+ "<div><img class='img_like' src='resources/assets/img/like.png' width='25px' height='25px' onclick='clike()'>"
@@ -73,7 +86,7 @@
 								+ "<button>댓글보기(아이콘으로 넣기)</button></div>"
 								+ "<div>좋아요 수" + insta.likecnt +"&nbsp;&nbsp;&nbsp;&nbsp; 싫어요 수 " + insta.dislikecnt +"&nbsp;&nbsp;&nbsp;&nbsp; 댓글 수" + insta.replycnt +"</div>"
 								+ "<div><textarea'placeholder='댓글을 입력하여 대화를 시작하세요!'></textarea></div>"
-								+ "<div>" + insta.cdate +"</div></div><hr>";
+								+ "<div>" + insta.cdate +"</div></div><hr>"; --%>
 							});
 						} else {
 							moreHtml += "<br><div><div>더이상 불러올 게시글이 없습니다</div></div><hr>";
@@ -149,7 +162,7 @@ function report(nowCno) {
 function rreport(nowRno) {
       rno = nowRno;
       console.log(rno);
-       modalFn('modal_report_reply');
+      modalReportReplyFn('modal_report_reply');
 
 }
 
@@ -227,6 +240,13 @@ function dislike() {
    }
 }
 
+function showInsertForm() {
+    if(${loginMember == null}) {
+  	alert("게시글을 작성하려면 로그인이 필요합니다.");
+    } else {
+  	  window.location='cWriteForm';
+    }
+}
 </script>
 </head>
 <body>
@@ -246,7 +266,10 @@ function dislike() {
 						name="keyword" placeholder="검색">
 					<button type=submit id="btnsearch" style="display: none;"></button>
 				</form>
-				<div class="nav-2"></div>
+				<div class="nav-2">
+          <img src="resources/assets/img/writing.png" onclick="showInsertForm()" alt="글쓰기">
+          <img src="resources/assets/img/megaphone.png" onclick="location.href='clist'" alt="공지사항">
+          </div>
 			</div>
 		</nav>
 		<!-- main -->
@@ -346,14 +369,15 @@ function dislike() {
 					</article>
 				</c:forEach>
 
-
+			<div id="moreDiv"></div>
+			<button type="button" class="moreFeed" onclick="moreInsta()">더보기</button>
 			</div>
 			<!-- main-right -->
 			<div class="main-right">
 				<!-- 랭킹 section -->
 				<div class="section-story">
 					<div class="menu-title">
-						<span class="sub-title">랭킹</span> <span class="find-more" onclick="location.href='ranking'">모두
+						<span class="sub-title">랭킹</span> <span class="find-more" onclick="location.href='rankAccumulative'">모두
 							보기</span>
 					</div>
 					<ul class="story-list">
@@ -404,7 +428,7 @@ function dislike() {
 				<!-- recommendation section -->
 				<div class="section-recommend">
 					<div class="menu-title">
-						<span class="sub-title">회원님을 위한 추천</span> <span class="find-more" onclick="location.href='ranking'">모두
+						<span class="sub-title">회원님을 위한 추천</span> <span class="find-more" onclick="location.href='rankAccumulative'">모두
 							보기</span>
 					</div>
 					<ul class="recommend-list">
@@ -442,9 +466,9 @@ function dislike() {
 				</div>
 				<footer>
 					<p class="insta-sccript">
-						소개 ∙ 도움말 ∙ 홍보 센터 ∙ API ∙ 채용 정보 ∙ 개인정보처리방침 ∙ <br>약관 ∙ 위치 ∙
+						<!-- 소개 ∙ 도움말 ∙ 홍보 센터 ∙ API ∙ 채용 정보 ∙ 개인정보처리방침 ∙ <br>약관 ∙ 위치 ∙
 						인기계정 ∙ 해시태그 ∙ 언어 <br>
-						<br> © 2020 INSTAGRAM FROM FACEBOOK
+						<br>  -->© 2021 Blockchain Traiding Simulator
 					</p>
 				</footer>
 			</div>
@@ -487,6 +511,7 @@ function dislike() {
 									src="resources/assets/img/user.png" alt="..">
 							</div>
 							<div class="profile-writer">
+								<input type="hidden" name="cno" value="${community.cno }">
 								<span class="userID point-span">wecode_bootcamp</span><span
 									class="sub-span">12분 전</span><br> <span
 									class="content-span">저스틴 비버의 어쿠스틱 라이브 😮</span>
@@ -686,8 +711,6 @@ function dislike() {
 				</div>
 			</div>
 
-			<div id="moreDiv"></div>
-			<button type="button" onclick="moreInsta()">더보기</button>
 		</main>
 		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>

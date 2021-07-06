@@ -81,24 +81,47 @@
 
 #coinTable {
 	width : 80%;
-	border: 1px solid black;
-	border-collapse: collapse;
+	margin: 0 auto;
+	border-collapse:collapse;
+	border-top: 2px solid grey;
+	border-left: none;
+	border-right: none;
+ 	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%); 
 }
 
 #coinTable th, td {
-	border: 1px solid black;
 	padding: 10px;
+ 	border: 0.1px solid #E3C8F8; 
+	border-left: none;
+	border-right: none;
+	
 }
+
+
+#coinTable th {
+	background-color: #f2f2f2;
+}
+
 
 .historyTable {
 	width : 80%;
-	border: 1px solid black;
-	border-collapse: collapse;
+	margin: 0 auto;
+	border-collapse:collapse;
+	border-top: 2px solid grey;
+	border-left: none;
+	border-right: none;
+ 	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%); 
 }
 
 .historyTable th, td {
-	border: 1px solid black;
 	padding: 10px;
+ 	border: 0.1px solid #E3C8F8; 
+	border-left: none;
+	border-right: none;
+}
+
+.historyTable th {
+	background-color: #f2f2f2;
 }
 
 .expandBtn {

@@ -42,7 +42,7 @@ $(function() {
 			<br>
 			<br>
 			<form action="cInsert" method="post" enctype="multipart/form-data"
-				style="margin-left: 20px" name="insertForm">
+				style="margin:0 20px" name="insertForm">
 				<input id="subject" type="text"
 					placeholder="&nbsp;&nbsp;제목을 입력해 주세요." name="csubject"
 					maxlength="100">

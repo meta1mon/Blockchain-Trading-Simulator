@@ -96,7 +96,7 @@
 							<tr>
 								<td>${blist.ubno }</td>
 								<td>${blist.coin }</td>
-								<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###,###.########" /></td>
 								<td><fmt:formatNumber value="${blist.buyprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${blist.bdate }</td>
 							</tr>
@@ -105,7 +105,7 @@
 							<tr class="blist" style="display: none;">
 								<td>${blist.ubno }</td>
 								<td>${blist.coin }</td>
-								<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${blist.buycnt }" pattern="#,###,###,###,###.########" /></td>
 								<td><fmt:formatNumber value="${blist.buyprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${blist.bdate }</td>
 							</tr>
@@ -129,7 +129,7 @@
 							<tr>
 								<td>${slist.usno }</td>
 								<td>${slist.coin }</td>
-								<td><fmt:formatNumber value="${slist.sellcnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${slist.sellcnt }" pattern="#,###,###,###,###.########" /></td>
 								<td><fmt:formatNumber value="${slist.sellprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${slist.sdate }</td>
 							</tr>
@@ -138,7 +138,7 @@
 							<tr class="slist" style="display: none;">
 								<td>${slist.usno }</td>
 								<td>${slist.coin }</td>
-								<td><fmt:formatNumber value="${slist.sellcnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${slist.sellcnt }" pattern="#,###,###,###,###.########" /></td>
 								<td><fmt:formatNumber value="${slist.sellprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${slist.sdate }</td>
 							</tr>
@@ -166,7 +166,7 @@
 							<tr>
 								<td>${wblist.ubno }</td>
 								<td>${wblist.coin }</td>
-								<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###,###.########" /></td>
 								<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${wblist.wbdate }</td>
 							</tr>
@@ -175,7 +175,7 @@
 							<tr class="wblist" style="display: none;">
 								<td>${wblist.ubno }</td>
 								<td>${wblist.coin }</td>
-								<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${wblist.buycnt }" pattern="#,###,###,###,###.########" /></td>
 								<td><fmt:formatNumber value="${wblist.buyprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${wblist.wbdate }</td>
 							</tr>
@@ -198,7 +198,7 @@
 							<tr>
 								<td>${wslist.usno }</td>
 								<td>${wslist.coin }</td>
-								<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###,###.########" /></td>
 								<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${wslist.wsdate }</td>
 							</tr>
@@ -207,7 +207,7 @@
 							<tr class="wslist" style="display: none;">
 								<td>${wslist.usno }</td>
 								<td>${wslist.coin }</td>
-								<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###,###" /></td>
+								<td><fmt:formatNumber value="${wslist.sellcnt }" pattern="#,###,###,###,###.########" /></td>
 								<td><fmt:formatNumber value="${wslist.sellprice }" pattern="#,###,###,###,###" />&nbsp;원</td>
 								<td>${wslist.wsdate }</td>
 							</tr>

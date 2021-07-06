@@ -24,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.HomeController;
+import com.kh.bts.acnt.model.service.AcntService;
+import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.admin.model.service.AdminService;
 import com.kh.bts.cash.model.service.CashService;
 import com.kh.bts.cash.model.vo.Cash;
@@ -437,7 +439,7 @@ public class AdminCtrl {
 						@RequestParam(name="keyword", defaultValue="", required = false) String	keyword,
 						@RequestParam(name="searchType", defaultValue="1") int searchType,
 						 ModelAndView mv) {
-		
+
 		try { 
 			int currentPage = page; 
 			int listCount = mService.countMember(); 
@@ -445,7 +447,7 @@ public class AdminCtrl {
 			
 			if(keyword != null && !keyword.equals("")) { 
 				mv.addObject("list",
-						aService.adminSearchMember(keyword, searchType)); 
+						aService.adminSearchMember(keyword, searchType));
 			} else {
 				mv.addObject("list", aService.adminListMember(currentPage, LIMIT)); 
 			}

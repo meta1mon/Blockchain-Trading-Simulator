@@ -8,71 +8,13 @@
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/admin.css"
 	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/admincll.css"
+	rel="stylesheet" type="text/css" />
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script>
-$(function() {
-	$('form[name=listForm]').on('submit',function(e) {
-		if ($('input[name=keyword]').val() == null || $('input[name=keyword]').val() == "") {
-			e.preventDefault();
-		} else {
-			return true;
-		}
-	});
-});
-</script>
-<style>
-#cll{
-	margin-top: 100px;
-	width: 1085px;
-}
-#wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    min-height: 100vh;
-}
-
-#cll th, td {
-	padding: 5px !important;
-}
-
-#cll td:not(.center, .right) {
-	text-align: left;
-}
-
-/*공통*/
-#page{
-	text-align: center;
-}
-
-.page {
-	position: fixed;
-	top: 603.5px;
-}
-.page td {
-	width: 1085px;
-}
-
-table{
-	width: 100%;
-}
-
-#listForm{
-	float:right;
-}
-
-.title{
-	font-size: 25px;
-	color: #fcc000;
-}
-
-.inbl{
-	display: inline-block;
-}
-
-</style>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin.js" type="text/javascript"></script>
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
@@ -150,11 +92,5 @@ table{
 		</table>
 	</div>
 	</div>
-	<script>
-		$(function(){
-			console.log("시도");
-			$(".money").append("원");
-		})	
-	</script>
 </body>
 </html>

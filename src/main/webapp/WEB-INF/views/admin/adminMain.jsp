@@ -8,49 +8,10 @@
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/admin.css"
 	rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<style>
-#mm li:not(.sub) {
-	float: left;
-	list-style-type: none;
-	margin: 15px;
-	color: black;
-	width: 140px;
-	height: 167px;
-	text-align: center;
-	border: 5px solid #ffc000;
-	border-radius: 15px;
-    padding-top: 39px;
-    padding-left: 39px;
-    padding-right: 39px;	
-}
-
-.sub{
-	text-align:left;
-	list-style-type: none;
-}
-
-#mm .img {
-	width: 80px;
-	height: 80px;
-	padding: 5px;
-}
-
-#mm {
-	position: absolute;
-	top: calc(50% - 150px);
-	left: calc(50% - 246px);
-}
-
-.fa-chevron-left, .fa-chevron-right {
-	color: #ffc000;
-}
-
-.report a:hover, .money a:hover {
-	color: red;
-	font-weight: bold;
-}
-</style>
+<link href="${pageContext.request.contextPath}/resources/css/adminmain.css"
+	rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin.js" type="text/javascript"></script>
 </head>
 <%@include file="headerAndAside.jsp"%> 
 <body class="adminContent">
@@ -86,11 +47,5 @@
 								pattern="#,###,###,###" /></a></p></li>
 		</ul>
 	</div>
-	<script>
-		$(function(){
-			$(".money").append("원");
-			$(".report").append("건");
-		})	
-	</script>
 </body>
 </html>

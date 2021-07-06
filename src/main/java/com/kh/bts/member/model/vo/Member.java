@@ -20,6 +20,16 @@ public class Member {
 	private String reqAgr;
 	
 	private long cybcash;
+	private String acntno;
+	private long newesset;
+
+	public String getAcntno() {
+		return acntno;
+	}
+
+	public void setAcntno(String acntno) {
+		this.acntno = acntno;
+	}
 
 	public String getEmail() {
 		return email;
@@ -107,6 +117,14 @@ public class Member {
 
 	public void setCybcash(long cybcash) {
 		this.cybcash = cybcash;
+	}
+	
+	public long getNewesset() {
+		return newesset;
+	}
+
+	public void setNewesset(long newesset) {
+		this.newesset = newesset;
 	}
 
 	@Override

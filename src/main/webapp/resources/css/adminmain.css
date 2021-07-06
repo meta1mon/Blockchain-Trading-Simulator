@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+#mm li:not(.sub) {
+	float: left;
+	list-style-type: none;
+	margin: 15px;
+	color: black;
+	width: 140px;
+	height: 167px;
+	text-align: center;
+	border: 5px solid #ffc000;
+	border-radius: 15px;
+    padding-top: 39px;
+    padding-left: 39px;
+    padding-right: 39px;	
+}
+
+.sub{
+	text-align:left;
+	list-style-type: none;
+}
+
+#mm .img {
+	width: 80px;
+	height: 80px;
+	padding: 5px;
+}
+
+#mm {
+	position: absolute;
+	top: calc(50% - 150px);
+	left: calc(50% - 246px);
+}
+
+.fa-chevron-left, .fa-chevron-right {
+	color: #ffc000;
+}
+
+.report a:hover, .money a:hover {
+	color: red;
+	font-weight: bold;
+}

@@ -104,7 +104,7 @@ function chart() {
 
 			function drawChart() {
 				var data = google.visualization.arrayToDataTable([
-						[ '1H', changecoin + '_KRW' ], [ '7시간전', abc7 ],
+						[ '1H', changecoin ], [ '7시간전', abc7 ],
 						[ '6시간전', abc6 ], [ '5시간전', abc5 ], [ '4시간전', abc4 ],
 						[ '3시간전', abc3 ], [ '2시간전', abc2 ], [ '1시간전', abc1 ],
 						[ '현재', abc ] ]);

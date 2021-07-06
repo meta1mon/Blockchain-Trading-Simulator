@@ -14,15 +14,18 @@
 </head>
 <style>
 #icon1 {
+	z-index: 999;
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
 	position: fixed;
 	top: 70px;
 	right: 5px;
+	width: 50px;
 }
 
 #icon2 {
+	z-index: 999;
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
@@ -32,30 +35,33 @@
 }
 
 #icon2_2 {
+	z-index: 999;
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
 	position: fixed;
-	top: 170px;
-	right: 5px;
+	top: 120px;
+	right: 55px;
 }
 
 #icon2_3 {
+	z-index: 999;
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
 	position: fixed;
-	top: 220px;
-	right: 5px;
+	top: 120px;
+	right: 105px;
 }
 
 #icon2_4 {
+	z-index: 999;
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
 	position: fixed;
-	top: 270px;
-	right: 5px;
+	top: 120px;
+	right: 155px;
 }
 
 .before1 {
@@ -101,7 +107,7 @@
 .w1 {
 	z-index: 9997;
 	position: fixed;
-	top: 220px;
+	top: 170px;
 	right: 5px;
 	border: 1px solid rgb(140, 102, 200);
 	border-radius: 5px;
@@ -110,7 +116,7 @@
 .w2 {
 	z-index: 9996;
 	position: fixed;
-	top: 270px;
+	top: 170px;
 	right: 5px;
 	border: 1px solid rgb(140, 102, 200);
 	border-radius: 5px;
@@ -119,7 +125,7 @@
 .w3 {
 	z-index: 9996;
 	position: fixed;
-	top: 320px;
+	top: 170px;
 	right: 5px;
 	border: 1px solid rgb(140, 102, 200);
 	border-radius: 5px;

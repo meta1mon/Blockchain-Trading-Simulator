@@ -4,6 +4,8 @@ $(function() {
 	coinname(); // 숫자를 이름으로 변경
 	chart(); // 차트 변수
 	bcnt();
+	scnt();
+
 	$("#check2").click(function() { // 계좌 비밀번호
 		var acntList = $("#frm11").serialize();
 		var checkhtml = "";
@@ -79,6 +81,40 @@ $(function() {
 		$("#updatecoin").val(csum);
 	});
 	$("#cnt_s").blur(function() { // 합계 구하기 매도
+		var sum1 = 0;
+		var a1 = $("#price_s").val();
+		var b1 = $("#cnt_s").val() * 1;
+		var now1 = $("#cybcash").val() * 1;
+		sum1 = a1 * b1;
+		var tsum1 = (sum1).toFixed(0);
+		$("#totalprice").val(tsum1);
+		$("#updateprice").val(now1 * 1 + tsum1 * 1);
+
+		var csum1 = 0;
+		var c1 = $("#coincount").val() * 1;
+		csum1 = c1 - b1;
+		$("#updatecoin").val(csum1);
+
+	});
+	$("#price_b").blur(function() { // 합계 구하기 매수
+		var sum = 0;
+		var a = $("#price_b").val();
+		var b = $("#cnt_b").val() * 1;
+		var now = $("#cybcash").val();
+		sum = a * b;
+		var tsum = (sum).toFixed(0);
+		$("#totalprice").val(tsum);
+		$("#updateprice").val(now - tsum);
+
+		var csum = 0;
+		var c = $("#coincount").val() * 1;
+		csum = c + b;
+		console.log(csum);
+		console.log(csum);
+		console.log(csum);
+		$("#updatecoin").val(csum);
+	});
+	$("#price_s").blur(function() { // 합계 구하기 매도
 		var sum1 = 0;
 		var a1 = $("#price_s").val();
 		var b1 = $("#cnt_s").val() * 1;
@@ -210,6 +246,7 @@ $(function() {
 			acnt();
 			coinacnt();
 			bcnt();
+			scnt();
 		}
 
 	}, 1000);
@@ -268,6 +305,7 @@ function click5() {
 	bnum = 5;
 }
 function click6() {
+	
 	bnum = 6;
 }
 function alltable() { // 전체코인 시세 표
@@ -368,16 +406,46 @@ function alltable() { // 전체코인 시세 표
 								data['data'][search]['closing_price'] * 1,
 								data['data'][search]['fluctate_rate_24H'] * 1,
 								data['data'][search]['acc_trade_value_24H'] * 1 ]
-						html = "<table style='height : 146px; table-layout : fixed;' class='table table-striped' ><tr><td width= '78.08px !important'>코인명</td><td width= '91.36px !important'>현재가</td><td width= '78.77px !important'>등락률(24H)</td><td width= '164.31px !important'>거래대금</td></tr>";
+						titdisplay[0] = [
+								data['data'][ch_title]['closing_price'] * 1,
+								data['data'][ch_title]['fluctate_rate_24H'] * 1,
+								data['data'][ch_title]['acc_trade_value_24H'] * 1,
+								data['data'][ch_title]['min_price'] * 1,
+								data['data'][ch_title]['max_price'] * 1 ]
+						title = "<table class='table table-striped' id='tit'><tr>";
 
+						html = "<table style='height : 146px; table-layout : fixed;' class='table table-striped' ><tr><td width= '78.08px !important'>코인명</td><td width= '91.36px !important'>현재가</td><td width= '78.77px !important'>등락률(24H)</td><td width= '164.31px !important'>거래대금</td></tr>";
+						title += "<td style='text-align : center; vertical-align: middle;'><h1>"
+							+ ch_title
+							+ "</h1></td><td style='text-align : center;'><h2>현재가</h2><a class='t_cha'style='text-align : center;'>"
+							+ titdisplay[0][0]
+							+ "</a></td><td style='text-align : center;'><h2>전일대비</h2><a class='t_cha'style='text-align : center;'>"
+							+ titdisplay[0][1]
+							+ "%</a></td><td style='text-align : center;'><h2>저가</h2><a class='t_ch' style='color : blue;text-align : center;'>"
+							+ titdisplay[0][3]
+							+ "</a></td><td style='text-align : center;'><h2>고가</h2><a class='t_ch' style='color : red;text-align : center;'>"
+							+ titdisplay[0][4] + "</a></td></tr>"
+
+				
 						html += "<tr><td><a href=# onclick='changename(\""
 								+ search + "\");'>" + search + "</a></td><td>"
-								+ onedisplay[0][0] + "</td><td>"
-								+ onedisplay[0][1] + "%" + "</td><td>"
+								+ onedisplay[0][0] + "</td><td id='perc'>"
+								+ onedisplay[0][1] + "<a>%</a></td><td>"
 								+ onedisplay[0][2] + "</td></tr>";
-
+						title += "</table>"
 						html += "</table>"
+							$("#title").html(title);
 						$("#cointable_div").html(html);
+						if (titdisplay[0][1] > 0) {
+							$(".t_cha").css('color', 'red');
+						} else {
+							$(".t_cha").css('color', 'blue');
+						}
+						if (onedisplay[0][1] > 0) {
+							$("#perc").css('color', 'red');
+						} else {
+							$("#perc").css('color', 'blue');
+						}
 						$('.table-striped tbody tr:nth-of-type(odd)').css(
 								'background-color', 'rgb(227,200,248, 0.0453)');
 					}
@@ -686,7 +754,7 @@ function wslist() { // 미체결 매도 내용 함수
 
 			});
 }
-// //////////////////// 갯수 확인 /////////////////////////
+// //////////////////// 개수 확인 /////////////////////////
 
 function bcnt() {
 	var dataList = $("#frm22").serialize();
@@ -704,13 +772,48 @@ function bcnt() {
 			$("#s_bcnt").val(first);
 
 			if (second != 0 && second != first) {
+				var audio = document.getElementById("boughtmusic");
+				audio.play();
 				$('.popup').animate({
+					right : '-400px',
+
+				}, 1000, function() {
+					$(this).animate({
 						right : '0px',
-					}, 1000, function() {
-						$(this).animate({
-							right : '-400px',
-						}, 3000);
-					});
+					}, 3000);
+				});
+			}
+
+		}
+
+	});
+}
+
+function scnt() {
+	var dataList = $("#frm22").serialize();
+	var fisrt = 0;
+	var second = $("#s_scnt").val();
+	$.ajax({
+		url : "scnt",
+		type : "POST",
+		data : dataList,
+		dataType : "json",
+
+		success : function(data) {
+			second = $("#s_scnt").val();
+			first = data;
+			$("#s_scnt").val(first);
+
+			if (second != 0 && second != first) {
+				var audio = document.getElementById("soldmusic");
+				audio.play();
+				$('.popup1').animate({
+					right : '0px',
+				}, 1000, function() {
+					$(this).animate({
+						right : '-400px',
+					}, 3000);
+				});
 			}
 
 		}
@@ -867,17 +970,21 @@ function buyp(a) {
 	var sumc = Math.floor(sum);
 	$("#cnt_b").val(sumc);
 	$("#cnt_b").focus();
+	$("#price_b").focus();
 	// 수량 = 코인수 * %
 	var buypcoin = $("#coincount").val();
 	var sumcc = buypcoin * a;
 	var sumccc = Math.floor(sumcc);
 	$("#cnt_s").val(sumccc);
 	$("#cnt_s").focus();
+	$("#price_s").focus();
 }
 // 호가창에서 가격 클릭시 입력하는 함수
 function ob_p(num) {
 	$("#price_b").val(num);
+	$("#price_b").focus();
 	$("#price_s").val(num);
+	$("#price_s").focus();
 }
 // 호가창 받아오는 함수
 function orderbook() {

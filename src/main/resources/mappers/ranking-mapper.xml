@@ -3,6 +3,8 @@
 <mapper namespace="ranking">
 	<resultMap type="Daily" id="resultDaily"></resultMap>
 	<resultMap type="Accumulative" id="resultAccumulative"></resultMap>
+	<resultMap type="Weekly" id="resultWeekly"></resultMap>
+	<resultMap type="Monthly" id="resultMonthly"></resultMap>
 	
 	<!-- Daily 수익률 변경 -->
 	<update id="updateDaily" parameterType="Daily" flushCache="true"
@@ -28,6 +30,30 @@
 		WHERE ACNTNO =
 		#{acntno}
 	</update>
+	
+	<!-- Weekly 수익률 변경 -->
+	<update id="updateWeekly" parameterType="Daily" flushCache="true"
+		statementType="PREPARED">
+		UPDATE WEEKLY
+		SET OLDESSET = #{oldesset},
+		NEWESSET =
+		#{newesset},
+		YIELD = ((#{newesset}/#{oldesset})-1)*100
+		WHERE ACNTNO =
+		#{acntno}
+	</update>
+
+	<!-- Monthly 수익률 변경 -->
+	<update id="updateMonthly" parameterType="Daily" flushCache="true"
+		statementType="PREPARED">
+		UPDATE MONTHLY
+		SET OLDESSET = #{oldesset},
+		NEWESSET =
+		#{newesset},
+		YIELD = ((#{newesset}/#{oldesset})-1)*100
+		WHERE ACNTNO =
+		#{acntno}
+	</update>
 
 	<!-- 회원가입 시, Daily 랭킹에 참가 -->
 	<insert id="insertDaily" parameterType="Daily" flushCache="true"
@@ -43,7 +69,23 @@
 	<insert id="insertAccumulative" parameterType="Daily"
 		flushCache="true" statementType="PREPARED">
 		INSERT INTO ACCUMULATIVE VALUES(
-		#{acntno}, #{email}, #{nickname}, 0, default, 0
+		#{acntno}, #{email}, #{nickname}, DEFAULT, default, 0
+		)
+	</insert>
+
+	<!-- 회원가입 시, Weekly 랭킹에 참가 -->
+	<insert id="insertWeekly" parameterType="Daily"
+		flushCache="true" statementType="PREPARED">
+		INSERT INTO WEEKLY VALUES(
+		#{acntno}, #{email}, #{nickname}, DEFAULT, default, 0
+		)
+	</insert>
+
+	<!-- 회원가입 시, Monthly 랭킹에 참가 -->
+	<insert id="insertMonthly" parameterType="Daily"
+		flushCache="true" statementType="PREPARED">
+		INSERT INTO Monthly VALUES(
+		#{acntno}, #{email}, #{nickname}, DEFAULT, default, 0
 		)
 	</insert>
 
@@ -85,6 +127,46 @@
 		resultType="int">
 		select b.* from (select rownum, a.* from (select * from
 		Accumulative order by yield desc) a) b where email= #{email}
+	</select>
+
+	<!-- Weekly 랭킹 가져오기 -->
+	<select id="selectWeekly" resultType="arraylist"
+		resultMap="resultWeekly">
+		SELECT * FROM Weekly ORDER BY
+		YIELD DESC
+	</select>
+
+	<!-- 나의 Weekly 정보 가져오기 -->
+	<select id="selectMyWeekly" parameterType="string"
+		resultType="Weekly">
+		SELECT * FROM Weekly WHERE EMAIL = #{email}
+	</select>
+
+	<!-- 나의 Weekly 순위 가져오기 -->
+	<select id="selectMyWeeklyRank" parameterType="string"
+		resultType="int">
+		select b.* from (select rownum, a.* from (select * from
+		Weekly order by yield desc) a) b where email= #{email}
+	</select>
+	
+	<!-- Monthly 랭킹 가져오기 -->
+	<select id="selectMonthly" resultType="arraylist"
+		resultMap="resultMonthly">
+		SELECT * FROM Monthly ORDER BY
+		YIELD DESC
+	</select>
+
+	<!-- 나의 Monthly 정보 가져오기 -->
+	<select id="selectMyMonthly" parameterType="string"
+		resultType="Monthly">
+		SELECT * FROM Monthly WHERE EMAIL = #{email}
+	</select>
+
+	<!-- 나의 Monthly 순위 가져오기 -->
+	<select id="selectMyMonthlyRank" parameterType="string"
+		resultType="int">
+		select b.* from (select rownum, a.* from (select * from
+		Monthly order by yield desc) a) b where email= #{email}
 	</select>
 
 	<!-- Daily 계좌번호로 과거 자산 가져오기 -->

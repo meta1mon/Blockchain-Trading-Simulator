@@ -10,12 +10,14 @@ import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.ranking.model.dao.RankingDao;
 import com.kh.bts.ranking.model.vo.Accumulative;
 import com.kh.bts.ranking.model.vo.Daily;
+import com.kh.bts.ranking.model.vo.Monthly;
+import com.kh.bts.ranking.model.vo.Weekly;
 
 @Service("rankService")
-public class RankingServiceImpl implements RankingService{
+public class RankingServiceImpl implements RankingService {
 	@Autowired
 	private RankingDao rankDao;
-	
+
 	@Override
 	public List<CoinAcnt> selectAllCoinAcnt() {
 		return rankDao.selectAllCoinAcnt();
@@ -30,22 +32,22 @@ public class RankingServiceImpl implements RankingService{
 	public List<String> selectAllAcntno() {
 		return rankDao.selectAllAcntno();
 	}
-	
+
 	@Transactional
 	@Override
-	public int updateDaily(Daily vo, int criteria) {
-		return rankDao.updateDaily(vo, criteria);
+	public int updateRank(Daily vo, int criteria) {
+		return rankDao.updateRank(vo, criteria);
+	}
+
+	@Transactional
+	@Override
+	public int updateRankNoCoin(int criteria) {
+		return rankDao.updateRankNoCoin(criteria);
 	}
 
 	@Override
 	public List<Daily> selectDaily() {
 		return rankDao.selectDaily();
-	}
-
-	@Transactional
-	@Override
-	public int updateDailyNoCoin(int criteria) {
-		return rankDao.updateDailyNoCoin(criteria);
 	}
 
 	@Override
@@ -71,6 +73,36 @@ public class RankingServiceImpl implements RankingService{
 	@Override
 	public int selectMyAccumulativeRank(String email) {
 		return rankDao.selectMyAccumulativeRank(email);
+	}
+
+	@Override
+	public List<Weekly> selectWeekly() {
+		return rankDao.selectWeekly();
+	}
+
+	@Override
+	public Weekly selectMyWeekly(String email) {
+		return rankDao.selectMyWeekly(email);
+	}
+
+	@Override
+	public int selectMyWeeklyRank(String email) {
+		return rankDao.selectMyWeeklyRank(email);
+	}
+
+	@Override
+	public List<Monthly> selectMonthly() {
+		return rankDao.selectMonthly();
+	}
+
+	@Override
+	public Monthly selectMyMonthly(String email) {
+		return rankDao.selectMyMonthly(email);
+	}
+
+	@Override
+	public int selectMyMonthlyRank(String email) {
+		return rankDao.selectMyMonthlyRank(email);
 	}
 
 }

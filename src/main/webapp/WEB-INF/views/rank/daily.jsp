@@ -121,8 +121,6 @@
 					}
 				}
 			});
-
-
 		 }
 
 	});
@@ -130,11 +128,11 @@
 </head>
 <body>
 	<c:forEach items="${coinAcnt }" var="ca" varStatus="status">
-		<input type="text" id="acnt${status.index }" value="${ca.acntno }">
-		<input type="text" id="coin${status.index }" value="${ca.coin }">
-		<input type="text" id="buycnt${status.index }" value="${ca.buycnt}">
-		<input type="text" value="" id="ca${status.index }">
-		<br>
+		<input type="hidden" id="acnt${status.index }" value="${ca.acntno }">
+		<input type="hidden" id="coin${status.index }" value="${ca.coin }">
+		<input type="hidden" id="buycnt${status.index }" value="${ca.buycnt}">
+		<input type="hidden" value="" id="ca${status.index }">
 	</c:forEach>
+	일일 수익률 계산 페이지 입니다
 </body>
 </html>

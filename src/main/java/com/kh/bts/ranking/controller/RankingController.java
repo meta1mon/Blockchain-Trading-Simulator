@@ -1,8 +1,11 @@
 package com.kh.bts.ranking.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.ranking.model.service.RankingService;
 import com.kh.bts.ranking.model.vo.Accumulative;
@@ -45,12 +50,12 @@ public class RankingController {
 		mav.setViewName("rank/rankDaily");
 		return mav;
 	}
-	
+
 	// Accumulative 랭킹 페이지로 이동
 	@RequestMapping("/rankAccumulative")
 	public ModelAndView accumRank(ModelAndView mav, HttpSession session) {
 		List<Accumulative> list = rankService.selectAccumulative();
-		
+
 		String email = (String) session.getAttribute("loginMember");
 		Accumulative vo = null;
 		int rank = 0;
@@ -58,7 +63,7 @@ public class RankingController {
 			vo = rankService.selectMyAccumulative(email);
 			rank = rankService.selectMyAccumulativeRank(email);
 		}
-		
+
 		mav.addObject("first", list.get(0));
 		mav.addObject("second", list.get(1));
 		mav.addObject("third", list.get(2));
@@ -77,14 +82,22 @@ public class RankingController {
 		mav.setViewName("rank/daily");
 		return mav;
 	}
-	
+
 	// 누적 랭킹 계산하는 페이지로 이동(코인계좌 전부 가져감)
-	@RequestMapping("/calcA")
-	public ModelAndView calcAccum(ModelAndView mav) {
-		List<CoinAcnt> list = rankService.selectAllCoinAcnt();
-		mav.addObject("coinAcnt", list);
-		mav.setViewName("rank/accumulative");
+	
+	
+	@RequestMapping("/abc")
+	public ModelAndView abc(ModelAndView mav) {
+		mav.setViewName("rank/test");
 		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/calc")
+	public List<CoinAcnt> calc(HttpServletResponse response) {
+		List<CoinAcnt> list = rankService.selectAllCoinAcnt();
+		System.out.println(list);
+		return list;
 	}
 
 	// 코인 보유자의 데일리 랭킹 변경

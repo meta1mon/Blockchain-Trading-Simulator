@@ -8,7 +8,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 // 누적 수익률
-// 10분 기준?으로 돌리까 생각 중
 	$(function() {
 		// 실시간 가격 받을 것
 		var nowprices = [];
@@ -75,8 +74,8 @@
 		 function calcPrice() {
 			 for (var i = 0; i < ${coinAcnt.size()}; i++) {
 				 for (var j = 0; j < haveCoin.length; j++) {
-					 if ($("#coin" + i).val() == haveCoin[j]) {
-						 $("#ca" + i).val($("#buycnt" + i).val() * nowprices[j]);
+					 if ($(".coin" + i).val() == haveCoin[j]) {
+						 $(".ca" + i).val($(".buycnt" + i).val() * nowprices[j]);
 					 }
 				 }
 			 }
@@ -132,11 +131,11 @@
 </head>
 <body>
 	<c:forEach items="${coinAcnt }" var="ca" varStatus="status">
-		<input type="text" id="acnt${status.index }" value="${ca.acntno }">
-		<input type="text" id="coin${status.index }" value="${ca.coin }">
-		<input type="text" id="buycnt${status.index }" value="${ca.buycnt}">
-		<input type="text" value="" id="ca${status.index }">
-		<br>
+		<input type="hidden" class="acnt${status.index }" value="${ca.acntno }">
+		<input type="hidden" class="coin${status.index }" value="${ca.coin }">
+		<input type="hidden" class="buycnt${status.index }" value="${ca.buycnt}">
+		<input type="hidden" value="" class="ca${status.index }">
 	</c:forEach>
+	누적 수익률 계산 페이지 입니다
 </body>
 </html>

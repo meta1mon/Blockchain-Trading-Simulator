@@ -33,8 +33,13 @@ function coinValue() {
 //						console.log((i+1)+"번째 "+"평가금액raw: "+coinValue);
 						
 						var coinProfitPcnt = ((coinValue/buyAvg) - 1) * 100;
-						
-						$('.coinProfit').eq(i).html(coinProfitPcnt.toFixed(2) + "&nbsp;%<br>"+ nCoinProfit + "&nbsp;원");
+						if(coinProfitPcnt > 0) {
+							$('.coinProfit').eq(i).html("<p style='color:red;'>" + coinProfitPcnt.toFixed(2) + "&nbsp;%</p><p style='color:red;'>"+ nCoinProfit + "&nbsp;원</p>");
+						} else if(coinProfitPcnt < 0) {
+							$('.coinProfit').eq(i).html("<p style='color:blue;'>" + coinProfitPcnt.toFixed(2) + "&nbsp;%</p><p style='color:blue;'>"+ nCoinProfit + "&nbsp;원</p>");
+						} else {
+							$('.coinProfit').eq(i).html("<p>" + coinProfitPcnt.toFixed(2) + "&nbsp;%</p><p>"+ nCoinProfit + "&nbsp;원</p>");
+						}
 						
 						totalcoin += coinValue;
 

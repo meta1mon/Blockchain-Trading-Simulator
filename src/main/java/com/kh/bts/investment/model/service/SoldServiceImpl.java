@@ -34,4 +34,10 @@ public class SoldServiceImpl implements SoldService {
 		return sDao.selectList(acntno);
 	}
 
+	@Override
+	public String cntSold(String acntno) throws Exception {
+		// TODO Auto-generated method stub
+		return sDao.cntSold(acntno);
+	}
+
 }

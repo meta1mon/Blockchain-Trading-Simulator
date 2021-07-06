@@ -537,6 +537,20 @@ public class investmentCtrl {
 		   out.close();
 	   }
    }
+   @RequestMapping(value = "scnt", method = RequestMethod.POST)
+   public void Soldcnt(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) throws Exception {   
+	   String result1 = sService.cntSold(acntno); 
+	   PrintWriter out = null;
+	   try {
+		   out = response.getWriter();
+		   out.print(result1);
+	   } catch (IOException e) {
+		   e.printStackTrace();
+	   } finally {
+		   out.flush();
+		   out.close();
+	   }
+   }
 
    @RequestMapping(value = "bdelete", method = RequestMethod.POST)
    public void Boughtdelete(@RequestParam(name = "ubno") int ubno, HttpServletResponse response) {

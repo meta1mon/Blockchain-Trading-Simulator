@@ -46,9 +46,10 @@ public class SoldDao {
 	public int deleteWaitSold(int usno) {
 		return sqlSession.delete("sold.deleteSold", usno);
 	}
-
 	public List<Sold> selectList(String acntno) {
 		return sqlSession.selectList("sold.selectListSold", acntno);
 	}
-
+	public String cntSold(String acntno) {
+		return sqlSession.selectOne("sold.cntSold", acntno);
+	}
 }

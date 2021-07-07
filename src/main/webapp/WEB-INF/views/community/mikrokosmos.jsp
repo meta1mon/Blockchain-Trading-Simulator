@@ -48,7 +48,7 @@
 	// 시작점 1번부터라는 뜻
 	var instaStart = 1;
 	// 추가로 4개씩 더 불러옴
-	const instaPlus = 3;
+	const instaPlus = 13;
 	var moreHtml = "";
 	function moreInsta() {
 		instaStart += instaPlus + 1;
@@ -74,7 +74,7 @@
 										+"<img class='thumbsdown-disliked' onclick='dislike()' src='resources/assets/img/thumbs-down.png'> </div> <div class='icons-right'> <img class='reply' onclick='reply('rep.rno')' id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png'>"
 										+"</div> </div> <div class='reaction'> <div class='liked-people'> <p> <span class='point-span'>"+insta.likecnt +"</span> 명이 추천합니다</p> </div> <div class='comment-section'> <ul class='comments'> </ul>"
 										+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <form> <div class='comment'> <input type='hidden' name='cno' value="+ insta.cno +">"
-										+"<input type='text' class='input-comment' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick="rcommunityInsertFn('status.index')">게시</button>"
+										+"<input type='text' class='input-comment' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick=\"replyInsert(idx)\">게시</button>"
 										+"</div> </form> </c:if> </div> <c:if test='${loginMember == null }'> <div class='comment'> <input class='input-comment' type='text' placeholder='댓글을 작성하려면 로그인이 필요합니다.'>"
 										+"<button type='submit' class='submit-comment'>게시</button> </div> </c:if> </article>";
 									
@@ -89,7 +89,7 @@
 								+ "<div>" + insta.cdate +"</div></div><hr>"; --%>
 							});
 						} else {
-							moreHtml += "<br><div><div>더이상 불러올 게시글이 없습니다</div></div><hr>";
+							moreHtml += "<br><div><div style='text-align:center; margin-bottom:20px;'>더이상 불러올 게시글이 없습니다</div></div>";
 						}
 						$("#moreDiv").html(moreHtml);
 						
@@ -151,6 +151,7 @@
 <script>
 // 추천
 function clike() {
+	console.log("clike들어오나!!!!!!");
    if(${loginMember == null}) {
       alert("로그인이 필요합니다");         
    } else {
@@ -184,6 +185,7 @@ function clike() {
  
 // 비추천
 function dislike() {
+	console.log("cdislike들어오나!!!!!!");
    if(${loginMember == null}) {
       alert("로그인이 필요합니다");         
    } else {
@@ -236,6 +238,7 @@ $(function(){
              return true;
           }
        });
+})
 </script>
 </head>
 <body>
@@ -296,6 +299,7 @@ $(function(){
 								</div>
 							</div>
 						</header>
+						<!-- 게시글 내용 영역 -->
 						<div class="main-image">
 							<div class="subject">${vo.csubject }</div>
 							<div class="content">${vo.ccontent }
@@ -330,7 +334,7 @@ $(function(){
 									src="resources/assets/img/thumbs-down.png" alt="비추천">
 							</div>
 							<div class="icons-right">
-								<img class="reply" onclick="reply(${rep.rno})"
+								<img class="reply" onclick="reply(${vo.cno})"
 									id="reply_popup_open"
 									src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png"
 									alt="댓글">
@@ -351,19 +355,17 @@ $(function(){
 								</div>
 							</div>
 						</div>
-						<!-- 댓글 작성 부분 -->
+						<!-- 댓글 작성 영역 -->
 						<div>
 							<div class="hl"></div>
 							<c:if test="${loginMember != null }">
-								<form id="writeRcommunity">
 									<div class="comment">
-										<input type="hidden" name="cno" value="${community.cno }">
-										<input type="text" class="input-comment" name="rcontent"
+										<input type="hidden" name="cno" class="replyInsertCno" value="${vo.cno }">
+										<input type="text" class="input-comment replyInsert" name="rcontent"
 											maxlength="4000" placeholder="댓글 달기...">
 										<button type="submit" class="submit-comment"
-											onclick="rplyInsert()">등록</button>
+											onclick="replyInsert(${status.index})">등록</button>
 									</div>
-								</form>
 							</c:if>
 						</div>
 						<c:if test="${loginMember == null }">
@@ -373,6 +375,7 @@ $(function(){
 								<button type="submit" class="submit-comment">게시</button>
 							</div>
 						</c:if>
+	
 					</article>
 				</c:forEach>
 
@@ -480,21 +483,19 @@ $(function(){
 
 			<!-- 댓글 작성, 게시글 신고, 댓글 신고 모달창 -->
 
-			<!-- 댓글 모달창 -->
+							<!-- 댓글 모달창 -->
 			<div id="modal_reply" class="modal_reply">
 				<button type="button" class="modal_reply_close_btn"></button>
 				<!-- 댓글 작성 영역 -->
 				<div>
 					<c:if test="${loginMember != null }">
-						<form>
 							<div class="comment">
-								<input type="hidden" name="cno" value="${community.cno }">
-								<input type="text" class="modal-input-comment" name="rcontent"
+								<input type="hidden" name="cno" class="replyInsertCno" value="${community.cno }">
+								<input type="text" class="modal-input-comment replyInsert" name="rcontent"
 									maxlength="4000" placeholder="댓글 달기...">
 								<button type="submit" class="submit-comment"
-									onclick="rcommunityInsertFn(${status.index})">게시</button>
+									onclick="replyInsert(${status.index})">등록</button>
 							</div>
-						</form>
 					</c:if>
 				</div>
 				<c:if test="${loginMember == null }">

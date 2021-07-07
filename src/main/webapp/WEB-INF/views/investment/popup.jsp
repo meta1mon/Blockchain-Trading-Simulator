@@ -15,6 +15,7 @@
 </head>
 <style>
 #icon {
+	z-index : 9998;
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;

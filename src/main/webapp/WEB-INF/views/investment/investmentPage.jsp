@@ -43,13 +43,33 @@
 	padding: 40px;
 	margin-bottom: 52px;
 	text-align: center;
+	font: 18px !important;
+	color: white;
+	right: 0;
+	bottom: 100px;
+}
+
+.popup1 {
+	position: absolute;
+	bottom: 0px;
+	right: -400px;
+	width: 400px;
+	height: 150px;
+	background: blue;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 40px;
+	margin-bottom: 52px;
+	text-align: center;
+	font: 18px !important;
+	color: white;
 }
 </style>
 <meta charset="UTF-8">
 </head>
 <body>
 	<div id="wrapper">
-		
+
 		<jsp:include page="../main/header.jsp"></jsp:include>
 		<jsp:include page='popup.jsp'></jsp:include>
 		<jsp:include page="../sub/pop.jsp"></jsp:include>
@@ -58,10 +78,19 @@
 			<div class="parent">
 				<!-- 위젯, 코인 목록 테이블 -->
 				<div class="div1">
+
+					<audio id="boughtmusic">
+						<source
+							src="${pageContext.request.contextPath}/resources/audio/bought.wav">
+					</audio>
+					<audio id="soldmusic">
+						<source
+							src="${pageContext.request.contextPath}/resources/audio/sold.wav">
+					</audio>
 					<div id="title"></div>
 				</div>
 				<div class="div2">
-	
+
 					<div id="chart1">
 						<!-- TradingView Widget BEGIN -->
 						<div class="tradingview-widget-container">
@@ -84,18 +113,18 @@
 						style="width: 100%; display: 'block'" placeholder="코인 검색">
 					<table>
 						<tr style='text-align: center'>
-							<td width= '78.08px !important'></td>
-							<td width= '91.36px !important'><img
+							<td width='78.08px !important'></td>
+							<td width='91.36px !important'><img
 								src="${pageContext.request.contextPath}/resources/assets/img/down-arrow.svg"
 								width="30px" height="30px" onclick="click1()"> <img
 								src="${pageContext.request.contextPath}/resources/assets/img/up-arrow.svg"
 								width="30px" height="30px" onclick="click2()"></td>
-							<td width= '78.77px !important'><img
+							<td width='78.77px !important'><img
 								src="${pageContext.request.contextPath}/resources/assets/img/down-arrow.svg"
 								width="30px" height="30px" onclick="click3()"> <img
 								src="${pageContext.request.contextPath}/resources/assets/img/up-arrow.svg"
 								width="30px" height="30px" onclick="click4()"></td>
-							<td width= '164.31px !important'><img
+							<td width='164.31px !important'><img
 								src="${pageContext.request.contextPath}/resources/assets/img/down-arrow.svg"
 								width="30px" height="30px" onclick="click5()"> <img
 								src="${pageContext.request.contextPath}/resources/assets/img/up-arrow.svg"
@@ -114,17 +143,23 @@
 				<div class="div4" id="all_t">
 					<c:choose>
 						<c:when test="${loginMember == null }">
-							<td >
+							<td>
 								<table class='table table-striped'>
 									<tr>
-										<td style="text-align: center; font-size: 30px !important; vertical-align: middle;"><a style="text-align: center; font-size: 30px !important;"  href="<%=request.getContextPath()%>/signup"
-											id="join">가입</a><input name="coin" id="coin" type="hidden"
-											value="BTC" readonly="readonly" style="text-align: center;"></td>
+										<td
+											style="text-align: center; font-size: 30px !important; vertical-align: middle;"><a
+											style="text-align: center; font-size: 30px !important;"
+											href="<%=request.getContextPath()%>/signup" id="join">가입</a><input
+											name="coin" id="coin" type="hidden" value="BTC"
+											readonly="readonly" style="text-align: center;"></td>
 
 									</tr>
 									<tr>
-										<td style="text-align: center; font-size: 30px !important;vertical-align: middle;"><a style="text-align: center; font-size: 30px !important;" href="<%=request.getContextPath()%>/login"
-											id="signup" id="login">로그인</a></td>
+										<td
+											style="text-align: center; font-size: 30px !important; vertical-align: middle;"><a
+											style="text-align: center; font-size: 30px !important;"
+											href="<%=request.getContextPath()%>/login" id="signup"
+											id="login">로그인</a></td>
 									</tr>
 								</table>
 							</td>
@@ -267,7 +302,11 @@
 					</tr>
 
 					<tr>
-						<th colspan="1">체결주문<div id="bcnt"></div><input type="text" id="s_bcnt" value=""></input></th>
+
+						<th colspan="1">체결주문
+							<div id="bcnt"></div> <input type="hidden" id="s_bcnt" value=""></input><input
+							type="hidden" id="s_scnt" value=""></input>
+						</th>
 					</tr>
 					<tr>
 
@@ -276,9 +315,9 @@
 					</tr>
 				</table>
 			</div>
-				<div id="alertbuy" class="popup">
-					매수가 체결되었습니다.
-				</div>
+
+			<div id="alertbuy" class="popup">매수가 체결되었습니다.</div>
+			<div id="alertsold" class="popup1">매도가 체결되었습니다.</div>
 		</div>
 
 

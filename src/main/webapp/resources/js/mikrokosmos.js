@@ -13,9 +13,9 @@
 	      modalReportReplyFn('modal_report_reply');
 	}
 
-	function reply(nowRno) {
-	      rno = nowRno;
-	      console.log(rno);
+	function reply(nowCno) {
+	      cno = nowCno;
+	      console.log(cno);
 	      modalReplyFn('modal_reply');
 	}
 
@@ -106,12 +106,20 @@ $(document).mouseup(function (e){
     })
 
       // 댓글 삽입
-   function rplyInsert() {
-	   var rInsertData = $("#writeRcommunity").serialize();
+   function replyInsert(Idx) {
+    	 var rcontent =  $(".replyInsert").eq(Idx).val();
+    	 var cno =  $(".replyInsertCno").eq(Idx).val();
+    	 console.log("댓글 들어오나????????????????");
+    	 console.log(rcontent);
+    	 console.log(cno);
+    	 
       $.ajax({
-          url : "${pageContext.request.contextPath}/rcInsert",
+          url : "rcInsert",
           type : "post",
-          data : rInsertData,
+          data : {
+        	  "rcontent" : rcontent,
+        	  "cno" : cno
+        	  },
           success : function(data) {
         	  alert("댓글 작성 완료");
          	 window.location.reload();

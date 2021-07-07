@@ -27,6 +27,7 @@ public class RcommunityCtrl {
 	@ResponseBody
 	@RequestMapping(value = "rcInsert", method = RequestMethod.POST)
 	public int RcommunityInsert(Rcommunity rc, HttpServletRequest request, ModelAndView mv) {
+		System.out.println("Rcommunity겟!@@@@@@@@@@@@@@@@@@@");
 		String email = (String) request.getSession().getAttribute("loginMember");
 		int result = rcmService.insertRcommunity(rc, email);
 		return result;

@@ -15,118 +15,12 @@
 	href="${pageContext.request.contextPath}/resources/css/mikrokosmos.css"
 	rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script type="text/javascript">
-	$(function() {
-		/* var n = 0;
-		for(var i =0; i < 5; i++) {
-			var id = "#ckeditor"+n;
-		 	ClassicEditor
-		    .create( document.querySelector( id ), {
-		        cloudServices: {
-		            tokenUrl: 'https://81478.cke-cs.com/token/dev/de0d9159dc2b7ce3ecb85191c28f789217b087f58ae6880e30d89820724d',
-		            uploadUrl: 'https://81478.cke-cs.com/easyimage/upload/'
-		        }
-		    } )
-		    .catch( error => {
-		        console.error( error );
-		    } ); 
-			n++;
-		} */
-		
-		
-		$('form[name=listForm]').on('submit',	function(e) {
-					if ($('input[name=keyword]').val() == null
-							|| $('input[name=keyword]').val() == "") {
-						alert("검색어를 입력해 주세요");
-						e.preventDefault();
-					} else {
-						return true;
-					}
-				});
-	});
-
-	// 시작점 1번부터라는 뜻
-	var instaStart = 1;
-	// 추가로 4개씩 더 불러옴
-	const instaPlus = 3;
-	var moreHtml = "";
-	function moreInsta() {
-		instaStart += instaPlus + 1;
-		$.ajax({
-					url : '${pageContext.request.contextPath}/moreInsta',
-					type : "get",
-					data : {
-						"start" : instaStart,
-						"plus" : instaPlus
-					},
-					datatype : "json",
-					contentType : "charset=UTF-8",
-					success : function(data) {
-						var json = JSON.parse(data);
-						if (json.length > 0) {
-							$.each(json,function(idx, insta) {
-								moreHtml += "<article> <header> <div class='profile-of-article'> <img class='img-profile pic' src='resources/assets/img/user.png'> <span class='userID main-id point-span'>" + insta.cwriter +"</span> </div> "
-										+"<div class='dropdown' style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
-										+ "<div class='dropdown-content' style='left: 0;'> <a href='#' onclick='report(${vo.cno})' class='report' id='popup_open_btn'>신고</a> <c:if test='${loginMember == writerEmail }'> <a href='${cupdate}' class='update'>수정</a> + </c:if>"
-										+"</div> </div> </div> </header> <div class='main-image'> <div class='subject'>" + insta.csubject + "</div> <div class='content'>" + insta.ccontent + "</div> <div class='description'>"
-										+"<p> <span class='at-tag'>@bts @wkorea @gucci</span> </p> </div> </div> <div class='icons-react'> <div class='icons-left'> <img class='thumbsup' onclick='clike()' src='resources/assets/img/thumbsup.png'>"
-										+"<img class='thumbsup-liked' onclick='clike()' src='resources/assets/img/thumbs-up.png'> </div> <div class='icons-middle'> <img class='thumbsdown' onclick='dislike()' src='resources/assets/img/thumbsdown.png'>"
-										+"<img class='thumbsdown-disliked' onclick='dislike()' src='resources/assets/img/thumbs-down.png'> </div> <div class='icons-right'> <img class='reply' onclick='reply('rep.rno')' id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png'>"
-										+"</div> </div> <div class='reaction'> <div class='liked-people'> <p> <span class='point-span'>"+insta.likecnt +"</span> 명이 추천합니다</p> </div> <div class='comment-section'> <ul class='comments'> </ul>"
-										+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <form> <div class='comment'> <input type='hidden' name='cno' value="+ insta.cno +">"
-										+"<input type='text' class='input-comment' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick="rcommunityInsertFn('status.index')">게시</button>"
-										+"</div> </form> </c:if> </div> <c:if test='${loginMember == null }'> <div class='comment'> <input class='input-comment' type='text' placeholder='댓글을 작성하려면 로그인이 필요합니다.'>"
-										+"<button type='submit' class='submit-comment'>게시</button> </div> </c:if> </article>";
-									
-							<%-- 		"<br><div class='parent'><div><img	src='<%=request.getContextPath()%>/resources/assets/img/bts_logo.png'"
-								+ "width='25px' height='25px'>" + insta.cwriter + "<span	style='color: red;'>:== 닉네임</span></div>"
-								+ "<div>" + insta.ccontentr +"<span style='color: red;''>:== 내용</span></div>"
-								+ "<div><img class='img_like' src='resources/assets/img/like.png' width='25px' height='25px' onclick='clike()'>"
-								+ "<img	class='img_dislike' src='resources/assets/img/dislike.png' width='25px' height='25px' onclick='dislike()'>"
-								+ "<button>댓글보기(아이콘으로 넣기)</button></div>"
-								+ "<div>좋아요 수" + insta.likecnt +"&nbsp;&nbsp;&nbsp;&nbsp; 싫어요 수 " + insta.dislikecnt +"&nbsp;&nbsp;&nbsp;&nbsp; 댓글 수" + insta.replycnt +"</div>"
-								+ "<div><textarea'placeholder='댓글을 입력하여 대화를 시작하세요!'></textarea></div>"
-								+ "<div>" + insta.cdate +"</div></div><hr>"; --%>
-							});
-						} else {
-							moreHtml += "<br><div><div>더이상 불러올 게시글이 없습니다</div></div><hr>";
-						}
-						$("#moreDiv").html(moreHtml);
-						
-					}
-				});
-	}
-	
-	function showInsertForm() {
-			      if(${loginMember == null}) {
-			    	alert("게시글을 작성하려면 로그인이 필요합니다.");
-			      } else {
-			    	  window.location='cWriteForm';
-			      }
-		      }
-	
-	// 게시글 수정
-	function communityUpdateFn(idx) {
-		
-	}
-
-	// 게시글 삭제
-	function communityDeleteFn(idx) {
-		
-	}
-	
-	// 댓글 입력
-	function rcommunityInsertFn(idx) {
-
-	}
-</script>
 <style>
-.parent>div {
+.parent > div {
 	text-align: center;
 	background-color: lightpurple;
 }
-</style>
-<style>
+
 #modalWrapper {
 	position: absolute;
 	top: 0;
@@ -149,8 +43,85 @@
 }
 </style>
 <script>
+
+$(function() {
+
+	// 검색 부분
+			$('form[name=listForm]').on('submit',	function(e) {
+						if ($('input[name=keyword]').val() == null
+								|| $('input[name=keyword]').val() == "") {
+							alert("검색어를 입력해 주세요");
+							e.preventDefault();
+						} else {
+							return true;
+						}
+					});
+		});
+
+		// 시작점 1번부터라는 뜻
+		var instaStart = 1;
+		// 추가로 4개씩 더 불러옴
+		const instaPlus = 3;
+		var moreHtml = "";
+		function moreInsta() {
+			instaStart += instaPlus + 1;
+			$.ajax({
+						url : '${pageContext.request.contextPath}/moreInsta',
+						type : "get",
+						data : {
+							"start" : instaStart,
+							"plus" : instaPlus
+						},
+						datatype : "json",
+						contentType : "charset=UTF-8",
+						success : function(data) {
+							var json = JSON.parse(data);
+							if (json.length > 0) {
+								$.each(json,function(idx, insta) {
+									moreHtml += "<article> <header> <div class='profile-of-article'> <img class='img-profile pic' src='resources/assets/img/user.png'> <span class='userID main-id point-span'>" + insta.cwriter +"</span> </div> "
+											+"<div class='dropdown' style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
+											+ "<div class='dropdown-content' style='left: 0;'> <a href='#' onclick='report(${vo.cno})' class='report' id='popup_open_btn'>신고</a> <c:if test='${loginMember == writerEmail }'> <a href='${cupdate}' class='update'>수정</a> + </c:if>"
+											+"</div> </div> </div> </header> <div class='main-image'> <div class='subject'>" + insta.csubject + "</div> <div class='content'>" + insta.ccontent + "</div> <div class='description'>"
+											+"<p> <span class='at-tag'>@bts @wkorea @gucci</span> </p> </div> </div> <div class='icons-react'> <div class='icons-left'> <img class='thumbsup' onclick='clike()' src='resources/assets/img/thumbsup.png'>"
+											+"<img class='thumbsup-liked' onclick='clike()' src='resources/assets/img/thumbs-up.png'> </div> <div class='icons-middle'> <img class='thumbsdown' onclick='dislike()' src='resources/assets/img/thumbsdown.png'>"
+											+"<img class='thumbsdown-disliked' onclick='dislike()' src='resources/assets/img/thumbs-down.png'> </div> <div class='icons-right'> <img class='reply' onclick='reply('rep.rno')' id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png'>"
+											+"</div> </div> <div class='reaction'> <div class='liked-people'> <p> <span class='point-span'>"+insta.likecnt +"</span> 명이 추천합니다</p> </div> <div class='comment-section'> <ul class='comments'> </ul>"
+											+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <form> <div class='comment'> <input type='hidden' name='cno' value="+ insta.cno +">"
+											+"<input type='text' class='input-comment' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick=\"replyInsert(idx)\">게시</button>"
+											+"</div> </form> </c:if> </div> <c:if test='${loginMember == null }'> <div class='comment'> <input class='input-comment' type='text' placeholder='댓글을 작성하려면 로그인이 필요합니다.'>"
+											+"<button type='submit' class='submit-comment'>게시</button> </div> </c:if> </article>";
+										
+								<%-- 		"<br><div class='parent'><div><img	src='<%=request.getContextPath()%>/resources/assets/img/bts_logo.png'"
+									+ "width='25px' height='25px'>" + insta.cwriter + "<span	style='color: red;'>:== 닉네임</span></div>"
+									+ "<div>" + insta.ccontentr +"<span style='color: red;''>:== 내용</span></div>"
+									+ "<div><img class='img_like' src='resources/assets/img/like.png' width='25px' height='25px' onclick='clike()'>"
+									+ "<img	class='img_dislike' src='resources/assets/img/dislike.png' width='25px' height='25px' onclick='dislike()'>"
+									+ "<button>댓글보기(아이콘으로 넣기)</button></div>"
+									+ "<div>좋아요 수" + insta.likecnt +"&nbsp;&nbsp;&nbsp;&nbsp; 싫어요 수 " + insta.dislikecnt +"&nbsp;&nbsp;&nbsp;&nbsp; 댓글 수" + insta.replycnt +"</div>"
+									+ "<div><textarea'placeholder='댓글을 입력하여 대화를 시작하세요!'></textarea></div>"
+									+ "<div>" + insta.cdate +"</div></div><hr>"; --%>
+								});
+							} else {
+								moreHtml += "<br><div><div style='text-align:center; margin-bottom:20px;'>더이상 불러올 게시글이 없습니다</div></div>";
+							}
+							$("#moreDiv").html(moreHtml);
+							
+						}
+					});
+		}
+		
+		// 게시글 작성 페이지로 넘어감
+		function showInsertForm() {
+				      if(${loginMember == null}) {
+				    	alert("게시글을 작성하려면 로그인이 필요합니다.");
+				      } else {
+				    	  window.location='cWriteForm';
+				      }
+			      }
+		
 // 추천
 function clike() {
+	console.log("clike들어오나!!!!!!");
    if(${loginMember == null}) {
       alert("로그인이 필요합니다");         
    } else {
@@ -184,6 +155,7 @@ function clike() {
  
 // 비추천
 function dislike() {
+	console.log("cdislike들어오나!!!!!!");
    if(${loginMember == null}) {
       alert("로그인이 필요합니다");         
    } else {
@@ -216,13 +188,6 @@ function dislike() {
    }
 }
 
-function showInsertForm() {
-    if(${loginMember == null}) {
-  	alert("게시글을 작성하려면 로그인이 필요합니다.");
-    } else {
-  	  window.location='cWriteForm';
-    }
-}
 
 //댓글 아무것도 입력 안 했을 때
 $(function(){
@@ -236,6 +201,7 @@ $(function(){
              return true;
           }
        });
+})
 </script>
 </head>
 <body>
@@ -288,14 +254,13 @@ $(function(){
 										<c:url var="cdelete" value="cDelete">
 											<c:param name="cno" value="${vo.cno}" />
 										</c:url>
-										<c:if test="${loginMember == writerEmail }">
-											<a href="${cupdate}" class="update">수정</a>
-											<a href="${cdelete}" class="delete">삭제</a>
-										</c:if>
+											<a class="update" onclick="checkUpdate(${vo.cno }, '${vo.cwriter }')">수정</a>
+											<a class="delete" onclick="checkDelete(${vo.cno }, '${vo.cwriter }')">삭제</a>
 									</div>
 								</div>
 							</div>
 						</header>
+						<!-- 게시글 내용 영역 -->
 						<div class="main-image">
 							<div class="subject">${vo.csubject }</div>
 							<div class="content">${vo.ccontent }
@@ -309,11 +274,6 @@ $(function(){
 									<br>
 								</c:forTokens>
 								</div>
-							<div class="description">
-								<p>
-									<span class="at-tag">@bts @wkorea @gucci</span>
-								</p>
-							</div>
 						</div>
 						<!-- 게시글 추천, 비추천, 댓글 작성 -->
 						<div class="icons-react">
@@ -330,7 +290,8 @@ $(function(){
 									src="resources/assets/img/thumbs-down.png" alt="비추천">
 							</div>
 							<div class="icons-right">
-								<img class="reply" onclick="reply(${rep.rno})"
+							<input type="hidden" class="hiddenCno" value="${vo.cno }">
+								<img class="reply" onclick="reply(${status.index})"
 									id="reply_popup_open"
 									src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png"
 									alt="댓글">
@@ -351,19 +312,17 @@ $(function(){
 								</div>
 							</div>
 						</div>
-						<!-- 댓글 작성 부분 -->
+						<!-- 모달 밖 댓글 작성 영역 -->
 						<div>
 							<div class="hl"></div>
 							<c:if test="${loginMember != null }">
-								<form id="writeRcommunity">
 									<div class="comment">
-										<input type="hidden" name="cno" value="${community.cno }">
-										<input type="text" class="input-comment" name="rcontent"
+										<input type="hidden" name="cno" class="replyInsertCno1" value="${vo.cno }">
+										<input type="text" class="input-comment replyInsert1" name="rcontent"
 											maxlength="4000" placeholder="댓글 달기...">
 										<button type="submit" class="submit-comment"
-											onclick="rplyInsert()">등록</button>
+											onclick="replyInsert1(${status.index})">등록</button>
 									</div>
-								</form>
 							</c:if>
 						</div>
 						<c:if test="${loginMember == null }">
@@ -373,6 +332,7 @@ $(function(){
 								<button type="submit" class="submit-comment">게시</button>
 							</div>
 						</c:if>
+	
 					</article>
 				</c:forEach>
 
@@ -478,7 +438,14 @@ $(function(){
 				</footer>
 			</div>
 
-			<!-- 댓글 작성, 게시글 신고, 댓글 신고 모달창 -->
+<!-- 모달 안에서 댓글 달기: 미완성-->
+<!-- 모달 안에서 댓글 달기: 미완성-->
+<!-- 모달 안에서 댓글 달기: 미완성-->
+<!-- 모달 안에서 댓글 달기: 미완성-->
+<!-- 모달 안에서 댓글 달기: 미완성-->
+<!-- 모달 안에서 댓글 달기: 미완성-->
+<!-- 모달 안에서 댓글 달기: 미완성-->
+<!-- 모달 안에서 댓글 달기: 미완성-->
 
 			<!-- 댓글 모달창 -->
 			<div id="modal_reply" class="modal_reply">
@@ -486,50 +453,26 @@ $(function(){
 				<!-- 댓글 작성 영역 -->
 				<div>
 					<c:if test="${loginMember != null }">
-						<form>
-							<div class="comment">
-								<input type="hidden" name="cno" value="${community.cno }">
-								<input type="text" class="modal-input-comment" name="rcontent"
+							<div class="modalComment">
+								<input type="text" class="modal-input-comment replyInsert2" name="rcontent"
 									maxlength="4000" placeholder="댓글 달기...">
 								<button type="submit" class="submit-comment"
-									onclick="rcommunityInsertFn(${status.index})">게시</button>
+									onclick="replyInsert2()">등록</button>
 							</div>
-						</form>
 					</c:if>
 				</div>
 				<c:if test="${loginMember == null }">
-					<div class="comment">
+					<div class="modalComment">
 						<input class="modal-input-comment" type="text"
 							placeholder="댓글을 작성하려면 로그인이 필요합니다.">
 						<button type="submit" class="submit-comment">게시</button>
 					</div>
 				</c:if>
 				<div class="modal-hl"></div>
-				<!-- 댓글 목록 -->
-				<div class="section-reply">
-					<ul class="reply-list">
-						<br>
-						
-						<c:if test="${!empty commentList}">
-				<!--  댓글 불러오기 -->
-				<c:forEach var="rep" items="${commentList}" varStatus="status">
-						<li>
-							<div class="profile-wrap">
-								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
-							</div>
-							<div class="profile-writer">
-								<input type="hidden" name="cno" value="${commuList.cno }">
-								<span class="userID point-span">${rep.rwriter}</span><span
-									class="sub-span">${rep.rdate}</span><br> <span
-									class="content-span">${rep.rcontent}</span>
-									<textarea class="newRcontent" style="display: none;"
-								maxlength="4000">${rep.rcontent }</textarea>
-								
-								<div class="replyDropdown" style="float: right; position: relative; left: 10px;">
-									<div class="icon-react icon-more"
-										style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
-										<div class="dropdown-content" style="left: 0;">
+				<!-- 댓글 목록을 html로 불러온다 -->
+				<div class="section-reply" id="replyList">
+<!-- 댓글 안 드랍다운 메뉴, 아직 안된거 -->
+					<div class="dropdown-content" style="left: 0;">
 											<a href="#" onclick="rreport(${vo.cno})" class="report">신고</a>
 											<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
 											<c:if test="${loginMember == writerEmail }">
@@ -545,37 +488,6 @@ $(function(){
 										style="display: none;">수정취소</button>
 											</c:if>
 										</div>
-									</div>
-									
-								</div>
-							</div>
-						</li>
-						</c:forEach>
-			</c:if>
-						<li>
-							<div class="profile-wrap">
-								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
-							</div>
-							<div class="profile-writer">
-								<span class="userID point-span">han_ye_seul</span><span
-									class="sub-span">12분 전</span><br> <span
-									class="content-span">저스틴 비버의 어쿠스틱 라이브 😮</span>
-							</div>
-						</li>
-						<li>
-							<div class="profile-wrap">
-								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
-							</div>
-							<div class="profile-writer">
-								<span class="userID point-span">dntlrdl</span><span
-									class="sub-span">12분 전</span><br> <span
-									class="content-span">저스틴 비버의 어쿠스틱 라이브 😮</span>
-							</div>
-						</li>
-
-					</ul>
 				</div>
 			</div>
 

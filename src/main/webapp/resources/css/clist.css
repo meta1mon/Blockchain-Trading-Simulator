@@ -42,6 +42,10 @@
 	color: black;
 	margin-top: 33px;
 	padding: 0;
+	background-color: #ffffff;
+}
+
+	
 }
 
 #searchType:hover, #searchType:focus {

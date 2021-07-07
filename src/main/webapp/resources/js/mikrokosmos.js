@@ -13,12 +13,60 @@
 	      modalReportReplyFn('modal_report_reply');
 	}
 
-	function reply(nowRno) {
-	      rno = nowRno;
-	      console.log(rno);
-	      modalReplyFn('modal_reply');
+	function reply(idx) {
+		var replyHtml = "<ul style=\"zIndex:10000;\"class=\"reply-list\">";
+			var replyCno = $(".hiddenCno").eq(idx).val();
+	      $.ajax({
+	          url : "rcSelect",
+	          type : "post",
+	          data : {
+	             "cno" : replyCno
+	          },
+	          datatype : "json",
+	          success : function(data) {
+	        	  $(".reply-list").remove();
+	    	      modalReplyFn('modal_reply');
+					var json = JSON.parse(data);
+					if (json.length > 0) {
+						$.each(json,function(idx, reply) {
+							replyHtml +=" <li><div class=\"profile-wrap\">"
+								+"<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
+								+"<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" +reply.rdate + "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div></li>";
+						});
+						replyHtml += "</ul>";
+					} else {
+						replyHtml = "<p>작성된 댓글이 없습니다.</p>";
+					}
+					$("#replyList").html(replyHtml);
+	          }
+	       });
 	}
 
+	// 게시글 수정
+	function checkUpdate(updateCno, updateCwriter) {
+		console.log(updateCno);
+		console.log(updateCwriter);
+	      $.ajax({
+	          url : "cUpdateCheck",
+	          type : "post",
+	          data : {
+	             "cwriter" : updateCwriter
+	          },
+	          datatype : "json",
+	          success : function(data) {
+	        	  if(data == 1) {
+	        		  location.href="cUpdateForm?cno=" + updateCno + "&fromInsta=1";
+	        	  } else {
+	        		  alert("수정 권한이 없습니다");
+	        	  }
+	          }
+	       });
+	}
+	
+	// 게시글 삭제
+	function checkDelete(deleteCno, deleteCwriter) {
+		console.log(deleteCno);
+	}
 // 게시글, 댓글 드랍다운 메뉴 클릭 시 열기/닫기
 $('.dropdown').click(function() {
 	console.log("클릭함");
@@ -38,11 +86,11 @@ $(document).mouseup(function (e){
     var replyDropdownBtn = $('.replyDropdown');
     var containerReply = $('#modal_reply'); // 댓글 모달창
     var containerReport = $('#modal_report'); // 게시글 신고 모달창
-    var containerReportReply = $('#modal_report_reply'); //댓글 신고 모달창
+    var containerReportReply = $('#modal_report_reply'); // 댓글 신고 모달창
     
     if( dropdown.has(e.target).length === 0){
     	dropdown.css('display','none');
-//    	replyDropdownBtn.css('display','none');
+// replyDropdownBtn.css('display','none');
     }
     if( containerReport.has(e.target).length === 0){
     	containerReport.css('display','none');
@@ -54,11 +102,11 @@ $(document).mouseup(function (e){
     	bgReportReply.remove();
     	modalReportReply.style.display = 'none';
     }
-//    if( containerReply.has(e.target).length === 0){ 
-//    	containerReply.css('display','none');
-//    	bgReply.remove();
-//    	modalReply.style.display = 'none';
-//    }
+// if( containerReply.has(e.target).length === 0){
+// containerReply.css('display','none');
+// bgReply.remove();
+// modalReply.style.display = 'none';
+// }
   });
 
    // 게시글 신고 부분
@@ -105,19 +153,25 @@ $(document).mouseup(function (e){
        });
     })
 
-      // 댓글 삽입
-   function rplyInsert() {
-	   var rInsertData = $("#writeRcommunity").serialize();
+      // 모달 밖의 댓글 삽입
+   function replyInsert1(Idx) {
+    	 var rcontent =  $(".replyInsert1").eq(Idx).val();
+    	 var cno =  $(".replyInsertCno1").eq(Idx).val();
+    	 
       $.ajax({
-          url : "${pageContext.request.contextPath}/rcInsert",
+          url : "rcInsert",
           type : "post",
-          data : rInsertData,
+          data : {
+        	  "rcontent" : rcontent,
+        	  "cno" : cno
+        	  },
           success : function(data) {
         	  alert("댓글 작성 완료");
          	 window.location.reload();
           }
    	})
    }
+
    // 댓글 수정 버튼 생성
    function makeUpdateBtn(index) {
 
@@ -155,7 +209,7 @@ $(document).mouseup(function (e){
       })
    }
    
-   // 댓글 삭제   -- 새로고침을 사용 중인데 추후 수정해야 할듯
+   // 댓글 삭제 -- 새로고침을 사용 중인데 추후 수정해야 할듯
    function replyDelete(deleteRno, deleteCno) {
       $.ajax({
          url : "${pageContext.request.contextPath}/rcDelete",
@@ -171,7 +225,7 @@ $(document).mouseup(function (e){
       });
    }
    
-   /*게시글 신고 모달*/
+   /* 게시글 신고 모달 */
    var bg = null;
    var modal = null;
    function modalFn(id) {
@@ -222,7 +276,7 @@ $(document).mouseup(function (e){
         return this;
     }
     
-    /*댓글 신고 모달*/
+    /* 댓글 신고 모달 */
     var bgReportReply = null;
     var modalReportReply = null;
     function modalReportReplyFn(id) {
@@ -274,14 +328,14 @@ $(document).mouseup(function (e){
     }
     
     
-    /* 댓글 모달*/
+    /* 댓글 모달 */
     var bgReply = null;
    var modalReply = null;
    function modalReplyFn(id) {
-        var zIndex = 9999;
+        var zIndex = 9998;
         modalReply = document.getElementById(id);
 
-        // 모달 div 뒤에 희끄무레한 레이어
+       // 모달 div 뒤에 희끄무레한 레이어
         bgReply = document.createElement('div');
         bgReply.setStyle({
             position: 'fixed',

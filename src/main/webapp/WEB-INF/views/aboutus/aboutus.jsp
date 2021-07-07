@@ -20,7 +20,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="<%=request.getContextPath()%>/mainpage"><img src="resources/assets/img/bts_logo.png" alt="..." /></a>
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/mainpage"><img src="resources/assets/img/bts_logo.svg" alt="..." /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
@@ -66,7 +66,7 @@
                 <div class="row text-center">
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
-                        <img src="resources/assets/img/bts_logo.png" style="height:2cm; position:relative; right:10px;" alt="..." />
+                        <img src="resources/assets/img/bts_logo.svg" style="height:2cm; position:relative; right:10px;" alt="..." />
 <!--                             <i class="fas fa-circle fa-stack-2x text-primary"></i> -->
                         </span>
                         <p class="my-3" style="font-size:18px;">BTS는 회원님께 다양한 서비스와 편의를 제공하는 가상자산 중개 플랫폼입니다.<br>

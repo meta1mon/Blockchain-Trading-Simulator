@@ -18,7 +18,13 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>BTS</title>
 <style>
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-style: normal;
+}
 * {
+    font-family: NanumSquareRound;
 	-ms-overflow-style: none;
 }
 
@@ -91,8 +97,7 @@ html, body {
 }
 
 #enter {
-	position: sticky;
-	bottom: 0px;
+	bottom: -100px;
 	margin-left: -20px;
 }
 
@@ -117,7 +122,7 @@ p {
 			<label class="label"> <Username></Username>
 			</label>
 			<div class="control">
-				<input id="username-input" placeholder="영어와 숫자만 사용하실 수 있습니다."
+				<input id="username-input" placeholder="닉네임을 입력해주세요 (※영어와 숫자만 가능)"
 					class="is-small" type="text" />
 			</div>
 		</div>
@@ -140,7 +145,7 @@ p {
 
 			</div>
 			<input id="enter" class="is-small" type="text"
-				style="margin-top: 10px;" />
+				style="margin-top: 10px;" maxlength="38"/>
 		</div>
 		<note-count-component></note-count-component>
 	</div>
@@ -150,6 +155,6 @@ p {
 		crossorigin="anonymous"></script>
 	<script src="https://asset.talkplus.io/talkplus-js-0.1.5.js"></script>
 
-	<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/chatting.js"></script>
 </body>
 </html>

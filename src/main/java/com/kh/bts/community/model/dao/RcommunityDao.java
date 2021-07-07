@@ -20,7 +20,9 @@ public class RcommunityDao {
 	}
 
 	public List<UserRcommuniyCheck> selectRcommunityList(String cno) { // 게시글에 해당하는 댓글 조회
-		return sqlSession.selectList("rcommunity.selectRcommunityAll", cno);
+		List<UserRcommuniyCheck> list = sqlSession.selectList("rcommunity.selectRcommunityAll", cno);
+		System.out.println(list);
+		return list;
 	}
 
 	public Rcommunity selectRcommunity(String rno) { // 단일 댓글 조회

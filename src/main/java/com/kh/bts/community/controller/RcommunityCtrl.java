@@ -1,6 +1,8 @@
 package com.kh.bts.community.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Rcommunity;
+import com.kh.bts.community.model.vo.UserRcommuniyCheck;
 
 @Controller
 public class RcommunityCtrl {
@@ -24,10 +29,34 @@ public class RcommunityCtrl {
 	@Autowired
 	private RcommunityService rcmService;
 
+	@RequestMapping(value = "rcSelect", method = RequestMethod.POST)
+	public void RcommunitySelect(Rcommunity rc,  HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		System.out.println(rc.getCno());
+		String oracleCno = setLPad(rc.getCno(), 5, "0");
+		List<UserRcommuniyCheck> list = rcmService.selectRcommunityList(oracleCno);
+		System.out.println(list);
+		PrintWriter out = null;
+		Gson gson = new GsonBuilder().create();
+		String jsonlist = gson.toJson(list);
+		try {
+			out = response.getWriter();
+			out.print(jsonlist);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			out.flush();
+			out.close();
+		}
+	}
+	
+	
+	
+	
 	@ResponseBody
 	@RequestMapping(value = "rcInsert", method = RequestMethod.POST)
 	public int RcommunityInsert(Rcommunity rc, HttpServletRequest request, ModelAndView mv) {
-		System.out.println("Rcommunity겟!@@@@@@@@@@@@@@@@@@@");
 		String email = (String) request.getSession().getAttribute("loginMember");
 		int result = rcmService.insertRcommunity(rc, email);
 		return result;

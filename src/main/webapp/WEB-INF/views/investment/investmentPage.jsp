@@ -32,7 +32,7 @@
 </script>
 <style>
 .popup {
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	right: -400px;
 	width: 400px;
@@ -41,16 +41,13 @@
 	border: 1px solid black;
 	border-radius: 5px;
 	padding: 40px;
-	margin-bottom: 52px;
 	text-align: center;
 	font: 18px !important;
 	color: white;
-	right: 0;
-	bottom: 100px;
 }
 
 .popup1 {
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	right: -400px;
 	width: 400px;
@@ -59,7 +56,6 @@
 	border: 1px solid black;
 	border-radius: 5px;
 	padding: 40px;
-	margin-bottom: 52px;
 	text-align: center;
 	font: 18px !important;
 	color: white;
@@ -316,11 +312,12 @@
 				</table>
 			</div>
 
-			<div id="alertbuy" class="popup">매수가 체결되었습니다.</div>
-			<div id="alertsold" class="popup1">매도가 체결되었습니다.</div>
+
 		</div>
 
 
+		<div id="alertbuy" class="popup">매수가 체결되었습니다.</div>
+		<div id="alertsold" class="popup1">매도가 체결되었습니다.</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 	<!--가상 키보드 부분  -->

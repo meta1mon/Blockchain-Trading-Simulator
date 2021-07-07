@@ -775,11 +775,11 @@ function bcnt() {
 				var audio = document.getElementById("boughtmusic");
 				audio.play();
 				$('.popup').animate({
-					right : '-400px',
+					right : '0px',
 
 				}, 1000, function() {
 					$(this).animate({
-						right : '0px',
+						right : '-400px',
 					}, 3000);
 				});
 			}

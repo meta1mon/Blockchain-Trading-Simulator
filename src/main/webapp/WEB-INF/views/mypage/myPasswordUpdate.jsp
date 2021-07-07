@@ -11,6 +11,8 @@
 	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/member.css"
 	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/myPasswordUpdate.css"
+	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/pinpad.css"
@@ -18,95 +20,81 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-<style>
-#mpu {
-	width: 65%;
-	min-width: 1024px;
-	text-align: center;
-	height: 50%;
-	padding: 20px;
-	margin: 25px auto;
-	background-color: #fff;
-	border: 1.5px solid #E3C8F8;
-	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
-}
-
-#mpu table {
-	margin: 0 auto;
-	width: 500px;
-}
-
-form {
-	padding: 20px;
-}
-
-form input {
-	width: 100%;
-}
-
-.btn1 {
-	width: 300px;
-}
-
-.alert {
-	height: 18px !important;
-}
-
-.star{
-	color: red;
-}
-</style>
 </head>
 <body>
 	<div id="wrapper">
 		<jsp:include page="myNav.jsp"></jsp:include>
 		<div id="mpu">
-			<h1 class="title">비밀번호 변경</h1>
-			<form action="${pageContext.request.contextPath}/mypage/passChange"
-				method="post" style="border-bottom: 1px solid black;">
-				<table>
-					<tr>
-						<td>비밀번호<span class="star">*</span></td>
-						<td><input type="password" name="pw" id="pw"
-							placeholder="비밀번호를 입력해주세요."></td>
-					</tr>
-					<tr>
-						<td colspan="2"><p class="alert pwReg">&nbsp;</p></td>
-					</tr>
-					<tr>
-						<td>비밀번호 확인<span class="star">*</span></td>
-						<td><input type="password" name="pwCh" id="pwCh"
-							placeholder="비밀번호를 다시 한 번 입력해주세요."></td>
-					</tr>
-					<tr>
-						<td colspan="2"><p class="alert pwCh">&nbsp;</p></td>
-					</tr>
-				</table>
-				<button type="submit" id="changePw" onclick="return passChange();" class="btn1">비밀번호 수정</button>
-			</form>
-			<br>
-			<h1 class="title">계좌 비밀번호 변경</h1>
-			<form action="${pageContext.request.contextPath}/mypage/bankPwChange"
-				method="post">
-				<table>
-					<tr>
-						<th>계좌 비밀번호<span class="star">*</span></th>
-						<td colspan="2"><input type="password" name="bankPw" id="bankPw1" class="pin1" placeholder="계좌 비밀번호를 입력해주세요"></td>
-					</tr>
-					<tr>
-						<td colspan="2"><p class="alert bankPwCh">&nbsp;</p></td>
-					</tr>
-					<tr>
-						<th>계좌 비밀번호 확인<span class="star">*</span></th>
-						<td colspan="2"><input type="password" id="bankPw2" class="pin2" placeholder="계좌 비밀번호를 입력해주세요."></td>
-					</tr>
-					<tr>
-						<td colspan="2"><p class="alert bankPwChCh">&nbsp;</p></td>
-					</tr>
-				</table>
-				<button type="submit" onclick="return bankPwChange();" class="btn1">계좌
-					비밀번호 수정</button>
-			</form>
+			
+			<div class="tab">
+				<button class="tablinks" value="pwd">비밀번호 변경</button>
+				<button class="tablinks" value="acntPwd">계좌 비밀번호 변경</button>
+			</div>
+			
+			
+			
+			
+			<div id="pwd" class="tabcontent">
+			
+				<form action="${pageContext.request.contextPath}/mypage/passChange" method="post">
+					<table id="pwdTable" cellspacing="20">
+						<tr>
+							<td>현재 비밀번호<span class="star">*</span></td>
+							<td><input type="password" name="pwNow" id="pwNow" placeholder="현재 비밀번호를 입력해주세요."></td>
+							<td id="pwdWarning" rowspan="6">
+								<strong>비밀번호에 영문 대소문자, 숫자, 특수문자를 조합하시면 비밀번호 안전도가 높아져 도용의 위험이 줄어듭니다.</strong>
+								<br>8~15자의 영어 대 소문자, 숫자와 특수문자(!@#$%^&*)만 사용할 수 있습니다.
+							</td>
+						</tr>
+						<tr>
+							<td style="border-bottom: 1px solid #ccc;" colspan="2"><p class="alert pwNow">&nbsp;</p></td>
+						</tr>
+						<tr>
+							<td>새 비밀번호<span class="star">*</span></td>
+							<td><input type="password" name="pw" id="pw" placeholder="새 비밀번호를 입력해주세요."></td>
+						</tr>
+						<tr>
+							<td colspan="2"><p class="alert pwReg">&nbsp;</p></td>
+						</tr>
+						<tr>
+							<td>새 비밀번호 확인<span class="star">*</span></td>
+							<td><input type="password" name="pwCh" id="pwCh"
+								placeholder="새 비밀번호를 다시 한 번 입력해주세요."></td>
+						</tr>
+						<tr>
+							<td colspan="2"><p class="alert pwCh">&nbsp;</p></td>
+						</tr>
+					</table>
+					<button type="submit" id="changePw" onclick="return passChange();" class="btn1">비밀번호 수정</button>
+				</form>
+			</div>
+				
+				
+				
+				
+			<div id="acntPwd" class="tabcontent">
+				<form action="${pageContext.request.contextPath}/mypage/bankPwChange"
+					method="post">
+					<table>
+						<tr>
+							<th>계좌 비밀번호<span class="star">*</span></th>
+							<td colspan="2"><input type="password" name="bankPw" id="bankPw1" class="pin1" placeholder="계좌 비밀번호를 입력해주세요"></td>
+						</tr>
+						<tr>
+							<td colspan="2"><p class="alert bankPwCh">&nbsp;</p></td>
+						</tr>
+						<tr>
+							<th>계좌 비밀번호 확인<span class="star">*</span></th>
+							<td colspan="2"><input type="password" id="bankPw2" class="pin2" placeholder="계좌 비밀번호를 입력해주세요."></td>
+						</tr>
+						<tr>
+							<td colspan="2"><p class="alert bankPwChCh">&nbsp;</p></td>
+						</tr>
+					</table>
+					<button type="submit" onclick="return bankPwChange();" class="btn1">계좌
+						비밀번호 수정</button>
+				</form>
+			</div>
 		</div>
 	</div>
 	<script>
@@ -165,6 +153,20 @@ form input {
 			alert("변경 실패!");
 			return false;
 		};
+		
+		$('.tablinks').click(function() {
+
+			for (var i = 0; i < $('.tabcontent').length; i++) {
+				$('.tabcontent').hide();
+			}
+
+			$(".tabcontent").eq($(this).index()).show();
+
+		});
+		
+		$(function() {
+			$(".tabcontent").eq(0).show(); // 보유코인 목록 탭 기본값 : show()
+		});
 	</script>
 	<script>
 		// 은행 비밀번호와 은행 비밀번호 확인 일치 여부

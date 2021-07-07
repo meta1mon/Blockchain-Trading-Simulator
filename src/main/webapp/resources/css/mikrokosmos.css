@@ -84,8 +84,7 @@ nav img {
 
 .searchType {
 	font-size: 14px;
-	font-weight: 300;
-	font-size: 14px;
+	font-weight: lighter;
 	color: #8e8e8e;
 	padding: 4px 0;
 	box-sizing: content-box;
@@ -219,6 +218,7 @@ header {
 
 .content p{
 	padding: 0 16px;
+	font-weight: lighter;
 }
 
 .dropdown {
@@ -581,7 +581,7 @@ ul.story-list .profile-text {
 }
 
 /* 댓글 모달창 */
-#modal_reply {
+.modal_reply {
 	display: none;
 	width: 470px;
 	height: 480px;

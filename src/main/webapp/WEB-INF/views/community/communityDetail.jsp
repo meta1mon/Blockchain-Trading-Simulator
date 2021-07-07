@@ -107,8 +107,8 @@ $(function(){
 										onclick="dislike()">&nbsp;&nbsp;&nbsp; <span
 										class="dislikecnt">${community.dislikecnt }</span>
 								</div>
-								<!-- 게시글 신고, 삭제, 수정 버튼 -->
 							</div>
+								<!-- 게시글 신고, 삭제, 수정 버튼 -->
 							<button type="button" class="report" id="popup_open_btn">신고</button>
 
 							<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
@@ -172,7 +172,7 @@ $(function(){
 								maxlength="4000"
 								onfocus="if(this.value == '댓글 쓰기') { this.value = ''; }"
 								onblur="if(this.value == '') { this.value ='댓글 쓰기'; }"></textarea>
-							<button type="button" onclick="rplyInsert()">등록</button>
+							<button class="rplyInsert" type="button" onclick="rplyInsert()">등록</button>
 						</div>
 					</form>
 				</c:if>

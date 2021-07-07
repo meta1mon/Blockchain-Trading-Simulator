@@ -8,25 +8,38 @@
 	margin: 10px;
 }
 
-.ck.ck-editor {
+#editor {
+	max-width: 80%;
+	min-width: 80%;
+	margin-left: 20px;
+	min-height: 70px;
+	text-indent: 1%;
+	border: 1px solid #eeeeee;
+}
+
+.newRcontent {
 	max-width: 80%;
 	min-width: 80%;
 	margin-left: 20px;
 	position: relative;
 	top: 6px;
+	min-height: 50px;
+	text-indent: 1%;
+	border: 1px solid #eeeeee;
 }
 
-.ck-editor__editable {
-	min-height: 90px;
+.rplyInsert{
+	color: #0095f6;
+    background-color: #fff;
+    border-style: none;
+    height: 40px;
+    width: 40px;
+    padding: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-.ck.ck-toolbar {
-	background: white;
-}
-
-.ck .ck-editor__main > .ck-editor__editable:not(.ck-focused)
-{
-}
 .detailOut {
 	width: 50%;
 	min-width: 1000px;
@@ -148,7 +161,7 @@
 .comment-box {
 	margin: 0 auto;
 	background-color: #FAFAFA;
-	padding: 20px 0 35px 0;
+	padding: 25px 0 25px 0;
 	width: 100%;
 	border-bottom: 1px solid #999;
 }

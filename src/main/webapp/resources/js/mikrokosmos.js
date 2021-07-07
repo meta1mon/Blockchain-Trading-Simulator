@@ -1,59 +1,23 @@
-//const commentInput = document.getElementsByClassName('input-comment')[0];
-//const commentBtn = document.getElementsByClassName('submit-comment')[0];
-//const commentList = document.getElementsByClassName('comments')[0];
-//
-//// 댓글 달기
-//
-//function addComment() {
-//    var newComment = document.createElement('li')
-//    newComment.innerHTML = `<span><span class="point-span userID">thisisyourhyung</span>` + commentInput.value + `</span>`;
-//
-//    // 코멘트에 더해지는 버튼 생성
-//    let commentBtns = document.createElement('div');
-//
-//    let deleteBtn = document.createElement('img');
-//    deleteBtn.classList.add("comment-more");
-//    deleteBtn.src = "https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png";
-//    deleteBtn.alt = "more";
-//
-//    // 버튼에 함수 선언
-//    deleteBtn.addEventListener('click', function() {
-//        this.parentNode.parentNode.remove();
-//    })
-//
-//    commentBtns.appendChild(deleteBtn);
-//    newComment.appendChild(commentBtns);
-//    commentList.appendChild(newComment);
-//    commentInput.value = "";
-//    commentBtn.disabled = true;
-//}
-//
-//commentBtn.addEventListener('click', function(){
-//    if (commentInput.value) {
-//        addComment();
-//    }
-//})
-//
-//commentInput.addEventListener('keyup', function(e){
-//    if (commentInput.value) {
-//        commentBtn.disabled = false;
-//        if (e.which === 13) {
-//            addComment();
-//        }
-//    }
-//    else {
-//    commentBtn.disabled = true;
-//    }
-//})
-//
-//// 댓글 지우기
-//
-//let deleteBtn = document.querySelectorAll('.comment-more');
-//deleteBtn.forEach(function(event) {
-//    event.addEventListener('click', function() {
-//        this.parentNode.parentNode.remove();
-//    });
-//})
+// 모달창 실행시키는 함수
+	var cno = 0;
+	var rno = 0;
+
+	function report(nowCno) {
+	      cno = nowCno;
+	      console.log(cno);
+	       modalFn('modal_report');
+	}
+	function rreport(nowRno) {
+	      rno = nowRno;
+	      console.log(rno);
+	      modalReportReplyFn('modal_report_reply');
+	}
+
+	function reply(nowRno) {
+	      rno = nowRno;
+	      console.log(rno);
+	      modalReplyFn('modal_reply');
+	}
 
 // 게시글, 댓글 드랍다운 메뉴 클릭 시 열기/닫기
 $('.dropdown').click(function() {

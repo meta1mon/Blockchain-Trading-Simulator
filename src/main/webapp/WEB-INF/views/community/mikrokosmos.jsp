@@ -119,7 +119,6 @@
 	function rcommunityInsertFn(idx) {
 
 	}
-
 </script>
 <style>
 .parent>div {
@@ -149,30 +148,7 @@
 	left: calc(50% - 225px);
 }
 </style>
-<script type="text/javascript">
-var cno = 0;
-var rno = 0;
-
-function report(nowCno) {
-      cno = nowCno;
-      console.log(cno);
-       modalFn('modal_report');
-
-}
-function rreport(nowRno) {
-      rno = nowRno;
-      console.log(rno);
-      modalReportReplyFn('modal_report_reply');
-
-}
-
-function reply(nowRno) {
-      rno = nowRno;
-      console.log(rno);
-      modalReplyFn('modal_reply');
-
-}
-
+<script>
 // 추천
 function clike() {
    if(${loginMember == null}) {
@@ -247,6 +223,19 @@ function showInsertForm() {
   	  window.location='cWriteForm';
     }
 }
+
+//댓글 아무것도 입력 안 했을 때
+$(function(){
+       // 댓글 Insert Script
+       $('#replyForm').on('submit', function(event){
+          if($('#reply_contents').val() == "" || $('#reply_contents').val() == null){
+             alert("내용을 입력해주세요.");
+             event.preventDefault();
+          } else {
+             $('#comments').val($('#reply_contents').val());
+             return true;
+          }
+       });
 </script>
 </head>
 <body>
@@ -267,8 +256,8 @@ function showInsertForm() {
 					<button type=submit id="btnsearch" style="display: none;"></button>
 				</form>
 				<div class="nav-2">
-          <img src="resources/assets/img/writing.png" onclick="showInsertForm()" alt="글쓰기">
-          <img src="resources/assets/img/megaphone.png" onclick="location.href='clist'" alt="공지사항">
+          <img src="resources/assets/img/writing.png" onclick="showInsertForm()" title="글 작성" alt="글쓰기" style="cursor:pointer;">
+          <img src="resources/assets/img/megaphone.png" onclick="location.href='clist'" title="공지사항" alt="공지사항" style="cursor:pointer;">
           </div>
 			</div>
 		</nav>
@@ -288,9 +277,17 @@ function showInsertForm() {
 								<div class="icon-react icon-more"
 									style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
 									<div class="dropdown-content" style="left: 0;">
-										<a href="#" onclick="report(${vo.cno})" class="report"
-											id="popup_open_btn">신고</a>
+										<a href="#" onclick="report(${vo.cno})" class="report">신고</a>
 										<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
+										<c:url var="insta" value="insta">
+											<c:param name="cno" value="${vo.cno}" />
+										</c:url>
+										<c:url var="cupdate" value="cUpdateForm">
+											<c:param name="cno" value="${vo.cno}" />
+										</c:url>
+										<c:url var="cdelete" value="cDelete">
+											<c:param name="cno" value="${vo.cno}" />
+										</c:url>
 										<c:if test="${loginMember == writerEmail }">
 											<a href="${cupdate}" class="update">수정</a>
 											<a href="${cdelete}" class="delete">삭제</a>
@@ -301,7 +298,17 @@ function showInsertForm() {
 						</header>
 						<div class="main-image">
 							<div class="subject">${vo.csubject }</div>
-							<div class="content">${vo.ccontent }</div>
+							<div class="content">${vo.ccontent }
+							<c:forTokens var="fileName" items="${vo.filepath}"
+									delims="," varStatus="st">
+									<a download="${fileName}"
+										href="${pageContext.request.contextPath}/resources/uploadFiles/${vo.filepath}">${fileName}</a>
+									<c:if test="${!st.last }">
+                                    /
+                                </c:if>
+									<br>
+								</c:forTokens>
+								</div>
 							<div class="description">
 								<p>
 									<span class="at-tag">@bts @wkorea @gucci</span>
@@ -348,13 +355,13 @@ function showInsertForm() {
 						<div>
 							<div class="hl"></div>
 							<c:if test="${loginMember != null }">
-								<form>
+								<form id="writeRcommunity">
 									<div class="comment">
 										<input type="hidden" name="cno" value="${community.cno }">
 										<input type="text" class="input-comment" name="rcontent"
 											maxlength="4000" placeholder="댓글 달기...">
 										<button type="submit" class="submit-comment"
-											onclick="rcommunityInsertFn(${status.index})">게시</button>
+											onclick="rplyInsert()">등록</button>
 									</div>
 								</form>
 							</c:if>
@@ -377,7 +384,7 @@ function showInsertForm() {
 				<!-- 랭킹 section -->
 				<div class="section-story">
 					<div class="menu-title">
-						<span class="sub-title">랭킹</span> <span class="find-more" onclick="location.href='rankAccumulative'">모두
+						<span class="sub-title">누적 랭킹</span> <span class="find-more" onclick="location.href='rankAccumulative'">모두
 							보기</span>
 					</div>
 					<ul class="story-list">
@@ -426,7 +433,7 @@ function showInsertForm() {
 					</ul>
 				</div>
 				<!-- recommendation section -->
-				<div class="section-recommend">
+			 	<div class="section-recommend">
 					<div class="menu-title">
 						<span class="sub-title">회원님을 위한 추천</span> <span class="find-more" onclick="location.href='rankAccumulative'">모두
 							보기</span>
@@ -463,12 +470,10 @@ function showInsertForm() {
 							</div> <span class="btn-follow">팔로우</span>
 						</li>
 					</ul>
-				</div>
+				</div> 
 				<footer>
 					<p class="insta-sccript">
-						<!-- 소개 ∙ 도움말 ∙ 홍보 센터 ∙ API ∙ 채용 정보 ∙ 개인정보처리방침 ∙ <br>약관 ∙ 위치 ∙
-						인기계정 ∙ 해시태그 ∙ 언어 <br>
-						<br>  -->© 2021 Blockchain Traiding Simulator
+						© 2021 Blockchain Traiding Simulator
 					</p>
 				</footer>
 			</div>
@@ -476,10 +481,9 @@ function showInsertForm() {
 			<!-- 댓글 작성, 게시글 신고, 댓글 신고 모달창 -->
 
 			<!-- 댓글 모달창 -->
-			<div id="modal_reply">
-				<button type="button" id="reply_popup_close"
-					class="modal_reply_close_btn"></button>
-				<!-- 댓글 작성 부분 -->
+			<div id="modal_reply" class="modal_reply">
+				<button type="button" class="modal_reply_close_btn"></button>
+				<!-- 댓글 작성 영역 -->
 				<div>
 					<c:if test="${loginMember != null }">
 						<form>
@@ -501,44 +505,53 @@ function showInsertForm() {
 					</div>
 				</c:if>
 				<div class="modal-hl"></div>
-				<!-- story section -->
+				<!-- 댓글 목록 -->
 				<div class="section-reply">
 					<ul class="reply-list">
 						<br>
+						
+						<c:if test="${!empty commentList}">
+				<!--  댓글 불러오기 -->
+				<c:forEach var="rep" items="${commentList}" varStatus="status">
 						<li>
 							<div class="profile-wrap">
 								<img class="img-profile story"
 									src="resources/assets/img/user.png" alt="..">
 							</div>
 							<div class="profile-writer">
-								<input type="hidden" name="cno" value="${community.cno }">
-								<span class="userID point-span">wecode_bootcamp</span><span
-									class="sub-span">12분 전</span><br> <span
-									class="content-span">저스틴 비버의 어쿠스틱 라이브 😮</span>
-								<div class="replyDropdown" style="float: right;">
+								<input type="hidden" name="cno" value="${commuList.cno }">
+								<span class="userID point-span">${rep.rwriter}</span><span
+									class="sub-span">${rep.rdate}</span><br> <span
+									class="content-span">${rep.rcontent}</span>
+									<textarea class="newRcontent" style="display: none;"
+								maxlength="4000">${rep.rcontent }</textarea>
+								
+								<div class="replyDropdown" style="float: right; position: relative; left: 10px;">
 									<div class="icon-react icon-more"
 										style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
 										<div class="dropdown-content" style="left: 0;">
-											<a href="#" onclick="rreport(${vo.cno})" class="report"
-												id="popup_open_btn">신고</a>
+											<a href="#" onclick="rreport(${vo.cno})" class="report">신고</a>
 											<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
 											<c:if test="${loginMember == writerEmail }">
 												<a href="#" class="update"
 													onclick="makeUpdateBtn(${status.index })">수정</a>
 												<a href="#" class="delete"
 													onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</a>
-											</c:if>
-										</div>
-									</div>
-									<button type="button" class="submitRUpdate"
+											<button type="button" class="submitRUpdate"
 										onclick="replyUpdate(${rep.rno}, ${status.index })"
 										style="display: none;">수정완료</button>
 									<button type="button" class="cancleRUpdate"
 										onclick="updateRCancle(${status.index })"
 										style="display: none;">수정취소</button>
+											</c:if>
+										</div>
+									</div>
+									
 								</div>
 							</div>
 						</li>
+						</c:forEach>
+			</c:if>
 						<li>
 							<div class="profile-wrap">
 								<img class="img-profile story"
@@ -561,83 +574,7 @@ function showInsertForm() {
 									class="content-span">저스틴 비버의 어쿠스틱 라이브 😮</span>
 							</div>
 						</li>
-						<li>
-							<div class="profile-wrap">
-								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
-							</div>
-							<div class="profile-writer">
-								<span class="userID point-span">i_icaruswalks</span><span
-									class="sub-span">12분 전</span><br> <span
-									class="content-span">A Perfect Fit for Landscaping</span>
-							</div>
-						</li>
-						<li>
-							<div class="profile-wrap">
-								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
-							</div>
-							<div class="profile-writer">
-								<span class="userID point-span">i_icaruswalks</span><span
-									class="sub-span">12분 전</span><br> <span
-									class="content-span">A Perfect Fit for Landscaping</span>
-							</div>
-						</li>
-						<li>
-							<div class="profile-wrap">
-								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
-							</div>
-							<div class="profile-writer">
-								<span class="userID point-span">i_icaruswalks</span><span
-									class="sub-span">12분 전</span><br> <span
-									class="content-span">A Perfect Fit for Landscaping</span>
-							</div>
-						</li>
-						<li>
-							<div class="profile-wrap">
-								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
-							</div>
-							<div class="profile-writer">
-								<span class="userID point-span">i_icaruswalks</span><span
-									class="sub-span">12분 전</span><br> <span
-									class="content-span">56분 전</span>
-							</div>
-						</li>
-						<li>
-							<div class="profile-wrap">
-								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
-							</div>
-							<div class="profile-writer">
-								<span class="userID point-span">i_icaruswalks</span><span
-									class="sub-span">12분 전</span><br> <span
-									class="content-span">56분 전</span>
-							</div>
-						</li>
-						<li>
-							<div class="profile-wrap">
-								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
-							</div>
-							<div class="profile-writer">
-								<span class="userID point-span">i_icaruswalks</span><span
-									class="sub-span">12분 전</span><br> <span
-									class="content-span">56분 전</span>
-							</div>
-						</li>
-						<li>
-							<div class="profile-wrap">
-								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
-							</div>
-							<div class="profile-writer">
-								<span class="userID point-span">i_icaruswalks</span><span
-									class="sub-span">12분 전</span><br> <span
-									class="content-span">56분 전</span>
-							</div>
-						</li>
+
 					</ul>
 				</div>
 			</div>
@@ -664,12 +601,11 @@ function showInsertForm() {
 							class="modal_choise_label">스팸 또는 사용자 현혹</label> <br> <input
 							type="radio" id="reportChoice6" class="reportChoice"
 							name="creport" value="6"> <label for="reportChoice6"
-							class="modal_choise_label">마음에 들지 않습니다.</label> <input
-							type="hidden" name="csubject" value="${community.csubject }" />
+							class="modal_choise_label">마음에 들지 않습니다.</label> 
+						<input type="hidden" name="csubject" value="${community.csubject }" />
 						<input type="hidden" name="cwriter" value="${community.cwriter }" />
-						<input type="hidden" name="ccontent"
-							value="${community.ccontent }" /> <input type="hidden"
-							name="cno" value="${community.cno }" />
+						<input type="hidden" name="ccontent" value="${community.ccontent }" /> 
+						<input type="hidden" name="cno" value="${community.cno }" />
 					</div>
 					<hr
 						style="width: 328px; position: relative; right: 30px; top: 20px;">

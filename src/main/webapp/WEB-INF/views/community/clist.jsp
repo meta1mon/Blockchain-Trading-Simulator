@@ -106,7 +106,7 @@
 							<td align="left"><a
 								href="cDetail?cno=${voNotice.cno}&page=${currentPage}"
 								class="subject"> &nbsp;${voNotice.csubject} </a> <a
-								href="cDetail?cno=${vo.cno}&page=${currentPage}"
+								href="cDetail?cno=${voNotice.cno}&page=${currentPage}"
 								class="replycnt">[${voNotice.replycnt}]</a></td>
 							<td align="center">${voNotice.cwriter}</td>
 							<td align="center" style="font-size: 13px;">${voNotice.cdate}</td>

@@ -22,11 +22,9 @@ import com.kh.bts.Paging;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Community;
-import com.kh.bts.community.model.vo.Rcommunity;
 import com.kh.bts.community.model.vo.UserRcommuniyCheck;
-import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.ranking.model.service.RankingService;
-import com.kh.bts.ranking.model.vo.Daily;
+import com.kh.bts.ranking.model.vo.Accumulative;
 
 @Controller
 public class CommunityCtrl {
@@ -42,17 +40,30 @@ public class CommunityCtrl {
 	public static final int LIMIT = 30;
 
 	@RequestMapping("insta")
-	public ModelAndView insta(ModelAndView mav) {
-		Paging vo = new Paging(1, 9);
-		List<Community> list = cmService.selectAllCommunityList(vo);
+	public ModelAndView insta(/* @RequestParam(name = "cno") String cno, */
+			ModelAndView mav) {
+		Paging paging = new Paging(1, 9);
+		List<Community> list = cmService.selectAllCommunityList(paging);
 		mav.addObject("commuList", list);
-		mav.addObject("nowPage", vo);
+		mav.addObject("nowPage", paging);
 
-		List<Daily> list1 = rankService.selectDaily();
+		List<Accumulative> list1 = rankService.selectAccumulative();
 		mav.addObject("first", list1.get(0));
 		mav.addObject("second", list1.get(1));
 		mav.addObject("third", list1.get(2));
 		mav.addObject("other", list1);
+		
+		/*
+		 * Community vo = cmService.selectCommunity(0, cno); String writerEmail =
+		 * cmService.returnEmail(vo.getCwriter());
+		 * 
+		 * List<UserRcommuniyCheck> list2 = rcmService.selectRcommunityList(cno);
+		 * 
+		 * mav.addObject("community", vo); mav.addObject("commentList",
+		 * rcmService.selectRcommunityList(cno)); mav.addObject("writerEmail",
+		 * writerEmail);
+		 */
+		
 		mav.setViewName("community/mikrokosmos");
 		return mav;
 	}

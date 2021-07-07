@@ -78,7 +78,7 @@
 										+"</div> </form> </c:if> </div> <c:if test='${loginMember == null }'> <div class='comment'> <input class='input-comment' type='text' placeholder='댓글을 작성하려면 로그인이 필요합니다.'>"
 										+"<button type='submit' class='submit-comment'>게시</button> </div> </c:if> </article>";
 									
-							<%-- 		"<br><div class='parent'><div><img	src='<%=request.getContextPath()%>/resources/assets/img/bts_logo.png'"
+							<%-- 		"<br><div class='parent'><div><img	src='<%=request.getContextPath()%>/resources/assets/img/bts_logo.svg'"
 								+ "width='25px' height='25px'>" + insta.cwriter + "<span	style='color: red;'>:== 닉네임</span></div>"
 								+ "<div>" + insta.ccontentr +"<span style='color: red;''>:== 내용</span></div>"
 								+ "<div><img class='img_like' src='resources/assets/img/like.png' width='25px' height='25px' onclick='clike()'>"
@@ -682,7 +682,7 @@ $(function(){
 				<div class="parent">
 					<div style="background-color: gray">
 						<img
-							src="<%=request.getContextPath()%>/resources/assets/img/bts_logo.png"
+							src="<%=request.getContextPath()%>/resources/assets/img/bts_logo.svg"
 							width="25px" height="25px">${vo.cwriter } <span
 							style="color: red;">:== 닉네임</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="button">...</button>

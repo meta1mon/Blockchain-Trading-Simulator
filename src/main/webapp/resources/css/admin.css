@@ -131,7 +131,7 @@ a, a:active, a:after, a:visited {
 }
 
 /* 검색 버튼 */
-#btnsearch {
+#btnsearch, #btnsearch2 {
 	border: 1px solid rgb(140, 102, 200);
 	border-radius: 5px;
 	color: rgb(140, 102, 200);
@@ -140,7 +140,7 @@ a, a:active, a:after, a:visited {
 }
 
 /* 검색 select */
-#listForm select {
+#listForm select, #frmSearch select {
 	height: 22px;
 	border: 1px solid rgba(0, 0, 0, 0.5);
 	border-radius: 2px;

@@ -13,7 +13,6 @@ public class Arreport {
 	private String rrdate;
 	private String rstatus;
 	private String rreason;
-	private String csubject;
 	private String arrdate;
 
 	public Arreport() {
@@ -94,14 +93,6 @@ public class Arreport {
 
 	public void setRreason(String rreason) {
 		this.rreason = rreason;
-	}
-
-	public String getCsubject() {
-		return csubject;
-	}
-
-	public void setCsubject(String csubject) {
-		this.csubject = csubject;
 	}
 
 	public String getArrdate() {

@@ -41,15 +41,14 @@ var onoff = function(){
 		var ele = event.currentTarget.querySelectorAll("td");
 
 		$("#crno").val(ele[0].innerText); // 신고 번호
-		$("#csubject").val(ele[1].innerText); // 신고하는 게시글 제목
-		$("#ccontentText").html(ele[2].innerText); // 신고하는 게시글 내용
-		$("#crespondent").val(ele[3].innerText); // 신고하는 게시글 작성자
-		$("#creporter").val(ele[4].innerText); // 신고자
-		$("#crreasonText").val(ele[5].innerText); // 신고 사유
-		$("#crdate").val(ele[6].innerText); // 신고 날짜
-		$("#creason").val(ele[7].innerText); // 처리 사유
-		$("#acrdate").val(ele[8].innerText); // 처리 시간
-		$("#cstatus").val(ele[9].innerText); // 처리 상태
+		$("#ccontentText").html(ele[1].innerText); // 신고하는 게시글 내용
+		$("#crespondent").val(ele[2].innerText); // 신고하는 게시글 작성자
+		$("#creporter").val(ele[3].innerText); // 신고자
+		$("#crreasonText").val(ele[4].innerText); // 신고 사유
+		$("#crdate").val(ele[5].innerText); // 신고 날짜
+		$("#creason").val(ele[6].innerText); // 처리 사유
+		$("#acrdate").val(ele[7].innerText); // 처리 시간
+		$("#cstatus").val(ele[8].innerText); // 처리 상태
 	}
 	$(".tr").on("click", openModal);
 	
@@ -70,8 +69,7 @@ var onoff = function(){
 		<div id="frmSearch">
 			<form action="acr" method="get">
 				<select id="searchType" name="searchType">
-					<option value="1" selected>게시글 제목</option>
-					<option value="2">피신고자</option>
+					<option value="2" selected>피신고자</option>
 					<option value="3">신고자</option>
 					<option value="4">처리 상태</option>
 				</select> <input type="search" name="keyword" id="search" placeholder="검색어를 입력해주세요.">
@@ -90,7 +88,7 @@ var onoff = function(){
 			<table id="list">
 				<tr>
 					<th>신고 번호</th>
-					<th>게시글 제목</th>
+					<th>게시글 내용</th>
 					<th>피신고자</th>
 					<th>신고자</th>
 					<th>신고 사유</th>
@@ -108,8 +106,7 @@ var onoff = function(){
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr class="tr">
 							<td class="center" style="cursor: pointer;">${vo.crno}</td>
-							<td style="cursor: pointer;" class="subject">${vo.csubject}</td>
-							<td class="hidden">${vo.ccontent}</td>
+							<td class="center" style="cursor: pointer;">${vo.ccontent}</td>
 							<td class="center" style="cursor: pointer;">${vo.crespondent}</td>
 							<td class="center" style="cursor: pointer;">${vo.creporter}</td>
 							<c:choose>
@@ -196,15 +193,11 @@ var onoff = function(){
 							<td><input type="hidden" value="" name="crno" id="crno"></td>
 						</tr>
 						<tr>
-							<td>게시글 제목</td>
-							<td><input type="text" value="" name="csubject" id="csubject" readonly></td>
-						</tr>
-						<tr>
 							<td>피신고자</td>
 							<td><input type="text" value="" name="crespondent" id="crespondent" readonly></td>
 						</tr>
 						<tr>
-							<td class="content">게시글 내용</td>
+							<td class="content">댓글 내용</td>
 							<td><div id="ccontentText">&nbsp;</div></td>
 						</tr>
 						<tr>

@@ -172,14 +172,12 @@ public class AdminDao {
 		List<Acreport> list = new ArrayList<Acreport>();
 		if (keyword != null) {
 			switch (searchType) {
-			case 1:
-				list = sqlSession.selectList("report.searchCsubject", keyword);
-				break;
 			case 2:
 				list = sqlSession.selectList("report.searchCrespondent", keyword);
 				break;
 			case 3:
 				list = sqlSession.selectList("report.searchCreporter", keyword);
+				break;
 			}
 		}
 		return list;
@@ -193,9 +191,6 @@ public class AdminDao {
 		List<Arreport> list = new ArrayList<Arreport>();
 		if (keyword != null) {
 			switch (searchType) {
-			case 1:
-				list = sqlSession.selectList("report.searchCsubject2", keyword);
-				break;
 			case 2:
 				list = sqlSession.selectList("report.searchRrespondent", keyword);
 				break;

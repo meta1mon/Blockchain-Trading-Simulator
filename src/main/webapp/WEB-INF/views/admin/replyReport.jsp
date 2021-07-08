@@ -17,23 +17,15 @@
 			var ele = event.currentTarget.querySelectorAll("td");
 			
 			$("#rrno").val(ele[0].innerText); // 신고 번호
-			$("#csubject").val(ele[1].innerText); // 신고하는 댓글이 있는 게시글 제목
-			$("#rcontentText").html(ele[2].innerText); // 신고하는 게시글 내용
+			$("#rcontentText").html(ele[1].innerText); // 신고하는 게시글 내용
 			$("#rcontent").val($("#rcontentText").html()); // 신고하는 게시글 내용(DB용)
-			$("#rrespondent").val(ele[3].innerText); // 신고하는 댓글 작성자
-			$("#rreporter").val(ele[4].innerText); // 신고자
-			$("#rrreasonText").val(ele[5].innerText); // 신고 사유(텍스트)
-			$("#rrreason").val(ele[6].innerText); // 신고 사유(DB용)
-			$("#rrdate").val(ele[7].innerText); // 신고 날짜
-			$("#cno").val(ele[8].innerText); // 신고하는 댓글이 있는 글 번호
-			$("#rno").val(ele[9].innerText); // 신고하는 댓글 번호
-			for(var i=0; i<ele.length; i++){
-				console.log("============================");
-				console.log(ele[i]);
-				console.log(ele[i].innerText);
-				console.log(ele[i].html);
-				console.log("============================");
-			}
+			$("#rrespondent").val(ele[2].innerText); // 신고하는 댓글 작성자
+			$("#rreporter").val(ele[3].innerText); // 신고자
+			$("#rrreasonText").val(ele[4].innerText); // 신고 사유(텍스트)
+			$("#rrreason").val(ele[5].innerText); // 신고 사유(DB용)
+			$("#rrdate").val(ele[6].innerText); // 신고 날짜
+			$("#cno").val(ele[7].innerText); // 신고하는 댓글이 있는 글 번호
+			$("#rno").val(ele[8].innerText); // 신고하는 댓글 번호
 		}
 		$(".tr").on("click", openModal);
 		
@@ -81,7 +73,7 @@
 			<table id="list">
 				<tr>
 					<th>신고 번호</th>
-					<th>게시글 제목</th>
+					<th>댓글 내용</th>
 					<th>피신고자</th>
 					<th>신고자</th>
 					<th>신고 사유</th>
@@ -96,8 +88,7 @@
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr class="tr">
 							<td class ="center" style="cursor: pointer;">${vo.rrno}</td>
-							<td style="cursor: pointer;">${vo.csubject}</td>
-							<td class="hidden">${vo.rcontent}</td>
+							<td class="center">${vo.rcontent}</td>
 							<td class ="center" style="cursor: pointer;">${vo.rrespondent}</td>
 							<td class ="center" style="cursor: pointer;">${vo.rreporter}</td>
 							<c:choose>
@@ -180,10 +171,6 @@
 						<tr class="hidden">
 							<td>신고 접수 번호</td>
 							<td><input type="hidden" value="" name="rrno" id="rrno"></td>
-						</tr>
-						<tr>
-							<td>게시글 제목</td>
-							<td><input type="text" value="" name="csubject" id="csubject" readonly></td>
 						</tr>
 						<tr>
 							<td>피신고자</td>

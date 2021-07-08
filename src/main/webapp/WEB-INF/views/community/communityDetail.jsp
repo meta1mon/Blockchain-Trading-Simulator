@@ -12,8 +12,8 @@
 <link href="${pageContext.request.contextPath}/resources/css/communityDetail.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
-<script	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 
 <script>
 

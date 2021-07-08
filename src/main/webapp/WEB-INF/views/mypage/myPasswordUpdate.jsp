@@ -12,11 +12,11 @@
 <link href="${pageContext.request.contextPath}/resources/css/myNav.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/member.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/myPasswordUpdate.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <link href="${pageContext.request.contextPath}/resources/css/pinpad.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 </head>
 <body>
 	<div id="wrapper">
@@ -125,8 +125,6 @@
 						<tr>
 							<td colspan="2"><p class="alert bankPwCh1">&nbsp;</p></td>
 						</tr>
-						
-						
 						<tr>
 							<th width="20%">계좌 비밀번호 확인<span class="star">*</span></th>
 							<td colspan="2"><input type="password" id="bankPw2" class="pin2" placeholder="계좌 비밀번호를 입력해주세요."></td>

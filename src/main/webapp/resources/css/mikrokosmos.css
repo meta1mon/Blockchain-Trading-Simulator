@@ -157,7 +157,7 @@ main {
 	display: inline-block;
 }
 
-article, .section-story, .section-recommend {
+article, .section-story {
 	background-color: #fff;
 	border-radius: 3px;
 	border: 1px solid #E3C8F8;
@@ -167,7 +167,7 @@ article {
 	margin-bottom: 60px;
 }
 
-.section-story, .section-recommend {
+.section-story {
 	width: 310px;
 	padding: 14px 16px;
 	overflow-y: hidden;
@@ -179,10 +179,6 @@ article {
 	overflow-y: auto;
 }
 
-.section-recommend {
-	height: 180px;
-	overflow-y: auto;
-}
 /* article */
 header {
 	height: 53px;
@@ -451,7 +447,7 @@ button.submit-comment:focus {
 }
 /* main-right */
 
-/* story & recommendation */
+/* 랭킹 영역 */
 .menu-title {
 	display: flex;
 	justify-content: space-between;
@@ -472,7 +468,7 @@ button.submit-comment:focus {
 	cursor: pointer;
 }
 
-.story-list li, .recommend-list li {
+.story-list li{
 	display: flex;
 	align-items: flex-start;
 }
@@ -506,24 +502,6 @@ ul.story-list .profile-text {
 
 .profile-text span.userID {
 	margin-bottom: 2px;
-}
-
-.recommend-list li {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-}
-
-.btn-follow {
-	padding-top: 7px;
-	color: #0095f6;
-	font-weight: 600;
-	font-size: 12px;
-}
-
-.recommend-friend-profile {
-	display: flex;
-	align-items: flex-start;
 }
 
 /* 게시글, 댓글 신고 모달창 */
@@ -637,7 +615,7 @@ ul.story-list .profile-text {
 	height: 400px;
 }
 
-.reply-list li, .recommend-list li {
+.reply-list li {
 	display: flex;
 	align-items: flex-start;
 	margin-bottom: 8px;

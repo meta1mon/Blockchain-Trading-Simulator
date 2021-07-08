@@ -78,12 +78,13 @@ $(function() {
 								$.each(json,function(idx, insta) {
 									moreHtml += "<article> <header> <div class='profile-of-article'> <img class='img-profile pic' src='resources/assets/img/user.png'> <span class='userID main-id point-span'>" + insta.cwriter +"</span> </div> "
 											+"<div class='dropdown' style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
-											+ "<div class='dropdown-content' style='left: 0;'> <p href='#' onclick='report()' class='report' id='popup_open_btn'>신고</p> <c:if test='${loginMember == writerEmail }'> <p onclick='checkUpdate('insta.cno', 'insta.cwriter')' class='update'>수정</a> <p onclick='checkDelete('insta.cno', 'insta.cwriter')' class='delete'>삭제</a> </c:if>"
+											+ "<div class='dropdown-content' style='left: 0;'> <p onclick='report()' class='report' id='popup_open_btn'>신고</p> <c:if test='${loginMember == writerEmail }'> <p onclick='checkUpdate('insta.cno', 'insta.cwriter')' class='update'>수정</a> <p onclick='checkDelete('insta.cno', 'insta.cwriter')' class='delete'>삭제</a> </c:if>"
 											
 											+"</div> </div> </div> </header> <div class='main-image'> <div class='subject'>" + insta.csubject + "</div> <div class='content'>" + insta.ccontent + "</div> <div class='description'>"
 											+"<p> <span class='at-tag'>@bts @wkorea @gucci</span> </p> </div> </div> <div class='icons-react'> <div class='icons-left'> <img class='thumbsup' onclick='clike()' src='resources/assets/img/thumbsup.png'>"
 											+"<img class='thumbsup-liked' onclick='clike()' src='resources/assets/img/thumbs-up.png'> </div> <div class='icons-middle'> <img class='thumbsdown' onclick='dislike()' src='resources/assets/img/thumbsdown.png'>"
-											+"<img class='thumbsdown-disliked' onclick='dislike()' src='resources/assets/img/thumbs-down.png'> </div> <div class='icons-right'> <img class='reply' onclick='reply('rep.rno')' id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png'>"
+											+"<img class='thumbsdown-disliked' onclick='dislike()' src='resources/assets/img/thumbs-down.png'> </div> <div class='icons-right'> <input type=\"hidden\" class=\"hiddenCno\" value=\"insta.cno\">"
+											+"<img class=\"reply\" onclick=\"reply(idx)\" id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png'>"
 											+"</div> </div> <div class='reaction'> <div class='liked-people'> <p> <span class='point-span'>"+insta.likecnt +"</span> 명이 추천합니다</p> </div> <div class='comment-section'> <ul class='comments'> </ul>"
 											+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <form> <div class='comment'> <input type='hidden' name='cno' value="+ insta.cno +">"
 											+"<input type='text' class='input-comment' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick=\"replyInsert(idx)\">게시</button>"
@@ -339,7 +340,7 @@ $(function(){
 			</div>
 			<!-- main-right -->
 			<div class="main-right">
-				<!-- 랭킹 section -->
+				<!-- 누적 랭킹 section -->
 				<div class="section-story">
 					<div class="menu-title">
 						<span class="sub-title">누적 랭킹</span> <span class="find-more"
@@ -391,43 +392,56 @@ $(function(){
 						</c:forEach>
 					</ul>
 				</div>
-				<!-- recommendation section -->
-				<div class="section-recommend">
+				<!-- 데일리 랭킹 section -->
+				<div class="section-story">
 					<div class="menu-title">
-						<span class="sub-title">회원님을 위한 추천</span> <span class="find-more"
-							onclick="location.href='rankAccumulative'">모두 보기</span>
+						<span class="sub-title">데일리 랭킹</span> <span class="find-more"
+							onclick="location.href='rankDaily'">모두 보기</span>
 					</div>
-					<ul class="recommend-list">
+										<ul class="story-list">
 						<li>
-							<div class="recommend-friend-profile">
-								<img class="img-profile" src="resources/assets/img/user.png"
-									alt="..">
-								<div class="profile-text">
-									<span class="userID point-span">renebaebae</span> <span
-										class="sub-span">hi_sseulgi님 외 2명이 팔로우합니다</span>
-								</div>
-							</div> <span class="btn-follow">팔로우</span>
+							<div class="gradient-wrap">
+								<img class="img-profile story"
+									src="resources/assets/img/gold_medal.png" alt="..">
+							</div>
+							<div class="profile-text">
+								<span class="userID point-span">${dailyFirst.nickname }</span> <span
+									class="sub-span">1등</span>
+							</div>
 						</li>
 						<li>
-							<div class="recommend-friend-profile">
-								<img class="img-profile" src="resources/assets/img/user.png"
-									alt="..">
-								<div class="profile-text">
-									<span class="userID point-span">_jeongjaehyun</span> <span
-										class="sub-span">johnnyjsuh님이 팔로우합니다</span>
-								</div>
-							</div> <span class="btn-follow">팔로우</span>
+							<div class="gradient-wrap">
+								<img class="img-profile story"
+									src="resources/assets/img/silver_medal.png" alt="..">
+							</div>
+							<div class="profile-text">
+								<span class="userID point-span">${dailySecond.nickname }</span> <span
+									class="sub-span">2등</span>
+							</div>
 						</li>
 						<li>
-							<div class="recommend-friend-profile">
-								<img class="img-profile" src="resources/assets/img/user.png"
-									alt="..">
-								<div class="profile-text">
-									<span class="userID point-span">leehi_hi</span> <span
-										class="sub-span">jennierubyjane님 외 5명이 팔로우합...</span>
-								</div>
-							</div> <span class="btn-follow">팔로우</span>
+							<div class="gradient-wrap">
+								<img class="img-profile story"
+									src="resources/assets/img/bronze_medal.png" alt="..">
+							</div>
+							<div class="profile-text">
+								<span class="userID point-span">${dailyThird.nickname }</span> <span
+									class="sub-span">3등</span>
+							</div>
 						</li>
+						<c:forEach items="${dailyOther }" var="rank" begin="3"
+							varStatus="status">
+							<li>
+								<div class="gradient-wrap">
+									<img class="img-profile story"
+										src="resources/assets/img/user.png" alt="..">
+								</div>
+								<div class="profile-text">
+									<span class="userID point-span">${rank.nickname }</span> <span
+										class="sub-span">${status.index +1 }등</span>
+								</div>
+							</li>
+						</c:forEach>
 					</ul>
 				</div>
 				<footer>

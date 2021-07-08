@@ -81,9 +81,13 @@ html,body {
 	display: none;
 }
 
-/* 
-a:visited{
-    color: #000;
+/* 텍스트 드래그 시 */
+::-moz-selection {
+   background: #8c66c8;
+   color: #fff;
 }
 
- 태그에 직접 css를 걸면 body태그 안에 있는 모든 a태그에 스타일이 적용되므로 주석 처리함.*/
+::selection {
+   background: #8c66c8;
+   color: #fff;
+}

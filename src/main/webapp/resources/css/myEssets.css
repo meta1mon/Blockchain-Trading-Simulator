@@ -51,14 +51,17 @@
 	overflow: hidden;
 	border: 1px solid #ccc;
 	background-color: #f1f1f1;
+	display: flex;
+    justify-content: space-evenly;
 }
 
 .tablinks {
+	width: 100%;
 	background-color: inherit;
 	border: none;
 	outline: none;
 	cursor: pointer;
-	padding: 14px 10%;
+	padding: 14px;
 	transition 0.3s;
 }
 
@@ -127,6 +130,40 @@
 .historyTable th {
 	background-color: #f2f2f2;
 }
+
+
+#chargeTable{
+	margin: 0 auto;
+	width: 50%;
+	border-collapse:collapse;
+	border-top: 2px solid grey;
+	border-left: none;
+	border-right: none;
+ 	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%); 
+}
+
+#chargeTable th, td {
+	padding: 5px 10px 5px 0;
+ 	border: 0.1px solid #E3C8F8; 
+	border-left: none;
+	border-right: none;
+}
+
+#chargeTable th {
+	padding: 10px;
+	background-color: #f2f2f2;
+}
+
+
+#chargeTable td {
+	padding-right: 35px;
+}
+
+.date {
+	font-size: 11px;
+	font-weight: lighter;
+}
+
 
 .expandBtn {
 	height: 30px;

@@ -95,6 +95,7 @@ body.pinpad-noscroll {
 
 /*pinboard에 적히는 비밀번호 색 */
 .pin-board .pin {
+	position: relative;
 	font-size: 30px;
 	min-height: 30px;
 	max-height: 30px;

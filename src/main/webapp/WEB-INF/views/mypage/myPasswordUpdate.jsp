@@ -13,6 +13,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/member.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/myPasswordUpdate.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <link href="${pageContext.request.contextPath}/resources/css/pinpad.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 

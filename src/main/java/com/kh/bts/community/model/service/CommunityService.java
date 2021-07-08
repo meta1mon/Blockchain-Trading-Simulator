@@ -30,5 +30,7 @@ public interface CommunityService {
 
 	List<Community> selectNoticeList(int startPage, int limit);
 	
+	List<Community> selectNoticeSearch(int startPage, int limit, String keyword, int searchType);
+	
 	public String returnEmail(String nickName);
 }

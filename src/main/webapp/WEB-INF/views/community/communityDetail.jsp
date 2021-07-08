@@ -94,12 +94,12 @@ $(function(){
 								<br> <br> <br> <br> <br>
 								<div id="like" title="추천">
 									<span class="likecnt">${community.likecnt }</span>&nbsp;&nbsp;&nbsp;
-									<img class="img_like" src="resources/assets/img/like.png"
+									<img class="img_like" src="resources/assets/img/thumbsup.png"
 										onclick="clike()">
 								</div>
 								&nbsp;&nbsp;&nbsp;
 								<div id="dislike" title="비추천">
-									<img class="img_dislike" src="resources/assets/img/dislike.png"
+									<img class="img_dislike" src="resources/assets/img/thumbsdown.png"
 										onclick="dislike()">&nbsp;&nbsp;&nbsp; <span
 										class="dislikecnt">${community.dislikecnt }</span>
 								</div>
@@ -132,13 +132,8 @@ $(function(){
 					<div id="comment">
 						<br> <span style="display: inline;"> <span
 							class="comment_writer"> ${rep.rwriter} &nbsp; &nbsp;</span> <span
-							class="comment_date"> ${rep.rdate}</span> <br> <span
-							class="comment_content"> ${rep.rcontent}</span>
-						<textarea class="newRcontent" style="display: none;"
-								maxlength="4000">${rep.rcontent }</textarea>
-						</span>
-						
-						<!-- 댓글 수정, 삭제, 신고 드랍다운 메뉴 -->
+							class="comment_date"> ${rep.rdate}</span> 
+									<!-- 댓글 수정, 삭제, 신고 드랍다운 메뉴 -->
 								<div class="replyDropdown" style="float: right;">
 									<div class="icon-react icon-more" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
 										<div class="dropdown-content">
@@ -151,14 +146,27 @@ $(function(){
 										</div>
 									</div>
 								</div>
-								
-							<!-- 댓글 작성자에게만 수정 삭제 버튼이 보임 -->
-								<button type="button" class="submitRUpdate"
-									onclick="replyUpdate(${rep.rno}, ${status.index })"
-									style="display: none;">저장</button>
-								<button type="button" class="cancleRUpdate"
-									onclick="updateRCancle(${status.index })"
-									style="display: none;">취소</button>
+								<br> 
+							<span class="comment_content"> ${rep.rcontent}</span>
+						</span>
+						<table style="width: 100%">
+							<tr>
+								<td width="80%"><textarea class="newRcontent"
+										style="display: none;" maxlength="4000">${rep.rcontent }</textarea>
+								</td>
+								<td width="7%">
+									<!-- 댓글 작성자에게만 수정 삭제 버튼이 보임 -->
+									<button type="button" class="submitRUpdate"
+										onclick="replyUpdate(${rep.rno}, ${status.index })"
+										style="display: none;">저장</button>
+								</td>
+								<td width="7%">
+									<button type="button" class="cancleRUpdate"
+										onclick="updateRCancle(${status.index })"
+										style="display: none;">취소</button>
+								</td>
+							</tr>
+						</table>
 					</div>
 					<br>
 				</c:forEach>
@@ -171,11 +179,19 @@ $(function(){
 					<form id="writeRcommunity">
 						<div class="comment-box">
 							<input type="hidden" name="cno" value="${community.cno }">
+							<table style="width: 100%">
+							<tr>
+							<td width="90%">
 							<textarea placeholder="댓글 쓰기" id="editor" name="rcontent"
 								maxlength="4000"
 								onfocus="if(this.value == '댓글 쓰기') { this.value = ''; }"
 								onblur="if(this.value == '') { this.value ='댓글 쓰기'; }"></textarea>
+								</td>
+								<td>
 							<button class="rplyInsert" type="button" onclick="rplyInsert()">등록</button>
+							</td>
+							</tr>
+							</table>
 						</div>
 					</form>
 				</c:if>

@@ -9,8 +9,8 @@
 }
 
 #editor {
-	max-width: 90%;
-	min-width: 90%;
+	max-width: 95%;
+	min-width: 95%;
 	margin-left: 30px;
 	min-height: 70px;
 	text-indent: 1%;
@@ -18,8 +18,8 @@
 }
 
 .newRcontent {
-	max-width: 80%;
-	min-width: 80%;
+	max-width: 95%;
+	min-width: 95%;
 	margin : 6px 0 0 20px;
 	min-height: 50px;
 	text-indent: 1%;
@@ -35,6 +35,8 @@
     cursor: pointer;
     padding: 10px 16px;
     border-radius: 3px;
+    margin-left: 10px;
+    transition: box-shadow 0.15s ease-in-out;
 }
 
 .detailOut {
@@ -174,7 +176,7 @@
 	margin: 0 auto;
 	font-size: 18px;
 	position: relative;
-	left: 40%;
+	left: 42%;
 	display: inline;
 	color: #d31900;
 }
@@ -184,19 +186,19 @@
 	margin: 0 auto;
 	font-size: 18px;
 	position: relative;
-	left: 40%;
+	left: 42%;
 	display: inline;
 }
 
 .img_like {
-	width: 50px;
+	width: 45px;
 	position: relative;
 	top: 15px;
 	cursor: pointer;
 }
 
 .img_dislike {
-	width: 50px;
+	width: 45px;
 	position: relative;
 	top: 15px;
 	cursor: pointer;
@@ -285,7 +287,6 @@ hr {
 }
 
 .replyDropdown {
-	position: relative;
 	/* display: none; */
 	width: 24px;
 }
@@ -293,7 +294,7 @@ hr {
 .dropdown-content {
 	display: none;
 	position: absolute;
-	right: 0;
+	/* right: 0; */
 	background-color: #f9f9f9;
 	min-width: 110px;
 	text-align: center;
@@ -367,6 +368,7 @@ hr {
     cursor: pointer;
     padding: 10px 16px;
     border-radius: 3px;
+    transition: box-shadow 0.15s ease-in-out;
 }
 
 .cancleRUpdate {
@@ -376,6 +378,7 @@ hr {
     cursor: pointer;
     padding: 10px 16px;
     border-radius: 3px;
+    transition: box-shadow 0.15s ease-in-out;
 }
 
 .report {
@@ -404,7 +407,7 @@ hr {
 }
 
 .delete:active, .delete:hover, .update:hover, .update:active, #list:hover,
-	#list:active, .report:hover, .report:active {
+	#list:active, .report:hover, .report:active, .submitRUpdate:hover, .submitRUpdate:active, .cancleRUpdate:hover, .cancleRUpdate:active, .rplyInsert:hover, .rplyInsert:active {
 	box-shadow: 10px 10px 20px 5px #eeeeee;
 }
 

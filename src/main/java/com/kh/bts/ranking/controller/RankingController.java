@@ -123,13 +123,12 @@ public class RankingController {
 		return mav;
 	}
 
-// 현실 시간 반영하여 수익률 반영 함수
-	// 추후 admin header에 삽입할 예정.
-	@RequestMapping("/abc")
-	public ModelAndView abc(ModelAndView mav) {
-		mav.setViewName("rank/test");
-		return mav;
-	}
+	/*
+	 * // 현실 시간 반영하여 수익률 반영 함수 // 추후 admin header에 삽입할 예정.
+	 * 
+	 * @RequestMapping("/calcRank") public ModelAndView abc(ModelAndView mav) {
+	 * mav.setViewName("rank/calcYield"); return mav; }
+	 */
 
 // 랭크의 ajax 공통 모듈
 	// 코인계좌의 정보 가져오기
@@ -163,10 +162,14 @@ public class RankingController {
 	public int updateRank(@RequestParam(name = "acntno") String acntno,
 			@RequestParam(name = "appraisal") long appraisal, @RequestParam(name = "criteria") int criteria) {
 		Daily vo = new Daily();
+		System.out.println("!@#!@#!@#!@#!@#!@#@!#!@3@");
+		System.out.println(criteria);
+		System.out.println(acntno);
+		System.out.println(appraisal);
 		vo.setAcntno(acntno);
 		vo.setNewesset(appraisal);
 		int result = rankService.updateRank(vo, criteria);
-
+		System.out.println(result + "1이면 성공");
 		return result;
 	}
 

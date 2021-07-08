@@ -15,6 +15,7 @@
 
 <!-- Font Awesome 4-->
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/calcYield.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link

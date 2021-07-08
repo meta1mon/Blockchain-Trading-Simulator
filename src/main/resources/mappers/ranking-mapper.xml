@@ -5,7 +5,7 @@
 	<resultMap type="Accumulative" id="resultAccumulative"></resultMap>
 	<resultMap type="Weekly" id="resultWeekly"></resultMap>
 	<resultMap type="Monthly" id="resultMonthly"></resultMap>
-	
+
 	<!-- Daily 수익률 변경 -->
 	<update id="updateDaily" parameterType="Daily" flushCache="true"
 		statementType="PREPARED">
@@ -30,30 +30,62 @@
 		WHERE ACNTNO =
 		#{acntno}
 	</update>
-	
+
 	<!-- Weekly 수익률 변경 -->
-	<update id="updateWeekly" parameterType="Daily" flushCache="true"
-		statementType="PREPARED">
+	<update id="updateWeekly" parameterType="Daily"
+		flushCache="true" statementType="PREPARED">
 		UPDATE WEEKLY
-		SET OLDESSET = #{oldesset},
+		SET OLDESSET =
+		#{oldesset},
 		NEWESSET =
 		#{newesset},
-		YIELD = ((#{newesset}/#{oldesset})-1)*100
+		YIELD =
+		((#{newesset}/#{oldesset})-1)*100
 		WHERE ACNTNO =
 		#{acntno}
 	</update>
 
 	<!-- Monthly 수익률 변경 -->
-	<update id="updateMonthly" parameterType="Daily" flushCache="true"
-		statementType="PREPARED">
+	<update id="updateMonthly" parameterType="Daily"
+		flushCache="true" statementType="PREPARED">
 		UPDATE MONTHLY
-		SET OLDESSET = #{oldesset},
+		SET OLDESSET =
+		#{oldesset},
 		NEWESSET =
 		#{newesset},
-		YIELD = ((#{newesset}/#{oldesset})-1)*100
+		YIELD =
+		((#{newesset}/#{oldesset})-1)*100
 		WHERE ACNTNO =
 		#{acntno}
 	</update>
+
+	<!-- 현질 금액 제거 -->
+	<select id="subtractDailyCashLog" parameterType="string"
+		resultType="long">
+		select nvl(sum(won), 0) from cashlog where substr(cashdate, 0, 10) =
+		to_char(sysdate-1, 'yyyy-mm-dd')
+		AND ACNTNO=#{acntno}
+	</select>
+
+	<!-- 현질 금액 제거 -->
+	<select id="subtractWeeklyCashLog" parameterType="string"
+		resultType="long">
+		select nvl(sum(won), 0) from cashlog where substr(cashdate, 0, 10) >=
+		to_char(sysdate-7,
+		'yyyy-mm-dd')
+		AND substr(cashdate, 0, 10) &lt;=
+		to_char(sysdate-1, 'yyyy-mm-dd')
+		AND ACNTNO=#{acntno}
+	</select>
+
+	<!-- 현질 금액 제거 -->
+	<select id="subtractMonthlyCashLog" parameterType="string"
+		resultType="long">
+		select nvl(sum(won), 0) from cashlog where substr(cashdate, 0, 7) = to_char(sysdate +
+		INTERVAL '-1' MONTH, 'yyyy-mm')
+		AND ACNTNO=#{acntno}
+	</select>
+
 
 	<!-- 회원가입 시, Daily 랭킹에 참가 -->
 	<insert id="insertDaily" parameterType="Daily" flushCache="true"
@@ -77,7 +109,8 @@
 	<insert id="insertWeekly" parameterType="Daily"
 		flushCache="true" statementType="PREPARED">
 		INSERT INTO WEEKLY VALUES(
-		#{acntno}, #{email}, #{nickname}, DEFAULT, default, 0
+		#{acntno},
+		#{email}, #{nickname}, DEFAULT, default, 0
 		)
 	</insert>
 
@@ -85,7 +118,8 @@
 	<insert id="insertMonthly" parameterType="Daily"
 		flushCache="true" statementType="PREPARED">
 		INSERT INTO Monthly VALUES(
-		#{acntno}, #{email}, #{nickname}, DEFAULT, default, 0
+		#{acntno},
+		#{email}, #{nickname}, DEFAULT, default, 0
 		)
 	</insert>
 
@@ -148,7 +182,7 @@
 		select b.* from (select rownum, a.* from (select * from
 		Weekly order by yield desc) a) b where email= #{email}
 	</select>
-	
+
 	<!-- Monthly 랭킹 가져오기 -->
 	<select id="selectMonthly" resultType="arraylist"
 		resultMap="resultMonthly">

@@ -56,10 +56,10 @@ public class AdminCtrl {
 
 	@Autowired
 	private AdminService aService;
-	
+
 	@Autowired
 	private MypageService myService;
-	
+
 	@Autowired
 	private CashService cashService;
 
@@ -84,23 +84,27 @@ public class AdminCtrl {
 	public int totalTodayCount() {
 		return cmService.totalTodayCount();
 	}
-	
+
 	@ModelAttribute("totalCybcash")
 	public long totalCybcash() {
 		return aService.totalCybcash();
 	}
+
 	@ModelAttribute("countTodayWon")
 	public long countTodayWon() {
 		return aService.countTodayWon();
 	}
+
 	@ModelAttribute("countCreport")
 	public int countCreport() {
 		return aService.countCreport();
 	}
+
 	@ModelAttribute("countRreport")
 	public int countRreport() {
 		return aService.countRreport();
 	}
+
 // 충전 상품 목록 불러오기
 	@RequestMapping(value = "/cash", method = RequestMethod.GET)
 	public ModelAndView cashR(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
@@ -108,31 +112,31 @@ public class AdminCtrl {
 			int currentPage = page;
 			int listCount = cashService.countTotalCash();
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
-			
+
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);
-			mv.addObject("list", cashService.selectTotalCash(currentPage, LIMIT)); 
-		} catch (Exception e) { 
-			System.out.println(e.getMessage()); 
+			mv.addObject("list", cashService.selectTotalCash(currentPage, LIMIT));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		mv.setViewName("admin/cashEdit");
 		return mv;
 	}
-	
+
 //	충전 상품 수정
 	@ResponseBody
-	@RequestMapping(value="/updateCash", method = RequestMethod.POST)
-	public int updateCash(Cash vo, HttpServletResponse response){
+	@RequestMapping(value = "/updateCash", method = RequestMethod.POST)
+	public int updateCash(Cash vo, HttpServletResponse response) {
 		int result = aService.updateCash(vo);
 		System.out.println(result);
 		return result;
 	}
-	
+
 //	충전 상품 삭제
 	@ResponseBody
-	@RequestMapping(value="/deleteCash", method = RequestMethod.POST)
-	public int deleteCash(Cash vo, HttpServletResponse response){
+	@RequestMapping(value = "/deleteCash", method = RequestMethod.POST)
+	public int deleteCash(Cash vo, HttpServletResponse response) {
 		int result = aService.deleteCash(vo);
 		return result;
 	}
@@ -161,12 +165,11 @@ public class AdminCtrl {
 			out.close();
 		}
 	}
-	
+
 // 게시글 신고 등록
 	@RequestMapping(value = "/reportCommunity", method = RequestMethod.POST)
 	public void reportCommunity(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("cno") String cno,
-			@RequestParam("creport") int crreason) {
+			@RequestParam("cno") String cno, @RequestParam("creport") int crreason) {
 		HttpSession session = request.getSession();
 		String loginEmail = (String) session.getAttribute("loginMember");
 		String creporter = mService.returnNickname(loginEmail);
@@ -187,7 +190,6 @@ public class AdminCtrl {
 		}
 		try {
 			out = response.getWriter();
-			System.out.println(result);
 			out.print(result);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -196,16 +198,18 @@ public class AdminCtrl {
 			out.close();
 		}
 	}
+
 // 게시글 신고 처리
-	@RequestMapping(value = "/dealcr", method=RequestMethod.POST)
-	public void insertAcreport(Acreport vo, String crno, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	@RequestMapping(value = "/dealcr", method = RequestMethod.POST)
+	public void insertAcreport(Acreport vo, String crno, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		String cstatus = request.getParameter("cstatus");
 		String cno = request.getParameter("cno");
 		int result = aService.insertAcreport(vo); // acreport에 삽입
 		int result2 = aService.deleteCreport(crno); // creport에서 삭제
-		if(cstatus.equals("accept")) { //수리일 때
-			int result3 = cmService.deleteCommunity(cno); //community에서 삭제
-		}else if(cstatus.equals("deny")) { //반려일 때
+		if (cstatus.equals("accept")) { // 수리일 때
+			int result3 = cmService.deleteCommunity(cno); // community에서 삭제
+		} else if (cstatus.equals("deny")) { // 반려일 때
 		}
 	}
 
@@ -213,9 +217,6 @@ public class AdminCtrl {
 	@ResponseBody
 	@RequestMapping(value = "/reportRcommunity")
 	public int reportRcommunity(HttpServletRequest request, Rreport vo) {
-		System.out.println("컨트롤러 들어오~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println(vo.getRrreason() + "댓글 신고 사유");
-		System.out.println(vo.getRno() + "댓글  번호");
 		HttpSession session = request.getSession();
 		String loginEmail = (String) session.getAttribute("loginMember");
 		String rreporter = mService.returnNickname(loginEmail);
@@ -224,7 +225,6 @@ public class AdminCtrl {
 		vo.setRno(oracleRno);
 		vo.setRreporter(rreporter);
 		vo.setCno(vo2.getCno());
-		System.out.println(vo2.getCno() + "의심중 ~~~~" );
 		vo.setRcontent(vo2.getRcontent());
 		vo.setRrespondent(vo2.getRwriter());
 		vo.setRrreason(vo.getRrreason());
@@ -233,33 +233,35 @@ public class AdminCtrl {
 
 		return result;
 	}
+
 	// 댓글 신고 처리
-		@RequestMapping(value = "/dealrr", method=RequestMethod.POST)
-		public void insertArreport(Arreport vo, String rrno, HttpServletRequest request, HttpServletResponse response) throws Exception{
-			String rstatus = request.getParameter("rstatus");
-			String cno = request.getParameter("cno");
-			String rno = request.getParameter("rno");
-			String csubject = request.getParameter("csubject");
-			vo.setCsubject(csubject);
+	@RequestMapping(value = "/dealrr", method = RequestMethod.POST)
+	public void insertArreport(Arreport vo, String rrno, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String rstatus = request.getParameter("rstatus");
+		String cno = request.getParameter("cno");
+		String rno = request.getParameter("rno");
+		String csubject = request.getParameter("csubject");
+		vo.setCsubject(csubject);
+		System.out.println("==============================================================");
+		System.out.println(rstatus);
+		System.out.println(cno);
+		System.out.println(rno);
+		System.out.println(csubject);
+		System.out.println("vo.getCsubject(): " + vo.getCsubject());
+		int result = aService.insertArreport(vo); // arreport에 삽입
+		int result2 = aService.deleteRreport(rrno); // rreport에서 삭제
+		System.out.println(result);
+		System.out.println(result2);
+		System.out.println("==============================================================");
+		if (rstatus.equals("accept")) { // 수리일 때
+			int result3 = rcmService.deleteRcommunity(rno, cno); // Rcommunity에서 삭제
+			System.out.println(result3);
 			System.out.println("==============================================================");
-			System.out.println(rstatus);
-			System.out.println(cno);
-			System.out.println(rno);
-			System.out.println(csubject);
-			System.out.println("vo.getCsubject(): " + vo.getCsubject());
-			int result = aService.insertArreport(vo); // arreport에 삽입
-			int result2 = aService.deleteRreport(rrno); // rreport에서 삭제
-			System.out.println(result);
-			System.out.println(result2);
+		} else if (rstatus.equals("deny")) { // 반려일 때
 			System.out.println("==============================================================");
-			if(rstatus.equals("accept")) { //수리일 때
-				int result3 = rcmService.deleteRcommunity(rno, cno); //Rcommunity에서 삭제
-				System.out.println(result3);
-				System.out.println("==============================================================");
-			}else if(rstatus.equals("deny")) { //반려일 때
-				System.out.println("==============================================================");
-			}
 		}
+	}
 
 	@RequestMapping(value = "")
 	public ModelAndView adminMain(ModelAndView mv) {
@@ -309,16 +311,15 @@ public class AdminCtrl {
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "nWrite", method = RequestMethod.GET)
 	public String noticeInsertForm(ModelAndView mv) {
 		return "admin/noticeWrite";
 	}
-	
+
 	@RequestMapping(value = "nInsert", method = RequestMethod.POST)
-	public ModelAndView noticeInsert(Community c,
-			@RequestParam(name = "upfile", required = false) MultipartFile report, HttpServletRequest request,
-			ModelAndView mv) {
+	public ModelAndView noticeInsert(Community c, @RequestParam(name = "upfile", required = false) MultipartFile report,
+			HttpServletRequest request, ModelAndView mv) {
 		try {
 			if (report != null && !report.equals(""))
 				saveFile(report, request);
@@ -333,7 +334,7 @@ public class AdminCtrl {
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "nUpdateForm", method = RequestMethod.GET)
 	public ModelAndView communityDetail(@RequestParam(name = "cno") String cno, ModelAndView mv) {
 		try {
@@ -345,7 +346,7 @@ public class AdminCtrl {
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "nUpdate", method = RequestMethod.POST)
 	public ModelAndView communityUpdate(Community c, @RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam("upfile") MultipartFile report, HttpServletRequest request, ModelAndView mv) {
@@ -416,7 +417,7 @@ public class AdminCtrl {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
 		}
 	}
-	
+
 	private void removeFile(String filepath, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\uploadFiles";
@@ -432,37 +433,36 @@ public class AdminCtrl {
 			System.out.println("파일 삭제 에러 : " + e.getMessage());
 		}
 	}
-	
+
 //	회원 리스트
 	@RequestMapping(value = "/ml", method = RequestMethod.GET)
-	public ModelAndView ml(
-						@RequestParam(name="page", defaultValue = "1") int page,
-						@RequestParam(name="keyword", defaultValue="", required = false) String	keyword,
-						@RequestParam(name="searchType", defaultValue="1") int searchType,
-						 ModelAndView mv) {
+	public ModelAndView ml(@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
+			@RequestParam(name = "searchType", defaultValue = "1") int searchType, ModelAndView mv) {
 
-		try { 
-			int currentPage = page; 
-			int listCount = mService.countMember(); 
-			int maxPage = (int)((double) listCount / LIMIT + 0.9);
-			
-			if(keyword != null && !keyword.equals("")) { 
-				mv.addObject("list",
-						aService.adminSearchMember(keyword, searchType));
+		try {
+			int currentPage = page;
+			int listCount = mService.countMember();
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+
+			if (keyword != null && !keyword.equals("")) {
+				mv.addObject("list", aService.adminSearchMember(keyword, searchType));
 			} else {
-				mv.addObject("list", aService.adminListMember(currentPage, LIMIT)); 
+				mv.addObject("list", aService.adminListMember(currentPage, LIMIT));
 			}
-				mv.addObject("currentPage", currentPage); mv.addObject("maxPage", maxPage);
-				mv.addObject("listCount", listCount); 
-			} catch (Exception e) { 
-				System.out.println(e.getMessage()); 
-			}
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("listCount", listCount);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		mv.setViewName("admin/memberList");
 		return mv;
 	}
+
 //	회원 삭제
 	@ResponseBody
-	@RequestMapping(value="/md")
+	@RequestMapping(value = "/md")
 	public int deleteMember(String email, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int result = myService.myDelete(email);
 		if (result > 0) {
@@ -472,102 +472,104 @@ public class AdminCtrl {
 		}
 		return result;
 	}
-	
+
 //	캐시로그 불러오기
 	@RequestMapping(value = "/cll")
-	public ModelAndView cashLogList(
-			@RequestParam(name="page", defaultValue = "1") int page,
-			@RequestParam(name="keyword", defaultValue="", required = false) String	keyword,
-			 ModelAndView mv) {
-		try { 
-		int currentPage = page; 
-		int listCount = aService.countCashLog(); 
-		int maxPage = (int)((double) listCount / LIMIT + 0.9);
-		
-		if(keyword != null && !keyword.equals("")) { 
-			mv.addObject("list", aService.searchCashLog(keyword)); 
-		} else {
-			mv.addObject("list", aService.selectCashLog(currentPage, LIMIT)); 
-		}
-		mv.addObject("currentPage", currentPage); 
-		mv.addObject("maxPage", maxPage);
-		mv.addObject("listCount", listCount);
-		} catch (Exception e) { 
-			System.out.println(e.getMessage()); 
+	public ModelAndView cashLogList(@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword, ModelAndView mv) {
+		try {
+			int currentPage = page;
+			int listCount = aService.countCashLog();
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+
+			if (keyword != null && !keyword.equals("")) {
+				mv.addObject("list", aService.searchCashLog(keyword));
+			} else {
+				mv.addObject("list", aService.selectCashLog(currentPage, LIMIT));
+			}
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("listCount", listCount);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		mv.setViewName("admin/cashLogList");
 		return mv;
 	}
+
 //	게시판 신고 목록
 	@RequestMapping(value = "/cr", method = RequestMethod.GET)
-	public ModelAndView cr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv) {
-		try { 
-			int currentPage = page; 
+	public ModelAndView cr(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
+		try {
+			int currentPage = page;
 			int listCount = aService.countCreport();
-			int maxPage = (int)((double) listCount / LIMIT + 0.9);
-			
-			mv.addObject("list", aService.selectCreport(currentPage, LIMIT)); 
-			mv.addObject("currentPage", currentPage); 
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+
+			mv.addObject("list", aService.selectCreport(currentPage, LIMIT));
+			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
-			mv.addObject("listCount", listCount); 
-			} catch (Exception e) { 
-				System.out.println(e.getMessage()); 
-			}
+			mv.addObject("listCount", listCount);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		mv.setViewName("admin/communityReport");
 		return mv;
 	}
+
 //	게시판 신고 처리 목록
 	@RequestMapping(value = "/acr", method = RequestMethod.GET)
-	public ModelAndView acr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv,
-							@RequestParam(name="keyword", defaultValue="", required = false) String	keyword,
-							@RequestParam(name="cstatus", defaultValue="", required = false) String cstatus,
-							@RequestParam(name="searchType", defaultValue="1") int searchType) {
-		try { 
-			int currentPage = page; 
+	public ModelAndView acr(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv,
+			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
+			@RequestParam(name = "cstatus", defaultValue = "", required = false) String cstatus,
+			@RequestParam(name = "searchType", defaultValue = "1") int searchType) {
+		try {
+			int currentPage = page;
 			int listCount = aService.countAcreport();
-			int maxPage = (int)((double) listCount / LIMIT + 0.9);
-			
-			 if (keyword != null && !keyword.equals("")) {
-			 mv.addObject("list", aService.searchAcreport(keyword, searchType));
-			 } else if (cstatus != null && !cstatus.equals("")) {
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+
+			if (keyword != null && !keyword.equals("")) {
+				mv.addObject("list", aService.searchAcreport(keyword, searchType));
+			} else if (cstatus != null && !cstatus.equals("")) {
 				mv.addObject("list", aService.searchAcreportByCstatus(cstatus, searchType));
 			} else {
 				mv.addObject("list", aService.selectAcreport(currentPage, LIMIT));
 			}
-			mv.addObject("currentPage", currentPage); 
+			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
-			mv.addObject("listCount", listCount); 
-			
+			mv.addObject("listCount", listCount);
 
-		} catch (Exception e) { 
-			System.out.println(e.getMessage()); 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		mv.setViewName("admin/afterCommunityReport");
 		return mv;
 	}
+
 //	댓글 신고 목록
 	@RequestMapping(value = "/rr", method = RequestMethod.GET)
-	public ModelAndView rr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv) {
-		try { 
-			int currentPage = page; 
+	public ModelAndView rr(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
+		try {
+			int currentPage = page;
 			int listCount = aService.countRreport();
-			int maxPage = (int)((double) listCount / LIMIT + 0.9);
-			
-			mv.addObject("list", aService.selectRreport(currentPage, LIMIT)); 
-			mv.addObject("currentPage", currentPage); 
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+
+			mv.addObject("list", aService.selectRreport(currentPage, LIMIT));
+			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
-			mv.addObject("listCount", listCount); 
-			} catch (Exception e) { 
-				System.out.println(e.getMessage()); 
-			}
+			mv.addObject("listCount", listCount);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		mv.setViewName("admin/replyReport");
 		return mv;
 	}
+
 //	댓글 신고 처리 목록
 	@RequestMapping(value = "/arr", method = RequestMethod.GET)
-	public ModelAndView arr(@RequestParam(name="page", defaultValue = "1") int page, ModelAndView mv,							@RequestParam(name="keyword", defaultValue="", required = false) String	keyword,
-							@RequestParam(name="rstatus", defaultValue="", required = false) String rstatus,
-							@RequestParam(name="searchType", defaultValue="1") int searchType) {
+	public ModelAndView arr(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv,
+			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
+			@RequestParam(name = "rstatus", defaultValue = "", required = false) String rstatus,
+			@RequestParam(name = "searchType", defaultValue = "1") int searchType) {
 		try {
 			int currentPage = page;
 			int listCount = aService.countArreport();
@@ -590,4 +592,3 @@ public class AdminCtrl {
 		return mv;
 	}
 }
-

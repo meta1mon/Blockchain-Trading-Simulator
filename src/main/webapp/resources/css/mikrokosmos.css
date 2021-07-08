@@ -266,9 +266,6 @@ header {
 	display: block;
 } 
 
-/* .dropdown:hover .dropbtn, .replyDropdown:hover .dropbtn {
-	background-color: #3e8e41;
-} */
 .icon-more {
 	justify-self: end;
 	background-size: 24px 24px;

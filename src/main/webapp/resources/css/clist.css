@@ -45,9 +45,6 @@
 	background-color: #ffffff;
 }
 
-	
-}
-
 #searchType:hover, #searchType:focus {
 	color: #643EA0;
 	transition: color 0.15s ease-in-out;

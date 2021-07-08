@@ -96,5 +96,11 @@ public class CommunityServiceImpl implements CommunityService {
 		return cmDao.searchNoticeList(startPage, limit, keyword, searchType);
 	}
 
+	@Override
+	public List<Community> selectMainAllCommunityList() {
+		// TODO Auto-generated method stub
+		return cmDao.selectMainAllCommunityList();
+	}
+
 
 }

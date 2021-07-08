@@ -4,21 +4,32 @@
 <html>
 <head>
 <title>BTS</title>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script src="${pageContext.request.contextPath}/resources/js/data.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/newsList.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/newsList.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/main.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
 <meta charset="UTF-8">
 <script type="text/javascript">
 function go() {
-	location.href = "<%=request.getContextPath()%>/investmentpage";
+	location.href = "<%=request.getContextPath()%>
+	/investmentpage";
 	}
 </script>
 </head>
@@ -36,8 +47,7 @@ function go() {
 			<div id="new">
 				<div class="headLine">
 					<marquee class="scroll" onmouseover="this.stop();"
-						onmouseout="this.start();">
-					</marquee>
+						onmouseout="this.start();"> </marquee>
 				</div>
 			</div>
 			<br>
@@ -74,16 +84,78 @@ function go() {
 							style="border: 1px solid #E3C8F8 !important;"></iframe></td>
 				</tr>
 			</table>
-			<table style="width: 100%"> <!-- 인스타 추가 부분 -->
+			<table style="width: 100%">
+				<!-- 인스타 추가 부분 -->
 				<tr>
-					<td id="c2_1"></td>
+					<td id="c2_1">
+						<div class="main-image">
+							<div class="subject">${maincommuList0.csubject }</div>
+							<div class="content">${maincommuList0.ccontent }
+								<c:forTokens var="fileName" items="${maincommuList0.filepath}"
+									delims="," varStatus="st">
+									<a download="${fileName}"
+										href="${pageContext.request.contextPath}/resources/uploadFiles/${maincommuList0.filepath}">${fileName}</a>
+									<c:if test="${!st.last }">
+                                    /
+                                </c:if>
+									<br>
+								</c:forTokens>
+							</div>
+						</div>
+					</td>
 
-					<td id="c2_2"></td>
+					<td id="c2_2">
+						<div class="main-image">
+							<div class="subject">${maincommuList1.csubject }</div>
+							<div class="content">${maincommuList1.ccontent }
+								<c:forTokens var="fileName" items="${maincommuList1.filepath}"
+									delims="," varStatus="st">
+									<a download="${fileName}"
+										href="${pageContext.request.contextPath}/resources/uploadFiles/${maincommuList1.filepath}">${fileName}</a>
+									<c:if test="${!st.last }">
+                                    /
+                                </c:if>
+									<br>
+								</c:forTokens>
+							</div>
+						</div>
+					</td>
 				</tr>
 				<tr>
-					<td id="c3_1"></td>
+					<td id="c3_1">
+						<div class="main-image">
+							<div class="subject">${maincommuList2.csubject }</div>
+							<div class="content">${maincommuList2.ccontent }
+								<c:forTokens var="fileName" items="${maincommuList2.filepath}"
+									delims="," varStatus="st">
+									<a download="${fileName}"
+										href="${pageContext.request.contextPath}/resources/uploadFiles/${maincommuList2.filepath}">${fileName}</a>
+									<c:if test="${!st.last }">
+                                    /
+                                </c:if>
+									<br>
+								</c:forTokens>
+							</div>
+						</div>
 
-					<td id="c3_2"></td>
+					</td>
+
+					<td id="c3_2">
+						<div class="main-image">
+							<div class="subject">${maincommuList3.csubject }</div>
+							<div class="content">${maincommuList3.ccontent }
+								<c:forTokens var="fileName" items="${maincommuList3.filepath}"
+									delims="," varStatus="st">
+									<a download="${fileName}"
+										href="${pageContext.request.contextPath}/resources/uploadFiles/${maincommuList3.filepath}">${fileName}</a>
+									<c:if test="${!st.last }">
+                                    /
+                                </c:if>
+									<br>
+								</c:forTokens>
+							</div>
+						</div>
+					</td>
 				</tr>
 			</table>
 

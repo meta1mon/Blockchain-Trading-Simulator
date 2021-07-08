@@ -8,7 +8,6 @@ public class Acreport {
 	private String crno;
 	private String creporter;
 	private int crreason;
-	private String csubject;
 	private String ccontent;
 	private String crespondent;
 	private String crdate;
@@ -19,13 +18,12 @@ public class Acreport {
 	public Acreport() {
 	}
 
-	public Acreport(String crno, String creporter, int crreason, String csubject, String ccontent, String crespondent,
+	public Acreport(String crno, String creporter, int crreason, String ccontent, String crespondent,
 			String crdate, String cstatus, String creason) {
 		super();
 		this.crno = crno;
 		this.creporter = creporter;
 		this.crreason = crreason;
-		this.csubject = csubject;
 		this.ccontent = ccontent;
 		this.crespondent = crespondent;
 		this.crdate = crdate;
@@ -55,14 +53,6 @@ public class Acreport {
 
 	public void setCrreason(int crreason) {
 		this.crreason = crreason;
-	}
-
-	public String getCsubject() {
-		return csubject;
-	}
-
-	public void setCsubject(String csubject) {
-		this.csubject = csubject;
 	}
 
 	public String getCcontent() {

@@ -4,10 +4,23 @@
 	<resultMap type="Community" id="resultCommunity">
 	</resultMap>
 
+
+	<!-- 메인게시글 전부 다 불러오기 -->
+	<select id="selectMainCommunityList"
+		resultType="arraylist" resultMap="resultCommunity">
+		select * from
+		(select rownum, a.* from
+		(select * from community where substr(cdate, 0, 10) &gt;=
+		to_char(sysdate-7,'yyyy-mm-dd') order by likecnt desc, dislikecnt asc,
+		replycnt desc) a) b where rownum &lt;= 4
+
+	</select>
 	<!-- 게시글 전부 다 불러오기 -->
 	<select id="selectCommunityList" parameterType="Paging"
 		resultType="arraylist" resultMap="resultCommunity">
-		SELECT * FROM (SELECT ROWNUM R, D.* FROM (SELECT * FROM COMMUNITY ORDER BY CNO DESC) D) WHERE R BETWEEN #{start} AND #{start}+#{plus}
+		SELECT * FROM (SELECT ROWNUM R, D.*
+		FROM (SELECT * FROM COMMUNITY ORDER BY CNO DESC) D) WHERE R BETWEEN
+		#{start} AND #{start}+#{plus}
 	</select>
 
 	<!-- 검색한 게시글 조회 -->
@@ -16,21 +29,24 @@
 		SELECT *
 		FROM
 		COMMUNITY
-		WHERE CSUBJECT LIKE '%'||#{keyword}||'%'
+		WHERE CSUBJECT
+		LIKE '%'||#{keyword}||'%'
 	</select>
 	<select id="searchListContent" parameterType="string"
 		resultType="arraylist" resultMap="resultCommunity">
 		SELECT *
 		FROM
 		COMMUNITY
-		WHERE CCONTENT LIKE '%'||#{keyword}||'%'
+		WHERE CCONTENT
+		LIKE '%'||#{keyword}||'%'
 	</select>
 	<select id="searchListWriter" parameterType="string"
 		resultType="arraylist" resultMap="resultCommunity">
 		SELECT *
 		FROM
 		COMMUNITY
-		WHERE CWRITER LIKE '%'||#{keyword}||'%'
+		WHERE CWRITER
+		LIKE '%'||#{keyword}||'%'
 	</select>
 
 	<!-- 조회수 상위 5개 게시글 조회 -->
@@ -56,10 +72,11 @@
 		SELECT count(*) FROM
 		COMMUNITY WHERE CDATE LIKE TO_CHAR(SYSDATE, 'YYYY-MM-DD%')
 	</select>
-	
+
 	<!-- 해당 게시글의 댓글 개수 조회 -->
 	<select id="countReply" resultType="int">
-		SELECT REPLYCNT FROM COMMUNITY WHERE CNO = #{cno}
+		SELECT REPLYCNT FROM
+		COMMUNITY WHERE CNO = #{cno}
 	</select>
 
 	<!-- 게시글 단일 조회 -->
@@ -88,7 +105,7 @@
 		WHERE CNO =
 		#{cno}
 	</update>
-	
+
 	<!-- 게시글 삭제 -->
 	<delete id="deleteCommunity" parameterType="string"
 		flushCache="true" statementType="PREPARED">
@@ -102,33 +119,37 @@
 		UPDATE COMMUNITY SET VIEWCNT =
 		VIEWCNT+1 WHERE CNO = #{cno}
 	</update>
-	
+
 	<!-- 공지사항 조회 -->
 	<select id="selectNoticeList" resultType="arraylist"
 		resultMap="resultCommunity">
-		SELECT * FROM COMMUNITY WHERE CWRITER = '관리자' ORDER BY CNO DESC
+		SELECT * FROM COMMUNITY WHERE CWRITER = '관리자' ORDER BY CNO
+		DESC
 	</select>
-	
+
 	<!-- 검색한 공지사항 조회 -->
 	<select id="searchNoticeListSubject" parameterType="string"
 		resultType="arraylist" resultMap="resultCommunity">
 		SELECT *
 		FROM
 		COMMUNITY
-		WHERE CSUBJECT LIKE '%'||#{keyword}||'%' AND CWRITER = '관리자' 
+		WHERE CSUBJECT
+		LIKE '%'||#{keyword}||'%' AND CWRITER = '관리자'
 	</select>
 	<select id="searchNoticeListContent" parameterType="string"
 		resultType="arraylist" resultMap="resultCommunity">
 		SELECT *
 		FROM
 		COMMUNITY
-		WHERE CCONTENT LIKE '%'||#{keyword}||'%' AND CWRITER = '관리자'
+		WHERE CCONTENT
+		LIKE '%'||#{keyword}||'%' AND CWRITER = '관리자'
 	</select>
 	<select id="searchNoticeListWriter" parameterType="string"
 		resultType="arraylist" resultMap="resultCommunity">
 		SELECT *
 		FROM
 		COMMUNITY
-		WHERE CWRITER LIKE '%'||#{keyword}||'%' AND CWRITER = '관리자'
+		WHERE CWRITER
+		LIKE '%'||#{keyword}||'%' AND CWRITER = '관리자'
 	</select>
 </mapper>

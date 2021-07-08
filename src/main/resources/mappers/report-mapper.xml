@@ -38,19 +38,19 @@
 	
 	<!-- 신고글 조회 -->
 	<select id="selectCreport" resultType="arraylist" resultMap="Creport">
-		SELECT CRNO, CNO, CR.CSUBJECT, CR.CCONTENT, CRESPONDENT, CREPORTER, CRREASON, CRDATE FROM CREPORT CR JOIN COMMUNITY USING (CNO)
+		SELECT CRNO, CNO, CR.CCONTENT, CRESPONDENT, CREPORTER, CRREASON, CRDATE FROM CREPORT CR JOIN COMMUNITY USING (CNO)
 		ORDER BY CRDATE DESC
 	</select>
 	
 	<!-- 신고 댓글 조회 -->
 	<select id="selectRreport" resultType="arraylist" resultMap="Rreport">
-		SELECT RRNO, RNO, CNO, C.CSUBJECT, RR.RCONTENT, RRESPONDENT, RREPORTER, RRREASON, RRDATE FROM RREPORT RR JOIN COMMUNITY C USING (CNO)
+		SELECT RRNO, RNO, CNO, RR.RCONTENT, RRESPONDENT, RREPORTER, RRREASON, RRDATE FROM RREPORT RR JOIN COMMUNITY C USING (CNO)
 		ORDER BY RRDATE DESC
 	</select>
 	
 	<!-- 신고글 처리 -->
 	<insert id="insertAcreport" parameterType="Acreport" flushCache="true" statementType="PREPARED">
-		INSERT INTO ACREPORT VALUES(#{crno}, #{creporter}, #{crreason}, #{csubject}, #{ccontent}, #{crespondent}, #{crdate}, #{cstatus}, #{creason}, default)
+		INSERT INTO ACREPORT VALUES(#{crno}, #{creporter}, #{crreason}, #{ccontent}, #{crespondent}, #{crdate}, #{cstatus}, #{creason}, default)
 	</insert>
 	
 	<delete id="deleteCreport" parameterType="string" flushCache="true" statementType="PREPARED">
@@ -59,8 +59,8 @@
 
 	<!-- 신고 댓글 처리 -->
 	<insert id="insertArreport" parameterType="Arreport" flushCache="true" statementType="PREPARED">
-		INSERT INTO ARREPORT(rrno, rreporter, rrreason, rcontent, rrespondent, rrdate, rstatus, rreason, arrdate, csubject)
-					  VALUES(#{rrno}, #{rreporter}, #{rrreason}, #{rcontent}, #{rrespondent}, #{rrdate}, #{rstatus}, #{rreason}, default, #{csubject})
+		INSERT INTO ARREPORT(rrno, rreporter, rrreason, rcontent, rrespondent, rrdate, rstatus, rreason, arrdate)
+					  VALUES(#{rrno}, #{rreporter}, #{rrreason}, #{rcontent}, #{rrespondent}, #{rrdate}, #{rstatus}, #{rreason}, default)
 	</insert>
 	
 	<delete id="deleteRreport" parameterType="string" flushCache="true" statementType="PREPARED">
@@ -84,10 +84,6 @@
 	</select>
 	
 	<!-- 처리된 신고글 검색 -->
-	<select id="searchCsubject" parameterType="string" resultType="arraylist" resultMap="Acreport">
-		SELECT * FROM ACREPORT
-		WHERE CSUBJECT LIKE '%'||#{keyword}||'%'
-	</select>
 	<select id="searchCrespondent" parameterType="string" resultType="arraylist" resultMap="Acreport">
 		SELECT * FROM ACREPORT
 		WHERE CRESPONDENT LIKE '%'||#{keyword}||'%'
@@ -107,10 +103,6 @@
 		ORDER BY ARRDATE DESC
 	</select>
 	<!-- 처리된 댓글 검색 -->
-	<select id="searchCsubject2" parameterType="string" resultType="arraylist" resultMap="Arreport">
-		SELECT * FROM ARREPORT
-		WHERE CSUBJECT LIKE '%'||#{keyword}||'%'
-	</select>
 	<select id="searchRrespondent" parameterType="string" resultType="arraylist" resultMap="Arreport">
 		SELECT * FROM ARREPORT
 		WHERE RRESPONDENT LIKE '%'||#{keyword}||'%'

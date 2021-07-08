@@ -18,15 +18,14 @@
 			var ele = event.currentTarget.querySelectorAll("td");
 			
 			$("#crno").val(ele[0].innerText);
-			$("#csubject").val(ele[1].innerText);
-			$("#ccontentText").html(ele[2].innerText);
+			$("#ccontentText").html(ele[1].innerText);
 			$("#ccontent").val($("#ccontentText").html());
-			$("#crespondent").val(ele[3].innerText);
-			$("#creporter").val(ele[4].innerText);
-			$("#crreasonText").val(ele[5].innerText);
-			$("#crreason").val(ele[6].innerText);
-			$("#crdate").val(ele[7].innerText);
-			$("#cno").val(ele[8].innerText);
+			$("#crespondent").val(ele[2].innerText);
+			$("#creporter").val(ele[3].innerText);
+			$("#crreasonText").val(ele[4].innerText);
+			$("#crreason").val(ele[5].innerText);
+			$("#crdate").val(ele[6].innerText);
+			$("#cno").val(ele[7].innerText);
 		}
 		$(".tr").on("click", openModal);
 		
@@ -76,7 +75,7 @@
 			<table id="list">
 				<tr>
 					<th>신고 번호</th>
-					<th>게시글 제목</th>
+					<th>게시글 내용</th>
 					<th>피신고자</th>
 					<th>신고자</th>
 					<th>신고 사유</th>
@@ -91,8 +90,7 @@
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr class="tr">
 							<td class ="center" style="cursor: pointer;">${vo.crno}</td>
-							<td style="cursor: pointer;">${vo.csubject}</td>
-							<td class="hidden">${vo.ccontent}</td>
+							<td class="center">${vo.ccontent}</td>
 							<td class ="center" style="cursor: pointer;">${vo.crespondent}</td>
 							<td class ="center" style="cursor: pointer;">${vo.creporter}</td>
 							<c:choose>
@@ -174,10 +172,6 @@
 						<tr class="hidden">
 							<td>신고 접수 번호</td>
 							<td><input type="hidden" value="" name="crno" id="crno"></td>
-						</tr>
-						<tr>
-							<td>게시글 제목</td>
-							<td><input type="text" value="" name="csubject" id="csubject" readonly></td>
 						</tr>
 						<tr>
 							<td>피신고자</td>

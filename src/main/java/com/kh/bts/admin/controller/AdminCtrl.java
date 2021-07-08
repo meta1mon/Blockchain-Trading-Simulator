@@ -248,14 +248,10 @@ public class AdminCtrl {
 		String rstatus = request.getParameter("rstatus");
 		String cno = request.getParameter("cno");
 		String rno = request.getParameter("rno");
-		String csubject = request.getParameter("csubject");
-		vo.setCsubject(csubject);
 		System.out.println("==============================================================");
 		System.out.println(rstatus);
 		System.out.println(cno);
 		System.out.println(rno);
-		System.out.println(csubject);
-		System.out.println("vo.getCsubject(): " + vo.getCsubject());
 		int result = aService.insertArreport(vo); // arreport에 삽입
 		int result2 = aService.deleteRreport(rrno); // rreport에서 삭제
 		System.out.println(result);

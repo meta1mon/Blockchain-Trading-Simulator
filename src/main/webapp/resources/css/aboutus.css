@@ -399,6 +399,7 @@ progress {
 
 .contact_kakao:link{
 	text-decoration:underline;
+	color: #f0ffff;
 }
 
 .contact_kakao:visited{
@@ -412,6 +413,7 @@ progress {
 
 .contact_comm:link{
 	text-decoration:underline;
+	color: #f0ffff;
 }
 
 .contact_comm:visited{

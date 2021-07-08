@@ -15,6 +15,7 @@
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="resources/css/aboutus.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -61,13 +62,11 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">사이트 소개</h2>
-<!--                     <h3 class="section-subheading text-muted">Blockchain Trading Simulator</h3> -->
                 </div>
                 <div class="row text-center">
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
-                        <img src="resources/assets/img/bts_logo.svg" style="height:2cm; position:relative; right:10px;" alt="..." />
-<!--                             <i class="fas fa-circle fa-stack-2x text-primary"></i> -->
+                        <img src="resources/assets/img/bts_logo.svg" style="height:2cm; position:relative; right:10px; background-color: #8c66c8;" alt="..." />
                         </span>
                         <p class="my-3" style="font-size:18px;">BTS는 회원님께 다양한 서비스와 편의를 제공하는 가상자산 중개 플랫폼입니다.<br>
                         										투기성 투자를 하는 사람들에게 위험부담 없이 시도할 수 있는 투자 기회와 경험을 제공합니다.<br>

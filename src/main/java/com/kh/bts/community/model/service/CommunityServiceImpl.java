@@ -90,5 +90,11 @@ public class CommunityServiceImpl implements CommunityService {
 		return cmDao.returnEmail(nickName);
 	}
 
+	@Override
+	public List<Community> selectNoticeSearch(int startPage, int limit, String keyword, int searchType) {
+		// TODO Auto-generated method stub
+		return cmDao.searchNoticeList(startPage, limit, keyword, searchType);
+	}
+
 
 }

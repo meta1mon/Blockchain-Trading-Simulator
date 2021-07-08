@@ -1,4 +1,8 @@
 @charset "UTF-8";
+input[type=button], input[type=submit] {
+	height: 50px;	
+}
+
 .link:visited {
 	color: black;
 }
@@ -38,14 +42,16 @@
 	width: 100%;
 }
 
-.w100 input {
+.w100 input[type=text], .w100 input[type=number], .w100 input[type=password], .w100 input[type=date]{
 	width: 100%;
-	height: 25px;
+	height: 30px;
+	padding: 5px;
+	outline: none;
 }
 
 .w100 select{
 	width: 100%;
-	height: 25px;
+	height: 30px;
 	
 }
 
@@ -98,9 +104,15 @@
 }
 .contents input:not(.btn1) {
 	border: 1px solid rgba(0, 0, 0, 0.25);
-	border-radius: 2px;
+	border-radius: 3px;
 }
 .contents select {
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	border-radius: 2px;
+}
+
+.border {
+	border-radius: 5px;
+	border: 1px solid rgba(0,0,0,0.5);
+	outline: none;
 }

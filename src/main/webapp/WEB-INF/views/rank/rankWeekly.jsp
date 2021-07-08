@@ -6,14 +6,12 @@
 <html>
 <head>
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
-	type="image/x-icon" />
-<link rel="icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
-	type="image/x-icon" />
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <meta charset="UTF-8">
-<link href="${pageContext.request.contextPath}/resources/css/reset.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css" rel="stylesheet" type="text/css" />
 <style>
 #rank {
 	width: 1240px;

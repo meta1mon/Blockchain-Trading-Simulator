@@ -227,17 +227,22 @@ header {
 	width: 24px;
 }
 
-/* 댓글에 커서 올리면  icon-more를 감싸고 있는 replyDropdown 태그가 보인다.*/
-.reply-list li:hover .replyDropdown {
-	position: relative;
-	display: inline-block;
-}
-
 .replyDropdown {
 	position: relative;
-	display: none;
+	display: block;;
 	width: 24px;
 }
+
+/*  replyDropdown 태그에 커서를 올리면 신고, 수정, 삭제 버튼을 둘러싸고 있는 dropdown-content 태그가 보인다.*/
+/* .reply-list li:hover .replyDropdown {
+	display: inline-block;
+} */
+
+/* replyDropdown 태그에 커서를 올리면 드랍다운 내용 보임 */
+ .replyDropdown:hover .dropdown-content
+	{
+	display: block;
+}  
 
 .dropdown-content {
 	display: none;
@@ -250,25 +255,22 @@ header {
 	z-index: 1;
 }
 
-.dropdown-content a {
+.dropdown-content p {
 	color: #262626;
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
 }
 
-.dropdown-content a:hover {
+.dropdown-content p:hover {
 	background-color: #f1f1f1;
 }
 
 /* .dropdown:hover .dropdown-content, .replyDropdown:hover .dropdown-content
 	{
 	display: block;
-} 
-
-/* .dropdown:hover .dropbtn, .replyDropdown:hover .dropbtn {
-	background-color: #3e8e41;
 } */
+
 .icon-more {
 	justify-self: end;
 	background-size: 24px 24px;
@@ -596,6 +598,7 @@ ul.story-list .profile-text {
 	width: 468px;
     position: relative;
     right: 30px;
+    margin-bottom: 15px;
 }
 
 .modal-input-comment {

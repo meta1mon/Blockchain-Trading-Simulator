@@ -45,9 +45,6 @@
 	background-color: #ffffff;
 }
 
-	
-}
-
 #searchType:hover, #searchType:focus {
 	color: #643EA0;
 	transition: color 0.15s ease-in-out;
@@ -179,10 +176,6 @@
 
 .replycnt:hover, .replycnt:active {
 	text-decoration: underline;
-}
-#space {
-	height: 100px;
-	border: 1px solid;
 }
 
 #page {

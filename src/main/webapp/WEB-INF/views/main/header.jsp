@@ -1,16 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link href="${pageContext.request.contextPath}/resources/css/header.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/reset.css"
-	rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<%-- 
+	<title>BTS</title>
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+	<link href="${pageContext.request.contextPath}/resources/css/header.css"
+		rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+		rel="stylesheet" type="text/css" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
-jsp:include 를 사용하는 페이지에서는 <link> 태그를 넣지 말라.
-header 내용은 header에만 하기
+--%>
+
+
+<%-- 
+	jsp:include 를 사용하는 페이지에서는 <link> 태그를 넣지 말것.
+	header 내용은 header에만 하기
 
 --%>
 
@@ -37,6 +42,7 @@ header 내용은 header에만 하기
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/nlist?news_keyword=">뉴스</a></li>
 			<li class="menu"><a class="menutext" href="javascript:void(window.open('<%=request.getContextPath()%>/prochart', '_blank','width=1300px, height=800px'))">프로차트</a></li>
 			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/clist">커뮤니티</a></li>
+			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/insta">소우주</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/cashShop">충전소</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/rankDaily">랭킹</a></li>
 		</ul>

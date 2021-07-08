@@ -4,21 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>BTS</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <meta charset="UTF-8">
 <!-- 스타일 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/member.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/findpw.css">
-<title>BTS</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/findpw.css">
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
 <!-- 스크립트 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
 </head>
 <body>
 	<div id="wrapper">

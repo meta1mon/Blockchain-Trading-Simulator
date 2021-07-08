@@ -10,9 +10,6 @@
     align-items: start;
     min-height: 100vh;
 }
-#cashR table {
-	width: 100%;
-}
 
 #cashR th, td {
 	padding: 5px !important;

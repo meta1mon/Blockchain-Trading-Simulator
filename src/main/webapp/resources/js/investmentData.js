@@ -3,8 +3,6 @@ $(function() {
 	var checkpw = false; // 2차 비밀번호 변수
 	coinname(); // 숫자를 이름으로 변경
 	chart(); // 차트 변수
-	bcnt();
-	scnt();
 
 	$("#check2").click(function() { // 계좌 비밀번호
 		var acntList = $("#frm11").serialize();

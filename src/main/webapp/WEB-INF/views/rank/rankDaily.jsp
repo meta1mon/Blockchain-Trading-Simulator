@@ -5,15 +5,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>BTS</title>
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
-	type="image/x-icon" />
-<link rel="icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
 	type="image/x-icon" />
 <meta charset="UTF-8">
-<link href="${pageContext.request.contextPath}/resources/css/reset.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 #rank {
@@ -56,11 +56,24 @@ input[type=radio] {
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  /* 이동하는 애니메이션 넣고 싶으면 이 부분 쓰면 됩니다 ↓ */
-  transition: transform .5s ease;
+  transition: transform .5s ease, opacity .5s;
   cursor: pointer;
   background: white;
   color: #8c66c8;
+}
+
+.info {
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform .5s ease;
+  cursor: pointer;
+  background: #8c66c8;
+  color: white;
 }
 
 .container {
@@ -83,29 +96,54 @@ input[type=radio] {
 
 #item-1:checked ~ .cards #rank-4, #item-2:checked ~ .cards #rank-1, #item-3:checked ~ .cards #rank-2, #item-4:checked ~ .cards #rank-3 {
   transform: translatex(-100%);
+  opacity: 0.3;
   z-index: 0;
 }
 
 #item-1:checked ~ .cards #rank-2, #item-2:checked ~ .cards #rank-3, #item-3:checked ~ .cards #rank-4, #item-4:checked ~ .cards #rank-1 {
   transform: translatex(100%);
+  opacity: 0.3;
   z-index: 0;
 }
 
 #item-1:checked ~ .cards #rank-1, #item-2:checked ~ .cards #rank-2, #item-3:checked ~ .cards #rank-3, #item-4:checked ~ .cards #rank-4 {
-  transform: translatex(0) scale(1);
+  transform: translatex(0) scale(1.2);
   opacity: 1;
   z-index: 1;
   background: #8c66c8;
   color: white;
+  }
   
+#item-1:checked ~ .cards #rank-info-4, #item-2:checked ~ .cards #rank-info-1, #item-3:checked ~ .cards #rank-info-2, #item-4:checked ~ .cards #rank-info-3 {
+  transform: translatex(-100%);
+  z-index: 0;
 }
+
+#item-1:checked ~ .cards #rank-info-2, #item-2:checked ~ .cards #rank-info-3, #item-3:checked ~ .cards #rank-info-4, #item-4:checked ~ .cards #rank-info-1 {
+  transform: translatex(100%);                                                                     
+  z-index: 0;                                                                                      
+}                                                                                                  
+                                                                                                   
+#item-1:checked ~ .cards #rank-info-1, #item-2:checked ~ .cards #rank-info-2, #item-3:checked ~ .cards #rank-info-3, #item-4:checked ~ .cards #rank-info-4 {
+  transform: translatex(0);
+  opacity: 1;
+  z-index: 1;
+  background: #8c66c8;
+  color: white;
+  }
+
+  
 /* 랭킹 스와이프 메뉴 끝 */
+
+/* 랭킹 정보 시작 */
+.info{
+	width: 1240px;
+}
+/* 랭킹 정보 끝 */
 
 .ranktable {
 	width: 100%;
 	text-align: center;
-	
-	
 }
 
 .ranktable td {
@@ -121,9 +159,12 @@ input[type=radio] {
 #accumulative {
 	display: none;
 }
+
+.ranktable a {
+	color: #8c66c8;
+}
 </style>
 <!-- <script>
-	이런 식으로 기능 넣어서 랭킹 jsp 하나로 다 통합하는 거 어떤지~? 아 근데 ajax로 한다구 했지..
 	$(function(){
 		var test = function(){
 			if($("#item-1:checked")){
@@ -163,6 +204,20 @@ input[type=radio] {
 					</label> 
 					<label class="card" for="item-4" id="rank-4">
 						월간 랭킹
+					</label>
+				</div>
+				<div class="cards">
+					<label class="info" for="item-1" id="rank-info-1">
+						초기 자본금(1,000만원)을 기준으로 매 시간 갱신됩니다.
+					</label>
+					<label class="info" for="item-2" id="rank-info-2">
+						매일 오전 9시에 갱신됩니다.
+					</label> 
+					<label class="info" for="item-3" id="rank-info-3">
+						매주 월요일 오전 9시에 갱신됩니다.
+					</label> 
+					<label class="info" for="item-4" id="rank-info-4">
+						매월 1일 오전 9시에 갱신됩니다.
 					</label>
 				</div>
 			</div>

@@ -4,15 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>BTS</title>
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
-	type="image/x-icon" />
-<link rel="icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
 	type="image/x-icon" />
 <meta charset="UTF-8">
-<link href="${pageContext.request.contextPath}/resources/css/clist.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/clist.css"	rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -117,10 +118,12 @@
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr>
 							<td align="center" style="font-size: 13px;">${vo.cno}</td>
-							<td align="left"><a
-								href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">&nbsp;${vo.csubject}
-							</a> <a href="cDetail?cno=${vo.cno}&page=${currentPage}"
-								class="replycnt">[${vo.replycnt}]</a></td>
+							<td align="left">
+								<a	href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">&nbsp;${vo.csubject}
+								</a> 
+								<a href="cDetail?cno=${vo.cno}&page=${currentPage}"	class="replycnt">[${vo.replycnt}]
+								</a>
+							</td>
 							<td align="center">${vo.cwriter}</td>
 							<td align="center" style="font-size: 13px;">${vo.cdate}</td>
 							<td align="center">${vo.viewcnt}</td>

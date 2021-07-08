@@ -67,7 +67,7 @@ $('.tablinks').click(function() {
 var bExpandBool = Boolean(false);
 
 $('#bExpand').click(function() {
-	console.log("show 클릭됨!");
+//	console.log("show 클릭됨!");
 	if(bExpandBool == false) {
 		$('.blist').show();
 		bExpandBool= true;
@@ -82,7 +82,7 @@ $('#bExpand').click(function() {
 var sExpandBool = Boolean(false);
 
 $('#sExpand').click(function() {
-	console.log("show 클릭됨!");
+//	console.log("show 클릭됨!");
 	if(sExpandBool == false) {
 		$('.slist').show();
 		sExpandBool= true;
@@ -98,7 +98,7 @@ $('#sExpand').click(function() {
 var wbExpandBool = Boolean(false);
 
 $('#wbExpand').click(function() {
-	console.log("show 클릭됨!");
+//	console.log("show 클릭됨!");
 	if(wbExpandBool == false) {
 		$('.wblist').show();
 		wbExpandBool= true;
@@ -113,7 +113,7 @@ $('#wbExpand').click(function() {
 var wsExpandBool = Boolean(false);
 
 $('#wsExpand').click(function() {
-	console.log("show 클릭됨!");
+//	console.log("show 클릭됨!");
 	if(wsExpandBool == false) {
 		$('.wslist').show();
 		wsExpandBool= true;
@@ -125,3 +125,18 @@ $('#wsExpand').click(function() {
 	}
 });
 
+
+var cExpandBool = Boolean(false);
+
+$('#cExpand').click(function() {
+//	console.log("show 클릭됨!");
+	if(cExpandBool == false) {
+		$('.cashlist').show();
+		cExpandBool= true;
+		$('#cExpand').val("접기");
+	} else if(cExpandBool == true) {
+		$('.cashlist').hide();
+		cExpandBool= false;
+		$('#cExpand').val("더 보기");
+	}
+});

@@ -121,6 +121,29 @@ public class CommunityDao {
 		RowBounds row = new RowBounds(startRow, limit);
 		return sqlSession.selectList("community.selectNoticeList", null, row);
 	}
+	public List<Community> searchNoticeList(int startPage, int limit, String keyword, int searchType) { // 검색한 게시글 조회
+		List<Community> list = new ArrayList<Community>();
+		int startRow = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(startRow, limit);
+		
+		if (keyword != null) {
+			switch (searchType) {
+			case 1: //제목으로 검색
+				list = sqlSession.selectList("community.searchNoticeListSubject", keyword, row);
+				break;
+			case 2: //내용으로 검색
+				list = sqlSession.selectList("community.searchNoticeListContent", keyword, row);
+				break;
+			case 3: //작성자명으로 검색
+				list = sqlSession.selectList("community.searchNoticeListWriter", keyword, row);
+				break;
+			default:
+				System.out.println("dao 오류");
+				break;
+			}
+		}
+		return list;
+	}
 	
 	public String returnEmail(String nickName) {
 		String result = sqlSession.selectOne("Member.returnEmail", nickName);

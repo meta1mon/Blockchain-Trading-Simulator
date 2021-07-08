@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
-	type="image/x-icon" />
-<link rel="icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
-	type="image/x-icon" />
-<meta charset="UTF-8">
 <title>BTS</title>
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<meta charset="UTF-8">
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
 <style>
 #wrapper {
 	background-color: #eeeeee;
@@ -83,6 +83,7 @@
 	color: #14D3D5;
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 </head>
 <%@include file="main/header.jsp"%>
 <body>

@@ -4,19 +4,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>BTS</title>
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
-	type="image/x-icon" />
-<link rel="icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
-	type="image/x-icon" />
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <meta charset="UTF-8">
-<link
-	href="${pageContext.request.contextPath}/resources/css/communityDetail.css"
-	rel="stylesheet" type="text/css" />
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/communityDetail.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 
 <script>
 
@@ -32,7 +30,15 @@ $(function(){
              return true;
           }
        });
- 
+	})
+	
+	var rno = 0;
+	function rreport(nowRno) {
+		rno = nowRno;
+		console.log(rno);
+		modalFn('my_modal_reply');
+
+}
 </script>
 </head>
 <body>
@@ -41,15 +47,6 @@ $(function(){
 		<div class="detailOut">
 			<div class="comm">커뮤니티</div>
 			<br>
-			<script>
-            var rno = 0;
-            function rreport(nowRno) {
-                  rno = nowRno;
-                  console.log(rno);
-                   modalFn('my_modal_reply');
-      
-            }
-         </script>
 			<!-- 게시글 제목 부분 -->
 			<hr style="position: relative; top: 7px;">
 			<table id="table">
@@ -98,12 +95,12 @@ $(function(){
 								<br> <br> <br> <br> <br>
 								<div id="like" title="추천">
 									<span class="likecnt">${community.likecnt }</span>&nbsp;&nbsp;&nbsp;
-									<img class="img_like" src="resources/assets/img/like.png"
+									<img class="img_like" src="resources/assets/img/thumbsup.png"
 										onclick="clike()">
 								</div>
 								&nbsp;&nbsp;&nbsp;
 								<div id="dislike" title="비추천">
-									<img class="img_dislike" src="resources/assets/img/dislike.png"
+									<img class="img_dislike" src="resources/assets/img/thumbsdown.png"
 										onclick="dislike()">&nbsp;&nbsp;&nbsp; <span
 										class="dislikecnt">${community.dislikecnt }</span>
 								</div>
@@ -136,26 +133,41 @@ $(function(){
 					<div id="comment">
 						<br> <span style="display: inline;"> <span
 							class="comment_writer"> ${rep.rwriter} &nbsp; &nbsp;</span> <span
-							class="comment_date"> ${rep.rdate}</span> <br> <span
-							class="comment_content"> ${rep.rcontent}</span>
-						<textarea class="newRcontent" style="display: none;"
-								maxlength="4000">${rep.rcontent }</textarea>
+							class="comment_date"> ${rep.rdate}</span> 
+									<!-- 댓글 수정, 삭제, 신고 드랍다운 메뉴 -->
+								<div class="replyDropdown" style="float: right;">
+									<div class="icon-react icon-more" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
+										<div class="dropdown-content">
+												<div class="reportReply" onclick="rreport(${rep.cno})">신고</div>
+											<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
+											<c:if test="${loginMember == rep.email }">
+												<div class="updateReply" onclick="makeUpdateBtn(${status.index })">수정</div>
+												<div class="deleteReply" onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</div>
+											</c:if>
+										</div>
+									</div>
+								</div>
+								<br> 
+							<span class="comment_content"> ${rep.rcontent}</span>
 						</span>
-							<!-- 댓글 작성자에게만 수정 삭제 버튼이 보임 -->
-							<c:if test="${loginMember == rep.email }">
-								<button type="button" class="makeBtn"
-									onclick="makeUpdateBtn(${status.index })">수정하기</button>
-								<button type="button" class="submitRUpdate"
-									onclick="replyUpdate(${rep.rno}, ${status.index })"
-									style="display: none;">수정완료</button>
-								<button type="button" class="cancleRUpdate"
-									onclick="updateRCancle(${status.index })"
-									style="display: none;">수정취소</button>
-								<button type="button"
-									onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</button>
-							</c:if>
-						<button type="button" class="report" id="popup_open_btn_reply"
-							onclick="rreport(${rep.rno})">신고</button>
+						<table style="width: 100%">
+							<tr>
+								<td width="80%"><textarea class="newRcontent"
+										style="display: none;" maxlength="4000">${rep.rcontent }</textarea>
+								</td>
+								<td width="7%">
+									<!-- 댓글 작성자에게만 수정 삭제 버튼이 보임 -->
+									<button type="button" class="submitRUpdate"
+										onclick="replyUpdate(${rep.rno}, ${status.index })"
+										style="display: none;">저장</button>
+								</td>
+								<td width="7%">
+									<button type="button" class="cancleRUpdate"
+										onclick="updateRCancle(${status.index })"
+										style="display: none;">취소</button>
+								</td>
+							</tr>
+						</table>
 					</div>
 					<br>
 				</c:forEach>
@@ -168,11 +180,19 @@ $(function(){
 					<form id="writeRcommunity">
 						<div class="comment-box">
 							<input type="hidden" name="cno" value="${community.cno }">
+							<table style="width: 100%">
+							<tr>
+							<td width="90%">
 							<textarea placeholder="댓글 쓰기" id="editor" name="rcontent"
 								maxlength="4000"
 								onfocus="if(this.value == '댓글 쓰기') { this.value = ''; }"
 								onblur="if(this.value == '') { this.value ='댓글 쓰기'; }"></textarea>
+								</td>
+								<td>
 							<button class="rplyInsert" type="button" onclick="rplyInsert()">등록</button>
+							</td>
+							</tr>
+							</table>
 						</div>
 					</form>
 				</c:if>
@@ -259,6 +279,27 @@ $(function(){
 		<%@include file="../main/footer.jsp"%>
 	</div>
 	<script>
+	
+	/* // 댓글 드랍다운 메뉴 클릭 시 열기/닫기
+	$('.replyDropdown').click(function() {
+		console.log("클릭함");
+		console.log("클릭dropdown 상위 article idx: " + $(this).parents('#comment').index());
+		$('.dropdown-content').eq($(this).parents('#comment').index()).show();
+		$(".replyDropdown").mouseleave(function(){$(this).css("display", "block");});
+		});
+
+	$(document).mouseup(function (e){
+	    var dropdown = $('.dropdown-content');
+	    var replyDropdownBtn = $('.replyDropdown');
+	    var containerReply = $('#modal_reply'); // 댓글 모달창
+	    var containerReport = $('#modal_report'); // 게시글 신고 모달창
+	    var containerReportReply = $('#modal_report_reply'); //댓글 신고 모달창
+	    
+	    if( dropdown.has(e.target).length === 0){
+	    	dropdown.css('display','none');
+//	    	replyDropdownBtn.css('display','none');
+	    } */
+	    
    var bg = null;
    var modal = null;
    function modalFn(id) {
@@ -411,9 +452,9 @@ $(function(){
    }
    // 댓글 수정 버튼 생성
    function makeUpdateBtn(index) {
-
+	console.log(index);
       $(".comment_content").eq(index).hide();
-      $(".makeBtn").eq(index).hide();
+      /* $(".makeBtn").eq(index).hide(); */
       $(".newRcontent").eq(index).show();
       $(".submitRUpdate").eq(index).show();
       $(".cancleRUpdate").eq(index).show();
@@ -421,8 +462,9 @@ $(function(){
    
    // 댓글 수정 취소 버튼 클릭 시
    function updateRCancle(index) {
+	console.log(index);
       $(".comment_content").eq(index).show();
-      $(".makeBtn").eq(index).show();
+      /* $(".makeBtn").eq(index).show(); */
       $(".newRcontent").eq(index).hide();
       $(".newRcontent").eq(index).text("");
       $(".submitRUpdate").eq(index).hide();

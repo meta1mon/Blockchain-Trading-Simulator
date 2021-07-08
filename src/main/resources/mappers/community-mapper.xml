@@ -108,4 +108,27 @@
 		resultMap="resultCommunity">
 		SELECT * FROM COMMUNITY WHERE CWRITER = '관리자' ORDER BY CNO DESC
 	</select>
+	
+	<!-- 검색한 공지사항 조회 -->
+	<select id="searchNoticeListSubject" parameterType="string"
+		resultType="arraylist" resultMap="resultCommunity">
+		SELECT *
+		FROM
+		COMMUNITY
+		WHERE CSUBJECT LIKE '%'||#{keyword}||'%' AND CWRITER = '관리자' 
+	</select>
+	<select id="searchNoticeListContent" parameterType="string"
+		resultType="arraylist" resultMap="resultCommunity">
+		SELECT *
+		FROM
+		COMMUNITY
+		WHERE CCONTENT LIKE '%'||#{keyword}||'%' AND CWRITER = '관리자'
+	</select>
+	<select id="searchNoticeListWriter" parameterType="string"
+		resultType="arraylist" resultMap="resultCommunity">
+		SELECT *
+		FROM
+		COMMUNITY
+		WHERE CWRITER LIKE '%'||#{keyword}||'%' AND CWRITER = '관리자'
+	</select>
 </mapper>

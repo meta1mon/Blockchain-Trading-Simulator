@@ -3,14 +3,30 @@
 	box-sizing: border-box;
 }
 
+.title {
+	font-size: 18px;
+	margin-bottom: 0px;	
+}
 /* 약관 상세 내용 상자 */
 .termsDetail {
 	height: 200px;
 	overflow: scroll;
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	border-radius: 5px;
+	padding: 7px;
+	text-indent: 5px;
 }
 
+.termsDetail *:not(h1, h2, h3, h4) {
+	font-weight: 500;
+	font-size: 14px
+}
+
+.termsDetail h3{
+	margin-top: 14.5px;
+	margin-bottom: 0px;
+	
+}
 .far.fa-check-circle .fas.fa-check-circle{
 	font-size: 13px;
 	color: black;

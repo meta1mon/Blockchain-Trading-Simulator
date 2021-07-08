@@ -8,14 +8,11 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link href="${pageContext.request.contextPath}/resources/css/header.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/reset.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link
-	href="${pageContext.request.contextPath}/resources/css/mikrokosmos.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/mikrokosmos.css" rel="stylesheet" type="text/css" />
 <style>
 .parent>div {
 	text-align: center;
@@ -81,7 +78,7 @@ $(function() {
 								$.each(json,function(idx, insta) {
 									moreHtml += "<article> <header> <div class='profile-of-article'> <img class='img-profile pic' src='resources/assets/img/user.png'> <span class='userID main-id point-span'>" + insta.cwriter +"</span> </div> "
 											+"<div class='dropdown' style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
-											+ "<div class='dropdown-content' style='left: 0;'> <a href='#' onclick='report()' class='report' id='popup_open_btn'>신고</a> <c:if test='${loginMember == writerEmail }'> <a href='${cupdate}' class='update'>수정</a> + </c:if>"
+											+ "<div class='dropdown-content' style='left: 0;'> <p href='#' onclick='report()' class='report' id='popup_open_btn'>신고</p> <c:if test='${loginMember == writerEmail }'> <p onclick='checkUpdate('insta.cno', 'insta.cwriter')' class='update'>수정</a> <p onclick='checkDelete('insta.cno', 'insta.cwriter')' class='delete'>삭제</a> </c:if>"
 											
 											+"</div> </div> </div> </header> <div class='main-image'> <div class='subject'>" + insta.csubject + "</div> <div class='content'>" + insta.ccontent + "</div> <div class='description'>"
 											+"<p> <span class='at-tag'>@bts @wkorea @gucci</span> </p> </div> </div> <div class='icons-react'> <div class='icons-left'> <img class='thumbsup' onclick='clike()' src='resources/assets/img/thumbsup.png'>"
@@ -474,7 +471,7 @@ $(function(){
 				<!-- 댓글 목록을 html로 불러온다 -->
 				<div class="section-reply" id="replyList">
 					<!-- 댓글 안 드랍다운 메뉴, 아직 안된거 -->
-					<div class="dropdown-content" style="left: 0;">
+				<%-- 	<div class="dropdown-content" style="left: 0;">
 						<a href="#" onclick="rreport(${vo.cno})" class="report">신고</a>
 						<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
 						<c:if test="${loginMember == writerEmail }">
@@ -488,7 +485,7 @@ $(function(){
 							<button type="button" class="cancleRUpdate"
 								onclick="updateRCancle(${status.index })" style="display: none;">수정취소</button>
 						</c:if>
-					</div>
+					</div> --%>
 				</div>
 			</div>
 

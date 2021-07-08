@@ -211,7 +211,7 @@ public class MypageController {
 
 	}
 
-// 내 게시글 불러오기
+// 나의 커뮤니티 불러오기
 	@RequestMapping(value = "/myClist", method = RequestMethod.GET)
 	public ModelAndView myClist(ModelAndView mv, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -224,21 +224,21 @@ public class MypageController {
 		return mv;
 	}
 
-	// 내 댓글 불러오기
-	@RequestMapping(value = "/myRlist", method = RequestMethod.GET)
-	public ModelAndView myRlist(ModelAndView mv, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String email = (String) session.getAttribute("loginMember");
-		List<MyRcommunity> list = myService.selectMyRcommunity(email);
-		if (list == null) {
-			System.out.println("댓글 없음");
-		} else {
-			System.out.println("댓글 있음");
-		}
-		mv.addObject("myRlist", list);
-		mv.setViewName("mypage/myRcommunity");
-		return mv;
-	}
+//	// 내 댓글 불러오기 -> 나의 커뮤니티로 통합
+//	@RequestMapping(value = "/myRlist", method = RequestMethod.GET)
+//	public ModelAndView myRlist(ModelAndView mv, HttpServletRequest request) {
+//		HttpSession session = request.getSession();
+//		String email = (String) session.getAttribute("loginMember");
+//		List<MyRcommunity> list = myService.selectMyRcommunity(email);
+//		if (list == null) {
+//			System.out.println("댓글 없음");
+//		} else {
+//			System.out.println("댓글 있음");
+//		}
+//		mv.addObject("myRlist", list);
+//		mv.setViewName("mypage/myRcommunity");
+//		return mv;
+//	}
 
 // 내 자산 진입
 	@RequestMapping(value = "/bankPwCheck", method = RequestMethod.POST)
@@ -345,22 +345,23 @@ public class MypageController {
 		mv.setViewName("mypage/myRcommunity");
 		return mv;
 	}
-
-	@RequestMapping(value = "/mcl")
-	public ModelAndView myCashLog(ModelAndView mv, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String loginEmail = (String) session.getAttribute("loginMember");
-		try {
-			mv.addObject("email", loginEmail);
-			System.out.println(loginEmail);
-			mv.addObject("list", myService.selectMyCashLog(loginEmail));
-			System.out.println(myService.selectMyCashLog(loginEmail));
-			mv.addObject("listCount", myService.selectMyCashLog(loginEmail).size());
-		} catch (Exception e) {
-
-		}
-		mv.setViewName("mypage/myCashLog");
-		return mv;
-	}
+	
+// 내 충전내역 -> 나의 자산으로 통합
+//	@RequestMapping(value = "/mcl")
+//	public ModelAndView myCashLog(ModelAndView mv, HttpServletRequest request) {
+//		HttpSession session = request.getSession();
+//		String loginEmail = (String) session.getAttribute("loginMember");
+//		try {
+//			mv.addObject("email", loginEmail);
+//			System.out.println(loginEmail);
+//			mv.addObject("list", myService.selectMyCashLog(loginEmail));
+//			System.out.println(myService.selectMyCashLog(loginEmail));
+//			mv.addObject("listCount", myService.selectMyCashLog(loginEmail).size());
+//		} catch (Exception e) {
+//
+//		}
+//		mv.setViewName("mypage/myCashLog");
+//		return mv;
+//	}
 
 }

@@ -7,8 +7,9 @@
 <title>BTS</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
 <meta charset="UTF-8">
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/myNav.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/myCommunity.css"	rel="stylesheet" type="text/css" />
@@ -16,7 +17,8 @@
 </head>
 <body>
 	<div id="wrapper">
-	<jsp:include page="myNav.jsp"></jsp:include>
+		<jsp:include page="../main/header.jsp"></jsp:include>
+		<jsp:include page="myNav.jsp"></jsp:include>
 		<div id="mc">
 		
 			<div class="tab">
@@ -48,10 +50,10 @@
 							<tr>
 								<td align="center" style="font-size: 13px;">${vo.cno}</td>
 								<td align="left">
-									<a	href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">
+									<a href="${pageContext.request.contextPath}/cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">
 										&nbsp;${vo.csubject}
 									</a> 
-									<a href="cDetail?cno=${vo.cno}&page=${currentPage}"	class="replycnt">
+									<a href="${pageContext.request.contextPath}/cDetail?cno=${vo.cno}&page=${currentPage}"	class="replycnt">
 										[${vo.replycnt}]
 									</a>
 								</td>
@@ -88,7 +90,7 @@
 							<tr>
 								<td align="center" style="font-size: 13px;">${vo.cno }</td>
 								<td align="left">
-									<a	href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">
+									<a	href="${pageContext.request.contextPath}/cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">
 										&nbsp;${vo.csubject}
 									</a> 
 								</td>
@@ -106,6 +108,7 @@
 			
 			
 		</div>
+		<jsp:include page="../main/footer.jsp"></jsp:include> 
 	</div>
 <script>
 //탭메뉴 jQuery

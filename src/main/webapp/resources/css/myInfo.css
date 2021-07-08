@@ -3,6 +3,7 @@
 #mi {
 	width: 65%;
 	min-width: 1024px;
+/* 	min-width: 500px; */
 	text-align: center;
 	height: 50%;
 	padding: 20px;
@@ -30,7 +31,7 @@
 #infoTable th, td {
 	border: 1px solid;
 	text-align: left;
-	padding: 20px;
+	padding: 21px;
 	border: 1.5px solid #E3C8F8;
 	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }

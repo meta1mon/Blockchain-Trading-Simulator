@@ -7,8 +7,9 @@
 <title>BTS</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
 <meta charset="UTF-8">
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/myNav.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/myInfo.css" rel="stylesheet" type="text/css" />
@@ -17,10 +18,14 @@
 $(function() {
 	$("#moveChangeBtn").click(function() {
 		$(".update").attr("readonly", false);
-		$(".none").css("display", "none");
-		$(".insert").css("display", "block");
-		$("#moveChangeBtn").css("display", "none");
-		$("#changeBtn").css("display", "inline");
+// 		$(".none").css("display", "none");
+		$(".none").hide();
+// 		$(".insert").css("display", "block");
+		$(".insert").show();
+// 		$("#moveChangeBtn").css("display", "none");
+		$("#moveChangeBtn").hide();
+// 		$("#changeBtn").css("display", "inline");
+		$("#changeBtn").show();
 	});
 
 	var checkND = true;
@@ -123,7 +128,8 @@ $(function() {
 </head>
 <body>
 	<div id="wrapper">
-	<jsp:include page="myNav.jsp"></jsp:include>
+		<jsp:include page="../main/header.jsp"></jsp:include>
+		<jsp:include page="myNav.jsp"></jsp:include>
 		<div id="mi">
 			<h1 id="title">회원정보</h1>
 			<form id="frmChangeInfo">
@@ -207,6 +213,7 @@ $(function() {
 				</table>
 			</form>
 		</div>
+		<jsp:include page="../main/footer.jsp"></jsp:include> 
 	</div>
 </body>
 </html>

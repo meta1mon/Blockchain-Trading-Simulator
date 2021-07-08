@@ -8,10 +8,12 @@
 <link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
 #mpe {
-	margin: 200px auto;
+	margin: 30px auto;
 	width: 65%;
 	min-width: 1024px;
 	text-align: center;
@@ -33,6 +35,7 @@
 				<button type="submit">확인</button>
 			</form>
 		</div>
+		<jsp:include page="../main/footer.jsp"></jsp:include> 
 	</div>
 </body>
 </html>

@@ -17,6 +17,7 @@ import com.kh.bts.ranking.model.vo.Weekly;
 public class RankingDao {
 	@Autowired
 	private SqlSession sqlSession;
+
 // 모든 랭킹 공통 함수
 	// 코인계좌에 존재하는 코인만 가져오기(코인수량 0은 제외)
 	public List<String> coinLoad() {
@@ -44,20 +45,30 @@ public class RankingDao {
 		vo.setEmail(vo2.getEmail());
 
 		// 코인 평가금과 보유 현금액을 업데이트
-		vo.setNewesset(vo.getNewesset() + vo2.getCybcash());
 		String nickname = sqlSession.selectOne("Member.returnNickname", vo.getEmail());
 		vo.setNickname(nickname);
 		if (criteria == 0) { // 누적 랭킹, 수익률 판단 기준은 천만원!
+			// 현질 반영
+			vo.setNewesset(vo.getNewesset() + vo2.getCybcash());
 			vo.setOldesset(10000000);
 			result = sqlSession.update("ranking.updateAccumulative", vo);
 		} else {
 			long oldesset = sqlSession.selectOne("ranking.selectOldEsset", vo.getAcntno());
 			vo.setOldesset(oldesset);
 			if (criteria == 1) { // 일간
+				// 현질 금액 제거
+				long subtractCash = sqlSession.selectOne("ranking.subtractDailyCashLog", vo.getAcntno());
+				vo.setNewesset(vo.getNewesset() + vo2.getCybcash() - subtractCash);
 				result = sqlSession.update("ranking.updateDaily", vo);
 			} else if (criteria == 2) { // 주간
+				// 현질 금액 제거
+				long subtractCash = sqlSession.selectOne("ranking.subtractWeeklyCashLog", vo.getAcntno());
+				vo.setNewesset(vo.getNewesset() + vo2.getCybcash() - subtractCash);
 				result = sqlSession.update("ranking.updateWeekly", vo);
 			} else if (criteria == 3) { // 월간
+				// 현질 금액 제거
+				long subtractCash = sqlSession.selectOne("ranking.subtractMonthlyCashLog", vo.getAcntno());
+				vo.setNewesset(vo.getNewesset() + vo2.getCybcash() - subtractCash);
 				result = sqlSession.update("ranking.updateMonthly", vo);
 			}
 		}
@@ -77,20 +88,33 @@ public class RankingDao {
 			Acnt vo = list.get(i);
 			long cybcash = vo.getCybcash();
 			Daily vo2 = new Daily();
-			vo2.setNewesset(cybcash);
 			vo2.setAcntno(vo.getAcntno());
+			
 			if (criteria == 0) { // 누적 랭킹, 수익률 판단 기준은 천만원!
+				// 현질 금액 반영
+				vo2.setNewesset(cybcash);
 				vo2.setOldesset(10000000);
 				result = sqlSession.update("ranking.updateAccumulative", vo2);
+				
 			} else {
-				long oldesset = sqlSession.selectOne("ranking.selectOldEsset", vo2.getAcntno());
+				long oldesset = sqlSession.selectOne("ranking.selectOldEsset", vo.getAcntno());
 				vo2.setOldesset(oldesset);
 				if (criteria == 1) { // 일간
+					// 현질 금액 제거
+					long subtractCash = sqlSession.selectOne("ranking.subtractDailyCashLog", vo.getAcntno());
+					vo2.setNewesset(cybcash - subtractCash);
 					result = sqlSession.update("ranking.updateDaily", vo2);
+
 				} else if (criteria == 2) { // 주간
+					// 현질 금액 제거
+					long subtractCash = sqlSession.selectOne("ranking.subtractWeeklyCashLog", vo.getAcntno());
+					vo2.setNewesset(cybcash - subtractCash);
 					result = sqlSession.update("ranking.updateWeekly", vo2);
 
 				} else if (criteria == 3) { // 월간
+					// 현질 금액 제거
+					long subtractCash = sqlSession.selectOne("ranking.subtractMonthlyCashLog", vo2.getAcntno());
+					vo2.setNewesset(cybcash - subtractCash);
 					result = sqlSession.update("ranking.updateMonthly", vo2);
 
 				}
@@ -105,6 +129,7 @@ public class RankingDao {
 		}
 		return result;
 	}
+
 // Daily
 	// Daily 수익률 불러오기
 	public List<Daily> selectDaily() {
@@ -138,6 +163,7 @@ public class RankingDao {
 		}
 		return result;
 	}
+
 // Accumulative
 	// Accumulative 수익률 불러오기
 	public List<Accumulative> selectAccumulative() {
@@ -171,6 +197,7 @@ public class RankingDao {
 		}
 		return result;
 	}
+
 // Weekly
 	// Weekly 수익률 불러오기
 	public List<Weekly> selectWeekly() {
@@ -204,6 +231,7 @@ public class RankingDao {
 		}
 		return result;
 	}
+
 // Monthly
 	// Monthly 수익률 불러오기
 	public List<Monthly> selectMonthly() {
@@ -215,7 +243,7 @@ public class RankingDao {
 		}
 		return list;
 	}
-	
+
 	// 나의 Monthly 랭킹 정보 가져오기
 	public Monthly selectMyMonthly(String email) {
 		Monthly vo = sqlSession.selectOne("ranking.selectMyMonthly", email);
@@ -226,7 +254,7 @@ public class RankingDao {
 		}
 		return vo;
 	}
-	
+
 	// 나의 Monthly 랭킹 정보 가져오기
 	public int selectMyMonthlyRank(String email) {
 		int result = sqlSession.selectOne("ranking.selectMyMonthlyRank", email);

@@ -120,7 +120,7 @@ $(function() {
 			      }
 		
 // 추천
-function clike() {
+function clike(likeCno) {
 	console.log("clike들어오나!!!!!!");
    if(${loginMember == null}) {
       alert("로그인이 필요합니다");         
@@ -129,9 +129,10 @@ function clike() {
          url : "${pageContext.request.contextPath}/clike",
          type : "post",
          data : {
-            "cno" : "${community.cno}"
+            "cno" : likeCno
          },
          success : function(data) {
+        	 alert("좋아요 제대로 들어갔는데, 컨트롤러에서 print.out을 안해서 좋아요 됐을 때 안됐을 때 구분이 안됨! 나중에 할거임!");
             window.location.reload();
          }
       });
@@ -154,8 +155,7 @@ function clike() {
 }
  
 // 비추천
-function dislike() {
-	console.log("cdislike들어오나!!!!!!");
+function dislike(dislikeCno) {
    if(${loginMember == null}) {
       alert("로그인이 필요합니다");         
    } else {
@@ -163,10 +163,11 @@ function dislike() {
          url : "${pageContext.request.contextPath}/cdislike",
          type : "post",
          data : {
-            cno : "${community.cno}"
+            cno : dislikeCno
          },
          datatype : "json",
          success : function(data) {
+        	 alert("싫어요 제대로 들어갔는데, 컨트롤러에서 print.out을 안해서 좋아요 됐을 때 안됐을 때 구분이 안됨! 나중에 할거임!");
             window.location.reload();
          }
       });
@@ -276,15 +277,15 @@ $(function(){
 						<!-- 게시글 추천, 비추천, 댓글 작성 -->
 						<div class="icons-react">
 							<div class="icons-left">
-								<img class="thumbsup" onclick="clike()"
+								<img class="thumbsup" onclick="clike('${vo.cno }')"
 									src="resources/assets/img/thumbsup.png" alt="추천"> <img
-									class="thumbsup-liked" onclick="clike()"
+									class="thumbsup-liked"
 									src="resources/assets/img/thumbs-up.png" alt="추천">
 							</div>
 							<div class="icons-middle">
-								<img class="thumbsdown" onclick="dislike()"
+								<img class="thumbsdown" onclick="dislike('${vo.cno }')"
 									src="resources/assets/img/thumbsdown.png" alt="비추천"> <img
-									class="thumbsdown-disliked" onclick="dislike()"
+									class="thumbsdown-disliked"
 									src="resources/assets/img/thumbs-down.png" alt="비추천">
 							</div>
 							<div class="icons-right">
@@ -299,7 +300,8 @@ $(function(){
 						<div class="reaction">
 							<div class="liked-people">
 								<p>
-									<span class="point-span">${vo.likecnt }</span>명이 추천합니다
+									<span class="point-span">${vo.likecnt }</span>명이 좋아합니다 /
+									<span class="point-span">${vo.dislikecnt }</span>명이 싫어합니다
 								</p>
 							</div>
 							<div class="comment-section">

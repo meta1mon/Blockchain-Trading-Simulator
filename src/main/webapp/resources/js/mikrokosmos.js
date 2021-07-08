@@ -198,7 +198,6 @@ $(document).mouseup(function(e) {
 
 // 게시글 신고 부분
 $("#btnreport").on("click", function() {
-	console.log("들어옴");
 	$.ajax({
 		url : "admin/reportCommunity",
 		type : "post",
@@ -213,8 +212,8 @@ $("#btnreport").on("click", function() {
 			} else {
 				alert("신고 접수 실패! 관리자에게 문의하세요!");
 			}
-/*			bg.remove();
-			modal.style.display = 'none';*/
+			bg.remove();
+			modal.style.display = 'none';
 
 		}
 	});

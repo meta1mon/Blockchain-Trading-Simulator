@@ -98,7 +98,7 @@ function keyevent(e) {
 	if($elem.data('key') == undefined)
 		$elem = $elem.parents('.number');
 	var key = $elem.data('key');
-	var same = /(\w)\1\1\1/; // 같은 영문자&숫자 연속 4번 정규식
+	var same = /(\w)\1\1/; // 같은 영문자&숫자 연속 4번 정규식
 	var contNum = /(0123)|(1234)|(2345)|(3456)|(4567)|(5678)|(6789)|(7890)/; //연속된 숫자
 	          
 	switch(key) {

@@ -4,19 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
-	type="image/x-icon" />
-<link rel="icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
-	type="image/x-icon" />
+<title>BTS</title>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link
 	href="${pageContext.request.contextPath}/resources/css/mikrokosmos.css"
 	rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
-.parent > div {
+.parent>div {
 	text-align: center;
 	background-color: lightpurple;
 }
@@ -80,7 +81,8 @@ $(function() {
 								$.each(json,function(idx, insta) {
 									moreHtml += "<article> <header> <div class='profile-of-article'> <img class='img-profile pic' src='resources/assets/img/user.png'> <span class='userID main-id point-span'>" + insta.cwriter +"</span> </div> "
 											+"<div class='dropdown' style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
-											+ "<div class='dropdown-content' style='left: 0;'> <a href='#' onclick='report(${vo.cno})' class='report' id='popup_open_btn'>신고</a> <c:if test='${loginMember == writerEmail }'> <a href='${cupdate}' class='update'>수정</a> + </c:if>"
+											+ "<div class='dropdown-content' style='left: 0;'> <p href='#' onclick='report()' class='report' id='popup_open_btn'>신고</p> <c:if test='${loginMember == writerEmail }'> <p onclick='checkUpdate('insta.cno', 'insta.cwriter')' class='update'>수정</a> <p onclick='checkDelete('insta.cno', 'insta.cwriter')' class='delete'>삭제</a> </c:if>"
+											
 											+"</div> </div> </div> </header> <div class='main-image'> <div class='subject'>" + insta.csubject + "</div> <div class='content'>" + insta.ccontent + "</div> <div class='description'>"
 											+"<p> <span class='at-tag'>@bts @wkorea @gucci</span> </p> </div> </div> <div class='icons-react'> <div class='icons-left'> <img class='thumbsup' onclick='clike()' src='resources/assets/img/thumbsup.png'>"
 											+"<img class='thumbsup-liked' onclick='clike()' src='resources/assets/img/thumbs-up.png'> </div> <div class='icons-middle'> <img class='thumbsdown' onclick='dislike()' src='resources/assets/img/thumbsdown.png'>"
@@ -222,13 +224,17 @@ $(function(){
 					<button type=submit id="btnsearch" style="display: none;"></button>
 				</form>
 				<div class="nav-2">
-          <img src="resources/assets/img/writing.png" onclick="showInsertForm()" title="글 작성" alt="글쓰기" style="cursor:pointer;">
-          <img src="resources/assets/img/megaphone.png" onclick="location.href='clist'" title="공지사항" alt="공지사항" style="cursor:pointer;">
-          </div>
+					<img src="resources/assets/img/writing.png"
+						onclick="showInsertForm()" title="글 작성" alt="글쓰기"
+						style="cursor: pointer;"> <img
+						src="resources/assets/img/megaphone.png"
+						onclick="location.href='clist'" title="공지사항" alt="공지사항"
+						style="cursor: pointer;">
+				</div>
 			</div>
 		</nav>
+		
 		<!-- main -->
-
 		<main>
 			<div class="feeds">
 				<!-- article -->
@@ -243,19 +249,13 @@ $(function(){
 								<div class="icon-react icon-more"
 									style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
 									<div class="dropdown-content" style="left: 0;">
-										<a href="#" onclick="report(${vo.cno})" class="report">신고</a>
-										<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
-										<c:url var="insta" value="insta">
-											<c:param name="cno" value="${vo.cno}" />
-										</c:url>
-										<c:url var="cupdate" value="cUpdateForm">
-											<c:param name="cno" value="${vo.cno}" />
-										</c:url>
-										<c:url var="cdelete" value="cDelete">
-											<c:param name="cno" value="${vo.cno}" />
-										</c:url>
-											<a class="update" onclick="checkUpdate(${vo.cno }, '${vo.cwriter }')">수정</a>
-											<a class="delete" onclick="checkDelete(${vo.cno }, '${vo.cwriter }')">삭제</a>
+										<c:if test="${loginMember != null }">
+											<p onclick="report('${vo.cno}')" class="report">신고</p>
+										</c:if>
+										<p class="update"
+											onclick="checkUpdate('${vo.cno }', '${vo.cwriter }')">수정</p> <p
+											class="delete"
+											onclick="checkDelete('${vo.cno }', '${vo.cwriter }')">삭제</p>
 									</div>
 								</div>
 							</div>
@@ -264,8 +264,8 @@ $(function(){
 						<div class="main-image">
 							<div class="subject">${vo.csubject }</div>
 							<div class="content">${vo.ccontent }
-							<c:forTokens var="fileName" items="${vo.filepath}"
-									delims="," varStatus="st">
+								<c:forTokens var="fileName" items="${vo.filepath}" delims=","
+									varStatus="st">
 									<a download="${fileName}"
 										href="${pageContext.request.contextPath}/resources/uploadFiles/${vo.filepath}">${fileName}</a>
 									<c:if test="${!st.last }">
@@ -273,7 +273,7 @@ $(function(){
                                 </c:if>
 									<br>
 								</c:forTokens>
-								</div>
+							</div>
 						</div>
 						<!-- 게시글 추천, 비추천, 댓글 작성 -->
 						<div class="icons-react">
@@ -290,7 +290,7 @@ $(function(){
 									src="resources/assets/img/thumbs-down.png" alt="비추천">
 							</div>
 							<div class="icons-right">
-							<input type="hidden" class="hiddenCno" value="${vo.cno }">
+								<input type="hidden" class="hiddenCno" value="${vo.cno }">
 								<img class="reply" onclick="reply(${status.index})"
 									id="reply_popup_open"
 									src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png"
@@ -316,13 +316,14 @@ $(function(){
 						<div>
 							<div class="hl"></div>
 							<c:if test="${loginMember != null }">
-									<div class="comment">
-										<input type="hidden" name="cno" class="replyInsertCno1" value="${vo.cno }">
-										<input type="text" class="input-comment replyInsert1" name="rcontent"
-											maxlength="4000" placeholder="댓글 달기...">
-										<button type="submit" class="submit-comment"
-											onclick="replyInsert1(${status.index})">등록</button>
-									</div>
+								<div class="comment">
+									<input type="hidden" name="cno" class="replyInsertCno1"
+										value="${vo.cno }"> <input type="text"
+										class="input-comment replyInsert1" name="rcontent"
+										maxlength="4000" placeholder="댓글 달기...">
+									<button type="submit" class="submit-comment"
+										onclick="replyInsert1(${status.index})">등록</button>
+								</div>
 							</c:if>
 						</div>
 						<c:if test="${loginMember == null }">
@@ -332,20 +333,20 @@ $(function(){
 								<button type="submit" class="submit-comment">게시</button>
 							</div>
 						</c:if>
-	
+
 					</article>
 				</c:forEach>
 
-			<div id="moreDiv"></div>
-			<button type="button" class="moreFeed" onclick="moreInsta()">더보기</button>
+				<div id="moreDiv"></div>
+				<button type="button" class="moreFeed" onclick="moreInsta()">더보기</button>
 			</div>
 			<!-- main-right -->
 			<div class="main-right">
 				<!-- 랭킹 section -->
 				<div class="section-story">
 					<div class="menu-title">
-						<span class="sub-title">누적 랭킹</span> <span class="find-more" onclick="location.href='rankAccumulative'">모두
-							보기</span>
+						<span class="sub-title">누적 랭킹</span> <span class="find-more"
+							onclick="location.href='rankAccumulative'">모두 보기</span>
 					</div>
 					<ul class="story-list">
 						<li>
@@ -378,25 +379,26 @@ $(function(){
 									class="sub-span">3등</span>
 							</div>
 						</li>
-						<c:forEach items="${other }" var="rank" begin="3" varStatus="status">
-						<li>
-							<div class="gradient-wrap">
-								<img class="img-profile story"
-									src="resources/assets/img/user.png" alt="..">
-							</div>
-							<div class="profile-text">
-								<span class="userID point-span">${rank.nickname }</span> <span
-									class="sub-span">${status.index +1 }등</span>
-							</div>
-						</li>
+						<c:forEach items="${other }" var="rank" begin="3"
+							varStatus="status">
+							<li>
+								<div class="gradient-wrap">
+									<img class="img-profile story"
+										src="resources/assets/img/user.png" alt="..">
+								</div>
+								<div class="profile-text">
+									<span class="userID point-span">${rank.nickname }</span> <span
+										class="sub-span">${status.index +1 }등</span>
+								</div>
+							</li>
 						</c:forEach>
 					</ul>
 				</div>
 				<!-- recommendation section -->
-			 	<div class="section-recommend">
+				<div class="section-recommend">
 					<div class="menu-title">
-						<span class="sub-title">회원님을 위한 추천</span> <span class="find-more" onclick="location.href='rankAccumulative'">모두
-							보기</span>
+						<span class="sub-title">회원님을 위한 추천</span> <span class="find-more"
+							onclick="location.href='rankAccumulative'">모두 보기</span>
 					</div>
 					<ul class="recommend-list">
 						<li>
@@ -430,22 +432,20 @@ $(function(){
 							</div> <span class="btn-follow">팔로우</span>
 						</li>
 					</ul>
-				</div> 
+				</div>
 				<footer>
-					<p class="insta-sccript">
-						© 2021 Blockchain Traiding Simulator
-					</p>
+					<p class="insta-sccript">© 2021 Blockchain Traiding Simulator</p>
 				</footer>
 			</div>
 
-<!-- 모달 안에서 댓글 달기: 미완성-->
-<!-- 모달 안에서 댓글 달기: 미완성-->
-<!-- 모달 안에서 댓글 달기: 미완성-->
-<!-- 모달 안에서 댓글 달기: 미완성-->
-<!-- 모달 안에서 댓글 달기: 미완성-->
-<!-- 모달 안에서 댓글 달기: 미완성-->
-<!-- 모달 안에서 댓글 달기: 미완성-->
-<!-- 모달 안에서 댓글 달기: 미완성-->
+			<!-- 모달 안에서 댓글 달기: 미완성-->
+			<!-- 모달 안에서 댓글 달기: 미완성-->
+			<!-- 모달 안에서 댓글 달기: 미완성-->
+			<!-- 모달 안에서 댓글 달기: 미완성-->
+			<!-- 모달 안에서 댓글 달기: 미완성-->
+			<!-- 모달 안에서 댓글 달기: 미완성-->
+			<!-- 모달 안에서 댓글 달기: 미완성-->
+			<!-- 모달 안에서 댓글 달기: 미완성-->
 
 			<!-- 댓글 모달창 -->
 			<div id="modal_reply" class="modal_reply">
@@ -453,12 +453,12 @@ $(function(){
 				<!-- 댓글 작성 영역 -->
 				<div>
 					<c:if test="${loginMember != null }">
-							<div class="modalComment">
-								<input type="text" class="modal-input-comment replyInsert2" name="rcontent"
-									maxlength="4000" placeholder="댓글 달기...">
-								<button type="submit" class="submit-comment"
-									onclick="replyInsert2()">등록</button>
-							</div>
+						<div class="modalComment">
+							<input type="text" class="modal-input-comment replyInsert2"
+								name="rcontent" maxlength="4000" placeholder="댓글 달기...">
+							<button type="submit" class="submit-comment"
+								onclick="replyInsert2()">등록</button>
+						</div>
 					</c:if>
 				</div>
 				<c:if test="${loginMember == null }">
@@ -471,23 +471,22 @@ $(function(){
 				<div class="modal-hl"></div>
 				<!-- 댓글 목록을 html로 불러온다 -->
 				<div class="section-reply" id="replyList">
-<!-- 댓글 안 드랍다운 메뉴, 아직 안된거 -->
-					<div class="dropdown-content" style="left: 0;">
-											<a href="#" onclick="rreport(${vo.cno})" class="report">신고</a>
-											<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
-											<c:if test="${loginMember == writerEmail }">
-												<a href="#" class="update"
-													onclick="makeUpdateBtn(${status.index })">수정</a>
-												<a href="#" class="delete"
-													onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</a>
-											<button type="button" class="submitRUpdate"
-										onclick="replyUpdate(${rep.rno}, ${status.index })"
-										style="display: none;">수정완료</button>
-									<button type="button" class="cancleRUpdate"
-										onclick="updateRCancle(${status.index })"
-										style="display: none;">수정취소</button>
-											</c:if>
-										</div>
+					<!-- 댓글 안 드랍다운 메뉴, 아직 안된거 -->
+				<%-- 	<div class="dropdown-content" style="left: 0;">
+						<a href="#" onclick="rreport(${vo.cno})" class="report">신고</a>
+						<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
+						<c:if test="${loginMember == writerEmail }">
+							<a href="#" class="update"
+								onclick="makeUpdateBtn(${status.index })">수정</a>
+							<a href="#" class="delete"
+								onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</a>
+							<button type="button" class="submitRUpdate"
+								onclick="replyUpdate(${rep.rno}, ${status.index })"
+								style="display: none;">수정완료</button>
+							<button type="button" class="cancleRUpdate"
+								onclick="updateRCancle(${status.index })" style="display: none;">수정취소</button>
+						</c:if>
+					</div> --%>
 				</div>
 			</div>
 
@@ -513,11 +512,15 @@ $(function(){
 							class="modal_choise_label">스팸 또는 사용자 현혹</label> <br> <input
 							type="radio" id="reportChoice6" class="reportChoice"
 							name="creport" value="6"> <label for="reportChoice6"
-							class="modal_choise_label">마음에 들지 않습니다.</label> 
-						<input type="hidden" name="csubject" value="${community.csubject }" />
+							class="modal_choise_label">마음에 들지 않습니다.</label>
+							<%-- <input
+							type="hidden" name="csubject" value="${community.csubject }" />
 						<input type="hidden" name="cwriter" value="${community.cwriter }" />
-						<input type="hidden" name="ccontent" value="${community.ccontent }" /> 
-						<input type="hidden" name="cno" value="${community.cno }" />
+						<input type="hidden" name="ccontent"
+							value="${community.ccontent }" /> --%>
+							 <input type="hidden"
+							id="creportCno"
+							name="cno" />
 					</div>
 					<hr
 						style="width: 328px; position: relative; right: 30px; top: 20px;">

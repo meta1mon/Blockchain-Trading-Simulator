@@ -112,7 +112,7 @@ function keyevent(e) {
 			break;
 		case 'done':
 			if(text.length != 4){
-				$(".bankPwCh").html("4자리 숫자만 사용할 수 있습니다.");
+				$(".bankPwCh").html("4자리 숫자만 사용할 수 있습니다.!");
 				$(".bankPwCh").css("color", "red");
 				$(".bankPwCh").css("font-size", "small");
 				console.log("자리수 부족: " + text);

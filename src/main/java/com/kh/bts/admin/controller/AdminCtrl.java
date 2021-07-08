@@ -163,13 +163,14 @@ public class AdminCtrl {
 	}
 	
 // 게시글 신고 등록
-	@RequestMapping(value = "/reportCommunity")
-	public void reportCommunity(HttpServletRequest request, HttpServletResponse response, Community vo,
+	@RequestMapping(value = "/reportCommunity", method = RequestMethod.POST)
+	public void reportCommunity(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("cno") String cno,
 			@RequestParam("creport") int crreason) {
 		HttpSession session = request.getSession();
 		String loginEmail = (String) session.getAttribute("loginMember");
 		String creporter = mService.returnNickname(loginEmail);
-
+		Community vo = cmService.selectCommunity(1, cno);
 		Creport vo2 = new Creport();
 		vo2.setCsubject(vo.getCsubject());
 		vo2.setCrreason(crreason);
@@ -186,6 +187,7 @@ public class AdminCtrl {
 		}
 		try {
 			out = response.getWriter();
+			System.out.println(result);
 			out.print(result);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -193,7 +195,6 @@ public class AdminCtrl {
 			out.flush();
 			out.close();
 		}
-
 	}
 // 게시글 신고 처리
 	@RequestMapping(value = "/dealcr", method=RequestMethod.POST)

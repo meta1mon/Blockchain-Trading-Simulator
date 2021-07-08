@@ -56,11 +56,24 @@ input[type=radio] {
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  /* 이동하는 애니메이션 넣고 싶으면 이 부분 쓰면 됩니다 ↓ */
   transition: transform .5s ease, opacity .5s;
   cursor: pointer;
   background: white;
   color: #8c66c8;
+}
+
+.info {
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform .5s ease;
+  cursor: pointer;
+  background: #8c66c8;
+  color: white;
 }
 
 .container {
@@ -99,8 +112,27 @@ input[type=radio] {
   z-index: 1;
   background: #8c66c8;
   color: white;
+  }
   
+#item-1:checked ~ .cards #rank-info-4, #item-2:checked ~ .cards #rank-info-1, #item-3:checked ~ .cards #rank-info-2, #item-4:checked ~ .cards #rank-info-3 {
+  transform: translatex(-100%);
+  z-index: 0;
 }
+
+#item-1:checked ~ .cards #rank-info-2, #item-2:checked ~ .cards #rank-info-3, #item-3:checked ~ .cards #rank-info-4, #item-4:checked ~ .cards #rank-info-1 {
+  transform: translatex(100%);                                                                     
+  z-index: 0;                                                                                      
+}                                                                                                  
+                                                                                                   
+#item-1:checked ~ .cards #rank-info-1, #item-2:checked ~ .cards #rank-info-2, #item-3:checked ~ .cards #rank-info-3, #item-4:checked ~ .cards #rank-info-4 {
+  transform: translatex(0);
+  opacity: 1;
+  z-index: 1;
+  background: #8c66c8;
+  color: white;
+  }
+
+  
 /* 랭킹 스와이프 메뉴 끝 */
 
 /* 랭킹 정보 시작 */
@@ -175,16 +207,16 @@ input[type=radio] {
 					</label>
 				</div>
 				<div class="cards">
-					<label class="card info" for="item-1" id="rank-1">
+					<label class="info" for="item-1" id="rank-info-1">
 						초기 자본금(1,000만원)을 기준으로 매 시간 갱신됩니다.
 					</label>
-					<label class="card info" for="item-2" id="rank-2">
+					<label class="info" for="item-2" id="rank-info-2">
 						매일 오전 9시에 갱신됩니다.
 					</label> 
-					<label class="card info" for="item-3" id="rank-3">
+					<label class="info" for="item-3" id="rank-info-3">
 						매주 월요일 오전 9시에 갱신됩니다.
 					</label> 
-					<label class="card info" for="item-4" id="rank-4">
+					<label class="info" for="item-4" id="rank-info-4">
 						매월 1일 오전 9시에 갱신됩니다.
 					</label>
 				</div>

@@ -37,7 +37,7 @@
 			<div id="pwd" class="tabcontent">
 			
 				<form action="${pageContext.request.contextPath}/mypage/passChange" method="post">
-					<table id="pwdTable" cellspacing="20">
+					<table id="pwdTable" cellspacing="15">
 						<!-- <tr>
 							<td>현재 비밀번호<span class="star">*</span></td>
 							<td><input type="password" name="pwNow" id="pwNow" placeholder="현재 비밀번호를 입력해주세요."></td>
@@ -46,18 +46,35 @@
 							<td style="border-bottom: 1px solid #ccc;" colspan="2"><p class="alert pwNow">&nbsp;</p></td>
 						</tr>  -->
 						<tr>
-							<td>비밀번호<span class="star">*</span></td>
+							<th width="20%">비밀번호<span class="star">*</span></th>
 							<td><input type="password" name="pw" id="pw" placeholder="새 비밀번호를 입력해주세요."></td>
 							<td class="rightCol" rowspan="4">
-								<strong>비밀번호에 영문 대소문자, 숫자, 특수문자를 조합하시면 비밀번호 안전도가 높아져 도용의 위험이 줄어듭니다.</strong>
-								<br>8~15자의 영어 대 소문자, 숫자와 특수문자(!@#$%^&*)만 사용할 수 있습니다.
+								<!--<table>
+									  <tr height="30px">
+										<td><img src="<%=request.getContextPath()%>/resources/assets/img/tip.svg" style="width: 30px; vertical-align: middle;"></td>
+										<td>비밀번호에 영문 대소문자, 숫자, 특수문자를 조합하시면 비밀번호 안전도가 높아져 도용의 위험이 줄어듭니다.</td>
+									</tr>
+									<tr>
+										<td colspan="2">8~15자의 영어 대 소문자, 숫자와 특수문자(!@#$%^&*)만 사용할 수 있습니다.</td>
+									</tr>
+								</table> -->
+								<span>
+									<img src="<%=request.getContextPath()%>/resources/assets/img/tip.svg" style="width: 30px; height:30px; vertical-align: middle;">
+									비밀번호 변경 요령
+								</span>
+								<ul>
+									<li>&#10004;&nbsp;8~15자의 영어, 숫자와 특수문자 사용</li>
+									<li>&#10004;&nbsp;사용 가능한 특수문자: !@#$%^&*</li>
+									<li>&#10004;&nbsp;영문 대소문자는 구분이 됩니다.</li>
+									<li>&#10004;&nbsp;비밀번호는 주기적으로 바꾸어 사용하시는 것이 <br>&nbsp;&nbsp;&nbsp;&nbsp;안전합니다.</li>
+								</ul>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2"><p class="alert pwReg">&nbsp;</p></td>
 						</tr>
 						<tr>
-							<td>비밀번호 확인<span class="star">*</span></td>
+							<th width="20%">비밀번호 확인<span class="star">*</span></th>
 							<td><input type="password" name="pwCh" id="pwCh"
 								placeholder="새 비밀번호를 다시 한 번 입력해주세요."></td>
 						</tr>
@@ -81,7 +98,7 @@
 								<input name="acntno" type="hidden" value="${acnt.acntno }">
 								<input name="bankPw" type="password"  id="bankPw0" class="pin0" placeholder="계좌 비밀번호를 입력해주세요">
 						</td>
-						<td class="rightCol">
+						<td id="rightColBtn">
 								<button id="checkBtn" type="button" class="btn1">현재 계좌 비밀번호 확인</button>
 						</td>
 					</tr>
@@ -97,10 +114,15 @@
 							<th width="20%">계좌 비밀번호<span class="star">*</span></th>
 							<td colspan="2"><input type="password" name="bankPw" id="bankPw1" class="pin1" placeholder="계좌 비밀번호를 입력해주세요"></td>
 							<td class="rightCol" rowspan="4">
-								<strong>금융정보 보안수칙</strong>
-								<br>비밀번호는 수시로 바꿔주고, 유추하기 쉬운 숫자는 피해야합니다.
-								<br>계좌번호, 계좌비밀번호 등 금융정보는 스마트폰이나 인터넷에 저장하지 말아야합니다.
-								<br>금융거래 시 금융회사별로 비밀번호는 다르게 하는 것이 안전합니다.
+								<span>
+									<img src="<%=request.getContextPath()%>/resources/assets/img/tip.svg" style="width: 30px; height:30px; vertical-align: middle;">
+									금융정보 보안수칙
+								</span>
+								<ul>
+									<li>&#10004;&nbsp;비밀번호는 수시로 바꿔주고, 유추하기 쉬운 숫자는<br>&nbsp;&nbsp;&nbsp;&nbsp;피해야합니다.</li>
+									<li>&#10004;&nbsp;계좌번호, 계좌비밀번호 등 금융정보는 스마트폰이나<br>&nbsp;&nbsp;&nbsp;&nbsp;인터넷에 저장하지 말아야합니다.</li>
+									<li>&#10004;&nbsp;금융거래 시 금융회사별로 비밀번호는 다르게 하는 것이<br>&nbsp;&nbsp;&nbsp;&nbsp;안전합니다.</li>
+								</ul>
 							</td>
 						</tr>
 						<tr>

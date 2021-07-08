@@ -32,7 +32,8 @@
                         <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/investmentpage">모의투자</a></li>
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/nlist?news_keyword=">뉴스</a></li>
                         <li class="nav-item"><a class="nav-link" href="javascript:void(window.open('<%=request.getContextPath()%>/prochart', '_blank','width=1000px, height=730px'))">프로차트</a></li>
-                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/clist">커뮤니티</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/clist">공지사항</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/insta">커뮤니티</a></li>
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/cashShop">충전소</a></li>
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
                     	<c:choose>

@@ -36,13 +36,7 @@
 		}
 		
 		$("#close").on("click", closeModal);
-		
-		/* 모달창 - 자세히 버튼 */
-		var detail = function(){
-			location.href="<%=request.getContextPath()%>/cDetail?cno="+$("#cno").val();
-		}
-		
-		$("#detail").on("click", detail);
+
 		
 		/* 모달창 - 신고 처리 */
 		$(".deal").on("click",function() {
@@ -225,8 +219,6 @@
 								<button type="button" id="accept" class="btnGreen deal" value="accept">수리</button>
 								<button type="button" id="deny" class="btnRed deal" value="deny">반려</button>
 								<input type="text" id="buttonvalue" value="" name="cstatus" style="display: none">
-								
-								<button type="button" id="detail" class="btnPurple">자세히</button>
 								<button type="button" id="close" class="btnPurple">닫기</button>
 							</td>
 						</tr>

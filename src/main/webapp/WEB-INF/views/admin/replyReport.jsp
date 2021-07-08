@@ -43,12 +43,6 @@
 		
 		$("#close").on("click", closeModal);
 		
-		var detail = function(){
-			location.href="<%=request.getContextPath()%>/cDetail?cno="+$("#cno").val();
-		}
-		
-		$("#detail").on("click", detail);
-		
 		$(".deal").on("click",function() {
  			var deal = $(this).val();
  			$("#buttonvalue").val(deal);
@@ -236,7 +230,6 @@
 								<button type="button" id="deny" class="btnRed deal" value="deny">반려</button>
 								<input type="text" id="buttonvalue" value="" name="rstatus" style="display: none">
 								
-								<button type="button" id="detail" class="btnPurple">자세히</button>
 								<button type="button" id="close" class="btnPurple">닫기</button>
 							</td>
 						</tr>

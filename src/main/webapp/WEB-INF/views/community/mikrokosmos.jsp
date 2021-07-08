@@ -6,13 +6,22 @@
 <head>
 <title>BTS</title>
 <meta charset="UTF-8">
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/mikrokosmos.css" rel="stylesheet" type="text/css" />
+<link
+	href="${pageContext.request.contextPath}/resources/css/mikrokosmos.css"
+	rel="stylesheet" type="text/css" />
 <style>
 .parent>div {
 	text-align: center;
@@ -78,12 +87,13 @@ $(function() {
 								$.each(json,function(idx, insta) {
 									moreHtml += "<article> <header> <div class='profile-of-article'> <img class='img-profile pic' src='resources/assets/img/user.png'> <span class='userID main-id point-span'>" + insta.cwriter +"</span> </div> "
 											+"<div class='dropdown' style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
-											+ "<div class='dropdown-content' style='left: 0;'> <p href='#' onclick='report()' class='report' id='popup_open_btn'>신고</p> <c:if test='${loginMember == writerEmail }'> <p onclick='checkUpdate('insta.cno', 'insta.cwriter')' class='update'>수정</a> <p onclick='checkDelete('insta.cno', 'insta.cwriter')' class='delete'>삭제</a> </c:if>"
+											+ "<div class='dropdown-content' style='left: 0;'> <p onclick='report()' class='report' id='popup_open_btn'>신고</p> <c:if test='${loginMember == writerEmail }'> <p onclick='checkUpdate('insta.cno', 'insta.cwriter')' class='update'>수정</a> <p onclick='checkDelete('insta.cno', 'insta.cwriter')' class='delete'>삭제</a> </c:if>"
 											
 											+"</div> </div> </div> </header> <div class='main-image'> <div class='subject'>" + insta.csubject + "</div> <div class='content'>" + insta.ccontent + "</div> <div class='description'>"
 											+"<p> <span class='at-tag'>@bts @wkorea @gucci</span> </p> </div> </div> <div class='icons-react'> <div class='icons-left'> <img class='thumbsup' onclick='clike()' src='resources/assets/img/thumbsup.png'>"
 											+"<img class='thumbsup-liked' onclick='clike()' src='resources/assets/img/thumbs-up.png'> </div> <div class='icons-middle'> <img class='thumbsdown' onclick='dislike()' src='resources/assets/img/thumbsdown.png'>"
-											+"<img class='thumbsdown-disliked' onclick='dislike()' src='resources/assets/img/thumbs-down.png'> </div> <div class='icons-right'> <img class='reply' onclick='reply('rep.rno')' id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png'>"
+											+"<img class='thumbsdown-disliked' onclick='dislike()' src='resources/assets/img/thumbs-down.png'> </div> <div class='icons-right'> <input type=\"hidden\" class=\"hiddenCno\" value=\"insta.cno\">"
+											+"<img class=\"reply\" onclick=\"reply(idx)\" id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png'>"
 											+"</div> </div> <div class='reaction'> <div class='liked-people'> <p> <span class='point-span'>"+insta.likecnt +"</span> 명이 추천합니다</p> </div> <div class='comment-section'> <ul class='comments'> </ul>"
 											+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <form> <div class='comment'> <input type='hidden' name='cno' value="+ insta.cno +">"
 											+"<input type='text' class='input-comment' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick=\"replyInsert(idx)\">게시</button>"
@@ -116,7 +126,33 @@ $(function() {
 				      } else {
 				    	  window.location='cWriteForm';
 				      }
-			      }
+		}
+		
+		// 게시글 신고 : 로그인 여부 체크
+		function report(nowCno) {
+			cno = nowCno;
+			console.log(cno);
+		
+			if(${loginMember == null }) {
+				alert("로그인이 필요합니다")
+			} else {
+				$("#creportCno").val(cno);
+				modalFn('modal_report');
+				
+			}
+		}
+		
+		// 댓글 신고 : 로그인 여부 체크
+		function rreport(nowRno) {
+			rno = nowRno;
+			console.log(rno);
+			if(${loginMember == null}) {
+				alert("로그인이 필요합니다")
+			} else {
+				$("#rreportRno").val(rno);
+				modalReportReplyFn('modal_report_reply');
+			}
+		}
 		
 // 추천
 function clike(likeCno) {
@@ -231,7 +267,7 @@ $(function(){
 				</div>
 			</div>
 		</nav>
-		
+
 		<!-- main -->
 		<main>
 			<div class="feeds">
@@ -247,12 +283,10 @@ $(function(){
 								<div class="icon-react icon-more"
 									style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
 									<div class="dropdown-content" style="left: 0;">
-										<c:if test="${loginMember != null }">
-											<p onclick="report('${vo.cno}')" class="report">신고</p>
-										</c:if>
+										<p onclick="report('${vo.cno}')" class="report">신고</p>
 										<p class="update"
-											onclick="checkUpdate('${vo.cno }', '${vo.cwriter }')">수정</p> <p
-											class="delete"
+											onclick="checkUpdate('${vo.cno }', '${vo.cwriter }')">수정</p>
+										<p class="delete"
 											onclick="checkDelete('${vo.cno }', '${vo.cwriter }')">삭제</p>
 									</div>
 								</div>
@@ -278,31 +312,26 @@ $(function(){
 							<div class="icons-left">
 								<img class="thumbsup" onclick="clike('${vo.cno }')"
 									src="resources/assets/img/thumbsup.png" alt="추천"> <img
-									class="thumbsup-liked"
-									src="resources/assets/img/thumbs-up.png" alt="추천">
+									class="thumbsup-liked" src="resources/assets/img/thumbs-up.png"
+									alt="추천"> ${vo.likecnt }
 							</div>
 							<div class="icons-middle">
 								<img class="thumbsdown" onclick="dislike('${vo.cno }')"
 									src="resources/assets/img/thumbsdown.png" alt="비추천"> <img
 									class="thumbsdown-disliked"
 									src="resources/assets/img/thumbs-down.png" alt="비추천">
+								${vo.dislikecnt }
 							</div>
 							<div class="icons-right">
 								<input type="hidden" class="hiddenCno" value="${vo.cno }">
 								<img class="reply" onclick="reply(${status.index})"
 									id="reply_popup_open"
 									src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png"
-									alt="댓글">
+									alt="댓글"> ${vo.replycnt }
 							</div>
 						</div>
 						<!-- 추천 수 -->
 						<div class="reaction">
-							<div class="liked-people">
-								<p>
-									<span class="point-span">${vo.likecnt }</span>명이 좋아합니다 /
-									<span class="point-span">${vo.dislikecnt }</span>명이 싫어합니다
-								</p>
-							</div>
 							<div class="comment-section">
 								<ul class="comments">
 								</ul>
@@ -341,7 +370,7 @@ $(function(){
 			</div>
 			<!-- main-right -->
 			<div class="main-right">
-				<!-- 랭킹 section -->
+				<!-- 누적 랭킹 section -->
 				<div class="section-story">
 					<div class="menu-title">
 						<span class="sub-title">누적 랭킹</span> <span class="find-more"
@@ -393,43 +422,56 @@ $(function(){
 						</c:forEach>
 					</ul>
 				</div>
-				<!-- recommendation section -->
-				<div class="section-recommend">
+				<!-- 데일리 랭킹 section -->
+				<div class="section-story">
 					<div class="menu-title">
-						<span class="sub-title">회원님을 위한 추천</span> <span class="find-more"
-							onclick="location.href='rankAccumulative'">모두 보기</span>
+						<span class="sub-title">데일리 랭킹</span> <span class="find-more"
+							onclick="location.href='rankDaily'">모두 보기</span>
 					</div>
-					<ul class="recommend-list">
+										<ul class="story-list">
 						<li>
-							<div class="recommend-friend-profile">
-								<img class="img-profile" src="resources/assets/img/user.png"
-									alt="..">
-								<div class="profile-text">
-									<span class="userID point-span">renebaebae</span> <span
-										class="sub-span">hi_sseulgi님 외 2명이 팔로우합니다</span>
-								</div>
-							</div> <span class="btn-follow">팔로우</span>
+							<div class="gradient-wrap">
+								<img class="img-profile story"
+									src="resources/assets/img/gold_medal.png" alt="..">
+							</div>
+							<div class="profile-text">
+								<span class="userID point-span">${dailyFirst.nickname }</span> <span
+									class="sub-span">1등</span>
+							</div>
 						</li>
 						<li>
-							<div class="recommend-friend-profile">
-								<img class="img-profile" src="resources/assets/img/user.png"
-									alt="..">
-								<div class="profile-text">
-									<span class="userID point-span">_jeongjaehyun</span> <span
-										class="sub-span">johnnyjsuh님이 팔로우합니다</span>
-								</div>
-							</div> <span class="btn-follow">팔로우</span>
+							<div class="gradient-wrap">
+								<img class="img-profile story"
+									src="resources/assets/img/silver_medal.png" alt="..">
+							</div>
+							<div class="profile-text">
+								<span class="userID point-span">${dailySecond.nickname }</span> <span
+									class="sub-span">2등</span>
+							</div>
 						</li>
 						<li>
-							<div class="recommend-friend-profile">
-								<img class="img-profile" src="resources/assets/img/user.png"
-									alt="..">
-								<div class="profile-text">
-									<span class="userID point-span">leehi_hi</span> <span
-										class="sub-span">jennierubyjane님 외 5명이 팔로우합...</span>
-								</div>
-							</div> <span class="btn-follow">팔로우</span>
+							<div class="gradient-wrap">
+								<img class="img-profile story"
+									src="resources/assets/img/bronze_medal.png" alt="..">
+							</div>
+							<div class="profile-text">
+								<span class="userID point-span">${dailyThird.nickname }</span> <span
+									class="sub-span">3등</span>
+							</div>
 						</li>
+						<c:forEach items="${dailyOther }" var="rank" begin="3"
+							varStatus="status">
+							<li>
+								<div class="gradient-wrap">
+									<img class="img-profile story"
+										src="resources/assets/img/user.png" alt="..">
+								</div>
+								<div class="profile-text">
+									<span class="userID point-span">${rank.nickname }</span> <span
+										class="sub-span">${status.index +1 }등</span>
+								</div>
+							</li>
+						</c:forEach>
 					</ul>
 				</div>
 				<footer>
@@ -469,24 +511,7 @@ $(function(){
 				</c:if>
 				<div class="modal-hl"></div>
 				<!-- 댓글 목록을 html로 불러온다 -->
-				<div class="section-reply" id="replyList">
-					<!-- 댓글 안 드랍다운 메뉴, 아직 안된거 -->
-				<%-- 	<div class="dropdown-content" style="left: 0;">
-						<a href="#" onclick="rreport(${vo.cno})" class="report">신고</a>
-						<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
-						<c:if test="${loginMember == writerEmail }">
-							<a href="#" class="update"
-								onclick="makeUpdateBtn(${status.index })">수정</a>
-							<a href="#" class="delete"
-								onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</a>
-							<button type="button" class="submitRUpdate"
-								onclick="replyUpdate(${rep.rno}, ${status.index })"
-								style="display: none;">수정완료</button>
-							<button type="button" class="cancleRUpdate"
-								onclick="updateRCancle(${status.index })" style="display: none;">수정취소</button>
-						</c:if>
-					</div> --%>
-				</div>
+				<div class="section-reply" id="replyList"></div>
 			</div>
 
 			<!-- 게시글 신고 모달창 -->
@@ -511,20 +536,13 @@ $(function(){
 							class="modal_choise_label">스팸 또는 사용자 현혹</label> <br> <input
 							type="radio" id="reportChoice6" class="reportChoice"
 							name="creport" value="6"> <label for="reportChoice6"
-							class="modal_choise_label">마음에 들지 않습니다.</label>
-							<%-- <input
-							type="hidden" name="csubject" value="${community.csubject }" />
-						<input type="hidden" name="cwriter" value="${community.cwriter }" />
-						<input type="hidden" name="ccontent"
-							value="${community.ccontent }" /> --%>
-							 <input type="hidden"
-							id="creportCno"
-							name="cno" />
+							class="modal_choise_label">마음에 들지 않습니다.</label> <input
+							type="hidden" id="creportCno" name="cno" />
 					</div>
 					<hr
 						style="width: 328px; position: relative; right: 30px; top: 20px;">
 					<div>
-						<button type="button" id="btncancel" class="modal_close_btn">취소</button>
+						<button type="button" class="modal_close_btn">취소</button>
 						<button type="submit" id="btnreport" class="modal_report_btn">신고</button>
 					</div>
 				</form>
@@ -532,33 +550,36 @@ $(function(){
 
 			<!-- 댓글 신고 모달창 -->
 			<div id="modal_report_reply">
-				<p>댓글 신고</p>
-				<div class="modal_report_div">
-					<input type="radio" id="rreportChoice1" class="reportChoice"
-						name="rreport" value="1"> <label for="rreportChoice1"
-						class="modal_choise_label">나체 이미지 또는 성적 행위</label> <br> <input
-						type="radio" id="rreportChoice2" class="reportChoice"
-						name="rreport" value="2"> <label for="rreportChoice2"
-						class="modal_choise_label">혐오 발언 또는 폭력적</label> <br> <input
-						type="radio" id="rreportChoice3" class="reportChoice"
-						name="rreport" value="3"> <label for="rreportChoice3"
-						class="modal_choise_label">증오 또는 학대</label> <br> <input
-						type="radio" id="rreportChoice4" class="reportChoice"
-						name="rreport" value="4"> <label for="rreportChoice4"
-						class="modal_choise_label">유해하거나 위험한 행위</label> <br> <input
-						type="radio" id="rreportChoice5" class="reportChoice"
-						name="rreport" value="5"> <label for="rreportChoice5"
-						class="modal_choise_label">스팸 또는 사용자 현혹</label> <br> <input
-						type="radio" id="rreportChoice6" class="reportChoice"
-						name="rreport" value="6"> <label for="rreportChoice6"
-						class="modal_choise_label">마음에 들지 않습니다.</label>
-				</div>
-				<hr
-					style="width: 328px; position: relative; right: 30px; top: 20px;">
-				<div>
-					<button type="button" id="btncancel" class="modal_close_btn">취소</button>
-					<button type="button" id="btnrply" class="modal_report_btn">신고</button>
-				</div>
+				<form id="frmR">
+					<p>댓글 신고</p>
+					<div class="modal_report_div">
+						<input type="radio" id="rreportChoice1" class="reportChoice"
+							name="rreport" value="1"> <label for="rreportChoice1"
+							class="modal_choise_label">나체 이미지 또는 성적 행위</label> <br> <input
+							type="radio" id="rreportChoice2" class="reportChoice"
+							name="rreport" value="2"> <label for="rreportChoice2"
+							class="modal_choise_label">혐오 발언 또는 폭력적</label> <br> <input
+							type="radio" id="rreportChoice3" class="reportChoice"
+							name="rreport" value="3"> <label for="rreportChoice3"
+							class="modal_choise_label">증오 또는 학대</label> <br> <input
+							type="radio" id="rreportChoice4" class="reportChoice"
+							name="rreport" value="4"> <label for="rreportChoice4"
+							class="modal_choise_label">유해하거나 위험한 행위</label> <br> <input
+							type="radio" id="rreportChoice5" class="reportChoice"
+							name="rreport" value="5"> <label for="rreportChoice5"
+							class="modal_choise_label">스팸 또는 사용자 현혹</label> <br> <input
+							type="radio" id="rreportChoice6" class="reportChoice"
+							name="rreport" value="6"> <label for="rreportChoice6"
+							class="modal_choise_label">마음에 들지 않습니다.</label><input
+							type="hidden" id="rreportRno" name="rno" />
+					</div>
+					<hr
+						style="width: 328px; position: relative; right: 30px; top: 20px;">
+					<div>
+						<button type="button" class="modal_close_btn">취소</button>
+						<button type="button" id="btnrply" class="modal_report_btn">신고</button>
+					</div>
+				</form>
 			</div>
 
 		</main>

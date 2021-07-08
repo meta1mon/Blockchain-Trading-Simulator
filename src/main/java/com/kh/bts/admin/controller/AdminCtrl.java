@@ -217,6 +217,14 @@ public class AdminCtrl {
 	@ResponseBody
 	@RequestMapping(value = "/reportRcommunity")
 	public int reportRcommunity(HttpServletRequest request, Rreport vo) {
+		System.out.println(vo);
+		System.out.println(vo);
+		System.out.println(vo);
+		System.out.println(vo);
+		System.out.println(vo);
+		System.out.println(vo);
+		System.out.println(vo);
+		System.out.println(vo);
 		HttpSession session = request.getSession();
 		String loginEmail = (String) session.getAttribute("loginMember");
 		String rreporter = mService.returnNickname(loginEmail);
@@ -227,7 +235,6 @@ public class AdminCtrl {
 		vo.setCno(vo2.getCno());
 		vo.setRcontent(vo2.getRcontent());
 		vo.setRrespondent(vo2.getRwriter());
-		vo.setRrreason(vo.getRrreason());
 
 		int result = aService.insertRreport(vo);
 

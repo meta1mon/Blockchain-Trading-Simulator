@@ -25,6 +25,7 @@
 			<br>
 			<form action="cUpdate" method="post" enctype="multipart/form-data"
 				style="margin:0 20px">
+				<input type="hidden" name="fromInsta" value="${fromInsta }">
 				<input type="hidden" name="cno" value="${community.cno}"> <input
 					type="hidden" name="filepath" value="${community.filepath}">
 				<input id="subject" type="text"

@@ -209,16 +209,22 @@
 			$("#icon2").on("click", show1);
 			var show2 = function() {
 				$(".w1").toggle();
+				$(".w2").css("display", "none");
+				$(".w3").css("display", "none");
 
 			}
 			$("#icon2_2").on("click", show2);
 			var show3 = function() {
 				$(".w2").toggle();
+				$(".w1").css("display", "none");
+				$(".w3").css("display", "none");
 
 			}
 			$("#icon2_3").on("click", show3);
 			var show4 = function() {
 				$(".w3").toggle();
+				$(".w2").css("display", "none");
+				$(".w1").css("display", "none");
 
 			}
 			$("#icon2_4").on("click", show4);

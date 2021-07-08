@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+<%-- <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
 <link href="${pageContext.request.contextPath}/resources/css/header.css"
 	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<title>
-	BTS
-</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+
+jsp:include 를 사용하는 페이지에서는 <link> 태그를 넣지 말라.
+header 내용은 header에만 하기
+
+--%>
+
 <script>
 	$(function() {
 		$('ul .menu').each(function() {
@@ -27,8 +30,8 @@
 	<div class="header">
 	<div class="h_left">
 		<ul>
-			<li class="logo"><a href="<%=request.getContextPath()%>/mainpage"><img
-					src="<%=request.getContextPath()%>/resources/assets/img/bts_logo.png" style="border-radius:5px;"></a></li>
+			<li class="logo"><a href="<%=request.getContextPath()%>/mainpage"><img width="120px" height="50px"
+					src="<%=request.getContextPath()%>/resources/assets/img/bts_logo.svg" style="vertical-align:middle;"></a></li>
 			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/aboutus">About Us</a></li>
 			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/investmentpage">모의투자</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/nlist?news_keyword=">뉴스</a></li>
@@ -61,6 +64,6 @@
 		</c:choose>
 	</div>
 </div>
-<jsp:include page="../investment/sell.jsp"></jsp:include>
-<jsp:include page="../investment/buy.jsp"></jsp:include>
+<%-- <jsp:include page="../investment/sell.jsp"></jsp:include>
+<jsp:include page="../investment/buy.jsp"></jsp:include> --%>
 </header>

@@ -31,6 +31,11 @@
 	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/loadingajax.js"></script>
+<style>
+placeholder {
+	font-style: italic;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../loadingajax.jsp"></jsp:include>

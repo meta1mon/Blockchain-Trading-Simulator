@@ -4,20 +4,20 @@ const DEMO_CHANNEL_ID = 'my_private_channel';
 
 let client;
 $(function(){
-	reset();
+   reset();
 
-	  client = new TalkPlus.Client({appId: APP_ID});
-	  client.on('event', function (payload) {
-	    const parsedPayload = JSON.parse(payload);
-	    if (parsedPayload.type === 'message') {
-	      addMessage(parsedPayload.message);
-	    }
-	  });
+     client = new TalkPlus.Client({appId: APP_ID});
+     client.on('event', function (payload) {
+       const parsedPayload = JSON.parse(payload);
+       if (parsedPayload.type === 'message') {
+         addMessage(parsedPayload.message);
+       }
+     });
 
-	  setupUsernameInputEventListener();
-	  sendMessageInputListener();
-	
-	
+     setupUsernameInputEventListener();
+     sendMessageInputListener();
+   
+   
 });
 
 
@@ -41,9 +41,10 @@ function setupUsernameInputEventListener() {
 
     // login anonymously
     client.loginAnonymous({userId: username, username: username}, function (errResp, data) {
-      if (errResp) {
-        return alert(JSON.stringify(errResp));
-      }
+    	if (errResp.code === '1002') {
+            alert("닉네임 조건을 확인해주세요");
+           
+         }
 
       // join demo channel
       client.joinChannel({channelId: DEMO_CHANNEL_ID}, function (errResp, data) {
@@ -56,23 +57,23 @@ function setupUsernameInputEventListener() {
               members: []
             }, function (errResp, data) {
               if (errResp) {
-                return alert(JSON.stringify(errResp));
+                return alert("4"+JSON.stringify(errResp));
               }
               hideUsernameWindow();
               showChatWindow();
             });
-          } else if (errResp.code === '2008') { // if user already had joined
-												// channel before, don't worry
-												// about error
-            // don't handle
+          } else if (errResp.code === '2008') { 
+        	  
           } else {
-            return alert(JSON.stringify(errResp));
+            return null;
+
           }
         }
 
         client.getMessages({channelId: DEMO_CHANNEL_ID}, function (errResp, data) {
           if (errResp) {
-            return alert(JSON.stringify(errResp));
+            return null;
+
           }
 
           populateChatWindowWithMessages(data.messages);
@@ -108,7 +109,7 @@ function populateChatWindowWithMessages(messages) {
 function addMessageText(messageText) {
   client.sendMessage({channelId: DEMO_CHANNEL_ID, type: 'text', text: messageText}, function (err, data) {
     if (err) {
-      return alert(err);
+      return null;
     }
 
     $('#users').append($('<p></p>').text(data.message.userId));

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,6 +24,7 @@ import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.community.model.vo.UserRcommuniyCheck;
+import com.kh.bts.member.model.service.MemberService;
 import com.kh.bts.ranking.model.service.RankingService;
 import com.kh.bts.ranking.model.vo.Accumulative;
 
@@ -37,6 +39,9 @@ public class CommunityCtrl {
 	@Autowired
 	private RankingService rankService;
 
+	@Autowired
+	private MemberService mService;
+	
 	public static final int LIMIT = 30;
 
 	@RequestMapping("insta")
@@ -44,6 +49,7 @@ public class CommunityCtrl {
 			ModelAndView mav) {
 		Paging paging = new Paging(1, 9);
 		List<Community> list = cmService.selectAllCommunityList(paging);
+		System.out.println(list);
 		mav.addObject("commuList", list);
 		mav.addObject("nowPage", paging);
 
@@ -156,18 +162,6 @@ public class CommunityCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "cUpdateForm", method = RequestMethod.GET)
-	public ModelAndView communityDetail(@RequestParam(name = "cno") String cno, ModelAndView mv) {
-		try {
-			mv.addObject("community", cmService.selectCommunity(1, cno));
-			mv.setViewName("community/updateForm");
-		} catch (Exception e) {
-			mv.addObject("msg", e.getMessage());
-			mv.setViewName("errorPage");
-		}
-		return mv;
-	}
-
 	@RequestMapping(value = "cWriteForm", method = RequestMethod.GET)
 	public String CommunityInsertForm(ModelAndView mv) {
 		return "community/writeForm";
@@ -184,7 +178,39 @@ public class CommunityCtrl {
 
 			String email = (String) request.getSession().getAttribute("loginMember");
 			int result = cmService.insertCommunity(c, email);
-			mv.setViewName("redirect:clist");
+			mv.setViewName("redirect:insta");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
+		}
+		return mv;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "cUpdateCheck", method = RequestMethod.POST)
+	public int cUpdateCheck(Community vo, HttpServletRequest request) {
+		 String email = (String) request.getSession().getAttribute("loginMember");
+		 String nowNickname = mService.returnNickname(email);
+		 int result = 0;
+		 if(vo.getCwriter().equals(nowNickname)) {
+			 result = 1;
+		 } else {
+			 result = 0;
+		 }
+		return result;
+	}
+
+	@RequestMapping(value = "cUpdateForm", method = RequestMethod.POST)
+	public ModelAndView cUpdateForm(@RequestParam(name = "cno") String cno, 
+			@RequestParam(name="fromInsta", defaultValue ="0") int fromInsta,
+			ModelAndView mv) {
+		System.out.println(cno);
+		String oracleCno = setLPad(cno, 5, "0");
+		try {
+			mv.addObject("community", cmService.selectCommunity(1, oracleCno));
+			// 공지사항과 인스타가 같은 업데이트폼을 쓰기 때문에, 어떤 곳에서 요청한 업데이트인지 확인하기 위한 용도임
+			mv.addObject("fromInsta", fromInsta);
+			mv.setViewName("community/updateForm");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");
@@ -193,7 +219,8 @@ public class CommunityCtrl {
 	}
 
 	@RequestMapping(value = "cUpdate", method = RequestMethod.POST)
-	public ModelAndView communityUpdate(Community c, @RequestParam(name = "page", defaultValue = "1") int page,
+	public ModelAndView cUpdate(Community c, @RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name="fromInsta", defaultValue ="0") int fromInsta,
 			@RequestParam("upfile") MultipartFile report, HttpServletRequest request, ModelAndView mv) {
 		try {
 			if (report != null && !report.equals("")) {
@@ -205,7 +232,11 @@ public class CommunityCtrl {
 			String email = (String) request.getSession().getAttribute("loginMember");
 			mv.addObject("cno", cmService.updateCommunity(c, email).getCno());
 			mv.addObject("currentPage", page);
-			mv.setViewName("redirect:cDetail");
+			if(fromInsta == 1) { // 인스타에서 넘어온 업데이트				
+				mv.setViewName("redirect:insta");
+			} else { // 공지사항에서 넘어온 업데이트
+				mv.setViewName("redirect:cDetail");
+			}
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");
@@ -213,8 +244,23 @@ public class CommunityCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "cDelete", method = RequestMethod.GET)
+	@ResponseBody
+	@RequestMapping(value = "cDeleteCheck", method = RequestMethod.POST)
+	public int cDeleteCheck(Community vo, HttpServletRequest request) {
+		 String email = (String) request.getSession().getAttribute("loginMember");
+		 String nowNickname = mService.returnNickname(email);
+		 int result = 0;
+		 if(vo.getCwriter().equals(nowNickname)) {
+			 result = 1;
+		 } else {
+			 result = 0;
+		 }
+		return result;
+	}
+	
+	@RequestMapping(value = "cDelete", method = RequestMethod.POST)
 	public ModelAndView communityDelete(@RequestParam(name = "cno") String cno,
+			@RequestParam(name="fromInsta", defaultValue ="0") int fromInsta,
 			@RequestParam(name = "page", defaultValue = "1") int page, HttpServletRequest request, ModelAndView mv) {
 		try {
 			Community c = cmService.selectCommunity(1, cno);
@@ -223,7 +269,11 @@ public class CommunityCtrl {
 			String email = (String) request.getSession().getAttribute("loginMember");
 			cmService.deleteCommunity(cno, email);
 			mv.addObject("currentPage", page);
-			mv.setViewName("redirect:clist");
+			if(fromInsta == 1) {
+				mv.setViewName("redirect:insta");
+			} else {
+				mv.setViewName("redirect:clist");
+			}
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");
@@ -267,5 +317,15 @@ public class CommunityCtrl {
 		} catch (Exception e) {
 			System.out.println("파일 삭제 에러 : " + e.getMessage());
 		}
+	}
+	
+	private String setLPad(String strContext, int iLen, String strChar) {
+		String strResult = "";
+		StringBuilder sbAddChar = new StringBuilder();
+		for (int i = strContext.length(); i < iLen; i++) { // iLen길이 만큼 strChar문자로 채운다.
+			sbAddChar.append(strChar);
+		}
+		strResult = sbAddChar + strContext; // LPAD이므로, 채울문자열 + 원래문자열로 Concate한다.
+		return strResult;
 	}
 }

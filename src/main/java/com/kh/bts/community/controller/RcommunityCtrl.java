@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.service.RcommunityService;
 import com.kh.bts.community.model.vo.Rcommunity;
 import com.kh.bts.community.model.vo.UserRcommuniyCheck;
@@ -24,7 +26,7 @@ import com.kh.bts.community.model.vo.UserRcommuniyCheck;
 public class RcommunityCtrl {
 
 	@Autowired
-	private Rcommunity rc;
+	private CommunityService cmService;
 
 	@Autowired
 	private RcommunityService rcmService;
@@ -79,10 +81,18 @@ public class RcommunityCtrl {
 	}
 
 	@RequestMapping(value = "rcDelete", method = RequestMethod.POST)
-	public void RcommunityDelete(HttpServletResponse response, Rcommunity rc) {
+	public void RcommunityDelete(HttpServletResponse response, Rcommunity rc, HttpSession session) {
+		String email = (String) session.getAttribute("loginMember");
+
 		String oracleRno = setLPad(rc.getRno(), 5, "0");
 		String oracleCno = setLPad(rc.getCno(), 5, "0");
-		int result = rcmService.deleteRcommunity(oracleRno, oracleCno);
+		
+		int result = -1;
+		
+		String writerEmail = cmService.returnEmail(rc.getRwriter());
+		if(email.equals(writerEmail)) {
+			result = rcmService.deleteRcommunity(oracleRno, oracleCno);
+		}
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();

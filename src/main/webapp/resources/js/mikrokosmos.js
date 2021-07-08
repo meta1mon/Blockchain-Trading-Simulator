@@ -5,17 +5,7 @@ let modal = null;
 var cno = 0;
 var rno = 0;
 
-function report(nowCno) {
-	cno = nowCno;
-	console.log(cno);
-	$("#creportCno").val(cno);
-	modalFn('modal_report');
-}
-function rreport(nowRno) {
-	rno = nowRno;
-	console.log(rno);
-	modalReportReplyFn('modal_report_reply');
-}
+
 
 function reply(idx) {
 	var replyHtml = "<ul style=\"zIndex:10000;\"class=\"reply-list\">";
@@ -48,11 +38,9 @@ function reply(idx) {
 													+ "</span></div>"
 													+ "<div class=\"replyDropdown\" style=\"float: right;\">"
 													+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
-													+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport(reply.cno)\">신고</p>"
-													+ "<c:if test=\"${loginMember == writer.email }\">"
-													+ "<p class=\"updateReply\" onclick=\"makeUpdateBtn(idx )\">수정</p>"
-													+ "<p class=\"deleteReply\" onclick=\"replyDelete(reply.rno, reply.cno)\">삭제</p>"
-													+ "</c:if> </div>"
+													+ "<div class=\"dropdown-content\"> <c:if test=\"${loginMember != null }\"><p class=\"reportReply\" onclick=\"rreport(" + reply.rno + ")\">신고</p></c:if>"
+													+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
+													+ "</div>"
 													+ "<button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
 													+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button>"
 													+ "</li>";
@@ -223,13 +211,14 @@ $("#btnreport").on("click", function() {
 $("#btnrply").on("click", function() {
 	var rreport = $("input[name='rreport']:checked").val();
 	$.ajax({
-		url : "${pageContext.request.contextPath}/admin/reportRcommunity",
+		url : "admin/reportRcommunity",
 		type : "post",
 		data : {
-			"rrreason" : rreport,
-			"rno" : rno
+			"rrreason" : $("[name=rreport]:checked").val(),
+			"rno" : $("#rreportRno").val()
 		},
 		success : function(data) {
+			console.log("신고하고 들어옴");
 			if (data > 0) {
 				alert("신고 접수 되었습니다!");
 			} else {
@@ -261,54 +250,24 @@ function replyInsert1(Idx) {
 	})
 }
 
-// 댓글 수정 버튼 생성
-function makeUpdateBtn(index) {
-
-	$(".comment_content").eq(index).hide();
-	$(".makeBtn").eq(index).hide();
-	$(".newRcontent").eq(index).show();
-	$(".submitRUpdate").eq(index).show();
-	$(".cancleRUpdate").eq(index).show();
-}
-
-// 댓글 수정 취소 버튼 클릭 시
-function updateRCancle(index) {
-	$(".comment_content").eq(index).show();
-	$(".makeBtn").eq(index).show();
-	$(".newRcontent").eq(index).hide();
-	$(".newRcontent").eq(index).text("");
-	$(".submitRUpdate").eq(index).hide();
-	$(".cancleRUpdate").eq(index).hide();
-}
-
-// 댓글 수정완료 버튼 클릭 시
-function replyUpdate(rno, idx) {
-	var newOne = $(".newRcontent").eq(idx).val();
+// 댓글 삭제
+function replyDelete(deleteRno, deleteCno, deleteRwriter) {
 	$.ajax({
-		url : "${pageContext.request.contextPath}/rcUpdate",
-		type : "post",
-		data : {
-			"rno" : rno,
-			"rcontent" : newOne
-		},
-		success : function(data) {
-			alert("댓글 수정완료")
-			window.location.reload();
-		}
-	})
-}
-
-// 댓글 삭제 -- 새로고침을 사용 중인데 추후 수정해야 할듯
-function replyDelete(deleteRno, deleteCno) {
-	$.ajax({
-		url : "${pageContext.request.contextPath}/rcDelete",
+		url : "rcDelete",
 		type : "post",
 		data : {
 			"rno" : deleteRno,
-			"cno" : deleteCno
+			"cno" : deleteCno,
+			"rwriter" : deleteRwriter
 		},
 		success : function(data) {
-			alert("댓글 삭제 완료");
+			if(data == -1) {
+				alert("권한이 없습니다");
+			} else if (data > 0){
+				alert("댓글 삭제 성공");
+			} else {
+				alert("댓글 삭제 실패");
+			}
 			window.location.reload();
 		}
 	});

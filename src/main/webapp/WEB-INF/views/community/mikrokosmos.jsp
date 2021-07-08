@@ -347,7 +347,7 @@ $(function(){
 								<div class="comment">
 									<input type="hidden" name="cno" class="replyInsertCno1"
 										value="${vo.cno }"> <input type="text"
-										class="input-comment replyInsert1" name="rcontent"
+										class="input-comment replyContent1" name="rcontent"
 										maxlength="4000" placeholder="댓글 달기...">
 									<button type="submit" class="submit-comment"
 										onclick="replyInsert1(${status.index})">등록</button>
@@ -356,9 +356,10 @@ $(function(){
 						</div>
 						<c:if test="${loginMember == null }">
 							<div class="comment">
-								<input class="input-comment" type="text"
+								<input class="input-comment" type="text" readonly
 									placeholder="댓글을 작성하려면 로그인이 필요합니다.">
-								<button type="submit" class="submit-comment">게시</button>
+								<button type="button" class="submit-comment"
+									onclick="location.href='login'">이동</button>
 							</div>
 						</c:if>
 
@@ -428,7 +429,7 @@ $(function(){
 						<span class="sub-title">데일리 랭킹</span> <span class="find-more"
 							onclick="location.href='rankDaily'">모두 보기</span>
 					</div>
-										<ul class="story-list">
+					<ul class="story-list">
 						<li>
 							<div class="gradient-wrap">
 								<img class="img-profile story"
@@ -445,8 +446,8 @@ $(function(){
 									src="resources/assets/img/silver_medal.png" alt="..">
 							</div>
 							<div class="profile-text">
-								<span class="userID point-span">${dailySecond.nickname }</span> <span
-									class="sub-span">2등</span>
+								<span class="userID point-span">${dailySecond.nickname }</span>
+								<span class="sub-span">2등</span>
 							</div>
 						</li>
 						<li>
@@ -479,15 +480,7 @@ $(function(){
 				</footer>
 			</div>
 
-			<!-- 모달 안에서 댓글 달기: 미완성-->
-			<!-- 모달 안에서 댓글 달기: 미완성-->
-			<!-- 모달 안에서 댓글 달기: 미완성-->
-			<!-- 모달 안에서 댓글 달기: 미완성-->
-			<!-- 모달 안에서 댓글 달기: 미완성-->
-			<!-- 모달 안에서 댓글 달기: 미완성-->
-			<!-- 모달 안에서 댓글 달기: 미완성-->
-			<!-- 모달 안에서 댓글 달기: 미완성-->
-
+			<!-- 모달 안에서 댓글 달기-->
 			<!-- 댓글 모달창 -->
 			<div id="modal_reply" class="modal_reply">
 				<button type="button" class="modal_reply_close_btn"></button>
@@ -495,20 +488,22 @@ $(function(){
 				<div>
 					<c:if test="${loginMember != null }">
 						<div class="modalComment">
-							<input type="text" class="modal-input-comment replyInsert2"
+							<input type="text" class="modal-input-comment" id="replyContent2"
 								name="rcontent" maxlength="4000" placeholder="댓글 달기...">
 							<button type="submit" class="submit-comment"
 								onclick="replyInsert2()">등록</button>
 						</div>
 					</c:if>
+					<c:if test="${loginMember == null }">
+						<div class="modalComment">
+							<input class="modal-input-comment" type="text" readonly
+								placeholder="댓글을 작성하려면 로그인이 필요합니다.">
+							<button type="button" class="submit-comment"
+								onclick="location.href='login'">이동</button>
+						</div>
+					</c:if>
 				</div>
-				<c:if test="${loginMember == null }">
-					<div class="modalComment">
-						<input class="modal-input-comment" type="text"
-							placeholder="댓글을 작성하려면 로그인이 필요합니다.">
-						<button type="submit" class="submit-comment">게시</button>
-					</div>
-				</c:if>
+
 				<div class="modal-hl"></div>
 				<!-- 댓글 목록을 html로 불러온다 -->
 				<div class="section-reply" id="replyList"></div>

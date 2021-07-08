@@ -70,11 +70,10 @@
 	<!-- 현질 금액 제거 -->
 	<select id="subtractWeeklyCashLog" parameterType="string"
 		resultType="long">
-		select nvl(sum(won), 0) from cashlog where substr(cashdate, 0, 10) >=
-		to_char(sysdate-7,
-		'yyyy-mm-dd')
-		AND substr(cashdate, 0, 10) &lt;=
-		to_char(sysdate-1, 'yyyy-mm-dd')
+		select nvl(sum(won), 0)
+		from cashlog
+		where substr(cashdate, 0, 10) &gt;= to_char(sysdate-7,'yyyy-mm-dd')
+		AND substr(cashdate, 0, 10) &lt;= to_char(sysdate-1, 'yyyy-mm-dd')
 		AND ACNTNO=#{acntno}
 	</select>
 

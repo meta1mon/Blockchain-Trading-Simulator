@@ -5,53 +5,40 @@ let modal = null;
 var cno = 0;
 var rno = 0;
 
-
-
+let replyCno = "";
 function reply(idx) {
-	var replyHtml = "<ul style=\"zIndex:10000;\"class=\"reply-list\">";
-	var replyCno = $(".hiddenCno").eq(idx).val();
-	$
-			.ajax({
-				url : "rcSelect",
-				type : "post",
-				data : {
-					"cno" : replyCno
-				},
-				datatype : "json",
-				success : function(data) {
-					$(".reply-list").remove();
-					modalReplyFn('modal_reply');
-					var json = JSON.parse(data);
-					if (json.length > 0) {
-						$
-								.each(
-										json,
-										function(idx, reply) {
-											replyHtml += " <li><div class=\"profile-wrap\">"
-													+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
-													+ "<span class=\"userID point-span\">"
-													+ reply.rwriter
-													+ "</span><span class=\"sub-span\">"
-													+ reply.rdate
-													+ "</span><br><span class=\"content-span\">"
-													+ reply.rcontent
-													+ "</span></div>"
-													+ "<div class=\"replyDropdown\" style=\"float: right;\">"
-													+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
-													+ "<div class=\"dropdown-content\"> <c:if test=\"${loginMember != null }\"><p class=\"reportReply\" onclick=\"rreport(" + reply.rno + ")\">신고</p></c:if>"
-													+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
-													+ "</div>"
-													+ "<button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
-													+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button>"
-													+ "</li>";
-										});
-						replyHtml += "</ul>";
-					} else {
-						replyHtml = "<p>작성된 댓글이 없습니다.</p>";
-					}
-					$("#replyList").html(replyHtml);
+	var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\">";
+	replyCno = $(".hiddenCno").eq(idx).val();
+	$.ajax({
+			url : "rcSelect",
+			type : "post",
+			data : {
+				"cno" : replyCno
+			},
+			datatype : "json",
+			success : function(data) {
+				/*$("#reply-list").remove();*/
+				modalReplyFn('modal_reply');
+				var json = JSON.parse(data);
+				if (json.length > 0) {
+					$.each(json, function(idx, reply) {
+										replyHtml += "<input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\">" + "<li><div class=\"profile-wrap\">"
+												+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
+												+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
+												+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
+												+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
+												+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport("+ reply.rno + ")\">신고</p>"
+												+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
+												+ "</div><button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
+												+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button></li>";
+									});
+					replyHtml += "</ul>";
+				} else {
+					replyHtml = "<input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\"><p>작성된 댓글이 없습니다.</p>";
 				}
-			});
+				$("#replyList").html(replyHtml);
+			}
+		});
 }
 
 // 게시글 수정
@@ -140,8 +127,8 @@ $('.replyDropdown').click(
 			console.log("클릭함");
 			console.log("클릭dropdown 상위 article idx: "
 					+ $(this).parents('.replyDropdown').index());
-			$('.dropdown-content').eq($(this).parents('.replyDropdown').index())
-					.show();
+			$('.dropdown-content')
+					.eq($(this).parents('.replyDropdown').index()).show();
 			$(".replyDropdown").mouseleave(function() {
 				$(this).css("display", "block");
 			});
@@ -177,11 +164,6 @@ $(document).mouseup(function(e) {
 			modalReportReply.style.display = 'none';
 		}
 	}
-	// if( containerReply.has(e.target).length === 0){
-	// containerReply.css('display','none');
-	// bgReply.remove();
-	// modalReply.style.display = 'none';
-	// }
 });
 
 // 게시글 신고 부분
@@ -195,7 +177,7 @@ $("#btnreport").on("click", function() {
 		},
 		success : function(data) {
 			console.log("신고하고 들어옴");
-			if(data > 0) {
+			if (data > 0) {
 				alert("신고 접수 되었습니다!");
 			} else {
 				alert("신고 접수 실패! 관리자에게 문의하세요!");
@@ -233,21 +215,83 @@ $("#btnrply").on("click", function() {
 
 // 모달 밖의 댓글 삽입
 function replyInsert1(Idx) {
-	var rcontent = $(".replyInsert1").eq(Idx).val();
+	var rcontent = $(".replyContent1").eq(Idx).val();
 	var cno = $(".replyInsertCno1").eq(Idx).val();
+	if (rcontent == "") {
+		alert("댓글을 입력하세요");
+	} else {
+		$.ajax({
+			url : "rcInsert",
+			type : "post",
+			data : {
+				"rcontent" : rcontent,
+				"cno" : cno
+			},
+			success : function(data) {
+				alert("댓글 작성 완료");
+				window.location.reload();
+			}
+		})
+	}
 
-	$.ajax({
-		url : "rcInsert",
-		type : "post",
-		data : {
-			"rcontent" : rcontent,
-			"cno" : cno
-		},
-		success : function(data) {
-			alert("댓글 작성 완료");
-			window.location.reload();
-		}
-	})
+}
+
+// 모달 안의 댓글 삽입
+function replyInsert2() {
+	var rcontent = $("#replyContent2").val();
+	var cno = $("#modalInCno").val();
+	console.log(rcontent);
+	console.log(cno);
+	if (rcontent == "") {
+		alert("댓글을 입력하세요");
+	} else {
+		$.ajax({
+			url : "rcInsert",
+			type : "post",
+			data : {
+				"rcontent" : rcontent,
+				"cno" : cno
+			},
+			success : function(data) {
+				bgReply.remove();
+				alert("댓글 작성 완료");
+				console.log(replyCno);
+				var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\">";
+				$.ajax({
+					url : "rcSelect",
+					type : "post",
+					data : {
+						"cno" : replyCno
+					},
+					datatype : "json",
+					success : function(data) {
+						$(".reply-list").remove();
+						modalReplyFn('modal_reply');
+						var json = JSON.parse(data);
+						if (json.length > 0) {
+							$.each(json, function(idx, reply) {
+								replyHtml += "<input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\">" + "<li><div class=\"profile-wrap\">"
+										+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
+										+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
+										+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
+										+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
+										+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport("+ reply.rno + ")\">신고</p>"
+										+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
+										+ "</div><button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
+										+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button></li>";
+							});
+							replyHtml += "</ul>";
+						} else {
+							replyHtml = "<input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\"><p>작성된 댓글이 없습니다.</p>";
+						}
+						$("#replyList").html(replyHtml);
+						$("#replyContent2").val("");
+					}
+				});
+			}
+		})
+	}
+	
 }
 
 // 댓글 삭제
@@ -261,9 +305,9 @@ function replyDelete(deleteRno, deleteCno, deleteRwriter) {
 			"rwriter" : deleteRwriter
 		},
 		success : function(data) {
-			if(data == -1) {
+			if (data == -1) {
 				alert("권한이 없습니다");
-			} else if (data > 0){
+			} else if (data > 0) {
 				alert("댓글 삭제 성공");
 			} else {
 				alert("댓글 삭제 실패");
@@ -351,7 +395,8 @@ function modalReportReplyFn(id) {
 	modalReportReply.querySelector('.modal_close_btn').addEventListener(
 			'click', function() {
 				bgReportReply.remove();
-				modalReportReply.style.display = 'none';
+				/*modalReportReply.removeChild();*/
+				/*modalReportReply.style.display = 'none';*/
 			});
 
 	modalReportReply
@@ -388,6 +433,7 @@ function modalReplyFn(id) {
 
 	// 모달 div 뒤에 희끄무레한 레이어
 	bgReply = document.createElement('div');
+/*	bgReply.setAttribute("class", "replyModalAppend");*/
 	bgReply.setStyle({
 		position : 'fixed',
 		zIndex : zIndex,
@@ -404,6 +450,7 @@ function modalReplyFn(id) {
 	// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
 	modalReply.querySelector('.modal_reply_close_btn').addEventListener(
 			'click', function() {
+				$("#replyContent2").val("");
 				bgReply.remove();
 				modalReply.style.display = 'none';
 			});

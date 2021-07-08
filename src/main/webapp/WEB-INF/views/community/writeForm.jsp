@@ -5,24 +5,31 @@
 <html>
 <head>
 <title>BTS</title>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link href="${pageContext.request.contextPath}/resources/css/writeForm.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link
+	href="${pageContext.request.contextPath}/resources/css/writeForm.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 <script>
 $(function() {
 	$('form[name=insertForm]').on(
 			'submit',
 			function(e) {
-				if ($('input[name=csubject]').val() == null || $('input[name=csubject]').val() == "") {
-					alert("제목을 입력하십시오.");
-					e.preventDefault();
-				} else if ($('textarea[name=ccontent]').val() == null || $('textarea[name=ccontent]').val() == ""){
+				if ($('textarea[name=ccontent]').val() == null || $('textarea[name=ccontent]').val() == ""){
 					alert("내용을 입력하십시오.");
 					e.preventDefault();
 				} else {
@@ -35,19 +42,17 @@ $(function() {
 </head>
 <body>
 	<div id="wrapper">
-	<%@include file="../main/header.jsp"%>
+		<%@include file="../main/header.jsp"%>
 		<div class="writeOut">
 			<div class="comm">글쓰기</div>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
+			<br> <br> <br> <br> <br>
 			<form action="cInsert" method="post" enctype="multipart/form-data"
-				style="margin:0 20px" name="insertForm">
-				<input id="subject" type="text"
-					placeholder="&nbsp;&nbsp;제목을 입력해 주세요." name="csubject"
-					maxlength="100">
+				style="margin: 0 20px" name="insertForm">
+				<c:if test="${loginMember == 'admin' }">
+					<input id="subject" type="text"
+						placeholder="&nbsp;&nbsp;제목을 입력해 주세요." name="csubject"
+						maxlength="100">
+				</c:if>
 				<textarea id="editor" name="ccontent" maxlength="4000"
 					style="margin: 0 auto 10 auto;"></textarea>
 				<input type="submit" value="글 작성하기" id="submit">
@@ -56,14 +61,14 @@ $(function() {
 				</c:url>
 				<input type="button" value="취소하기" id="cancel"
 					onclick="location.href = '${clist}'">
-	
+
 				<div id="file_text">파일 첨부</div>
 				<img src="resources/assets/img/folder.png" id="folder">
 				<p id="fileDiv">
 					<input type="file" id="file" name="upfile" multiple="multiple"
 						style="margin-top: 25px;">
 			</form>
-	
+
 			<script>
 						    ClassicEditor
 						    .create( document.querySelector( '#editor' ), {

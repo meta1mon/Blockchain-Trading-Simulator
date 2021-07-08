@@ -34,6 +34,7 @@
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/nlist?news_keyword=">뉴스</a></li>
 			<li class="menu"><a class="menutext" href="javascript:void(window.open('<%=request.getContextPath()%>/prochart', '_blank','width=1300px, height=800px'))">프로차트</a></li>
 			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/clist">커뮤니티</a></li>
+			<li class="menu"><a class="menutext" href="<%=request.getContextPath()%>/insta">소우주</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/cashShop">충전소</a></li>
 			<li class="menu"><a class="menutext" href="${pageContext.request.contextPath}/rankDaily">랭킹</a></li>
 		</ul>

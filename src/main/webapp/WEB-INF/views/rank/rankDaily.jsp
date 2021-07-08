@@ -57,7 +57,7 @@ input[type=radio] {
   margin-left: auto;
   margin-right: auto;
   /* 이동하는 애니메이션 넣고 싶으면 이 부분 쓰면 됩니다 ↓ */
-  transition: transform .5s ease;
+  transition: transform .5s ease, opacity .5s;
   cursor: pointer;
   background: white;
   color: #8c66c8;
@@ -83,16 +83,18 @@ input[type=radio] {
 
 #item-1:checked ~ .cards #rank-4, #item-2:checked ~ .cards #rank-1, #item-3:checked ~ .cards #rank-2, #item-4:checked ~ .cards #rank-3 {
   transform: translatex(-100%);
+  opacity: 0.5;
   z-index: 0;
 }
 
 #item-1:checked ~ .cards #rank-2, #item-2:checked ~ .cards #rank-3, #item-3:checked ~ .cards #rank-4, #item-4:checked ~ .cards #rank-1 {
   transform: translatex(100%);
+  opacity: 0.5;
   z-index: 0;
 }
 
 #item-1:checked ~ .cards #rank-1, #item-2:checked ~ .cards #rank-2, #item-3:checked ~ .cards #rank-3, #item-4:checked ~ .cards #rank-4 {
-  transform: translatex(0) scale(1);
+  transform: translatex(0) scale(1.2);
   opacity: 1;
   z-index: 1;
   background: #8c66c8;
@@ -104,8 +106,6 @@ input[type=radio] {
 .ranktable {
 	width: 100%;
 	text-align: center;
-	
-	
 }
 
 .ranktable td {
@@ -121,9 +121,12 @@ input[type=radio] {
 #accumulative {
 	display: none;
 }
+
+.ranktable a {
+	color: #8c66c8;
+}
 </style>
 <!-- <script>
-	이런 식으로 기능 넣어서 랭킹 jsp 하나로 다 통합하는 거 어떤지~? 아 근데 ajax로 한다구 했지..
 	$(function(){
 		var test = function(){
 			if($("#item-1:checked")){

@@ -61,17 +61,18 @@ $(function(){
 	// 수정을 누르면 .read의 readonly를 false로 변경
 	// 수정 버튼과 닫기 버튼의 value를 
 	var edit = function(){
-		var index = $(this).parents("#item").index(); 
-		index = index/2 +1;
+		var thistr = $(this).parents(".item"); //내가 클릭한 버튼의 tr
+		var index = $(".item").index(thistr); //.item 중에 thistr만 골라서 index를 알려준다!
+		console.log(index);
 		console.log($(this).val());
 			for(var i=0; i<8; i++){
-		var ele = $('tr:eq(' + index +') > td:nth-child('+i+') > input');
+		var ele = $('.item:eq(' + index + 1 +') > td:nth-child('+i+') > input');
 		/* console.log(index + "번째 tr의 "+ i + "번째 정보는 " +  ele.val()); */
-			var info = $('tr:eq(' + index +') > td:nth-child('+i+') > .info');
-			var show = $('tr:eq(' + index +') > td:nth-child('+i+') > .show');
-			var money = $('tr:eq(' + index +') > td:nth-child('+i+') > .hide');
-			var defaultmode = $('tr:eq(' + index +') .default');
-			var editmode = $('tr:eq(' + index +') .editmode');
+			var info = $('.item:eq(' + index +') > td:nth-child('+i+') > .info');
+			var show = $('.item:eq(' + index +') > td:nth-child('+i+') > .show');
+			var money = $('.item:eq(' + index +') > td:nth-child('+i+') > .hide');
+			var defaultmode = $('.item:eq(' + index +') .default');
+			var editmode = $('.item:eq(' + index +') .editmode');
 			
 			info.attr("readonly", false);
 			show.css("display", "none");
@@ -84,7 +85,7 @@ $(function(){
 			
 			var setMinDate = function(){
 				console.log("작동")
-				var startdate = $('tr:eq(' + index +') > td:nth-child(5) > input').val();
+				var startdate = $('.item:eq(' + index +') > td:nth-child(5) > input').val();
 				if(startdate != null && startdate != "" && startdate != undefined){
 					console.log("설정합니다.");
 					$("input[name=enddate]").attr("min", startdate);
@@ -93,25 +94,13 @@ $(function(){
 			$("input[name=startdate]").on("keyup", setMinDate);
 			$("input[name=startdate]").on("change", setMinDate);
 
-			var ele1 = $('tr:eq(' + index +') > td:nth-child(1) > input');
-			var ele2 = $('tr:eq(' + index +') > td:nth-child(2) > input');
-			var ele3 = $('tr:eq(' + index +') > td:nth-child(3) > input');
-			var ele4 = $('tr:eq(' + index +') > td:nth-child(4) > input');
-			var ele5 = $('tr:eq(' + index +') > td:nth-child(5) > input');
-			var ele6 = $('tr:eq(' + index +') > td:nth-child(6) > input');
-			
-			ele2.addClass("modfy");
-			ele3.addClass("modfy");
-			ele4.addClass("modfy");
-			ele5.addClass("modfy");
-			ele6.addClass("modfy");
-			
-			console.log("ele1: " + ele1.val());
-			console.log("ele2: " + ele2.val());
-			console.log("ele3: " + ele3.val());
-			console.log("ele4: " + ele4.val());
-			console.log("ele5: " + ele5.val());
-			console.log("ele6: " + ele6.val());
+			var ele1 = $('.item:eq(' + index +') > td:nth-child(1) > input');
+			var ele2 = $('.item:eq(' + index +') > td:nth-child(2) > input');
+			var ele3 = $('.item:eq(' + index +') > td:nth-child(3) > input');
+			var ele4 = $('.item:eq(' + index +') > td:nth-child(4) > input');
+			var ele5 = $('.item:eq(' + index +') > td:nth-child(5) > input');
+			var ele6 = $('.item:eq(' + index +') > td:nth-child(6) > input');
+
 			console.log("수정합니다.");
 			
 			
@@ -120,17 +109,17 @@ $(function(){
 	
 	var cancel = function(){
 		console.log("취소하겠습니다.")
-		var index = $(this).parents("#item").index(); 
-		index = index/2 +1;
-		console.log($(this).val());
-			for(var i=0; i<8; i++){
-		var ele = $('tr:eq(' + index +') > td:nth-child('+i+') > input');
-		/* console.log(index + "번째 tr의 "+ i + "번째 정보는 " +  ele.val()); */
-			var info = $('tr:eq(' + index +') > td:nth-child('+i+') > .info');
-			var show = $('tr:eq(' + index +') > td:nth-child('+i+') > .show');
-			var money = $('tr:eq(' + index +') > td:nth-child('+i+') > .hide');
-			var defaultmode = $('tr:eq(' + index +') .default');
-			var editmode = $('tr:eq(' + index +') .editmode');
+		var thistr = $(this).parents(".item"); //내가 클릭한 버튼의 tr
+		var index = $(".item").index(thistr); //.item 중에 thistr만 골라서 index를 알려준다!
+
+		for(var i=0; i<8; i++){
+			var ele = $('.item:eq(' + index +') > td:nth-child('+i+') > input');
+			/* console.log(index + "번째 tr의 "+ i + "번째 정보는 " +  ele.val()); */
+			var info = $('.item:eq(' + index +') > td:nth-child('+i+') > .info');
+			var show = $('.item:eq(' + index +') > td:nth-child('+i+') > .show');
+			var money = $('.item:eq(' + index +') > td:nth-child('+i+') > .hide');
+			var defaultmode = $('.item:eq(' + index +') .default');
+			var editmode = $('.item:eq(' + index +') .editmode');
 			
 			info.attr("readonly", true);
 			show.css("display", "inline");
@@ -146,15 +135,15 @@ $(function(){
 	
 	var done = function(){
 		console.log("완료하겠습니다.")
+		var thistr = $(this).parents(".item"); //내가 클릭한 버튼의 tr
+		var index = $(".item").index(thistr); //.item 중에 thistr만 골라서 index를 알려준다!
 		
-		var index = $(this).parents("#item").index(); 
-		index = index/2 +1;
-			var ele1 = $('tr:eq(' + index +') > td:nth-child(1) > input');
-		var ele2 = $('tr:eq(' + index +') > td:nth-child(2) > input');
-		var ele3 = $('tr:eq(' + index +') > td:nth-child(3) > input');
-		var ele4 = $('tr:eq(' + index +') > td:nth-child(4) > input');
-		var ele5 = $('tr:eq(' + index +') > td:nth-child(5) > input');
-		var ele6 = $('tr:eq(' + index +') > td:nth-child(6) > input');
+		var ele1 = $('.item:eq(' + index +') > td:nth-child(1) > input');
+		var ele2 = $('.item:eq(' + index +') > td:nth-child(2) > input');
+		var ele3 = $('.item:eq(' + index +') > td:nth-child(3) >  input');
+		var ele4 = $('.item:eq(' + index +') > td:nth-child(4) > input');
+		var ele5 = $('.item:eq(' + index +') > td:nth-child(5) > input');
+		var ele6 = $('.item:eq(' + index +') > td:nth-child(6) > input');
 		
 		$("input[name=won]").val(ele2.val());
 		$("input[name=price]").val(ele3.val());
@@ -215,7 +204,7 @@ $(function(){
 					<c:if test="${listCount ne 0}">
 						<c:forEach var="vo" items="${list}" varStatus="status">
 							<form id="frmCashEdit">
-							<tr id="item">
+							<tr class="item">
 								<td style="display: none">
 									<input class="info" type="hidden" name="cashno" id="cashno" value="${vo.cashno}">
 								</td>

@@ -83,13 +83,13 @@ input[type=radio] {
 
 #item-1:checked ~ .cards #rank-4, #item-2:checked ~ .cards #rank-1, #item-3:checked ~ .cards #rank-2, #item-4:checked ~ .cards #rank-3 {
   transform: translatex(-100%);
-  opacity: 0.5;
+  opacity: 0.3;
   z-index: 0;
 }
 
 #item-1:checked ~ .cards #rank-2, #item-2:checked ~ .cards #rank-3, #item-3:checked ~ .cards #rank-4, #item-4:checked ~ .cards #rank-1 {
   transform: translatex(100%);
-  opacity: 0.5;
+  opacity: 0.3;
   z-index: 0;
 }
 
@@ -102,6 +102,12 @@ input[type=radio] {
   
 }
 /* 랭킹 스와이프 메뉴 끝 */
+
+/* 랭킹 정보 시작 */
+.info{
+	width: 1240px;
+}
+/* 랭킹 정보 끝 */
 
 .ranktable {
 	width: 100%;
@@ -166,6 +172,20 @@ input[type=radio] {
 					</label> 
 					<label class="card" for="item-4" id="rank-4">
 						월간 랭킹
+					</label>
+				</div>
+				<div class="cards">
+					<label class="card info" for="item-1" id="rank-1">
+						초기 자본금(1,000만원)을 기준으로 매 시간 갱신됩니다.
+					</label>
+					<label class="card info" for="item-2" id="rank-2">
+						매일 오전 9시에 갱신됩니다.
+					</label> 
+					<label class="card info" for="item-3" id="rank-3">
+						매주 월요일 오전 9시에 갱신됩니다.
+					</label> 
+					<label class="card info" for="item-4" id="rank-4">
+						매월 1일 오전 9시에 갱신됩니다.
 					</label>
 				</div>
 			</div>

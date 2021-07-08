@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link href="${pageContext.request.contextPath}/resources/css/footer.css"
-	rel="stylesheet" type="text/css" />
-<script>
-	
-</script>
+<%-- <link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" /> --%>
 <footer class="footer-container">
 	<div class="footer">
 	<div class="f_left">

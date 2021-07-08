@@ -177,10 +177,6 @@
 .replycnt:hover, .replycnt:active {
 	text-decoration: underline;
 }
-#space {
-	height: 100px;
-	border: 1px solid;
-}
 
 #page {
 	line-height: 30px;

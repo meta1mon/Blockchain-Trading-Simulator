@@ -11,60 +11,119 @@
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/myNav.css"	rel="stylesheet" type="text/css" />
-<style>
-#mc {
-	width: 65%;
-	min-width: 1024px;
-	text-align: center;
-	height: 50%;
-	padding: 20px;
-	margin: 25px auto;
-	background-color: #fff;
-    border: 1.5px solid #E3C8F8;
-	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
-}
-
-#mc table {
-	margin: 0 auto;
-}
-</style>
+<link href="${pageContext.request.contextPath}/resources/css/myCommunity.css"	rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 </head>
 <body>
 	<div id="wrapper">
 	<jsp:include page="myNav.jsp"></jsp:include>
 		<div id="mc">
-			<table class="ctable">
-				<tr bgcolor="#8C66C8">
-					<td align="center" width="60">번호</td>
-					<td align="center" width="380">제목</td>
-					<td align="center" width="100">작성자</td>
-					<td align="center" width="100">작성일</td>
-					<td align="center" width="60">조회</td>
-					<td align="center" width="60">추천</td>
-				</tr>
-				<!-- 글이 없을 경우 -->
-				<c:if test="${myClist.size() eq 0}">
+		
+			<div class="tab">
+				<button class="tablinks" value="myCom">나의 게시글</button>
+				<button class="tablinks" value="myRe">나의 댓글</button>
+			</div>
+			
+			
+			
+			<div id="myCom" class="tabcontent">
+				<table class="ctable">
 					<tr>
-						<td colspan="6" align="center"><br> <br> 작성한 글이
-							없습니다. <br> <br></td>
+						<td align="center" width="60" style="font-size: 13px;">번호</td>
+						<td align="center" width="380">제목</td>
+						<td align="center" width="100">작성자</td>
+						<td align="center" width="100">작성일</td>
+						<td align="center" width="60">조회</td>
+						<td align="center" width="60">추천</td>
 					</tr>
-				</c:if>
-				<c:if test="${myClist.size() ne 0}">
-					<c:forEach var="vo" items="${myClist }" varStatus="status">
+					<!-- 글이 없을 경우 -->
+					<c:if test="${myClist.size() eq 0}">
 						<tr>
-							<td align="center">${vo.cno}</td>
-							<td align="left"><a href="${pageContext.request.contextPath}/cDetail?cno=${vo.cno }">
-									&nbsp;${vo.csubject} </a></td>
-							<td align="center">${vo.cwriter}</td>
-							<td align="center">${vo.cdate}</td>
-							<td align="center">${vo.viewcnt}</td>
-							<td align="center">${vo.likecnt}</td>
+							<td colspan="6" align="center"><br> <br> 작성한 글이
+								없습니다. <br> <br></td>
 						</tr>
-					</c:forEach>
-				</c:if>
-			</table>
+					</c:if>
+					<c:if test="${myClist.size() ne 0}">
+						<c:forEach var="vo" items="${myClist }" varStatus="status">
+							<tr>
+								<td align="center" style="font-size: 13px;">${vo.cno}</td>
+								<td align="left">
+									<a	href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">
+										&nbsp;${vo.csubject}
+									</a> 
+									<a href="cDetail?cno=${vo.cno}&page=${currentPage}"	class="replycnt">
+										[${vo.replycnt}]
+									</a>
+								</td>
+								<td align="center">${vo.cwriter}</td>
+								<td align="center" style="font-size: 13px;">${vo.cdate}</td>
+								<td align="center">${vo.viewcnt}</td>
+								<td align="center">${vo.likecnt}</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+				</table>
+			</div>
+			
+			<div id="myRe" class="tabcontent">
+				<table class="ctable">
+					<tr>
+						<td align="center" width="60" style="font-size: 13px;">번호</td>
+						<td align="center" width="380">제목</td>
+						<td align="center" width="100">작성자</td>
+						<td align="center" width="100">댓글내용</td>
+						<td align="center" width="100">작성일</td>
+						<td align="center" width="60">조회</td>
+						<td align="center" width="60">추천</td>
+					</tr>
+					<!-- 글이 없을 경우 -->
+					<c:if test="${myRlist.size() eq 0}">
+						<tr>
+							<td colspan="6" align="center"><br> <br> 작성한 댓글이
+								없습니다. <br> <br></td>
+						</tr>
+					</c:if>
+					<c:if test="${myRlist.size() ne 0}">
+						<c:forEach var="vo" items="${myRlist }" varStatus="status">
+							<tr>
+								<td align="center" style="font-size: 13px;">${vo.cno }</td>
+								<td align="left">
+									<a	href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">
+										&nbsp;${vo.csubject}
+									</a> 
+								</td>
+								<td align="center">${vo.cwriter }</td>
+								<td align="center">${vo.rcontent }</td>
+								<td align="center" style="font-size: 13px;">${vo.rdate }</td>
+								<td align="center">${vo.viewcnt }</td>
+								<td align="center">${vo.likecnt }</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+				</table>
+			</div>
+			
+			
+			
 		</div>
 	</div>
+<script>
+//탭메뉴 jQuery
+$('.tablinks').click(function() {
+
+	for (var i = 0; i < $('.tabcontent').length; i++) {
+		$('.tabcontent').hide();
+	}
+
+	$(".tabcontent").eq($(this).index()).show();
+
+});
+
+$(function() {
+	$(".tabcontent").eq(0).show(); // 보유코인 목록 탭 기본값 : show()
+});
+
+
+</script>
 </body>
 </html>

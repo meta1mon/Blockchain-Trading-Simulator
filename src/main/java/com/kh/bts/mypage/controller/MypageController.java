@@ -214,7 +214,9 @@ public class MypageController {
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("loginMember");
 		List<Community> list = myService.myCommunity(email);
+		List<MyRcommunity> replyList = myService.selectMyRcommunity(email);
 		mv.addObject("myClist", list);
+		mv.addObject("myRlist", replyList);
 		mv.setViewName("mypage/myCommunity");
 		return mv;
 	}

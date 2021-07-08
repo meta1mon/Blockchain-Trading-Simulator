@@ -53,6 +53,7 @@
 	background-color: #f1f1f1;
 	display: flex;
     justify-content: space-evenly;
+    box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 
 .tablinks {
@@ -78,10 +79,12 @@
 }
 
 .tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
+	display: none;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-top: none;
+	border: 0.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 
 /* 탭 메뉴 끝 */

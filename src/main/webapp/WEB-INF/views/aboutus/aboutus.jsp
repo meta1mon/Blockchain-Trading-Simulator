@@ -15,6 +15,7 @@
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="resources/css/aboutus.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
     </head>
     <body id="page-top">
         <!-- Navigation-->

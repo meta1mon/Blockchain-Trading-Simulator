@@ -17,6 +17,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/investment.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/pinpad.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>

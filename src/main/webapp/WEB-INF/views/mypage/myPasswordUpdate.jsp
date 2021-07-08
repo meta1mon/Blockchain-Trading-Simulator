@@ -32,7 +32,6 @@
 			
 			
 			<div id="pwd" class="tabcontent">
-			
 				<form action="${pageContext.request.contextPath}/mypage/passChange" method="post">
 					<table id="pwdTable" cellspacing="15">
 						<!-- <tr>

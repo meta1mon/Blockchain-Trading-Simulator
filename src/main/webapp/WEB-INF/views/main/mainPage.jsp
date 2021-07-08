@@ -13,6 +13,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/newsList.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
 <meta charset="UTF-8">
 <script type="text/javascript">

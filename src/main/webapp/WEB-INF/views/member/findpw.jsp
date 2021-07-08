@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/findpw.css">
 <link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
 <!-- 스크립트 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

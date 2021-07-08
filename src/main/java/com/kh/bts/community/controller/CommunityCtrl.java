@@ -49,6 +49,7 @@ public class CommunityCtrl {
 			ModelAndView mav) {
 		Paging paging = new Paging(1, 9);
 		List<Community> list = cmService.selectAllCommunityList(paging);
+		System.out.println(list);
 		mav.addObject("commuList", list);
 		mav.addObject("nowPage", paging);
 
@@ -199,10 +200,11 @@ public class CommunityCtrl {
 		return result;
 	}
 
-	@RequestMapping(value = "cUpdateForm", method = RequestMethod.GET)
+	@RequestMapping(value = "cUpdateForm", method = RequestMethod.POST)
 	public ModelAndView cUpdateForm(@RequestParam(name = "cno") String cno, 
 			@RequestParam(name="fromInsta", defaultValue ="0") int fromInsta,
 			ModelAndView mv) {
+		System.out.println(cno);
 		String oracleCno = setLPad(cno, 5, "0");
 		try {
 			mv.addObject("community", cmService.selectCommunity(1, oracleCno));
@@ -242,8 +244,23 @@ public class CommunityCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "cDelete", method = RequestMethod.GET)
+	@ResponseBody
+	@RequestMapping(value = "cDeleteCheck", method = RequestMethod.POST)
+	public int cDeleteCheck(Community vo, HttpServletRequest request) {
+		 String email = (String) request.getSession().getAttribute("loginMember");
+		 String nowNickname = mService.returnNickname(email);
+		 int result = 0;
+		 if(vo.getCwriter().equals(nowNickname)) {
+			 result = 1;
+		 } else {
+			 result = 0;
+		 }
+		return result;
+	}
+	
+	@RequestMapping(value = "cDelete", method = RequestMethod.POST)
 	public ModelAndView communityDelete(@RequestParam(name = "cno") String cno,
+			@RequestParam(name="fromInsta", defaultValue ="0") int fromInsta,
 			@RequestParam(name = "page", defaultValue = "1") int page, HttpServletRequest request, ModelAndView mv) {
 		try {
 			Community c = cmService.selectCommunity(1, cno);
@@ -252,7 +269,11 @@ public class CommunityCtrl {
 			String email = (String) request.getSession().getAttribute("loginMember");
 			cmService.deleteCommunity(cno, email);
 			mv.addObject("currentPage", page);
-			mv.setViewName("redirect:clist");
+			if(fromInsta == 1) {
+				mv.setViewName("redirect:insta");
+			} else {
+				mv.setViewName("redirect:clist");
+			}
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");

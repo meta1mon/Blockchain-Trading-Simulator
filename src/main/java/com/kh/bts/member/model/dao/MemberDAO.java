@@ -26,17 +26,14 @@ public class MemberDAO {
 				vo3.setEmail(vo.getEmail());
 				vo3.setNickname(vo.getNickname());
 				vo3.setAcntno(vo2.getAcntno());
-				result = sqlSession.insert("ranking.insertDaily", vo3);
-				if (result > 0) {
-					System.out.println("Daily 랭크 참가 완료");
-					result = sqlSession.insert("ranking.insertAccumulative", vo3);
-					if (result > 0) {
-						System.out.println("Accumulative 랭크 참가 완료");
-					} else {
-						System.out.println("Accumulative 랭크 참가 실패");
-					}
+				int result1 = sqlSession.insert("ranking.insertDaily", vo3);
+				int result2 = sqlSession.insert("ranking.insertAccumulative", vo3);
+				int result3 = sqlSession.insert("ranking.insertMonthly", vo3);
+				int result4 = sqlSession.insert("ranking.insertWeekly", vo3);
+				if(result1 * result2 * result3 * result4 == 0) {
+					System.out.println("회원 가입 시, 랭킹 4종 참가 실패");
 				} else {
-					System.out.println("Daily 랭크 참가 실패");
+					System.out.println("회원 가입 시, 랭킹 4종 참가 성공");
 				}
 			} else {
 				System.out.println("memberDao에서 계좌 삽입 실패");

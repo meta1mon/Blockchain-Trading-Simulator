@@ -23,14 +23,11 @@
 <title>BTS</title>
 <!-- 스크립트 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/loadingajax.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/loadingajax.js"></script>
 <style>
 placeholder {
 	font-style: italic;

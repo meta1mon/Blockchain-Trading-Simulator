@@ -23,6 +23,7 @@ import com.kh.bts.acnt.model.service.AcntService;
 import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.cash.model.service.CashService;
+import com.kh.bts.cash.model.vo.CashLog;
 import com.kh.bts.community.model.service.CommunityService;
 import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.investment.model.service.BoughtService;
@@ -307,7 +308,9 @@ public class MypageController {
 			List<WaitSold> wSoldResult = wsService.selectListWaitSold(acntResult.getAcntno());
 			List<Bought> boughtResult = bService.selectListBought(acntResult.getAcntno());
 			List<Sold> soldResult = sService.selectListSold(acntResult.getAcntno());
-
+			List<CashLog> cashLogList = myService.selectMyCashLog(loginEmail);
+			int cashLogListCount = myService.selectMyCashLog(loginEmail).size();
+			
 			mv.addObject("acnt", acntResult);
 			mv.addObject("totalCoin", totalCoin);
 			mv.addObject("totalAssets", totalAssets);
@@ -317,6 +320,8 @@ public class MypageController {
 			mv.addObject("wSoldResult", wSoldResult);
 			mv.addObject("boughtResult", boughtResult);
 			mv.addObject("soldResult", soldResult);
+			mv.addObject("cashLogList", cashLogList);
+			mv.addObject("cashLogListCount", cashLogListCount);
 
 		}
 

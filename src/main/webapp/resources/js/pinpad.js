@@ -100,7 +100,7 @@ function keyevent(e) {
 	var key = $elem.data('key');
 	var same = /(\w)\1\1\1/; // 같은 영문자&숫자 연속 4번 정규식
 	var contNum = /(0123)|(1234)|(2345)|(3456)|(4567)|(5678)|(6789)|(7890)/; //연속된 숫자
-
+	          
 	switch(key) {
 		case 'del':
 			if(text.length == 0){
@@ -112,24 +112,25 @@ function keyevent(e) {
 			break;
 		case 'done':
 			if(text.length != 4){
-				$(".bankPwCh").html("4자리 숫자만 사용할 수 있습니다.!");
+				$(".bankPwCh").html("4자리 숫자만 사용할 수 있습니다.");
 				$(".bankPwCh").css("color", "red");
 				$(".bankPwCh").css("font-size", "small");
+				$(".pin").effect("shake");
 				console.log("자리수 부족: " + text);
-				text = '';
+				/*text = '';*/
 			} else {
 				if(text.match(same) != null) {
 					$(".bankPwCh").html("동일한 숫자를 연속 3번 이상 사용할 수 없습니다.");
 					$(".bankPwCh").css("color", "red");
 					$(".bankPwCh").css("font-size", "small");
+					$(".pin").effect("shake");
 					console.log("같은 숫자: " + text);
-					text = '';
 				}else if(text.match(contNum) !=null){
 					$(".bankPwCh").html("연속된 숫자를 사용할 수 없습니다.");
 					$(".bankPwCh").css("color", "red");
 					$(".bankPwCh").css("font-size", "small");
+					$(".pin").effect("shake");
 					console.log("연속숫자: " + text);
-					text = '';
 				} else {
 					$(".bankPwCh").html("");
 					$(".bankPwCh").css("color", "red");

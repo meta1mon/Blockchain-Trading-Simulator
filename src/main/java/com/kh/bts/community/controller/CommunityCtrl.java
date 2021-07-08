@@ -27,6 +27,7 @@ import com.kh.bts.community.model.vo.UserRcommuniyCheck;
 import com.kh.bts.member.model.service.MemberService;
 import com.kh.bts.ranking.model.service.RankingService;
 import com.kh.bts.ranking.model.vo.Accumulative;
+import com.kh.bts.ranking.model.vo.Daily;
 
 @Controller
 public class CommunityCtrl {
@@ -45,8 +46,7 @@ public class CommunityCtrl {
 	public static final int LIMIT = 30;
 
 	@RequestMapping("insta")
-	public ModelAndView insta(/* @RequestParam(name = "cno") String cno, */
-			ModelAndView mav) {
+	public ModelAndView insta(ModelAndView mav) {
 		Paging paging = new Paging(1, 9);
 		List<Community> list = cmService.selectAllCommunityList(paging);
 		System.out.println(list);
@@ -59,16 +59,11 @@ public class CommunityCtrl {
 		mav.addObject("third", list1.get(2));
 		mav.addObject("other", list1);
 		
-		/*
-		 * Community vo = cmService.selectCommunity(0, cno); String writerEmail =
-		 * cmService.returnEmail(vo.getCwriter());
-		 * 
-		 * List<UserRcommuniyCheck> list2 = rcmService.selectRcommunityList(cno);
-		 * 
-		 * mav.addObject("community", vo); mav.addObject("commentList",
-		 * rcmService.selectRcommunityList(cno)); mav.addObject("writerEmail",
-		 * writerEmail);
-		 */
+		List<Daily> list2 = rankService.selectDaily();
+		mav.addObject("dailyFirst", list2.get(0));
+		mav.addObject("dailySecond", list2.get(1));
+		mav.addObject("dailyThird", list2.get(2));
+		mav.addObject("dailOther", list2);
 		
 		mav.setViewName("community/mikrokosmos");
 		return mav;
@@ -100,9 +95,7 @@ public class CommunityCtrl {
 	@RequestMapping(value = "clist", method = RequestMethod.GET)
 	public ModelAndView communityListService(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
-			@RequestParam(name = "searchType", defaultValue = "1") int searchType,
-			@RequestParam(name = "bottomKeyword", defaultValue = "", required = false) String bottomKeyword,
-			@RequestParam(name = "bottomSearchType", defaultValue = "1") int bottomSearchType, ModelAndView mv) {
+			@RequestParam(name = "searchType", defaultValue = "1") int searchType, ModelAndView mv) {
 		try {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
@@ -112,20 +105,11 @@ public class CommunityCtrl {
 			if (!keyword.equals("")) { // 상단 검색 내용 있음
 				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword, searchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-
-			} else if (!bottomKeyword.equals("")) { // 하단 검색 내용 있음
-				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, bottomKeyword, bottomSearchType));
-				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-
-			} else if (keyword.equals("")) { // 상단 검색 내용 없음
+			} else { // 상단 검색 내용 없음
 				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword, searchType));
-				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-			} else { // 하단 검색 내용 없음
-				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, bottomKeyword, bottomSearchType));
 				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 			}
 
-			mv.addObject("plist", cmService.searchpopularList());
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);

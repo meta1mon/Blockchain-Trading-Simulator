@@ -134,7 +134,7 @@ public class MypageController {
 
 	// 계좌 비밀번호 변경
 	@RequestMapping(value = "/bankPwChange")
-	public ModelAndView bankPwChange(ModelAndView mv, HttpServletRequest request,
+	public void bankPwChange(ModelAndView mv, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(name = "bankPw") int bankPw) {
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("loginMember");
@@ -148,8 +148,11 @@ public class MypageController {
 		} else {
 			logger.info("계좌 비밀번호 변경 실패");
 		}
-		mv.setViewName("main/mainPage");
-		return mv;
+		try {
+			response.sendRedirect("/bts");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// 내 회원 정보 가져오기
@@ -312,7 +315,7 @@ public class MypageController {
 			List<Sold> soldResult = sService.selectListSold(acntResult.getAcntno());
 			List<CashLog> cashLogList = myService.selectMyCashLog(loginEmail);
 			int cashLogListCount = myService.selectMyCashLog(loginEmail).size();
-			
+
 			mv.addObject("acnt", acntResult);
 			mv.addObject("totalCoin", totalCoin);
 			mv.addObject("totalAssets", totalAssets);

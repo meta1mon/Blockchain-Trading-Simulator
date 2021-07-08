@@ -2,7 +2,6 @@ package com.kh.bts.mypage.controller;
 
 import java.io.IOException;
 
-
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -53,7 +52,7 @@ public class MypageController {
 
 	@Autowired
 	private AcntService acntService;
-	
+
 	@Autowired
 	private WaitBoughtService wbService;
 	@Autowired
@@ -62,7 +61,7 @@ public class MypageController {
 	private BoughtService bService;
 	@Autowired
 	private SoldService sService;
-	
+
 	@RequestMapping(value = "")
 	public ModelAndView mypageEnter(ModelAndView mv) {
 		mv.setViewName("mypage/myPageEnter");
@@ -110,7 +109,8 @@ public class MypageController {
 
 	// 비밀번호 변경
 	@RequestMapping(value = "/passChange")
-	public void passChange(ModelAndView mv, HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "pw") String pw) {
+	public void passChange(ModelAndView mv, HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name = "pw") String pw) {
 		logger.info("비밀번호 변경하러 들어옴");
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("loginMember");
@@ -224,7 +224,7 @@ public class MypageController {
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("loginMember");
 		List<MyRcommunity> list = myService.selectMyRcommunity(email);
-		if(list == null) {
+		if (list == null) {
 			System.out.println("댓글 없음");
 		} else {
 			System.out.println("댓글 있음");
@@ -269,7 +269,16 @@ public class MypageController {
 	}
 
 	@RequestMapping(value = "/mpu")
-	public ModelAndView mypagePasswordUpdate(ModelAndView mv) {
+	public ModelAndView mypagePasswordUpdate(ModelAndView mv, HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+		String loginEmail = (String) session.getAttribute("loginMember");
+		if (loginEmail == null) {
+			System.out.println("비회원입니다");
+		} else {
+			Acnt result = acntService.selectMyAcnt(loginEmail);
+			mv.addObject("acnt", result);
+		}
 		mv.setViewName("mypage/myPasswordUpdate");
 		return mv;
 	}
@@ -279,27 +288,26 @@ public class MypageController {
 
 		HttpSession session = request.getSession();
 		String loginEmail = (String) session.getAttribute("loginMember");
-		
-		
+
 		if (loginEmail == null) {
 			System.out.println("비회원입니다");
 		} else {
 			mv.addObject("email", loginEmail);
 			Acnt acntResult = acntService.selectMyAcnt(loginEmail);
-			
-			int totalCoin =  myService.myTotalCoin(acntResult);
-			
-			long totalAssets = totalCoin+acntResult.getCybcash();
-			
+
+			int totalCoin = myService.myTotalCoin(acntResult);
+
+			long totalAssets = totalCoin + acntResult.getCybcash();
+
 			int coinListCount = myService.coinListCount(acntResult);
-			
+
 			List<CoinAcnt> coinList = myService.selectMyCoinAcnt(acntResult.getAcntno());
-			
+
 			List<WaitBought> wBoughtResult = wbService.selectListWaitBought(acntResult.getAcntno());
 			List<WaitSold> wSoldResult = wsService.selectListWaitSold(acntResult.getAcntno());
 			List<Bought> boughtResult = bService.selectListBought(acntResult.getAcntno());
 			List<Sold> soldResult = sService.selectListSold(acntResult.getAcntno());
-			
+
 			mv.addObject("acnt", acntResult);
 			mv.addObject("totalCoin", totalCoin);
 			mv.addObject("totalAssets", totalAssets);
@@ -309,9 +317,9 @@ public class MypageController {
 			mv.addObject("wSoldResult", wSoldResult);
 			mv.addObject("boughtResult", boughtResult);
 			mv.addObject("soldResult", soldResult);
-			
+
 		}
-		
+
 		mv.setViewName("mypage/myEssets");
 		return mv;
 	}
@@ -338,8 +346,8 @@ public class MypageController {
 			mv.addObject("list", myService.selectMyCashLog(loginEmail));
 			System.out.println(myService.selectMyCashLog(loginEmail));
 			mv.addObject("listCount", myService.selectMyCashLog(loginEmail).size());
-		} catch(Exception e) {
-			
+		} catch (Exception e) {
+
 		}
 		mv.setViewName("mypage/myCashLog");
 		return mv;

@@ -45,7 +45,17 @@ function reply(idx) {
 													+ reply.rdate
 													+ "</span><br><span class=\"content-span\">"
 													+ reply.rcontent
-													+ "</span></div></li>";
+													+ "</span></div>"
+													+ "<div class=\"replyDropdown\" style=\"float: right;\">"
+													+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
+													+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport(reply.cno)\">신고</p>"
+													+ "<c:if test=\"${loginMember == writer.email }\">"
+													+ "<p class=\"updateReply\" onclick=\"makeUpdateBtn(idx )\">수정</p>"
+													+ "<p class=\"deleteReply\" onclick=\"replyDelete(reply.rno, reply.cno)\">삭제</p>"
+													+ "</c:if> </div>"
+													+ "<button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
+													+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button>"
+													+ "</li>";
 										});
 						replyHtml += "</ul>";
 					} else {
@@ -141,8 +151,8 @@ $('.replyDropdown').click(
 		function() {
 			console.log("클릭함");
 			console.log("클릭dropdown 상위 article idx: "
-					+ $(this).parents('article').index());
-			$('.dropdown-content').eq($(this).parents('article').index())
+					+ $(this).parents('.replyDropdown').index());
+			$('.dropdown-content').eq($(this).parents('.replyDropdown').index())
 					.show();
 			$(".replyDropdown").mouseleave(function() {
 				$(this).css("display", "block");

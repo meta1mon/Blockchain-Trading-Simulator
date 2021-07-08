@@ -156,18 +156,12 @@ $(function(){
 								</div>
 								
 							<!-- 댓글 작성자에게만 수정 삭제 버튼이 보임 -->
-								<%-- <button type="button" class="makeBtn"
-									onclick="makeUpdateBtn(${status.index })">수정하기</button> --%>
 								<button type="button" class="submitRUpdate"
 									onclick="replyUpdate(${rep.rno}, ${status.index })"
 									style="display: none;">저장</button>
 								<button type="button" class="cancleRUpdate"
 									onclick="updateRCancle(${status.index })"
 									style="display: none;">취소</button>
-								<%-- <button type="button"
-									onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</button> --%>
-						<%-- <button type="button" class="report" id="popup_open_btn_reply"
-							onclick="rreport(${rep.rno})">신고</button> --%>
 					</div>
 					<br>
 				</c:forEach>

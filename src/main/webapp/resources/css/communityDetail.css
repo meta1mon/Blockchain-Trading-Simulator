@@ -278,7 +278,7 @@ hr {
 	cursor: pointer;
 }
 
-/* 댓글에 커서 올리면  icon-more를 감싸고 있는 replyDropdown 태그가 보인다.*/
+/*  replyDropdown 태그에 커서를 올리면 신고, 수정, 삭제 버튼을 둘러싸고 있는 dropdown-content 태그가 보인다.*/
 .reply-list li:hover .replyDropdown {
 	position: relative;
 	display: inline-block;

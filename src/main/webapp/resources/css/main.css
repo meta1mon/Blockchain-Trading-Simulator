@@ -389,7 +389,7 @@ img.comment-heart-liked {
 }
 
 div.time-log {
-	margin-bottom: 8px;
+	margin-bottom: 30px;
 }
 
 div.time-log span {
@@ -830,10 +830,18 @@ marquee {
 
 .insta img {
 	object-fit: cover;
+	
+}
+.insta .main-image img {
+	object-fit: scale-down;
+	width: 400px;
+	height: 300px;
+	overflow: auto;
 }
 
 .insta td {
 	height: 550px;
+	
 }
 
 article {

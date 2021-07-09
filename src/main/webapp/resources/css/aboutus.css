@@ -11210,6 +11210,7 @@ header.masthead .masthead-heading {
 .team-member img {
   width: 14rem;
   height: 14rem;
+  object-fit: cover;
 }
 .team-member h4, .team-member .h4 {
   margin-top: 1.5rem;

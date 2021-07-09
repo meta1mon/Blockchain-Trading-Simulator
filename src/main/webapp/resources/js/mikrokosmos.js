@@ -159,20 +159,21 @@ $('.dropdown').click(
 					.show();
 		});
 
-$('.replyDropdown').click(
+//댓글 드랍다운 메뉴는 css hover로 구현
+/*$('.replyDropdown').click(
 		function() {
 			console.log("클릭함");
 			console.log("클릭dropdown 상위 article idx: "
-					+ $(this).parents('.replyDropdown').index());
+					+ $(this).parents('.modal_reply').index());
 			$('.dropdown-content')
-					.eq($(this).parents('.replyDropdown').index()).show();
+					.eq($(this).parents('.modal_reply').index()).show();
 			$(".replyDropdown").mouseleave(function() {
 				$(this).css("display", "block");
 			});
-		});
+		});*/
 
 $(document).mouseup(function(e) {
-	var dropdown = $('.dropdown-content');
+	var dropdown = $('.ddcontent');
 	var replyDropdownBtn = $('.replyDropdown');
 	var containerReply = $('#modal_reply'); // 댓글 모달창
 	var containerReport = $('#modal_report'); // 게시글 신고 모달창
@@ -180,7 +181,6 @@ $(document).mouseup(function(e) {
 
 	if (dropdown.has(e.target).length === 0) {
 		dropdown.css('display', 'none');
-		// replyDropdownBtn.css('display','none');
 	}
 	if (containerReport.has(e.target).length === 0) {
 		containerReport.css('display', 'none');
@@ -458,7 +458,7 @@ function modalReportReplyFn(id) {
 			'click', function() {
 				bgReportReply.remove();
 				/*modalReportReply.removeChild();*/
-				/*modalReportReply.style.display = 'none';*/
+				modalReportReply.style.display = 'none';
 			});
 
 	modalReportReply

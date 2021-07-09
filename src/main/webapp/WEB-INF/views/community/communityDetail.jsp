@@ -45,7 +45,7 @@ $(function(){
 	<div id="wrapper">
 		<%@include file="../main/header.jsp"%>
 		<div class="detailOut">
-			<div class="comm">커뮤니티</div>
+			<div class="comm">공지사항</div>
 			<br>
 			<!-- 게시글 제목 부분 -->
 			<hr style="position: relative; top: 7px;">

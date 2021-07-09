@@ -51,7 +51,7 @@ public class CommunityCtrl {
 	public ModelAndView insta(ModelAndView mav,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
 			@RequestParam(name = "searchType", defaultValue = "1") int searchType) {
-		Paging paging = new Paging(1, 9);
+		Paging paging = new Paging(1, 9999);
 		List<Community> list = cmService.selectAllCommunityList(paging, keyword, searchType);
 		System.out.println(list);
 		mav.addObject("commuList", list);
@@ -67,7 +67,7 @@ public class CommunityCtrl {
 		mav.addObject("dailyFirst", list2.get(0));
 		mav.addObject("dailySecond", list2.get(1));
 		mav.addObject("dailyThird", list2.get(2));
-		mav.addObject("dailOther", list2);
+		mav.addObject("dailyOther", list2);
 
 		mav.setViewName("community/mikrokosmos");
 		return mav;

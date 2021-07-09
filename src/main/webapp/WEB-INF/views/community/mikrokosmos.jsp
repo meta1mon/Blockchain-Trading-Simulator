@@ -55,9 +55,7 @@
 }
 </style>
 <script>
-
 $(function() {
-
 	// 검색 부분
 			$('form[name=listForm]').on('submit',	function(e) {
 						if ($('input[name=keyword]').val() == null
@@ -70,11 +68,6 @@ $(function() {
 					});
 		});
 		
-		// 인스타 게시글 첨부파일이 없을 때 사용하는 변수
-		var filepath = "";
-		if (filepath == ("undefined")) {
-			filepath = "";
-		}
 		// 시작점 1번부터라는 뜻
 		var instaStart = 7;
 		// 추가로 4개씩 더 불러옴
@@ -95,12 +88,13 @@ $(function() {
 							var json = JSON.parse(data);
 							if (json.length > 0) {
 								$.each(json,function(idx, insta) {
+									// 인스타 게시글 첨부파일이 없을 때 사용하는 변수
 									moreHtml += "<article> <header> <div class='profile-of-article'> <img class='img-profile pic' src='resources/assets/img/user.png'> <span class='userID main-id point-span'>" + insta.cwriter +"</span> </div> "
-											+"<div class='dropdown' style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
+											+"<div class='dropdown dd' onclick=\"dropdown()\" style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
 											+"<div class='dropdown-content' style='left: 0;'> <p onclick='report(" + insta.cno + ")' class='report' id='popup_open_btn'>신고</p> <c:if test='${loginMember == writerEmail }'> <p onclick=\"checkUpdate(" + insta.cno + ", " + insta.cwriter + ")\" class='update'>수정</a> <p onclick='checkDelete('insta.cno', 'insta.cwriter')' class='delete'>삭제</a> </c:if>"
 											+"</div> </div> </div> </header>"
 											+"<div class='main-image'><div class='content'>" + insta.ccontent
-											+"<a download="+insta.filepath+" href=\"${pageContext.request.contextPath}/resources/uploadFiles/"+insta.filepath+"\">"+filepath+"</a><br> </div> </div>"
+											+"<c:if test='${not empty insta.filepath}'> <a download="+insta.filepath+" href=\"${pageContext.request.contextPath}/resources/uploadFiles/"+insta.filepath+"\">"+insta.filepath+"</a></c:if><br> </div> </div>"
 											
 		                                	+"<div class=\"icons-react\"> <div class=\"icons-left\"> <img class=\"thumbsup\" onclick=\"clike(" + insta.cno + ")\" src='resources/assets/img/thumbsup.png' alt=\"추천\">" + insta.likecnt + "</div>"
 											+"<div class=\"icons-middle\"> <img class=\"thumbsdown\" onclick=\"dislike(" + insta.cno + ")\" src='resources/assets/img/thumbsdown.png' alt='비추천'>"
@@ -113,7 +107,7 @@ $(function() {
 											+"<input type='text' class='input-comment replyContent3' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick=\"replyInsert3('" + insta.cno + "')\">등록</button>"
 											+"</div> </c:if> </div> <c:if test='${loginMember == null }'> <div class='comment'> <input class='input-comment' type='text' readonly placeholder='댓글을 작성하려면 로그인이 필요합니다.'>"
 											+"<button type='button' class='submit-comment' onclick=\"location.href='login'\">이동</button> </div> </c:if> </article>";
-										
+								
 								<%-- 		"<br><div class='parent'><div><img	src='<%=request.getContextPath()%>/resources/assets/img/bts_logo.png'"
 									+ "width='25px' height='25px'>" + insta.cwriter + "<span	style='color: red;'>:== 닉네임</span></div>"
 									+ "<div>" + insta.ccontentr +"<span style='color: red;''>:== 내용</span></div>"
@@ -132,7 +126,7 @@ $(function() {
 						}
 					});
 		}
-		
+	
 		// 게시글 작성 페이지로 넘어감
 		function showInsertForm() {
 				      if(${loginMember == null}) {
@@ -181,7 +175,6 @@ function clike(likeCno) {
             "cno" : likeCno
          },
          success : function(data) {
-        	 alert("좋아요 제대로 들어갔는데, 컨트롤러에서 print.out을 안해서 좋아요 됐을 때 안됐을 때 구분이 안됨! 나중에 할거임!");
             window.location.reload();
          }
       });
@@ -216,7 +209,6 @@ function dislike(dislikeCno) {
          },
          datatype : "json",
          success : function(data) {
-        	 alert("싫어요 제대로 들어갔는데, 컨트롤러에서 print.out을 안해서 좋아요 됐을 때 안됐을 때 구분이 안됨! 나중에 할거임!");
             window.location.reload();
          }
       });
@@ -295,7 +287,7 @@ $(function(){
 							<div class="dropdown" style="float: right;">
 								<div class="icon-react icon-more"
 									style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
-									<div class="dropdown-content" style="left: 0;">
+									<div class="dropdown-content ddcontent" style="left: 0;">
 										<p onclick="report('${vo.cno}')" class="report">신고</p>
 										<p class="update"
 											onclick="checkUpdate('${vo.cno }', '${vo.cwriter }')">수정</p>
@@ -308,9 +300,9 @@ $(function(){
 						<!-- 게시글 내용 영역 -->
 						<div class="main-image">
 							<div class="content">${vo.ccontent }
-									<a download="${vo.filepath}"
-										href="${pageContext.request.contextPath}/resources/uploadFiles/${vo.filepath}">${vo.filepath}</a>
-									<br>
+								<a download="${vo.filepath}"
+									href="${pageContext.request.contextPath}/resources/uploadFiles/${vo.filepath}">${vo.filepath}</a>
+								<br>
 							</div>
 						</div>
 						<!-- 게시글 추천, 비추천, 댓글 작성 -->
@@ -372,8 +364,13 @@ $(function(){
 					</article>
 				</c:forEach>
 
-				<div id="moreDiv"></div>
-				<button type="button" class="moreFeed" onclick="moreInsta()">더보기</button>
+				<br>
+				<div>
+					<div style='text-align: center; margin-bottom: 20px;'>더이상 불러올
+						게시글이 없습니다</div>
+				</div>
+				<!-- <div id="moreDiv"></div>
+				<button type="button" class="moreFeed" onclick="moreInsta()">더보기</button> -->
 			</div>
 			<!-- main-right -->
 			<div class="main-right">

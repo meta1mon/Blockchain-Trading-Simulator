@@ -297,10 +297,6 @@
                                     <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/investment.jpg" alt="..." />
                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                                     <ul class="list-inline">
-                                        <li>
-                                            <strong>Developer:</strong>
-                                            Threads
-                                        </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-times me-1"></i>
@@ -328,10 +324,6 @@
                                     <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/news.jpg" alt="..." />
                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                                     <ul class="list-inline">
-                                        <li>
-                                            <strong>Developer:</strong>
-                                            Explore
-                                        </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-times me-1"></i>
@@ -359,10 +351,6 @@
                                     <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/prochart.jpg" alt="..." />
                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                                     <ul class="list-inline">
-                                        <li>
-                                            <strong>Developer:</strong>
-                                            Finish
-                                        </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-times me-1"></i>
@@ -388,12 +376,8 @@
                                     <h2 class="text-uppercase">커뮤니티</h2>
                                     <p class="item-intro text-muted">Community</p>
                                     <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/community.jpg" alt="..." />
-                                    <p>이미지와 게시판이 결합된 커뮤니티 서비스입니다. 투자자 간 주식, 비트코인 등 사회 각 분야에 대한 정보와 의견을 공유할 수 있습니다. 현재 CKEditor5, 파일 첨부, 추천, 비추천 등 다양한 기능을 제공하고 있으며, 자유로운 소통의 장으로 자리매김하고 있습니다.</p>
+                                    <p>이미지와 게시판이 결합된 커뮤니티 서비스입니다.<br> 투자자 간 주식, 비트코인 등 사회 각 분야에 대한 정보와 의견을 공유할 수 있습니다.<br> 현재 CKEditor5, 파일 첨부, 추천, 비추천 등 다양한 기능을 제공하고 있으며, <br>자유로운 소통의 장으로 자리매김하고 있습니다.</p>
                                     <ul class="list-inline">
-                                        <li>
-                                            <strong>Developer:</strong>
-                                           	김연준
-                                        </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-times me-1"></i>
@@ -421,10 +405,6 @@
                                     <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/cashshop.jpg" alt="..." />
                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                                     <ul class="list-inline">
-                                        <li>
-                                            <strong>Developer:</strong>
-                                            Southwest
-                                        </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-times me-1"></i>
@@ -452,10 +432,6 @@
                                     <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/ranking.jpg" alt="..." />
                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                                     <ul class="list-inline">
-                                        <li>
-                                            <strong>Developer:</strong>
-                                            Window
-                                        </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-times me-1"></i>

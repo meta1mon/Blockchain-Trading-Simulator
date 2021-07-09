@@ -205,7 +205,7 @@
                             <h4>김도영</h4>
                             <p class="text-muted" style="margin:0;">Developer</p>
                             <p class="text-muted">gimdoyoung97@gmail.com</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" target="_blank"><i class="fab fa-github"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/ehdud0314" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">

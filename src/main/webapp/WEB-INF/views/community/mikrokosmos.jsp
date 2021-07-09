@@ -106,11 +106,11 @@ $(function() {
 											+"<div class=\"icons-middle\"> <img class=\"thumbsdown\" onclick=\"dislike(" + insta.cno + ")\" src='resources/assets/img/thumbsdown.png' alt='비추천'>"
 											+"<img class='thumbsdown-disliked' src='resources/assets/img/thumbs-down.png'>" + insta.dislikecnt + "</div> "
 											
-											+"<div class='icons-right'> <input type=\"hidden\" class=\"hiddenCno\" value="+insta.cno+">"
-											+"<img class=\"reply\" onclick=\"reply(idx)\" id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png' alt='댓글'>"
+											+"<div class='icons-right'>"
+											+"<img class=\"reply\" onclick=\"reply2('" + insta.cno + "')\" id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png' alt='댓글'>" + insta.replycnt
 											+"</div> </div> <div class=\"reaction\"> <div class=\"comment-section\"> <ul class=\"comments\"> </ul>"
 											+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <div class='comment'> <input type='hidden' name='cno' class=\"replyInsertCno1\" value="+ insta.cno +">"
-											+"<input type='text' class='input-comment' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick=\"replyInsert1(idx)\">등록</button>"
+											+"<input type='text' class='input-comment replyContent3' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick=\"replyInsert3('" + insta.cno + "')\">등록</button>"
 											+"</div> </c:if> </div> <c:if test='${loginMember == null }'> <div class='comment'> <input class='input-comment' type='text' readonly placeholder='댓글을 작성하려면 로그인이 필요합니다.'>"
 											+"<button type='button' class='submit-comment' onclick=\"location.href='login'\">이동</button> </div> </c:if> </article>";
 										

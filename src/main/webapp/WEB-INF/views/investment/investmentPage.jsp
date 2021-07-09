@@ -8,21 +8,35 @@
 <title>BTS</title>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
 	type="image/x-icon" />
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="${pageContext.request.contextPath}/resources/css/investment.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/pinpad.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
+<link
+	href="${pageContext.request.contextPath}/resources/css/investment.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/pinpad.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script src="${pageContext.request.contextPath}/resources/js/pinpad.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-<script	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+	integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+	crossorigin="anonymous"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/investmentData.js"></script>
 <style>
 .popup {
 	position: fixed;
@@ -67,7 +81,7 @@
 			<div class="parent">
 				<!-- 위젯, 코인 목록 테이블 -->
 				<div class="div1">
-
+					<!-- 매수 매도 오디오 부분   -->
 					<audio id="boughtmusic">
 						<source
 							src="${pageContext.request.contextPath}/resources/audio/bought.wav">
@@ -78,6 +92,7 @@
 					</audio>
 					<div id="title"></div>
 				</div>
+				<!-- 메인차트부분   -->
 				<div class="div2">
 
 					<div id="chart1">
@@ -96,7 +111,7 @@
 						<!-- TradingView Widget END -->
 					</div>
 				</div>
-
+				<!-- 전체 코인 테이블 부분   -->
 				<div class="div5">
 					<input type="text" id="searchcoin" value=""
 						style="width: 100%; display: 'block'" placeholder="코인 검색">
@@ -124,11 +139,11 @@
 
 					<div id="cointable_div"></div>
 				</div>
-
+				<!-- 호가창부분   -->
 				<div class="div3">
 					<div id="aaaaa"></div>
 				</div>
-
+				<!-- 매수 매도 부분   -->
 				<div class="div4" id="all_t">
 					<c:choose>
 						<c:when test="${loginMember == null }">
@@ -277,6 +292,7 @@
 				</div>
 
 			</div>
+			<!-- 체결 & 미체결 부분   -->
 			<div class="div7">
 
 				<table id="wb_ws" class='table table-striped'>
@@ -308,7 +324,7 @@
 
 		</div>
 
-
+		<!-- 매수 매도 애니매이션 부분   -->
 		<div id="alertbuy" class="popup">매수가 체결되었습니다.</div>
 		<div id="alertsold" class="popup1">매도가 체결되었습니다.</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include>

@@ -33,8 +33,7 @@ $(function() {
 
 	});
 
-	// ///////////////////////////// CSS
-	// /////////////////////////////////////////////////
+/////////////////////////////////// CSS
 	$("#sold_b").click(function() {// 매도 활성화 css
 		$("#sold_b").css("color", "white");
 		$("#bought_b").css("color", "black");
@@ -59,7 +58,7 @@ $(function() {
 		$("#price_b").show();
 		$("#bought").show();
 	});
-	// ////////////// 총합계산 ///////////////////////////
+/////////////////// 총합계산 ///////////////////////////
 	$("#cnt_b").blur(function() { // 합계 구하기 매수
 		var sum = 0;
 		var a = $("#price_b").val();
@@ -128,7 +127,7 @@ $(function() {
 		$("#updatecoin").val(csum1);
 
 	});
-	// /////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////
 	$("#sold").on(
 			// 미체결 매도 추가하기
 			"click",
@@ -259,6 +258,8 @@ var display = new Array();
 var displays = new Array();
 var html = "";
 var bnum = 2; // 차트 종류
+
+//////////// 차트 정렬 기준 ///////////////
 function qwer(bnum) {
 	if (bnum == 1) { // price down
 		display.sort(function(a, b) {
@@ -306,7 +307,8 @@ function click6() {
 	
 	bnum = 6;
 }
-function alltable() { // 전체코인 시세 표
+////////////////// 전체 코인 시세 표 /////////////
+function alltable() { 
 	var titdisplay = new Array();
 	var onedisplay = new Array();
 
@@ -331,10 +333,7 @@ function alltable() { // 전체코인 시세 표
 									data['data'][b]['acc_trade_value_24H'] * 1,
 									b ]
 						}
-						// //////////// 정렬 부분 ////////////
-
 						qwer(bnum);
-
 						titdisplay[0] = [
 								data['data'][ch_title]['closing_price'] * 1,
 								data['data'][ch_title]['fluctate_rate_24H'] * 1,
@@ -471,8 +470,8 @@ function returncoinfn(tc) { // 매도 취소시 코인 반환 update 문
 		}
 	});
 }
-
-function up() { // 매수 & 매도 실행시 돈계산 부분
+//매수 & 매도 실행시 돈계산 부분
+function up() { 
 	$.ajax({
 		url : "coinupdate",
 		type : "post",
@@ -489,7 +488,8 @@ function up() { // 매수 & 매도 실행시 돈계산 부분
 		}
 	});
 }
-function coinacntupdate() { // 코인계산 부분
+//코인계산 부분
+function coinacntupdate() { 
 	$.ajax({
 		url : "coinacntupdate",
 		type : "post",
@@ -508,7 +508,8 @@ function coinacntupdate() { // 코인계산 부분
 		}
 	});
 }
-function upcoin() { // coin 돈계산 부분
+//coin 돈계산 부분
+function upcoin() { 
 	$.ajax({
 		url : "coinacntupdate",
 		type : "post",
@@ -571,7 +572,7 @@ function acnt() { // acnt select list 계좌 금액 체크
 	});
 }
 // //////////////////////////////// 체결 & 미체결 list
-// ///////////////////////////////////////////////////////
+
 function slist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 	var dataList = $("#frm22").serialize();
 
@@ -1010,10 +1011,6 @@ function orderbook() {
 					html6 = "<table id='orderbook_t' class='table table-striped' style='text-align : center;'><tr><th style=' position: sticky; top: 0px;  background: #f8f9fa;'>현재가</th><th  style=' position: sticky; top: 0px;  background: #f8f9fa;'>수량</th></tr>";
 					for (var i = 14; i >= 0; i--) {
 						html6 += "<tr><td><a href='#'  style='color : black !important;' onclick='ob_p("
-								// html6 += "<tr style='background:
-								// rgba(255,51,0,0.5) !important;'><td><a
-								// href='#' style='color : black !important;'
-								// onclick='ob_p("
 								+ orderbookarrask[i][0]
 								+ ");'>"
 								+ orderbookarrask[i][0]
@@ -1021,13 +1018,8 @@ function orderbook() {
 								+ orderbookarrask[i][1] + "개" + "</td></tr>";
 
 					}
-					// html6 += "<tr><td>구분좀하자 </td></tr>";
 					for (var i = 0; i < 15; i++) {
 						html6 += "<tr><td><a href='#'  style='color : black !important;' onclick='ob_p("
-								// html6 += "<tr style='background:
-								// rgba(33,150,243, 0.5) !important;'><td><a
-								// href='#' style='color : black !important;'
-								// onclick='ob_p("
 								+ orderbookarrbid[i][0]
 								+ ");'>"
 								+ orderbookarrbid[i][0]

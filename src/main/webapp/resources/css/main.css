@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 ul, li {
 	margin: 0;
 	padding: 0;
@@ -159,10 +160,6 @@ article, .section-story, .section-recommend {
 	border: 1px solid #E3C8F8;
 }
 
-article {
-	margin-bottom: 60px;
-}
-
 .section-story, .section-recommend {
 	width: 310px;
 	padding: 14px 16px;
@@ -200,10 +197,6 @@ header {
 	border-radius: 100%;
 }
 
-.main-image img {
-	width: 612px;
-}
-
 .main-id {
 	margin-left: 14px;
 }
@@ -212,7 +205,11 @@ header {
 	padding: 0 16px 6px 16px;
 }
 
-.content p{
+.content {
+	height: 400px;
+}
+
+.content p {
 	padding: 0 16px;
 	font-weight: lighter;
 }
@@ -235,10 +232,9 @@ header {
 } */
 
 /* replyDropdown 태그에 커서를 올리면 드랍다운 내용 보임 */
- .replyDropdown:hover .dropdown-content
-	{
+.replyDropdown:hover .dropdown-content {
 	display: block;
-}  
+}
 
 .dropdown-content {
 	display: none;
@@ -266,7 +262,6 @@ header {
 	{
 	display: block;
 } */
-
 .icon-more {
 	justify-self: end;
 	background-size: 24px 24px;
@@ -547,7 +542,7 @@ ul.story-list .profile-text {
 	padding: 3px 10px;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 #modal_report .modal_report_btn, #modal_report_reply .modal_report_btn {
@@ -561,7 +556,7 @@ ul.story-list .profile-text {
 	padding: 3px 10px;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 #modal_report .modal_close_btn:hover, #modal_report .modal_report_btn:hover
@@ -592,9 +587,9 @@ ul.story-list .profile-text {
 .modal-hl {
 	border-top: 1px solid #efefef;
 	width: 468px;
-    position: relative;
-    right: 30px;
-    margin-bottom: 15px;
+	position: relative;
+	right: 30px;
+	margin-bottom: 15px;
 }
 
 .modal-input-comment {
@@ -608,18 +603,18 @@ ul.story-list .profile-text {
 }
 
 .modal_reply_close_btn {
-	    position: absolute;
-    top: 8px;
-    right: 8px;
-    border: none;
-    background-color: #fefefe;
-    height: 17px;
-    width: 17px;
-    background-repeat: no-repeat;
-    background-size: 16px;
-    background-position: center left;
-    background-image: url(../assets/img/cancel.png);
-    cursor:pointer;
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	border: none;
+	background-color: #fefefe;
+	height: 17px;
+	width: 17px;
+	background-repeat: no-repeat;
+	background-size: 16px;
+	background-position: center left;
+	background-image: url(../assets/img/cancel.png);
+	cursor: pointer;
 }
 
 .modal_reply_close_btn:hover {
@@ -693,14 +688,14 @@ img.reply-more {
 }
 
 button.moreFeed {
-	height:50px;
-	width : 612px;
+	height: 50px;
+	width: 612px;
 	background-color: #fff;
-    border-radius: 3px;
-    border: 1px solid #E3C8F8;
-    font-size: 14px;
-    color: #262626;
-    cursor:pointer;
+	border-radius: 3px;
+	border: 1px solid #E3C8F8;
+	font-size: 14px;
+	color: #262626;
+	cursor: pointer;
 }
 
 button.moreFeed:hover {
@@ -709,28 +704,28 @@ button.moreFeed:hover {
 		box-shadow 0.15s ease-in-out;
 }
 
-
 table {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
 }
-#c1{
+
+#c1 {
 	width: 600px;
 	height: 500px;
 	background: #fff;
 	border: 1px solid transparent;
 	border-color: #E3C8F8;
-  	box-shadow: 1px 2px 3px rgb(90 90 90/ 35%);
+	box-shadow: 1px 2px 3px rgb(90 90 90/ 35%);
 }
 
-#c2{
+#c2 {
 	width: 400px;
 	height: 500px;
 	background: white;
 	border: 1px solid transparent;
 	border-color: #E3C8F8;
-  	box-shadow: 1px 2px 3px rgb(90 90 90/ 35%);
+	box-shadow: 1px 2px 3px rgb(90 90 90/ 35%);
 }
 /*  #chart {
 	
@@ -738,28 +733,30 @@ table {
 	height: 100%
 	border: 1px solid;
 } */
-
- #chart_div {
+#chart_div {
 	height: 500px;
 	border: 1px solid #f2f2f2;
 	border-radius: 5px;
-	
-} 
+}
 
- #cointable_div{
+#cointable_div {
 	height: 100%;
 	font-size: small;
-} 
- #cointable_div a{
- 	color: #8C66C8;
-} 
- #cointable_div a:visited{
- 	color: #8C66C8;
- 	text-decoration: none;
-} 
- #cointable_div a:active{
- 	text-decoration: none;
-} 
+}
+
+#cointable_div a {
+	color: #8C66C8;
+}
+
+#cointable_div a:visited {
+	color: #8C66C8;
+	text-decoration: none;
+}
+
+#cointable_div a:active {
+	text-decoration: none;
+}
+
 #cointable_btn {
 	width: 960px;
 	height: 30px;
@@ -770,18 +767,21 @@ table {
 	margin-top: 10px;
 	box-shadow: 1px 2px 3px rgb(90 90 90/ 35%);
 }
+
 #cointable_btn:hover {
 	border: 1px solid #8C66C8;
 	border-radius: 5px;
 	color: white;
 	background: #8C66C8;
 }
-#new{
-	text-align:center;
-	display:inline;
+
+#new {
+	text-align: center;
+	display: inline;
 	width: 90%;
 	height: 10%;
 }
+
 .headLine {
 	/* border: 2px inset; */
 	border: 1px solid transparent;
@@ -801,7 +801,7 @@ table {
 
 .headList {
 	line-height: 35px;
-	vertical-align: middle; 
+	vertical-align: middle;
 }
 
 marquee {
@@ -810,12 +810,40 @@ marquee {
 
 #videobcg {
 	position: fixed;
-    top: 64px;
-    left: 0px;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -1000;
-    overflow: hidden;
+	top: 64px;
+	left: 0px;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	z-index: -1000;
+	overflow: hidden;
+}
+
+.insta {
+	table-layout: fixed;
+}
+
+.time-log {
+	text-align: left;
+}
+
+.insta img {
+	object-fit: cover;
+}
+
+.insta td {
+	height: 550px;
+}
+
+article {
+	height: calc(100% - 40px);
+	margin: 10px;
+}
+
+.ex1 {
+	text-align: center;
+	display: inline;
+	width: 90%;
+	height: 10%;
 }

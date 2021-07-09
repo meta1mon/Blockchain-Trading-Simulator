@@ -56,7 +56,7 @@ public class investmentCtrl {
    private MypageService myService;
    
    
-   
+   // 팝업 부분
    @RequestMapping(value = "mpopup")
    public ModelAndView myEssets(ModelAndView mv, Member vo, HttpServletRequest request) {
 
@@ -65,7 +65,7 @@ public class investmentCtrl {
       
       
       if (loginEmail == null) {
-         System.out.println("비회원입니다");
+        
       } else {
          mv.addObject("email", loginEmail);
          Acnt acntResult = acntService.selectMyAcnt(loginEmail);
@@ -197,7 +197,6 @@ public class investmentCtrl {
       HttpSession session = request.getSession();
       String loginEmail = (String) session.getAttribute("loginMember");
       if (loginEmail == null) {
-         System.out.println("비회원입니다");
       } else {
          mav.addObject("email", loginEmail);
          Acnt result = acntService.selectMyAcnt(loginEmail);
@@ -240,9 +239,9 @@ public class investmentCtrl {
       PrintWriter out = null;
       try {
          if (result > 0) {
-            System.out.println("insert성공");
+            System.out.println("coinacntInsert성공");
          } else {
-            System.out.println("insert실패");
+            System.out.println("coinacntInsert실패");
          }
          out = response.getWriter();
          out.print(result);
@@ -261,9 +260,9 @@ public class investmentCtrl {
       PrintWriter out = null;
       try {
          if (result > 0) {
-            System.out.println("wbdelete 성공");
+            System.out.println("coinacntdelete 성공");
          } else {
-            System.out.println("wbdelete 실패");
+            System.out.println("coinacntdelete 실패");
          }
          out = response.getWriter();
          out.print(result);
@@ -347,8 +346,6 @@ public class investmentCtrl {
       String jsonlist = gson.toJson(result);
 
       try {
-
-         System.out.println("ajax select성공");
          out = response.getWriter();
          out.print(jsonlist);
       } catch (IOException e) {

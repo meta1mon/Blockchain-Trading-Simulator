@@ -164,23 +164,36 @@ input[type=radio] {
 	color: #8c66c8;
 }
 </style>
-<!-- <script>
+ <script>
 	$(function(){
-		var test = function(){
-			if($("#item-1:checked")){
-				$("#accumulative").css("display", "block");
-				$("#daily").css("display", "none");
-			} else {
-				$("#accumulative").css("display", "none");
-				$("#daily").css("display", "block");
-				
-			} 
-			
+		if(${criteria == 0}) {
+			$("#item-1").prop("checked", true);
+		} else if(${criteria == 1}) {
+			$("#item-2").prop("checked", true);
+		} else if(${criteria ==2}) {
+			$("#item-3").prop("checked", true);
+		} else if(${criteria ==3}) {
+			$("#item-4").prop("checked", true);
 		}
 		
-		$("#item-1").on("click", test);
+		$("#rank-1").click(function() {
+			console.log("1번 클릭");
+			location.href="rankDaily?criteria=0";
+		});
+		$("#rank-2").click(function() {
+			console.log("2번 클릭");
+			location.href="rankDaily?criteria=1";
+		});
+		$("#rank-3").click(function() {
+			console.log("3번 클릭");
+			location.href="rankDaily?criteria=2";
+		});
+		$("#rank-4").click(function() {
+			console.log("4번 클릭");
+			location.href="rankDaily?criteria=3";
+		});
 	})
-</script> -->
+</script>
 </head>
 <body>
 	<div id="wrapper">
@@ -188,7 +201,7 @@ input[type=radio] {
 		<div id="rank">
 			<!-- 랭킹 스와이프 메뉴 시작 -->
 			<div class="container">
-				<input type="radio" name="slider" id="item-1" checked> 
+				<input type="radio" name="slider" id="item-1"> 
 				<input type="radio" name="slider" id="item-2"> 
 				<input type="radio" name="slider" id="item-3"> 
 				<input type="radio" name="slider" id="item-4">

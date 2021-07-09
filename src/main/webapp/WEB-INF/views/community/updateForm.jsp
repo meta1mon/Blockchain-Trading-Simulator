@@ -43,7 +43,7 @@
 				</c:if>
 				<textarea id="editor" name="ccontent" maxlength="4000"
 					style="margin: 0 auto 10 auto;">${community.ccontent}</textarea>
-				<input type="submit" value="글 작성하기" id="submit">
+				<input type="submit" value="글 수정하기" id="submit">
 				<c:url var="clist" value="clist">
 					<c:param name="page" value="1" />
 				</c:url>

@@ -3,6 +3,7 @@ package com.kh.bts.community.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,7 @@ import com.kh.bts.ranking.model.vo.Daily;
 
 @Controller
 public class CommunityCtrl {
+	private String[] tagArr;
 	@Autowired
 	private CommunityService cmService;
 
@@ -42,7 +44,7 @@ public class CommunityCtrl {
 
 	@Autowired
 	private MemberService mService;
-	
+
 	public static final int LIMIT = 30;
 
 	@RequestMapping("insta")
@@ -58,13 +60,13 @@ public class CommunityCtrl {
 		mav.addObject("second", list1.get(1));
 		mav.addObject("third", list1.get(2));
 		mav.addObject("other", list1);
-		
+
 		List<Daily> list2 = rankService.selectDaily();
 		mav.addObject("dailyFirst", list2.get(0));
 		mav.addObject("dailySecond", list2.get(1));
 		mav.addObject("dailyThird", list2.get(2));
 		mav.addObject("dailOther", list2);
-		
+
 		mav.setViewName("community/mikrokosmos");
 		return mav;
 	}
@@ -160,6 +162,14 @@ public class CommunityCtrl {
 				saveFile(report, request);
 			c.setFilepath(report.getOriginalFilename());
 
+			if (c.getCsubject() == null) { // 제목 없음. 인스타에 작성한 부분임. 태그 삽입할 예정
+				c.setCcontent(changeTag(c.getCcontent())); // 태그에 클래스(tag) 추가
+				String tagStr = "";
+				for (int i = 0; i < tagArr.length; i++) {
+					tagStr += tagArr[i] + ",";
+				}
+				c.setCsubject(tagStr);
+			}
 			String email = (String) request.getSession().getAttribute("loginMember");
 			int result = cmService.insertCommunity(c, email);
 			mv.setViewName("redirect:insta");
@@ -173,21 +183,20 @@ public class CommunityCtrl {
 	@ResponseBody
 	@RequestMapping(value = "cUpdateCheck", method = RequestMethod.POST)
 	public int cUpdateCheck(Community vo, HttpServletRequest request) {
-		 String email = (String) request.getSession().getAttribute("loginMember");
-		 String nowNickname = mService.returnNickname(email);
-		 int result = 0;
-		 if(vo.getCwriter().equals(nowNickname)) {
-			 result = 1;
-		 } else {
-			 result = 0;
-		 }
+		String email = (String) request.getSession().getAttribute("loginMember");
+		String nowNickname = mService.returnNickname(email);
+		int result = 0;
+		if (vo.getCwriter().equals(nowNickname)) {
+			result = 1;
+		} else {
+			result = 0;
+		}
 		return result;
 	}
 
 	@RequestMapping(value = "cUpdateForm", method = RequestMethod.POST)
-	public ModelAndView cUpdateForm(@RequestParam(name = "cno") String cno, 
-			@RequestParam(name="fromInsta", defaultValue ="0") int fromInsta,
-			ModelAndView mv) {
+	public ModelAndView cUpdateForm(@RequestParam(name = "cno") String cno,
+			@RequestParam(name = "fromInsta", defaultValue = "0") int fromInsta, ModelAndView mv) {
 		System.out.println(cno);
 		String oracleCno = setLPad(cno, 5, "0");
 		try {
@@ -204,7 +213,7 @@ public class CommunityCtrl {
 
 	@RequestMapping(value = "cUpdate", method = RequestMethod.POST)
 	public ModelAndView cUpdate(Community c, @RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam(name="fromInsta", defaultValue ="0") int fromInsta,
+			@RequestParam(name = "fromInsta", defaultValue = "0") int fromInsta,
 			@RequestParam("upfile") MultipartFile report, HttpServletRequest request, ModelAndView mv) {
 		try {
 			if (report != null && !report.equals("")) {
@@ -214,9 +223,19 @@ public class CommunityCtrl {
 			c.setFilepath(report.getOriginalFilename());
 
 			String email = (String) request.getSession().getAttribute("loginMember");
+			
+			// 태그에 클래스(tag) 추가
+			c.setCcontent(changeTag(c.getCcontent()));
+			String tagStr = "";
+			for (int i = 0; i < tagArr.length; i++) {
+				tagStr += tagArr[i] + ",";
+			}
+			c.setCsubject(tagStr);
+			
+			
 			mv.addObject("cno", cmService.updateCommunity(c, email).getCno());
 			mv.addObject("currentPage", page);
-			if(fromInsta == 1) { // 인스타에서 넘어온 업데이트				
+			if (fromInsta == 1) { // 인스타에서 넘어온 업데이트
 				mv.setViewName("redirect:insta");
 			} else { // 공지사항에서 넘어온 업데이트
 				mv.setViewName("redirect:cDetail");
@@ -231,20 +250,20 @@ public class CommunityCtrl {
 	@ResponseBody
 	@RequestMapping(value = "cDeleteCheck", method = RequestMethod.POST)
 	public int cDeleteCheck(Community vo, HttpServletRequest request) {
-		 String email = (String) request.getSession().getAttribute("loginMember");
-		 String nowNickname = mService.returnNickname(email);
-		 int result = 0;
-		 if(vo.getCwriter().equals(nowNickname)) {
-			 result = 1;
-		 } else {
-			 result = 0;
-		 }
+		String email = (String) request.getSession().getAttribute("loginMember");
+		String nowNickname = mService.returnNickname(email);
+		int result = 0;
+		if (vo.getCwriter().equals(nowNickname)) {
+			result = 1;
+		} else {
+			result = 0;
+		}
 		return result;
 	}
-	
+
 	@RequestMapping(value = "cDelete", method = RequestMethod.POST)
 	public ModelAndView communityDelete(@RequestParam(name = "cno") String cno,
-			@RequestParam(name="fromInsta", defaultValue ="0") int fromInsta,
+			@RequestParam(name = "fromInsta", defaultValue = "0") int fromInsta,
 			@RequestParam(name = "page", defaultValue = "1") int page, HttpServletRequest request, ModelAndView mv) {
 		try {
 			Community c = cmService.selectCommunity(1, cno);
@@ -253,7 +272,7 @@ public class CommunityCtrl {
 			String email = (String) request.getSession().getAttribute("loginMember");
 			cmService.deleteCommunity(cno, email);
 			mv.addObject("currentPage", page);
-			if(fromInsta == 1) {
+			if (fromInsta == 1) {
 				mv.setViewName("redirect:insta");
 			} else {
 				mv.setViewName("redirect:clist");
@@ -302,7 +321,7 @@ public class CommunityCtrl {
 			System.out.println("파일 삭제 에러 : " + e.getMessage());
 		}
 	}
-	
+
 	private String setLPad(String strContext, int iLen, String strChar) {
 		String strResult = "";
 		StringBuilder sbAddChar = new StringBuilder();
@@ -311,5 +330,50 @@ public class CommunityCtrl {
 		}
 		strResult = sbAddChar + strContext; // LPAD이므로, 채울문자열 + 원래문자열로 Concate한다.
 		return strResult;
+	}
+
+	private String changeTag(String content) {
+
+		List<Integer> list1 = new ArrayList<Integer>();
+		List<Integer> list2 = new ArrayList<Integer>();
+
+		int n = 0;
+		int charFrom = 0;
+		int charTo = 0;
+		// @부분 인덱스 뽑아오기
+		while (true) {
+			if (n == 0) {
+				charFrom = content.indexOf("@");
+				charTo = content.indexOf(" ", charFrom + 1);
+			} else {
+				charFrom = content.indexOf("@", charFrom + 1);
+				charTo = content.indexOf(" ", charFrom + 1);
+				if (charTo == -1) {
+					charTo = content.indexOf("<", charFrom + 1);
+				}
+
+			}
+
+			if (charFrom == -1) { // @ 없으면 함수 중지
+				break;
+			} else { // @ 있으면 리스트에 추가
+				list1.add(charFrom);
+				list2.add(charTo);
+			}
+
+			n++;
+		}
+
+		// 태그 문자를 배열로 받아옴
+		tagArr = new String[list1.size()];
+		for (int i = 0; i < tagArr.length; i++) {
+			tagArr[i] = content.substring(list1.get(i), list2.get(i));
+		}
+
+		for (int j = 0; j < tagArr.length; j++) {
+			content = content.replace(tagArr[j], "<span class='tag'>" + tagArr[j] + "</span>");
+		}
+
+		return content;
 	}
 }

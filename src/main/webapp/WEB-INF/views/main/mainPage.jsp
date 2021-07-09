@@ -28,8 +28,7 @@
 <meta charset="UTF-8">
 <script type="text/javascript">
 function go() {
-	location.href = "<%=request.getContextPath()%>
-	/investmentpage";
+	location.href = "<%=request.getContextPath()%>/investmentpage";
 	}
 </script>
 </head>

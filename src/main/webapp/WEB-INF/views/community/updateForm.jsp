@@ -32,7 +32,7 @@
 			<div class="comm">수정하기</div>
 			<br> <br> <br> <br> <br>
 			<form action="cUpdate" method="post" enctype="multipart/form-data"
-				style="margin: 0 20px">
+				style="margin: 20px 20px 0 20px">
 				<input type="hidden" name="fromInsta" value="${fromInsta }">
 				<input type="hidden" name="cno" value="${community.cno}"> <input
 					type="hidden" name="filepath" value="${community.filepath}">
@@ -64,7 +64,7 @@
 				<c:if test="${!empty community.filepath}">
 					<c:forTokens var="fileName" items="${community.filepath}"
 						delims="," varStatus="st">
-						<a download="${fileName}"
+						<a download="${fileName}" class="download"
 							href="${pageContext.request.contextPath}/resources/uploadFiles/${community.filepath}">${fileName}</a>
 						<c:if test="${!st.last }">
 	                        /

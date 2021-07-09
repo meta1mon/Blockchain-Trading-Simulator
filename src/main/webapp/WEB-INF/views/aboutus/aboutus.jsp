@@ -31,11 +31,11 @@
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/aboutus">About Us</a></li>
                         <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/investmentpage">모의투자</a></li>
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/nlist?news_keyword=">뉴스</a></li>
-                        <li class="nav-item"><a class="nav-link" href="javascript:void(window.open('<%=request.getContextPath()%>/prochart', '_blank','width=1000px, height=730px'))">프로차트</a></li>
+                        <li class="nav-item"><a class="nav-link" href="javascript:void(window.open('<%=request.getContextPath()%>/prochart', '_blank','width=1300px, height=800px'))">프로차트</a></li>
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/clist">공지사항</a></li>
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/insta">커뮤니티</a></li>
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/cashShop">충전소</a></li>
-                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ranking">랭킹</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/rankDaily">랭킹</a></li>
                     	<c:choose>
 							<c:when test="${loginMember == null }">
 									<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/signup" id="signup">회원가입</a></li>
@@ -472,10 +472,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="resources/js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
     <%@include file="../main/footer.jsp"%>

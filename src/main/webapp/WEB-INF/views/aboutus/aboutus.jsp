@@ -192,25 +192,25 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="resources/assets/img/user.png" alt="..." />
+                            <img class="mx-auto rounded-circle" src="resources/assets/img/profile/ksm.jpg" alt="..." />
                             <h4>강수목</h4>
                             <p class="text-muted" style="margin:0;">Developer</p>
-                            <p class="text-muted">강수목@rkdtnahr.com</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" target="_blank"><i class="fab fa-github"></i></a>
+                            <p class="text-muted">beonlyone0405@gmail.com</p>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/Naverbetter" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="resources/assets/img/user.png" alt="..." />
+                            <img class="mx-auto rounded-circle" src="resources/assets/img/profile/kdy.jpg" alt="..." />
                             <h4>김도영</h4>
                             <p class="text-muted" style="margin:0;">Developer</p>
-                            <p class="text-muted">김도영@rlaehdud.com</p>
+                            <p class="text-muted">gimdoyoung97@gmail.com</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="resources/assets/img/user.png" alt="..." />
+                            <img class="mx-auto rounded-circle" src="resources/assets/img/profile/kyj.jpg" alt="..." />
                             <h4>김연준</h4>
                             <p class="text-muted" style="margin:0;">Developer</p>
                             <p class="text-muted">okip6854q@gmail.com</p>
@@ -219,20 +219,20 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="resources/assets/img/user.png" alt="..." />
+                            <img class="mx-auto rounded-circle" src="resources/assets/img/profile/jjh.jpg" alt="..." />
                             <h4>정재훈</h4>
                             <p class="text-muted" style="margin:0;">Developer</p>
-                            <p class="text-muted">정재훈@wjdwogns.com</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" target="_blank"><i class="fab fa-github"></i></a>
+                            <p class="text-muted">jjh52782796@gmail.com</p>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/meta1mon" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="resources/assets/img/user.png" alt="..." />
+                            <img class="mx-auto rounded-circle" src="resources/assets/img/profile/jsh.jpg" alt="..." />
                             <h4>제승하</h4>
                             <p class="text-muted" style="margin:0;">Developer</p>
-                            <p class="text-muted">제승하@wptmdgk.com</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" target="_blank"><i class="fab fa-github"></i></a>
+                            <p class="text-muted"> jeseungha1102@gmail.com</p>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/shje" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>

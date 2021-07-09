@@ -6,40 +6,31 @@
 <head>
 <title>BTS</title>
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
 	type="image/x-icon" />
 <meta charset="UTF-8">
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/clist.css"	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/clist.css"
+	rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$('form[name=listForm]').on(
-				'submit',
-				function(e) {
-					if ($('input[name=keyword]').val() == null
-							|| $('input[name=keyword]').val() == "") {
-						alert("검색어를 입력해 주세요");
-						e.preventDefault();
-					} else {
-						return true;
-					}
-				});
-	});
-	
-	function showInsertForm() {
-			      if(${loginMember == null}) {
-			    	alert("게시글을 작성하려면 로그인이 필요합니다.");
-			      } else {
-			    	  window.location='cWriteForm';
-			      }
-		      }
+<script>
+function showInsertForm() {
+    if(${loginMember == null}) {
+     alert("게시글을 작성하려면 로그인이 필요합니다.");
+    } else {
+       window.location='cWriteForm';
+    }
+ }
+
 </script>
-
-
 </head>
 <body>
 	<div id="wrapper">
@@ -47,22 +38,13 @@
 		<div class="listOut">
 
 			<div class="comm">공지사항</div>
-
-			<div class="searchDiv">
-				<form action="clist" name="listForm" method="get">
-					<select id="searchType" name="searchType">
-						<option value="1">글제목</option>
-						<option value="2">글내용</option>
-						<option value="3">작성자</option>
-					</select> <input type='search' id="search" name="keyword" placeholder="">
-					<button type=submit id="btnsearch">검색</button>
-				</form>
-<%-- 				<input type="hidden" name="page" value="${currentPage}">  --%>
-				<input type="button" id="write" class="write" value="글쓰기" onclick="showInsertForm()">
-			</div>
-
-			<hr>
-			<table class="ctable">
+			<c:if test="${loginMember == 'admin' }">
+				<div style="float: right; margin: 40px 20px 0 0;">
+					<input type="button" id="write" class="write" value="글쓰기"
+						onclick="showInsertForm()">
+				</div>
+			</c:if>
+			<table class="ctable" style="clear: both;">
 				<tr>
 					<td align="center" width="60" style="font-size: 13px;">번호</td>
 					<td align="center" width="300">제목</td>
@@ -74,8 +56,8 @@
 				<!-- 글이 없을 경우 -->
 				<c:if test="${listCount eq 0}">
 					<tr>
-						<td colspan="6" align="center"><br> <br> 게시판에 저장된
-							글이없습니다.<br> <br></td>
+						<td colspan="6" align="center"><br> <br> 공지사항이 없습니다<br>
+							<br></td>
 					</tr>
 				</c:if>
 				<c:if test="${listCount ne 0}">
@@ -93,44 +75,23 @@
 							<td align="center">${voNotice.likecnt}</td>
 						</tr>
 					</c:forEach>
-					<c:forEach var="vo" items="${list}" varStatus="status">
-						<tr>
-							<td align="center" style="font-size: 13px;">${vo.cno}</td>
-							<td align="left">
-								<a	href="cDetail?cno=${vo.cno}&page=${currentPage}" class="subject">&nbsp;${vo.csubject}
-								</a> 
-								<a href="cDetail?cno=${vo.cno}&page=${currentPage}"	class="replycnt">[${vo.replycnt}]
-								</a>
-							</td>
-							<td align="center">${vo.cwriter}</td>
-							<td align="center" style="font-size: 13px;">${vo.cdate}</td>
-							<td align="center">${vo.viewcnt}</td>
-							<td align="center">${vo.likecnt}</td>
-						</tr>
-					</c:forEach>
 				</c:if>
 			</table>
 			<hr>
-
-		<div id="page">
-			<span id="leftpage">
-				<!-- 앞 페이지 번호 처리 -->
-				<c:if test="${currentPage <= 1}">
+			<div id="page">
+				<span id="leftpage"> <!-- 앞 페이지 번호 처리 --> <c:if
+						test="${currentPage <= 1}">
 					처음
-				</c:if>
-				
-				
-				<!-- 이전페이지로 이동 -->
-				<c:if test="${currentPage > 1}">
-					<c:url var="clistST" value="clist">
-						<c:param name="page" value="${currentPage-1}" />
-					</c:url>
-					<a href="${clistST}&searchType=${searchType }&keyword=${keyword}">이전</a>
-				</c:if>
-			</span>
+				</c:if> <!-- 이전페이지로 이동 --> <c:if test="${currentPage > 1}">
+						<c:url var="clistST" value="clist">
+							<c:param name="page" value="${currentPage-1}" />
+						</c:url>
+						<a href="${clistST}">이전</a>
+					</c:if>
+				</span>
 
 				<c:set var="endPage" value="${maxPage}" />
-				<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
+				<c:forEach var="p" begin="1" end="${endPage}">
 					<c:if test="${p eq currentPage}">
 						<font color="#8C66C8" class="pageNum"><b>${p}</b></font>
 					</c:if>
@@ -138,26 +99,21 @@
 						<c:url var="clistchk" value="clist">
 							<c:param name="page" value="${p}" />
 						</c:url>
-						<a href="${clistchk}&searchType=${searchType }&keyword=${keyword}" class="pageNum">${p}</a>
+						<a href="${clistchk}" class="pageNum">${p}</a>
 					</c:if>
 				</c:forEach>
-			
-			<span id="rightpage">
-				<!-- 다음페이지로 이동 -->
-				<c:if test="${currentPage < maxPage}">
-					<c:url var="clistEND" value="clist">
-						<c:param name="page" value="${currentPage+1}" />
-					</c:url>
-					<a href="${clistEND}&searchType=${searchType }&keyword=${keyword}">다음</a>
+
+				<span id="rightpage"> <!-- 다음페이지로 이동 --> <c:if
+						test="${currentPage < maxPage}">
+						<c:url var="clistEND" value="clist">
+							<c:param name="page" value="${currentPage+1}" />
+						</c:url>
+						<a href="${clistEND}&searchType=${searchType }&keyword=${keyword}">다음</a>
+					</c:if> <!-- 끝 페이지 번호 처리 --> <c:if test="${currentPage >= maxPage}">
+					끝
 				</c:if>
-			
-			
-			<!-- 끝 페이지 번호 처리 -->
-			<c:if test="${currentPage >= maxPage}">
-				끝
-			</c:if>
-	</span>
-		</div>
+				</span>
+			</div>
 		</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>

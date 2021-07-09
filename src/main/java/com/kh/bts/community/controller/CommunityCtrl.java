@@ -45,7 +45,7 @@ public class CommunityCtrl {
 	@Autowired
 	private MemberService mService;
 
-	public static final int LIMIT = 30;
+	public static final int LIMIT = 10;
 
 	@RequestMapping("insta")
 	public ModelAndView insta(ModelAndView mav,
@@ -74,12 +74,11 @@ public class CommunityCtrl {
 	}
 
 	@RequestMapping("moreInsta")
-	public void moreInsta(Paging vo, HttpServletResponse response, @RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
-			@RequestParam(name = "searchType", defaultValue = "1") int searchType) {
+	public void moreInsta(Paging vo, HttpServletResponse response) {
 		
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		List<Community> list = cmService.selectAllCommunityList(vo, keyword, searchType);
+		List<Community> list = cmService.selectAllCommunityList(vo, "", 0);
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(list);
@@ -97,22 +96,14 @@ public class CommunityCtrl {
 
 	@RequestMapping(value = "clist", method = RequestMethod.GET)
 	public ModelAndView communityListService(@RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
-			@RequestParam(name = "searchType", defaultValue = "1") int searchType, ModelAndView mv) {
+				ModelAndView mv) {
 		try {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
-			int listCount = cmService.totalCount(); // 게시글 개수
-			int maxPage = (int) ((double) listCount / LIMIT + 0.9); // 게시글 개수 /
+			int listCount = cmService.totalCount(); // 공지사항 개수
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9); // 공지사항 개수 /
 
-			if (!keyword.equals("")) { // 상단 검색 내용 있음
-				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword, searchType));
-				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-			} else { // 상단 검색 내용 없음
-				mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword, searchType));
-				mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
-			}
-
+			mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);

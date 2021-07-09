@@ -68,7 +68,7 @@ public class CommunityDao {
 		return sqlSession.selectList("community.searchpopularList");
 	}
 
-	public int listCount() { // 게시글 개수 조회
+	public int listCount() { // 공지사항 개수 조회(작성자에 관리자가 포함된 경우)
 		return sqlSession.selectOne("community.countCommunity");
 	}
 

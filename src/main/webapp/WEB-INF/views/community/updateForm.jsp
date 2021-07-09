@@ -42,7 +42,7 @@
 						maxlength="100" value="${community.csubject}">
 				</c:if>
 				<textarea id="editor" name="ccontent" maxlength="4000"
-					style="margin: 0 auto 10 auto;">${community.ccontent}</textarea>
+					style="margin: 0 auto 10 auto;" placeholder="태그 변환은 '@'와 ' ' 사이에 작성해주세요">${community.ccontent}</textarea>
 				<input type="submit" value="글 수정하기" id="submit">
 				<c:url var="clist" value="clist">
 					<c:param name="page" value="1" />

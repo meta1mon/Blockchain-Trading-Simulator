@@ -15,11 +15,12 @@
 		replycnt desc) a) b where rownum &lt;= 4
 
 	</select>
-	<!-- 게시글 전부 다 불러오기 -->
+	
+	<!-- 공지사항 제외 인스타 다 불러오기 -->
 	<select id="selectCommunityList" parameterType="Paging"
 		resultType="arraylist" resultMap="resultCommunity">
 		SELECT * FROM (SELECT ROWNUM R, D.*
-		FROM (SELECT * FROM COMMUNITY ORDER BY CNO DESC) D) WHERE R BETWEEN
+		FROM (SELECT * FROM COMMUNITY WHERE CWRITER NOT LIKE '%관리자%' ORDER BY CNO DESC) D) WHERE R BETWEEN
 		#{start} AND #{start}+#{plus}
 	</select>
 
@@ -64,8 +65,7 @@
 
 	<!-- 게시글 전체 개수 조회 -->
 	<select id="countCommunity" resultType="int">
-		SELECT count(*) FROM
-		COMMUNITY
+		SELECT count(*) FROM COMMUNITY WHERE CWRITER LIKE '%관리자%'
 	</select>
 	<!-- 오늘 게시글 전체 개수 조회 -->
 	<select id="countTodayCommunity" resultType="int">
@@ -123,33 +123,6 @@
 	<!-- 공지사항 조회 -->
 	<select id="selectNoticeList" resultType="arraylist"
 		resultMap="resultCommunity">
-		SELECT * FROM COMMUNITY WHERE CWRITER = '관리자' ORDER BY CNO
-		DESC
-	</select>
-
-	<!-- 검색한 공지사항 조회 -->
-	<select id="searchNoticeListSubject" parameterType="string"
-		resultType="arraylist" resultMap="resultCommunity">
-		SELECT *
-		FROM
-		COMMUNITY
-		WHERE CSUBJECT
-		LIKE '%'||#{keyword}||'%' AND CWRITER = '관리자'
-	</select>
-	<select id="searchNoticeListContent" parameterType="string"
-		resultType="arraylist" resultMap="resultCommunity">
-		SELECT *
-		FROM
-		COMMUNITY
-		WHERE CCONTENT
-		LIKE '%'||#{keyword}||'%' AND CWRITER = '관리자'
-	</select>
-	<select id="searchNoticeListWriter" parameterType="string"
-		resultType="arraylist" resultMap="resultCommunity">
-		SELECT *
-		FROM
-		COMMUNITY
-		WHERE CWRITER
-		LIKE '%'||#{keyword}||'%' AND CWRITER = '관리자'
+		SELECT * FROM COMMUNITY WHERE CWRITER LIKE '%관리자%' ORDER BY CNO DESC
 	</select>
 </mapper>

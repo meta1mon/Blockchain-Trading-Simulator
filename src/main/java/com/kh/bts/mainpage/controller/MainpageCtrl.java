@@ -18,8 +18,6 @@ public class MainpageCtrl {
 	@RequestMapping("/mainpage")
 	public ModelAndView MainPage(ModelAndView mav) {
 		List<Community> mainlist = cmService.selectMainAllCommunityList();
-		System.out.println(mainlist);
-
 		mav.addObject("maincommuList0", mainlist.get(0));
 		mav.addObject("maincommuList1", mainlist.get(1));
 		mav.addObject("maincommuList2", mainlist.get(2));

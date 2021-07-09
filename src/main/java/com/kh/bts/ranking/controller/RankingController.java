@@ -33,23 +33,77 @@ public class RankingController {
 // 랭킹 페이지 이동 함수
 	// Daily 랭킹 페이지로 이동
 	@RequestMapping("/rankDaily")
-	public ModelAndView rankDaily(ModelAndView mav, HttpSession session) {
-		List<Daily> list = rankService.selectDaily();
-
-		String email = (String) session.getAttribute("loginMember");
-		Daily vo = null;
+	public ModelAndView rankDaily(ModelAndView mav, HttpSession session, @RequestParam(name="criteria", defaultValue = "1") int criteria) {
 		int rank = 0;
-		if (email != null) {
-			vo = rankService.selectMyDaily(email);
-			rank = rankService.selectMyDailyRank(email);
-		}
+		String email = (String) session.getAttribute("loginMember");
 
-		mav.addObject("first", list.get(0));
-		mav.addObject("second", list.get(1));
-		mav.addObject("third", list.get(2));
-		mav.addObject("other", list);
-		mav.addObject("my", vo);
-		mav.addObject("rank", rank);
+		if(criteria == 0) {
+			List<Accumulative> list = rankService.selectAccumulative();
+
+			Accumulative vo = null;
+			if (email != null) {
+				vo = rankService.selectMyAccumulative(email);
+				rank = rankService.selectMyAccumulativeRank(email);
+			}
+
+			mav.addObject("first", list.get(0));
+			mav.addObject("second", list.get(1));
+			mav.addObject("third", list.get(2));
+			mav.addObject("other", list);
+			mav.addObject("my", vo);
+			mav.addObject("rank", rank);
+		}
+		if(criteria == 1) {
+			List<Daily> list = rankService.selectDaily();
+			
+			Daily vo = null;
+			if (email != null) {
+				vo = rankService.selectMyDaily(email);
+				rank = rankService.selectMyDailyRank(email);
+			}
+			
+			mav.addObject("first", list.get(0));
+			mav.addObject("second", list.get(1));
+			mav.addObject("third", list.get(2));
+			mav.addObject("other", list);
+			mav.addObject("my", vo);
+			mav.addObject("rank", rank);
+		}
+		if(criteria == 2) {
+			List<Weekly> list = rankService.selectWeekly();
+
+			Weekly vo = null;
+
+			if (email != null) {
+				vo = rankService.selectMyWeekly(email);
+				rank = rankService.selectMyWeeklyRank(email);
+			}
+
+			mav.addObject("first", list.get(0));
+			mav.addObject("second", list.get(1));
+			mav.addObject("third", list.get(2));
+			mav.addObject("other", list);
+			mav.addObject("my", vo);
+			mav.addObject("rank", rank);
+		}
+		if(criteria == 3) {
+			List<Monthly> list = rankService.selectMonthly();
+
+			Monthly vo = null;
+			if (email != null) {
+				vo = rankService.selectMyMonthly(email);
+				rank = rankService.selectMyMonthlyRank(email);
+			}
+
+			mav.addObject("first", list.get(0));
+			mav.addObject("second", list.get(1));
+			mav.addObject("third", list.get(2));
+			mav.addObject("other", list);
+			mav.addObject("my", vo);
+			mav.addObject("rank", rank);
+
+		}
+		mav.addObject("criteria", criteria);
 		mav.setViewName("rank/rankDaily");
 		return mav;
 	}
@@ -57,11 +111,12 @@ public class RankingController {
 	// Accumulative 랭킹 페이지로 이동
 	@RequestMapping("/rankAccumulative")
 	public ModelAndView rankAccumulative(ModelAndView mav, HttpSession session) {
+		int rank = 0;
+		String email = (String) session.getAttribute("loginMember");
+
 		List<Accumulative> list = rankService.selectAccumulative();
 
-		String email = (String) session.getAttribute("loginMember");
 		Accumulative vo = null;
-		int rank = 0;
 		if (email != null) {
 			vo = rankService.selectMyAccumulative(email);
 			rank = rankService.selectMyAccumulativeRank(email);
@@ -80,11 +135,13 @@ public class RankingController {
 	// Weekly 랭킹 페이지로 이동
 	@RequestMapping("/rankWeekly")
 	public ModelAndView rankWeekly(ModelAndView mav, HttpSession session) {
+		int rank = 0;
+		String email = (String) session.getAttribute("loginMember");
+
 		List<Weekly> list = rankService.selectWeekly();
 
-		String email = (String) session.getAttribute("loginMember");
 		Weekly vo = null;
-		int rank = 0;
+
 		if (email != null) {
 			vo = rankService.selectMyWeekly(email);
 			rank = rankService.selectMyWeeklyRank(email);
@@ -103,11 +160,12 @@ public class RankingController {
 	// Monthly 랭킹 페이지로 이동
 	@RequestMapping("/rankMonthly")
 	public ModelAndView rankMonthly(ModelAndView mav, HttpSession session) {
+		int rank = 0;
+		String email = (String) session.getAttribute("loginMember");
+
 		List<Monthly> list = rankService.selectMonthly();
 
-		String email = (String) session.getAttribute("loginMember");
 		Monthly vo = null;
-		int rank = 0;
 		if (email != null) {
 			vo = rankService.selectMyMonthly(email);
 			rank = rankService.selectMyMonthlyRank(email);

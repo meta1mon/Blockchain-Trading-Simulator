@@ -48,6 +48,11 @@
 	top: calc(50% - 255px);
 	left: calc(50% - 225px);
 }
+
+.tag {
+	color: #8c66c8;
+	font-size: medium;
+}
 </style>
 <script>
 
@@ -89,7 +94,7 @@ $(function() {
 											+"<div class='dropdown' style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
 											+ "<div class='dropdown-content' style='left: 0;'> <p onclick='report()' class='report' id='popup_open_btn'>신고</p> <c:if test='${loginMember == writerEmail }'> <p onclick='checkUpdate('insta.cno', 'insta.cwriter')' class='update'>수정</a> <p onclick='checkDelete('insta.cno', 'insta.cwriter')' class='delete'>삭제</a> </c:if>"
 											
-											+"</div> </div> </div> </header> <div class='main-image'> <div class='subject'>" + insta.csubject + "</div> <div class='content'>" + insta.ccontent + "</div> <div class='description'>"
+											+"</div> </div> </div> </header> <div class='main-image'><div class='content'>" + insta.ccontent + "</div> <div class='description'>"
 											+"<p> <span class='at-tag'>@bts @wkorea @gucci</span> </p> </div> </div> <div class='icons-react'> <div class='icons-left'> <img class='thumbsup' onclick='clike()' src='resources/assets/img/thumbsup.png'>"
 											+"<img class='thumbsup-liked' onclick='clike()' src='resources/assets/img/thumbs-up.png'> </div> <div class='icons-middle'> <img class='thumbsdown' onclick='dislike()' src='resources/assets/img/thumbsdown.png'>"
 											+"<img class='thumbsdown-disliked' onclick='dislike()' src='resources/assets/img/thumbs-down.png'> </div> <div class='icons-right'> <input type=\"hidden\" class=\"hiddenCno\" value=\"insta.cno\">"
@@ -294,7 +299,6 @@ $(function(){
 						</header>
 						<!-- 게시글 내용 영역 -->
 						<div class="main-image">
-							<div class="subject">${vo.csubject }</div>
 							<div class="content">${vo.ccontent }
 								<c:forTokens var="fileName" items="${vo.filepath}" delims=","
 									varStatus="st">

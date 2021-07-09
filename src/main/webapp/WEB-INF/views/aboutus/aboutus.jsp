@@ -67,9 +67,9 @@
                 <div class="row text-center">
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
-                        <img src="resources/assets/img/bts_logo.svg" style="height:2cm; position:relative; right:10px; background-color: #8c66c8;" alt="..." />
+                        <img src="resources/assets/img/bts_logo_reversal.svg" style="height:2cm; position:relative; right:10px;" alt="..." />
                         </span>
-                        <p class="my-3" style="font-size:18px;">BTS는 회원님께 다양한 서비스와 편의를 제공하는 가상자산 중개 플랫폼입니다.<br>
+                        <p class="my-3" style="font-size:18px;">BTS는 회원님께 	다양한 서비스와 편의를 제공하는 가상자산 중개 플랫폼입니다.<br>
                         										투기성 투자를 하는 사람들에게 위험부담 없이 시도할 수 있는 투자 기회와 경험을 제공합니다.<br>
                         										주식은 모의투자 개념의 프로그램이 이미 많이 활성화 되어있습니다.<br>
                         										 하지만 암호화폐는 투자를 연습할 공간이 없는 실정이므로, 암호화폐 모의투자 사이트를 기획하게 되었습니다.<br>

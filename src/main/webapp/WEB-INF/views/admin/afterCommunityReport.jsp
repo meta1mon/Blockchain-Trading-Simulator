@@ -13,11 +13,15 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/admin.js"></script>
 <script>
 $(function(){
-	$("#cstatusSelect").css("display", "inline-block");
+	$("#cstatusSelect").css("display", "none");
 	$("#search").css("display", "inline-block");
 	$("#btnsearch").css("display", "inline-block");
-	$("#btnsearch2").css("display", "inline-block");
-
+	$("#btnsearch2").css("display", "none");
+	if($(".ccontent").has($("img"))){
+		$(".ccontent img").attr("src", null);
+		$(".ccontent img").attr("alt", "(사진)");
+	}
+	
 var onoff = function(){
 	 var opt = $("#searchType option:selected");
 	 if(opt.val() == '4'){
@@ -106,7 +110,7 @@ var onoff = function(){
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr class="tr">
 							<td class="center" style="cursor: pointer;">${vo.crno}</td>
-							<td class="center" style="cursor: pointer;">${vo.ccontent}</td>
+							<td class="center ccontent" style="cursor: pointer;">${vo.ccontent}</td>
 							<td class="center" style="cursor: pointer;">${vo.crespondent}</td>
 							<td class="center" style="cursor: pointer;">${vo.creporter}</td>
 							<c:choose>

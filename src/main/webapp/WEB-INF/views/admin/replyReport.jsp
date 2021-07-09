@@ -12,6 +12,10 @@
 	src="${pageContext.request.contextPath}/resources/js/loadingajax.js"></script>
 <script>
 	$(function(){
+		if($(".rcontent").has($("img"))){
+			$(".rcontent img").attr("src", null);
+			$(".rcontent img").attr("alt", "(사진)");
+		}
 		var  openModal = function(event) {
 			$("#modal").css("display", "block");
 			var ele = event.currentTarget.querySelectorAll("td");
@@ -43,6 +47,11 @@
 		    var dataquery = $("#frmReport").serialize();
 		    dataquery = decodeURIComponent(dataquery);
 		    console.log(dataquery);
+		    
+		    if($("#rreason").val("") || $("#rreason") == null){
+				alert("신고 처리 사유를 입력해주세요.");		    	
+		    }else {
+		    	
 			$.ajax({
 			url : "dealrr",
 			type : "POST",
@@ -56,6 +65,7 @@
 			}
 			
 		})
+		    }
 	})
 
 	})
@@ -88,7 +98,7 @@
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr class="tr">
 							<td class ="center" style="cursor: pointer;">${vo.rrno}</td>
-							<td class="center">${vo.rcontent}</td>
+							<td class="center rcontent">${vo.rcontent}</td>
 							<td class ="center" style="cursor: pointer;">${vo.rrespondent}</td>
 							<td class ="center" style="cursor: pointer;">${vo.rreporter}</td>
 							<c:choose>

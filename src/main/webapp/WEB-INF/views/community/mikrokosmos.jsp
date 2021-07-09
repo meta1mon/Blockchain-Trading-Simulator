@@ -261,12 +261,11 @@ $(function(){
 		<nav>
 			<div class="nav-container">
 				<div class="nav-1"></div>
-				<form action="clist" name="listForm" method="get"
+				<form action="insta" name="listForm" method="get"
 					style="width: 340px;">
 					<select id="searchType" class="searchType" name="searchType">
-						<option value="1">글제목</option>
-						<option value="2">글내용</option>
-						<option value="3">작성자</option>
+						<option value="1">태그</option>
+						<option value="2">작성자</option>
 					</select> <input id="searchInput" type="search" class="input-search"
 						name="keyword" placeholder="검색">
 					<button type=submit id="btnsearch" style="display: none;"></button>

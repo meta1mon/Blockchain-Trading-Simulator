@@ -15,7 +15,7 @@
 	
 	<!-- 해당 게시글에 대한 댓글 리스트 조회 -->
 	<select id="selectRcommunityAll" parameterType="string" resultType="arraylist" resultMap="resultUserRcommuniyCheck">
-		SELECT RNO, A.RWRITER, RCONTENT, RDATE, CNO, EMAIL FROM RCOMMUNITY A JOIN MEMBER B ON A.RWRITER = B.NICKNAME WHERE CNO=#{cno}
+		SELECT RNO, A.RWRITER, RCONTENT, RDATE, CNO, EMAIL FROM RCOMMUNITY A JOIN MEMBER B ON A.RWRITER = B.NICKNAME WHERE CNO=#{cno} ORDER BY RNO DESC
 	</select>
 
 	<!-- 댓글 단일 조회 -->

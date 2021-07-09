@@ -12,6 +12,10 @@
 	src="${pageContext.request.contextPath}/resources/js/loadingajax.js"></script>
 <script>
 	$(function(){
+		if($(".ccontent").has($("img"))){
+			$(".ccontent img").attr("src", null);
+			$(".ccontent img").attr("alt", "(사진)");
+		}
 		/* 모달창 열기 */
 		var  openModal = function(event) {
 			$("#modal").css("display", "block");
@@ -42,22 +46,26 @@
  			var deal = $(this).val();
  			$("#buttonvalue").val(deal);
  			var btnval = $("#buttonvalue").val();
-			 
 		    var dataquery = $("#frmReport").serialize();
 		    console.log(dataquery);
-			$.ajax({
-			url : "dealcr",
-			type : "POST",
-			data : dataquery,
-			async : true,
-			success : function(data) {
-				location.href = "<%=request.getContextPath()%>/admin/cr";
-			},
-			error : function(request, status, error) {
-				location.href="<%=request.getContextPath()%>/admin/cr";
-			}
-			
-		})
+
+		    if($("#creason").val("") || $("#creason") == null ){
+				 alert("신고 처리 사유를 입력해주세요.");
+			 } else {
+				$.ajax({
+				url : "dealcr",
+				type : "POST",
+				data : dataquery,
+				async : true,
+				success : function(data) {
+					location.href = "<%=request.getContextPath()%>/admin/cr";
+				},
+				error : function(request, status, error) {
+					location.href="<%=request.getContextPath()%>/admin/cr";
+				}
+				
+			})
+		 }
 	})
 
 	})
@@ -90,7 +98,7 @@
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr class="tr">
 							<td class ="center" style="cursor: pointer;">${vo.crno}</td>
-							<td class="center">${vo.ccontent}</td>
+							<td class="center ccontent">${vo.ccontent}</td>
 							<td class ="center" style="cursor: pointer;">${vo.crespondent}</td>
 							<td class ="center" style="cursor: pointer;">${vo.creporter}</td>
 							<c:choose>

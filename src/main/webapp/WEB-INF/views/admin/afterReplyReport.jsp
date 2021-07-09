@@ -35,11 +35,14 @@ $(function(){
 	
 	$("#close").on("click", closeModal);
 
-	$("#rstatusSelect").css("display", "inline-block");
+	$("#cstatusSelect").css("display", "none");
 	$("#search").css("display", "inline-block");
 	$("#btnsearch").css("display", "inline-block");
-	$("#btnsearch2").css("display", "inline-block");
-
+	$("#btnsearch2").css("display", "none");
+	if($(".rcontent").has($("img"))){
+		$(".rcontent img").attr("src", null);
+		$(".rcontent img").attr("alt", "(사진)");
+	}
 var onoff = function(){
 	 var opt = $("#searchType option:selected");
 	 console.log("이벤트 동작")
@@ -107,7 +110,7 @@ var onoff = function(){
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr class="tr">
 							<td class="center" style="cursor: pointer;">${vo.rrno}</td>
-							<td class="center">${vo.rcontent}</td>
+							<td class="center rcontent">${vo.rcontent}</td>
 							<td class="center" style="cursor: pointer;">${vo.rrespondent}</td>
 							<td class="center" style="cursor: pointer;">${vo.rreporter}</td>
 							<c:choose>

@@ -16,8 +16,8 @@ public class CommunityServiceImpl implements CommunityService {
 	private CommunityDao cmDao;
 
 	@Override
-	public List<Community> selectAllCommunityList(Paging vo) {
-		return cmDao.selectAllCommunityList(vo);
+	public List<Community> selectAllCommunityList(Paging vo, String keyword, int searchType) {
+		return cmDao.selectAllCommunityList(vo, keyword, searchType);
 	}
 	
 	@Override

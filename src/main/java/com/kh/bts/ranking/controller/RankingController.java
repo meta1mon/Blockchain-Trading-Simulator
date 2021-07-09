@@ -41,7 +41,7 @@ public class RankingController {
 			List<Accumulative> list = rankService.selectAccumulative();
 
 			Accumulative vo = null;
-			if (email != null) {
+			if (email != null && !email.equals("admin")) {
 				vo = rankService.selectMyAccumulative(email);
 				rank = rankService.selectMyAccumulativeRank(email);
 			}
@@ -57,7 +57,7 @@ public class RankingController {
 			List<Daily> list = rankService.selectDaily();
 			
 			Daily vo = null;
-			if (email != null) {
+			if (email != null && !email.equals("admin")) {
 				vo = rankService.selectMyDaily(email);
 				rank = rankService.selectMyDailyRank(email);
 			}
@@ -74,7 +74,7 @@ public class RankingController {
 
 			Weekly vo = null;
 
-			if (email != null) {
+			if (email != null && !email.equals("admin")) {
 				vo = rankService.selectMyWeekly(email);
 				rank = rankService.selectMyWeeklyRank(email);
 			}
@@ -90,7 +90,7 @@ public class RankingController {
 			List<Monthly> list = rankService.selectMonthly();
 
 			Monthly vo = null;
-			if (email != null) {
+			if (email != null && !email.equals("admin")) {
 				vo = rankService.selectMyMonthly(email);
 				rank = rankService.selectMyMonthlyRank(email);
 			}

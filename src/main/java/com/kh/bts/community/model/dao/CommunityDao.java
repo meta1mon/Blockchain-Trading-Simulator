@@ -17,29 +17,37 @@ public class CommunityDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<Community> selectAllCommunityList(Paging vo) {
-		List<Community> list = sqlSession.selectList("community.selectCommunityList", vo);
+	public List<Community> selectAllCommunityList(Paging vo, String keyword, int searchType) {
+		List<Community> list = null;
+		if (keyword.equals("")) { // 검색 안했을 때
+			list = sqlSession.selectList("community.selectCommunityList", vo);
+		} else if (searchType == 1) { // 태그로 검색 했을 때
+			list = sqlSession.selectList("community.searchListSubject", keyword);
+		} else if (searchType == 2) { // 작성자로 검색했을 때
+			list = sqlSession.selectList("community.searchListWriter", keyword);
+		}
 		return list;
 	}
+
 	public List<Community> selectMainAllCommunityList() {
 		List<Community> mlist = sqlSession.selectList("community.selectMainCommunityList");
 		return mlist;
 	}
-	
+
 	public List<Community> searchList(int startPage, int limit, String keyword, int searchType) { // 검색한 게시글 조회
 		List<Community> list = new ArrayList<Community>();
 		int startRow = (startPage - 1) * limit;
 		RowBounds row = new RowBounds(startRow, limit);
-		
+
 		if (keyword != null) {
 			switch (searchType) {
-			case 1: //제목으로 검색
+			case 1: // 제목으로 검색
 				list = sqlSession.selectList("community.searchListSubject", keyword, row);
 				break;
-			case 2: //내용으로 검색
+			case 2: // 내용으로 검색
 				list = sqlSession.selectList("community.searchListContent", keyword, row);
 				break;
-			case 3: //작성자명으로 검색
+			case 3: // 작성자명으로 검색
 				list = sqlSession.selectList("community.searchListWriter", keyword, row);
 				break;
 			default:
@@ -63,7 +71,7 @@ public class CommunityDao {
 	public int listCount() { // 게시글 개수 조회
 		return sqlSession.selectOne("community.countCommunity");
 	}
-	
+
 	public int listTodayCount() { // 오늘 게시글 전체 개수 조회
 		return sqlSession.selectOne("community.countTodayCommunity");
 	}
@@ -111,6 +119,7 @@ public class CommunityDao {
 		int result = sqlSession.delete("community.deleteCommunity", cno);
 		return result;
 	}
+
 	public int deleteCommunity(String cno) { // 게시글 삭제
 		int result = sqlSession.delete("community.deleteCommunity", cno);
 		return result;
@@ -125,20 +134,21 @@ public class CommunityDao {
 		RowBounds row = new RowBounds(startRow, limit);
 		return sqlSession.selectList("community.selectNoticeList", null, row);
 	}
+
 	public List<Community> searchNoticeList(int startPage, int limit, String keyword, int searchType) { // 검색한 게시글 조회
 		List<Community> list = new ArrayList<Community>();
 		int startRow = (startPage - 1) * limit;
 		RowBounds row = new RowBounds(startRow, limit);
-		
+
 		if (keyword != null) {
 			switch (searchType) {
-			case 1: //제목으로 검색
+			case 1: // 제목으로 검색
 				list = sqlSession.selectList("community.searchNoticeListSubject", keyword, row);
 				break;
-			case 2: //내용으로 검색
+			case 2: // 내용으로 검색
 				list = sqlSession.selectList("community.searchNoticeListContent", keyword, row);
 				break;
-			case 3: //작성자명으로 검색
+			case 3: // 작성자명으로 검색
 				list = sqlSession.selectList("community.searchNoticeListWriter", keyword, row);
 				break;
 			default:
@@ -148,7 +158,7 @@ public class CommunityDao {
 		}
 		return list;
 	}
-	
+
 	public String returnEmail(String nickName) {
 		String result = sqlSession.selectOne("Member.returnEmail", nickName);
 		return result;

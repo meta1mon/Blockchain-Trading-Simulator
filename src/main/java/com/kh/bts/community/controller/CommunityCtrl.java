@@ -48,9 +48,11 @@ public class CommunityCtrl {
 	public static final int LIMIT = 30;
 
 	@RequestMapping("insta")
-	public ModelAndView insta(ModelAndView mav) {
+	public ModelAndView insta(ModelAndView mav,
+			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
+			@RequestParam(name = "searchType", defaultValue = "1") int searchType) {
 		Paging paging = new Paging(1, 9);
-		List<Community> list = cmService.selectAllCommunityList(paging);
+		List<Community> list = cmService.selectAllCommunityList(paging, keyword, searchType);
 		System.out.println(list);
 		mav.addObject("commuList", list);
 		mav.addObject("nowPage", paging);
@@ -72,13 +74,12 @@ public class CommunityCtrl {
 	}
 
 	@RequestMapping("moreInsta")
-	public void moreInsta(Paging vo, HttpServletResponse response) {
+	public void moreInsta(Paging vo, HttpServletResponse response, @RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
+			@RequestParam(name = "searchType", defaultValue = "1") int searchType) {
+		
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		System.out.println("ajax로 들어옴");
-		System.out.println(vo.getStart());
-		System.out.println(vo.getPlus());
-		List<Community> list = cmService.selectAllCommunityList(vo);
+		List<Community> list = cmService.selectAllCommunityList(vo, keyword, searchType);
 		PrintWriter out = null;
 		Gson gson = new GsonBuilder().create();
 		String jsonlist = gson.toJson(list);
@@ -223,7 +224,7 @@ public class CommunityCtrl {
 			c.setFilepath(report.getOriginalFilename());
 
 			String email = (String) request.getSession().getAttribute("loginMember");
-			
+
 			// 태그에 클래스(tag) 추가
 			c.setCcontent(changeTag(c.getCcontent()));
 			String tagStr = "";
@@ -231,8 +232,7 @@ public class CommunityCtrl {
 				tagStr += tagArr[i] + ",";
 			}
 			c.setCsubject(tagStr);
-			
-			
+
 			mv.addObject("cno", cmService.updateCommunity(c, email).getCno());
 			mv.addObject("currentPage", page);
 			if (fromInsta == 1) { // 인스타에서 넘어온 업데이트

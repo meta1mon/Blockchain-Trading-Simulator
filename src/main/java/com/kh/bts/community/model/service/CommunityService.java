@@ -6,7 +6,7 @@ import com.kh.bts.Paging;
 import com.kh.bts.community.model.vo.Community;
 
 public interface CommunityService {
-	public List<Community> selectAllCommunityList(Paging vo);
+	public List<Community> selectAllCommunityList(Paging vo, String keyword, int searchType);
 
 	public List<Community> selectMainAllCommunityList();
 

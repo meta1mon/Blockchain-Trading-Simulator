@@ -29,24 +29,24 @@
 		SELECT *
 		FROM
 		COMMUNITY
-		WHERE CSUBJECT
-		LIKE '%'||#{keyword}||'%'
+		WHERE CSUBJECT LIKE '%'||UPPER(#{keyword})||'%'
+		OR CSUBJECT LIKE '%'||LOWER(#{keyword})||'%'
 	</select>
 	<select id="searchListContent" parameterType="string"
 		resultType="arraylist" resultMap="resultCommunity">
 		SELECT *
 		FROM
 		COMMUNITY
-		WHERE CCONTENT
-		LIKE '%'||#{keyword}||'%'
+		WHERE CCONTENT LIKE '%'||UPPER(#{keyword})||'%'
+		OR CCONTENT LIKE '%'||LOWER(#{keyword})||'%'
 	</select>
 	<select id="searchListWriter" parameterType="string"
 		resultType="arraylist" resultMap="resultCommunity">
 		SELECT *
 		FROM
 		COMMUNITY
-		WHERE CWRITER
-		LIKE '%'||#{keyword}||'%'
+		WHERE CWRITER LIKE '%'||UPPER(#{keyword})||'%'
+		OR CWRITER LIKE '%'||LOWER(#{keyword})||'%'
 	</select>
 
 	<!-- 조회수 상위 5개 게시글 조회 -->

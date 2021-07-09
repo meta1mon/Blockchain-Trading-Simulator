@@ -55,7 +55,7 @@ $(function() {
 				</c:if>
 				<textarea id="editor" name="ccontent" maxlength="4000"
 					style="margin: 0 auto 10 auto;"></textarea>
-				<input type="submit" value="글 작성하기" id="submit">
+				<input type="submit" value="태그 변환은 '@'와 ' ' 사이에 작성해주세요" id="submit">
 				<c:url var="clist" value="clist">
 					<c:param name="page" value="1" />
 				</c:url>

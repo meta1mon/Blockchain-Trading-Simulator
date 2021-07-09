@@ -50,7 +50,7 @@
 	
 	<!-- 신고글 처리 -->
 	<insert id="insertAcreport" parameterType="Acreport" flushCache="true" statementType="PREPARED">
-		INSERT INTO ACREPORT VALUES(#{crno}, #{creporter}, #{crreason}, #{ccontent}, #{crespondent}, #{crdate}, #{cstatus}, #{creason}, default)
+		INSERT INTO ACREPORT VALUES(#{crno}, #{creporter}, #{crreason}, default, #{ccontent}, #{crespondent}, #{crdate}, #{cstatus}, #{creason}, default)
 	</insert>
 	
 	<delete id="deleteCreport" parameterType="string" flushCache="true" statementType="PREPARED">

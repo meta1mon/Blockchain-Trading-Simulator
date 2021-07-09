@@ -157,7 +157,7 @@ main {
 	display: inline-block;
 }
 
-article, .section-story {
+article, .section-accumulative, .section-daily {
 	background-color: #fff;
 	border-radius: 3px;
 	border: 1px solid #E3C8F8;
@@ -167,15 +167,21 @@ article {
 	margin-bottom: 60px;
 }
 
-.section-story {
+.section-accumulative, .section-daily {
 	width: 310px;
 	padding: 14px 16px;
 	overflow-y: hidden;
 }
 
-.section-story {
+.section-accumulative {
 	height: 212px;
 	margin: 50px 0 20px 0;
+	overflow-y: auto;
+}
+
+.section-daily {
+	height: 212px;
+	margin: 0 0 20px 0;
 	overflow-y: auto;
 }
 
@@ -215,6 +221,15 @@ header {
 .content p{
 	padding: 0 16px;
 	font-weight: lighter;
+}
+
+.content a{
+	padding: 0 16px;
+	color:#6464FF;
+}
+.content a:hover{
+	text-decoration:underline;
+	padding: 0 16px;
 }
 
 .dropdown {

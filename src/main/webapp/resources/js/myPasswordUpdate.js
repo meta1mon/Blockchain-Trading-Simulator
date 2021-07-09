@@ -26,13 +26,14 @@ var passEqual = function() {
 		$(".pwCh").text("비밀번호가 일치합니다.");
 		$(".pwCh").css("color", "blue");
 		flag1 = true;
-		console.log("일치");
+//		console.log("일치");
 	} else {
 		$(".pwCh").text("비밀번호가 일치하지 않습니다.");
-		console.log("일치X");
+		$(".pwCh").css("color", "red");
+//		console.log("일치X");
 		flag1 = false;
 	}
-	console.log(flag1 + "일치 여부" + pass1 + "/" + pass2);
+//	console.log(flag1 + "일치 여부" + pass1 + "/" + pass2);
 };
 
 $("input[name=pwCh]").on("keyup", passEqual);
@@ -52,21 +53,23 @@ var pwReg = function() {
 			$(".pwReg").css("color", "red");
 			flag2 = false;
 		}
-		console.log(flag2 + "양식 여부" + password);
+//		console.log(flag2 + "양식 여부" + password);
 	}
 };
 $("#pw").on("keyup", pwReg);
 
 function passChange() {
-	console.log(flag1 + "/" + flag2);
-	console.log(flag1 && flag2);
-	alert("변경하시겠습니까?");
-	if (flag1 && flag2) {
-		alert("변경 성공!");
-		return true;
+//	console.log(flag1 + "/" + flag2);
+//	console.log(flag1 && flag2);
+	if(confirm('비밀번호를 변경하시겠습니까?')){
+		if (flag1 && flag2) {
+			alert(" 비밀번호가 정상적으로 변경되었습니다.");
+			alert("다시 로그인하여 이용해주세요!");
+			return true;
+		}
+		alert("양식에 맞는 비밀번호를 입력해주세요!");
+		return false;
 	}
-	;
-	alert("변경 실패!");
 	return false;
 };
 
@@ -82,11 +85,13 @@ $("#checkBtn").click(function() { // 계좌 비밀번호
 		data : acntList,
 		success : function(data) {
 			if (data == 1) {
-				console.log("계좌 비번이 맞아요");
+				$(".bankPwChNow").html("계좌 비밀번호가 확인 되었습니다.");
+				$(".bankPwChNow").css("color", "blue");
 				checkpw = true;
 			} else {
 				alert("계좌 비밀번호를 확인해 주세요 ");
-				console.log("계좌 비번이 틀려요");
+				$(".bankPwChNow").html("계좌 비밀번호를 확인해 주세요.");
+				$(".bankPwChNow").css("color", "red");
 				checkpw = false;
 			}
 		}
@@ -120,6 +125,8 @@ function bankPwChange() {
 			$(".bankPwCh1").html("현재 계좌 비밀번호를 확인해주세요.");
 			$(".bankPwChCh1").html("&nbsp;");
 		} else {
+			alert("계좌 비밀번호가 정상적으로 변경되었습니다. ");
+			alert("다시 로그인하여 이용해주세요! ");
 			return true;
 		}
 		return false;

@@ -134,8 +134,7 @@
 							<td colspan="2"><p class="alert bankPwChCh1">&nbsp;</p></td>
 						</tr>
 					</table>
-					<button type="submit" onclick="return bankPwChange();" class="btn1">
-					계좌	비밀번호 수정</button>
+					<button type="submit" onclick="return bankPwChange();" class="btn1">계좌	비밀번호 수정</button>
 				</form>
 			</div>
 			

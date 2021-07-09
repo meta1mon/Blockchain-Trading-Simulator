@@ -47,7 +47,7 @@ $(function() {
 			<div class="comm">글쓰기</div>
 			<br> <br> <br> <br> <br>
 			<form action="cInsert" method="post" enctype="multipart/form-data"
-				style="margin: 0 20px" name="insertForm">
+				style="margin: 20px 20px 0 20px" name="insertForm">
 				<c:if test="${loginMember == 'admin' }">
 					<input id="subject" type="text"
 						placeholder="&nbsp;&nbsp;제목을 입력해 주세요." name="csubject"

@@ -376,7 +376,7 @@ $(function(){
 			<!-- main-right -->
 			<div class="main-right">
 				<!-- 누적 랭킹 section -->
-				<div class="section-story">
+				<div class="section-accumulative">
 					<div class="menu-title">
 						<span class="sub-title">누적 랭킹</span> <span class="find-more"
 							onclick="location.href='rankAccumulative'">모두 보기</span>
@@ -428,7 +428,7 @@ $(function(){
 					</ul>
 				</div>
 				<!-- 데일리 랭킹 section -->
-				<div class="section-story">
+				<div class="section-daily">
 					<div class="menu-title">
 						<span class="sub-title">데일리 랭킹</span> <span class="find-more"
 							onclick="location.href='rankDaily'">모두 보기</span>

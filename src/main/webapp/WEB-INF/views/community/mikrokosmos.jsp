@@ -69,9 +69,14 @@ $(function() {
 						}
 					});
 		});
-
+		
+		// 인스타 게시글 첨부파일이 없을 때 사용하는 변수
+		var filepath = "";
+		if (filepath == ("undefined")) {
+			filepath = "";
+		}
 		// 시작점 1번부터라는 뜻
-		var instaStart = 1;
+		var instaStart = 7;
 		// 추가로 4개씩 더 불러옴
 		const instaPlus = 3;
 		var moreHtml = "";
@@ -92,18 +97,22 @@ $(function() {
 								$.each(json,function(idx, insta) {
 									moreHtml += "<article> <header> <div class='profile-of-article'> <img class='img-profile pic' src='resources/assets/img/user.png'> <span class='userID main-id point-span'>" + insta.cwriter +"</span> </div> "
 											+"<div class='dropdown' style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
-											+ "<div class='dropdown-content' style='left: 0;'> <p onclick='report()' class='report' id='popup_open_btn'>신고</p> <c:if test='${loginMember == writerEmail }'> <p onclick='checkUpdate('insta.cno', 'insta.cwriter')' class='update'>수정</a> <p onclick='checkDelete('insta.cno', 'insta.cwriter')' class='delete'>삭제</a> </c:if>"
+											+"<div class='dropdown-content' style='left: 0;'> <p onclick='report(" + insta.cno + ")' class='report' id='popup_open_btn'>신고</p> <c:if test='${loginMember == writerEmail }'> <p onclick=\"checkUpdate(" + insta.cno + ", " + insta.cwriter + ")\" class='update'>수정</a> <p onclick='checkDelete('insta.cno', 'insta.cwriter')' class='delete'>삭제</a> </c:if>"
+											+"</div> </div> </div> </header>"
+											+"<div class='main-image'><div class='content'>" + insta.ccontent
+											+"<a download="+insta.filepath+" href=\"${pageContext.request.contextPath}/resources/uploadFiles/"+insta.filepath+"\">"+filepath+"</a><br> </div> </div>"
 											
-											+"</div> </div> </div> </header> <div class='main-image'><div class='content'>" + insta.ccontent + "</div> <div class='description'>"
-											+"<p> <span class='at-tag'>@bts @wkorea @gucci</span> </p> </div> </div> <div class='icons-react'> <div class='icons-left'> <img class='thumbsup' onclick='clike()' src='resources/assets/img/thumbsup.png'>"
-											+"<img class='thumbsup-liked' onclick='clike()' src='resources/assets/img/thumbs-up.png'> </div> <div class='icons-middle'> <img class='thumbsdown' onclick='dislike()' src='resources/assets/img/thumbsdown.png'>"
-											+"<img class='thumbsdown-disliked' onclick='dislike()' src='resources/assets/img/thumbs-down.png'> </div> <div class='icons-right'> <input type=\"hidden\" class=\"hiddenCno\" value=\"insta.cno\">"
-											+"<img class=\"reply\" onclick=\"reply(idx)\" id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png'>"
-											+"</div> </div> <div class='reaction'> <div class='liked-people'> <p> <span class='point-span'>"+insta.likecnt +"</span> 명이 추천합니다</p> </div> <div class='comment-section'> <ul class='comments'> </ul>"
-											+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <form> <div class='comment'> <input type='hidden' name='cno' value="+ insta.cno +">"
-											+"<input type='text' class='input-comment' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick=\"replyInsert(idx)\">게시</button>"
-											+"</div> </form> </c:if> </div> <c:if test='${loginMember == null }'> <div class='comment'> <input class='input-comment' type='text' placeholder='댓글을 작성하려면 로그인이 필요합니다.'>"
-											+"<button type='submit' class='submit-comment'>게시</button> </div> </c:if> </article>";
+		                                	+"<div class=\"icons-react\"> <div class=\"icons-left\"> <img class=\"thumbsup\" onclick=\"clike(" + insta.cno + ")\" src='resources/assets/img/thumbsup.png' alt=\"추천\">" + insta.likecnt + "</div>"
+											+"<div class=\"icons-middle\"> <img class=\"thumbsdown\" onclick=\"dislike(" + insta.cno + ")\" src='resources/assets/img/thumbsdown.png' alt='비추천'>"
+											+"<img class='thumbsdown-disliked' src='resources/assets/img/thumbs-down.png'>" + insta.dislikecnt + "</div> "
+											
+											+"<div class='icons-right'> <input type=\"hidden\" class=\"hiddenCno\" value="+insta.cno+">"
+											+"<img class=\"reply\" onclick=\"reply(idx)\" id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png' alt='댓글'>"
+											+"</div> </div> <div class=\"reaction\"> <div class=\"comment-section\"> <ul class=\"comments\"> </ul>"
+											+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <div class='comment'> <input type='hidden' name='cno' class=\"replyInsertCno1\" value="+ insta.cno +">"
+											+"<input type='text' class='input-comment' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick=\"replyInsert1(idx)\">등록</button>"
+											+"</div> </c:if> </div> <c:if test='${loginMember == null }'> <div class='comment'> <input class='input-comment' type='text' readonly placeholder='댓글을 작성하려면 로그인이 필요합니다.'>"
+											+"<button type='button' class='submit-comment' onclick=\"location.href='login'\">이동</button> </div> </c:if> </article>";
 										
 								<%-- 		"<br><div class='parent'><div><img	src='<%=request.getContextPath()%>/resources/assets/img/bts_logo.png'"
 									+ "width='25px' height='25px'>" + insta.cwriter + "<span	style='color: red;'>:== 닉네임</span></div>"
@@ -300,15 +309,9 @@ $(function(){
 						<!-- 게시글 내용 영역 -->
 						<div class="main-image">
 							<div class="content">${vo.ccontent }
-								<c:forTokens var="fileName" items="${vo.filepath}" delims=","
-									varStatus="st">
-									<a download="${fileName}"
-										href="${pageContext.request.contextPath}/resources/uploadFiles/${vo.filepath}">${fileName}</a>
-									<c:if test="${!st.last }">
-                                    /
-                                </c:if>
+									<a download="${vo.filepath}"
+										href="${pageContext.request.contextPath}/resources/uploadFiles/${vo.filepath}">${vo.filepath}</a>
 									<br>
-								</c:forTokens>
 							</div>
 						</div>
 						<!-- 게시글 추천, 비추천, 댓글 작성 -->

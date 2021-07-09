@@ -66,6 +66,18 @@
     bottom: 2px;
 }
 
+.download{
+	float: right;
+    position: relative;
+    left: 250px;
+    top: 60px;
+    color:#6464FF;
+}
+
+.download:hover {
+	text-decoration : underline;
+}
+
 #file_text {
 	color: black;
 	font-size: 14px;

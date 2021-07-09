@@ -32,7 +32,7 @@
 			<div class="comm">수정하기</div>
 			<br> <br> <br> <br> <br>
 			<form action="cUpdate" method="post" enctype="multipart/form-data"
-				style="margin: 0 20px">
+				style="margin: 20px 20px 0 20px">
 				<input type="hidden" name="fromInsta" value="${fromInsta }">
 				<input type="hidden" name="cno" value="${community.cno}"> <input
 					type="hidden" name="filepath" value="${community.filepath}">
@@ -43,7 +43,7 @@
 				</c:if>
 				<textarea id="editor" name="ccontent" maxlength="4000"
 					style="margin: 0 auto 10 auto;">${community.ccontent}</textarea>
-				<input type="submit" value="글 작성하기" id="submit">
+				<input type="submit" value="글 수정하기" id="submit">
 				<c:url var="clist" value="clist">
 					<c:param name="page" value="1" />
 				</c:url>
@@ -64,7 +64,7 @@
 				<c:if test="${!empty community.filepath}">
 					<c:forTokens var="fileName" items="${community.filepath}"
 						delims="," varStatus="st">
-						<a download="${fileName}"
+						<a download="${fileName}" class="download"
 							href="${pageContext.request.contextPath}/resources/uploadFiles/${community.filepath}">${fileName}</a>
 						<c:if test="${!st.last }">
 	                        /

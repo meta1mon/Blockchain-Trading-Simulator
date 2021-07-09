@@ -3,7 +3,7 @@ package com.kh.bts.mypage.model.vo;
 public class MyRcommunity {
 	private String cno;
 	private String csubject;
-	private String cwriter;
+	private String rwriter;
 	private String rcontent;
 	private String rdate;
 	private int viewcnt;
@@ -11,11 +11,11 @@ public class MyRcommunity {
 
 	public MyRcommunity() {}
 	
-	public MyRcommunity(String cno, String csubject, String cwriter, String rcontent, String rdate, int viewcnt,
+	public MyRcommunity(String cno, String csubject, String rwriter, String rcontent, String rdate, int viewcnt,
 			int likecnt) {
 		super();
 		this.csubject = csubject;
-		this.cwriter = cwriter;
+		this.rwriter = rwriter;
 		this.rcontent = rcontent;
 		this.rdate = rdate;
 		this.viewcnt = viewcnt;
@@ -38,12 +38,12 @@ public class MyRcommunity {
 		this.csubject = csubject;
 	}
 
-	public String getCwriter() {
-		return cwriter;
+	public String getRwriter() {
+		return rwriter;
 	}
 
-	public void setCwriter(String cwriter) {
-		this.cwriter = cwriter;
+	public void setRwriter(String rwriter) {
+		this.rwriter = rwriter;
 	}
 
 	public String getRcontent() {

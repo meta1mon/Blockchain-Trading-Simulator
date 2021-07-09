@@ -68,7 +68,7 @@
 					</tr>
 					<c:if test="${coinListCount eq 0 }">
 						<tr>
-							<td colspan="6" align="center"><br> <br> 보유한 코인이
+							<td colspan="6" align="center"><br>보유한 코인이
 								없습니다.<br> <br></td>
 						</tr>
 					</c:if>
@@ -112,33 +112,43 @@
 						<th>매수가격</th>
 						<th>매수날짜</th>
 					</tr>
-					<c:forEach var="blist" items="${boughtResult }" varStatus="status">
-						<c:if test="${status.index <4}">
-							<tr>
-								<td>${blist.ubno }</td>
-								<td>${blist.coin }</td>
-								<td><fmt:formatNumber value="${blist.buycnt }"
-										pattern="#,###,###,###,###.########" /></td>
-								<td><fmt:formatNumber value="${blist.buyprice }"
-										pattern="#,###,###,###,###" />&nbsp;원</td>
-								<td>${blist.bdate }</td>
-							</tr>
-						</c:if>
-						<c:if test="${status.index>=4 }">
-							<tr class="blist" style="display: none;">
-								<td>${blist.ubno }</td>
-								<td>${blist.coin }</td>
-								<td><fmt:formatNumber value="${blist.buycnt }"
-										pattern="#,###,###,###,###.########" /></td>
-								<td><fmt:formatNumber value="${blist.buyprice }"
-										pattern="#,###,###,###,###" />&nbsp;원</td>
-								<td>${blist.bdate }</td>
-							</tr>
-						</c:if>
-
-					</c:forEach>
+					<c:if test="${boughtResult.size() eq 0}">
+						<tr>
+							<td colspan="5" align="center"><br> 
+								체결 매수 주문내역이 없습니다. <br> <br>
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${boughtResult.size() ne 0}">
+						<c:forEach var="blist" items="${boughtResult }" varStatus="status">
+							<c:if test="${status.index <4}">
+								<tr>
+									<td>${blist.ubno }</td>
+									<td>${blist.coin }</td>
+									<td><fmt:formatNumber value="${blist.buycnt }"
+											pattern="#,###,###,###,###.########" /></td>
+									<td><fmt:formatNumber value="${blist.buyprice }"
+											pattern="#,###,###,###,###" />&nbsp;원</td>
+									<td>${blist.bdate }</td>
+								</tr>
+							</c:if>
+							<c:if test="${status.index>=4 }">
+								<tr class="blist" style="display: none;">
+									<td>${blist.ubno }</td>
+									<td>${blist.coin }</td>
+									<td><fmt:formatNumber value="${blist.buycnt }"
+											pattern="#,###,###,###,###.########" /></td>
+									<td><fmt:formatNumber value="${blist.buyprice }"
+											pattern="#,###,###,###,###" />&nbsp;원</td>
+									<td>${blist.bdate }</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</c:if>
 				</table>
+				<c:if test="${boughtResult.size()>4 }">
 				<input type="button" id="bExpand" value="더 보기" class="expandBtn"></input>
+				</c:if>
 
 				<h3>체결 매도주문내역</h3>
 				<table class="historyTable">
@@ -149,32 +159,43 @@
 						<th>매수가격</th>
 						<th>매수날짜</th>
 					</tr>
-					<c:forEach var="slist" items="${soldResult }" varStatus="status">
-						<c:if test="${status.index <4}">
-							<tr>
-								<td>${slist.usno }</td>
-								<td>${slist.coin }</td>
-								<td><fmt:formatNumber value="${slist.sellcnt }"
-										pattern="#,###,###,###,###.########" /></td>
-								<td><fmt:formatNumber value="${slist.sellprice }"
-										pattern="#,###,###,###,###" />&nbsp;원</td>
-								<td>${slist.sdate }</td>
-							</tr>
-						</c:if>
-						<c:if test="${status.index >=4}">
-							<tr class="slist" style="display: none;">
-								<td>${slist.usno }</td>
-								<td>${slist.coin }</td>
-								<td><fmt:formatNumber value="${slist.sellcnt }"
-										pattern="#,###,###,###,###.########" /></td>
-								<td><fmt:formatNumber value="${slist.sellprice }"
-										pattern="#,###,###,###,###" />&nbsp;원</td>
-								<td>${slist.sdate }</td>
-							</tr>
-						</c:if>
-					</c:forEach>
+					<c:if test="${soldResult.size() eq 0}">
+						<tr>
+							<td colspan="5" align="center"><br> 
+								체결 매도 주문내역이 없습니다. <br> <br>
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${soldResult.size() ne 0}">
+						<c:forEach var="slist" items="${soldResult }" varStatus="status">
+							<c:if test="${status.index <4}">
+								<tr>
+									<td>${slist.usno }</td>
+									<td>${slist.coin }</td>
+									<td><fmt:formatNumber value="${slist.sellcnt }"
+											pattern="#,###,###,###,###.########" /></td>
+									<td><fmt:formatNumber value="${slist.sellprice }"
+											pattern="#,###,###,###,###" />&nbsp;원</td>
+									<td>${slist.sdate }</td>
+								</tr>
+							</c:if>
+							<c:if test="${status.index >=4}">
+								<tr class="slist" style="display: none;">
+									<td>${slist.usno }</td>
+									<td>${slist.coin }</td>
+									<td><fmt:formatNumber value="${slist.sellcnt }"
+											pattern="#,###,###,###,###.########" /></td>
+									<td><fmt:formatNumber value="${slist.sellprice }"
+											pattern="#,###,###,###,###" />&nbsp;원</td>
+									<td>${slist.sdate }</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</c:if>
 				</table>
+				<c:if test="${soldResult.size()>4 }">
 				<input type="button" id="sExpand" value="더 보기" class="expandBtn"></input>
+				</c:if>
 			</div>
 
 
@@ -190,34 +211,45 @@
 						<th>매수가격</th>
 						<th>매수날짜</th>
 					</tr>
-					<c:forEach var="wblist" items="${wBoughtResult }"
-						varStatus="status">
-						<c:if test="${status.index <4}">
-							<tr>
-								<td>${wblist.ubno }</td>
-								<td>${wblist.coin }</td>
-								<td><fmt:formatNumber value="${wblist.buycnt }"
-										pattern="#,###,###,###,###.########" /></td>
-								<td><fmt:formatNumber value="${wblist.buyprice }"
-										pattern="#,###,###,###,###" />&nbsp;원</td>
-								<td>${wblist.wbdate }</td>
-							</tr>
-						</c:if>
-						<c:if test="${status.index >=4}">
-							<tr class="wblist" style="display: none;">
-								<td>${wblist.ubno }</td>
-								<td>${wblist.coin }</td>
-								<td><fmt:formatNumber value="${wblist.buycnt }"
-										pattern="#,###,###,###,###.########" /></td>
-								<td><fmt:formatNumber value="${wblist.buyprice }"
-										pattern="#,###,###,###,###" />&nbsp;원</td>
-								<td>${wblist.wbdate }</td>
-							</tr>
-						</c:if>
-					</c:forEach>
+					<c:if test="${wBoughtResult.size() eq 0}">
+						<tr>
+							<td colspan="5" align="center"><br>  
+								미체결 매수 주문내역이 없습니다. <br> <br>
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${wBoughtResult.size() ne 0}">
+						<c:forEach var="wblist" items="${wBoughtResult }" varStatus="status">
+							<c:if test="${status.index <4}">
+								<tr>
+									<td>${wblist.ubno }</td>
+									<td>${wblist.coin }</td>
+									<td><fmt:formatNumber value="${wblist.buycnt }"
+											pattern="#,###,###,###,###.########" /></td>
+									<td><fmt:formatNumber value="${wblist.buyprice }"
+											pattern="#,###,###,###,###" />&nbsp;원</td>
+									<td>${wblist.wbdate }</td>
+								</tr>
+							</c:if>
+							<c:if test="${status.index >=4}">
+								<tr class="wblist" style="display: none;">
+									<td>${wblist.ubno }</td>
+									<td>${wblist.coin }</td>
+									<td><fmt:formatNumber value="${wblist.buycnt }"
+											pattern="#,###,###,###,###.########" /></td>
+									<td><fmt:formatNumber value="${wblist.buyprice }"
+											pattern="#,###,###,###,###" />&nbsp;원</td>
+									<td>${wblist.wbdate }</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</c:if>
 				</table>
+				
+				<c:if test="${wBoughtResult.size()>4 }">
 				<input type="button" id="wbExpand" value="더 보기" class="expandBtn"></input>
-
+				</c:if>
+				
 				<h3>미체결 매도주문내역</h3>
 				<table class="historyTable">
 					<tr>
@@ -227,33 +259,43 @@
 						<th>매수가격</th>
 						<th>매수날짜</th>
 					</tr>
-					<c:forEach var="wslist" items="${wSoldResult }" varStatus="status">
-						<c:if test="${status.index <4}">
-							<tr>
-								<td>${wslist.usno }</td>
-								<td>${wslist.coin }</td>
-								<td><fmt:formatNumber value="${wslist.sellcnt }"
-										pattern="#,###,###,###,###.########" /></td>
-								<td><fmt:formatNumber value="${wslist.sellprice }"
-										pattern="#,###,###,###,###" />&nbsp;원</td>
-								<td>${wslist.wsdate }</td>
-							</tr>
-						</c:if>
-						<c:if test="${status.index >=4}">
-							<tr class="wslist" style="display: none;">
-								<td>${wslist.usno }</td>
-								<td>${wslist.coin }</td>
-								<td><fmt:formatNumber value="${wslist.sellcnt }"
-										pattern="#,###,###,###,###.########" /></td>
-								<td><fmt:formatNumber value="${wslist.sellprice }"
-										pattern="#,###,###,###,###" />&nbsp;원</td>
-								<td>${wslist.wsdate }</td>
-							</tr>
-						</c:if>
-					</c:forEach>
+					<c:if test="${wSoldResult.size() eq 0}">
+						<tr>
+							<td colspan="5" align="center"><br> 
+								미체결 매도 주문내역이 없습니다. <br> <br>
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${wSoldResult.size() ne 0}">
+						<c:forEach var="wslist" items="${wSoldResult }" varStatus="status">
+							<c:if test="${status.index <4}">
+								<tr>
+									<td>${wslist.usno }</td>
+									<td>${wslist.coin }</td>
+									<td><fmt:formatNumber value="${wslist.sellcnt }"
+											pattern="#,###,###,###,###.########" /></td>
+									<td><fmt:formatNumber value="${wslist.sellprice }"
+											pattern="#,###,###,###,###" />&nbsp;원</td>
+									<td>${wslist.wsdate }</td>
+								</tr>
+							</c:if>
+							<c:if test="${status.index >=4}">
+								<tr class="wslist" style="display: none;">
+									<td>${wslist.usno }</td>
+									<td>${wslist.coin }</td>
+									<td><fmt:formatNumber value="${wslist.sellcnt }"
+											pattern="#,###,###,###,###.########" /></td>
+									<td><fmt:formatNumber value="${wslist.sellprice }"
+											pattern="#,###,###,###,###" />&nbsp;원</td>
+									<td>${wslist.wsdate }</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</c:if>
 				</table>
+				<c:if test="${wSoldResult.size()>4 }">
 				<input type="button" id="wsExpand" value="더 보기" class="expandBtn"></input>
-
+				</c:if>
 			</div>
 
 
@@ -269,7 +311,7 @@
 					</tr>
 					<c:if test="${cashLogListCount eq 0}">
 						<tr>
-							<td colspan="3">표시할 충전 내역이 없습니다.</td>
+							<td colspan="3"><br>표시할 충전 내역이 없습니다.<br><br></td>
 						</tr>
 					</c:if>
 					<c:if test="${cashLogListCount ne 0}">
@@ -297,7 +339,9 @@
 						</c:forEach>
 					</c:if>
 				</table>
+				<c:if test="${cashLogList.size()>4 }">
 				<input type="button" id="cExpand" value="더 보기" class="expandBtn"></input>
+				</c:if>
 			</div>
 
 

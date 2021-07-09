@@ -13,7 +13,7 @@
 	<!-- 내가 쓴 댓글 리스트 -->
 	<select id="selectMyRcommunity" parameterType="string"
 		resultType="arraylist" resultMap="resultMyRcommunity">
-		SELECT community.cno cno, csubject, cwriter, rcontent, rdate, viewcnt, likecnt
+		SELECT community.cno cno, csubject, rwriter, rcontent, rdate, viewcnt, likecnt
 		FROM RCOMMUNITY
 		JOIN COMMUNITY
 		ON rcommunity.cno = community.cno

@@ -29,6 +29,31 @@
 	background-color: #FCFCFC;
 }
 
+/* 긴 게시글 한줄에 짧게 표현하기 */
+.ccontentSpan{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap:break-word; 
+    line-height: 2.4em;
+    height: 2.4em; /* line-height 가 1.2em 이고 3라인을 자르기 때문에 height는 1.2em * 3 = 3.6em */
+    vertical-align: middle; 
+}
+
+/* 긴 댓글 한줄에 짧게 표현하기 */
+.rcontentSpan{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap:break-word; 
+    line-height: 2.4em;
+    height: 2.4em; /* line-height 가 1.2em 이고 3라인을 자르기 때문에 height는 1.2em * 3 = 3.6em */
+    vertical-align: middle; 
+}
 
 .subject {
 	color: black;
@@ -94,3 +119,18 @@
 }
 
 /* 탭 메뉴 끝 */
+
+
+.expandBtn {
+	height: 30px;
+	font-size: 16px;
+	background-color: #fff;
+	color: #8C66C8,;
+	padding: 0px 8px;
+	border: 1px solid transparent;
+	border-color: #E3C8F8;
+  	border-radius: 4px;
+  	cursor: pointer;
+  	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
+  	margin: 10px auto;
+}

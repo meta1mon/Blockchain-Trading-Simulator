@@ -89,6 +89,10 @@
 
 /* 탭 메뉴 끝 */
 
+h3 {
+	margin-top: 30px;
+}
+
 #coinTable {
 	width : 80%;
 	margin: 0 auto;

@@ -90,21 +90,19 @@ $(function() {
 								$.each(json,function(idx, insta) {
 									// 인스타 게시글 첨부파일이 없을 때 사용하는 변수
 									moreHtml += "<article> <header> <div class='profile-of-article'> <img class='img-profile pic' src='resources/assets/img/user.png'> <span class='userID main-id point-span'>" + insta.cwriter +"</span> </div> "
-											+"<div class='dropdown dd' onclick=\"dropdown()\" style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
-											+"<div class='dropdown-content' style='left: 0;'> <p onclick='report(" + insta.cno + ")' class='report' id='popup_open_btn'>신고</p> <c:if test='${loginMember == writerEmail }'> <p onclick=\"checkUpdate(" + insta.cno + ", " + insta.cwriter + ")\" class='update'>수정</a> <p onclick='checkDelete('insta.cno', 'insta.cwriter')' class='delete'>삭제</a> </c:if>"
-											+"</div> </div> </div> </header>"
+											+"<div class='dropdown' style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
+											+"<div class='dropdown-content ddcontent' style='left: 0;'> <p onclick='report(\"" + insta.cno + "\")' class='report'>신고</p><p onclick=\"checkUpdate('" + insta.cno + "', '" + insta.cwriter + "')\" class='update'>수정</p>"
+											+"<p onclick='checkDelete(\"" + insta.cno + "\", \"" + insta.cwriter + "\")' class='delete'>삭제</p></div> </div> </div> </header>"
 											+"<div class='main-image'><div class='content'>" + insta.ccontent
 											+"<c:if test='${not empty insta.filepath}'> <a download="+insta.filepath+" href=\"${pageContext.request.contextPath}/resources/uploadFiles/"+insta.filepath+"\">"+insta.filepath+"</a></c:if><br> </div> </div>"
-											
-		                                	+"<div class=\"icons-react\"> <div class=\"icons-left\"> <img class=\"thumbsup\" onclick=\"clike(" + insta.cno + ")\" src='resources/assets/img/thumbsup.png' alt=\"추천\">" + insta.likecnt + "</div>"
-											+"<div class=\"icons-middle\"> <img class=\"thumbsdown\" onclick=\"dislike(" + insta.cno + ")\" src='resources/assets/img/thumbsdown.png' alt='비추천'>"
+		                                	+"<div class=\"icons-react\"> <div class=\"icons-left\"> <img class=\"thumbsup\" onclick=\"clike('" + insta.cno + "')\" src='resources/assets/img/thumbsup.png' alt=\"추천\">" + insta.likecnt + "</div>"
+											+"<div class=\"icons-middle\"> <img class=\"thumbsdown\" onclick=\"dislike('" + insta.cno + "')\" src='resources/assets/img/thumbsdown.png' alt='비추천'>"
 											+"<img class='thumbsdown-disliked' src='resources/assets/img/thumbs-down.png'>" + insta.dislikecnt + "</div> "
-											
 											+"<div class='icons-right'>"
 											+"<img class=\"reply\" onclick=\"reply2('" + insta.cno + "')\" id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png' alt='댓글'>" + insta.replycnt
 											+"</div> </div> <div class=\"reaction\"> <div class=\"comment-section\"> <ul class=\"comments\"> </ul>"
-											+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <div class='comment'> <input type='hidden' name='cno' class=\"replyInsertCno1\" value="+ insta.cno +">"
-											+"<input type='text' class='input-comment replyContent3' name='rcontent' maxlength='4000' placeholder='댓글 달기...''> <button type='submit' class='submit-comment' onclick=\"replyInsert3('" + insta.cno + "')\">등록</button>"
+											+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <div class='comment'> <input type='hidden' name='cno' class=\"replyInsertCno1\" value=\""+ insta.cno +"\">"
+											+"<input type='text' class='input-comment replyContent1' name='rcontent' maxlength='4000' placeholder='댓글 달기...'> <button type='submit' class='submit-comment' onclick=\"replyInsert1('" + insta.cno + "')\">등록</button>"
 											+"</div> </c:if> </div> <c:if test='${loginMember == null }'> <div class='comment'> <input class='input-comment' type='text' readonly placeholder='댓글을 작성하려면 로그인이 필요합니다.'>"
 											+"<button type='button' class='submit-comment' onclick=\"location.href='login'\">이동</button> </div> </c:if> </article>";
 								
@@ -175,6 +173,11 @@ function clike(likeCno) {
             "cno" : likeCno
          },
          success : function(data) {
+        	if(data == 1) {
+        		alert("이 글이 맘에 드셨군요~?");
+        	} else {
+        		alert("마음이 바뀌셨나요?");
+        	}
             window.location.reload();
          }
       });
@@ -209,6 +212,11 @@ function dislike(dislikeCno) {
          },
          datatype : "json",
          success : function(data) {
+         	if(data == 1) {
+        		alert("이 글은 별로에요!");
+        	} else {
+        		alert("마음이 바뀌셨나요?");
+        	}
             window.location.reload();
          }
       });
@@ -325,7 +333,7 @@ $(function(){
 								<img class="reply" onclick="reply(${status.index})"
 									id="reply_popup_open"
 									src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png"
-									alt="댓글"> ${vo.replycnt }
+									alt="댓글">${vo.replycnt }
 							</div>
 						</div>
 						<!-- 추천 수 -->
@@ -363,14 +371,24 @@ $(function(){
 
 					</article>
 				</c:forEach>
-
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
 				<br>
-				<div>
-					<div style='text-align: center; margin-bottom: 20px;'>더이상 불러올
-						게시글이 없습니다</div>
+				<div id="moreDiv">
+					<!-- 더 불러온 인스타 넣는 구역 -->
 				</div>
-				<!-- <div id="moreDiv"></div>
-				<button type="button" class="moreFeed" onclick="moreInsta()">더보기</button> -->
+				<button type="button" class="moreFeed" onclick="moreInsta()">더보기</button>
 			</div>
 			<!-- main-right -->
 			<div class="main-right">
@@ -652,7 +670,7 @@ $(function(){
 				<hr>
 			</c:forEach>
 			<div id="moreDiv"></div>
-			<button type="button" onclick="moreInsta()">더보기</button>
+			
 
 			<div class="searchDiv">
 				<form action="clist" name="bottomListForm" method="get">

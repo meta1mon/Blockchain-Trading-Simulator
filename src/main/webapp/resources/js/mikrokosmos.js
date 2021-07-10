@@ -19,7 +19,6 @@ function reply(idx) {
 			},
 			datatype : "json",
 			success : function(data) {
-				/*$("#reply-list").remove();*/
 				modalReplyFn('modal_reply');
 				var json = JSON.parse(data);
 				if (json.length > 0) {
@@ -45,8 +44,8 @@ function reply(idx) {
 
 // moreInsta에서 댓글 리스트 불러오기
 function reply2(moreInstaCno) {
-	var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\">";
 	console.log(moreInstaCno);
+	var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\">";
 	$.ajax({
 		url : "rcSelect",
 		type : "post",
@@ -59,19 +58,19 @@ function reply2(moreInstaCno) {
 			var json = JSON.parse(data);
 			if (json.length > 0) {
 				$.each(json, function(idx, reply) {
-					replyHtml += "<input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\">" + "<li><div class=\"profile-wrap\">"
-					+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
-					+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
-					+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
-					+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
-					+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport("+ reply.rno + ")\">신고</p>"
-					+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
-					+ "</div><button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
-					+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button></li>";
-				});
+									replyHtml += "<input id=\"moreModalInCno\" type=\"hidden\" value=\"" + moreInstaCno +"\">" + "<li><div class=\"profile-wrap\">"
+											+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
+											+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
+											+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
+											+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
+											+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
+											+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
+											+ "</div><button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
+											+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button></li>";
+								});
 				replyHtml += "</ul>";
 			} else {
-				replyHtml = "<input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\"><p>작성된 댓글이 없습니다.</p>";
+				replyHtml = "<input id=\"moreModalInCno\" type=\"hidden\" value=\"" + moreInstaCno +"\"><p>작성된 댓글이 없습니다.</p>";
 			}
 			$("#replyList").html(replyHtml);
 		}
@@ -275,37 +274,20 @@ function replyInsert1(Idx) {
 
 }
 
-	
-// 모달 밖의 댓글 삽입. moreInsta
-function replyInsert3(moreInstaWriteCno) {
-	console.log(moreInstaWriteCno);
-	var rcontent = $(this).prev().val();
-	console.log(rcontent);
-	if (rcontent == "") {
-		alert("댓글을 입력하세요");
-	} else {
-		$.ajax({
-			url : "rcInsert",
-			type : "post",
-			data : {
-				"rcontent" : rcontent,
-				"cno" : moreInstaWriteCno
-			},
-			success : function(data) {
-				alert("댓글 작성 완료");
-				window.location.reload();
-			}
-		})
-	}
-	
-}
-
 // 모달 안의 댓글 삽입
 function replyInsert2() {
 	var rcontent = $("#replyContent2").val();
-	var cno = $("#modalInCno").val();
+	var cno = "";
+	if($("#modalInCno").val() == undefined) {     // moreInsta에서 들어옴
+		console.log("moreInsta에서 들어옴");
+		cno = $("#moreModalInCno").val();
+		
+	} else {                                      // 그냥 Insta에서 들어옴
+		console.log("그냥 Insta에서 들어옴");
+		cno = $("#modalInCno").val();
+	}
 	console.log(rcontent);
-	console.log(cno);
+	console.log(cno + "asdfasdfsadf");
 	if (rcontent == "") {
 		alert("댓글을 입력하세요");
 	} else {
@@ -319,34 +301,34 @@ function replyInsert2() {
 			success : function(data) {
 				bgReply.remove();
 				alert("댓글 작성 완료");
-				console.log(replyCno);
+				console.log(cno);
 				var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\">";
+				// 댓글 리스트 읽어오는 ajax
 				$.ajax({
 					url : "rcSelect",
 					type : "post",
 					data : {
-						"cno" : replyCno
+						"cno" : cno
 					},
 					datatype : "json",
 					success : function(data) {
-						$(".reply-list").remove();
 						modalReplyFn('modal_reply');
 						var json = JSON.parse(data);
 						if (json.length > 0) {
 							$.each(json, function(idx, reply) {
-								replyHtml += "<input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\">" + "<li><div class=\"profile-wrap\">"
-										+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
-										+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
-										+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
-										+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
-										+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport("+ reply.rno + ")\">신고</p>"
-										+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
-										+ "</div><button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
-										+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button></li>";
-							});
+												replyHtml += "<input id=\"moreModalInCno\" type=\"hidden\" value=\"" + cno +"\">" + "<li><div class=\"profile-wrap\">"
+														+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
+														+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
+														+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
+														+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
+														+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
+														+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
+														+ "</div><button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
+														+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button></li>";
+											});
 							replyHtml += "</ul>";
 						} else {
-							replyHtml = "<input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\"><p>작성된 댓글이 없습니다.</p>";
+							replyHtml = "<p>작성된 댓글이 없습니다.</p>";
 						}
 						$("#replyList").html(replyHtml);
 						$("#replyContent2").val("");

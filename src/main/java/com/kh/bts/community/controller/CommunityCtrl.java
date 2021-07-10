@@ -51,7 +51,7 @@ public class CommunityCtrl {
 	public ModelAndView insta(ModelAndView mav,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
 			@RequestParam(name = "searchType", defaultValue = "1") int searchType) {
-		Paging paging = new Paging(1, 10);
+		Paging paging = new Paging(1, 9);
 		List<Community> list = cmService.selectAllCommunityList(paging, keyword, searchType);
 		System.out.println(list);
 		mav.addObject("commuList", list);

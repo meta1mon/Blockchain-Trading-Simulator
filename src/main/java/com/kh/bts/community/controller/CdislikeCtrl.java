@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.community.model.service.CdislikeService;
@@ -17,8 +18,9 @@ public class CdislikeCtrl {
 	@Autowired
 	private CdislikeService dlService;
 
+	@ResponseBody
 	@RequestMapping(value = "cdislike", method = RequestMethod.POST)
-	public void communityDetail(@RequestParam(name = "cno") String cno, HttpServletRequest request,
+	public int communityDetail(@RequestParam(name = "cno") String cno, HttpServletRequest request,
 			HttpServletResponse response, ModelAndView mv) {
 
 		// 이메일 가져오기
@@ -26,20 +28,25 @@ public class CdislikeCtrl {
 
 		// 이미 추천했는지 판단
 		int isDislike = 0;
+		int forAlert = 0;
 		try {
 
 			isDislike = dlService.isDislike(cno, email);
 			System.out.println("컨트롤러 isDislike : " + isDislike);
 			if (isDislike > 0) { // 이미 추천했음 => 추천 취소
 				dlService.deleteCdislike(cno, email);
+				forAlert = 0;
 
 			} else if (isDislike == 0) { // 추천 안했음 => 추천 실행
 				dlService.insertCdislike(cno, email);
+				forAlert = 1;
 
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");
 		}
+		
+		return forAlert;
 	}
 }

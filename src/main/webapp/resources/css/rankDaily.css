@@ -1,0 +1,162 @@
+@charset "UTF-8";
+#rank {
+	width: 1240px;
+	height: 800px;
+	margin: 35px auto;
+	text-align: center;
+	background-color: #fff;
+	border: 1.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
+}
+
+#rank table {
+	margin: 0 auto;
+}
+
+#rank table th, #rank table td, #rank table a {
+	font-size: 20px;
+}
+
+#rank li {
+	list-style-type: none;
+	float: left;
+	margin: 0 50px;
+}
+
+#rank img {
+	width: 200px;
+	height: 200px;
+}
+
+/* 랭킹 스와이프 메뉴 시작 */
+input[type=radio] {
+  display: none;
+}
+
+.card {
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform .5s ease, opacity .5s;
+  cursor: pointer;
+  background: white;
+  color: #8c66c8;
+}
+
+.info {
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform .5s ease;
+  cursor: pointer;
+  background: #8c66c8;
+  color: white;
+}
+
+.container {
+  width: 1240px;
+  max-width: 1240px;
+  max-height: 100px;
+  height: 100%;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cards {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#item-1:checked ~ .cards #rank-4, #item-2:checked ~ .cards #rank-1, #item-3:checked ~ .cards #rank-2, #item-4:checked ~ .cards #rank-3 {
+  transform: translatex(-100%);
+  opacity: 0.3;
+  z-index: 0;
+}
+
+#item-1:checked ~ .cards #rank-2, #item-2:checked ~ .cards #rank-3, #item-3:checked ~ .cards #rank-4, #item-4:checked ~ .cards #rank-1 {
+  transform: translatex(100%);
+  opacity: 0.3;
+  z-index: 0;
+}
+
+#item-1:checked ~ .cards #rank-1, #item-2:checked ~ .cards #rank-2, #item-3:checked ~ .cards #rank-3, #item-4:checked ~ .cards #rank-4 {
+  transform: translatex(0) scale(1.2);
+  opacity: 1;
+  z-index: 1;
+  background: #8c66c8;
+  color: white;
+  }
+  
+#item-1:checked ~ .cards #rank-info-4, #item-2:checked ~ .cards #rank-info-1, #item-3:checked ~ .cards #rank-info-2, #item-4:checked ~ .cards #rank-info-3 {
+  transform: translatex(-100%);
+  z-index: 0;
+}
+
+#item-1:checked ~ .cards #rank-info-2, #item-2:checked ~ .cards #rank-info-3, #item-3:checked ~ .cards #rank-info-4, #item-4:checked ~ .cards #rank-info-1 {
+  transform: translatex(100%);                                                                     
+  z-index: 0;                                                                                      
+}                                                                                                  
+                                                                                                   
+#item-1:checked ~ .cards #rank-info-1, #item-2:checked ~ .cards #rank-info-2, #item-3:checked ~ .cards #rank-info-3, #item-4:checked ~ .cards #rank-info-4 {
+  transform: translatex(0);
+  opacity: 1;
+  z-index: 1;
+  background: #8c66c8;
+  color: white;
+  }
+
+  
+/* 랭킹 스와이프 메뉴 끝 */
+
+/* 랭킹 정보 시작 */
+.info{
+	width: 1240px;
+}
+/* 랭킹 정보 끝 */
+
+#daily {
+	width: 65%;
+	min-width: 1000px;
+	height: 80%;
+	padding:20px;
+	margin: 25px auto;
+    background-color: #fff;
+    border: 1.5px solid #f2f2f2;
+/*     border: 1.5px solid #E3C8F8; */
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
+}
+
+.ranktable {
+	width: 100%;
+	text-align: center;
+}
+
+.ranktable td {
+	width: 33.3%;
+}
+
+.top3{
+	margin-bottom: 10px;
+	width: 100%;
+	height: 247px;
+}
+
+#accumulative {
+	display: none;
+}
+
+.ranktable a {
+	color: #8c66c8;
+}

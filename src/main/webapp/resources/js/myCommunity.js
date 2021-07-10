@@ -3,14 +3,19 @@ $('.tablinks').click(function() {
 
 	for (var i = 0; i < $('.tabcontent').length; i++) {
 		$('.tabcontent').hide();
+		if($('.tablinks').hasClass("tablinksActive")) {
+			$('.tablinks').removeClass('tablinksActive');
+		}
 	}
 
 	$(".tabcontent").eq($(this).index()).show();
+	$(this).addClass('tablinksActive');
 
 });
 
 $(function() {
-	$(".tabcontent").eq(0).show(); // 보유코인 목록 탭 기본값 : show()
+	$(".tabcontent").eq(0).show(); // 나의 게시글 탭 기본값 : show()
+	$('.tablinks').eq(0).addClass('tablinksActive');
 	
 	for (var i = 0; i < $('#ccontentSize').val(); i++) {
 		var text = $('.ccontentHidden').eq(i).val();

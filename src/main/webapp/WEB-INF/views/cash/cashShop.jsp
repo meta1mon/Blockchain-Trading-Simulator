@@ -17,13 +17,16 @@
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
 #cashShop {
-	width: 1240px;
-	height: 800px;
-	background-color: #fff;
-	margin: 35px auto;
 	text-align: center;
-	border: solid 1px black;
-	padding: 50px;
+	
+	width: 65%;
+	min-width: 1000px;
+	height: 95%;
+	padding:20px;
+	margin: 25px auto;
+    background-color: #fff;
+    border: 1.5px solid #E3C8F8;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 
 #cashShop #steps {
@@ -40,7 +43,7 @@
 	text-align: right;
 }
 #step2, #oldSale{
-	border-top: 1px solid black;
+	border-top: 1.5px solid #E3C8F8;
 }
 .step {
     width: 80%;

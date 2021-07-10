@@ -32,7 +32,6 @@
 			<div id="myCom" class="tabcontent">
 				<table class="ctable">
 					<tr>
-						<td align="center" width="60" style="font-size: 13px;">번호</td>
 						<td align="center" width="380">내용</td>
 						<td align="center" width="100">작성자</td>
 						<td align="center" width="100">작성일</td>
@@ -42,7 +41,7 @@
 					<!-- 글이 없을 경우 -->
 					<c:if test="${myClist.size() eq 0}">
 						<tr>
-							<td colspan="6" align="center"><br> <br> 작성한 글이
+							<td colspan="5" align="center"><br> <br> 작성한 글이
 								없습니다. <br> <br></td>
 						</tr>
 					</c:if>
@@ -51,7 +50,6 @@
 						<c:forEach var="vo" items="${myClist }" varStatus="status">
 							<c:if test="${status.index <15}">
 								<tr>
-									<td align="center" style="font-size: 13px;">${vo.cno}</td>
 									<td align="left">
 										<input type="hidden" value="${fn:escapeXml(vo.ccontent)}" class="ccontentHidden"/>
 										<a href="${pageContext.request.contextPath}/cDetail?cno=${vo.cno}" class="subject">
@@ -66,7 +64,6 @@
 							</c:if>
 							<c:if test="${status.index >=15}">
 								<tr class="myCommunityList" style="display: none;">
-									<td align="center" style="font-size: 13px;">${vo.cno}</td>
 									<td align="left">
 										<input type="hidden" value="${fn:escapeXml(vo.ccontent)}" class="ccontentHidden"/>
 										<a href="${pageContext.request.contextPath}/cDetail?cno=${vo.cno}" class="subject">
@@ -90,7 +87,6 @@
 			<div id="myRe" class="tabcontent">
 				<table class="ctable">
 					<tr>
-						<td align="center" width="60" style="font-size: 13px;">번호</td>
 						<td align="center" width="380">내용</td>
 						<td align="center" width="100">작성자</td>
 						<td align="center" width="100">작성일</td>
@@ -98,7 +94,7 @@
 					<!-- 글이 없을 경우 -->
 					<c:if test="${myRlist.size() eq 0}">
 						<tr>
-							<td colspan="4" align="center"><br> <br> 작성한 댓글이
+							<td colspan="3" align="center"><br> <br> 작성한 댓글이
 								없습니다. <br> <br></td>
 						</tr>
 					</c:if>
@@ -107,7 +103,6 @@
 						<c:forEach var="vo" items="${myRlist }" varStatus="status">
 							<c:if test="${status.index <15}">
 							<tr>
-								<td align="center" style="font-size: 13px;">${vo.cno }</td>
 								<td align="left">
 									<input type="hidden" value="${fn:escapeXml(vo.rcontent)}" class="rcontentHidden"/>
 									<a href="${pageContext.request.contextPath}/cDetail?cno=${vo.cno}" class="subject">
@@ -120,7 +115,6 @@
 							</c:if>
 							<c:if test="${status.index >=15}">
 							<tr class="myReplyCommunityList" style="display: none;">
-								<td align="center" style="font-size: 13px;">${vo.cno }</td>
 								<td align="left">
 									<input type="hidden" value="${fn:escapeXml(vo.rcontent)}" class="rcontentHidden"/>
 									<a href="${pageContext.request.contextPath}/cDetail?cno=${vo.cno}" class="subject">

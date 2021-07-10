@@ -90,7 +90,7 @@ $(function() {
 								$.each(json,function(idx, insta) {
 									// 인스타 게시글 첨부파일이 없을 때 사용하는 변수
 									moreHtml += "<article> <header> <div class='profile-of-article'> <img class='img-profile pic' src='resources/assets/img/user.png'> <span class='userID main-id point-span'>" + insta.cwriter +"</span> </div> "
-											+"<div class='dropdown' style='float: right;'> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
+											+"<div class=\"dropdown\" style=\"float: right;\" onclick=\"moreDropdown('" + (instaStart-1 + idx*1) + "')\"> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
 											+"<div class='dropdown-content ddcontent' style='left: 0;'> <p onclick='report(\"" + insta.cno + "\")' class='report'>신고</p><p onclick=\"checkUpdate('" + insta.cno + "', '" + insta.cwriter + "')\" class='update'>수정</p>"
 											+"<p onclick='checkDelete(\"" + insta.cno + "\", \"" + insta.cwriter + "\")' class='delete'>삭제</p></div> </div> </div> </header>"
 											+"<div class='main-image'><div class='content'>" + insta.ccontent
@@ -101,8 +101,8 @@ $(function() {
 											+"<div class='icons-right'>"
 											+"<img class=\"reply\" onclick=\"reply2('" + insta.cno + "')\" id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png' alt='댓글'>" + insta.replycnt
 											+"</div> </div> <div class=\"reaction\"> <div class=\"comment-section\"> <ul class=\"comments\"> </ul>"
-											+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <div class='comment'> <input type='hidden' name='cno' class=\"replyInsertCno1\" value=\""+ insta.cno +"\">"
-											+"<input type='text' class='input-comment replyContent1' name='rcontent' maxlength='4000' placeholder='댓글 달기...'> <button type='submit' class='submit-comment' onclick=\"replyInsert1('" + insta.cno + "')\">등록</button>"
+											+"<div class='time-log'> <span>"+ insta.cdate +"</span> </div> </div> </div> <div> <div class='hl'></div> <c:if test='${loginMember != null }'> <div class='comment'>"
+											+"<input type='text' class='input-comment' name='rcontent' maxlength='4000' placeholder='댓글 달기...'> <button type='button' class='submit-comment' onclick=\"replyInsert3('" + this + "', '" + insta.cno + "')\">등록</button>"
 											+"</div> </c:if> </div> <c:if test='${loginMember == null }'> <div class='comment'> <input class='input-comment' type='text' readonly placeholder='댓글을 작성하려면 로그인이 필요합니다.'>"
 											+"<button type='button' class='submit-comment' onclick=\"location.href='login'\">이동</button> </div> </c:if> </article>";
 								
@@ -116,11 +116,18 @@ $(function() {
 									+ "<div><textarea'placeholder='댓글을 입력하여 대화를 시작하세요!'></textarea></div>"
 									+ "<div>" + insta.cdate +"</div></div><hr>"; --%>
 								});
+								
 							} else {
 								moreHtml += "<br><div><div style='text-align:center; margin-bottom:20px;'>더이상 불러올 게시글이 없습니다</div></div>";
 							}
 							$("#moreDiv").html(moreHtml);
-							
+/* 							console.log("####################");
+							$('#hiiii').click( function(){
+								console.log("asdfasdfasdfsaf");
+								var rcontent = $(this).prev().val();
+								console.log(rcontent);
+							});
+							console.log("여긴 들어가지?"); */
 						}
 					});
 		}
@@ -355,7 +362,7 @@ $(function(){
 										value="${vo.cno }"> <input type="text"
 										class="input-comment replyContent1" name="rcontent"
 										maxlength="4000" placeholder="댓글 달기...">
-									<button type="submit" class="submit-comment"
+									<button type="button" class="submit-comment"
 										onclick="replyInsert1(${status.index})">등록</button>
 								</div>
 							</c:if>
@@ -371,19 +378,6 @@ $(function(){
 
 					</article>
 				</c:forEach>
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
 				<br>
 				<div id="moreDiv">
 					<!-- 더 불러온 인스타 넣는 구역 -->

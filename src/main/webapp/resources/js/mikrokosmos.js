@@ -149,15 +149,16 @@ function checkDelete(deleteCno, deleteCwriter) {
 	});
 }
 // 게시글, 댓글 드랍다운 메뉴 클릭 시 열기/닫기
-$('.dropdown').click(
-		function() {
+$('.dropdown').click(function() {
 			console.log("클릭함");
-			console.log("클릭dropdown 상위 article idx: "
-					+ $(this).parents('article').index());
-			$('.dropdown-content').eq($(this).parents('article').index())
-					.show();
+			console.log("클릭dropdown 상위 article idx: "	+ $(this).parents('article').index());
+			$('.dropdown-content').eq($(this).parents('article').index()).show();
 		});
 
+function moreDropdown(idx) {
+	console.log(idx);
+	$('.dropdown-content').eq(idx).css("display", "block");
+}
 //댓글 드랍다운 메뉴는 css hover로 구현
 /*$('.replyDropdown').click(
 		function() {
@@ -274,7 +275,30 @@ function replyInsert1(Idx) {
 
 }
 
-// 모달 안의 댓글 삽입
+// 모달 밖의 댓글 삽입. moreInsta
+function replyInsert3(thisObject, outModalCno) {
+	var rcontent = $(window.event.target).prev().val();
+	
+	if (rcontent == "") {
+		alert("댓글을 입력하세요");
+	} else {
+		$.ajax({
+			url : "rcInsert",
+			type : "post",
+			data : {
+				"rcontent" : rcontent,
+				"cno" : outModalCno
+			},
+			success : function(data) {
+				alert("댓글 작성 완료");
+				window.location.reload();
+			}
+		})
+	}
+	
+}
+
+// 모달 안의 댓글 삽입. 원래 인스타와 moreInsta 공용
 function replyInsert2() {
 	var rcontent = $("#replyContent2").val();
 	var cno = "";

@@ -167,9 +167,10 @@ public class AdminCtrl {
 	}
 
 // 게시글 신고 등록
+	@ResponseBody
 	@RequestMapping(value = "/reportCommunity", method = RequestMethod.POST)
-	public void reportCommunity(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("cno") String cno, @RequestParam("creport") int crreason) {
+	public int reportCommunity(HttpServletRequest request, @RequestParam("cno") String cno,
+			@RequestParam("creport") int crreason) {
 		HttpSession session = request.getSession();
 		String loginEmail = (String) session.getAttribute("loginMember");
 		String creporter = mService.returnNickname(loginEmail);
@@ -182,21 +183,12 @@ public class AdminCtrl {
 		vo2.setCcontent(vo.getCcontent());
 		vo2.setCno(vo.getCno());
 		int result = aService.insertCreport(vo2);
-		PrintWriter out = null;
 		if (result > 0) {
 			System.out.println("신고 성공");
 		} else {
 			System.out.println("신고 실패");
 		}
-		try {
-			out = response.getWriter();
-			out.print(result);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			out.flush();
-			out.close();
-		}
+		return result;
 	}
 
 // 게시글 신고 처리
@@ -217,14 +209,6 @@ public class AdminCtrl {
 	@ResponseBody
 	@RequestMapping(value = "/reportRcommunity")
 	public int reportRcommunity(HttpServletRequest request, Rreport vo) {
-		System.out.println(vo);
-		System.out.println(vo);
-		System.out.println(vo);
-		System.out.println(vo);
-		System.out.println(vo);
-		System.out.println(vo);
-		System.out.println(vo);
-		System.out.println(vo);
 		HttpSession session = request.getSession();
 		String loginEmail = (String) session.getAttribute("loginMember");
 		String rreporter = mService.returnNickname(loginEmail);
@@ -284,8 +268,9 @@ public class AdminCtrl {
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 
 			if (keyword != null && !keyword.equals(""))
-				//mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword, searchType));
-			mv.addObject("list", cmService.selectNoticeSearch(currentPage, LIMIT, keyword, searchType));
+				// mv.addObject("list", cmService.selectSearch(currentPage, LIMIT, keyword,
+				// searchType));
+				mv.addObject("list", cmService.selectNoticeSearch(currentPage, LIMIT, keyword, searchType));
 			else
 				mv.addObject("list", cmService.selectNoticeList(currentPage, LIMIT));
 			mv.addObject("currentPage", currentPage);

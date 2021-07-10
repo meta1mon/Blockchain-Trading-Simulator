@@ -197,7 +197,7 @@ $(function(){
 					</form>
 				</c:if>
 				<c:if test="${loginMember == null }">
-					<div id="needlogin">&nbsp;&nbsp;&nbsp;댓글을 작성하려면 로그인이 필요합니다.</div>
+					<div id="needlogin">&nbsp;&nbsp;&nbsp;댓글을 작성하려면 <a href="login" style="font-size: 30px; color:#8c66c8">로그인</a>이 필요합니다.</div>
 				</c:if>
 			</div>
 			<c:url var="clist" value="clist">

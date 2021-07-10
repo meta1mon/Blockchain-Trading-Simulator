@@ -29,7 +29,7 @@ function reply(idx) {
 												+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
 												+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
 												+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
-												+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport("+ reply.rno + ")\">신고</p>"
+												+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
 												+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
 												+ "</div><button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
 												+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button></li>";
@@ -220,7 +220,8 @@ $("#btnreport").on("click", function() {
 				alert("신고 접수 실패! 관리자에게 문의하세요!");
 			}
 			bg.remove();
-			modal.style.display = 'none';
+			$("#modal_report").css("display", "none");
+			$(".reportChoice:checked").prop("checked", false);
 
 		}
 	});
@@ -243,8 +244,9 @@ $("#btnrply").on("click", function() {
 			} else {
 				alert("신고 접수 실패! 관리자에게 문의하세요!");
 			}
-			bg.remove();
-			modal.style.display = 'none';
+			bgReportReply.remove();
+			$("#modal_report_reply").css("display", "none");
+			$(".reportChoice:checked").prop("checked", false);
 
 		}
 	});

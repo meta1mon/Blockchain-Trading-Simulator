@@ -53,6 +53,11 @@
 	color: #8c66c8;
 	font-size: medium;
 }
+
+.nowLike, .nowDislike, .nowLike2, .nowDislike2 {
+	border: 0px;
+	width: 25px;
+}
 </style>
 <script>
 $(function() {
@@ -93,11 +98,11 @@ $(function() {
 											+"<div class=\"dropdown\" style=\"float: right;\" onclick=\"moreDropdown('" + (instaStart-1 + idx*1) + "')\"> <div class='icon-react icon-more' style='background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);'>"
 											+"<div class='dropdown-content ddcontent' style='left: 0;'> <p onclick='report(\"" + insta.cno + "\")' class='report'>신고</p><p onclick=\"checkUpdate('" + insta.cno + "', '" + insta.cwriter + "')\" class='update'>수정</p>"
 											+"<p onclick='checkDelete(\"" + insta.cno + "\", \"" + insta.cwriter + "\")' class='delete'>삭제</p></div> </div> </div> </header>"
-											+"<div class='main-image'><div class='content'>" + insta.ccontent
-											+"<c:if test='${not empty insta.filepath}'> <a download="+insta.filepath+" href=\"${pageContext.request.contextPath}/resources/uploadFiles/"+insta.filepath+"\">"+insta.filepath+"</a></c:if><br> </div> </div>"
-		                                	+"<div class=\"icons-react\"> <div class=\"icons-left\"> <img class=\"thumbsup\" onclick=\"clike('" + insta.cno + "')\" src='resources/assets/img/thumbsup.png' alt=\"추천\">" + insta.likecnt + "</div>"
-											+"<div class=\"icons-middle\"> <img class=\"thumbsdown\" onclick=\"dislike('" + insta.cno + "')\" src='resources/assets/img/thumbsdown.png' alt='비추천'>"
-											+"<img class='thumbsdown-disliked' src='resources/assets/img/thumbs-down.png'>" + insta.dislikecnt + "</div> "
+											+"<div class='main-image'><div class='content'>" + insta.ccontent +"<c:if test='${not empty insta.filepath}'> <a download="+insta.filepath+" href=\"${pageContext.request.contextPath}/resources/uploadFiles/"+insta.filepath+"\">"+insta.filepath+"</a></c:if><br> </div> </div>"
+		                                	+"<div class=\"icons-react\"> <div class=\"icons-left\" onclick=\"clike2('" + this + "', '" + insta.cno + "')\" > <img class=\"thumbsup2\" src='resources/assets/img/thumbsup.png' alt=\"추천\">"
+		                                	+ "<img class=\"thumbsup-liked2\" src=\"resources/assets/img/thumbs-up.png\" alt=\"추천\"><input type=\"text\" class=\"nowLike2\" readonly value=\"" + insta.likecnt +"\"></div>"
+											+"<div class=\"icons-middle\" onclick=\"dislike2('" + this + "', '" + insta.cno + "')\"> <img class=\"thumbsdown2\" src='resources/assets/img/thumbsdown.png' alt='비추천'>"
+											+"<img class='thumbsdown-disliked2' src='resources/assets/img/thumbs-down.png'><input type=\"text\" class=\"nowDislike2\" readonly value=\"" + insta.dislikecnt +"\"></div> "
 											+"<div class='icons-right'>"
 											+"<img class=\"reply\" onclick=\"reply2('" + insta.cno + "')\" id='reply_popup_open' src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png' alt='댓글'>" + insta.replycnt
 											+"</div> </div> <div class=\"reaction\"> <div class=\"comment-section\"> <ul class=\"comments\"> </ul>"
@@ -105,29 +110,12 @@ $(function() {
 											+"<input type='text' class='input-comment' name='rcontent' maxlength='4000' placeholder='댓글 달기...'> <button type='button' class='submit-comment' onclick=\"replyInsert3('" + this + "', '" + insta.cno + "')\">등록</button>"
 											+"</div> </c:if> </div> <c:if test='${loginMember == null }'> <div class='comment'> <input class='input-comment' type='text' readonly placeholder='댓글을 작성하려면 로그인이 필요합니다.'>"
 											+"<button type='button' class='submit-comment' onclick=\"location.href='login'\">이동</button> </div> </c:if> </article>";
-								
-								<%-- 		"<br><div class='parent'><div><img	src='<%=request.getContextPath()%>/resources/assets/img/bts_logo.png'"
-									+ "width='25px' height='25px'>" + insta.cwriter + "<span	style='color: red;'>:== 닉네임</span></div>"
-									+ "<div>" + insta.ccontentr +"<span style='color: red;''>:== 내용</span></div>"
-									+ "<div><img class='img_like' src='resources/assets/img/like.png' width='25px' height='25px' onclick='clike()'>"
-									+ "<img	class='img_dislike' src='resources/assets/img/dislike.png' width='25px' height='25px' onclick='dislike()'>"
-									+ "<button>댓글보기(아이콘으로 넣기)</button></div>"
-									+ "<div>좋아요 수" + insta.likecnt +"&nbsp;&nbsp;&nbsp;&nbsp; 싫어요 수 " + insta.dislikecnt +"&nbsp;&nbsp;&nbsp;&nbsp; 댓글 수" + insta.replycnt +"</div>"
-									+ "<div><textarea'placeholder='댓글을 입력하여 대화를 시작하세요!'></textarea></div>"
-									+ "<div>" + insta.cdate +"</div></div><hr>"; --%>
 								});
 								
 							} else {
 								moreHtml += "<br><div><div style='text-align:center; margin-bottom:20px;'>더이상 불러올 게시글이 없습니다</div></div>";
 							}
 							$("#moreDiv").html(moreHtml);
-/* 							console.log("####################");
-							$('#hiiii').click( function(){
-								console.log("asdfasdfasdfsaf");
-								var rcontent = $(this).prev().val();
-								console.log(rcontent);
-							});
-							console.log("여긴 들어가지?"); */
 						}
 					});
 		}
@@ -167,10 +155,10 @@ $(function() {
 			}
 		}
 		
-// 추천
-function clike(likeCno) {
-	console.log("clike들어오나!!!!!!");
-   if(${loginMember == null}) {
+// 추천 : 처음 인스타
+function clike(idx, likeCno) {
+	console.log(idx);
+     if(${loginMember == null}) {
       alert("로그인이 필요합니다");         
    } else {
       $.ajax({
@@ -180,34 +168,52 @@ function clike(likeCno) {
             "cno" : likeCno
          },
          success : function(data) {
-        	if(data == 1) {
-        		alert("이 글이 맘에 드셨군요~?");
-        	} else {
-        		alert("마음이 바뀌셨나요?");
-        	}
-            window.location.reload();
+        	 if(data == 1) { // 좋아요 + 1
+        		 var nowLikeCnt = $(".nowLike").eq(idx).val() * 1 + 1;
+				$(".nowLike").eq(idx).val(nowLikeCnt);
+				$(".thumbsup-liked").eq(idx).css("display", "inline-block");
+				$(".thumbsup").eq(idx).css("display", "none");
+        	 } else if(data == 0) { // 좋아요 - 1
+        		 var nowLikeCnt = $(".nowLike").eq(idx).val() * 1 - 1;
+ 				$(".nowLike").eq(idx).val(nowLikeCnt);
+				$(".thumbsup-liked").eq(idx).css("display", "none");
+				$(".thumbsup").eq(idx).css("display", "inline-block");
+        	 }
          }
       });
-      let commentLike = document.querySelectorAll('.icons-left');
-      commentLike.forEach(function(event) {
-          event.addEventListener('click', function() {
-              var likeBtn = this.querySelector('.thumbsup');
-              var likedBtn = this.querySelector('.thumbsup-liked');
-
-              if (likeBtn.style.display === 'none') {
-                  likeBtn.style.display = 'inline-block';
-                  likedBtn.style.display = 'none';
-              } else {
-                  likeBtn.style.display = 'none';
-                  likedBtn.style.display = 'inline-block';
-              }
-          })
-      })
+   } 
+}
+// 추천 : moreInsta
+function clike2(likeThis, likeCno) {
+	var nowIdx = $(window.event.target).parents('article').index();
+      if(${loginMember == null}) {
+      alert("로그인이 필요합니다");         
+   } else {
+      $.ajax({
+         url : "${pageContext.request.contextPath}/clike",
+         type : "post",
+         data : {
+            "cno" : likeCno
+         },
+         success : function(data) {
+        	 if(data == 1) {
+        		 var nowLikeCnt = $(".nowLike2").eq(nowIdx).val() * 1 + 1;
+				$(".nowLike2").eq(nowIdx).val(nowLikeCnt);
+				$(".thumbsup-liked2").eq(nowIdx).css("display", "inline-block");
+				$(".thumbsup2").eq(nowIdx).css("display", "none");
+        	 } else if(data == 0) {
+        		 var nowLikeCnt = $(".nowLike2").eq(nowIdx).val() * 1 - 1;
+ 				$(".nowLike2").eq(nowIdx).val(nowLikeCnt);
+				$(".thumbsup-liked2").eq(nowIdx).css("display", "none");
+				$(".thumbsup2").eq(nowIdx).css("display", "inline-block");
+        	 }
+         }
+      });
    }
 }
  
-// 비추천
-function dislike(dislikeCno) {
+// 비추천 : 처음 인스타
+function dislike(idx, dislikeCno) {
    if(${loginMember == null}) {
       alert("로그인이 필요합니다");         
    } else {
@@ -219,29 +225,49 @@ function dislike(dislikeCno) {
          },
          datatype : "json",
          success : function(data) {
-         	if(data == 1) {
-        		alert("이 글은 별로에요!");
-        	} else {
-        		alert("마음이 바뀌셨나요?");
-        	}
-            window.location.reload();
+        	 if(data == 1) {
+        		 var nowDislikeCnt = $(".nowDislike").eq(idx).val() * 1 + 1;
+				$(".nowDislike").eq(idx).val(nowDislikeCnt);
+				$(".thumbsdown-disliked").eq(idx).css("display", "inline-block");
+				$(".thumbsdown").eq(idx).css("display", "none");
+        	 } else if(data == 0) {
+        		 var nowDislikeCnt = $(".nowDislike").eq(idx).val() * 1 - 1;
+ 				$(".nowDislike").eq(idx).val(nowDislikeCnt);
+				$(".thumbsdown-disliked").eq(idx).css("display", "none");
+				$(".thumbsdown").eq(idx).css("display", "inline-block");
+        	 }
          }
       });
-      let commentDislike = document.querySelectorAll('.icons-middle');
-      commentDislike.forEach(function(event) {
-      	event.addEventListener('click', function() {
-      		var likeBtn = this.querySelector('.thumbsdown');
-      		var likedBtn = this.querySelector('.thumbsdown-disliked');
-      		
-      		if (likeBtn.style.display === 'none') {
-      			likeBtn.style.display = 'inline-block';
-      			likedBtn.style.display = 'none';
-      		} else {
-      			likeBtn.style.display = 'none';
-      			likedBtn.style.display = 'inline-block';
-      		}
-      	})
-      })
+   }
+}
+
+// 비추천 : moreInsta
+function dislike2(dislikeThis, dislikeCno) {
+	var nowIdx = $(window.event.target).parents('article').index();
+   if(${loginMember == null}) {
+      alert("로그인이 필요합니다");         
+   } else {
+      $.ajax({
+         url : "${pageContext.request.contextPath}/cdislike",
+         type : "post",
+         data : {
+            cno : dislikeCno
+         },
+         datatype : "json",
+         success : function(data) {
+        	 if(data == 1) {
+        		 var nowDislikeCnt = $(".nowDislike2").eq(nowIdx).val() * 1 + 1;
+				$(".nowDislike2").eq(nowIdx).val(nowDislikeCnt);
+				$(".thumbsdown-disliked2").eq(nowIdx).css("display", "inline-block");
+				$(".thumbsdown2").eq(nowIdx).css("display", "none");
+        	 } else if(data == 0) {
+        		 var nowDislikeCnt = $(".nowDislike2").eq(nowIdx).val() * 1 - 1;
+ 				$(".nowDislike2").eq(nowIdx).val(nowDislikeCnt);
+				$(".thumbsdown-disliked2").eq(nowIdx).css("display", "none");
+				$(".thumbsdown2").eq(nowIdx).css("display", "inline-block");
+        	 }
+         }
+      });
    }
 }
 
@@ -322,18 +348,21 @@ $(function(){
 						</div>
 						<!-- 게시글 추천, 비추천, 댓글 작성 -->
 						<div class="icons-react">
-							<div class="icons-left">
-								<img class="thumbsup" onclick="clike('${vo.cno }')"
-									src="resources/assets/img/thumbsup.png" alt="추천"> <img
-									class="thumbsup-liked" src="resources/assets/img/thumbs-up.png"
-									alt="추천"> ${vo.likecnt }
+							<div class="icons-left"
+								onclick="clike('${status.index}', '${vo.cno }')">
+								<img class="thumbsup-liked"
+									src="resources/assets/img/thumbs-up.png" alt="추천"> <img
+									class="thumbsup" src="resources/assets/img/thumbsup.png"
+									alt="추천"> <input type="text" class="nowLike" readonly
+									value="${vo.likecnt }">
 							</div>
-							<div class="icons-middle">
-								<img class="thumbsdown" onclick="dislike('${vo.cno }')"
-									src="resources/assets/img/thumbsdown.png" alt="비추천"> <img
-									class="thumbsdown-disliked"
-									src="resources/assets/img/thumbs-down.png" alt="비추천">
-								${vo.dislikecnt }
+							<div class="icons-middle"
+								onclick="dislike('${status.index}', '${vo.cno }')">
+								<img class="thumbsdown-disliked"
+									src="resources/assets/img/thumbs-down.png" alt="비추천"> <img
+									class="thumbsdown" src="resources/assets/img/thumbsdown.png"
+									alt="비추천"> <input type="text" class="nowDislike" readonly
+									value="${vo.dislikecnt }">
 							</div>
 							<div class="icons-right">
 								<input type="hidden" class="hiddenCno" value="${vo.cno }">
@@ -598,89 +627,5 @@ $(function(){
 
 
 	<script src="resources/js/mikrokosmos.js"></script>
-
-
-
-
-	<%-- 	<div id="wrapper">
-		<%@include file="../main/header.jsp"%>
-		<div class="listOut">
-
-			<div class="comm">소우주</div>
-			<div class="searchDiv">
-				<form action="clist" name="listForm" method="get">
-					<select id="searchType" name="searchType">
-						<option value="1">글제목</option>
-						<option value="2">글내용</option>
-						<option value="3">작성자</option>
-					</select> <input type='search' id="search" name="keyword">
-					<button type=submit id="btnsearch">검색</button>
-				</form>
-				<input type="hidden" name="page" value="${currentPage}"> <input
-					type="button" id="write" class="write" value="글쓰기"
-					onclick="showInsertForm()">
-			</div>
-			<hr>
-			<c:forEach items="${commuList }" var="vo" varStatus="status">
-				<br>
-				<div class="parent">
-					<div style="background-color: gray">
-						<img
-							src="<%=request.getContextPath()%>/resources/assets/img/bts_logo.png"
-							width="25px" height="25px">${vo.cwriter } <span
-							style="color: red;">:== 닉네임</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="button">...</button>
-						<button type="button"
-							onclick="communityUpdateFn(${status.index })">수정</button>
-						<button type="button"
-							onclick="communityDeleteFn(${status.index })">삭제</button>
-						<button type="button">신고</button>
-					</div>
-					<div style="background-color: yellow">${vo.ccontent }
-						<span style="color: red;">:== 내용</span>
-					</div>
-					<div style="background-color: lightgray">
-						<img class="img_like" src="resources/assets/img/like.png"
-							width="25px" height="25px" onclick="clike()"><img
-							class="img_dislike" src="resources/assets/img/dislike.png"
-							width="25px" height="25px" onclick="dislike()">
-						<button>댓글보기(아이콘으로 넣기)</button>
-					</div>
-					<div style="background-color: lightgreen">좋아요 수 ${vo.likecnt }
-						&nbsp;&nbsp;&nbsp;&nbsp; 싫어요 수 ${vo.dislikecnt }&nbsp;&nbsp;&nbsp;&nbsp;
-						댓글 수${vo.replycnt }</div>
-					<div style="background-color: lightblue">
-						<textarea placeholder="댓글을 입력하여 대화를 시작하세요!" name="rcontent"
-							maxlength="4000"
-							onfocus="if(this.value == '댓글을 입력하여 대화를 시작하세요!') { this.value = ''; }"
-							onblur="if(this.value == '') { this.value ='댓글을 입력하여 대화를 시작하세요!'; }"></textarea>
-						<button type="button"
-							onclick="rcommunityInsertFn(${status.index})">댓글 작성</button>
-						<button type="button"
-							onclick="rcommunityInsertFn(${status.index})">댓글 쓰기</button>
-					</div>
-					<div>${vo.cdate }</div>
-				</div>
-				<hr>
-			</c:forEach>
-			<div id="moreDiv"></div>
-			
-
-			<div class="searchDiv">
-				<form action="clist" name="bottomListForm" method="get">
-					<select id="searchType" name="bottomSearchType">
-						<option value="1">글제목</option>
-						<option value="2">글내용</option>
-						<option value="3">작성자</option>
-					</select> <input type='search' id="search" name="bottomKeyword">
-					<button type=submit id="btnsearch">검색</button>
-				</form>
-				<input type="hidden" name="page" value="${currentPage}"> <input
-					type="button" id="write" class="write" value="글쓰기"
-					onclick="showInsertForm()">
-			</div>
-		</div>
-		<jsp:include page="../main/footer.jsp"></jsp:include>
-	</div> --%>
 </body>
 </html>

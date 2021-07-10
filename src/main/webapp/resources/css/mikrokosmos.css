@@ -294,25 +294,26 @@ header {
 }
 
 .icon-react, .thumbsup, .thumbsup-liked, .thumbsdown,
-	.thumbsdown-disliked, .reply {
+	.thumbsdown-disliked, .thumbsup2, .thumbsup-liked2, .thumbsdown2,
+	.thumbsdown-disliked2, .reply {
 	width: 24px;
 	height: 24px;
 	cursor: pointer;
 }
 
-img.thumbsup {
+img.thumbsup, img.thumbsup2 {
 	display: inline-block;
 }
 
-img.thumbsup-liked {
+img.thumbsup-liked, img.thumbsup-liked2 {
 	display: none;
 }
 
-img.thumbsdown {
+img.thumbsdown, img.thumbsdown2 {
 	display: inline-block;
 }
 
-img.thumbsdown-disliked {
+img.thumbsdown-disliked, img.thumbsdown-disliked2 {
 	display: none;
 }
 
@@ -322,7 +323,8 @@ img.thumbsdown-disliked {
 }
 
 .icons-left, .icons-middle, .icons-right, .icon-react, .thumbsup,
-	.thumbsup-liked, .thumbsdown, .thumbsdown-disliked, .reply {
+	.thumbsup-liked, .thumbsdown, .thumbsdown-disliked, .thumbsup2,
+	.thumbsup-liked2, .thumbsdown2, .thumbsdown-disliked2, .reply {
 	margin-right: 12px;
 }
 /* article text data */

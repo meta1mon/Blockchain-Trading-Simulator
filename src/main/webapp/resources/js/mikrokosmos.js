@@ -29,9 +29,7 @@ function reply(idx) {
 												+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
 												+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
 												+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
-												+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
-												+ "</div><button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
-												+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button></li>";
+												+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p></div></li>";
 									});
 					replyHtml += "</ul>";
 				} else {
@@ -65,8 +63,7 @@ function reply2(moreInstaCno) {
 											+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
 											+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
 											+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
-											+ "</div><button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
-											+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button></li>";
+											+ "</div></li>";
 								});
 				replyHtml += "</ul>";
 			} else {
@@ -155,22 +152,11 @@ $('.dropdown').click(function() {
 			$('.dropdown-content').eq($(this).parents('article').index()).show();
 		});
 
+// moreInsta에서 댓글 드랍다운 만들기
 function moreDropdown(idx) {
 	console.log(idx);
 	$('.dropdown-content').eq(idx).css("display", "block");
 }
-//댓글 드랍다운 메뉴는 css hover로 구현
-/*$('.replyDropdown').click(
-		function() {
-			console.log("클릭함");
-			console.log("클릭dropdown 상위 article idx: "
-					+ $(this).parents('.modal_reply').index());
-			$('.dropdown-content')
-					.eq($(this).parents('.modal_reply').index()).show();
-			$(".replyDropdown").mouseleave(function() {
-				$(this).css("display", "block");
-			});
-		});*/
 
 $(document).mouseup(function(e) {
 	var dropdown = $('.ddcontent');
@@ -213,7 +199,6 @@ $("#btnreport").on("click", function() {
 			"creport" : $("[name=creport]:checked").val()
 		},
 		success : function(data) {
-			console.log("신고하고 들어옴");
 			if (data > 0) {
 				alert("신고 접수 되었습니다!");
 			} else {
@@ -238,7 +223,6 @@ $("#btnrply").on("click", function() {
 			"rno" : $("#rreportRno").val()
 		},
 		success : function(data) {
-			console.log("신고하고 들어옴");
 			if (data > 0) {
 				alert("신고 접수 되었습니다!");
 			} else {
@@ -310,8 +294,6 @@ function replyInsert2() {
 		console.log("그냥 Insta에서 들어옴");
 		cno = $("#modalInCno").val();
 	}
-	console.log(rcontent);
-	console.log(cno + "asdfasdfsadf");
 	if (rcontent == "") {
 		alert("댓글을 입력하세요");
 	} else {
@@ -346,9 +328,7 @@ function replyInsert2() {
 														+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
 														+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
 														+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
-														+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
-														+ "</div><button type=\"button\" class=\"submitRUpdate\" onclick=\"replyUpdate(reply.rno, idx )\" style=\"display: none;\">저장</button>"
-														+ "<button type=\"button\" class=\"cancleRUpdate\" onclick=\"updateRCancle(idx)\" style=\"display: none;\">취소</button></li>";
+														+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p></div></li>";
 											});
 							replyHtml += "</ul>";
 						} else {

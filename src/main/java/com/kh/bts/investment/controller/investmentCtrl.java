@@ -317,7 +317,7 @@ public class investmentCtrl {
    }
 
    @RequestMapping(value = "acntlists", method = RequestMethod.POST)
-   public void acntService(@RequestParam(name = "acntno") String acntno, HttpServletRequest request,
+   public void acnt(@RequestParam(name = "acntno") String acntno, HttpServletRequest request,
          HttpServletResponse response) {
 
       HttpSession session = request.getSession();
@@ -338,8 +338,7 @@ public class investmentCtrl {
    }
 
    @RequestMapping(value = "ajslists", method = RequestMethod.POST)
-   public void SoldListService(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
-      System.out.println(acntno);
+   public void SoldList(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
       List<Sold> result = sService.selectListSold(acntno);
       PrintWriter out = null;
       Gson gson = new GsonBuilder().create();
@@ -400,7 +399,7 @@ public class investmentCtrl {
    }
 
    @RequestMapping(value = "ajwslists", method = RequestMethod.POST)
-   public void WaitSoldListService(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
+   public void WaitSoldList(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
       List<WaitSold> result = wsService.selectListWaitSold(acntno);
       PrintWriter out = null;
       Gson gson = new GsonBuilder().create();
@@ -461,7 +460,7 @@ public class investmentCtrl {
    }
 
    @RequestMapping(value = "ajwblists", method = RequestMethod.POST)
-   public void WaitBoughtListService(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
+   public void WaitBoughtList(@RequestParam(name = "acntno") String acntno, HttpServletResponse response) {
       List<WaitBought> result = wbService.selectListWaitBought(acntno);
       String[] coinArr = new String[result.size()];
       for (int i = 0; i < result.size(); i++) {

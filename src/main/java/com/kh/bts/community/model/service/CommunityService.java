@@ -10,8 +10,6 @@ public interface CommunityService {
 
 	public List<Community> selectMainAllCommunityList();
 
-	List<Community> selectSearch(int startPage, int limit, String keyword, int searchType);
-
 	List<Community> selectList(int startPage, int limit);
 
 	List<Community> searchpopularList();

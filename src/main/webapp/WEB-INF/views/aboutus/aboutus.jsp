@@ -70,7 +70,7 @@
                         <img src="resources/assets/img/bts_logo_reversal.svg" style="height:2cm; position:relative; right:10px;" alt="..." />
                         </span>
                         <p class="my-3" style="font-size:18px;">BTS는 회원님께 	다양한 서비스와 편의를 제공하는 가상자산 중개 플랫폼입니다.<br>
-                        										투기성 투자를 하는 사람들에게 위험부담 없이 시도할 수 있는 투자 기회와 경험을 제공합니다.<br>
+                        										가상자산에 투자하려는 사람들에게 위험부담 없는 투자 기회와 경험을 제공합니다.<br>
                         										주식은 모의투자 개념의 프로그램이 이미 많이 활성화 되어있습니다.<br>
                         										 하지만 암호화폐는 투자를 연습할 공간이 없는 실정이므로, 암호화폐 모의투자 사이트를 기획하게 되었습니다.<br>
                         										
@@ -276,7 +276,7 @@
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">서포트 & 피드백</h2>
                     <h3 class="section-subheading text-muted" style="color: azure; font-size: larger;">도움이 필요하시면 <a class="contact_kakao" href="http://pf.kakao.com/_ZhLns/chat" target="_blank">저희에게 연락하십시오.</a> 제품 피드백을 공유하려면<br>
-															제품에 대한 정보는 <a class="contact_comm" href="${pageContext.request.contextPath}/clist">여기에서 커뮤니티를 방문하십시오.</a></h3>
+															제품에 대한 정보는 <a class="contact_comm" href="${pageContext.request.contextPath}/insta">여기에서 커뮤니티를 방문하십시오.</a></h3>
                 </div>
             </div>
         </section>
@@ -376,7 +376,7 @@
                                     <h2 class="text-uppercase">커뮤니티</h2>
                                     <p class="item-intro text-muted">Community</p>
                                     <img class="img-fluid d-block mx-auto" src="resources/assets/img/portfolio/community.jpg" alt="..." />
-                                    <p>이미지와 게시판이 결합된 커뮤니티 서비스입니다.<br> 투자자 간 주식, 비트코인 등 사회 각 분야에 대한 정보와 의견을 공유할 수 있습니다.<br> 현재 CKEditor5, 파일 첨부, 추천, 비추천 등 다양한 기능을 제공하고 있으며, <br>자유로운 소통의 장으로 자리매김하고 있습니다.</p>
+                                    <p>이미지와 게시판이 결합된 커뮤니티 서비스입니다.<br> 투자자 간 주식, 비트코인 등 사회 각 분야에 대한 정보와 의견을 공유할 수 있습니다.<br> 현재 CKEditor5, 파일 첨부, 좋아요, 싫어요 등 다양한 기능을 제공하고 있으며, <br>자유로운 소통의 장으로 자리매김하고 있습니다.</p>
                                     <ul class="list-inline">
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">

@@ -10,21 +10,6 @@
 <link href="${pageContext.request.contextPath}/resources/css/noticeList.css"
 	rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script>
-	$(function() {
-		$('form[name=listForm]').on(
-				'submit',
-				function(e) {
-					if ($('input[name=keyword]').val() == null
-							|| $('input[name=keyword]').val() == "") {
-						alert("검색어를 입력해 주세요");
-						e.preventDefault();
-					} else {
-						return true;
-					}
-				});
-	});
-</script>
 </head>
 <%@include file="headerAndAside.jsp"%>
 <body>
@@ -34,21 +19,8 @@
 				공지사항
 			</div>
 			<div id="listIn">
-			
-				<hr>
-				
-				<form action="nl" name="listForm" method="get">
-					<select id="searchType" name="searchType">
-						<option value="1">글제목</option>
-						<option value="2">글내용</option>
-						<option value="3">작성자</option>
-					</select> 
-					<input type='search' id="search" name="keyword">
-					<button type=submit id="btnsearch">검색</button>
-				</form>
-				
+			<input type="button" id="write" value="글쓰기" onclick="window.location='nWrite'">
 				<input type="hidden" name="page" value="${currentPage}"> 
-				<input type="button" id="write" value="글쓰기" onclick="window.location='nWrite'">
 				
 				<div style="clear: both; height: 30px;">
 				</div>

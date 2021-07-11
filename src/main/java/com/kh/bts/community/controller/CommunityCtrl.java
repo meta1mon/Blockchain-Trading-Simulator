@@ -53,9 +53,12 @@ public class CommunityCtrl {
 			@RequestParam(name = "searchType", defaultValue = "1") int searchType) {
 		Paging paging = new Paging(1, 9);
 		List<Community> list = cmService.selectAllCommunityList(paging, keyword, searchType);
-		System.out.println(list);
 		mav.addObject("commuList", list);
 		mav.addObject("nowPage", paging);
+		if(!keyword.equals("")) {
+			mav.addObject("isSearched", "y");
+			System.out.println("1231231231231231231231232");
+		}
 
 		List<Accumulative> list1 = rankService.selectAccumulative();
 		mav.addObject("first", list1.get(0));
@@ -149,6 +152,7 @@ public class CommunityCtrl {
 	public ModelAndView communityInsert(Community c,
 			@RequestParam(name = "upfile", required = false) MultipartFile report, HttpServletRequest request,
 			ModelAndView mv) {
+		int flag = 0; // 공지사항과 인스타의 글 작성 페이지가 공통이므로, 작성 후에 어느 페이지로 돌아가야할 지 판단하는 용도. 0은 공지사항 1은 인스타 
 		try {
 			if (report != null && !report.equals(""))
 				saveFile(report, request);
@@ -161,10 +165,21 @@ public class CommunityCtrl {
 					tagStr += tagArr[i] + ",";
 				}
 				c.setCsubject(tagStr);
+				flag = 1;
 			}
 			String email = (String) request.getSession().getAttribute("loginMember");
 			int result = cmService.insertCommunity(c, email);
-			mv.setViewName("redirect:insta");
+			if(result > 1) {
+				System.out.println("글 작성 성공");
+			} else {
+				System.out.println("글 작성 실패");
+			}
+			if(flag == 1) {
+				mv.setViewName("redirect:insta");
+			} else if(flag == 0) {
+				mv.setViewName("redirect:clist");
+			}
+			
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");

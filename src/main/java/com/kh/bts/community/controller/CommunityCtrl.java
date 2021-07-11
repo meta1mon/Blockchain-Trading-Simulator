@@ -103,7 +103,7 @@ public class CommunityCtrl {
 			int listCount = cmService.totalCount(); // 공지사항 개수
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9); // 공지사항 개수 /
 
-			mv.addObject("noticeList", cmService.selectNoticeList(1, 2));
+			mv.addObject("noticeList", cmService.selectNoticeList(1, 10));
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);

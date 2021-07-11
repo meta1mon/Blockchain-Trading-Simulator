@@ -60,7 +60,7 @@ $(function() {
 					<c:param name="page" value="1" />
 				</c:url>
 				<input type="button" value="취소하기" id="cancel"
-					onclick="location.href = '${clist}'">
+					onclick="location.href = 'insta'">
 
 				<div id="file_text">파일 첨부</div>
 				<img src="resources/assets/img/folder.png" id="folder">

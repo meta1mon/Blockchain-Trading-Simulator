@@ -48,7 +48,7 @@
 					<c:param name="page" value="1" />
 				</c:url>
 				<input type="button" value="취소하기" id="cancel"
-					onclick="location.href = '${clist}'">
+					onclick="location.href = 'insta'">
 				<!-- 게시글 첨부파일 -->
 				<div id="file_text">변경할 첨부 파일</div>
 				<img src="resources/assets/img/upload.png" id="folder"> <input

@@ -138,6 +138,7 @@ function checkDelete(deleteCno, deleteCwriter) {
 				form.setAttribute('method', 'post'); // get,post 가능
 				form.setAttribute('action', "cDelete"); // 보내는 url
 				document.body.appendChild(form);
+				alert("삭제되었습니다");
 				form.submit();
 			} else {
 				alert("삭제 권한이 없습니다");

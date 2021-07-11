@@ -54,7 +54,7 @@ $(function(){
 					<td>
 						<div id="subject">${community.csubject }</div>
 						<div id="writer">${community.cwriter }</div>
-						<div id="date">${community.cdate }</div> <!-- 게시글 조회수, 댓글수, 추천수 -->
+						<div id="date">${community.cdate }</div> <!-- 게시글 조회수, 댓글수, 추천수, 비추천수 -->
 						<div id="viewcnt">
 							<img src="resources/assets/img/eye.png" id="eye">
 							${community.viewcnt }
@@ -63,10 +63,15 @@ $(function(){
 							<img src="resources/assets/img/speechbubble.png"
 								id="speechbubble"> ${community.replycnt }&nbsp;
 						</div>
+						<div id="dislikecnt">
+							<img src="resources/assets/img/thumb-down.png" id="dislikey">
+							${community.dislikecnt }
+						</div>
 						<div id="likecnt">
 							<img src="resources/assets/img/thumb-up.png" id="likey">
-							${community.likecnt }&nbsp;
-						</div> <br>
+							${community.likecnt }&nbsp;&nbsp;&nbsp;&nbsp;
+						</div>
+						 <br>
 						<hr>
 					</td>
 				</tr>
@@ -105,9 +110,6 @@ $(function(){
 										class="dislikecnt">${community.dislikecnt }</span>
 								</div>
 							</div>
-								<!-- 게시글 신고, 삭제, 수정 버튼 -->
-							<button type="button" class="report" id="popup_open_btn">신고</button>
-
 							<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
 							<c:if test="${loginMember == writerEmail }">
 								<button type="button" class="delete"
@@ -139,9 +141,8 @@ $(function(){
 									<div class="icon-react icon-more" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
 										<div class="dropdown-content">
 												<div class="reportReply" onclick="rreport(${rep.cno})">신고</div>
-											<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
+											<!-- 로그인한 유저의 게시글만 삭제 버튼 보임 -->
 											<c:if test="${loginMember == rep.email }">
-												<div class="updateReply" onclick="makeUpdateBtn(${status.index })">수정</div>
 												<div class="deleteReply" onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</div>
 											</c:if>
 										</div>
@@ -150,24 +151,6 @@ $(function(){
 								<br> 
 							<span class="comment_content"> ${rep.rcontent}</span>
 						</span>
-						<table style="width: 100%">
-							<tr>
-								<td width="80%"><textarea class="newRcontent"
-										style="display: none;" maxlength="4000">${rep.rcontent }</textarea>
-								</td>
-								<td width="7%">
-									<!-- 댓글 작성자에게만 수정 삭제 버튼이 보임 -->
-									<button type="button" class="submitRUpdate"
-										onclick="replyUpdate(${rep.rno}, ${status.index })"
-										style="display: none;">저장</button>
-								</td>
-								<td width="7%">
-									<button type="button" class="cancleRUpdate"
-										onclick="updateRCancle(${status.index })"
-										style="display: none;">취소</button>
-								</td>
-							</tr>
-						</table>
 					</div>
 					<br>
 				</c:forEach>
@@ -206,44 +189,6 @@ $(function(){
 
 			<button type="button" id="list" onclick="location.href='${clist}'">목록으로
 				돌아가기</button>
-
-			<!-- 게시글 신고 모달창 -->
-			<div id="my_modal">
-				<form id="frmC">
-					<p>게시글 신고</p>
-					<div class="modal_report_div">
-						<input type="radio" id="reportChoice1" class="reportChoice"
-							name="creport" value="1"> <label for="reportChoice1"
-							class="modal_choise_label">나체 이미지 또는 성적 행위</label> <br> <input
-							type="radio" id="reportChoice2" class="reportChoice"
-							name="creport" value="2"> <label for="reportChoice2"
-							class="modal_choise_label">혐오 발언 또는 폭력적</label> <br> <input
-							type="radio" id="reportChoice3" class="reportChoice"
-							name="creport" value="3"> <label for="reportChoice3"
-							class="modal_choise_label">증오 또는 학대</label> <br> <input
-							type="radio" id="reportChoice4" class="reportChoice"
-							name="creport" value="4"> <label for="reportChoice4"
-							class="modal_choise_label">유해하거나 위험한 행위</label> <br> <input
-							type="radio" id="reportChoice5" class="reportChoice"
-							name="creport" value="5"> <label for="reportChoice5"
-							class="modal_choise_label">스팸 또는 사용자 현혹</label> <br> <input
-							type="radio" id="reportChoice6" class="reportChoice"
-							name="creport" value="6"> <label for="reportChoice6"
-							class="modal_choise_label">마음에 들지 않습니다.</label> <input
-							type="hidden" name="csubject" value="${community.csubject }" />
-						<input type="hidden" name="cwriter" value="${community.cwriter }" />
-						<input type="hidden" name="ccontent"
-							value="${community.ccontent }" style="display: none"/> <input type="hidden"
-							name="cno" value="${community.cno }" />
-					</div>
-					<hr
-						style="width: 328px; position: relative; right: 30px; top: 20px;">
-					<div>
-						<button type="button" id="btncancel" class="modal_close_btn">취소</button>
-						<button type="submit" id="btnreport" class="modal_report_btn">신고</button>
-					</div>
-				</form>
-			</div>
 
 			<!-- 댓글 신고 모달창 -->
 			<div id="my_modal_reply">
@@ -450,43 +395,43 @@ $(function(){
           }
    	})
    }
-   // 댓글 수정 버튼 생성
-   function makeUpdateBtn(index) {
-	console.log(index);
-      $(".comment_content").eq(index).hide();
-      /* $(".makeBtn").eq(index).hide(); */
-      $(".newRcontent").eq(index).show();
-      $(".submitRUpdate").eq(index).show();
-      $(".cancleRUpdate").eq(index).show();
-   }
+//    // 댓글 수정 버튼 생성
+//    function makeUpdateBtn(index) {
+// 	console.log(index);
+//       $(".comment_content").eq(index).hide();
+//       /* $(".makeBtn").eq(index).hide(); */
+//       $(".newRcontent").eq(index).show();
+//       $(".submitRUpdate").eq(index).show();
+//       $(".cancleRUpdate").eq(index).show();
+//    }
    
-   // 댓글 수정 취소 버튼 클릭 시
-   function updateRCancle(index) {
-	console.log(index);
-      $(".comment_content").eq(index).show();
-      /* $(".makeBtn").eq(index).show(); */
-      $(".newRcontent").eq(index).hide();
-      $(".newRcontent").eq(index).text("");
-      $(".submitRUpdate").eq(index).hide();
-      $(".cancleRUpdate").eq(index).hide();
-   }
+//    // 댓글 수정 취소 버튼 클릭 시
+//    function updateRCancle(index) {
+// 	console.log(index);
+//       $(".comment_content").eq(index).show();
+//       /* $(".makeBtn").eq(index).show(); */
+//       $(".newRcontent").eq(index).hide();
+//       $(".newRcontent").eq(index).text("");
+//       $(".submitRUpdate").eq(index).hide();
+//       $(".cancleRUpdate").eq(index).hide();
+//    }
    
-   // 댓글 수정완료 버튼 클릭 시
-   function replyUpdate(rno, idx) {
-      var newOne = $(".newRcontent").eq(idx).val();
-      $.ajax({
-         url : "${pageContext.request.contextPath}/rcUpdate",
-         type : "post",
-         data : {
-            "rno" : rno,
-            "rcontent": newOne
-         },
-         success : function(data) {
-        	 alert("댓글 수정완료")
-        	 window.location.reload();
-         }
-      })
-   }
+//    // 댓글 수정완료 버튼 클릭 시
+//    function replyUpdate(rno, idx) {
+//       var newOne = $(".newRcontent").eq(idx).val();
+//       $.ajax({
+//          url : "${pageContext.request.contextPath}/rcUpdate",
+//          type : "post",
+//          data : {
+//             "rno" : rno,
+//             "rcontent": newOne
+//          },
+//          success : function(data) {
+//         	 alert("댓글 수정완료")
+//         	 window.location.reload();
+//          }
+//       })
+//    }
    
    // 댓글 삭제   -- 새로고침을 사용 중인데 추후 수정해야 할듯
    function replyDelete(deleteRno, deleteCno) {

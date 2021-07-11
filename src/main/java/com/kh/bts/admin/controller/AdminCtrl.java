@@ -427,7 +427,7 @@ public class AdminCtrl {
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 
 			if (keyword != null && !keyword.equals("")) {
-				mv.addObject("list", aService.adminSearchMember(keyword, searchType));
+				mv.addObject("list", aService.adminSearchMember(currentPage, LIMIT, keyword, searchType));
 			} else {
 				mv.addObject("list", aService.adminListMember(currentPage, LIMIT));
 			}
@@ -464,7 +464,7 @@ public class AdminCtrl {
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 
 			if (keyword != null && !keyword.equals("")) {
-				mv.addObject("list", aService.searchCashLog(keyword));
+				mv.addObject("list", aService.searchCashLog(currentPage, LIMIT, keyword));
 			} else {
 				mv.addObject("list", aService.selectCashLog(currentPage, LIMIT));
 			}
@@ -509,9 +509,9 @@ public class AdminCtrl {
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 
 			if (keyword != null && !keyword.equals("")) {
-				mv.addObject("list", aService.searchAcreport(keyword, searchType));
+				mv.addObject("list", aService.searchAcreport(currentPage, LIMIT, keyword, searchType));
 			} else if (cstatus != null && !cstatus.equals("")) {
-				mv.addObject("list", aService.searchAcreportByCstatus(cstatus, searchType));
+				mv.addObject("list", aService.searchAcreportByCstatus(currentPage, LIMIT, cstatus, searchType));
 			} else {
 				mv.addObject("list", aService.selectAcreport(currentPage, LIMIT));
 			}
@@ -544,7 +544,7 @@ public class AdminCtrl {
 		mv.setViewName("admin/replyReport");
 		return mv;
 	}
-
+	
 //	댓글 신고 처리 목록
 	@RequestMapping(value = "/arr" )
 	public ModelAndView arr(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv,
@@ -557,9 +557,9 @@ public class AdminCtrl {
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 
 			if (keyword != null && !keyword.equals("")) {
-				mv.addObject("list", aService.searchArreport(keyword, searchType));
+				mv.addObject("list", aService.searchArreport(currentPage, LIMIT, keyword, searchType));
 			} else if (rstatus != null && !rstatus.equals("")) {
-				mv.addObject("list", aService.searchArreportByRstatus(rstatus, searchType));
+				mv.addObject("list", aService.searchArreportByRstatus(currentPage, LIMIT, rstatus, searchType));
 			} else {
 				mv.addObject("list", aService.selectArreport(currentPage, LIMIT));
 			}

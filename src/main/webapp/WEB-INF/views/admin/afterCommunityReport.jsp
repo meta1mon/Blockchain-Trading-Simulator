@@ -156,7 +156,7 @@ var onoff = function(){
 							<i class="fas fa-angle-double-left"></i>
 							</c:if>
 							<c:if test="${currentPage > 1}">
-								<c:url var="crlistST" value="cr">
+								<c:url var="crlistST" value="acr">
 									<c:param name="page" value="${currentPage-1}"/>
 								</c:url>
 								<a href="${crlistST}"><i class="fas fa-angle-double-left"></i></a>
@@ -168,7 +168,7 @@ var onoff = function(){
 									<div class="pageNum"><b>${p}</b></div>
 								</c:if>
 								<c:if test="${p ne currentPage}">
-									<c:url var="crlistchk" value="cr">
+									<c:url var="crlistchk" value="acr">
 										<c:param name="page" value="${p}" />
 									</c:url>
 									<a href="${crlistchk}">${p}</a>
@@ -178,7 +178,7 @@ var onoff = function(){
 								<i class="fas fa-angle-double-right"></i>
 							</c:if>
 							<c:if test="${currentPage < maxPage}">
-								<c:url var="crlistEND" value="cr">
+								<c:url var="crlistEND" value="acr">
 									<c:param name="page" value="${currentPage+1}" />
 								</c:url>
 								<a href="${crlistEND}"><i class="fas fa-angle-double-right"></i></a>

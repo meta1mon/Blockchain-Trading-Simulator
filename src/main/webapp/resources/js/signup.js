@@ -163,8 +163,8 @@ $(function() {
 			var reg = /^[가-힣A-Za-z0-9]{2,8}$/g;
 			if (nickname.length != 0) {
 				if (nickname.match(reg) != null) {
-					 if (nickname.includes('관리자') || nickname.includes('운영자')){
-							$(".nickReg").text("관리자또는 운영자가 포함된 닉네임은 사용하실 수 없습니다.");
+					 if (nickname.includes('관리') || nickname.includes('운영')){
+							$(".nickReg").text("관리또는 운영이 포함된 닉네임은 사용하실 수 없습니다.");
 					} else {
 							$(".nickReg").html("&nbsp;");
 							checkNN = true;

@@ -156,7 +156,7 @@ var onoff = function(){
 							<i class="fas fa-angle-double-left"></i>
 							</c:if>
 							<c:if test="${currentPage > 1}">
-								<c:url var="rrlistST" value="cr">
+								<c:url var="rrlistST" value="arr">
 									<c:param name="page" value="${currentPage-1}"/>
 								</c:url>
 								<a href="${rrlistST}"><i class="fas fa-angle-double-left"></i></a>
@@ -164,11 +164,13 @@ var onoff = function(){
 							<!-- 끝 페이지 번호 처리 -->
 							<c:set var="endPage" value="${maxPage}" />
 							<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
+								<!-- 현재페이지랑 같으면-->
 								<c:if test="${p eq currentPage}">
 									<div class="pageNum"><b>${p}</b></div>
 								</c:if>
+								<!-- 현재페이지 -->
 								<c:if test="${p ne currentPage}">
-									<c:url var="rrlistchk" value="cr">
+									<c:url var="rrlistchk" value="arr">
 										<c:param name="page" value="${p}" />
 									</c:url>
 									<a href="${crlistchk}">${p}</a>
@@ -178,7 +180,7 @@ var onoff = function(){
 								<i class="fas fa-angle-double-right"></i>
 							</c:if>
 							<c:if test="${currentPage < maxPage}">
-								<c:url var="rrlistEND" value="cr">
+								<c:url var="rrlistEND" value="arr">
 									<c:param name="page" value="${currentPage+1}" />
 								</c:url>
 								<a href="${rrlistEND}"><i class="fas fa-angle-double-right"></i></a>

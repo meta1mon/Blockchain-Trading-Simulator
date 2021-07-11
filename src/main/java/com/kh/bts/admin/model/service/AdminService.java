@@ -22,8 +22,8 @@ public interface AdminService {
 	public int deleteCash(Cash vo);
 	public int countCashLog();
 	public List<CashLog> selectCashLog(int startPage, int limit);
-	public List<CashLog> searchCashLog(String keyword);
-	public List<Member> adminSearchMember(String keyword, int searchType);
+	public List<CashLog> searchCashLog(int startPage, int limit, String keyword);
+	public List<Member> adminSearchMember(int startPage, int limit, String keyword, int searchType);
 	public List<Member> adminListMember(int startPage, int limit);
 	public long totalCybcash();
 	public long countTodayWon();
@@ -37,8 +37,8 @@ public interface AdminService {
 	public List<Rreport> selectRreport(int startPage, int limit);
 	public int deleteCreport(String crno);
 	public int deleteRreport(String rrno);
-	public List<Acreport> searchAcreport(String keyword, int searchType);
-	public List<Acreport> searchAcreportByCstatus(String cstatus, int searchType);
-	public List<Arreport> searchArreport(String keyword, int searchType);
-	public List<Arreport> searchArreportByRstatus(String rstatus, int searchType);
+	public List<Acreport> searchAcreport(int startPage, int limit, String keyword, int searchType);
+	public List<Acreport> searchAcreportByCstatus(int startPage, int limit, String cstatus, int searchType);
+	public List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType);
+	public List<Arreport> searchArreportByRstatus(int startPage, int limit, String rstatus, int searchType);
 }

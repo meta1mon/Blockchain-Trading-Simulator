@@ -23,7 +23,7 @@
 	<p class="title inbl">충전 내역</p>
 	<!-- TODO 검색 기능 넣기 -->
 	<form name="listForm" action="cll" method="get" id="listForm">
-		<input type="search" name="keyword" id="search"	placeholder="검색어를 입력해주세요.">
+		<input type="search" name="keyword" id="search"	placeholder="닉네임으로 검색하실 수 있습니다.">
 		<button type="submit" id="btnsearch">검색</button>
 	</form>
 	<hr>

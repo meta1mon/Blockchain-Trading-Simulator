@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.cash.model.vo.CashLog;
+import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.report.model.vo.Acreport;
 import com.kh.bts.report.model.vo.Arreport;
@@ -70,19 +71,24 @@ public class AdminDao {
 		return result;
 	}
 	
-	public List<CashLog> searchCashLog(String keyword){
-		return sqlSession.selectList("CashLog.searchCashLog", keyword);
+	public List<CashLog> searchCashLog(int startPage, int limit, String keyword){
+		List<CashLog> list = new ArrayList<CashLog>(); 
+		int startRow = (startPage - 1) * limit; 
+		RowBounds row = new RowBounds(startRow, limit);
+		return sqlSession.selectList("CashLog.searchCashLog", keyword, row);
 	}
 	
-	public List<Member> adminSearchMember(String keyword, int searchType){
+	public List<Member> adminSearchMember(int startPage, int limit, String keyword, int searchType){
 		List<Member> list = new ArrayList<Member>();
+		int startRow = (startPage - 1) * limit; 
+		RowBounds row = new RowBounds(startRow, limit);
 		if(keyword != null) {
 			switch(searchType) {
 			case 1:
-				list = sqlSession.selectList("Member.adminSearchEmail", keyword);
+				list = sqlSession.selectList("Member.adminSearchEmail", keyword, row);
 				break;
 			case 2:
-				list = sqlSession.selectList("Member.adminSearchNick", keyword);
+				list = sqlSession.selectList("Member.adminSearchNick", keyword, row);
 				break;
 			}
 		}
@@ -174,41 +180,49 @@ public class AdminDao {
 		return result;
 	}
 
-	public List<Acreport> searchAcreport(String keyword, int searchType) {
+	public List<Acreport> searchAcreport(int startPage, int limit, String keyword, int searchType) {
 		List<Acreport> list = new ArrayList<Acreport>();
+		int startRow = (startPage - 1) * limit; 
+		RowBounds row = new RowBounds(startRow, limit);
 		if (keyword != null) {
 			switch (searchType) {
 			case 2:
-				list = sqlSession.selectList("report.searchCrespondent", keyword);
+				list = sqlSession.selectList("report.searchCrespondent", keyword, row);
 				break;
 			case 3:
-				list = sqlSession.selectList("report.searchCreporter", keyword);
+				list = sqlSession.selectList("report.searchCreporter", keyword, row);
 				break;
 			}
 		}
 		return list;
 	}
-	public List<Acreport> searchAcreportByCstatus(String cstatus, int searchType) {
+	public List<Acreport> searchAcreportByCstatus(int startPage, int limit, String cstatus, int searchType) {
 		List<Acreport> list = new ArrayList<Acreport>();
-		list = sqlSession.selectList("report.searchCstatus", cstatus);
+		int startRow = (startPage - 1) * limit; 
+		RowBounds row = new RowBounds(startRow, limit);
+		list = sqlSession.selectList("report.searchCstatus", cstatus, row);
 		return list;
 	}
-	public List<Arreport> searchArreport(String keyword, int searchType) {
+	public List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType) {
 		List<Arreport> list = new ArrayList<Arreport>();
+		int startRow = (startPage - 1) * limit; 
+		RowBounds row = new RowBounds(startRow, limit);
 		if (keyword != null) {
 			switch (searchType) {
 			case 2:
-				list = sqlSession.selectList("report.searchRrespondent", keyword);
+				list = sqlSession.selectList("report.searchRrespondent", keyword, row);
 				break;
 			case 3:
-				list = sqlSession.selectList("report.searchRreporter", keyword);
+				list = sqlSession.selectList("report.searchRreporter", keyword, row);
 			}
 		}
 		return list;
 	}
-	public List<Arreport> searchArreportByRstatus(String rstatus, int searchType) {
+	public List<Arreport> searchArreportByRstatus(int startPage, int limit, String rstatus, int searchType) {
 		List<Arreport> list = new ArrayList<Arreport>();
-		list = sqlSession.selectList("report.searchRstatus", rstatus);
+		int startRow = (startPage - 1) * limit; 
+		RowBounds row = new RowBounds(startRow, limit);
+		list = sqlSession.selectList("report.searchRstatus", rstatus, row);
 		return list;
 	}
 	

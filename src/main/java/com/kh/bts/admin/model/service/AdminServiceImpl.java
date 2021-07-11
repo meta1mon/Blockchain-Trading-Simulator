@@ -89,16 +89,16 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public List<CashLog> searchCashLog(String keyword) {
-		return aDao.searchCashLog(keyword);
+	public List<CashLog> searchCashLog(int startPage, int limit, String keyword) {
+		return aDao.searchCashLog(startPage, limit, keyword);
 	}
 	@Override
-	public List<Member> adminSearchMember(String keyword, int searchType) {
-		return aDao.adminSearchMember(keyword, searchType);
+	public List<Member> adminSearchMember(int startPage, int limit, String keyword, int searchType) {
+		return aDao.adminSearchMember(startPage, limit, keyword, searchType);
 	}
 	@Override
-	public List<Acreport> searchAcreport(String keyword, int searchType) {
-		return aDao.searchAcreport(keyword, searchType);
+	public List<Acreport> searchAcreport(int startPage, int limit, String keyword, int searchType) {
+		return aDao.searchAcreport(startPage, limit, keyword, searchType);
 	}
 
 	@Override
@@ -179,15 +179,15 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.selectArreport(startPage, limit);
 	}
 	@Override
-	public List<Acreport> searchAcreportByCstatus(String cstatus, int searchType) {
-		return aDao.searchAcreportByCstatus(cstatus, searchType);
+	public List<Acreport> searchAcreportByCstatus(int startPage, int limit, String cstatus, int searchType) {
+		return aDao.searchAcreportByCstatus(startPage, limit, cstatus, searchType);
 	}
 	@Override
-	public List<Arreport> searchArreport(String keyword, int searchType) {
-		return aDao.searchArreport(keyword, searchType);
+	public List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType) {
+		return aDao.searchArreport(startPage, limit, keyword, searchType);
 	}
 	@Override
-	public List<Arreport> searchArreportByRstatus(String rstatus, int searchType) {
-		return aDao.searchArreportByRstatus(rstatus, searchType);
+	public List<Arreport> searchArreportByRstatus(int startPage, int limit, String rstatus, int searchType) {
+		return aDao.searchArreportByRstatus(startPage, limit, rstatus, searchType);
 	}
 }

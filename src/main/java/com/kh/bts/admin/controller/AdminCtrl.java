@@ -106,7 +106,7 @@ public class AdminCtrl {
 	}
 
 // 충전 상품 목록 불러오기
-	@RequestMapping(value = "/cash", method = RequestMethod.GET)
+	@RequestMapping(value = "/cash")
 	public ModelAndView cashR(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
 		try {
 			int currentPage = page;
@@ -126,7 +126,7 @@ public class AdminCtrl {
 
 //	충전 상품 수정
 	@ResponseBody
-	@RequestMapping(value = "/updateCash", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateCash")
 	public int updateCash(Cash vo, HttpServletResponse response) {
 		int result = aService.updateCash(vo);
 		System.out.println(result);
@@ -135,14 +135,14 @@ public class AdminCtrl {
 
 //	충전 상품 삭제
 	@ResponseBody
-	@RequestMapping(value = "/deleteCash", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteCash")
 	public int deleteCash(Cash vo, HttpServletResponse response) {
 		int result = aService.deleteCash(vo);
 		return result;
 	}
 
 // 충전 상품 등록
-	@RequestMapping(value = "/cashRegister", method = RequestMethod.POST)
+	@RequestMapping(value = "/cashRegister")
 	public void cashRegister(Cash vo, HttpServletResponse response) {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -168,7 +168,7 @@ public class AdminCtrl {
 
 // 게시글 신고 등록
 	@ResponseBody
-	@RequestMapping(value = "/reportCommunity", method = RequestMethod.POST)
+	@RequestMapping(value = "/reportCommunity")
 	public int reportCommunity(HttpServletRequest request, @RequestParam("cno") String cno,
 			@RequestParam("creport") int crreason) {
 		HttpSession session = request.getSession();
@@ -192,7 +192,7 @@ public class AdminCtrl {
 	}
 
 // 게시글 신고 처리
-	@RequestMapping(value = "/dealcr", method = RequestMethod.POST)
+	@RequestMapping(value = "/dealcr")
 	public void insertAcreport(Acreport vo, String crno, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String cstatus = request.getParameter("cstatus");
@@ -220,14 +220,13 @@ public class AdminCtrl {
 		vo.setCno(vo2.getCno());
 		vo.setRcontent(vo2.getRcontent());
 		vo.setRrespondent(vo2.getRwriter());
-
 		int result = aService.insertRreport(vo);
 
 		return result;
 	}
 
 	// 댓글 신고 처리
-	@RequestMapping(value = "/dealrr", method = RequestMethod.POST)
+	@RequestMapping(value = "/dealrr")
 	public void insertArreport(Arreport vo, String rrno, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String rstatus = request.getParameter("rstatus");
@@ -244,18 +243,17 @@ public class AdminCtrl {
 		}
 	}
 
-	@RequestMapping(value = "")
+	@RequestMapping(value = "", method = RequestMethod.POST )
 	public ModelAndView adminMain(ModelAndView mv) {
 		mv.setViewName("admin/adminMain");
 		return mv;
 	}
 
-	@RequestMapping(value = "/nl", method = RequestMethod.GET)
+	@RequestMapping(value = "/nl")
 	public ModelAndView nl(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
 			@RequestParam(name = "searchType", defaultValue = "1") int searchType, ModelAndView mv) {
 		try {
-			System.out.println("nl까지 들어옴");
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
 			int listCount = cmService.totalCount();
@@ -278,7 +276,7 @@ public class AdminCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "/nDetail", method = RequestMethod.GET)
+	@RequestMapping(value = "/nDetail")
 	public ModelAndView noticeDetail(@RequestParam(name = "cno") String cno,
 			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
 		try {
@@ -295,12 +293,12 @@ public class AdminCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "nWrite", method = RequestMethod.GET)
+	@RequestMapping(value = "nWrite")
 	public String noticeInsertForm(ModelAndView mv) {
 		return "admin/noticeWrite";
 	}
 
-	@RequestMapping(value = "nInsert", method = RequestMethod.POST)
+	@RequestMapping(value = "nInsert")
 	public ModelAndView noticeInsert(Community c, @RequestParam(name = "upfile", required = false) MultipartFile report,
 			HttpServletRequest request, ModelAndView mv) {
 		try {
@@ -318,7 +316,7 @@ public class AdminCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "nUpdateForm", method = RequestMethod.GET)
+	@RequestMapping(value = "nUpdateForm")
 	public ModelAndView communityDetail(@RequestParam(name = "cno") String cno, ModelAndView mv) {
 		try {
 			mv.addObject("community", cmService.selectCommunity(1, cno));
@@ -330,7 +328,7 @@ public class AdminCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "nUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "nUpdate")
 	public ModelAndView communityUpdate(Community c, @RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam("upfile") MultipartFile report, HttpServletRequest request, ModelAndView mv) {
 		try {
@@ -351,7 +349,7 @@ public class AdminCtrl {
 		return mv;
 	}
 
-	@RequestMapping(value = "nDelete", method = RequestMethod.GET)
+	@RequestMapping(value = "nDelete")
 	public ModelAndView communityDelete(@RequestParam(name = "cno") String cno,
 			@RequestParam(name = "page", defaultValue = "1") int page, HttpServletRequest request, ModelAndView mv) {
 		try {
@@ -418,7 +416,7 @@ public class AdminCtrl {
 	}
 
 //	회원 리스트
-	@RequestMapping(value = "/ml", method = RequestMethod.GET)
+	@RequestMapping(value = "/ml" )
 	public ModelAndView ml(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
 			@RequestParam(name = "searchType", defaultValue = "1") int searchType, ModelAndView mv) {
@@ -445,7 +443,7 @@ public class AdminCtrl {
 
 //	회원 삭제
 	@ResponseBody
-	@RequestMapping(value = "/md")
+	@RequestMapping(value = "/md" )
 	public int deleteMember(String email, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int result = myService.myDelete(email);
 		if (result > 0) {
@@ -457,7 +455,7 @@ public class AdminCtrl {
 	}
 
 //	캐시로그 불러오기
-	@RequestMapping(value = "/cll")
+	@RequestMapping(value = "/cll" )
 	public ModelAndView cashLogList(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword, ModelAndView mv) {
 		try {
@@ -481,7 +479,7 @@ public class AdminCtrl {
 	}
 
 //	게시판 신고 목록
-	@RequestMapping(value = "/cr", method = RequestMethod.GET)
+	@RequestMapping(value = "/cr" )
 	public ModelAndView cr(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
 		try {
 			int currentPage = page;
@@ -500,7 +498,7 @@ public class AdminCtrl {
 	}
 
 //	게시판 신고 처리 목록
-	@RequestMapping(value = "/acr", method = RequestMethod.GET)
+	@RequestMapping(value = "/acr" )
 	public ModelAndView acr(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
 			@RequestParam(name = "cstatus", defaultValue = "", required = false) String cstatus,
@@ -529,7 +527,7 @@ public class AdminCtrl {
 	}
 
 //	댓글 신고 목록
-	@RequestMapping(value = "/rr", method = RequestMethod.GET)
+	@RequestMapping(value = "/rr" )
 	public ModelAndView rr(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
 		try {
 			int currentPage = page;
@@ -548,7 +546,7 @@ public class AdminCtrl {
 	}
 
 //	댓글 신고 처리 목록
-	@RequestMapping(value = "/arr", method = RequestMethod.GET)
+	@RequestMapping(value = "/arr" )
 	public ModelAndView arr(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
 			@RequestParam(name = "rstatus", defaultValue = "", required = false) String rstatus,

@@ -18,7 +18,6 @@
 	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link
 	href="${pageContext.request.contextPath}/resources/css/mikrokosmos.css"
 	rel="stylesheet" type="text/css" />
@@ -59,6 +58,7 @@
 	width: 25px;
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(function() {
 	// 검색 부분
@@ -588,7 +588,7 @@ $(function(){
 						style="width: 328px; position: relative; right: 30px; top: 20px;">
 					<div>
 						<button type="button" class="modal_close_btn">취소</button>
-						<button type="submit" id="btnreport" class="modal_report_btn">신고</button>
+						<button type="button" id="btnreport" class="modal_report_btn">신고</button>
 					</div>
 				</form>
 			</div>

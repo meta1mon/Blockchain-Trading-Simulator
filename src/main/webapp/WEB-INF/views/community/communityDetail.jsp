@@ -41,10 +41,9 @@ $(function(){
        });
 	})
 	
-	var rno = 0;
+	var rnoForReport = 0;
 	function rreport(nowRno) {
-		rno = nowRno;
-		console.log(rno);
+		rnoForReport = nowRno;
 		modalFn('my_modal_reply');
 
 }
@@ -150,11 +149,11 @@ $(function(){
 								<div class="icon-react icon-more"
 									style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
 									<div class="dropdown-content">
-										<div class="reportReply" onclick="rreport(${rep.cno})">신고</div>
+										<div class="reportReply" onclick="rreport('${rep.rno}')">신고</div>
 										<!-- 로그인한 유저의 게시글만 삭제 버튼 보임 -->
 										<c:if test="${loginMember == rep.email }">
 											<div class="deleteReply"
-												onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</div>
+												onclick="replyDelete('${rep.rno}', '${rep.cno }', '${rep.rwriter }')">삭제</div>
 										</c:if>
 									</div>
 								</div>
@@ -229,7 +228,7 @@ $(function(){
 					style="width: 328px; position: relative; right: 30px; top: 20px;">
 				<div>
 					<button type="button" id="btncancel" class="modal_close_btn">취소</button>
-					<button type="button" id="btnrply" class="modal_report_btn">신고</button>
+					<button type="button" id="btnrply" style="cursor: pointer;" class="modal_report_btn">신고</button>
 				</div>
 			</div>
 		</div>
@@ -310,11 +309,11 @@ $(function(){
    // 댓글 신고 부분
     $("#btnrply").on("click", function() {
        var rreport = $("input[name='rreport']:checked").val();
-       $.ajax({
+        $.ajax({
           url : "${pageContext.request.contextPath}/admin/reportRcommunity",
           type : "post",
           data : {"rrreason" : rreport,
-             "rno" : rno},
+             "rno" : rnoForReport},
           success : function(data) {
              if(data > 0) {
                 alert("신고 접수 되었습니다!");
@@ -380,18 +379,25 @@ $(function(){
    	})
    }
 
-   // 댓글 삭제   -- 새로고침을 사용 중인데 추후 수정해야 할듯
-   function replyDelete(deleteRno, deleteCno) {
-      $.ajax({
+   // 댓글 삭제
+   function replyDelete(deleteRno, deleteCno, deleteRwriter) {
+		console.log(deleteRno);	   
+		console.log(deleteCno);	   
+       $.ajax({
          url : "${pageContext.request.contextPath}/rcDelete",
          type : "post",
          data : {
             "rno" : deleteRno,
-            "cno" : deleteCno
+            "cno" : deleteCno,
+            "rwriter" : deleteRwriter
          },
          success : function(data) {
+			if(data > 0) {
         	 alert("댓글 삭제 완료");
         	 window.location.reload();
+			} else {
+        	 alert("댓글 삭제 실패");
+			}
          }
       });
    }

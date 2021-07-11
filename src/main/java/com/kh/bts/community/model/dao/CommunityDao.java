@@ -34,30 +34,6 @@ public class CommunityDao {
 		return mlist;
 	}
 
-	public List<Community> searchList(int startPage, int limit, String keyword, int searchType) { // 검색한 게시글 조회
-		List<Community> list = new ArrayList<Community>();
-		int startRow = (startPage - 1) * limit;
-		RowBounds row = new RowBounds(startRow, limit);
-
-		if (keyword != null) {
-			switch (searchType) {
-			case 1: // 제목으로 검색
-				list = sqlSession.selectList("community.searchListSubject", keyword, row);
-				break;
-			case 2: // 내용으로 검색
-				list = sqlSession.selectList("community.searchListContent", keyword, row);
-				break;
-			case 3: // 작성자명으로 검색
-				list = sqlSession.selectList("community.searchListWriter", keyword, row);
-				break;
-			default:
-				System.out.println("dao 오류");
-				break;
-			}
-		}
-		return list;
-	}
-
 	public List<Community> selectList(int startPage, int limit) { // 페이지당 게시글 조회
 		int startRow = (startPage - 1) * limit;
 		RowBounds row = new RowBounds(startRow, limit);

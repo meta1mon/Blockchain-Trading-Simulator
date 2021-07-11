@@ -25,14 +25,20 @@ public class AdminDao {
 	public int insertCreport(Creport vo) {
 		return sqlSession.insert("report.insertCreport", vo);
 	}
-	public int insertAcreport(Acreport vo) {
-		return sqlSession.insert("report.insertAcreport", vo);
+	public int insertAcreportDeny(Acreport vo) {
+		return sqlSession.insert("report.insertAcreportDeny", vo);
+	}
+	public int insertAcreportAccept(Acreport vo) {
+		return sqlSession.insert("report.insertAcreportAccept", vo);
 	}
 	public int insertRreport(Rreport vo) {
 		return sqlSession.insert("report.insertRreport", vo);
 	}
-	public int insertArreport(Arreport vo) {
-		return sqlSession.insert("report.insertArreport", vo);
+	public int insertArreportDeny(Arreport vo) {
+		return sqlSession.insert("report.insertArreportDeny", vo);
+	}
+	public int insertArreportAccept(Arreport vo) {
+		return sqlSession.insert("report.insertArreportAccept", vo);
 	}
 	
 	public int registerCash(Cash vo) {

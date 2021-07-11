@@ -86,7 +86,6 @@ public class RcommunityCtrl {
 
 		String oracleRno = setLPad(rc.getRno(), 5, "0");
 		String oracleCno = setLPad(rc.getCno(), 5, "0");
-		
 		int result = -1;
 		
 		String writerEmail = cmService.returnEmail(rc.getRwriter());

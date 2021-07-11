@@ -192,6 +192,8 @@ $(document).mouseup(function(e) {
 
 // 게시글 신고 부분
 $("#btnreport").on("click", function() {
+	console.log("컨트롤러로 신고 사유 전송하러 들어옴");
+	console.log();
 	$.ajax({
 		url : "admin/reportCommunity",
 		type : "post",
@@ -504,6 +506,37 @@ function modalReplyFn(id) {
 				$("#replyContent2").val("");
 				bgReply.remove();
 				modalReply.style.display = 'none';
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			});
 
 	modalReply

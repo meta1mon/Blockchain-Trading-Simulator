@@ -12,9 +12,11 @@ import com.kh.bts.report.model.vo.Rreport;
 
 public interface AdminService {
 	public int insertCreport(Creport vo);
-	public int insertAcreport(Acreport vo);
+	public int insertAcreportDeny(Acreport vo);
+	public int insertAcreportAccept(Acreport vo);
 	public int insertRreport(Rreport vo);
-	public int insertArreport(Arreport vo);
+	public int insertArreportDeny(Arreport vo);
+	public int insertArreportAccept(Arreport vo);
 	public int registerCash(Cash vo);
 	public int updateCash(Cash vo);
 	public int deleteCash(Cash vo);

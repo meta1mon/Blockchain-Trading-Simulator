@@ -152,8 +152,8 @@
 									<tr>
 										<td
 											style="text-align: center; font-size: 30px !important; vertical-align: middle;"><a
-											style="text-align: center; font-size: 30px !important;"
-											href="<%=request.getContextPath()%>/signup" id="join">가입</a><input
+											style="text-align: center; font-size: 30px !important; color: #8c66c8;"
+											href="<%=request.getContextPath()%>/signup" id="join">회원가입</a><input
 											name="coin" id="coin" type="hidden" value="BTC"
 											readonly="readonly" style="text-align: center;"></td>
 
@@ -161,7 +161,7 @@
 									<tr>
 										<td
 											style="text-align: center; font-size: 30px !important; vertical-align: middle;"><a
-											style="text-align: center; font-size: 30px !important;"
+											style="text-align: center; font-size: 30px !important; color: #8c66c8;"
 											href="<%=request.getContextPath()%>/login" id="signup"
 											id="login">로그인</a></td>
 									</tr>

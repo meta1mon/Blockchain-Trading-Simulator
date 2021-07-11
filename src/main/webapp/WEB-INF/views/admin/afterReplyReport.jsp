@@ -41,7 +41,8 @@ $(function(){
 	$("#btnsearch2").css("display", "none");
 	if($(".rcontent").has($("img"))){
 		$(".rcontent img").attr("src", null);
-		$(".rcontent img").attr("alt", "(사진)");
+		$(".rcontent img").attr("srcset", null);
+		$(".rcontent img").attr("alt", "[이미지]");
 	}
 var onoff = function(){
 	 var opt = $("#searchType option:selected");

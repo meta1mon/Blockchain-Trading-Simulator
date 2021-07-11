@@ -204,6 +204,7 @@ function doOpenCheck(chk){
 		if($("#won").val() != '' && $("#cash").val() != '') {
 			openChild();
 		} else {
+			alert("결제할 상품을 선택하세요");
 			
 		}
 	}

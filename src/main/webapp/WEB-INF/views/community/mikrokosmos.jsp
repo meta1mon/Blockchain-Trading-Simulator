@@ -18,7 +18,6 @@
 	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css"
 	rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link
 	href="${pageContext.request.contextPath}/resources/css/mikrokosmos.css"
 	rel="stylesheet" type="text/css" />
@@ -59,6 +58,7 @@
 	width: 25px;
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(function() {
 	// 검색 부분
@@ -411,7 +411,13 @@ $(function(){
 				<div id="moreDiv">
 					<!-- 더 불러온 인스타 넣는 구역 -->
 				</div>
-				<button type="button" class="moreFeed" onclick="moreInsta()">더보기</button>
+				<c:if test="${isSearched == null }">
+					<button type="button" class="moreFeed" onclick="moreInsta()">더보기</button>
+				</c:if>
+				<c:if test="${isSearched != null }">
+					<button type="button" class="moreFeed"
+						onclick="location.href='insta'">목록으로 돌아가기</button>
+				</c:if>
 			</div>
 			<!-- main-right -->
 			<div class="main-right">
@@ -419,7 +425,7 @@ $(function(){
 				<div class="section-accumulative">
 					<div class="menu-title">
 						<span class="sub-title">누적 랭킹</span> <span class="find-more"
-							onclick="location.href='rankAccumulative'">모두 보기</span>
+							onclick="location.href='rankDaily?criteria=0'">모두 보기</span>
 					</div>
 					<ul class="story-list">
 						<li>
@@ -582,7 +588,7 @@ $(function(){
 						style="width: 328px; position: relative; right: 30px; top: 20px;">
 					<div>
 						<button type="button" class="modal_close_btn">취소</button>
-						<button type="submit" id="btnreport" class="modal_report_btn">신고</button>
+						<button type="button" id="btnreport" class="modal_report_btn">신고</button>
 					</div>
 				</form>
 			</div>

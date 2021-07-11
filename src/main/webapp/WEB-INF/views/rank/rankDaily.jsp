@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,28 +22,33 @@
 	$(function(){
 		if(${criteria == 0}) {
 			$("#item-1").prop("checked", true);
+			$(".info").eq(0).show();
 		} else if(${criteria == 1}) {
+// 			console.log("일간넘어감");
 			$("#item-2").prop("checked", true);
+			$(".info").eq(1).show();
 		} else if(${criteria ==2}) {
 			$("#item-3").prop("checked", true);
+			$(".info").eq(2).show();
 		} else if(${criteria ==3}) {
 			$("#item-4").prop("checked", true);
+			$(".info").eq(3).show();
 		}
 		
 		$("#rank-1").click(function() {
-			console.log("1번 클릭");
+// 			console.log("1번 클릭");
 			location.href="rankDaily?criteria=0";
 		});
 		$("#rank-2").click(function() {
-			console.log("2번 클릭");
+// 			console.log("2번 클릭");
 			location.href="rankDaily?criteria=1";
 		});
 		$("#rank-3").click(function() {
-			console.log("3번 클릭");
+// 			console.log("3번 클릭");
 			location.href="rankDaily?criteria=2";
 		});
 		$("#rank-4").click(function() {
-			console.log("4번 클릭");
+// 			console.log("4번 클릭");
 			location.href="rankDaily?criteria=3";
 		});
 	})
@@ -92,45 +98,97 @@
 			<div id="daily">
 			<!-- 일간 TOP3 -->
 			<div class="top3" style="clear: both;">
+			
 				<ul>
 					<li>
 						<div>
-							<img src="resources/assets/img/silver_medal.png">
+							<img class="rankImg" src="resources/assets/img/silver_medal.png">
 						</div>
-						<div>
-							<p>2등 ${second.nickname }</p>
-						</div>
-						<div>
-							<p>수익률 <fmt:formatNumber value="${second.yield }" pattern="##,###.##" /> % </p>
+						<c:if test="${fn:length(second.nickname)  > 7 }">
+							<div style="margin: 0 auto; width: calc(5em+${fn:length(second.nickname) }em);">
+						</c:if>
+						<c:if test="${fn:length(second.nickname) <= 7 }">
+							<div style="margin: 0 auto; width: 12.5em;">
+						</c:if>
+							<p class="rankFont" align="left">
+								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
+								2등 ${second.nickname }
+								<br>
+								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
+								수익률&nbsp;
+								
+								<c:if test="${second.yield>=0 }">
+									<font class="rankFont" color="red" ><fmt:formatNumber value="${second.yield }" pattern="##,###.##" /> % </font>
+								</c:if>
+								<c:if test="${second.yield<0 }">
+									<font class="rankFont" color="blue" ><fmt:formatNumber value="${second.yield }" pattern="##,###.##" /> % </font>
+								</c:if>
+							
+							</p>
 						</div>
 					</li>
+					
 					<li>
 						<div>
-							<img src="resources/assets/img/gold_medal.png">
+							<img class="no1" src="resources/assets/img/gold_medal.png">
 						</div>
-						<div>
-							<p>1등 ${first.nickname }</p>
-						</div>
-						<div>
-							<p>수익률 <fmt:formatNumber value="${first.yield }" pattern="##,###.##" /> % </p>
+						<c:if test="${fn:length(first.nickname)  > 7 }">
+							<div style="margin: 0 auto; width: calc(5em+${fn:length(first.nickname) }em);">
+						</c:if>
+						<c:if test="${fn:length(first.nickname) <= 7 }">
+							<div style="margin: 0 auto; width: 12.5em;">
+						</c:if>
+							<p class="rankFont" align="left">
+								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
+								1등 ${first.nickname }
+								<br>
+								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
+								수익률&nbsp;
+								
+								<c:if test="${first.yield>=0 }">
+									<font class="rankFont" color="red" ><fmt:formatNumber value="${first.yield }" pattern="##,###.##" /> % </font>
+								</c:if>
+								<c:if test="${first.yield<0 }">
+									<font class="rankFont" color="blue" ><fmt:formatNumber value="${first.yield }" pattern="##,###.##" /> % </font>
+								</c:if>
+							
+							</p>
 						</div>
 					</li>
+					
 					<li>
 						<div>
-							<img src="resources/assets/img/bronze_medal.png">
+							<img class="rankImg" src="resources/assets/img/bronze_medal.png">
 						</div>
-						<div>
-							<p>3등 ${third.nickname }</p>
-						</div>
-						<div>
-							<p>수익률 <fmt:formatNumber value="${third.yield }" pattern="##,###.##" /> %</p>
+						<c:if test="${fn:length(third.nickname)  > 7 }">
+							<div style="margin: 0 auto; width: calc(5em+${fn:length(third.nickname) }em);">
+						</c:if>
+						<c:if test="${fn:length(third.nickname) <= 7 }">
+							<div style="margin: 0 auto; width: 12.5em;">
+						</c:if>
+							<p class="rankFont" align="left">
+								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
+								3등 ${third.nickname }
+								<br>
+								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
+								수익률&nbsp;
+								
+								<c:if test="${third.yield>=0 }">
+									<font class="rankFont" color="red" ><fmt:formatNumber value="${third.yield }" pattern="##,###.##" /> % </font>
+								</c:if>
+								<c:if test="${third.yield<0 }">
+									<font class="rankFont" color="blue" ><fmt:formatNumber value="${third.yield }" pattern="##,###.##" /> % </font>
+								</c:if>
+							</p>
 						</div>
 					</li>
 				</ul>
 			</div>
 			
-			<br>
+			<br><br><br><br><br><br>
+			
 			<hr style="clear: both;">
+<!-- 			<hr> -->
 			<br>
 
 			<p style="text-align: center;">전체 참가 인원 : ${other.size() } 명</p>
@@ -139,6 +197,7 @@
 			
 			<!-- 일간 랭킹 및 내 순위 -->
 			<table style="clear: both;" class="ranktable">
+<!-- 			<table class="ranktable"> -->
 				<tr>
 					<th>순위</th>
 					<th>닉네임</th>
@@ -149,12 +208,18 @@
 					<tr>
 						<td>${status.index +1 }위</td>
 						<td>${rank.nickname }</td>
-						<td><fmt:formatNumber value="${rank.yield }"
-								pattern="##,###.##" /> %</td>
+						<td>
+							<c:if test="${rank.yield>=0 }">
+								<font class="rankFont" color="red" ><fmt:formatNumber value="${rank.yield }" pattern="##,###.##" /> % </font>
+							</c:if>
+							<c:if test="${rank.yield<0 }">
+								<font class="rankFont" color="blue" ><fmt:formatNumber value="${rank.yield }" pattern="##,###.##" /> % </font>
+							</c:if>		
+						</td>
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="3">.<br>.<br>.</td>
+					<td colspan="3" >.<br>.<br>.<br>[내 수익률]<br>.<br>.<br>.<br></td>
 				</tr>
 				<c:if test="${loginMember == null }">
 					<tr>
@@ -167,8 +232,14 @@
 					<tr>
 						<td>${rank }위</td>
 						<td>${my.nickname }</td>
-						<td><fmt:formatNumber value="${my.yield }"
-								pattern="##,###.##" /> %</td>
+						<td>
+							<c:if test="${my.yield>=0 }">
+								<font class="rankFont" color="red" ><fmt:formatNumber value="${my.yield }" pattern="##,###.##" /> % </font>
+							</c:if>
+							<c:if test="${my.yield<0 }">
+								<font class="rankFont" color="blue" ><fmt:formatNumber value="${my.yield }" pattern="##,###.##" /> % </font>
+							</c:if>		
+						</td>
 					</tr>
 				</c:if>
 			</table>

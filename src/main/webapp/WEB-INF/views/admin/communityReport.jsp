@@ -50,9 +50,6 @@
 		    var dataquery = $("#frmReport").serialize();
 		    console.log(dataquery);
 
-/* 		    if($("#creason").val("") || $("#creason") == null ){
-				 alert("신고 처리 사유를 입력해주세요.");
-			 } else { */
 				$.ajax({
 				url : "dealcr",
 				type : "POST",
@@ -66,7 +63,6 @@
 				}
 				
 			})
-/* 		 } */
 	})
 
 	})

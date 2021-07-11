@@ -179,15 +179,7 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.selectArreport(startPage, limit);
 	}
 	@Override
-	public List<Acreport> searchAcreportByCstatus(int startPage, int limit, String cstatus, int searchType) {
-		return aDao.searchAcreportByCstatus(startPage, limit, cstatus, searchType);
-	}
-	@Override
 	public List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType) {
 		return aDao.searchArreport(startPage, limit, keyword, searchType);
-	}
-	@Override
-	public List<Arreport> searchArreportByRstatus(int startPage, int limit, String rstatus, int searchType) {
-		return aDao.searchArreportByRstatus(startPage, limit, rstatus, searchType);
 	}
 }

@@ -49,10 +49,6 @@
 		    dataquery = decodeURIComponent(dataquery);
 		    console.log(dataquery);
 		    
-/* 		    if($("#rreason").val("") || $("#rreason") == null){
-				alert("신고 처리 사유를 입력해주세요.");		    	
-		    }else { */
-		    	
 			$.ajax({
 			url : "dealrr",
 			type : "POST",
@@ -66,7 +62,6 @@
 			}
 			
 		})
-		    /* } */
 	})
 
 	})

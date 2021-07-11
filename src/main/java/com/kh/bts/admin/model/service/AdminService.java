@@ -38,7 +38,5 @@ public interface AdminService {
 	public int deleteCreport(String crno);
 	public int deleteRreport(String rrno);
 	public List<Acreport> searchAcreport(int startPage, int limit, String keyword, int searchType);
-	public List<Acreport> searchAcreportByCstatus(int startPage, int limit, String cstatus, int searchType);
 	public List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType);
-	public List<Arreport> searchArreportByRstatus(int startPage, int limit, String rstatus, int searchType);
 }

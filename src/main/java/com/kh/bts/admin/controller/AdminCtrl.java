@@ -501,23 +501,26 @@ public class AdminCtrl {
 	@RequestMapping(value = "/acr" )
 	public ModelAndView acr(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
-			@RequestParam(name = "cstatus", defaultValue = "", required = false) String cstatus,
 			@RequestParam(name = "searchType", defaultValue = "1") int searchType) {
 		try {
 			int currentPage = page;
-			int listCount = aService.countAcreport();
-			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 
 			if (keyword != null && !keyword.equals("")) {
 				mv.addObject("list", aService.searchAcreport(currentPage, LIMIT, keyword, searchType));
-			} else if (cstatus != null && !cstatus.equals("")) {
-				mv.addObject("list", aService.searchAcreportByCstatus(currentPage, LIMIT, cstatus, searchType));
+				int listCount = aService.searchAcreport(currentPage, LIMIT, keyword, searchType).size();
+				int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+				mv.addObject("listCount", listCount);
+				mv.addObject("maxPage", maxPage);
 			} else {
 				mv.addObject("list", aService.selectAcreport(currentPage, LIMIT));
+				int listCount = aService.selectAcreport(currentPage, LIMIT).size();
+				int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+				mv.addObject("listCount", listCount);
+				mv.addObject("maxPage", maxPage);
 			}
+			mv.addObject("keyword", keyword);
+			mv.addObject("searchType", searchType);
 			mv.addObject("currentPage", currentPage);
-			mv.addObject("maxPage", maxPage);
-			mv.addObject("listCount", listCount);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -549,23 +552,26 @@ public class AdminCtrl {
 	@RequestMapping(value = "/arr" )
 	public ModelAndView arr(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
-			@RequestParam(name = "rstatus", defaultValue = "", required = false) String rstatus,
 			@RequestParam(name = "searchType", defaultValue = "1") int searchType) {
 		try {
 			int currentPage = page;
-			int listCount = aService.countArreport();
-			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 
 			if (keyword != null && !keyword.equals("")) {
 				mv.addObject("list", aService.searchArreport(currentPage, LIMIT, keyword, searchType));
-			} else if (rstatus != null && !rstatus.equals("")) {
-				mv.addObject("list", aService.searchArreportByRstatus(currentPage, LIMIT, rstatus, searchType));
+				int listCount = aService.searchArreport(currentPage, LIMIT, keyword, searchType).size();
+				int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+				mv.addObject("listCount", listCount);
+				mv.addObject("maxPage", maxPage);
 			} else {
 				mv.addObject("list", aService.selectArreport(currentPage, LIMIT));
+				int listCount = aService.selectArreport(currentPage, LIMIT).size();
+				int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+				mv.addObject("listCount", listCount);
+				mv.addObject("maxPage", maxPage);
 			}
+			mv.addObject("keyword", keyword);
+			mv.addObject("searchType", searchType);
 			mv.addObject("currentPage", currentPage);
-			mv.addObject("maxPage", maxPage);
-			mv.addObject("listCount", listCount);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

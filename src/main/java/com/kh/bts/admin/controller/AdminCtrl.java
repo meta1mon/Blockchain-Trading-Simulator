@@ -197,11 +197,12 @@ public class AdminCtrl {
 			throws Exception {
 		String cstatus = request.getParameter("cstatus");
 		String cno = request.getParameter("cno");
-		int result = aService.insertAcreport(vo); // acreport에 삽입
-		int result2 = aService.deleteCreport(crno); // creport에서 삭제
-		if (cstatus.equals("accept")) { // 수리일 때
-			int result3 = cmService.deleteCommunity(cno); // community에서 삭제
+		if (cstatus.equals("accept")) { // 수리일 때 select creport where cno list 반환 --> acreport insert --> cno 가져와서 delete
+			int result = aService.insertAcreportAccept(vo); // acreport에 삽입
+			int result2 = cmService.deleteCommunity(cno); // community에서 삭제
 		} else if (cstatus.equals("deny")) { // 반려일 때
+			int result = aService.insertAcreportDeny(vo); // acreport에 삽입
+			int result2 = aService.deleteCreport(cno); // creport에서 삭제
 		}
 	}
 
@@ -232,21 +233,14 @@ public class AdminCtrl {
 		String rstatus = request.getParameter("rstatus");
 		String cno = request.getParameter("cno");
 		String rno = request.getParameter("rno");
-		System.out.println("==============================================================");
-		System.out.println(rstatus);
-		System.out.println(cno);
-		System.out.println(rno);
-		int result = aService.insertArreport(vo); // arreport에 삽입
-		int result2 = aService.deleteRreport(rrno); // rreport에서 삭제
-		System.out.println(result);
-		System.out.println(result2);
-		System.out.println("==============================================================");
 		if (rstatus.equals("accept")) { // 수리일 때
+			int result = aService.insertArreportAccept(vo); // arreport에 삽입
+			int result2 = aService.deleteRreport(rrno); // rreport에서 삭제
 			int result3 = rcmService.deleteRcommunity(rno, cno); // Rcommunity에서 삭제
 			System.out.println(result3);
-			System.out.println("==============================================================");
 		} else if (rstatus.equals("deny")) { // 반려일 때
-			System.out.println("==============================================================");
+			int result = aService.insertArreportDeny(vo); // arreport에 삽입
+			int result2 = aService.deleteRreport(rrno); // rreport에서 삭제
 		}
 	}
 

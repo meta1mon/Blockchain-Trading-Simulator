@@ -6,3 +6,12 @@
 #frmLogin{
 	padding-top: calc(50% - 135.5px);
 }
+
+#frmLogin a {
+	color: black;
+	
+}
+#frmLogin a:hover {
+	color: #8c66c8;
+	
+}

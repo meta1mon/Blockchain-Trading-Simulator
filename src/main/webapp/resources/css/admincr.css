@@ -71,6 +71,13 @@
 	background: white;
 }
 
+.ccontent *{
+	display: inline-block;
+	width: 146.8px;
+	white-space: nowrap;
+	overfow: hidden;
+	text-overflow: ellipsis;
+}
 button {
 	width: 90px;
 }

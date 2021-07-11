@@ -14,7 +14,8 @@
 	$(function(){
 		if($(".ccontent").has($("img"))){
 			$(".ccontent img").attr("src", null);
-			$(".ccontent img").attr("alt", "(사진)");
+			$(".ccontent img").attr("srcset", null);
+			$(".ccontent img").attr("alt", "[이미지]");
 		}
 		/* 모달창 열기 */
 		var  openModal = function(event) {
@@ -95,6 +96,7 @@
 					</tr>
 				</c:if>
 				<c:if test="${listCount ne 0}">
+					<input type="hidden" value=${listCount } id="listCount">
 					<c:forEach var="vo" items="${list}" varStatus="status">
 						<tr class="tr">
 							<td class ="center" style="cursor: pointer;">${vo.crno}</td>

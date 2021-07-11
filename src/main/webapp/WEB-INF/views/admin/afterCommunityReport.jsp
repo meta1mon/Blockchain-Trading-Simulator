@@ -19,7 +19,8 @@ $(function(){
 	$("#btnsearch2").css("display", "none");
 	if($(".ccontent").has($("img"))){
 		$(".ccontent img").attr("src", null);
-		$(".ccontent img").attr("alt", "(사진)");
+		$(".ccontent img").attr("srcset", null);
+		$(".ccontent img").attr("alt", "[이미지]");
 	}
 	
 var onoff = function(){

@@ -67,7 +67,7 @@
 					  VALUES(#{rrno}, #{rreporter}, #{rrreason}, #{rcontent}, #{rrespondent}, #{rrdate}, #{rstatus}, #{rreason}, default)
 	</insert>
 	<insert id="insertArreportAccept" parameterType="Arreport" flushCache="true" statementType="PREPARED">
-		INSERT INTO ARREPORT(RRNO, RREPORTER, RRREASON, RCONTENT, RRESPONDENT, RRDATE, RSTATUS, RREASON, ARRDATE) SELECT RRNO, RREPORTER, RRREASON, RCONTENT, RRESPONDENT, RRDATE, 'accept', #{rreason} FROM RREPORT WHERE RNO = #{RNO}
+		INSERT INTO ARREPORT(RRNO, RREPORTER, RRREASON, RCONTENT, RRESPONDENT, RRDATE, RSTATUS, RREASON) SELECT RRNO, RREPORTER, RRREASON, RCONTENT, RRESPONDENT, RRDATE, 'accept', #{rreason} FROM RREPORT WHERE RNO = #{rno}
 	</insert>
 	
 	<delete id="deleteRreport" parameterType="string" flushCache="true" statementType="PREPARED">

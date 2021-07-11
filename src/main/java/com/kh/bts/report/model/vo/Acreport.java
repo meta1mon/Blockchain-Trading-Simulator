@@ -16,14 +16,6 @@ public class Acreport {
 	private String acrdate;
 	private String cno;
 
-	public String getCno() {
-		return cno;
-	}
-
-	public void setCno(String cno) {
-		this.cno = cno;
-	}
-
 	public Acreport() {
 	}
 
@@ -111,5 +103,14 @@ public class Acreport {
 	public void setAcrdate(String acrdate) {
 		this.acrdate = acrdate;
 	}
+
+	public String getCno() {
+		return cno;
+	}
+
+	public void setCno(String cno) {
+		this.cno = cno;
+	}
+
 
 }

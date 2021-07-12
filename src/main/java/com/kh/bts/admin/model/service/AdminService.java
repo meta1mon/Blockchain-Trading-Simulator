@@ -69,5 +69,13 @@ public interface AdminService {
 	List<Acreport> searchAcreport(int startPage, int limit, String keyword, int searchType);
 
 	List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType);
+	
+	List<Member> selectWeeklyRank();
+
+	List<Member> selectMonthlyRank();
+	
+	String sendMonthlyRankReward(String[] email)throws Exception;
+	
+	String sendWeeklyRankReward(String[] email)throws Exception;
 
 }

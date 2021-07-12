@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,13 +46,13 @@
 	right: -400px;
 	width: 400px;
 	height: 150px;
-	background: red;
+	background: #FBCCD1;
 	border: 1px solid black;
 	border-radius: 5px;
 	padding: 40px;
 	text-align: center;
 	font: 18px !important;
-	color: white;
+	color: black;
 }
 
 .popup1 {
@@ -59,13 +61,13 @@
 	right: -400px;
 	width: 400px;
 	height: 150px;
-	background: blue;
+	background: #90C5F9;
 	border: 1px solid black;
 	border-radius: 5px;
 	padding: 40px;
 	text-align: center;
 	font: 18px !important;
-	color: white;
+	color: black;
 }
 </style>
 <meta charset="UTF-8">
@@ -325,8 +327,40 @@
 		</div>
 
 		<!-- 매수 매도 애니매이션 부분   -->
-		<div id="alertbuy" class="popup">매수가 체결되었습니다.</div>
-		<div id="alertsold" class="popup1">매도가 체결되었습니다.</div>
+		<div id="alertbuy" class="popup" style="border: 0px;">
+			<a style="font-size: 18px !important;">매수가 체결되었습니다.</a>
+			<table id="alertbuy_1" class='table table-striped'>
+
+				<tr>
+					<td>거래소</td>
+					<td>BTS</td>
+				</tr>
+				<tr>
+					<%
+						Date nowTime = new Date();
+					SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
+					%>
+					<td>체결시간</td>
+					<td><%=sf.format(nowTime)%></td>
+				</tr>
+			</table>
+		</div>
+		<div id="alertsold" class="popup1">
+			<a style="font-size: 18px !important;">매도가 체결되었습니다.</a>
+			<table id="alertbuy_2" class='table table-striped'>
+
+				<tr>
+					<td>거래소</td>
+					<td>BTS</td>
+				</tr>
+				<tr>
+					<td>체결시간</td>
+					<td><%=sf.format(nowTime)%></td>
+				</tr>
+			</table>
+
+
+		</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 	<!--가상 키보드 부분  -->

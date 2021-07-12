@@ -31,6 +31,7 @@
 <body>
 	<jsp:include page="../main/header.jsp"></jsp:include>
 	<div id="wrapper">
+	
 		<jsp:include page="../sub/pop.jsp"></jsp:include>
 		<!-- 위젯 부분   -->
 		<div id="container">

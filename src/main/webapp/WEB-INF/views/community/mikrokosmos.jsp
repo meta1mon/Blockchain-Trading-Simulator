@@ -318,7 +318,7 @@ function replyDelete1(deleteRno, deleteCno, deleteRwriter) {
 							modalReplyFn('modal_reply');
 							var json = JSON.parse(data);
 							if (json.length > 0) {
-								replyHtml += "<input id=\"moreModalInCno\" type=\"hidden\" value=\"" + deleteCno +"\">";
+								replyHtml += "<input id=\"modalInCno\" type=\"hidden\" value=\"" + deleteCno +"\">";
 								$.each(json, function(idx, reply) {
 									replyHtml += "<li><div class=\"profile-wrap\">"
 										+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
@@ -413,7 +413,7 @@ function replyDelete2(deleteRno, deleteCno, deleteRwriter) {
 						}
 					});
 					
-					// 화면에 댓글 숫자 변경
+					// 댓글 수 실시간 반영
 					$.ajax({
 						url : "replyCount",
 						type : "post",

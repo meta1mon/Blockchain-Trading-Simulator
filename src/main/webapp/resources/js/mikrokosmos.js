@@ -295,14 +295,15 @@ function replyInsert3(thisObject, outModalCno) {
 	
 }
 
-// 모달 안의 댓글 삽입. 원래 인스타와 moreInsta 공용
+// 모달 안의 댓글 삽입. 원래와 추가 인스타 공통
 function replyInsert2() {
 	var rcontent = $("#replyContent2").val();
 	var cno = "";
+	var flag = 0;
 	if($("#modalInCno").val() == undefined) {     // moreInsta에서 들어옴
 		console.log("moreInsta에서 들어옴");
 		cno = $("#moreModalInCno").val();
-		
+		flag = 1;
 	} else {                                      // 그냥 Insta에서 들어옴
 		console.log("그냥 Insta에서 들어옴");
 		cno = $("#modalInCno").val();
@@ -321,6 +322,7 @@ function replyInsert2() {
 				bgReply.remove();
 				alert("댓글 작성 완료");
 				var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\">";
+				
 				// 댓글 리스트 읽어오는 ajax
 				$.ajax({
 					url : "rcSelect",
@@ -332,24 +334,85 @@ function replyInsert2() {
 					success : function(data) {
 						modalReplyFn('modal_reply');
 						var json = JSON.parse(data);
-						if (json.length > 0) {
-							$.each(json, function(idx, reply) {
-												replyHtml += "<input id=\"moreModalInCno\" type=\"hidden\" value=\"" + cno +"\">" + "<li><div class=\"profile-wrap\">"
-														+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
-														+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
-														+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
-														+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
-														+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
-														+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p></div></li>";
-											});
-							replyHtml += "</ul>";
-						} else {
-							replyHtml = "<p>작성된 댓글이 없습니다.</p>";
+						if(flag == 0) {		// 그냥 인스타에서 들어옴
+							replyHtml +="<input id=\"modalInCno\" type=\"hidden\" value=\"" + cno +"\">";
+							if (json.length > 0) {
+								$.each(json, function(idx, reply) {
+													replyHtml += "<li><div class=\"profile-wrap\">"
+															+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
+															+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
+															+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
+															+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
+															+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
+															+ "<p class=\"deleteReply\" onclick=\"replyDelete1('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p></div></li>";
+												});
+								replyHtml += "</ul>";
+							} else {
+								replyHtml = "<input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\"><p>작성된 댓글이 없습니다.</p>";
+							}
+						} else if (flag == 1) {  // moreInsta에서 들어옴
+							replyHtml += "<input id=\"moreModalInCno\" type=\"hidden\" value=\"" + cno +"\">";
+							if (json.length > 0) {
+								$.each(json, function(idx, reply) {
+									replyHtml += "<li><div class=\"profile-wrap\">"
+											+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
+											+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
+											+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
+											+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
+											+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
+											+ "<p class=\"deleteReply\" onclick=\"replyDelete2('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
+											+ "</div></li>";
+												});
+								replyHtml += "</ul>";
+							} else {
+								replyHtml = "<input id=\"moreModalInCno\" type=\"hidden\" value=\"" + moreInstaCno +"\"><p>작성된 댓글이 없습니다.</p>";
+							}
 						}
 						$("#replyList").html(replyHtml);
 						$("#replyContent2").val("");
 					}
 				});
+				
+				// 화면에 댓글 숫자 변경
+				if(flag ==0) {
+					$.ajax({
+						url : "replyCount",
+						type : "post",
+						data : {
+							"cno" : cno
+						},
+						success : function(data) {
+							var i = 0;
+							while(true) {
+								if($(".hiddenCno").eq(i).val() == cno) {
+										$(".liveReplyCnt").eq(i).text(data);
+									break;
+								}
+								i++;
+							}
+						}
+					});
+				} else if (flag ==1) {
+					$.ajax({
+						url : "replyCount",
+						type : "post",
+						data : {
+							"cno" : cno
+						},
+						success : function(data) {
+							console.log(data + "다녀온 결과값, 현재 댓글 개수");
+							var i = 0;
+							while(true) {
+								console.log($(".hiddenCno").eq(i).val() + "바깥에 있는 게시글 번호");
+								if($(".hiddenCno").eq(i).val() == cno) {
+									$(".moreReplycnt ").eq(i - 10).text(data);
+									break;
+								}
+								i++;	
+							}
+						}
+					});
+				}
 			}
 		});
 	}

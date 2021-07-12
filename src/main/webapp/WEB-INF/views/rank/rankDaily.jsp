@@ -219,7 +219,7 @@
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="3" >.<br>.<br>.<br>[내 수익률]<br>.<br>.<br>.<br></td>
+					<td colspan="3" >&#8942;<br>[나의 순위]
 				</tr>
 				<c:if test="${loginMember == null }">
 					<tr>

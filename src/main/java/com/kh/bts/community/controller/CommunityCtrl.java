@@ -57,7 +57,6 @@ public class CommunityCtrl {
 		mav.addObject("nowPage", paging);
 		if(!keyword.equals("")) {
 			mav.addObject("isSearched", "y");
-			System.out.println("1231231231231231231231232");
 		}
 
 		List<Accumulative> list1 = rankService.selectAccumulative();

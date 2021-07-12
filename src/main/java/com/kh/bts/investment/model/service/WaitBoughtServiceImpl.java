@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.bts.investment.model.dao.WaitBoughtDao;
 import com.kh.bts.investment.model.vo.WaitBought;
@@ -13,43 +14,30 @@ public class WaitBoughtServiceImpl implements WaitBoughtService {
 	@Autowired
 	private WaitBoughtDao wbDao;
 
-
-
+	@Transactional
 	@Override
 	public int insertWaitBought(WaitBought vo) {
-		// TODO Auto-generated method stub
 		return wbDao.insertWaitBought(vo);
 	}
 
-
-
+	@Transactional
 	@Override
 	public int deleteWaitBought(int ubno) {
-		// TODO Auto-generated method stub
 		return wbDao.deleteWaitBought(ubno);
 	}
 
-
-
 	@Override
 	public List<WaitBought> selectListWaitBought(String acntno) {
-		// TODO Auto-generated method stub
 		return wbDao.selectList(acntno);
 	}
 
-
-
 	@Override
 	public List<WaitBought> selectAllCoinListWaitBought() {
-		// TODO Auto-generated method stub
 		return wbDao.selectAllCoinListWaitBought();
 	}
 
-
-
 	@Override
 	public List<WaitBought> selectAllListWaitBought() {
-		// TODO Auto-generated method stub
 		return wbDao.selectAllListWaitBought();
 	}
 

@@ -10,16 +10,27 @@ import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.vo.MyRcommunity;
 
 public interface MypageService {
-	public Member myInfo(String email);
-	public int myInfoUpdate(Member vo);
-	public int passwordUpdate(Member vo);
-	public int bankPwUpdate(Acnt vo);
-	public List<Community> myCommunity(String email);
-	public int myDelete(String email);
-	public Acnt myAcnt(String email);
-	public List<MyRcommunity> selectMyRcommunity(String email);
-	public int myTotalCoin(Acnt vo);
-	public int coinListCount(Acnt vo);
-	public List<CoinAcnt> selectMyCoinAcnt(String acntno);
-	public List<CashLog> selectMyCashLog(String email);
+	Member myInfo(String email);
+
+	int myInfoUpdate(Member vo);
+
+	int passwordUpdate(Member vo);
+
+	int bankPwUpdate(Acnt vo);
+
+	List<Community> myCommunity(String email);
+
+	int myDelete(String email);
+
+	Acnt myAcnt(String email);
+
+	List<MyRcommunity> selectMyRcommunity(String email);
+
+	int myTotalCoin(Acnt vo);
+
+	int coinListCount(Acnt vo);
+
+	List<CoinAcnt> selectMyCoinAcnt(String acntno);
+
+	List<CashLog> selectMyCashLog(String email);
 }

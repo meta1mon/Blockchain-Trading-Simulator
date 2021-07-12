@@ -12,5 +12,5 @@ public interface BoughtService {
 
 	List<Bought> selectListBought(String acntno);
 
-	public String cntBought(String acntno) throws Exception;
+	String cntBought(String acntno) throws Exception;
 }

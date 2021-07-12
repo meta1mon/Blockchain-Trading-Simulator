@@ -5,7 +5,7 @@
 	</resultMap>
 
 
-	<!-- 메인게시글 전부 다 불러오기 -->
+	<!-- 메인에 사용할 인기 게시글 4개 불러오기 -->
 	<select id="selectMainCommunityList"
 		resultType="arraylist" resultMap="resultCommunity">
 		select * from

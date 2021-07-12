@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.bts.acnt.model.dao.CoinAcntDao;
 import com.kh.bts.acnt.model.vo.CoinAcnt;
@@ -15,31 +16,29 @@ public class CoinAcntServiceImpl implements CoinAcntService{
 
 	@Override
 	public List<CoinAcnt> allselectList(String acntno) {
-		// TODO Auto-generated method stub
 		return coinacntDao.allselectList(acntno);
 	}
 
+	@Transactional
 	@Override
 	public int insertCoinAcnt(CoinAcnt vo) {
-		// TODO Auto-generated method stub
 		return coinacntDao.insertCoinAcnt(vo);
 	}
 
+	@Transactional
 	@Override
 	public int deleteCoinAcnt(int cano) {
-		// TODO Auto-generated method stub
 		return coinacntDao.deleteWaitBought(cano);
 	}
 
 	@Override
 	public CoinAcnt countcoin(CoinAcnt vo) {
-		// TODO Auto-generated method stub
 		return coinacntDao.countcoin(vo);
 	}
 
+	@Transactional
 	@Override
 	public int updateCoinAcnt(CoinAcnt vo) throws Exception {
-		// TODO Auto-generated method stub
 		return coinacntDao.updateMyCoinAcnt(vo);
 	}
 	

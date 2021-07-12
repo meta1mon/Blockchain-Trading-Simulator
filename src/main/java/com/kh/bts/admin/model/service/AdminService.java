@@ -11,42 +11,63 @@ import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
 public interface AdminService {
-	// 게시판 관리
-	public int insertCreport(Creport vo);
-	public int insertAcreportDeny(Acreport vo);
-	public int insertAcreportAccept(Acreport vo);
-	public int insertRreport(Rreport vo);
-	public int insertArreportDeny(Arreport vo);
-	public int insertArreportAccept(Arreport vo);
-	public int countArreport();
-	public List<Creport> selectCreport(int startPage, int limit);
-	public List<Acreport> selectAcreport(int startPage, int limit);
-	public List<Arreport> selectArreport(int startPage, int limit);
-	public int countRreport();
-	public List<Rreport> selectRreport(int startPage, int limit);
-	public int deleteCreport(String crno);
-	public int deleteRreport(String rrno);
-	public List<Acreport> searchAcreport(int startPage, int limit, String keyword, int searchType);
-	public List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType);
-	// 충전 상품 관리
-	public int registerCash(Cash vo);
-	public int updateCash(Cash vo);
-	public int deleteCash(Cash vo);
-	// 충전 내역 관리
-	public int countCashLog();
-	public List<CashLog> selectCashLog(int startPage, int limit);
-	public List<CashLog> searchCashLog(int startPage, int limit, String keyword);
-	// 회원 관리
-	public List<Member> adminSearchMember(int startPage, int limit, String keyword, int searchType);
-	public List<Member> adminListMember(int startPage, int limit);
-	public List<Member> selectWeeklyRank();
-	public List<Member> selectMonthlyRank();
-	public String sendWeeklyRankReward(String[] email) throws Exception;
-	public String sendMonthlyRankReward(String[] email) throws Exception;
-	// 헤더
-	public long totalCybcash();
-	public long countTodayWon();
-	// 메인
-	public int countCreport();
-	public int countAcreport();
+
+
+
+	int insertCreport(Creport vo);
+
+	int insertAcreportDeny(Acreport vo);
+
+	int insertAcreportAccept(Acreport vo);
+
+	int insertRreport(Rreport vo);
+
+	int insertArreportDeny(Arreport vo);
+
+	int insertArreportAccept(Arreport vo);
+
+	int registerCash(Cash vo);
+
+	int updateCash(Cash vo);
+
+	int deleteCash(Cash vo);
+
+	int countCashLog();
+
+	List<CashLog> selectCashLog(int startPage, int limit);
+
+	List<CashLog> searchCashLog(int startPage, int limit, String keyword);
+
+	List<Member> adminSearchMember(int startPage, int limit, String keyword, int searchType);
+
+	List<Member> adminListMember(int startPage, int limit);
+
+	long totalCybcash();
+
+	long countTodayWon();
+
+	int countCreport();
+
+	List<Creport> selectCreport(int startPage, int limit);
+
+	int countAcreport();
+
+	int countArreport();
+
+	List<Acreport> selectAcreport(int startPage, int limit);
+
+	List<Arreport> selectArreport(int startPage, int limit);
+
+	int countRreport();
+
+	List<Rreport> selectRreport(int startPage, int limit);
+
+	int deleteCreport(String crno);
+
+	int deleteRreport(String rrno);
+
+	List<Acreport> searchAcreport(int startPage, int limit, String keyword, int searchType);
+
+	List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType);
+
 }

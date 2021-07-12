@@ -1,5 +1,8 @@
 package com.kh.bts.investment.model.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class WaitSold {
 	private int usno;
 	private String coin;

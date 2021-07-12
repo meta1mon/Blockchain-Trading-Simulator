@@ -7,7 +7,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AboutUsCtrl {
 	
-	
 	@RequestMapping("aboutus")
 	public ModelAndView aboutUs(ModelAndView mav) {
 		mav.setViewName("aboutus/aboutus");

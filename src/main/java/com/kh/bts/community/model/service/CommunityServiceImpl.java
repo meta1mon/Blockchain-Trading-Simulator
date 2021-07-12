@@ -81,6 +81,7 @@ public class CommunityServiceImpl implements CommunityService {
 		return cmDao.selectNoticeList(startPage, limit);
 	}
 	
+	@Override
 	public String returnEmail(String nickName) {
 		return cmDao.returnEmail(nickName);
 	}

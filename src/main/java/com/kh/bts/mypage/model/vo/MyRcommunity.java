@@ -1,5 +1,8 @@
 package com.kh.bts.mypage.model.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MyRcommunity {
 	private String cno;
 	private String csubject;

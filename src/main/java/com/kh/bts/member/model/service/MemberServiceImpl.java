@@ -54,7 +54,10 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
+
 	// 임시 비밀번호 생성
+
+	@Transactional
 	@Override
 	public void createTempPassword(String email, String pw) throws Exception {
 		mDao.createTempPassword(email, pw);
@@ -121,14 +124,21 @@ public class MemberServiceImpl implements MemberService {
 	public void createAuthkey(String email, String authkey) throws Exception {
 		mDao.createAuthkey(email, authkey);
 	}
+
 	
 	// 회원 정보 수정
+
+
+	@Transactional
 	@Override
 	public int updateMember(Member vo) {
 		return mDao.updateMember(vo);
 	}
 
+
 	// 회원 탈퇴
+
+	@Transactional
 	@Override
 	public int deleteMember(String email) {
 		return mDao.deleteMember(email);

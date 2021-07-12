@@ -158,7 +158,7 @@ $(function() {
 												$("#price_s").val("");
 												$("#cnt_b").val("");
 												$("#cnt_s").val("");
-
+												$("#totalprice").val("");
 											},
 											error : function(request, status,
 													errorData) {
@@ -210,6 +210,7 @@ $(function() {
 												$("#price_s").val("");
 												$("#cnt_b").val("");
 												$("#cnt_s").val("");
+												$("#totalprice").val("");
 
 											},
 											error : function(request, status,
@@ -289,23 +290,23 @@ function qwer(bnum) {
 
 }
 function click1() {
-	bnum = 1;
-}
-function click2() {
 	bnum = 2;
 }
-function click3() {
-	bnum = 3;
+function click2() {
+	bnum = 1;
 }
-function click4() {
+function click3() {
 	bnum = 4;
 }
+function click4() {
+	bnum = 3;
+}
 function click5() {
-	bnum = 5;
+	bnum = 6;
 }
 function click6() {
 	
-	bnum = 6;
+	bnum = 5;
 }
 ////////////////// 전체 코인 시세 표 /////////////
 function alltable() { 
@@ -357,15 +358,15 @@ function alltable() {
 									+ display[i][2] + "</td></tr>";
 
 						}
-						title += "<td style='text-align : center; vertical-align: middle;'><h1>"
+						title += "<td style='text-align : center; vertical-align: middle; width : 255px;'><h1>"
 								+ ch_title
-								+ "</h1></td><td style='text-align : center;'><h2>현재가</h2><a class='t_cha'style='text-align : center;'>"
+								+ "</h1></td><td style='text-align : center;  width : 167px;'><h2>현재가</h2><a class='t_cha'style='text-align : center;'>"
 								+ titdisplay[0][0]
-								+ "</a></td><td style='text-align : center;'><h2>전일대비</h2><a class='t_cha'style='text-align : center;'>"
+								+ "</a></td><td style='text-align : center; width : 208px;'><h2>전일대비</h2><a class='t_cha'style='text-align : center;'>"
 								+ titdisplay[0][1]
-								+ "%</a></td><td style='text-align : center;'><h2>저가</h2><a class='t_ch' style='color : blue;text-align : center;'>"
+								+ "%</a></td><td style='text-align : center; width : 150px;'><h2>저가</h2><a class='t_ch' style='color : blue;text-align : center;'>"
 								+ titdisplay[0][3]
-								+ "</a></td><td style='text-align : center;'><h2>고가</h2><a class='t_ch' style='color : red;text-align : center;'>"
+								+ "</a></td><td style='text-align : center; width : 167px;'><h2>고가</h2><a class='t_ch' style='color : red;text-align : center;'>"
 								+ titdisplay[0][4] + "</a></td></tr>"
 
 						html += "</table>"
@@ -412,15 +413,15 @@ function alltable() {
 						title = "<table class='table table-striped' id='tit'><tr>";
 
 						html = "<table style='height : 146px; table-layout : fixed;' class='table table-striped' ><tr><td width= '78.08px !important'>코인명</td><td width= '91.36px !important'>현재가</td><td width= '78.77px !important'>등락률(24H)</td><td width= '164.31px !important'>거래대금</td></tr>";
-						title += "<td style='text-align : center; vertical-align: middle;'><h1>"
+						title += "<td style='text-align : center; vertical-align: middle; width : 255px;'><h1>"
 							+ ch_title
-							+ "</h1></td><td style='text-align : center;'><h2>현재가</h2><a class='t_cha'style='text-align : center;'>"
+							+ "</h1></td><td style='text-align : center; width : 167px;'><h2>현재가</h2><a class='t_cha'style='text-align : center;'>"
 							+ titdisplay[0][0]
-							+ "</a></td><td style='text-align : center;'><h2>전일대비</h2><a class='t_cha'style='text-align : center;'>"
+							+ "</a></td><td style='text-align : center; width : 208px;'><h2>전일대비</h2><a class='t_cha'style='text-align : center;'>"
 							+ titdisplay[0][1]
-							+ "%</a></td><td style='text-align : center;'><h2>저가</h2><a class='t_ch' style='color : blue;text-align : center;'>"
+							+ "%</a></td><td style='text-align : center; width : 150px;'><h2>저가</h2><a class='t_ch' style='color : blue;text-align : center;'>"
 							+ titdisplay[0][3]
-							+ "</a></td><td style='text-align : center;'><h2>고가</h2><a class='t_ch' style='color : red;text-align : center;'>"
+							+ "</a></td><td style='text-align : center; width : 167px;'><h2>고가</h2><a class='t_ch' style='color : red;text-align : center;'>"
 							+ titdisplay[0][4] + "</a></td></tr>"
 
 				

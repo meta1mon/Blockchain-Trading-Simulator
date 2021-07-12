@@ -48,7 +48,7 @@ var onoff = function(){
 	 var opt = $("#searchType option:selected");
 	 console.log("이벤트 동작")
 	 console.log(opt.val());
-	 if(opt.val() == '4'){
+	 if(opt.val() == '1'){
 		 $("#search").css("display", "none");
 		 $("#btnsearch").css("display", "none");
 		 $("#rstatusSelect").css("display", "inline-block");
@@ -74,15 +74,15 @@ var onoff = function(){
 	<div id="frmSearch">
 			<form action="arr" method="get">
 				<select id="searchType" name="searchType">
-					<option value="2" selected>피신고자</option>
+					<option value="1" selected>처리 상태</option>
+					<option value="2">피신고자</option>
 					<option value="3">신고자</option>
-					<option value="4">처리 상태</option>
 				</select> <input type="search" name="keyword" id="search" placeholder="검색어를 입력해주세요.">
 				<button type="submit" id="btnsearch" class="inbl">검색</button>
 			</form>
 			<form action="arr" method="get">
-				<select id="rstatusSelect" name="rstatus">
-					<option value="accept">수리</option>
+				<select id="rstatusSelect" name="keyword">
+					<option value="accept" selected>수리</option>
 					<option value="deny">반려</option>
 				</select>
 				<button type="submit" id="btnsearch2" class="inbl">검색</button>
@@ -159,7 +159,7 @@ var onoff = function(){
 								<c:url var="rrlistST" value="arr">
 									<c:param name="page" value="${currentPage-1}"/>
 								</c:url>
-								<a href="${rrlistST}"><i class="fas fa-angle-double-left"></i></a>
+								<a href="${rrlistST}&searchType=${searchType}&keyword=${keyword}"><i class="fas fa-angle-double-left"></i></a>
 							</c:if>
 							<!-- 끝 페이지 번호 처리 -->
 							<c:set var="endPage" value="${maxPage}" />
@@ -173,7 +173,7 @@ var onoff = function(){
 									<c:url var="rrlistchk" value="arr">
 										<c:param name="page" value="${p}" />
 									</c:url>
-									<a href="${crlistchk}">${p}</a>
+									<a href="${crlistchk}&searchType=${searchType}&keyword=${keyword}">${p}</a>
 								</c:if>
 							</c:forEach>
 							<c:if test="${currentPage >= maxPage}">
@@ -183,7 +183,7 @@ var onoff = function(){
 								<c:url var="rrlistEND" value="arr">
 									<c:param name="page" value="${currentPage+1}" />
 								</c:url>
-								<a href="${rrlistEND}"><i class="fas fa-angle-double-right"></i></a>
+								<a href="${rrlistEND}&searchType=${searchType}&keyword=${keyword}"><i class="fas fa-angle-double-right"></i></a>
 							</c:if>
 						</div>
 					</td>

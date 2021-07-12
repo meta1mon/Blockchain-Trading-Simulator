@@ -186,6 +186,9 @@ public class AdminDao {
 		RowBounds row = new RowBounds(startRow, limit);
 		if (keyword != null) {
 			switch (searchType) {
+			case 1:
+				list = sqlSession.selectList("report.searchCstatus", keyword, row);
+				break;
 			case 2:
 				list = sqlSession.selectList("report.searchCrespondent", keyword, row);
 				break;
@@ -196,19 +199,15 @@ public class AdminDao {
 		}
 		return list;
 	}
-	public List<Acreport> searchAcreportByCstatus(int startPage, int limit, String cstatus, int searchType) {
-		List<Acreport> list = new ArrayList<Acreport>();
-		int startRow = (startPage - 1) * limit; 
-		RowBounds row = new RowBounds(startRow, limit);
-		list = sqlSession.selectList("report.searchCstatus", cstatus, row);
-		return list;
-	}
 	public List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType) {
 		List<Arreport> list = new ArrayList<Arreport>();
 		int startRow = (startPage - 1) * limit; 
 		RowBounds row = new RowBounds(startRow, limit);
 		if (keyword != null) {
 			switch (searchType) {
+			case 1:
+				list = sqlSession.selectList("report.searchRstatus", keyword, row);
+				break;
 			case 2:
 				list = sqlSession.selectList("report.searchRrespondent", keyword, row);
 				break;
@@ -216,13 +215,6 @@ public class AdminDao {
 				list = sqlSession.selectList("report.searchRreporter", keyword, row);
 			}
 		}
-		return list;
-	}
-	public List<Arreport> searchArreportByRstatus(int startPage, int limit, String rstatus, int searchType) {
-		List<Arreport> list = new ArrayList<Arreport>();
-		int startRow = (startPage - 1) * limit; 
-		RowBounds row = new RowBounds(startRow, limit);
-		list = sqlSession.selectList("report.searchRstatus", rstatus, row);
 		return list;
 	}
 	

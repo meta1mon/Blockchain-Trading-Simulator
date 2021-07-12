@@ -52,7 +52,7 @@
 								<tr>
 									<td align="left">
 										<input type="hidden" value="${fn:escapeXml(vo.ccontent)}" class="ccontentHidden"/>
-										<a href="${pageContext.request.contextPath}/cDetail?cno=${vo.cno}" class="subject">
+										<a href="${pageContext.request.contextPath}/mypage/myinsta?cno=${vo.cno}" class="subject">
 											<span class="ccontentSpan"></span>
 										</a> 
 									</td>
@@ -66,7 +66,7 @@
 								<tr class="myCommunityList" style="display: none;">
 									<td align="left">
 										<input type="hidden" value="${fn:escapeXml(vo.ccontent)}" class="ccontentHidden"/>
-										<a href="${pageContext.request.contextPath}/cDetail?cno=${vo.cno}" class="subject">
+										<a href="${pageContext.request.contextPath}/mypage/myinsta?cno=${vo.cno}" class="subject">
 											<span class="ccontentSpan"></span>
 										</a> 
 									</td>
@@ -105,7 +105,7 @@
 							<tr>
 								<td align="left">
 									<input type="hidden" value="${fn:escapeXml(vo.rcontent)}" class="rcontentHidden"/>
-									<a href="${pageContext.request.contextPath}/cDetail?cno=${vo.cno}" class="subject">
+									<a href="${pageContext.request.contextPath}/mypage/myinsta?cno=${vo.cno}" class="subject">
 										<span class="rcontentSpan"></span>
 									</a> 
 								</td>
@@ -117,7 +117,7 @@
 							<tr class="myReplyCommunityList" style="display: none;">
 								<td align="left">
 									<input type="hidden" value="${fn:escapeXml(vo.rcontent)}" class="rcontentHidden"/>
-									<a href="${pageContext.request.contextPath}/cDetail?cno=${vo.cno}" class="subject">
+									<a href="${pageContext.request.contextPath}/mypage/myinsta?cno=${vo.cno}" class="subject">
 										<span class="rcontentSpan"></span>
 									</a> 
 								</td>

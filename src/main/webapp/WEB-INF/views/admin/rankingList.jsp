@@ -41,7 +41,7 @@
 	        if (seconds < 10){
 	            seconds = "0" + seconds;
 	        }
-		document.getElementById("listForm").innerHTML = year+"년 " + month + "월 "+ day +"일 "+ ampm + hours + ":" + minutes + ":" + seconds +" 기준";
+		document.getElementById("timestamp").innerHTML = "🕘" + year+"년 " + month + "월 "+ day +"일 "+ ampm + hours + ":" + minutes + ":" + seconds +" 기준";
 	    }
 	 	setInterval("dpTime()",1000);
 	</script>
@@ -50,12 +50,13 @@
 <body>
 <div id="wrapper">
 	<div id="mmm">
-<form action="weeklyrewarding">
-	<p class="title inbl">월간 랭킹</p><button type="submit" class="btnPurple inbl">보상 메일 발송</button>
-
-	<p id="listForm" class="inbl">&nbsp;<p>
+<div style="width: 100%; height: 20px; text-align: center;"><p id="timestamp" class="inbl">&nbsp;<p></div>
+<div style="height: 10px">
+</div>
+<form action="monthlyrewarding">
+	<p class="title inbl">월간 랭킹</p><button style="float:right;  height: 25px; display: inline-block" type="submit" class="btnPurple inbl">보상 메일 발송</button>
 	<hr>
-<table>
+<table class="ranklist">
 	<tr>
 	<td>이메일</td>
 	<td>닉네임</td>
@@ -65,7 +66,15 @@
 	<tr>
 	<td class="email"><input type="hidden" name="email" value="${monthly.email }">${monthly.email }</td>
 	<td>${monthly.nickname }</td>
-	<td>${monthly.yield}</td>
+	<td><c:if test="${monthly.yield>0 }">
+		<span style="color: red">&#9650; </span><fmt:formatNumber value="${monthly.yield }" pattern="##,###.######" /> %
+		</c:if>
+		<c:if test="${monthly.yield==0 }">
+			<fmt:formatNumber value="${monthly.yield }" pattern="##,###.######" /> %
+		</c:if>
+		<c:if test="${monthly.yield <0 }">
+		<span style="color: blue">&#9660; </span><fmt:formatNumber value="${monthly.yield }" pattern="##,###.######" /> %
+		</c:if></td>
 	
 	</tr>
 	</c:forEach>
@@ -73,10 +82,10 @@
 <div style="height: 100px">
 </div>
 </form>
-<form action="monthlyrewarding">
-	<p class="title inbl">주간 랭킹</p><button type="submit" class="btnPurple inbl">보상 메일 발송</button>
+<form action="weeklyrewarding">
+	<p class="title inbl">주간 랭킹</p><button  style="float:right;  height: 25px; display: inline-block" type="submit" class="btnPurple inbl">보상 메일 발송</button>
 	<hr>
-	<table>
+	<table class="ranklist">
 		<tr>
 		<td>이메일</td>
 		<td>닉네임</td>
@@ -86,7 +95,17 @@
 		<tr>
 		<td class="email"><input type="hidden" name="email" value="${weekly.email }">${weekly.email }</td>
 		<td>${weekly.nickname }</td>
-		<td>${weekly.yield }</td>
+		<td>
+		<c:if test="${weekly.yield>0 }">
+		<span style="color: red">&#9650; </span><fmt:formatNumber value="${weekly.yield }" pattern="##,###.######" /> % 
+		</c:if>
+		<c:if test="${weekly.yield==0 }">
+		<fmt:formatNumber value="${weekly.yield }" pattern="##,###.######" /> %
+		</c:if>
+		<c:if test="${weekly.yield <0 }">
+		<span style="color: blue">&#9660; </span><fmt:formatNumber value="${weekly.yield }" pattern="##,###.######" /> %
+		</c:if>
+		 </td>
 		</tr>
 		</c:forEach>
 	</table>

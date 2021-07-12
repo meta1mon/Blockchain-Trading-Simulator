@@ -457,6 +457,9 @@ public class AdminCtrl {
 			@RequestParam(name = "searchType", defaultValue = "1") int searchType, ModelAndView mv,
 			HttpSession session) {
 		String nowEmail = (String) session.getAttribute("loginMember");
+		System.out.println("*********************************************************");
+		System.out.println(nowEmail);
+		System.out.println("*********************************************************");
 		if (!nowEmail.equals("admin")) {
 			mv.setViewName("errorPage");
 		} else {

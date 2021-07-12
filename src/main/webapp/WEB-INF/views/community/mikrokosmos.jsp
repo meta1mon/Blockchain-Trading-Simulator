@@ -710,8 +710,6 @@ function replyDelete(deleteRno, deleteCno, deleteRwriter) {
 		</main>
 		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
-
-
-	<script src="resources/js/mikrokosmos.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/mikrokosmos.js"></script>
 </body>
 </html>

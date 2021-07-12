@@ -203,7 +203,7 @@
 					<th>닉네임</th>
 					<th>수익률</th>
 				</tr>
-				<c:forEach items="${other }" var="rank" begin="3" end="100"
+				<c:forEach items="${other }" var="rank" begin="3" end="9"
 					varStatus="status">
 					<tr>
 						<td>${status.index +1 }위</td>
@@ -219,7 +219,7 @@
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="3" >.<br>.<br>.<br>[내 수익률]<br>.<br>.<br>.<br></td>
+					<td colspan="3" >&#8942;<br>[나의 순위]
 				</tr>
 				<c:if test="${loginMember == null }">
 					<tr>

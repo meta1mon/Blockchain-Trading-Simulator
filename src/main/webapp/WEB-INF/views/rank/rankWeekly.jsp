@@ -107,7 +107,7 @@
 					<th>닉네임</th>
 					<th>수익률</th>
 				</tr>
-				<c:forEach items="${other }" var="rank" begin="3" end="100"
+				<c:forEach items="${other }" var="rank" begin="3" end="9"
 					varStatus="status">
 					<tr>
 						<td>${status.index +1 }위</td>

@@ -3,10 +3,9 @@
 #mmm th, td {
 	padding: 5px !important;
 }
-#mmm table{
-	table-layout: fixed;
+#mmm .ranklikst{
+	table-layout: fixed;	
 }
-
 #mmm td:not(.center, .right){
 	text-align: left;
 }

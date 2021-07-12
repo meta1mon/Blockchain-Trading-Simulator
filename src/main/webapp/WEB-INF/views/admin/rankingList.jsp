@@ -56,7 +56,7 @@
 <form action="monthlyrewarding">
 	<p class="title inbl">월간 랭킹</p><button style="float:right;  height: 25px; display: inline-block" type="submit" class="btnPurple inbl">보상 메일 발송</button>
 	<hr>
-<table>
+<table class="ranklist">
 	<tr>
 	<td>이메일</td>
 	<td>닉네임</td>
@@ -85,7 +85,7 @@
 <form action="weeklyrewarding">
 	<p class="title inbl">주간 랭킹</p><button  style="float:right;  height: 25px; display: inline-block" type="submit" class="btnPurple inbl">보상 메일 발송</button>
 	<hr>
-	<table>
+	<table class="ranklist">
 		<tr>
 		<td>이메일</td>
 		<td>닉네임</td>

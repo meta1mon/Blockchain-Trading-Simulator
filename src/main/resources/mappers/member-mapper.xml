@@ -106,5 +106,19 @@
 		resultType="string">
 		SELECT email FROM MEMBER WHERE NICKNAME = #{nickname}
 	</select>
+	
+	<!-- 인증 여부만 조회 -->
+	<select id="returnAuth" parameterType="string"
+		resultType="string">
+		SELECT AUTH FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+	
+	<!-- 랭킹 TOP3 조회 -->
+	<select id="selectWeeklyTop3" resultType="arrayList" resultMap="Member">
+	SELECT MEMBER.EMAIL, MEMBER.NICKNAME, YIELD FROM MEMBER JOIN WEEKLY ON MEMBER.EMAIL = WEEKLY.EMAIL WHERE ROWNUM &lt; 4 ORDER BY YIELD DESC
+	</select>
+	<select id="selectMonthlyTop3" resultType="arrayList" resultMap="Member">
+	SELECT MEMBER.EMAIL, MEMBER.NICKNAME, YIELD FROM MEMBER JOIN MONTHLY ON MEMBER.EMAIL = MONTHLY.EMAIL WHERE ROWNUM &lt; 4 ORDER BY YIELD DESC
+	</select>
 
 </mapper>

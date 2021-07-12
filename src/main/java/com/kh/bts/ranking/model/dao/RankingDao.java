@@ -47,10 +47,10 @@ public class RankingDao {
 		// 코인 평가금과 보유 현금액을 업데이트
 		String nickname = sqlSession.selectOne("Member.returnNickname", vo.getEmail());
 		vo.setNickname(nickname);
-		if (criteria == 0) { // 누적 랭킹, 수익률 판단 기준은 천만원!
+		if (criteria == 0) { // 누적 랭킹, 수익률 판단 기준은 오백만원!
 			// 현질 반영
 			vo.setNewesset(vo.getNewesset() + vo2.getCybcash());
-			vo.setOldesset(10000000);
+			vo.setOldesset(5000000);
 			result = sqlSession.update("ranking.updateAccumulative", vo);
 		} else {
 			long oldesset = sqlSession.selectOne("ranking.selectOldEsset", vo.getAcntno());
@@ -90,10 +90,10 @@ public class RankingDao {
 			Daily vo2 = new Daily();
 			vo2.setAcntno(vo.getAcntno());
 			
-			if (criteria == 0) { // 누적 랭킹, 수익률 판단 기준은 천만원!
+			if (criteria == 0) { // 누적 랭킹, 수익률 판단 기준은 오백만원!
 				// 현질 금액 반영
 				vo2.setNewesset(cybcash);
-				vo2.setOldesset(10000000);
+				vo2.setOldesset(5000000);
 				result = sqlSession.update("ranking.updateAccumulative", vo2);
 				
 			} else {

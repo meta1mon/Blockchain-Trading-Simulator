@@ -120,11 +120,13 @@ $(function(){
 							<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
 							<c:if test="${loginMember == writerEmail }">
 								<form action="cDelete" method="post">
-									<input type="hidden" name="cno" value="${cdelete }">
+									<input type="hidden" name="cno" value="${community.cno }">
 									<button type="submit" class="delete">삭제</button>
 								</form>
-								<button type="button" class="update"
-									onclick="location.href='${cupdate}'">수정</button>
+								<form action=cUpdateForm method="post">
+									<input type="hidden" name="cno" value="${community.cno }">
+									<button type="submit" class="update">수정</button>
+								</form>
 							</c:if>
 
 						</div></td>
@@ -228,7 +230,8 @@ $(function(){
 					style="width: 328px; position: relative; right: 30px; top: 20px;">
 				<div>
 					<button type="button" id="btncancel" class="modal_close_btn">취소</button>
-					<button type="button" id="btnrply" style="cursor: pointer;" class="modal_report_btn">신고</button>
+					<button type="button" id="btnrply" style="cursor: pointer;"
+						class="modal_report_btn">신고</button>
 				</div>
 			</div>
 		</div>

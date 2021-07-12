@@ -33,6 +33,11 @@ public class CommunityDao {
 		List<Community> mlist = sqlSession.selectList("community.selectMainCommunityList");
 		return mlist;
 	}
+	
+	public int countReply(String cno) {
+		int result = sqlSession.selectOne(cno);
+		return result;
+	}
 
 	public List<Community> selectList(int startPage, int limit) { // 페이지당 게시글 조회
 		int startRow = (startPage - 1) * limit;

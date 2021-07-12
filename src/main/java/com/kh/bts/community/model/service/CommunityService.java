@@ -33,4 +33,6 @@ public interface CommunityService {
 	List<Community> selectNoticeSearch(int startPage, int limit, String keyword, int searchType);
 
 	String returnEmail(String nickName);
+
+	int countReply(String cno);
 }

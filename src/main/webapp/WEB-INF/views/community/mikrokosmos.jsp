@@ -369,7 +369,30 @@ $(function(){
 								<img class="reply" onclick="reply(${status.index})"
 									id="reply_popup_open"
 									src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png"
-									alt="댓글">${vo.replycnt }
+									alt="댓글"><span class="liveReplyCnt">${vo.replycnt }</span>
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
 							</div>
 						</div>
 						<!-- 추천 수 -->

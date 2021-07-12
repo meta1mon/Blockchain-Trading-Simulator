@@ -1,5 +1,8 @@
 package com.kh.bts.member.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -9,7 +12,7 @@ import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.ranking.model.vo.Daily;
 
 @Repository("mDao")
-public class MemberDAO {
+public class MemberDao {
 	@Autowired
 	SqlSession sqlSession;
 
@@ -61,6 +64,9 @@ public class MemberDAO {
 	public String returnNickname(String email) {
 		return sqlSession.selectOne("Member.returnNickname", email);
 	}
+	public String returnAuth(String email) {
+		return sqlSession.selectOne("Member.returnAuth", email);
+	}
 
 	// 계좌번호 중복 체크
 	public int checkAcntno(String acntno) {
@@ -83,6 +89,11 @@ public class MemberDAO {
 		sqlSession.selectOne("Member.createAuthKey", vo);
 	}
 
+	// 이메일 인증 링크 클릭시, 멤버 Auth를 Y로 변경
+	public void authMember(Member vo) {
+		sqlSession.update("Member.authMember", vo);
+	}
+	
 	// 임시 비밀번호 생성
 	public void createTempPassword(String email, String pw) throws Exception {
 		Member vo = new Member();
@@ -91,10 +102,6 @@ public class MemberDAO {
 		sqlSession.selectOne("Member.createTempPassword", vo);
 	}
 
-	// 이메일 인증 링크 클릭시, 멤버 Auth를 Y로 변경
-	public void authMember(Member vo) {
-		sqlSession.update("Member.authMember", vo);
-	}
 
 	// 로그인
 	public Member loginMember(Member vo) throws Exception {
@@ -113,5 +120,18 @@ public class MemberDAO {
 		int result = 0;
 		result = sqlSession.selectOne("Member.countTodayMember");
 		return result;
+	}
+	
+	//주간 랭킹 TOP3 조회
+	public List<Member> selectWeeklyTop3(){
+		List<Member> list = new ArrayList<Member>();
+		list = sqlSession.selectList("Member.selectWeeklyTop3");
+		return list;
+	}
+	//월간 랭킹 TOP3 조회
+	public List<Member> selectMonthlyTop3(){
+		List<Member> list = new ArrayList<Member>();
+		list = sqlSession.selectList("Member.selectMonthlyTop3");
+		return list;
 	}
 }

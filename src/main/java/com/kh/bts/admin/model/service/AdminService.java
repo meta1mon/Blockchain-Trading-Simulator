@@ -11,6 +11,9 @@ import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
 public interface AdminService {
+
+
+
 	int insertCreport(Creport vo);
 
 	int insertAcreportDeny(Acreport vo);
@@ -66,4 +69,13 @@ public interface AdminService {
 	List<Acreport> searchAcreport(int startPage, int limit, String keyword, int searchType);
 
 	List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType);
+	
+	List<Member> selectWeeklyRank();
+
+	List<Member> selectMonthlyRank();
+	
+	String sendMonthlyRankReward(String[] email)throws Exception;
+	
+	String sendWeeklyRankReward(String[] email)throws Exception;
+
 }

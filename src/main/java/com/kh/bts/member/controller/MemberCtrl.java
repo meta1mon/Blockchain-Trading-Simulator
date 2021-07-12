@@ -62,19 +62,13 @@ public class MemberCtrl {
 			for (int i = 0; i < 8; i++) {
 				tempAcntno += ((int) (Math.random() * 10));
 			}
-			System.out.println("임시계좌번호" + tempAcntno);
 			int check = mService.checkAcntno(tempAcntno);
 			if (check == 0) {
 				vo2.setAcntno(tempAcntno);
 				flag = false;
 			}
 		}
-		System.out.println("정식 계좌번호" + vo2.getAcntno() );
-		
-		System.out.println("bankPw 입력값이 얼마냐?" + vo2.getBankPw());
-		System.out.println("acnt 이메일 입력값이 얼마냐?" + vo2.getEmail());
 		int result = mService.insertMember(vo, vo2);
-		System.out.println(result);
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();
@@ -116,11 +110,18 @@ public class MemberCtrl {
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		Member nowLogin = mService.loginMember(vo);
+		String auth = mService.returnAuth(email);
 		if (nowLogin == null) {
-			logger.info("======= 회원 정보 불일치 =======");
-			request.setAttribute("errorMessage", "로그인 정보가 올바르지 않습니다.");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
-			dispatcher.forward(request, response); 
+			if(auth == "N" || auth.equals("N")) {
+				request.setAttribute("errorMessage", "이메일 인증을 진행해주세요.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
+				dispatcher.forward(request, response); 
+			} else {
+				logger.info("======= 없는 회원 및 회원 정보 불일치 =======");
+				request.setAttribute("errorMessage", "로그인 정보가 올바르지 않습니다.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
+				dispatcher.forward(request, response);
+			}
 		} else {
 			logger.info("======= 로그인 성공 =======");
 			String loginMember = nowLogin.getEmail();
@@ -149,16 +150,24 @@ public class MemberCtrl {
 	public void findPassword(@RequestParam("email") String email, Member vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("폼에서 받아온 email 값: " + email);
 		int result = mService.dupeEmail(vo);
+		String auth = mService.returnAuth(email);
 		if(result == 1) {
-			mService.findPassword(vo);
-			request.setAttribute("errorMessage", "임시 비밀번호가 이메일로 전송되었습니다.");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/find");
-			dispatcher.forward(request, response);
+			if(auth == "Y" || auth.equals("Y")) {
+				request.setAttribute("errorMessage", "임시 비밀번호가 이메일로 전송되었습니다.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/find");
+				dispatcher.forward(request, response);
+				mService.findPassword(vo);
+			} else {
+				request.setAttribute("errorMessage", "이메일 인증을 진행해주세요.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/find");
+				dispatcher.forward(request, response);
+			}
 		}else {
 			request.setAttribute("errorMessage", "존재하지 않는  회원입니다.");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/find");
 			dispatcher.forward(request, response);
 		}
+		System.out.println(vo.toString());
 		System.out.println(mService.findPassword(vo));
 	}
 }

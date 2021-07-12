@@ -38,6 +38,8 @@ function reply(idx) {
 				$("#replyList").html(replyHtml);
 			}
 		});
+	
+	console.log("dasfsdafadsfasdfasdfs" + $("#modalInCno").val());
 }
 
 // moreInsta에서 댓글 리스트 불러오기
@@ -447,7 +449,6 @@ function modalReportReplyFn(id) {
 	modalReportReply.querySelector('.modal_close_btn').addEventListener(
 			'click', function() {
 				bgReportReply.remove();
-				/*modalReportReply.removeChild();*/
 				modalReportReply.style.display = 'none';
 			});
 
@@ -505,37 +506,7 @@ function modalReplyFn(id) {
 				$("#replyContent2").val("");
 				bgReply.remove();
 				modalReply.style.display = 'none';
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				window.location.reload();
 			});
 
 	modalReply

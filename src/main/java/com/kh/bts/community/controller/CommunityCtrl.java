@@ -55,7 +55,7 @@ public class CommunityCtrl {
 		List<Community> list = cmService.selectAllCommunityList(paging, keyword, searchType);
 		mav.addObject("commuList", list);
 		mav.addObject("nowPage", paging);
-		if(!keyword.equals("")) {
+		if (!keyword.equals("")) {
 			mav.addObject("isSearched", "y");
 		}
 
@@ -77,7 +77,7 @@ public class CommunityCtrl {
 
 	@RequestMapping("moreInsta")
 	public void moreInsta(Paging vo, HttpServletResponse response) {
-		
+
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		List<Community> list = cmService.selectAllCommunityList(vo, "", 0);
@@ -96,9 +96,19 @@ public class CommunityCtrl {
 
 	}
 
+	// 댓글 수 가져오기
+	@ResponseBody
+	@RequestMapping(value = "replyCount", method = RequestMethod.POST)
+	public int replyCount(Community vo, HttpServletRequest request) {
+		System.out.println(vo.getCno());
+		int result = cmService.countReply(vo.getCno());
+		System.out.println(result);
+		return result;
+	}
+	
 	@RequestMapping(value = "clist", method = RequestMethod.GET)
 	public ModelAndView communityListService(@RequestParam(name = "page", defaultValue = "1") int page,
-				ModelAndView mv) {
+			ModelAndView mv) {
 		try {
 			int currentPage = page;
 			// 한 페이지당 출력할 목록 갯수
@@ -151,12 +161,12 @@ public class CommunityCtrl {
 	public ModelAndView communityInsert(Community c,
 			@RequestParam(name = "upfile", required = false) MultipartFile report, HttpServletRequest request,
 			ModelAndView mv) {
-		int flag = 0; // 공지사항과 인스타의 글 작성 페이지가 공통이므로, 작성 후에 어느 페이지로 돌아가야할 지 판단하는 용도. 0은 공지사항 1은 인스타 
+		int flag = 0; // 공지사항과 인스타의 글 작성 페이지가 공통이므로, 작성 후에 어느 페이지로 돌아가야할 지 판단하는 용도. 0은 공지사항 1은 인스타
 		try {
-			if (report != null && !report.equals(""))
+			if (report != null && !report.equals("")) {
 				saveFile(report, request);
-			c.setFilepath(report.getOriginalFilename());
-
+				c.setFilepath(report.getOriginalFilename());
+			}
 			if (c.getCsubject() == null) { // 제목 없음. 인스타에 작성한 부분임. 태그 삽입할 예정
 				c.setCcontent(changeTag(c.getCcontent())); // 태그에 클래스(tag) 추가
 				String tagStr = "";
@@ -168,17 +178,17 @@ public class CommunityCtrl {
 			}
 			String email = (String) request.getSession().getAttribute("loginMember");
 			int result = cmService.insertCommunity(c, email);
-			if(result > 1) {
+			if (result > 1) {
 				System.out.println("글 작성 성공");
 			} else {
 				System.out.println("글 작성 실패");
 			}
-			if(flag == 1) {
+			if (flag == 1) {
 				mv.setViewName("redirect:insta");
-			} else if(flag == 0) {
+			} else if (flag == 0) {
 				mv.setViewName("redirect:clist");
 			}
-			
+
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");
@@ -231,12 +241,14 @@ public class CommunityCtrl {
 			String email = (String) request.getSession().getAttribute("loginMember");
 
 			// 태그에 클래스(tag) 추가
-			c.setCcontent(changeTag(c.getCcontent()));
-			String tagStr = "";
-			for (int i = 0; i < tagArr.length; i++) {
-				tagStr += tagArr[i] + ",";
+			if (fromInsta == 1) {
+				c.setCcontent(changeTag(c.getCcontent()));
+				String tagStr = "";
+				for (int i = 0; i < tagArr.length; i++) {
+					tagStr += tagArr[i] + ",";
+				}
+				c.setCsubject(tagStr);
 			}
-			c.setCsubject(tagStr);
 
 			mv.addObject("cno", cmService.updateCommunity(c, email).getCno());
 			mv.addObject("currentPage", page);
@@ -375,10 +387,17 @@ public class CommunityCtrl {
 			tagArr[i] = content.substring(list1.get(i), list2.get(i));
 		}
 
-		for (int j = 0; j < tagArr.length; j++) {
-			content = content.replace(tagArr[j], "<span class='tag'>" + tagArr[j] + "</span>");
+		if (list1.size() > 0) {
+			String newContent = content.substring(0, list1.get(0));
+			for (int i = 0; i < list1.size() - 1; i++) {
+				newContent += "<span class='tag'>" + tagArr[i] + "</span>";
+				newContent += content.substring(list2.get(i), list1.get(i + 1));
+			}
+			newContent += "<span class='tag'>" + tagArr[list1.size() - 1] + "</span>";
+			newContent += content.substring(list2.get(list1.size() - 1));
+			return newContent;
+		} else {
+			return content;
 		}
-
-		return content;
 	}
 }

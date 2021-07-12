@@ -10,17 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.member.email.MailHandler;
 import com.kh.bts.member.email.TempKey;
-import com.kh.bts.member.model.dao.MemberDAO;
+import com.kh.bts.member.model.dao.MemberDao;
 import com.kh.bts.member.model.vo.Member;
 
 @Service("mService")
 public class MemberServiceImpl implements MemberService {
 	@Autowired
-	private MemberDAO mDao;
+	private MemberDao mDao;
 
 	@Inject
 	private JavaMailSender mailSender;
-
+	
+	// 회원 가입
 	@Transactional
 	@Override
 	public int insertMember(Member vo, Acnt vo2) throws Exception {
@@ -45,7 +46,7 @@ public class MemberServiceImpl implements MemberService {
 				.append("<p style='margin: 20px;'>가입하여 저희 BTS를 빛내주세요!</p>")
 				.append("<p style='margin: 20px;'>등록해 주셔서 감사합니다.</p>")
 				.append("<hr>")
-				.append("<div style='padding: 20px;'><span style='color: #8c8cc6'>♥</span><b>A</b>ces <b>R</b>ecruited <b>M</b>emeber of the <b>Y</b>ear 드림<span style='color: #8c8cc6'>♥</span></div>").toString());
+				.append("<div style='padding: 20px;'><span style='color: #8c8cc6'>♥</span><b>A</b>ces <b>R</b>ecruited <b>M</b>emeber of <b>Y</b>ear 드림<span style='color: #8c8cc6'>♥</span></div>").toString());
 		sendMail.setFrom("Aces.Recruited.Member@gmail.com", "BTS");
 		sendMail.setTo(vo.getEmail());
 		sendMail.send();
@@ -53,16 +54,21 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
+
+	// 임시 비밀번호 생성
+
 	@Transactional
 	@Override
 	public void createTempPassword(String email, String pw) throws Exception {
 		mDao.createTempPassword(email, pw);
 	}
 	
+	// 비밀번호 찾기
 	@Override
 	public String findPassword(Member vo) throws Exception {
 		String result = null;
 		if(vo.getEmail()!=null) {
+			if(vo.getAuth() != null) {
 			String key = new TempKey().getKey(12, false); // 랜덤 문자 생성
 			mDao.createTempPassword(vo.getEmail(), key);
 			MailHandler sendMail = new MailHandler(mailSender);
@@ -78,39 +84,50 @@ public class MemberServiceImpl implements MemberService {
 					.append("<p style='margin: 20px; color: #8c8cc6'>임시 비밀번호: ").append(key).append("</p>")
 					.append("<p style='margin: 20px;'>항상 BTS를 이용해주셔서 감사합니다.</p>")
 					.append("<hr>")
-					.append("<div style='padding: 20px;'><span style='color: #8c8cc6'>♥</span><b>A</b>ces <b>R</b>ecruited <b>M</b>emeber of the <b>Y</b>ear 드림<span style='color: #8c8cc6'>♥</span></div>").toString());
+					.append("<div style='padding: 20px;'><span style='color: #8c8cc6'>♥</span><b>A</b>ces <b>R</b>ecruited <b>M</b>emeber of <b>Y</b>ear 드림<span style='color: #8c8cc6'>♥</span></div>").toString());
 			sendMail.setFrom("Aces.Recruited.Member@gmail.com", "BTS");
 			sendMail.setTo(vo.getEmail());
 			sendMail.send();
 			result = "Success";
+			} else {
+				result = "Fail";
+			}
 		} else {
 			result = "Fail";
 		}
 		return result;
 	}
-
+	
+	// 이메일 중복 검사
 	@Override
 	public int dupeEmail(Member vo) throws Exception{
 		int result = 0;
 		result = mDao.dupeEmail(vo);
 		return result;
 	}
-
+	
+	// 닉네임 중복 검사
 	@Override
 	public int dupeNick(Member vo)  throws Exception{
 		int result = 0;
 		result = mDao.dupeNick(vo);
 		return result;
 	}
+	
 	@Override
 	public int checkAcntno(String acntno) {
 		return mDao.checkAcntno(acntno);
 	}
 
+	// 인증키 생성
 	@Override
 	public void createAuthkey(String email, String authkey) throws Exception {
 		mDao.createAuthkey(email, authkey);
 	}
+
+	
+	// 회원 정보 수정
+
 
 	@Transactional
 	@Override
@@ -118,34 +135,46 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.updateMember(vo);
 	}
 
+
+	// 회원 탈퇴
+
 	@Transactional
 	@Override
 	public int deleteMember(String email) {
 		return mDao.deleteMember(email);
 	}
 
+	// 인증여부 Y로 수정
 	@Override
 	public void authMember(Member vo) {
 		mDao.authMember(vo);
 	}
 
+	// 로그인
 	@Override
 	public Member loginMember(Member vo) throws Exception {
 		return mDao.loginMember(vo);
 	}
 	
-	// 이메일로 닉네임 가져오는 함수
+	// 이메일로 닉네임 가져오기
 	@Override
 	public String returnNickname(String email) {
 		return mDao.returnNickname(email);
 	}
+	@Override
+	public String returnAuth(String email) {
+		return mDao.returnAuth(email);
+	}
 	
+	// 회원 수 세기
 	@Override
 	public int countMember() {
 		int result =0;
 		result = mDao.countMember();
 		return result;
 	}
+	
+	// 오늘자 신규 가입 회원 수 세기
 	@Override
 	public int countTodayMember() {
 		int result =0;

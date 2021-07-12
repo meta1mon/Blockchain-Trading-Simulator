@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bts.HomeController;
+import com.kh.bts.Paging;
 import com.kh.bts.acnt.model.service.AcntService;
 import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.acnt.model.vo.CoinAcnt;
@@ -39,6 +40,8 @@ import com.kh.bts.member.model.service.MemberServiceImpl;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.service.MypageService;
 import com.kh.bts.mypage.model.vo.MyRcommunity;
+import com.kh.bts.ranking.model.vo.Accumulative;
+import com.kh.bts.ranking.model.vo.Daily;
 
 @Controller
 @RequestMapping("mypage")
@@ -62,6 +65,8 @@ public class MypageController {
 	private BoughtService bService;
 	@Autowired
 	private SoldService sService;
+	@Autowired
+	private CommunityService cmService;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView mypageEnter(ModelAndView mv) {
@@ -340,9 +345,17 @@ public class MypageController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/mr")
-	public ModelAndView myReply(ModelAndView mv) {
-		mv.setViewName("mypage/myRcommunity");
+//	@RequestMapping(value = "/mr")
+//	public ModelAndView myReply(ModelAndView mv) {
+//		mv.setViewName("mypage/myRcommunity");
+//		return mv;
+//	}
+	
+	@RequestMapping(value = "/myinsta")
+	public ModelAndView myInsta(ModelAndView mv, @RequestParam(name = "cno") String cno) {
+		mv.addObject("community", cmService.selectCommunity(1, cno));
+
+		mv.setViewName("mypage/myInsta");
 		return mv;
 	}
 	

@@ -1,0 +1,23 @@
+@charset "UTF-8";
+nav {
+    width: 0% !important;
+    height: 0 !important;
+    position: absolute !important;
+    display: block !important;
+    justify-content: none !important;
+    border-bottom: 0px solid #DBDBDB !important;
+    opacity: 1.0 !important;
+}
+
+#myM {
+	top: 0px !important;
+}
+
+main {
+	padding-top : 25px !important;
+}
+
+.nowLike, .nowDislike, {
+	border: 0px;
+	width: 25px;
+}

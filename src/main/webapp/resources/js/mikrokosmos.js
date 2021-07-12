@@ -30,7 +30,7 @@ function reply(idx) {
 												+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
 												+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
 												+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
-												+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "', '" + this +"')\">삭제</p></div></li>";
+												+ "<p class=\"deleteReply\" onclick=\"replyDelete1('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p></div></li>";
 									});
 					replyHtml += "</ul>";
 				} else {
@@ -63,7 +63,7 @@ function reply2(moreInstaCno) {
 							+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
 							+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
 							+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
-							+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
+							+ "<p class=\"deleteReply\" onclick=\"replyDelete2('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
 							+ "</div></li>";
 								});
 				replyHtml += "</ul>";

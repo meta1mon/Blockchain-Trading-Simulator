@@ -3,7 +3,6 @@ package com.kh.bts.admin.model.service;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,7 +13,6 @@ import com.kh.bts.admin.model.dao.AdminDao;
 import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.cash.model.vo.CashLog;
 import com.kh.bts.member.email.MailHandler;
-import com.kh.bts.member.email.TempKey;
 import com.kh.bts.member.model.dao.MemberDao;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.report.model.vo.Acreport;
@@ -219,7 +217,7 @@ public class AdminServiceImpl implements AdminService {
 					.append("<p style='color: #8c8cc6; padding: 5px;'>● 새로운 연결이 세상에 스며들다.</p>")
 					.append("<p style='color: #8c8cc6; padding: 5px;'>● BTS는 회원님께 다양한 서비스와 편의를 제공하는 가상자산 중개 플랫폼입니다. </p>")
 					.append("<p style='color: #8c8cc6; padding: 5px;'>● 단순한 기술 커뮤니티를 넘어, SW개발자의 기술과 삶을 나누는 공간으로서의 역할을 담당하고 있습니다.</p>")
-					.append("<div style='width: 100%; background-color: #8c8cc6; color:white; padding: 10px'><h2>임시 비밀번호 안내</h2></div>")
+					.append("<div style='width: 100%; background-color: #8c8cc6; color:white; padding: 10px'><h2>주간 랭킹 보상 지급</h2></div>")
 					.append("<p style='margin: 20px;'>안녕하세요! ").append(email[i]).append("님!</p>")
 					.append("<p style='margin: 20px;'>").append("주간 랭킹 TOP3에 드신 것을 축하드립니다.</p>")
 					.append("<p style='margin: 20px;'>").append("소정의 상품을 지급해드립니다.</p>")
@@ -248,7 +246,7 @@ public class AdminServiceImpl implements AdminService {
 						.append("<p style='color: #8c8cc6; padding: 5px;'>● 새로운 연결이 세상에 스며들다.</p>")
 						.append("<p style='color: #8c8cc6; padding: 5px;'>● BTS는 회원님께 다양한 서비스와 편의를 제공하는 가상자산 중개 플랫폼입니다. </p>")
 						.append("<p style='color: #8c8cc6; padding: 5px;'>● 단순한 기술 커뮤니티를 넘어, SW개발자의 기술과 삶을 나누는 공간으로서의 역할을 담당하고 있습니다.</p>")
-						.append("<div style='width: 100%; background-color: #8c8cc6; color:white; padding: 10px'><h2>임시 비밀번호 안내</h2></div>")
+						.append("<div style='width: 100%; background-color: #8c8cc6; color:white; padding: 10px'><h2>주간 랭킹 보상 지급</h2></div>")
 						.append("<p style='margin: 20px;'>안녕하세요! ").append(email[i]).append("님!.</p>")
 						.append("<p style='margin: 20px;'>").append("월간 랭킹 TOP3에 드신 것을 축하드립니다.</p>")
 						.append("<p style='margin: 20px;'>").append("소정의 상품을 지급해드립니다.</p>")

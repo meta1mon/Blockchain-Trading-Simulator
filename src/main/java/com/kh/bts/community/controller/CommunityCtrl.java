@@ -96,6 +96,16 @@ public class CommunityCtrl {
 
 	}
 
+	// 댓글 수 가져오기
+	@ResponseBody
+	@RequestMapping(value = "replyCount", method = RequestMethod.POST)
+	public int replyCount(Community vo, HttpServletRequest request) {
+		System.out.println(vo.getCno());
+		int result = cmService.countReply(vo.getCno());
+		System.out.println(result);
+		return result;
+	}
+	
 	@RequestMapping(value = "clist", method = RequestMethod.GET)
 	public ModelAndView communityListService(@RequestParam(name = "page", defaultValue = "1") int page,
 			ModelAndView mv) {
@@ -377,10 +387,17 @@ public class CommunityCtrl {
 			tagArr[i] = content.substring(list1.get(i), list2.get(i));
 		}
 
-		for (int j = 0; j < tagArr.length; j++) {
-			content = content.replace(tagArr[j], "<span class='tag'>" + tagArr[j] + "</span>");
+		if (list1.size() > 0) {
+			String newContent = content.substring(0, list1.get(0));
+			for (int i = 0; i < list1.size() - 1; i++) {
+				newContent += "<span class='tag'>" + tagArr[i] + "</span>";
+				newContent += content.substring(list2.get(i), list1.get(i + 1));
+			}
+			newContent += "<span class='tag'>" + tagArr[list1.size() - 1] + "</span>";
+			newContent += content.substring(list2.get(list1.size() - 1));
+			return newContent;
+		} else {
+			return content;
 		}
-
-		return content;
 	}
 }

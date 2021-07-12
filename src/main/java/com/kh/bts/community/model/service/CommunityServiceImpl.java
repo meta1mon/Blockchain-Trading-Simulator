@@ -98,5 +98,10 @@ public class CommunityServiceImpl implements CommunityService {
 		return cmDao.selectMainAllCommunityList();
 	}
 
+	@Override
+	public int countReply(String cno) {
+		return cmDao.countReply(cno);
+	}
+
 
 }

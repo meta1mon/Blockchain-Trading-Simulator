@@ -855,3 +855,8 @@ article {
 	width: 90%;
 	height: 10%;
 }
+
+.tag {
+	color: #8c66c8;
+	font-size: medium;
+}

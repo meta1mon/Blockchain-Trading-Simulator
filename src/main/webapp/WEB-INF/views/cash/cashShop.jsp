@@ -39,6 +39,9 @@
 	float: left;
 	margin: 0 50px;
 }
+.left{
+	text-align: left;
+}
 .right{
 	text-align: right;
 }
@@ -88,6 +91,19 @@ h1 {
 	border: 1px solid rgb(140, 102, 200);
 	color: white;
 }
+.expandBtn {
+	height: 30px;
+	font-size: 16px;
+	background-color: #fff;
+	color: #8C66C8,;
+	padding: 0px 8px;
+	border: 1px solid transparent;
+	border-color: #E3C8F8;
+  	border-radius: 4px;
+  	cursor: pointer;
+  	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
+  	margin: 10px auto;
+}
 </style>
 <script>
 function doOpenCheck(chk){
@@ -116,17 +132,17 @@ function doOpenCheck(chk){
 						</td>
 					</tr>
 					<tr>
-						<td>모의 투자 충전 금액</td>
-						<td>KRW</td>
+						<td class="left">모의 투자 충전 금액</td>
+						<td class="left">KRW</td>
 						<td>할인율</td>
 						<td>할인 기간</td>
 						<td>&nbsp;</td>
 					</tr>
 					<c:forEach items="${nowList }" var="cashVo" varStatus="status">
 						<tr>
-							<td class="right"><fmt:formatNumber value="${cashVo.won }"
+							<td class="left"><fmt:formatNumber value="${cashVo.won }"
 								pattern="#,###,###,###" />원</td>
-							<td class="right"><fmt:formatNumber value="${cashVo.sellprice }"
+							<td class="left"><fmt:formatNumber value="${cashVo.sellprice }"
 								pattern="#,###,###,###" />원</td>
 							<td>${cashVo.discountrate }%</td>
 							<input type="hidden" name="currentWon${status.count }" value="${cashVo.won }" readonly>
@@ -149,12 +165,12 @@ function doOpenCheck(chk){
 				</tr>
 				<tr>
 					<td rowspan="2">&nbsp; &nbsp; &nbsp; &nbsp;</td>
-					<td>충전할 금액 : </td>
+					<td width="100">충전할 금액 : </td>
 					<td><input type="text" id="won" class="right money" readonly>원</td>
 					<td colspan ="2" rowspan="2"><button type="button" class="btn1" onclick="openPayment();">결제하기</button></td>
 				</tr>
 				<tr>
-					<td>지불할 금액 : </td>
+					<td width="100">지불할 금액 : </td>
 					<td><input type="text" id="cash" name="cash"  class="right money" readonly>원</td>
 				</tr>
 			</table>
@@ -169,20 +185,21 @@ function doOpenCheck(chk){
 					<td colspan="4"><h4><span class="purple">&lt;</span> 할인 종료 상품 <span class="purple">&gt;</span></h4></td>
 				</tr>
 				<tr>
-					<td>모의 투자 충전 금액</td>
-					<td>KRW</td>
+					<td class="left">모의 투자 충전 금액</td>
+					<td class="left">KRW</td>
 					<td>할인율</td>
 					<td>할인 기간</td>
 				</tr>
 				<c:forEach items="${oldList }" var="cashVo" varStatus="status">
-					<tr>
-						<td class="right">${cashVo.won }원</td>
-						<td class="right">${cashVo.sellprice }원</td>
+					<tr class="olist" style="display: none;">
+						<td align="left">${cashVo.won }원</td>
+						<td align="left">${cashVo.sellprice }원</td>
 						<td>${cashVo.discountrate }%</td>
 						<td>${cashVo.startdate } ~ ${cashVo.enddate }</td>
 					</tr>
 				</c:forEach>
 			</table>
+			<input type="button" id="oExpand" value="더 보기" class="expandBtn"></input>
 		</div>
 		</td>
 		</tr>
@@ -213,5 +230,20 @@ function doOpenCheck(chk){
 		openWin = window.open("<%=request.getContextPath()%>/pay", "paymentPopup", "width=850px, height=650px, resizable = no, left= 100, top=100");
 		
 	}
+	
+
+	var oExpandBool = Boolean(false);
+
+	$('#oExpand').click(function() {
+		if(oExpandBool == false) {
+			$('.olist').show();
+			oExpandBool= true;
+			$('#oExpand').val("접기");
+		} else if(oExpandBool == true) {
+			$('.olist').hide();
+			oExpandBool= false;
+			$('#oExpand').val("더 보기");
+		}
+	});
 </script>
 </html>

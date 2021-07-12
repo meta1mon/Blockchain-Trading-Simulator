@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class Prochart {
 	@RequestMapping("prochart")
-	public ModelAndView MainPage(ModelAndView mav) {
+	public ModelAndView prochart(ModelAndView mav) {
 		mav.setViewName("prochart/prochart");
 		return mav;
 	}

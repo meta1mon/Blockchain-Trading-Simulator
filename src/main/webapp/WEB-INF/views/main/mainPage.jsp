@@ -170,7 +170,7 @@
 											<div class="profile-of-article">
 												<img class="img-profile pic"
 													src="resources/assets/img/user.png" alt=".."> <span
-													class="userID main-id point-span">${maincommuList0.cwriter }</span>
+													class="userID main-id point-span">${maincommuList1.cwriter }</span>
 											</div>
 										</header>
 										<!-- 게시글 내용 영역 -->

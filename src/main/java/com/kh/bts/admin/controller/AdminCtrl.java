@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -651,5 +652,23 @@ public class AdminCtrl {
 			mv.setViewName("admin/afterReplyReport");
 		}
 		return mv;
+	}
+	@RequestMapping(value="/rankerml")
+	public ModelAndView rankerml(ModelAndView mv) {
+		
+		mv.addObject("weekly", aService.selectWeeklyRank());
+		mv.addObject("monthly", aService.selectMonthlyRank());
+		mv.setViewName("admin/rankingList");
+		return mv;
+	}
+	@RequestMapping(value="/weeklyrewarding")
+	public void weeklyRewarding(@RequestParam("email") String[] email, HttpServletResponse response) throws Exception {
+		aService.sendWeeklyRankReward(email);
+		response.sendRedirect("rankerml");
+	}
+	@RequestMapping(value="/monthlyrewarding")
+	public void monthlyRewarding(@RequestParam("email") String[] email, HttpServletResponse response) throws Exception {
+		aService.sendMonthlyRankReward(email);
+		response.sendRedirect("rankerml");
 	}
 }

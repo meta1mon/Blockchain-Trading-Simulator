@@ -47,6 +47,7 @@
                   class="fa fa-chevron-down"></i></span></a>
                <ul>
                   <li><a href="${pageContext.request.contextPath}/admin/ml">회원 관리</a></li>
+                  <li><a href="${pageContext.request.contextPath}/admin/rankerml">랭킹 회원 보상 관리</a></li>
                </ul></li>
             <li id="adminshop"><a href="#">게시판 관리<span class="icon"><i
                   class="fa fa-chevron-down"></i></span></a>

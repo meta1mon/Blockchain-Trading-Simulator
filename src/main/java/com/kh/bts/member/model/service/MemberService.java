@@ -4,6 +4,11 @@ import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.member.model.vo.Member;
 
 public interface MemberService {
+
+	
+	public String returnAuth(String email);
+	
+
 	 int insertMember(Member vo, Acnt vo2) throws Exception;
 	 String findPassword(Member vo) throws Exception;
 	 int dupeEmail(Member vo) throws Exception;
@@ -18,4 +23,5 @@ public interface MemberService {
 	 String returnNickname(String email);
 	 int countMember();
 	 int countTodayMember();
+
 }

@@ -9,6 +9,7 @@ let replyCno = "";
 
 // 처음 인스타에서 댓글 리스트 불러오기
 function reply(idx) {
+	var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\">"
 	replyCno = $(".hiddenCno").eq(idx).val();
 	$.ajax({
 			url : "rcSelect",
@@ -18,8 +19,8 @@ function reply(idx) {
 			},
 			datatype : "json",
 			success : function(data) {
-				var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\"><input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\">";
 				modalReplyFn('modal_reply');
+				replyHtml +="<input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\">";
 				var json = JSON.parse(data);
 				if (json.length > 0) {
 					$.each(json, function(idx, reply) {
@@ -42,7 +43,7 @@ function reply(idx) {
 
 // moreInsta에서 댓글 리스트 불러오기
 function reply2(moreInstaCno) {
-	console.log(moreInstaCno);
+	var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\">"
 	$.ajax({
 		url : "rcSelect",
 		type : "post",
@@ -51,19 +52,19 @@ function reply2(moreInstaCno) {
 		},
 		datatype : "json",
 		success : function(data) {
-			var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\"> <input id=\"moreModalInCno\" type=\"hidden\" value=\"" + moreInstaCno +"\">";
+			replyHtml += "<input id=\"moreModalInCno\" type=\"hidden\" value=\"" + moreInstaCno +"\">";
 			modalReplyFn('modal_reply');
 			var json = JSON.parse(data);
 			if (json.length > 0) {
 				$.each(json, function(idx, reply) {
-									replyHtml += "<li><div class=\"profile-wrap\">"
-											+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
-											+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
-											+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
-											+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
-											+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
-											+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
-											+ "</div></li>";
+					replyHtml += "<li><div class=\"profile-wrap\">"
+							+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
+							+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
+							+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
+							+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
+							+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
+							+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p>"
+							+ "</div></li>";
 								});
 				replyHtml += "</ul>";
 			} else {
@@ -350,7 +351,7 @@ function replyInsert2() {
 					}
 				});
 			}
-		})
+		});
 	}
 	
 }
@@ -485,12 +486,13 @@ function modalReplyFn(id) {
 	document.body.append(bgReply);
 
 	// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-	modalReply.querySelector('.modal_reply_close_btn').addEventListener(
-			'click', function() {
-				$("#replyContent2").val("");
-				bgReply.remove();
-				modalReply.style.display = 'none';
-			});
+	   modalReply.querySelector('.modal_reply_close_btn').addEventListener(
+		         'click', function() {
+		            $("#replyContent2").val("");
+		            bgReply.remove();
+		            modalReply.style.display = 'none';
+		         });
+
 
 	modalReply
 			.setStyle({

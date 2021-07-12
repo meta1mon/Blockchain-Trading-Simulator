@@ -427,29 +427,6 @@ function replyDelete(deleteRno, deleteCno, deleteRwriter) {
 									id="reply_popup_open"
 									src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/comment.png"
 									alt="댓글"><span class="liveReplyCnt">${vo.replycnt }</span>
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
 							</div>
 						</div>
 						<!-- 추천 수 -->
@@ -613,7 +590,7 @@ function replyDelete(deleteRno, deleteCno, deleteRwriter) {
 			<!-- 모달 안에서 댓글 달기-->
 			<!-- 댓글 모달창 -->
 			<div id="modal_reply" class="modal_reply">
-				<button type="button" id="modal_reply_close_btn"></button>
+				<button type="button" class="modal_reply_close_btn"></button>
 				<!-- 댓글 작성 영역 -->
 				<div>
 					<c:if test="${loginMember != null }">

@@ -41,7 +41,7 @@
 	        if (seconds < 10){
 	            seconds = "0" + seconds;
 	        }
-		document.getElementById("timestamp").innerHTML = year+"년 " + month + "월 "+ day +"일 "+ ampm + hours + ":" + minutes + ":" + seconds +" 기준";
+		document.getElementById("timestamp").innerHTML = "🕘" + year+"년 " + month + "월 "+ day +"일 "+ ampm + hours + ":" + minutes + ":" + seconds +" 기준";
 	    }
 	 	setInterval("dpTime()",1000);
 	</script>
@@ -67,13 +67,13 @@
 	<td class="email"><input type="hidden" name="email" value="${monthly.email }">${monthly.email }</td>
 	<td>${monthly.nickname }</td>
 	<td><c:if test="${monthly.yield>0 }">
-		<span style="color: red"> <fmt:formatNumber value="${monthly.yield }" pattern="##,###.######" /> %</span>
+		<span style="color: red">&#9650; </span><fmt:formatNumber value="${monthly.yield }" pattern="##,###.######" /> %
 		</c:if>
-		<c:if test="${monthly.yield=0 }">
+		<c:if test="${monthly.yield==0 }">
 			<fmt:formatNumber value="${monthly.yield }" pattern="##,###.######" /> %
 		</c:if>
 		<c:if test="${monthly.yield <0 }">
-		<span style="color: blue"><fmt:formatNumber value="${monthly.yield }" pattern="##,###.######" /> %</span> 
+		<span style="color: blue">&#9660; </span><fmt:formatNumber value="${monthly.yield }" pattern="##,###.######" /> %
 		</c:if></td>
 	
 	</tr>
@@ -97,13 +97,13 @@
 		<td>${weekly.nickname }</td>
 		<td>
 		<c:if test="${weekly.yield>0 }">
-		<span style="color: red"><fmt:formatNumber value="${weekly.yield }" pattern="##,###.######" /> %</span> 
+		<span style="color: red">&#9650; </span><fmt:formatNumber value="${weekly.yield }" pattern="##,###.######" /> % 
 		</c:if>
-		<c:if test="${weekly.yield=0 }">
+		<c:if test="${weekly.yield==0 }">
 		<fmt:formatNumber value="${weekly.yield }" pattern="##,###.######" /> %
 		</c:if>
 		<c:if test="${weekly.yield <0 }">
-		<span style="color: blue"> <fmt:formatNumber value="${weekly.yield }" pattern="##,###.######" /> %</span>
+		<span style="color: blue">&#9660; </span><fmt:formatNumber value="${weekly.yield }" pattern="##,###.######" /> %
 		</c:if>
 		 </td>
 		</tr>

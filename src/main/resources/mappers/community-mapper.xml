@@ -5,7 +5,7 @@
 	</resultMap>
 
 
-	<!-- 메인게시글 전부 다 불러오기 -->
+	<!-- 메인에 사용할 인기 게시글 4개 불러오기 -->
 	<select id="selectMainCommunityList"
 		resultType="arraylist" resultMap="resultCommunity">
 		select * from
@@ -20,7 +20,7 @@
 	<select id="selectCommunityList" parameterType="Paging"
 		resultType="arraylist" resultMap="resultCommunity">
 		SELECT * FROM (SELECT ROWNUM R, D.*
-		FROM (SELECT * FROM COMMUNITY WHERE CWRITER NOT LIKE '%관리자%' ORDER BY CNO DESC) D) WHERE R BETWEEN
+		FROM (SELECT * FROM COMMUNITY WHERE CWRITER NOT LIKE '%관리%' AND CWRITER NOT LIKE '%운영%' ORDER BY CNO DESC) D) WHERE R BETWEEN
 		#{start} AND #{start}+#{plus}
 	</select>
 
@@ -30,24 +30,19 @@
 		SELECT *
 		FROM
 		COMMUNITY
-		WHERE CSUBJECT LIKE '%'||UPPER(#{keyword})||'%'
-		OR CSUBJECT LIKE '%'||LOWER(#{keyword})||'%'
+		WHERE (CSUBJECT LIKE '%'||UPPER(#{keyword})||'%'
+		OR CSUBJECT LIKE '%'||LOWER(#{keyword})||'%')
+		AND (CWRITER NOT LIKE '%관리%' AND CWRITER NOT LIKE '%운영%')
 	</select>
-	<select id="searchListContent" parameterType="string"
-		resultType="arraylist" resultMap="resultCommunity">
-		SELECT *
-		FROM
-		COMMUNITY
-		WHERE CCONTENT LIKE '%'||UPPER(#{keyword})||'%'
-		OR CCONTENT LIKE '%'||LOWER(#{keyword})||'%'
-	</select>
+
 	<select id="searchListWriter" parameterType="string"
 		resultType="arraylist" resultMap="resultCommunity">
 		SELECT *
 		FROM
 		COMMUNITY
-		WHERE CWRITER LIKE '%'||UPPER(#{keyword})||'%'
-		OR CWRITER LIKE '%'||LOWER(#{keyword})||'%'
+		WHERE (CWRITER LIKE '%'||UPPER(#{keyword})||'%'
+		OR CWRITER LIKE '%'||LOWER(#{keyword})||'%')
+		AND (CWRITER NOT LIKE '%관리%' AND CWRITER NOT LIKE '%운영%')
 	</select>
 
 	<!-- 조회수 상위 5개 게시글 조회 -->

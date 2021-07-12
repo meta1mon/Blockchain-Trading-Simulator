@@ -1,11 +1,11 @@
 package com.kh.bts.community.model.service;
 
 public interface ClikeService {
-	public int insertClike(String cno, String email);
-	
-	public int deleteClike(String cno, String email);
-	
-	public int isLike(String cno, String email);
-	
-	public int likeCount(String cno);
+	int insertClike(String cno, String email);
+
+	int deleteClike(String cno, String email);
+
+	int isLike(String cno, String email);
+
+	int likeCount(String cno);
 }

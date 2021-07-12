@@ -18,13 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.kh.bts.Paging;
 import com.kh.bts.acnt.model.service.AcntService;
 import com.kh.bts.acnt.model.service.CoinAcntService;
 import com.kh.bts.acnt.model.vo.Acnt;
 import com.kh.bts.acnt.model.vo.CoinAcnt;
-import com.kh.bts.community.model.service.CommunityService;
-import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.investment.model.service.BoughtService;
 import com.kh.bts.investment.model.service.SoldService;
 import com.kh.bts.investment.model.service.WaitBoughtService;
@@ -35,7 +32,6 @@ import com.kh.bts.investment.model.vo.WaitBought;
 import com.kh.bts.investment.model.vo.WaitSold;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.mypage.model.service.MypageService;
-import com.kh.bts.ranking.model.vo.Accumulative;
 
 @Controller
 public class investmentCtrl {

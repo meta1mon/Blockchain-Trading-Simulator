@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.bts.acnt.model.vo.CoinAcnt;
 import com.kh.bts.cash.model.vo.Cash;
 import com.kh.bts.cash.model.vo.CashLog;
+import com.kh.bts.community.model.vo.Community;
 import com.kh.bts.member.model.vo.Member;
 import com.kh.bts.report.model.vo.Acreport;
 import com.kh.bts.report.model.vo.Arreport;
@@ -25,14 +26,20 @@ public class AdminDao {
 	public int insertCreport(Creport vo) {
 		return sqlSession.insert("report.insertCreport", vo);
 	}
-	public int insertAcreport(Acreport vo) {
-		return sqlSession.insert("report.insertAcreport", vo);
+	public int insertAcreportDeny(Acreport vo) {
+		return sqlSession.insert("report.insertAcreportDeny", vo);
+	}
+	public int insertAcreportAccept(Acreport vo) {
+		return sqlSession.insert("report.insertAcreportAccept", vo);
 	}
 	public int insertRreport(Rreport vo) {
 		return sqlSession.insert("report.insertRreport", vo);
 	}
-	public int insertArreport(Arreport vo) {
-		return sqlSession.insert("report.insertArreport", vo);
+	public int insertArreportDeny(Arreport vo) {
+		return sqlSession.insert("report.insertArreportDeny", vo);
+	}
+	public int insertArreportAccept(Arreport vo) {
+		return sqlSession.insert("report.insertArreportAccept", vo);
 	}
 	
 	public int registerCash(Cash vo) {
@@ -64,19 +71,24 @@ public class AdminDao {
 		return result;
 	}
 	
-	public List<CashLog> searchCashLog(String keyword){
-		return sqlSession.selectList("CashLog.searchCashLog", keyword);
+	public List<CashLog> searchCashLog(int startPage, int limit, String keyword){
+		List<CashLog> list = new ArrayList<CashLog>(); 
+		int startRow = (startPage - 1) * limit; 
+		RowBounds row = new RowBounds(startRow, limit);
+		return sqlSession.selectList("CashLog.searchCashLog", keyword, row);
 	}
 	
-	public List<Member> adminSearchMember(String keyword, int searchType){
+	public List<Member> adminSearchMember(int startPage, int limit, String keyword, int searchType){
 		List<Member> list = new ArrayList<Member>();
+		int startRow = (startPage - 1) * limit; 
+		RowBounds row = new RowBounds(startRow, limit);
 		if(keyword != null) {
 			switch(searchType) {
 			case 1:
-				list = sqlSession.selectList("Member.adminSearchEmail", keyword);
+				list = sqlSession.selectList("Member.adminSearchEmail", keyword, row);
 				break;
 			case 2:
-				list = sqlSession.selectList("Member.adminSearchNick", keyword);
+				list = sqlSession.selectList("Member.adminSearchNick", keyword, row);
 				break;
 			}
 		}
@@ -168,41 +180,41 @@ public class AdminDao {
 		return result;
 	}
 
-	public List<Acreport> searchAcreport(String keyword, int searchType) {
+	public List<Acreport> searchAcreport(int startPage, int limit, String keyword, int searchType) {
 		List<Acreport> list = new ArrayList<Acreport>();
+		int startRow = (startPage - 1) * limit; 
+		RowBounds row = new RowBounds(startRow, limit);
 		if (keyword != null) {
 			switch (searchType) {
+			case 1:
+				list = sqlSession.selectList("report.searchCstatus", keyword, row);
+				break;
 			case 2:
-				list = sqlSession.selectList("report.searchCrespondent", keyword);
+				list = sqlSession.selectList("report.searchCrespondent", keyword, row);
 				break;
 			case 3:
-				list = sqlSession.selectList("report.searchCreporter", keyword);
+				list = sqlSession.selectList("report.searchCreporter", keyword, row);
 				break;
 			}
 		}
 		return list;
 	}
-	public List<Acreport> searchAcreportByCstatus(String cstatus, int searchType) {
-		List<Acreport> list = new ArrayList<Acreport>();
-		list = sqlSession.selectList("report.searchCstatus", cstatus);
-		return list;
-	}
-	public List<Arreport> searchArreport(String keyword, int searchType) {
+	public List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType) {
 		List<Arreport> list = new ArrayList<Arreport>();
+		int startRow = (startPage - 1) * limit; 
+		RowBounds row = new RowBounds(startRow, limit);
 		if (keyword != null) {
 			switch (searchType) {
+			case 1:
+				list = sqlSession.selectList("report.searchRstatus", keyword, row);
+				break;
 			case 2:
-				list = sqlSession.selectList("report.searchRrespondent", keyword);
+				list = sqlSession.selectList("report.searchRrespondent", keyword, row);
 				break;
 			case 3:
-				list = sqlSession.selectList("report.searchRreporter", keyword);
+				list = sqlSession.selectList("report.searchRreporter", keyword, row);
 			}
 		}
-		return list;
-	}
-	public List<Arreport> searchArreportByRstatus(String rstatus, int searchType) {
-		List<Arreport> list = new ArrayList<Arreport>();
-		list = sqlSession.selectList("report.searchRstatus", rstatus);
 		return list;
 	}
 	

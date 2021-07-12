@@ -1,18 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="shortcut icon"
-   href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
-   type="image/x-icon" />
-<link rel="icon"
-   href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
-   type="image/x-icon" />
-<meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
    $(function() {
       var alltimer = setInterval(function() { // 1초마다 함수 돌림 ()
          loadValues1();
@@ -27,7 +12,7 @@
       function loadValues1() {
          // 미체결 매수 코인 종류 불러오기
          $.ajax({
-            url : '${pageContext.request.contextPath}/buyLoad1',
+            url : 'buyLoad1',
             type : "get",
             cache : false,
             datatype : "json",
@@ -42,7 +27,7 @@
       function loadValues2() {
          //  미체결 매수 내역 중, 가격만 불러오기
          $.ajax({
-            url : '${pageContext.request.contextPath}/buyLoad2',
+            url : 'buyLoad2',
             type : "get",
             cache : false,
             datatype : "json",
@@ -91,7 +76,7 @@
                   console.log(buyCoinArr[i] + "코인이 " + buyPriceArr[i][j]
                         + " 가격으로 구매됨");
                   $.ajax({
-                     url : "${pageContext.request.contextPath}/bought",
+                     url : "bought",
                      type : "post",
                      data : {
                         "buyCoin" : buyCoinArr[i],
@@ -111,9 +96,3 @@
          }
       }
    });
-</script>
-<title>BTS</title>
-</head>
-<body>
-</body>
-</html>

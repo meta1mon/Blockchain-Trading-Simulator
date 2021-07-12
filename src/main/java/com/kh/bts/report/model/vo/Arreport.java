@@ -14,6 +14,7 @@ public class Arreport {
 	private String rstatus;
 	private String rreason;
 	private String arrdate;
+	private String rno;
 
 	public Arreport() {
 	}
@@ -102,5 +103,14 @@ public class Arreport {
 	public void setArrdate(String arrdate) {
 		this.arrdate = arrdate;
 	}
+	public String getRno() {
+		return rno;
+	}
+
+	public void setRno(String rno) {
+		this.rno = rno;
+	}
+
+
 
 }

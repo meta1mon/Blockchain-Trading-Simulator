@@ -14,7 +14,8 @@
 	$(function(){
 		if($(".rcontent").has($("img"))){
 			$(".rcontent img").attr("src", null);
-			$(".rcontent img").attr("alt", "(사진)");
+			$(".rcontent img").attr("srcset", null);
+			$(".rcontent img").attr("alt", "[이미지]");
 		}
 		var  openModal = function(event) {
 			$("#modal").css("display", "block");
@@ -48,10 +49,6 @@
 		    dataquery = decodeURIComponent(dataquery);
 		    console.log(dataquery);
 		    
-		    if($("#rreason").val("") || $("#rreason") == null){
-				alert("신고 처리 사유를 입력해주세요.");		    	
-		    }else {
-		    	
 			$.ajax({
 			url : "dealrr",
 			type : "POST",
@@ -65,7 +62,6 @@
 			}
 			
 		})
-		    }
 	})
 
 	})
@@ -141,7 +137,7 @@
 							<i class="fas fa-angle-double-left"></i>
 							</c:if>
 							<c:if test="${currentPage > 1}">
-								<c:url var="rrlistST" value="cr">
+								<c:url var="rrlistST" value="rr">
 									<c:param name="page" value="${currentPage-1}"/>
 								</c:url>
 								<a href="${rrlistST}"><i class="fas fa-angle-double-left"></i></a>
@@ -153,7 +149,7 @@
 									<div class="pageNum"><b>${p}</b></div>
 								</c:if>
 								<c:if test="${p ne currentPage}">
-									<c:url var="rrlistchk" value="cr">
+									<c:url var="rrlistchk" value="rr">
 										<c:param name="page" value="${p}" />
 									</c:url>
 									<a href="${rrlistchk}">${p}</a>
@@ -163,7 +159,7 @@
 								<i class="fas fa-angle-double-right"></i>
 							</c:if>
 							<c:if test="${currentPage < maxPage}">
-								<c:url var="rrlistEND" value="cr">
+								<c:url var="rrlistEND" value="rr">
 									<c:param name="page" value="${currentPage+1}" />
 								</c:url>
 								<a href="${rrlistEND}"><i class="fas fa-angle-double-right"></i></a>

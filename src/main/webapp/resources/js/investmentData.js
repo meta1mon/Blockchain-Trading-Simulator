@@ -875,7 +875,7 @@ function coinname() {
 	});
 };
 function removeWaitBought(ubno, buycnt, buyprice) {
-	if (confirm("매수를 취하시려면 예를 누르시고 매수를 취소하지 않으시려면 아니오를 눌러주세요")) {
+	if (confirm("매수 주문을 취소하시겠습니까?")) {
 		$.ajax({
 			url : "wbdelete",
 			type : "post",
@@ -907,7 +907,7 @@ function removeWaitBought(ubno, buycnt, buyprice) {
 }
 
 function removeWaitSold(usno, sellcnt) {
-	if (confirm("매도를 취하시려면 예를 누르시고 매도를 취소하지 않으시려면 아니오를 눌러주세요")) {
+	if (confirm("매도 주문을 취소하시겠습니까?")) {
 		$.ajax({
 			url : "wsdelete",
 			type : "post",

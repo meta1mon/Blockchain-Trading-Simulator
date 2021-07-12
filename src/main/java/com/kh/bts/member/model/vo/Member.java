@@ -1,5 +1,8 @@
 package com.kh.bts.member.model.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Member {
 
 	private String email;

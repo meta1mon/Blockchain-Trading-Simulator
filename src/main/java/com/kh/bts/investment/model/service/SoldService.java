@@ -12,5 +12,5 @@ public interface SoldService {
 
 	List<Sold> selectListSold(String acntno);
 
-	public String cntSold(String acntno) throws Exception;
+	String cntSold(String acntno) throws Exception;
 }

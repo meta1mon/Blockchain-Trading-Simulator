@@ -51,7 +51,7 @@ function showInsertForm() {
 					<td align="center" width="100">작성자</td>
 					<td align="center" width="110">작성일</td>
 					<td align="center" width="60">조회</td>
-					<td align="center" width="60">추천</td>
+					<td align="center" width="60">좋아요</td>
 				</tr>
 				<!-- 글이 없을 경우 -->
 				<c:if test="${listCount eq 0}">

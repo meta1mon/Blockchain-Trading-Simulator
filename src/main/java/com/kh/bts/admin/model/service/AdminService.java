@@ -11,32 +11,59 @@ import com.kh.bts.report.model.vo.Creport;
 import com.kh.bts.report.model.vo.Rreport;
 
 public interface AdminService {
-	public int insertCreport(Creport vo);
-	public int insertAcreport(Acreport vo);
-	public int insertRreport(Rreport vo);
-	public int insertArreport(Arreport vo);
-	public int registerCash(Cash vo);
-	public int updateCash(Cash vo);
-	public int deleteCash(Cash vo);
-	public int countCashLog();
-	public List<CashLog> selectCashLog(int startPage, int limit);
-	public List<CashLog> searchCashLog(String keyword);
-	public List<Member> adminSearchMember(String keyword, int searchType);
-	public List<Member> adminListMember(int startPage, int limit);
-	public long totalCybcash();
-	public long countTodayWon();
-	public int countCreport();
-	public List<Creport> selectCreport(int startPage, int limit);
-	public int countAcreport();
-	public int countArreport();
-	public List<Acreport> selectAcreport(int startPage, int limit);
-	public List<Arreport> selectArreport(int startPage, int limit);
-	public int countRreport();
-	public List<Rreport> selectRreport(int startPage, int limit);
-	public int deleteCreport(String crno);
-	public int deleteRreport(String rrno);
-	public List<Acreport> searchAcreport(String keyword, int searchType);
-	public List<Acreport> searchAcreportByCstatus(String cstatus, int searchType);
-	public List<Arreport> searchArreport(String keyword, int searchType);
-	public List<Arreport> searchArreportByRstatus(String rstatus, int searchType);
+	int insertCreport(Creport vo);
+
+	int insertAcreportDeny(Acreport vo);
+
+	int insertAcreportAccept(Acreport vo);
+
+	int insertRreport(Rreport vo);
+
+	int insertArreportDeny(Arreport vo);
+
+	int insertArreportAccept(Arreport vo);
+
+	int registerCash(Cash vo);
+
+	int updateCash(Cash vo);
+
+	int deleteCash(Cash vo);
+
+	int countCashLog();
+
+	List<CashLog> selectCashLog(int startPage, int limit);
+
+	List<CashLog> searchCashLog(int startPage, int limit, String keyword);
+
+	List<Member> adminSearchMember(int startPage, int limit, String keyword, int searchType);
+
+	List<Member> adminListMember(int startPage, int limit);
+
+	long totalCybcash();
+
+	long countTodayWon();
+
+	int countCreport();
+
+	List<Creport> selectCreport(int startPage, int limit);
+
+	int countAcreport();
+
+	int countArreport();
+
+	List<Acreport> selectAcreport(int startPage, int limit);
+
+	List<Arreport> selectArreport(int startPage, int limit);
+
+	int countRreport();
+
+	List<Rreport> selectRreport(int startPage, int limit);
+
+	int deleteCreport(String crno);
+
+	int deleteRreport(String rrno);
+
+	List<Acreport> searchAcreport(int startPage, int limit, String keyword, int searchType);
+
+	List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType);
 }

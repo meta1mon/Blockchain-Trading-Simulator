@@ -21,11 +21,6 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-	public List<Community> selectSearch(int startPage, int limit, String keyword, int searchType) {
-		return cmDao.searchList(startPage, limit, keyword, searchType);
-	}
-
-	@Override
 	public List<Community> selectList(int startPage, int limit) {
 		return cmDao.selectList(startPage, limit);
 	}
@@ -86,6 +81,7 @@ public class CommunityServiceImpl implements CommunityService {
 		return cmDao.selectNoticeList(startPage, limit);
 	}
 	
+	@Override
 	public String returnEmail(String nickName) {
 		return cmDao.returnEmail(nickName);
 	}

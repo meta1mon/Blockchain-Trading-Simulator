@@ -53,6 +53,7 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
+	@Transactional
 	@Override
 	public void createTempPassword(String email, String pw) throws Exception {
 		mDao.createTempPassword(email, pw);
@@ -111,11 +112,13 @@ public class MemberServiceImpl implements MemberService {
 		mDao.createAuthkey(email, authkey);
 	}
 
+	@Transactional
 	@Override
 	public int updateMember(Member vo) {
 		return mDao.updateMember(vo);
 	}
 
+	@Transactional
 	@Override
 	public int deleteMember(String email) {
 		return mDao.deleteMember(email);

@@ -18,25 +18,22 @@ public class SoldServiceImpl implements SoldService {
 	@Transactional
 	@Override
 	public int insertSold(WaitSold vo) {
-		// TODO Auto-generated method stub
 		return sDao.insertSold(vo);
 	}
 
+	@Transactional
 	@Override
 	public int deleteSold(int usno) {
-		// TODO Auto-generated method stub
 		return sDao.deleteWaitSold(usno);
 	}
 
 	@Override
 	public List<Sold> selectListSold(String acntno) {
-		// TODO Auto-generated method stub
 		return sDao.selectList(acntno);
 	}
 
 	@Override
 	public String cntSold(String acntno) throws Exception {
-		// TODO Auto-generated method stub
 		return sDao.cntSold(acntno);
 	}
 

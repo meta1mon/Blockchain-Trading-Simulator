@@ -6,15 +6,24 @@
 <head>
 <title>BTS</title>
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="${pageContext.request.contextPath}/resources/assets/favicon.ico" type="image/x-icon" />
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/resources/assets/favicon.ico"
+	type="image/x-icon" />
 <meta charset="UTF-8">
-<link href="${pageContext.request.contextPath}/resources/css/communityDetail.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/reset.css"	rel="stylesheet" type="text/css" />
+<link
+	href="${pageContext.request.contextPath}/resources/css/communityDetail.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/reset.css"
+	rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 
 <script>
 
@@ -32,10 +41,9 @@ $(function(){
        });
 	})
 	
-	var rno = 0;
+	var rnoForReport = 0;
 	function rreport(nowRno) {
-		rno = nowRno;
-		console.log(rno);
+		rnoForReport = nowRno;
 		modalFn('my_modal_reply');
 
 }
@@ -70,8 +78,7 @@ $(function(){
 						<div id="likecnt">
 							<img src="resources/assets/img/thumb-up.png" id="likey">
 							${community.likecnt }&nbsp;&nbsp;&nbsp;&nbsp;
-						</div>
-						 <br>
+						</div> <br>
 						<hr>
 					</td>
 				</tr>
@@ -105,15 +112,17 @@ $(function(){
 								</div>
 								&nbsp;&nbsp;&nbsp;
 								<div id="dislike" title="비추천">
-									<img class="img_dislike" src="resources/assets/img/thumbsdown.png"
-										onclick="dislike()">&nbsp;&nbsp;&nbsp; <span
-										class="dislikecnt">${community.dislikecnt }</span>
+									<img class="img_dislike"
+										src="resources/assets/img/thumbsdown.png" onclick="dislike()">&nbsp;&nbsp;&nbsp;
+									<span class="dislikecnt">${community.dislikecnt }</span>
 								</div>
 							</div>
 							<!-- 로그인한 유저의 게시글만 수정, 삭제 버튼 보임 -->
 							<c:if test="${loginMember == writerEmail }">
-								<button type="button" class="delete"
-									onclick="location.href='${cdelete}'">삭제</button>
+								<form action="cDelete" method="post">
+									<input type="hidden" name="cno" value="${cdelete }">
+									<button type="submit" class="delete">삭제</button>
+								</form>
 								<button type="button" class="update"
 									onclick="location.href='${cupdate}'">수정</button>
 							</c:if>
@@ -135,21 +144,20 @@ $(function(){
 					<div id="comment">
 						<br> <span style="display: inline;"> <span
 							class="comment_writer"> ${rep.rwriter} &nbsp; &nbsp;</span> <span
-							class="comment_date"> ${rep.rdate}</span> 
-									<!-- 댓글 수정, 삭제, 신고 드랍다운 메뉴 -->
-								<div class="replyDropdown" style="float: right;">
-									<div class="icon-react icon-more" style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
-										<div class="dropdown-content">
-												<div class="reportReply" onclick="rreport(${rep.cno})">신고</div>
-											<!-- 로그인한 유저의 게시글만 삭제 버튼 보임 -->
-											<c:if test="${loginMember == rep.email }">
-												<div class="deleteReply" onclick="replyDelete(${rep.rno}, ${rep.cno })">삭제</div>
-											</c:if>
-										</div>
+							class="comment_date"> ${rep.rdate}</span> <!-- 댓글 수정, 삭제, 신고 드랍다운 메뉴 -->
+							<div class="replyDropdown" style="float: right;">
+								<div class="icon-react icon-more"
+									style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
+									<div class="dropdown-content">
+										<div class="reportReply" onclick="rreport('${rep.rno}')">신고</div>
+										<!-- 로그인한 유저의 게시글만 삭제 버튼 보임 -->
+										<c:if test="${loginMember == rep.email }">
+											<div class="deleteReply"
+												onclick="replyDelete('${rep.rno}', '${rep.cno }', '${rep.rwriter }')">삭제</div>
+										</c:if>
 									</div>
 								</div>
-								<br> 
-							<span class="comment_content"> ${rep.rcontent}</span>
+							</div> <br> <span class="comment_content"> ${rep.rcontent}</span>
 						</span>
 					</div>
 					<br>
@@ -164,23 +172,26 @@ $(function(){
 						<div class="comment-box">
 							<input type="hidden" name="cno" value="${community.cno }">
 							<table style="width: 100%">
-							<tr>
-							<td width="90%">
-							<textarea placeholder="댓글 쓰기" id="editor" name="rcontent"
-								maxlength="4000"
-								onfocus="if(this.value == '댓글 쓰기') { this.value = ''; }"
-								onblur="if(this.value == '') { this.value ='댓글 쓰기'; }"></textarea>
-								</td>
-								<td>
-							<button class="rplyInsert" type="button" onclick="rplyInsert()">등록</button>
-							</td>
-							</tr>
+								<tr>
+									<td width="90%"><textarea placeholder="댓글 쓰기" id="editor"
+											name="rcontent" maxlength="4000"
+											onfocus="if(this.value == '댓글 쓰기') { this.value = ''; }"
+											onblur="if(this.value == '') { this.value ='댓글 쓰기'; }"></textarea>
+									</td>
+									<td>
+										<button class="rplyInsert" type="button"
+											onclick="rplyInsert()">등록</button>
+									</td>
+								</tr>
 							</table>
 						</div>
 					</form>
 				</c:if>
 				<c:if test="${loginMember == null }">
-					<div id="needlogin">&nbsp;&nbsp;&nbsp;댓글을 작성하려면 <a href="login" style="font-size: 30px; color:#8c66c8">로그인</a>이 필요합니다.</div>
+					<div id="needlogin">
+						&nbsp;&nbsp;&nbsp;댓글을 작성하려면 <a href="login"
+							style="font-size: 30px; color: #8c66c8">로그인</a>이 필요합니다.
+					</div>
 				</c:if>
 			</div>
 			<c:url var="clist" value="clist">
@@ -217,7 +228,7 @@ $(function(){
 					style="width: 328px; position: relative; right: 30px; top: 20px;">
 				<div>
 					<button type="button" id="btncancel" class="modal_close_btn">취소</button>
-					<button type="button" id="btnrply" class="modal_report_btn">신고</button>
+					<button type="button" id="btnrply" style="cursor: pointer;" class="modal_report_btn">신고</button>
 				</div>
 			</div>
 		</div>
@@ -295,42 +306,14 @@ $(function(){
         return this;
     }
 
-    document.getElementById('popup_open_btn').addEventListener('click', function() {
-        // 모달창 띄우기
-        modalFn('my_modal');
-    })
-    
-   // 게시글 신고 부분
-      <!-- 게시글 신고 전송 ajax -->
-      $("#btnreport").on("click", function() {
-         var dataList = $("#frmC").serialize();
-         $.ajax({
-            url : "${pageContext.request.contextPath}/admin/reportCommunity",
-            type : "post",
-            data : dataList,
-            success : function(data) {
-               if(data > 0) {
-                  alert("신고 접수 되었습니다!");
-               } else {
-                  alert("신고 접수 실패! 관리자에게 문의하세요!");                  
-               }
-               bg.remove();
-               modal.style.display = 'none';
-               
-            }
-         });
-      })
-    
-    
-    
    // 댓글 신고 부분
     $("#btnrply").on("click", function() {
        var rreport = $("input[name='rreport']:checked").val();
-       $.ajax({
+        $.ajax({
           url : "${pageContext.request.contextPath}/admin/reportRcommunity",
           type : "post",
           data : {"rrreason" : rreport,
-             "rno" : rno},
+             "rno" : rnoForReport},
           success : function(data) {
              if(data > 0) {
                 alert("신고 접수 되었습니다!");
@@ -395,56 +378,26 @@ $(function(){
           }
    	})
    }
-//    // 댓글 수정 버튼 생성
-//    function makeUpdateBtn(index) {
-// 	console.log(index);
-//       $(".comment_content").eq(index).hide();
-//       /* $(".makeBtn").eq(index).hide(); */
-//       $(".newRcontent").eq(index).show();
-//       $(".submitRUpdate").eq(index).show();
-//       $(".cancleRUpdate").eq(index).show();
-//    }
-   
-//    // 댓글 수정 취소 버튼 클릭 시
-//    function updateRCancle(index) {
-// 	console.log(index);
-//       $(".comment_content").eq(index).show();
-//       /* $(".makeBtn").eq(index).show(); */
-//       $(".newRcontent").eq(index).hide();
-//       $(".newRcontent").eq(index).text("");
-//       $(".submitRUpdate").eq(index).hide();
-//       $(".cancleRUpdate").eq(index).hide();
-//    }
-   
-//    // 댓글 수정완료 버튼 클릭 시
-//    function replyUpdate(rno, idx) {
-//       var newOne = $(".newRcontent").eq(idx).val();
-//       $.ajax({
-//          url : "${pageContext.request.contextPath}/rcUpdate",
-//          type : "post",
-//          data : {
-//             "rno" : rno,
-//             "rcontent": newOne
-//          },
-//          success : function(data) {
-//         	 alert("댓글 수정완료")
-//         	 window.location.reload();
-//          }
-//       })
-//    }
-   
-   // 댓글 삭제   -- 새로고침을 사용 중인데 추후 수정해야 할듯
-   function replyDelete(deleteRno, deleteCno) {
-      $.ajax({
+
+   // 댓글 삭제
+   function replyDelete(deleteRno, deleteCno, deleteRwriter) {
+		console.log(deleteRno);	   
+		console.log(deleteCno);	   
+       $.ajax({
          url : "${pageContext.request.contextPath}/rcDelete",
          type : "post",
          data : {
             "rno" : deleteRno,
-            "cno" : deleteCno
+            "cno" : deleteCno,
+            "rwriter" : deleteRwriter
          },
          success : function(data) {
+			if(data > 0) {
         	 alert("댓글 삭제 완료");
         	 window.location.reload();
+			} else {
+        	 alert("댓글 삭제 실패");
+			}
          }
       });
    }

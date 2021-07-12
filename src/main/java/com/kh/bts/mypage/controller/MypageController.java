@@ -63,7 +63,7 @@ public class MypageController {
 	@Autowired
 	private SoldService sService;
 
-	@RequestMapping(value = "")
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView mypageEnter(ModelAndView mv) {
 		mv.setViewName("mypage/myPageEnter");
 		return mv;

@@ -14,6 +14,7 @@ public class Acreport {
 	private String cstatus;
 	private String creason;
 	private String acrdate;
+	private String cno;
 
 	public Acreport() {
 	}
@@ -102,5 +103,14 @@ public class Acreport {
 	public void setAcrdate(String acrdate) {
 		this.acrdate = acrdate;
 	}
+
+	public String getCno() {
+		return cno;
+	}
+
+	public void setCno(String cno) {
+		this.cno = cno;
+	}
+
 
 }

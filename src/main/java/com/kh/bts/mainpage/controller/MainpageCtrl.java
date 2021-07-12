@@ -26,9 +26,15 @@ public class MainpageCtrl {
 		return mav;
 	}
 
-	@RequestMapping(value = "/")
-	public String mainPage() {
-		return "main/mainPage";
+	@RequestMapping(value = "")
+	public ModelAndView mainPage(ModelAndView mav) {
+		List<Community> mainlist = cmService.selectMainAllCommunityList();
+		mav.addObject("maincommuList0", mainlist.get(0));
+		mav.addObject("maincommuList1", mainlist.get(1));
+		mav.addObject("maincommuList2", mainlist.get(2));
+		mav.addObject("maincommuList3", mainlist.get(3));
+		mav.setViewName("main/mainPage");
+		return mav;
 	}
 
 }

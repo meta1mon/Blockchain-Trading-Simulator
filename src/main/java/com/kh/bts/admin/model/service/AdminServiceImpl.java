@@ -28,8 +28,13 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Transactional
 	@Override
-	public int insertAcreport(Acreport vo) {
-		return aDao.insertAcreport(vo);
+	public int insertAcreportDeny(Acreport vo) {
+		return aDao.insertAcreportDeny(vo);
+	}
+	@Transactional
+	@Override
+	public int insertAcreportAccept(Acreport vo) {
+		return aDao.insertAcreportAccept(vo);
 	}
 	
 	@Transactional
@@ -40,8 +45,13 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Transactional
 	@Override
-	public int insertArreport(Arreport vo) {
-		return aDao.insertArreport(vo);
+	public int insertArreportDeny(Arreport vo) {
+		return aDao.insertArreportDeny(vo);
+	}
+	@Transactional
+	@Override
+	public int insertArreportAccept(Arreport vo) {
+		return aDao.insertArreportAccept(vo);
 	}
 
 	@Transactional
@@ -79,16 +89,16 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public List<CashLog> searchCashLog(String keyword) {
-		return aDao.searchCashLog(keyword);
+	public List<CashLog> searchCashLog(int startPage, int limit, String keyword) {
+		return aDao.searchCashLog(startPage, limit, keyword);
 	}
 	@Override
-	public List<Member> adminSearchMember(String keyword, int searchType) {
-		return aDao.adminSearchMember(keyword, searchType);
+	public List<Member> adminSearchMember(int startPage, int limit, String keyword, int searchType) {
+		return aDao.adminSearchMember(startPage, limit, keyword, searchType);
 	}
 	@Override
-	public List<Acreport> searchAcreport(String keyword, int searchType) {
-		return aDao.searchAcreport(keyword, searchType);
+	public List<Acreport> searchAcreport(int startPage, int limit, String keyword, int searchType) {
+		return aDao.searchAcreport(startPage, limit, keyword, searchType);
 	}
 
 	@Override
@@ -169,15 +179,7 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.selectArreport(startPage, limit);
 	}
 	@Override
-	public List<Acreport> searchAcreportByCstatus(String cstatus, int searchType) {
-		return aDao.searchAcreportByCstatus(cstatus, searchType);
-	}
-	@Override
-	public List<Arreport> searchArreport(String keyword, int searchType) {
-		return aDao.searchArreport(keyword, searchType);
-	}
-	@Override
-	public List<Arreport> searchArreportByRstatus(String rstatus, int searchType) {
-		return aDao.searchArreportByRstatus(rstatus, searchType);
+	public List<Arreport> searchArreport(int startPage, int limit, String keyword, int searchType) {
+		return aDao.searchArreport(startPage, limit, keyword, searchType);
 	}
 }

@@ -42,6 +42,9 @@
 .left{
 	text-align: left;
 }
+.center{
+	text-align: center;
+}
 .right{
 	text-align: right;
 }
@@ -132,17 +135,17 @@ function doOpenCheck(chk){
 						</td>
 					</tr>
 					<tr>
-						<td class="left">모의 투자 충전 금액</td>
-						<td class="left">KRW</td>
+						<td class="center">모의 투자 충전 금액</td>
+						<td class="center">KRW</td>
 						<td>할인율</td>
 						<td>할인 기간</td>
 						<td>&nbsp;</td>
 					</tr>
 					<c:forEach items="${nowList }" var="cashVo" varStatus="status">
 						<tr>
-							<td class="left"><fmt:formatNumber value="${cashVo.won }"
+							<td class="right"><fmt:formatNumber value="${cashVo.won }"
 								pattern="#,###,###,###" />원</td>
-							<td class="left"><fmt:formatNumber value="${cashVo.sellprice }"
+							<td class="right"><fmt:formatNumber value="${cashVo.sellprice }"
 								pattern="#,###,###,###" />원</td>
 							<td>${cashVo.discountrate }%</td>
 							<input type="hidden" name="currentWon${status.count }" value="${cashVo.won }" readonly>

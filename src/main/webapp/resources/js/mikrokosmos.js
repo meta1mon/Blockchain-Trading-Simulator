@@ -9,7 +9,6 @@ let replyCno = "";
 
 // 처음 인스타에서 댓글 리스트 불러오기
 function reply(idx) {
-	var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\">";
 	replyCno = $(".hiddenCno").eq(idx).val();
 	$.ajax({
 			url : "rcSelect",
@@ -19,17 +18,18 @@ function reply(idx) {
 			},
 			datatype : "json",
 			success : function(data) {
+				var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\"><input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\">";
 				modalReplyFn('modal_reply');
 				var json = JSON.parse(data);
 				if (json.length > 0) {
 					$.each(json, function(idx, reply) {
-										replyHtml += "<input id=\"modalInCno\" type=\"hidden\" value=\"" + replyCno +"\">" + "<li><div class=\"profile-wrap\">"
+										replyHtml += "<li><div class=\"profile-wrap\">"
 												+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
 												+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
 												+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
 												+ "<div class=\"icon-react icon-more\" style=\"background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);\">"
 												+ "<div class=\"dropdown-content\"> <p class=\"reportReply\" onclick=\"rreport('"+ reply.rno + "')\">신고</p>"
-												+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "')\">삭제</p></div></li>";
+												+ "<p class=\"deleteReply\" onclick=\"replyDelete('" + reply.rno + "', '" + reply.cno + "', '" + reply.rwriter + "', '" + this +"')\">삭제</p></div></li>";
 									});
 					replyHtml += "</ul>";
 				} else {
@@ -38,14 +38,11 @@ function reply(idx) {
 				$("#replyList").html(replyHtml);
 			}
 		});
-	
-	console.log("dasfsdafadsfasdfasdfs" + $("#modalInCno").val());
 }
 
 // moreInsta에서 댓글 리스트 불러오기
 function reply2(moreInstaCno) {
 	console.log(moreInstaCno);
-	var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\">";
 	$.ajax({
 		url : "rcSelect",
 		type : "post",
@@ -54,11 +51,12 @@ function reply2(moreInstaCno) {
 		},
 		datatype : "json",
 		success : function(data) {
+			var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\"> <input id=\"moreModalInCno\" type=\"hidden\" value=\"" + moreInstaCno +"\">";
 			modalReplyFn('modal_reply');
 			var json = JSON.parse(data);
 			if (json.length > 0) {
 				$.each(json, function(idx, reply) {
-									replyHtml += "<input id=\"moreModalInCno\" type=\"hidden\" value=\"" + moreInstaCno +"\">" + "<li><div class=\"profile-wrap\">"
+									replyHtml += "<li><div class=\"profile-wrap\">"
 											+ "<img class=\"img-profile story\" src=\"resources/assets/img/user.png\" alt=\"..\"></div><div class=\"profile-writer\">"
 											+ "<span class=\"userID point-span\">" + reply.rwriter + "</span><span class=\"sub-span\">" + reply.rdate
 											+ "</span><br><span class=\"content-span\">" + reply.rcontent + "</span></div><div class=\"replyDropdown\" style=\"float: right;\">"
@@ -113,8 +111,6 @@ function checkUpdate(updateCno, updateCwriter) {
 
 // 게시글 삭제
 function checkDelete(deleteCno, deleteCwriter) {
-	console.log(deleteCno);
-	console.log(deleteCwriter);
 	$.ajax({
 		url : "cDeleteCheck",
 		type : "post",
@@ -194,7 +190,6 @@ $(document).mouseup(function(e) {
 
 // 게시글 신고 부분
 $("#btnreport").on("click", function() {
-	console.log("컨트롤러로 신고 사유 전송하러 들어옴");
 	$.ajax({
 		url : "admin/reportCommunity",
 		type : "post",
@@ -265,6 +260,7 @@ function replyInsert1(Idx) {
 
 // 모달 밖의 댓글 삽입. moreInsta
 function replyInsert3(thisObject, outModalCno) {
+	var thisIdx = $(window.event.target).parents('article').index();
 	var rcontent = $(window.event.target).prev().val();
 	
 	if (rcontent == "") {
@@ -279,9 +275,21 @@ function replyInsert3(thisObject, outModalCno) {
 			},
 			success : function(data) {
 				alert("댓글 작성 완료");
-				window.location.reload();
+				$.ajax({
+					url : "replyCount",
+					type : "post",
+					data : {
+						"cno" : outModalCno
+					},
+					success : function(data) {
+						var nowReplyCnt = $(".moreReplycnt").eq(thisIdx).text();
+						$(".moreReplycnt").eq(thisIdx).text(nowReplyCnt*1 + 1);
+						// 기존의 글이 10개라 10개를 더함. 처음 글이 5개면 5개 더해야 함
+						$(".input-comment").eq(thisIdx+10).val(" ");
+					}
+				})
 			}
-		})
+		});
 	}
 	
 }
@@ -311,7 +319,6 @@ function replyInsert2() {
 			success : function(data) {
 				bgReply.remove();
 				alert("댓글 작성 완료");
-				console.log(cno);
 				var replyHtml = "<ul style=\"zIndex:10000;\" class=\"reply-list\">";
 				// 댓글 리스트 읽어오는 ajax
 				$.ajax({
@@ -348,28 +355,7 @@ function replyInsert2() {
 	
 }
 
-// 댓글 삭제
-function replyDelete(deleteRno, deleteCno, deleteRwriter) {
-	$.ajax({
-		url : "rcDelete",
-		type : "post",
-		data : {
-			"rno" : deleteRno,
-			"cno" : deleteCno,
-			"rwriter" : deleteRwriter
-		},
-		success : function(data) {
-			if (data == -1) {
-				alert("권한이 없습니다");
-			} else if (data > 0) {
-				alert("댓글 삭제 성공");
-			} else {
-				alert("댓글 삭제 실패");
-			}
-			window.location.reload();
-		}
-	});
-}
+
 
 /* 게시글 신고 모달 */
 
@@ -398,22 +384,21 @@ function modalFn(id) {
 				modal.style.display = 'none';
 			});
 
-	modal
-			.setStyle({
-				position : 'fixed',
-				display : 'block',
-				boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+	modal.setStyle({
+			position : 'fixed',
+			display : 'block',
+			boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
 
-				// 시꺼먼 레이어 보다 한칸 위에 보이기
-				zIndex : zIndex + 1,
+			// 시꺼먼 레이어 보다 한칸 위에 보이기
+			zIndex : zIndex + 1,
 
-				// div center 정렬
-				top : '50%',
-				left : '50%',
-				transform : 'translate(-50%, -50%)',
-				msTransform : 'translate(-50%, -50%)',
-				webkitTransform : 'translate(-50%, -50%)'
-			});
+			// div center 정렬
+			top : '50%',
+			left : '50%',
+			transform : 'translate(-50%, -50%)',
+			msTransform : 'translate(-50%, -50%)',
+			webkitTransform : 'translate(-50%, -50%)'
+		});
 }
 
 // Element 에 style 한번에 오브젝트로 설정하는 함수 추가
@@ -486,7 +471,6 @@ function modalReplyFn(id) {
 
 	// 모달 div 뒤에 희끄무레한 레이어
 	bgReply = document.createElement('div');
-/*	bgReply.setAttribute("class", "replyModalAppend");*/
 	bgReply.setStyle({
 		position : 'fixed',
 		zIndex : zIndex,
@@ -506,7 +490,6 @@ function modalReplyFn(id) {
 				$("#replyContent2").val("");
 				bgReply.remove();
 				modalReply.style.display = 'none';
-				window.location.reload();
 			});
 
 	modalReply

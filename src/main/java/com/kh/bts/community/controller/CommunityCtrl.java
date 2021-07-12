@@ -100,9 +100,7 @@ public class CommunityCtrl {
 	@ResponseBody
 	@RequestMapping(value = "replyCount", method = RequestMethod.POST)
 	public int replyCount(Community vo, HttpServletRequest request) {
-		System.out.println(vo.getCno());
 		int result = cmService.countReply(vo.getCno());
-		System.out.println(result);
 		return result;
 	}
 	

@@ -80,7 +80,7 @@
 				</div>
 				<div class="cards">
 					<label class="info" for="item-1" id="rank-info-1">
-						초기 자본금(1,000만원)을 기준으로 매 시간 갱신됩니다.
+						초기 자본금(500만원)을 기준으로 매 시간 갱신됩니다.
 					</label>
 					<label class="info" for="item-2" id="rank-info-2">
 						매일 오전 9시에 갱신됩니다.

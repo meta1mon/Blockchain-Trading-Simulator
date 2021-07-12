@@ -35,7 +35,7 @@ public class CommunityDao {
 	}
 	
 	public int countReply(String cno) {
-		int result = sqlSession.selectOne(cno);
+		int result = sqlSession.selectOne("community.countReply", cno);
 		return result;
 	}
 

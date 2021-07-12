@@ -238,27 +238,7 @@ $(function(){
 		<%@include file="../main/footer.jsp"%>
 	</div>
 	<script>
-	
-	/* // 댓글 드랍다운 메뉴 클릭 시 열기/닫기
-	$('.replyDropdown').click(function() {
-		console.log("클릭함");
-		console.log("클릭dropdown 상위 article idx: " + $(this).parents('#comment').index());
-		$('.dropdown-content').eq($(this).parents('#comment').index()).show();
-		$(".replyDropdown").mouseleave(function(){$(this).css("display", "block");});
-		});
 
-	$(document).mouseup(function (e){
-	    var dropdown = $('.dropdown-content');
-	    var replyDropdownBtn = $('.replyDropdown');
-	    var containerReply = $('#modal_reply'); // 댓글 모달창
-	    var containerReport = $('#modal_report'); // 게시글 신고 모달창
-	    var containerReportReply = $('#modal_report_reply'); //댓글 신고 모달창
-	    
-	    if( dropdown.has(e.target).length === 0){
-	    	dropdown.css('display','none');
-//	    	replyDropdownBtn.css('display','none');
-	    } */
-	    
    var bg = null;
    var modal = null;
    function modalFn(id) {

@@ -94,7 +94,6 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public List<Community> selectMainAllCommunityList() {
-		// TODO Auto-generated method stub
 		return cmDao.selectMainAllCommunityList();
 	}
 

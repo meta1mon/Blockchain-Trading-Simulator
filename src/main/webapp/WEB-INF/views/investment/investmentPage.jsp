@@ -177,7 +177,9 @@
 
 
 									<table class='table table-striped'>
-
+										<tr>
+											<td><div id="now_price"></div></td>
+										</tr>
 										<tr>
 											<th><span>회원계좌번호 : ${acnt.acntno } </span> <span id="su"></span><input
 												name="acntno" type="hidden" value="${acnt.acntno }"></th>
@@ -203,6 +205,7 @@
 								</table>
 								<form id="frm22">
 									<table style="width: 100%;">
+
 										<tr>
 											<th style="font-size: 20px !important; width: 100%;"
 												colspan="1">보유잔고</th>

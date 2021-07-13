@@ -353,7 +353,7 @@ function alltable() {
 								data['data'][ch_title]['acc_trade_value_24H'] * 1,
 								data['data'][ch_title]['min_price'] * 1,
 								data['data'][ch_title]['max_price'] * 1 ]
-						html = "<table class='table table-striped' id='cointable'><tr><th style='position: sticky; top: 0px'>현재가</th><th style='position: sticky; top: 0px'>등락률(24H)</th><th style=' position: sticky; top: 0px;'>거래대금</th></tr>";
+						html = "<table class='table table-striped' id='cointable'><tr><th style='position: sticky; top: 0px'>코인명</th><th style='position: sticky; top: 0px'>현재가</th><th style='position: sticky; top: 0px'>등락률(24H)</th><th style=' position: sticky; top: 0px;'>거래대금</th></tr>";
 						// 위 코드에서 첫번째 tr 뒤에 있던 건데 빼도 괜찮음? <th style='position: sticky; top: 0px'>코인명</th>
 						title = "<table class='table table-striped' id='tit'>";
 						// 위 코드 뒤에 붙어있던건데 땠음<tr><th style='position: sticky; top: 0px'>코인명</th></tr>

@@ -23,16 +23,20 @@
 		if(${criteria == 0}) {
 			$("#item-1").prop("checked", true);
 			$(".info").eq(0).show();
+			$(".ment").append("<p>&nbsp;</p>");
 		} else if(${criteria == 1}) {
 // 			console.log("일간넘어감");
 			$("#item-2").prop("checked", true);
 			$(".info").eq(1).show();
+			$(".ment").append("<p>&nbsp;</p>");
 		} else if(${criteria ==2}) {
 			$("#item-3").prop("checked", true);
 			$(".info").eq(2).show();
+			$(".ment").append("<p>주간 랭킹 Top3에게는 소정의 상품이 지급됩니다.</p>");
 		} else if(${criteria ==3}) {
 			$("#item-4").prop("checked", true);
 			$(".info").eq(3).show();
+			$(".ment").append("<p>월간 랭킹 Top3에게는 소정의 상품이 지급됩니다.</p>");
 		}
 		
 		$("#rank-1").click(function() {
@@ -96,7 +100,7 @@
 			<!-- 랭킹 스와이프 메뉴 끝 -->
 
 			<div id="daily">
-			<p style="text-align: left;">
+			<p style="text-align: left;" class="ment">
 				현재 <fmt:formatNumber value="${other.size() }"	pattern="#,###,###,###,###" /> 명이 랭킹에 참여하고 있습니다.
 			</p>
 			<!-- 일간 TOP3 -->

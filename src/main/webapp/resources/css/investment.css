@@ -12,10 +12,14 @@
 	width: 48.5%;
 }
 
+.table td, .table th {
+	vertical-align: bottom;
+}
+
 .pinpad-dimmed {
 	width: 100%;
 	min-height: 100%;
-	height: 2500px !important; 
+	height: 2500px !important;
 	position: absolute;
 	display: grid;
 	top: 0;
@@ -23,6 +27,10 @@
 	margin: 0;
 	padding: 0;
 	z-index: 1000000;
+}
+
+.btn_bs {
+	width: 100%;
 }
 
 #bought {

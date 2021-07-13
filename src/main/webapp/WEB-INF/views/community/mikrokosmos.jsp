@@ -615,7 +615,7 @@ function replyDelete2(deleteRno, deleteCno, deleteRwriter) {
 									class="sub-span">3등</span>
 							</div>
 						</li>
-						<c:forEach items="${other }" var="rank" begin="3"
+						<c:forEach items="${other }" var="rank" begin="3" end="9"
 							varStatus="status">
 							<li>
 								<div class="gradient-wrap">
@@ -667,7 +667,7 @@ function replyDelete2(deleteRno, deleteCno, deleteRwriter) {
 									class="sub-span">3등</span>
 							</div>
 						</li>
-						<c:forEach items="${dailyOther }" var="rank" begin="3"
+						<c:forEach items="${dailyOther }" var="rank" begin="3" end="9"
 							varStatus="status">
 							<li>
 								<div class="gradient-wrap">

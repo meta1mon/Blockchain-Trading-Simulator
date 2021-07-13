@@ -177,90 +177,94 @@
 								</tr>
 							</c:when>
 							<c:when test="${loginMember != null }">
-								<tr id="now_price">
+								<tr id="now_price" style="width: 226.5px;">
 								</tr>
+							
+
 								<form id="frm11">
-								<tr>
-									<td width="100px">회원계좌번호</td>
-									<td>${acnt.acntno }<span id="su"></span><input
-										name="acntno" type="hidden" value="${acnt.acntno }"></td>
-								</tr>
-								<tr>
-									<td width="100px">계좌비밀번호</td>
-									<td><input class="password2" id="bankpw" name="bankPw"
-										type="password" placeholder="비밀번호">
-										<button id="check2" type="button"
-											style="border-radius: 8px; outline: none; border: 2px #E3C8F8 solid; cursor: pointer; background-color: #E3C8F8; color: white;">확인</button>
-									</td>
-								</tr>
+									<tr>
+										<td style="width: 223px;">회원계좌번호</td>
+										<td>${acnt.acntno }<span id="su"></span><input
+											name="acntno" type="hidden" value="${acnt.acntno }"></td>
+									</tr>
+									<tr>
+										<td width="100px">계좌비밀번호</td>
+										<td><input class="password2" id="bankpw" name="bankPw"
+											type="password" placeholder="비밀번호">
+											<button id="check2" type="button"
+												style="border-radius: 8px; outline: none; border: 2px #E3C8F8 solid; cursor: pointer; background-color: #E3C8F8; color: white;">확인</button>
+										</td>
+									</tr>
 								</form>
 								<tr>
-									<td style="text-align: center;"><button class="btn_bs"
+									<td style="text-align: center;" ><button class="btn_bs"
 											id="bought_b"
-											style="border-radius: 8px; border: 0px; background-color: #f75467; outline: none; cursor: pointer; width: 150px;">매수</button>
+											style="border-radius: 8px; border: 0px; background-color: #f75467; outline: none; cursor: pointer;">매수</button>
 									</td>
-									<td><button class="btn_bs" id="sold_b"
-											style="border-radius: 8px; outline: none; cursor: pointer; width: 150px;">매도</button>
+									<td><button  class="btn_bs" id="sold_b"
+											style=" border-radius: 8px; outline: none; cursor: pointer;">매도</button>
 										<br></td>
 								</tr>
 								<form id="frm22">
-								<tr>
-									<td width="100px">보유 금액</td>
-									<td><input id="cybcash" value="" readonly="readonly">
-									</td>
-								</tr>
-								<tr>
-									<td style="width: 100px">코인 이름</td>
-									<td><input name="coin" id="coin" type="text" value="BTC"
-										readonly="readonly" style="text-align: center;"></td>
-								</tr>
-								<tr>
-									<td width="100px">보유 수량</td>
-									<td><input style="text-align: center;" id="coincount"
-										placeholder="보유 코인" value="" readonly></td>
-								</tr>
-								<tr>
-									<td>가격</td>
-									<td><input style="text-align: center;" id="price_b"
-										type="text" name="buyprice"><input style="text-align: center;" id="price_s"
-										type="text" name="sellprice"></td>
+									<tr>
+										<td width="100px">보유 금액</td>
+										<td><input id="cybcash" value="" readonly="readonly">
+										</td>
+									</tr>
+									<tr>
+										<td style="width: 100px">코인 이름</td>
+										<td><input name="coin" id="coin" type="text" value="BTC"
+											readonly="readonly" style="text-align: center;"></td>
+									</tr>
+									<tr>
+										<td width="100px">보유 수량</td>
+										<td><input style="text-align: center;" id="coincount"
+											placeholder="보유 코인" value="" readonly></td>
+									</tr>
+									<tr>
+										<td>가격</td>
+										<td><input style="text-align: center;" id="price_b"
+											type="text" name="buyprice"><input
+											style="text-align: center;" id="price_s" type="text"
+											name="sellprice"></td>
 
-								</tr>
-								<tr>
-									<td>수량</td>
-									<td><input style="text-align: center;" id="cnt_b"
-										type="text" name="buycnt"><input style="text-align: center;" id="cnt_s"
-										type="text" name="sellcnt"></td>
-								</tr>
-								<tr>
-									<td>총액</td>
-									<td><input id="totalprice" type="text" value="0"><input
-										id="updateprice" name="updateprice" type="hidden" value=""><input
-										id="updatecoin" name="updatecoin" type="hidden" value=""><br></td>
-								</tr>
-								<tr>
-									<td colspan="2"><input id="acntno" name="acntno"
-										type="hidden" value="${acnt.acntno }"> <input
-										id="hidden" type="hidden" value="${acnt.cybcash }"></td>
-								</tr>
-								<tr>
-									<td style="text-align: center;" colspan="2"><button
-											type="button" class="b_c" value="0.1" onclick="buyp(0.1)">10%</button>
-										<button type="button" class="b_c" value="0.25"
-											onclick="buyp(0.25)">25%</button>
-										<button type="button" class="b_c" value="0.50"
-											onclick="buyp(0.5)">50%</button>
-										<button type="button" class="b_c" value="1" onclick="buyp(1)">100%</button>
-										<br> <br></td>
-								</tr>
-								<tr>
-									<td style="text-align: center;" colspan="2"><button
-											id="bought" type="button"
-											style="border-radius: 8px; background-color: #f75467; border: 0px; outline: none; cursor: pointer;">매수</button>
-										<button id="sold" type="button"
-											style="border-radius: 8px; background-color: #4387f9; border: 0px; outline: none; cursor: pointer;">매도</button></td>
+									</tr>
+									<tr>
+										<td>수량</td>
+										<td><input style="text-align: center;" id="cnt_b"
+											type="text" name="buycnt"><input
+											style="text-align: center;" id="cnt_s" type="text"
+											name="sellcnt"></td>
+									</tr>
+									<tr>
+										<td>총액</td>
+										<td><input id="totalprice" type="text" value="0"><input
+											id="updateprice" name="updateprice" type="hidden" value=""><input
+											id="updatecoin" name="updatecoin" type="hidden" value=""><br></td>
+									</tr>
+									<tr>
+										<td colspan="2"><input id="acntno" name="acntno"
+											type="hidden" value="${acnt.acntno }"> <input
+											id="hidden" type="hidden" value="${acnt.cybcash }"></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;" colspan="2"><button
+												type="button" class="b_c" value="0.1" onclick="buyp(0.1)">10%</button>
+											<button type="button" class="b_c" value="0.25"
+												onclick="buyp(0.25)">25%</button>
+											<button type="button" class="b_c" value="0.50"
+												onclick="buyp(0.5)">50%</button>
+											<button type="button" class="b_c" value="1" onclick="buyp(1)">100%</button>
+											<br> <br></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;" colspan="2"><button
+												id="bought" type="button"
+												style="border-radius: 8px; background-color: #f75467; border: 0px; outline: none; cursor: pointer;">매수</button>
+											<button id="sold" type="button"
+												style="border-radius: 8px; background-color: #4387f9; border: 0px; outline: none; cursor: pointer;">매도</button></td>
 
-								</tr>
+									</tr>
 								</form>
 							</c:when>
 						</c:choose>

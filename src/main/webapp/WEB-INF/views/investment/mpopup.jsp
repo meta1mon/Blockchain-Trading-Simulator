@@ -23,7 +23,7 @@
 <body>
 
 
-	<div id="me" style="min-width: 200px !important;">
+	<div id="me" style="min-width: 200px !important; height: 100%">
 		<h2>
 			<img
 				src="${pageContext.request.contextPath}/resources/assets/img/icon_acnt.svg"

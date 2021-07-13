@@ -32,14 +32,6 @@
 
 			// 랭킹 카테고리 :  0 - 누적, 1 - 데일리, 2 - 위클리, 3 - 먼슬리
 			// 누적 : 1시간, 정각
-			
-			if(second == 0) {
-				liveEsset(0);
-				liveEsset(1);
-				liveEsset(2);
-				liveEsset(3);
-				
-			}
 
 			if (minute == 0 && second == 0) {
 				liveEsset(0);

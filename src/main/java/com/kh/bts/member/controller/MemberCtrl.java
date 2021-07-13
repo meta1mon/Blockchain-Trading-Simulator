@@ -111,22 +111,22 @@ public class MemberCtrl {
 		HttpSession session = request.getSession();
 		Member nowLogin = mService.loginMember(vo);
 		String auth = mService.returnAuth(email);
-		if (nowLogin == null) {
+		if (nowLogin != null) {
 			if(auth == "N" || auth.equals("N")) {
 				request.setAttribute("errorMessage", "이메일 인증을 진행해주세요.");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
 				dispatcher.forward(request, response); 
 			} else {
-				logger.info("======= 없는 회원 및 회원 정보 불일치 =======");
-				request.setAttribute("errorMessage", "로그인 정보가 올바르지 않습니다.");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
-				dispatcher.forward(request, response);
+				logger.info("======= 로그인 성공 =======");
+				String loginMember = nowLogin.getEmail();
+				session.setAttribute("loginMember", loginMember);
+				response.sendRedirect("mainpage");
 			}
 		} else {
-			logger.info("======= 로그인 성공 =======");
-			String loginMember = nowLogin.getEmail();
-			session.setAttribute("loginMember", loginMember);
-			response.sendRedirect("mainpage");
+			logger.info("======= 없는 회원 및 회원 정보 불일치 =======");
+			request.setAttribute("errorMessage", "로그인 정보가 올바르지 않습니다.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
+			dispatcher.forward(request, response);
 		}
 
 	}

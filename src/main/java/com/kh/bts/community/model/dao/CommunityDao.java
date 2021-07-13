@@ -52,6 +52,10 @@ public class CommunityDao {
 	public int listCount() { // 공지사항 개수 조회(작성자에 관리자가 포함된 경우)
 		return sqlSession.selectOne("community.countCommunity");
 	}
+	
+	public int listTotalCount() { // 전체 글 개수(관리자 제외)
+		return sqlSession.selectOne("community.countTotalCommunity");
+	}
 
 	public int listTodayCount() { // 오늘 게시글 전체 개수 조회
 		return sqlSession.selectOne("community.countTodayCommunity");

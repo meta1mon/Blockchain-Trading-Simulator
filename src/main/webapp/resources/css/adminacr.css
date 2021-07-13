@@ -10,6 +10,12 @@
 #acr {
 	margin-top: 150px;
 	width: 1085px;
+	padding: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    box-shadow: 5px 5px -0px -0px rgba(0,0,0,0.05);
+    background: white;
+	
 }
 
 #acr table{
@@ -163,4 +169,5 @@ table {
     justify-content: center;
     align-items: start;
     min-height: 100vh;
+    background: #f2f2f2;
 }

@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: start;
     min-height: 100vh;
+    background: #f2f2f2;
 }
 
 #mm .img {
@@ -28,6 +29,7 @@
 
 .main {
 	width: 100%;
+	
 }
 
 .main td:not(.sub) {
@@ -43,15 +45,16 @@
 }
 
 .border {
-	border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 15px;
     margin: 40px;
     padding: 30px;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
     box-shadow: 5px 5px -0px -0px rgba(0,0,0,0.05);
+    background: white;
 	
 }
 #mm {
-	margin-top: 150px;
+	margin-top: 125px;
 	width: 800px;
 }
 

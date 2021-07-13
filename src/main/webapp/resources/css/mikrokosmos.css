@@ -245,9 +245,6 @@ header {
 }
 
 /*  replyDropdown 태그에 커서를 올리면 신고, 수정, 삭제 버튼을 둘러싸고 있는 dropdown-content 태그가 보인다.*/
-/* .reply-list li:hover .replyDropdown {
-	display: inline-block;
-} */
 
 /* replyDropdown 태그에 커서를 올리면 드랍다운 내용 보임 */
  .replyDropdown:hover .dropdown-content
@@ -277,10 +274,6 @@ header {
 	background-color: #f1f1f1;
 }
 
-/* .dropdown:hover .dropdown-content, .replyDropdown:hover .dropdown-content
-	{
-	display: block;
-} */
 
 .icon-more {
 	justify-self: end;
@@ -292,7 +285,6 @@ header {
 	padding: 0 16px;
 	display: flex;
 	align-items: center;
-	/* justify-content: space-between; */
 }
 
 .icon-react, .thumbsup, .thumbsup-liked, .thumbsdown,
@@ -650,7 +642,6 @@ ul.reply-list img.story {
 	justify-content: center;
 	align-items: center;
 	border-radius: 100%;
-	/* background: radial-gradient(circle at bottom left, #F58529 20%, #C42D91); */
 	margin-right: 11px;
 }
 

@@ -5,9 +5,8 @@
 }
 #me {
 	text-align: center;
-	padding: 20px;
-	margin: 25px auto;
 	background-color: #fff;
+	padding-top: 50px;
     border: 1.5px solid #E3C8F8;
 	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }

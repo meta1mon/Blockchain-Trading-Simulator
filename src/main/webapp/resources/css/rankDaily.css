@@ -14,7 +14,7 @@
 }
 
 #rank table th, #rank table td, #rank table a {
-	font-size: 20px;
+	font-size: 15px;
 }
 
 #rank ul {
@@ -163,12 +163,29 @@ input[type=radio] {
 
 .ranktable {
 	width: 100%;
-	text-align: center;
+	text-align: left;
+	border-collapse: collapse;
+/* 	border: 1px solid #eeeeee; */
+ 	border-spacing: 0 1rem;
+}
+
+.ranktable tr {
+	border-bottom: 1px solid #eeeeee;
+	height: 35px;
+	
+}
+
+.ranktable th {
+	background-color: #f1f1f1;
+	padding-left: 123px;
 }
 
 .ranktable td {
 	width: 33.3%;
+	padding-left: 123px;
 }
+
+
 
 .top3{
 	margin-bottom: 10px;

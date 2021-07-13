@@ -190,19 +190,18 @@
 									<tr>
 										<td width="100px">계좌비밀번호</td>
 										<td><input class="password2" id="bankpw" name="bankPw"
-											type="password" placeholder="비밀번호">
-											<button id="check2" type="button"
-												style="border-radius: 8px; outline: none; border: 2px #E3C8F8 solid; cursor: pointer; background-color: #E3C8F8; color: white;">확인</button>
+											type="password" placeholder="비밀번호를 입력해주세요">
+											<button id="check2" type="button">확인</button>
 										</td>
 									</tr>
 								</form>
 								<tr>
 									<td style="text-align: center;"><button class="btn_bs"
 											id="bought_b"
-											style="border-radius: 8px; border: 0px; background-color: #f75467; outline: none; cursor: pointer;">매수</button>
+											style="border-radius: 5px; border: 2px solid #f75467; background-color: #f75467; outline: none; cursor: pointer;">매수</button>
 									</td>
 									<td><button class="btn_bs" id="sold_b"
-											style="border-radius: 8px; outline: none; cursor: pointer;">매도</button>
+											style="border-radius: 5px; outline: none; cursor: pointer;">매도</button>
 										<br></td>
 								</tr>
 								<form id="frm22">
@@ -261,9 +260,9 @@
 									<tr>
 										<td style="text-align: center;" colspan="2"><button
 												id="bought" type="button"
-												style="border-radius: 8px; background-color: #f75467; border: 0px; outline: none; cursor: pointer;">매수</button>
+												style="border-radius: 5px; background-color: #f75467; border: 0px; outline: none; cursor: pointer;">매수</button>
 											<button id="sold" type="button"
-												style="border-radius: 8px; background-color: #4387f9; border: 0px; outline: none; cursor: pointer;">매도</button></td>
+												style="border-radius: 5px; background-color: #4387f9; border: 0px; outline: none; cursor: pointer;">매도</button></td>
 
 									</tr>
 								</form>

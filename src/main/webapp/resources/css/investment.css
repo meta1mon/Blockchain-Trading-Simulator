@@ -46,9 +46,22 @@
 }
 
 .b_c {
-	width: 20%;
+	width: 24%;
+	padding: 2px;
+    border: 2px solid #808080;
+    border-radius: 4px;
 }
-
+#check2 {
+	height: 29px; 
+	width: 50px; 
+	margin-left: 7px;
+	border-radius: 5px; 
+	outline: none; 
+	border: 2px #E3C8F8 solid; 
+	cursor: pointer; 
+	background-color: #E3C8F8; 
+	color: white;
+}
 .parent {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -97,6 +110,20 @@
 	height: 10px;
 }
  */
+ 
+.password2 {
+	padding: 2px;
+    border: 2px solid #808080;
+    border-radius: 4px;
+}
+
+#cybcash, #coin, #coincount, #price_b, #cnt_b, #price_s, #cnt_s, #totalprice {
+    padding: 2px;
+    border: 2px solid #808080;
+    border-radius: 4px;
+    width: 226px;
+}
+ 
 #cointable_div {
 	overflow: auto;
 	height: 1348px;

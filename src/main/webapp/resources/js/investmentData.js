@@ -37,7 +37,8 @@ $(function() {
 	$("#sold_b").click(function() {// 매도 활성화 css
 		$("#sold_b").css("color", "white");
 		$("#sold_b").css("background", "#4387f9");
-		$("#sold_b").css("border", "0px");
+		$("#sold_b").css("border", "2px solid #4387f9");
+		
 
 		$("#bought_b").css("color", "black");
 		$("#bought_b").css("background", "white");
@@ -53,7 +54,7 @@ $(function() {
 	$("#bought_b").click(function() {// 매수 활성화 css
 		$("#bought_b").css("color", "white");
 		$("#bought_b").css("background", "#f75467");
-		$("#bought_b").css("border", "0px");
+		$("#bought_b").css("border", "2px solid #f75467");
 		
 		$("#sold_b").css("color", "black");
 		$("#sold_b").css("background", "white");
@@ -353,12 +354,12 @@ function alltable() {
 								data['data'][ch_title]['acc_trade_value_24H'] * 1,
 								data['data'][ch_title]['min_price'] * 1,
 								data['data'][ch_title]['max_price'] * 1 ]
-						html = "<table class='table table-striped' id='cointable'><tr><th style='position: sticky; top: 0px'>코인명</th><th style='position: sticky; top: 0px'>현재가</th><th style='position: sticky; top: 0px'>등락률(24H)</th><th style=' position: sticky; top: 0px;'>거래대금</th></tr>";
+						html = "<table class='table table-striped' id='cointable'><tr><th style='position: sticky; top: 0px'>코인명</th><th style='position: sticky; top: 10px'>현재가</th><th style='position: sticky; top: 0px'>등락률(24H)</th><th style=' position: sticky; top: 0px;'>거래대금</th></tr>";
 						// 위 코드에서 첫번째 tr 뒤에 있던 건데 빼도 괜찮음? <th style='position: sticky; top: 0px'>코인명</th>
 						title = "<table class='table table-striped' id='tit'>";
 						// 위 코드 뒤에 붙어있던건데 땠음<tr><th style='position: sticky; top: 0px'>코인명</th></tr>
 						//TODO
-						subtitle = "<td style='position: sticky; top: 0px'>현재가 </td>";
+						subtitle = "<td style='position: sticky; top: 20px'>현재가 </td>";
 						for (var i = 0; i < coinList.length - 1; i++) {
 							thisCoin = i;
 							html += "<tr><td><a href=# onclick='changename(\""

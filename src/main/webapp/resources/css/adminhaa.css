@@ -4,18 +4,20 @@
 	position: absolute;
     width: calc(100% - 200px);
     left: 200px;
-	height: 100px;
+	height: 80px;
+	background-color: #E3C8F8;
+	background-color: rgba(227, 200, 248, 0.4);
 }
 #mh td {
-	padding-top: 42px !important; 
+	padding-top: 29px !important; 
 	text-align: center;
 }
 #mh td:nth-child(2), #mh td:nth-child(3), #mh td:nth-child(4) {
-	border-left: 1px solid black;
+/* 	border-left: 1px solid black; */
 }
 
 #mh td{
-	border-bottom: 1px solid black;
+	border-bottom: 1.5px solid #E3C8F8;
 }
 
 #mh td p {

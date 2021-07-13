@@ -111,7 +111,7 @@
 							<div style="margin: 0 auto; width: calc(5em+${fn:length(second.nickname) }em);">
 						</c:if>
 						<c:if test="${fn:length(second.nickname) <= 7 }">
-							<div style="margin: 0 auto; width: 12.5em;">
+							<div style="margin: 0 auto; width: 14em;">
 						</c:if>
 							<p class="rankFont" align="left">
 								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
@@ -139,7 +139,7 @@
 							<div style="margin: 0 auto; width: calc(5em+${fn:length(first.nickname) }em);">
 						</c:if>
 						<c:if test="${fn:length(first.nickname) <= 7 }">
-							<div style="margin: 0 auto; width: 12.5em;">
+							<div style="margin: 0 auto; width: 14em;">
 						</c:if>
 							<p class="rankFont" align="left">
 								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
@@ -167,7 +167,7 @@
 							<div style="margin: 0 auto; width: calc(5em+${fn:length(third.nickname) }em);">
 						</c:if>
 						<c:if test="${fn:length(third.nickname) <= 7 }">
-							<div style="margin: 0 auto; width: 12.5em;">
+							<div style="margin: 0 auto; width: 14em;">
 						</c:if>
 							<p class="rankFont" align="left">
 								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
@@ -197,14 +197,14 @@
 				<tr>
 					<th>순위</th>
 					<th>닉네임</th>
-					<th>수익률</th>
+					<th style="padding-left: 165px;">수익률</th>
 				</tr>
 				<c:forEach items="${other }" var="rank" begin="3" end="9"
 					varStatus="status">
 					<tr>
 						<td>${status.index +1 }위</td>
 						<td>${rank.nickname }</td>
-						<td style="padding-right: 85px; text-align: right;">
+						<td style="padding-right: 57px; text-align: right;">
 							<c:if test="${rank.yield>=0 }">
 								<font class="rankFont" color="red" ><fmt:formatNumber value="${rank.yield }" pattern="##,###.##" /> % </font>
 							</c:if>
@@ -230,7 +230,7 @@
 							<font color="#8c66c8">나의 현재 순위</font> ${rank }위
 						</td>
 						<td>${my.nickname }</td>
-						<td style="padding-right: 85px; text-align: right;">
+						<td style="padding-right: 57px; text-align: right;">
 							<c:if test="${my.yield>=0 }">
 								<font class="rankFont" color="red" ><fmt:formatNumber value="${my.yield }" pattern="##,###.##" /> % </font>
 							</c:if>

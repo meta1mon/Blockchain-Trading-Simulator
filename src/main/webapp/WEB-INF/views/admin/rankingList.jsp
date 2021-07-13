@@ -110,6 +110,8 @@
 		</c:forEach>
 	</table>
 </form>
+<div style="height: 50px">
+</div>
 </div>
 </div>
 </body>

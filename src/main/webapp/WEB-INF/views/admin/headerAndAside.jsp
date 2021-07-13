@@ -37,12 +37,6 @@
          <ul class="menu">
             <li id="index"><img src="${pageContext.request.contextPath}/resources/assets/img/bts_logo.svg" width="120"height="50" ></li>
             <li id="home"><a onclick="moveAdminPost()">MAIN<span class="icon"><i class="fa fa-home"></i></span></a></li>
-            <li id="adminmember"><a href="#">공지사항 관리
-            <span class="icon"><i class="fas fa-bullhorn"></i></span></a>
-               <ul>
-                  <li><a href="${pageContext.request.contextPath}/admin/nl">공지사항 리스트</a></li>
-               </ul>
-               </li>
             <li id="buychart"><a href="#">회원관리<span class="icon"><i
                   class="fa fa-chevron-down"></i></span></a>
                <ul>

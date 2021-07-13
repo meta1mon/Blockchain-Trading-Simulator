@@ -69,6 +69,7 @@
 	<select id="countTodayCommunity" resultType="int">
 		SELECT count(*) FROM
 		COMMUNITY WHERE CDATE LIKE TO_CHAR(SYSDATE, 'YYYY-MM-DD%')
+		WHERE CWRITER NOT LIKE '%관리자%'
 	</select>
 
 	<!-- 해당 게시글의 댓글 개수 조회 -->

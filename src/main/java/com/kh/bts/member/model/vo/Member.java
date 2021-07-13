@@ -25,6 +25,7 @@ public class Member {
 	private long cybcash;
 	private String acntno;
 	private long newesset;
+	private long oldesset;
 	private double yield;
 
 	public String getEmail() {
@@ -171,6 +172,16 @@ public class Member {
 
 	public void setNewesset(long newesset) {
 		this.newesset = newesset;
+	}
+
+	public long getOldesset() {
+		return oldesset;
+	}
+
+
+
+	public void setOldesset(long oldesset) {
+		this.oldesset = oldesset;
 	}
 
 

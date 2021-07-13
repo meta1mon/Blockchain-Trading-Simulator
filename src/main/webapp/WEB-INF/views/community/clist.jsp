@@ -78,7 +78,7 @@ function showInsertForm() {
 				</c:if>
 			</table>
 			<hr>
-			<div id="page">
+			<%-- <div id="page">
 				<span id="leftpage"> <!-- 앞 페이지 번호 처리 --> <c:if
 						test="${currentPage <= 1}">
 					처음
@@ -113,7 +113,7 @@ function showInsertForm() {
 					끝
 				</c:if>
 				</span>
-			</div>
+			</div> --%>
 		</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>

@@ -1,4 +1,4 @@
-zzzz<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -20,14 +20,14 @@ $(function(){
 	if($(".ccontent").has($("img"))){
 		var test = $('.ccontent').html();
 		console.log(test);
-			test = test.replace(/<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gi,"[이미지]");
+		test = test.replace(/<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gi,"[이미지]");
 		console.log(test);
 		$('.ccontent').has($("img")).html(test);
 	}
 	
 var onoff = function(){
 	 var opt = $("#searchType option:selected");
-	 if(opt.val() == '1'){
+	 if(opt.val() == '3'){
 		 $("#search").css("display", "none");
 		 $("#btnsearch").css("display", "none");
 		 $("#cstatusSelect").css("display", "inline-block");
@@ -76,14 +76,15 @@ var onoff = function(){
 		<div id="frmSearch">
 			<form action="acr" method="get">
 				<select id="searchType" name="searchType">
-					<option value="2" selected>피신고자</option>
-					<option value="3">신고자</option>
-					<option value="1">처리 상태</option>
+					<option value="1">피신고자</option>
+					<option value="2">신고자</option>
+					<option value="3">처리 상태</option>
 				</select> 
 				<input type="search" name="keyword" id="search" placeholder="검색어를 입력해주세요.">
 				<button type="submit" id="btnsearch" class="inbl">검색</button>
 			</form>
 			<form action="acr" method="get">
+				<input type="hidden" name="searchType" value="3">
 				<select id="cstatusSelect" name="keyword">
 					<option value="accept">수리</option>
 					<option value="deny">반려</option>

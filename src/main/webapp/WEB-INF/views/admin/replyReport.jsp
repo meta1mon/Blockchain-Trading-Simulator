@@ -61,7 +61,7 @@
 			},
 			error : function(request, status, error) {
 				console.log("message:"+request.responseText+"\n"+"error:"+error);
-			}
+			} 
 			
 		})
 	})

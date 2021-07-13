@@ -111,17 +111,30 @@
 						<div>
 							<img class="rankImg" src="resources/assets/img/silver_medal.png">
 						</div>
-						<c:if test="${fn:length(second.nickname)  > 7 }">
-							<div style="margin: 0 auto; width: calc(5em+${fn:length(second.nickname) }em);">
+						
+						<c:if test="${fn:length(second.nickname)  > 4 }">
+							<c:if test="${second.yield>=100 }">
+								<div style="margin: 0 auto; width: calc(4em+${fn:length(second.nickname) }em);">
+							</c:if>
+							<c:if test="${second.yield<100 }">
+								<div style="margin: 0 auto; width: 10em;">
+							</c:if>
 						</c:if>
-						<c:if test="${fn:length(second.nickname) <= 7 }">
-							<div style="margin: 0 auto; width: 14em;">
+						<c:if test="${fn:length(second.nickname) <= 4 }">
+							<c:if test="${second.yield>=100 }">
+								<div style="margin: 0 auto; width: 14em;">
+							</c:if>
+							<c:if test="${second.yield<100 }">
+								<div style="margin: 0 auto; width: 9em;">
+							</c:if>
 						</c:if>
+						
+						
 							<p class="rankFont" align="left">
-								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
+								<img style="vertical-align:middle;" width="20px" height="20px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
 								2등 ${second.nickname }
 								<br>
-								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
+								<img style="vertical-align:middle;" width="20px" height="20px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
 								수익률&nbsp;
 								
 								<c:if test="${second.yield>=0 }">
@@ -139,17 +152,27 @@
 						<div>
 							<img class="no1" src="resources/assets/img/gold_medal.png">
 						</div>
-						<c:if test="${fn:length(first.nickname)  > 7 }">
-							<div style="margin: 0 auto; width: calc(5em+${fn:length(first.nickname) }em);">
+						<c:if test="${fn:length(first.nickname)  > 4 }">
+							<c:if test="${first.yield>=100 }">
+								<div style="margin: 0 auto; width: calc(4em+${fn:length(first.nickname) }em);">
+							</c:if>
+							<c:if test="${first.yield<100 }">
+								<div style="margin: 0 auto; width: 9em;">
+							</c:if>
 						</c:if>
-						<c:if test="${fn:length(first.nickname) <= 7 }">
-							<div style="margin: 0 auto; width: 14em;">
+						<c:if test="${fn:length(first.nickname) <= 4 }">
+							<c:if test="${first.yield>=100 }">
+								<div style="margin: 0 auto; width: 14em;">
+							</c:if>
+							<c:if test="${first.yield<100 }">
+								<div style="margin: 0 auto; width: 9em;">
+							</c:if>
 						</c:if>
 							<p class="rankFont" align="left">
-								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
+								<img style="vertical-align:middle;" width="20px" height="20px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
 								1등 ${first.nickname }
 								<br>
-								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
+								<img style="vertical-align:middle;" width="20px" height="20px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
 								수익률&nbsp;
 								
 								<c:if test="${first.yield>=0 }">
@@ -167,17 +190,27 @@
 						<div>
 							<img class="rankImg" src="resources/assets/img/bronze_medal.png">
 						</div>
-						<c:if test="${fn:length(third.nickname)  > 7 }">
-							<div style="margin: 0 auto; width: calc(5em+${fn:length(third.nickname) }em);">
+						<c:if test="${fn:length(third.nickname)  > 4 }">
+							<c:if test="${third.yield>=100 }">
+								<div style="margin: 0 auto; width: calc(4em+${fn:length(third.nickname) }em);">
+							</c:if>
+							<c:if test="${third.yield<100 }">
+								<div style="margin: 0 auto; width: 11em;">
+							</c:if>
 						</c:if>
-						<c:if test="${fn:length(third.nickname) <= 7 }">
-							<div style="margin: 0 auto; width: 14em;">
+						<c:if test="${fn:length(third.nickname) <= 4 }">
+							<c:if test="${third.yield>=100 }">
+								<div style="margin: 0 auto; width: 14em;">
+							</c:if>
+							<c:if test="${third.yield<100 }">
+								<div style="margin: 0 auto; width: 9em;">
+							</c:if>
 						</c:if>
 							<p class="rankFont" align="left">
-								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
+								<img style="vertical-align:middle;" width="20px" height="20px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
 								3등 ${third.nickname }
 								<br>
-								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
+								<img style="vertical-align:middle;" width="20px" height="20px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
 								수익률&nbsp;
 								
 								<c:if test="${third.yield>=0 }">

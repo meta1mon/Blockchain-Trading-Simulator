@@ -50,7 +50,7 @@
 	
 	<!-- 신고글 처리 -->
 	<insert id="insertAcreportDeny" parameterType="Acreport" flushCache="true" statementType="PREPARED">
-		INSERT INTO ACREPORT VALUES(#{crno}, #{creporter}, #{crreason}, default, #{ccontent}, #{crespondent}, #{crdate}, #{cstatus}, #{creason}, default)
+		INSERT INTO ACREPORT(CRNO, CREPORTER, CRREASON, CCONTENT, CRESPONDENT, CRDATE, CSTATUS, CREASON) SELECT CRNO, CREPORTER, CRREASON, CCONTENT, CRESPONDENT, CRDATE, 'deny', #{creason} FROM CREPORT WHERE CNO = #{cno}
 		
 	</insert>
 	<insert id="insertAcreportAccept" parameterType="Acreport" flushCache="true" statementType="PREPARED">
@@ -63,8 +63,7 @@
 
 	<!-- 신고 댓글 처리 -->
 	<insert id="insertArreportDeny" parameterType="Arreport" flushCache="true" statementType="PREPARED">
-		INSERT INTO ARREPORT(rrno, rreporter, rrreason, rcontent, rrespondent, rrdate, rstatus, rreason, arrdate)
-					  VALUES(#{rrno}, #{rreporter}, #{rrreason}, #{rcontent}, #{rrespondent}, #{rrdate}, #{rstatus}, #{rreason}, default)
+INSERT INTO ARREPORT(RRNO, RREPORTER, RRREASON, RCONTENT, RRESPONDENT, RRDATE, RSTATUS, RREASON) SELECT RRNO, RREPORTER, RRREASON, RCONTENT, RRESPONDENT, RRDATE, 'deny', #{rreason} FROM RREPORT WHERE RNO = #{rno}
 	</insert>
 	<insert id="insertArreportAccept" parameterType="Arreport" flushCache="true" statementType="PREPARED">
 		INSERT INTO ARREPORT(RRNO, RREPORTER, RRREASON, RCONTENT, RRESPONDENT, RRDATE, RSTATUS, RREASON) SELECT RRNO, RREPORTER, RRREASON, RCONTENT, RRESPONDENT, RRDATE, 'accept', #{rreason} FROM RREPORT WHERE RNO = #{rno}

@@ -54,7 +54,7 @@
 <div style="height: 10px">
 </div>
 <form action="monthlyrewarding">
-	<p class="title inbl">월간 랭킹</p><button style="float:right;  height: 25px; display: inline-block" type="submit" class="btnPurple inbl">보상 메일 발송</button>
+	<p class="title inbl">월간 랭킹</p><button id="monthly" style="float:right;  height: 25px; display: inline-block" type="submit" class="btnPurple inbl">월간 보상 발송</button>
 	<hr>
 <table class="ranklist">
 	<tr>
@@ -64,9 +64,9 @@
 	</tr>
 	<c:forEach items="${monthly }" var="monthly">
 	<tr>
-	<td class="email"><input type="hidden" name="email" value="${monthly.email }">${monthly.email }</td>
+	<td class="email" style="width: 450px"><input type="hidden" name="email" value="${monthly.email }">${monthly.email }</td>
 	<td>${monthly.nickname }</td>
-	<td><c:if test="${monthly.yield>0 }">
+	<td style="width: 400px"><c:if test="${monthly.yield>0 }">
 		<span style="color: red">&#9650; </span><fmt:formatNumber value="${monthly.yield }" pattern="##,###.######" /> %
 		</c:if>
 		<c:if test="${monthly.yield==0 }">
@@ -83,7 +83,7 @@
 </div>
 </form>
 <form action="weeklyrewarding">
-	<p class="title inbl">주간 랭킹</p><button  style="float:right;  height: 25px; display: inline-block" type="submit" class="btnPurple inbl">보상 메일 발송</button>
+	<p class="title inbl">주간 랭킹</p><button id="weekly" style="float:right;  height: 25px; display: inline-block" type="submit" class="btnPurple inbl">주간 보상 발송</button>
 	<hr>
 	<table class="ranklist">
 		<tr>
@@ -93,9 +93,9 @@
 		</tr>
 		<c:forEach items="${weekly }" var="weekly">
 		<tr>
-		<td class="email"><input type="hidden" name="email" value="${weekly.email }">${weekly.email }</td>
+		<td  style="width: 450px" class="email"><input type="hidden" name="email" value="${weekly.email }">${weekly.email }</td>
 		<td>${weekly.nickname }</td>
-		<td>
+		<td style="width: 400px">
 		<c:if test="${weekly.yield>0 }">
 		<span style="color: red">&#9650; </span><fmt:formatNumber value="${weekly.yield }" pattern="##,###.######" /> % 
 		</c:if>
@@ -115,4 +115,20 @@
 </div>
 </div>
 </body>
+<script>
+$(function(){
+	$("#monthly").on("click", function(){
+		$("#monthly").html("전송되었습니다.");
+		$("#monthly").attr("disabled");
+		$("#monthly").css("color", "white");
+		$("#monthly").css("background", "#8c66c8");
+	})
+	$("#weekly").on("click", function(){
+		$("#weekly").html("전송되었습니다.");
+		$("#weekly").attr("disabled");
+		$("#weekly").css("color", "white");
+		$("#weekly").css("background", "#8c66c8");
+	})
+})
+</script>
 </html>

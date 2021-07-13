@@ -72,17 +72,19 @@
 									<c:url var="prev" value="ml">
 										<c:param name="page" value="1" />
 									</c:url>
-									<a href="${prev}"><i class="fas fa-angle-double-left"></i></a>
+									<a href="${prev}&searchType=${searchType}&keyword=${keyword}"><i class="fas fa-angle-double-left"></i></a>
 								</c:if>
 								<!-- 5초과라면 화살표를 눌렀을 때 5페이지 전으로 -->
 								<c:if test="${currentPage > 5}">
 									<c:url var="prev" value="ml">
 										<c:param name="page" value="${currentPage-5}" />
 									</c:url>
-									<a href="${prev}"><i class="fas fa-angle-double-left"></i></a>
+									<a href="${prev}&searchType=${searchType}&keyword=${keyword}"><i class="fas fa-angle-double-left"></i></a>
 								</c:if>
-								<!-- 현재 페이지 -2가 1보다 작다면 1부터 5페이지까지 표시 -->
-								<c:if test="${currentPage -2 < 1}">
+								<!-- 이전 버튼 끝 -->
+								
+								<!-- 현재 페이지 -2가 1보다 작고 maxPage가 5보다 크거나 같다면 -->
+								<c:if test="${currentPage -2 < 1 and maxPage >= 5}">
 									<c:forEach var="p" begin="${startPage+1}" end="5">
 										<c:if test="${p eq currentPage}">
 											<div class="pageNum">
@@ -93,13 +95,13 @@
 											<c:url var="mlistchk" value="ml">
 												<c:param name="page" value="${p}" />
 											</c:url>
-											<a href="${mlistchk}">${p}</a>
+											<a href="${mlistchk}&searchType=${searchType}&keyword=${keyword}">${p}</a>
 										</c:if>
 									</c:forEach>
 								</c:if>
-								<!-- 현재 페이지 -2가 1이상이고 현재페이지 +2 가 끝페이지보다  -->
-								<c:if test="${currentPage -2 >= 1 and currentPage +2 <= maxPage}">
-									<c:forEach var="p" begin="${currentPage-2}"	end="${currentPage+2}">
+								<!-- 현재 페이지 -2가 1보다 작고 maxPage가 5보다 작다면 -->
+								<c:if test="${currentPage -2 < 1 and maxPage < 5}">
+									<c:forEach var="p" begin="${startPage+1}" end="${maxPage }">
 										<c:if test="${p eq currentPage}">
 											<div class="pageNum">
 												<b>${p}</b>
@@ -109,38 +111,25 @@
 											<c:url var="mlistchk" value="ml">
 												<c:param name="page" value="${p}" />
 											</c:url>
-											<a href="${mlistchk}">${p}</a>
+											<a href="${mlistchk}&searchType=${searchType}&keyword=${keyword}">${p}</a>
 										</c:if>
 									</c:forEach>
 								</c:if>
-								<c:if test="${currentPage +2 > maxPage}">
-									<c:forEach var="p" begin="${currentPage-2}" end="${maxPage}">
-										<c:if test="${p eq currentPage}">
-											<div class="pageNum">
-												<b>${p}</b>
-											</div>
-										</c:if>
-										<c:if test="${p ne currentPage}">
-											<c:url var="mlistchk" value="ml">
-												<c:param name="page" value="${p}" />
-											</c:url>
-											<a href="${mlistchk}">${p}</a>
-										</c:if>
-									</c:forEach>
-								</c:if>
+								
+								<!-- 다음 버튼 -->
 								<!-- 현재 페이지 5페이지 후가 마지막페이지 보다 작다면 -->
 								<c:if test="${currentPage +5 < maxPage}">
 									<!-- 5페이지 뒤로 이동 -->
 									<c:url var="clistEND" value="ml">
 										<c:param name="page" value="${currentPage+5}" />
 									</c:url>
-									<a href="${clistEND}"><i class="fas fa-angle-double-right"></i></a>
+									<a href="${clistEND}&searchType=${searchType}&keyword=${keyword}"><i class="fas fa-angle-double-right"></i></a>
 								</c:if>
 								<c:if test="${currentPage +5 >= maxPage}">
 									<c:url var="clistEND" value="ml">
 										<c:param name="page" value="${maxPage}" />
 									</c:url>
-									<a href="${clistEND}"><i class="fas fa-angle-double-right"></i></a>
+									<a href="${clistEND}&searchType=${searchType}&keyword=${keyword}"><i class="fas fa-angle-double-right"></i></a>
 								</c:if>
 							</div>
 					</td>

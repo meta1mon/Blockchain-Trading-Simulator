@@ -26,3 +26,7 @@ main {
 	position: relative;
 	left: -33px;
 }
+
+.thumbsup, .thumbsup-liked, .thumbsdown, .thumbsdown-disliked {
+    cursor: auto !important;
+}

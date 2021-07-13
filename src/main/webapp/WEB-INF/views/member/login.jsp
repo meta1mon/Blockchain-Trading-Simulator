@@ -18,7 +18,6 @@
 <!-- 스크립트 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/login.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
 </head>
 <body>
 	<div id="wrapper">

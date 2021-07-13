@@ -21,3 +21,8 @@ main {
 	border: 0px;
 	width: 25px;
 }
+
+.feeds {
+	position: relative;
+	left: -33px;
+}

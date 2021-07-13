@@ -26,7 +26,7 @@
 					<header>
 						<div class="profile-of-article">
 							<img class="img-profile pic" src="${pageContext.request.contextPath}/resources/assets/img/user.png"
-								alt=".."> <span class="userID main-id point-span">${vo.cwriter }</span>
+								alt=".."> <span class="userID main-id point-span">${community.cwriter }</span>
 						</div>
 						<div class="dropdown" style="float: right;">
 							<div class="icon-react icon-more"
@@ -52,15 +52,13 @@
 					<!-- 게시글 추천, 비추천, 댓글 작성 -->
 					<div class="icons-react">
 						<div class="icons-left"
-							onclick="clike('${status.index}', '${community.cno }')">
-							<img class="thumbsup-liked"
-								src="${pageContext.request.contextPath}/resources/assets/img/thumbs-up.png" alt="추천"> <img
-								class="thumbsup" src="${pageContext.request.contextPath}/resources/assets/img/thumbsup.png"
-								alt="추천"> <input type="text" class="nowLike" readonly
-								value="${community.likecnt }">
+							onclick="clike(0, '${community.cno }')">
+							<img class="thumbsup-liked"	src="${pageContext.request.contextPath}/resources/assets/img/thumbs-up.png" alt="추천">
+							<img class="thumbsup" src="${pageContext.request.contextPath}/resources/assets/img/thumbsup.png" alt="추천"> 
+							<input type="text" class="nowLike" readonly	value="${community.likecnt }">
 						</div>
 						<div class="icons-middle"
-							onclick="dislike('${status.index}', '${community.cno }')">
+							onclick="dislike(0, '${community.cno }')">
 							<img class="thumbsdown-disliked"
 								src="${pageContext.request.contextPath}/resources/assets/img/thumbs-down.png" alt="비추천"> <img
 								class="thumbsdown" src="${pageContext.request.contextPath}/resources/assets/img/thumbsdown.png"
@@ -244,6 +242,63 @@ function reply2(idx) {
 			}
 		});
 }
+
+function clike(idx, likeCno) {
+	console.log(idx);
+     if(${loginMember == null}) {
+      alert("로그인이 필요합니다");         
+   } else {
+      $.ajax({
+         url : "${pageContext.request.contextPath}/clike",
+         type : "post",
+         data : {
+            "cno" : likeCno
+         },
+         success : function(data) {
+        	 if(data == 1) { // 좋아요 + 1
+        		 var nowLikeCnt = $(".nowLike").eq(idx).val() * 1 + 1;
+				$(".nowLike").eq(idx).val(nowLikeCnt);
+				$(".thumbsup-liked").eq(idx).css("display", "inline-block");
+				$(".thumbsup").eq(idx).css("display", "none");
+        	 } else if(data == 0) { // 좋아요 - 1
+        		 var nowLikeCnt = $(".nowLike").eq(idx).val() * 1 - 1;
+ 				$(".nowLike").eq(idx).val(nowLikeCnt);
+				$(".thumbsup-liked").eq(idx).css("display", "none");
+				$(".thumbsup").eq(idx).css("display", "inline-block");
+        	 }
+         }
+      });
+   } 
+}
+
+function dislike(idx, dislikeCno) {
+	   if(${loginMember == null}) {
+	      alert("로그인이 필요합니다");         
+	   } else {
+	      $.ajax({
+	         url : "${pageContext.request.contextPath}/cdislike",
+	         type : "post",
+	         data : {
+	            cno : dislikeCno
+	         },
+	         datatype : "json",
+	         success : function(data) {
+	        	 if(data == 1) {
+	        		 var nowDislikeCnt = $(".nowDislike").eq(idx).val() * 1 + 1;
+					$(".nowDislike").eq(idx).val(nowDislikeCnt);
+					$(".thumbsdown-disliked").eq(idx).css("display", "inline-block");
+					$(".thumbsdown").eq(idx).css("display", "none");
+	        	 } else if(data == 0) {
+	        		 var nowDislikeCnt = $(".nowDislike").eq(idx).val() * 1 - 1;
+	 				$(".nowDislike").eq(idx).val(nowDislikeCnt);
+					$(".thumbsdown-disliked").eq(idx).css("display", "none");
+					$(".thumbsdown").eq(idx).css("display", "inline-block");
+	        	 }
+	         }
+	      });
+	   }
+	}
+
 </script>
 </body>
 </html>

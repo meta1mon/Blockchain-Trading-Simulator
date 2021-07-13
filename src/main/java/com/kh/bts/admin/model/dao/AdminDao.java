@@ -190,13 +190,13 @@ public class AdminDao {
 		if (keyword != null) {
 			switch (searchType) {
 			case 1:
-				list = sqlSession.selectList("report.searchCstatus", keyword, row);
+				list = sqlSession.selectList("report.searchCreporter", keyword, row);
 				break;
 			case 2:
 				list = sqlSession.selectList("report.searchCrespondent", keyword, row);
 				break;
 			case 3:
-				list = sqlSession.selectList("report.searchCreporter", keyword, row);
+				list = sqlSession.selectList("report.searchCstatus", keyword, row);
 				break;
 			}
 		}
@@ -210,13 +210,14 @@ public class AdminDao {
 		if (keyword != null) {
 			switch (searchType) {
 			case 1:
-				list = sqlSession.selectList("report.searchRstatus", keyword, row);
+				list = sqlSession.selectList("report.searchRreporter", keyword, row);
 				break;
 			case 2:
 				list = sqlSession.selectList("report.searchRrespondent", keyword, row);
 				break;
 			case 3:
-				list = sqlSession.selectList("report.searchRreporter", keyword, row);
+				list = sqlSession.selectList("report.searchRstatus", keyword, row);
+				break;
 			}
 		}
 		return list;

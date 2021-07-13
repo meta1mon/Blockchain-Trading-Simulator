@@ -50,7 +50,7 @@ var onoff = function(){
 	 var opt = $("#searchType option:selected");
 	 console.log("이벤트 동작")
 	 console.log(opt.val());
-	 if(opt.val() == '1'){
+	 if(opt.val() == '3'){
 		 $("#search").css("display", "none");
 		 $("#btnsearch").css("display", "none");
 		 $("#rstatusSelect").css("display", "inline-block");
@@ -76,15 +76,16 @@ var onoff = function(){
 	<div id="frmSearch">
 			<form action="arr" method="get">
 				<select id="searchType" name="searchType">
-					<option value="2" selected>피신고자</option>
-					<option value="3">신고자</option>
-					<option value="1">처리 상태</option>
+					<option value="1">피신고자</option>
+					<option value="2">신고자</option>
+					<option value="3">처리 상태</option>
 				</select> <input type="search" name="keyword" id="search" placeholder="검색어를 입력해주세요.">
 				<button type="submit" id="btnsearch" class="inbl">검색</button>
 			</form>
 			<form action="arr" method="get">
+				<input type="hidden" name="searchType" value="3">
 				<select id="rstatusSelect" name="keyword">
-					<option value="accept" selected>수리</option>
+					<option value="accept">수리</option>
 					<option value="deny">반려</option>
 				</select>
 				<button type="submit" id="btnsearch2" class="inbl">검색</button>

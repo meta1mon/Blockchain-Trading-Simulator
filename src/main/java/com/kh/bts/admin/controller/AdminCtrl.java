@@ -466,21 +466,27 @@ public class AdminCtrl {
 		} else {
 			try {
 				int currentPage = page; // 현재 페이지
-				int listCount = mService.countMember(); // 총 멤버수
-				int maxPage = (int) ((double) listCount / LIMIT + 0.9); //전체 페이지 수
 
 				if (keyword != null && !keyword.equals("")) {
 					mv.addObject("list", aService.adminSearchMember(currentPage, LIMIT, keyword, searchType));
+					int listCount = aService.adminSearchMember(currentPage, LIMIT, keyword, searchType).size();
+					int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+					mv.addObject("listCount", listCount);
+					mv.addObject("maxPage", maxPage);
 				} else {
 					mv.addObject("list", aService.adminListMember(currentPage, LIMIT));
+					int listCount = mService.countMember(); // 총 멤버수
+					int maxPage = (int) ((double) listCount / LIMIT + 0.9); //전체 페이지 수
+					mv.addObject("listCount", listCount);
+					mv.addObject("maxPage", maxPage);
 				}
+				mv.addObject("searchType", searchType);
+				mv.addObject("keyword", keyword);
 				mv.addObject("currentPage", currentPage);
-				mv.addObject("maxPage", maxPage);
-				mv.addObject("listCount", listCount);
-				mv.setViewName("admin/memberList");
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
+			mv.setViewName("admin/memberList");
 		}
 		return mv;
 	}
@@ -619,7 +625,7 @@ public class AdminCtrl {
 	@RequestMapping(value = "/arr")
 	public ModelAndView arr(@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv,
 			@RequestParam(name = "keyword", defaultValue = "", required = false) String keyword,
-			@RequestParam(name = "searchType", defaultValue = "2") int searchType, HttpSession session) {
+			@RequestParam(name = "searchType", defaultValue = "1") int searchType, HttpSession session) {
 		String nowEmail = (String) session.getAttribute("loginMember");
 		if (!nowEmail.equals("admin")) {
 			mv.setViewName("errorPage");

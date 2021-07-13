@@ -156,12 +156,14 @@ $(function(){
 		console.log($("input[name=startdate]").val());
 		console.log($("input[name=enddate]").val());
 		
-			var dataquery = $("#frmCashEdit").serialize();
-			console.log("dataquery:" + dataquery);
+		var dataquery = $("#frmCashEdit").serialize();
+		console.log("dataquery:" + dataquery);
 		$.ajax({
 				url: 'updateCash',
 				type: 'post',
-				data: dataquery,
+				data: {
+					"cashno" : cashno;
+				}
 				sync : true,
 			success : function(data) {
 				alert("상품 수정 완료!");

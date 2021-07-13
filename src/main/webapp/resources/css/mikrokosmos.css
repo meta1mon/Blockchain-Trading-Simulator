@@ -163,12 +163,14 @@ article, .section-accumulative, .section-daily {
 
 article {
 	margin-bottom: 60px;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 
 .section-accumulative, .section-daily {
 	width: 310px;
 	padding: 14px 16px;
 	overflow-y: hidden;
+	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
 
 .section-accumulative {

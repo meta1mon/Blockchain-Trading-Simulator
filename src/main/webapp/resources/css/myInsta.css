@@ -17,7 +17,7 @@ main {
 	padding-top : 25px !important;
 }
 
-.nowLike, .nowDislike, {
+.nowLike, .nowDislike {
 	border: 0px;
 	width: 25px;
 }

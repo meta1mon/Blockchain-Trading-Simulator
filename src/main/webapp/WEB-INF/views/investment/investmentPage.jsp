@@ -174,10 +174,10 @@
 
 							<td>
 								<form id="frm11">
-
-
 									<table class='table table-striped'>
-
+										<tr>
+											<td><div id="now_price"></div></td>
+										</tr>
 										<tr>
 											<th><span>회원계좌번호 : ${acnt.acntno } </span> <span id="su"></span><input
 												name="acntno" type="hidden" value="${acnt.acntno }"></th>
@@ -188,7 +188,7 @@
 										<tr>
 											<td>계좌비밀번호 : <input class="password2" id="bankpw"
 												name="bankPw" type="password" placeholder="비밀번호">
-												<button id="check2" type="button">확인</button></td>
+												<button id="check2" type="button" style="border-radius: 8px; outline:none; border: 2px #E3C8F8 solid; cursor:pointer; background-color: #E3C8F8; color:white;">확인</button></td>
 										</tr>
 
 
@@ -197,12 +197,13 @@
 								<table style="width: 100%; padding-left: 20px;">
 									<tr>
 										<td style="text-align: center;"><button class="btn_bs"
-												id="bought_b">매수</button>
-											<button class="btn_bs" id="sold_b">매도</button> <br></td>
+												id="bought_b" style="border-radius: 8px; border: 0px; background-color: #f75467; outline: none; cursor: pointer;">매수</button>
+											<button class="btn_bs" id="sold_b" style="border-radius: 8px;  outline: none; cursor: pointer;">매도</button> <br></td>
 									</tr>
 								</table>
 								<form id="frm22">
 									<table style="width: 100%;">
+
 										<tr>
 											<th style="font-size: 20px !important; width: 100%;"
 												colspan="1">보유잔고</th>
@@ -276,8 +277,8 @@
 										</tr>
 										<tr>
 											<td style="text-align: center;" colspan="1"><button
-													id="bought" type="button">매수</button>
-												<button id="sold" type="button">매도</button></td>
+													id="bought" type="button" style="border-radius: 8px; background-color: #f75467; border: 0px;  outline: none; cursor: pointer;">매수</button>
+												<button id="sold" type="button" style="border-radius: 8px; background-color: #4387f9; border: 0px;  outline: none; cursor: pointer;">매도</button></td>
 
 										</tr>
 
@@ -297,10 +298,10 @@
 			<!-- 체결 & 미체결 부분   -->
 			<div class="div7">
 
-				<table id="wb_ws" class='table table-striped'>
+				<table id="wb_ws" class='table'>
 
 					<tr>
-						<th colspan="1">미체결주문</th>
+						<th colspan="1"><span style="font-size: 30px">미체결주문</span></th>
 					</tr>
 					<tr>
 						<td><div id="aj_wb"></div>
@@ -310,7 +311,7 @@
 
 					<tr>
 
-						<th colspan="1">체결주문
+						<th colspan="1"><span style="font-size: 30px">체결주문</span>
 							<div id="bcnt"></div> <input type="hidden" id="s_bcnt" value=""></input><input
 							type="hidden" id="s_scnt" value=""></input>
 						</th>

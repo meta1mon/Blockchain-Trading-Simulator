@@ -30,7 +30,7 @@
 
 	<!-- 회원수조회 -->
 	<select id="countMember" resultType="int">
-		SELECT COUNT(*) FROM MEMBER WHERE EMAIL NOT LIKE '%admin%'
+		SELECT COUNT(*) FROM MEMBER WHERE EMAIL NOT LIKE 'admin'
 	</select>
 	
 	<!-- 오늘 가입한 회원수조회 -->

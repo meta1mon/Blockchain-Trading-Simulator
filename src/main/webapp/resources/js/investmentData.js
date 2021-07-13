@@ -33,12 +33,16 @@ $(function() {
 
 	});
 
-/////////////////////////////////// CSS
+	// ///////////////////////////////// CSS
 	$("#sold_b").click(function() {// 매도 활성화 css
 		$("#sold_b").css("color", "white");
+		$("#sold_b").css("background", "#4387f9");
+		$("#sold_b").css("border", "0px");
+
 		$("#bought_b").css("color", "black");
-		$("#sold_b").css("background", "blue");
 		$("#bought_b").css("background", "white");
+		$("#bought_b").css("border", "2px black solid");
+		
 		$("#cnt_b").hide();
 		$("#price_b").hide();
 		$("#bought").hide();
@@ -48,9 +52,13 @@ $(function() {
 	});
 	$("#bought_b").click(function() {// 매수 활성화 css
 		$("#bought_b").css("color", "white");
+		$("#bought_b").css("background", "#f75467");
+		$("#bought_b").css("border", "0px");
+		
 		$("#sold_b").css("color", "black");
-		$("#bought_b").css("background", "red");
 		$("#sold_b").css("background", "white");
+		$("#sold_b").css("border", "2px black solid");
+		
 		$("#cnt_s").hide();
 		$("#price_s").hide();
 		$("#sold").hide();
@@ -58,7 +66,7 @@ $(function() {
 		$("#price_b").show();
 		$("#bought").show();
 	});
-/////////////////// 총합계산 ///////////////////////////
+	// ///////////////// 총합계산 ///////////////////////////
 	$("#cnt_b").blur(function() { // 합계 구하기 매수
 		var sum = 0;
 		var a = $("#price_b").val();
@@ -127,7 +135,7 @@ $(function() {
 		$("#updatecoin").val(csum1);
 
 	});
-// /////////////////////////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////////////////////////
 	$("#sold").on(
 			// 미체결 매도 추가하기
 			"click",
@@ -247,20 +255,24 @@ $(function() {
 			scnt();
 		}
 
-	}, 1000);
+	}, 3000);
 
 });
 // /////////// 함수 정의 부분 ///////////////////////
 // 전역변수
+var orderbookarrbid = new Array();
+var orderbookarrask = new Array();
+var titdisplay = new Array();
 var coinList = null; // 전체 리스트
 var changecoin = "BTC"; // default
 var ch_title = "BTC";
 var display = new Array();
 var displays = new Array();
 var html = "";
+var subtitle = "";
 var bnum = 2; // 차트 종류
 
-//////////// 차트 정렬 기준 ///////////////
+// ////////// 차트 정렬 기준 ///////////////
 function qwer(bnum) {
 	if (bnum == 1) { // price down
 		display.sort(function(a, b) {
@@ -305,12 +317,12 @@ function click5() {
 	bnum = 6;
 }
 function click6() {
-	
+
 	bnum = 5;
 }
-////////////////// 전체 코인 시세 표 /////////////
-function alltable() { 
-	var titdisplay = new Array();
+// //////////////// 전체 코인 시세 표 /////////////
+function alltable() {
+
 	var onedisplay = new Array();
 
 	var title = "";
@@ -341,9 +353,12 @@ function alltable() {
 								data['data'][ch_title]['acc_trade_value_24H'] * 1,
 								data['data'][ch_title]['min_price'] * 1,
 								data['data'][ch_title]['max_price'] * 1 ]
-						html = "<table class='table' id='cointable' ><tr><th style='position: sticky; top: 0px'>코인명</th><th style='position: sticky; top: 0px'>현재가</th><th style='position: sticky; top: 0px'>등락률(24H)</th><th style=' position: sticky; top: 0px;'>거래대금</th></tr>";
-						title = "<table class='table' id='tit'><tr>";
-
+						html = "<table class='table table-striped' id='cointable'><tr><th style='position: sticky; top: 0px'>현재가</th><th style='position: sticky; top: 0px'>등락률(24H)</th><th style=' position: sticky; top: 0px;'>거래대금</th></tr>";
+						// 위 코드에서 첫번째 tr 뒤에 있던 건데 빼도 괜찮음? <th style='position: sticky; top: 0px'>코인명</th>
+						title = "<table class='table table-striped' id='tit'>";
+						// 위 코드 뒤에 붙어있던건데 땠음<tr><th style='position: sticky; top: 0px'>코인명</th></tr>
+						//TODO
+						subtitle = "<table class='table table-striped'><tr><th style='position: sticky; top: 0px'>현재가 </th>";
 						for (var i = 0; i < coinList.length - 1; i++) {
 							thisCoin = i;
 							html += "<tr><td><a href=# onclick='changename(\""
@@ -371,8 +386,10 @@ function alltable() {
 
 						html += "</table>"
 						title += "</table>"
+						subtitle +="<td>"+ titdisplay[0][0] +"</td></tr></table>"
 						$("#cointable_div").html(html);
 						$("#title").html(title);
+						$("#now_price").html(subtitle);
 
 						for (var i = 0; i < coinList.length - 1; i++) {
 							var num = $(".change_c").eq(i);
@@ -395,8 +412,6 @@ function alltable() {
 
 						}
 
-						$('tbody tr:nth-of-type(odd)').css(
-								'background-color', 'rgb(227,200,248, 0.0453)');
 					} else {
 						var onechange = "";
 
@@ -410,21 +425,20 @@ function alltable() {
 								data['data'][ch_title]['acc_trade_value_24H'] * 1,
 								data['data'][ch_title]['min_price'] * 1,
 								data['data'][ch_title]['max_price'] * 1 ]
-						title = "<table class='table' id='tit'><tr>";
+						title = "<table class='table table-striped' id='tit'><tr>";
 
-						html = "<table style='height : 146px; table-layout : fixed;' class='table' ><tr><td width= '78.08px !important'>코인명</td><td width= '91.36px !important'>현재가</td><td width= '78.77px !important'>등락률(24H)</td><td width= '164.31px !important'>거래대금</td></tr>";
+						html = "<table style='height : 146px; table-layout : fixed;' class='table table-striped' ><tr><td width= '78.08px !important'>코인명</td><td width= '91.36px !important'>현재가</td><td width= '78.77px !important'>등락률(24H)</td><td width= '164.31px !important'>거래대금</td></tr>";
 						title += "<td style='text-align : center; vertical-align: middle; width : 255px;'><h1>"
-							+ ch_title
-							+ "</h1></td><td style='text-align : center; width : 167px;'><h2>현재가</h2><a class='t_cha'style='text-align : center;'>"
-							+ titdisplay[0][0]
-							+ "</a></td><td style='text-align : center; width : 208px;'><h2>전일대비</h2><a class='t_cha'style='text-align : center;'>"
-							+ titdisplay[0][1]
-							+ "%</a></td><td style='text-align : center; width : 150px;'><h2>저가</h2><a class='t_ch' style='color : blue;text-align : center;'>"
-							+ titdisplay[0][3]
-							+ "</a></td><td style='text-align : center; width : 167px;'><h2>고가</h2><a class='t_ch' style='color : red;text-align : center;'>"
-							+ titdisplay[0][4] + "</a></td></tr>"
+								+ ch_title
+								+ "</h1></td><td style='text-align : center; width : 167px;'><h2>현재가</h2><a class='t_cha'style='text-align : center;'>"
+								+ titdisplay[0][0]
+								+ "</a></td><td style='text-align : center; width : 208px;'><h2>전일대비</h2><a class='t_cha'style='text-align : center;'>"
+								+ titdisplay[0][1]
+								+ "%</a></td><td style='text-align : center; width : 150px;'><h2>저가</h2><a class='t_ch' style='color : blue;text-align : center;'>"
+								+ titdisplay[0][3]
+								+ "</a></td><td style='text-align : center; width : 167px;'><h2>고가</h2><a class='t_ch' style='color : red;text-align : center;'>"
+								+ titdisplay[0][4] + "</a></td></tr>"
 
-				
 						html += "<tr><td><a href=# onclick='changename(\""
 								+ search + "\");'>" + search + "</a></td><td>"
 								+ onedisplay[0][0] + "</td><td id='perc'>"
@@ -432,7 +446,7 @@ function alltable() {
 								+ onedisplay[0][2] + "</td></tr>";
 						title += "</table>"
 						html += "</table>"
-							$("#title").html(title);
+						$("#title").html(title);
 						$("#cointable_div").html(html);
 						if (titdisplay[0][1] > 0) {
 							$(".t_cha").css('color', 'red');
@@ -444,11 +458,12 @@ function alltable() {
 						} else {
 							$("#perc").css('color', 'blue');
 						}
-						$('tbody tr:nth-of-type(odd)').css(
+						$('.table-striped tbody tr:nth-of-type(odd)').css(
 								'background-color', 'rgb(227,200,248, 0.0453)');
 					}
 
 				}
+
 			});
 };
 
@@ -471,8 +486,8 @@ function returncoinfn(tc) { // 매도 취소시 코인 반환 update 문
 		}
 	});
 }
-//매수 & 매도 실행시 돈계산 부분
-function up() { 
+// 매수 & 매도 실행시 돈계산 부분
+function up() {
 	$.ajax({
 		url : "coinupdate",
 		type : "post",
@@ -489,8 +504,8 @@ function up() {
 		}
 	});
 }
-//코인계산 부분
-function coinacntupdate() { 
+// 코인계산 부분
+function coinacntupdate() {
 	$.ajax({
 		url : "coinacntupdate",
 		type : "post",
@@ -509,8 +524,8 @@ function coinacntupdate() {
 		}
 	});
 }
-//coin 돈계산 부분
-function upcoin() { 
+// coin 돈계산 부분
+function upcoin() {
 	$.ajax({
 		url : "coinacntupdate",
 		type : "post",
@@ -586,11 +601,11 @@ function slist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 
 				success : function(json) {
 
-					var html1 = "<br><span>채결 매도주문내역</span><form id='frm24'><table class='table  ' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매도가격</td><td>매도날짜</td><td>계좌번호</td></tr>";
+					var html1 = "<br><span style='font-size:20px;'>채결 <span style='color:#4387f9; font-size:20px;'>매도</span> 주문내역</span><form id='frm24'><table class='table' style='text-align:center;'><tr style='border: 2px solid #efefef; background-color:#efefef;'><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매도가격</td><td>매도날짜</td><td>계좌번호</td></tr>";
 
 					if (json.length > 0) {
 						$.each(json, function(entryIndex, entry) {
-							html1 += "<tr><td>" + entry.usno + "</td>" + "<td>"
+							html1 += "<tr style='border: 2px solid #efefef;'><td>" + entry.usno + "</td>" + "<td>"
 									+ entry.coin + "</td>" + "<td>"
 									+ entry.sellcnt + "</td>" + "<td>"
 									+ entry.sellprice + "</td>" + "<td>"
@@ -621,11 +636,11 @@ function blist() { // 컨트롤러로 부터 리스트를 받아서 출력한다
 
 				success : function(json) {
 
-					var html1 = "<span>채결 매수주문내역</span><form id='frm23'><table class='table'><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
+					var html1 = "<span style='font-size:20px;'>채결  <span style='color:#f75467;font-size:20px;'>매수</span> 주문내역</span><form id='frm23'><table class='table' style='text-align:center;'><tr style='border: 2px solid #efefef;background-color:#efefef;'><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td></tr>";
 
 					if (json.length > 0) {
 						$.each(json, function(entryIndex, entry) {
-							html1 += "<tr><td>" + entry.ubno + "</td>" + "<td>"
+							html1 += "<tr style='border: 2px solid #efefef;'><td>" + entry.ubno + "</td>" + "<td>"
 									+ entry.coin + "</td>" + "<td>"
 									+ entry.buycnt + "</td>" + "<td>"
 									+ entry.buyprice + "</td>" + "<td>"
@@ -655,13 +670,13 @@ function wblist() { // 미체결 매수 list함수
 
 				success : function(json) {
 
-					var html1 = "<span>미채결 매수주문내역</span><form id='frm20'><table class='table  ' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td><td>주문취소</td></tr>";
+					var html1 = "<span style='font-size:20px;'>미체결 <span style='color:#f75467;font-size:20px;'>매수</span> 주문내역</span><form id='frm20'><table class='table' style='text-align:center;'><tr style='border-bottom: 2px solid #efefef; background-color:#efefef;'><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매수가격</td><td>매수날짜</td><td>계좌번호</td><td>주문취소</td></tr>";
 					if (json.length > 0) {
 						$
 								.each(
 										json,
 										function(entryIndex, entry) {
-											html1 += "<tr><td>"
+											html1 += "<tr style='border: 2px solid #efefef;'><td>"
 													+ entry.ubno
 													+ "</td>"
 													+ "<td>"
@@ -680,13 +695,13 @@ function wblist() { // 미체결 매수 list함수
 													+ entry.acntno
 													+ "</td>"
 
-													+ "<td><button type='button' class='del' onclick=\"removeWaitBought("
+													+ "<td><a class='del'  style='cursor: pointer;' onclick=\"removeWaitBought("
 													+ entry.ubno
 													+ ", "
 													+ entry.buycnt
 													+ ", "
 													+ entry.buyprice
-													+ ")\">X</button></td></tr>";
+													+ ")\">취소</a></td></tr>";
 										});
 						html1 += "</table></form>"
 					} else {
@@ -711,14 +726,14 @@ function wslist() { // 미체결 매도 내용 함수
 
 				success : function(json) {
 
-					var html1 = "<br><span>미채결 매도주문내역</span><form id='frm29'><table class='table  ' ><tr><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매도가격</td><td>매도날짜</td><td>계좌번호</td><td>주문취소</td></tr>";
+					var html1 = "<br><span style='font-size:20px;'>미체결 <span style='color:#4387f9;font-size:20px;'>매도</span> 주문내역</span><form id='frm29'><table class='table'  style='text-align:center;'><tr style='border: 2px solid #efefef; background-color:#efefef;'><td>접수번호</td><td>코인종류</td><td>코인개수</td><td>매도가격</td><td>매도날짜</td><td>계좌번호</td><td>주문취소</td></tr>";
 
 					if (json.length > 0) {
 						$
 								.each(
 										json,
 										function(entryIndex, entry) {
-											html1 += "<tr><td>"
+											html1 += "<tr style='border: 2px solid #efefef;'><td>"
 													+ entry.usno
 													+ "</td>"
 													+ "<td>"
@@ -737,11 +752,11 @@ function wslist() { // 미체결 매도 내용 함수
 													+ entry.acntno
 													+ "</td>"
 
-													+ "<td><button type='button' class='del' onclick=\"removeWaitSold("
+													+ "<td><a class='del' style='cursor: pointer;' onclick=\"removeWaitSold("
 													+ entry.usno
 													+ ", "
 													+ entry.sellcnt
-													+ ")\">X</button></td></tr>";
+													+ ")\">취소</a></td></tr>";
 										});
 						html1 += "</table></form>"
 					} else {
@@ -988,8 +1003,7 @@ function ob_p(num) {
 }
 // 호가창 받아오는 함수
 function orderbook() {
-	var orderbookarrbid = new Array();
-	var orderbookarrask = new Array();
+
 	var a = $("#coin").val();
 	var html6 = "";
 	$
@@ -1008,8 +1022,10 @@ function orderbook() {
 						orderbookarrask[i] = [
 								data[0]['orderbook_units'][i]['ask_price'] * 1,
 								data[0]['orderbook_units'][i]['ask_size'] * 1 ]
-					} //  class='table  '
-					html6 = "<table id='orderbook_t' class='table' style='text-align : center;'><tr><th style=' position: sticky; top: 0px;  background: #f8f9fa;'>현재가</th><th  style=' position: sticky; top: 0px;  background: #f8f9fa;'>수량</th></tr>";
+					}
+					html6 = "<table id='orderbook_t' class='table table-striped' style='text-align : center;'><tr><th style=' position: sticky; top: 0px;  background: #f8f9fa;'>호가</th><th  style=' position: sticky; top: 0px;  background: #f8f9fa;'>"
+							
+							+ "수량</th></tr>";
 					for (var i = 14; i >= 0; i--) {
 						html6 += "<tr><td><a href='#'  style='color : black !important;' onclick='ob_p("
 								+ orderbookarrask[i][0]
@@ -1030,7 +1046,8 @@ function orderbook() {
 					}
 					html6 += "</table>"
 					$("#aaaaa").html(html6);
-				}
+				},
+			
 			});
 };
 

@@ -179,12 +179,12 @@
 							<c:when test="${loginMember != null }">
 								<tr id="now_price" style="width: 226.5px;">
 								</tr>
-							
+
 
 								<form id="frm11">
 									<tr>
 										<td style="width: 223px;">회원계좌번호</td>
-										<td>${acnt.acntno }<span id="su"></span><input
+										<td>${acnt.acntno }&nbsp; <span id="su"></span><input
 											name="acntno" type="hidden" value="${acnt.acntno }"></td>
 									</tr>
 									<tr>
@@ -197,19 +197,19 @@
 									</tr>
 								</form>
 								<tr>
-									<td style="text-align: center;" ><button class="btn_bs"
+									<td style="text-align: center;"><button class="btn_bs"
 											id="bought_b"
 											style="border-radius: 8px; border: 0px; background-color: #f75467; outline: none; cursor: pointer;">매수</button>
 									</td>
-									<td><button  class="btn_bs" id="sold_b"
-											style=" border-radius: 8px; outline: none; cursor: pointer;">매도</button>
+									<td><button class="btn_bs" id="sold_b"
+											style="border-radius: 8px; outline: none; cursor: pointer;">매도</button>
 										<br></td>
 								</tr>
 								<form id="frm22">
 									<tr>
 										<td width="100px">보유 금액</td>
-										<td><input id="cybcash" value="" readonly="readonly">
-										</td>
+										<td><input id="cybcash" value="" readonly="readonly"
+											style="text-align: center;"></td>
 									</tr>
 									<tr>
 										<td style="width: 100px">코인 이름</td>
@@ -238,8 +238,9 @@
 									</tr>
 									<tr>
 										<td>총액</td>
-										<td><input id="totalprice" type="text" value="0"><input
-											id="updateprice" name="updateprice" type="hidden" value=""><input
+										<td><input id="totalprice" type="text" value="0"
+											style="text-align: center;"><input id="updateprice"
+											name="updateprice" type="hidden" value=""><input
 											id="updatecoin" name="updatecoin" type="hidden" value=""><br></td>
 									</tr>
 									<tr>

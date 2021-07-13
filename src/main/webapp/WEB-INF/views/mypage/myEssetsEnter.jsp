@@ -28,6 +28,29 @@
     border: 1.5px solid #E3C8F8;
 	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);
 }
+
+.pwd {
+	height: 31.5px;
+    width: 24.5%;
+    padding: 5px;
+    border: 1.5px solid #E3C8F8;
+    border-radius: 5px;
+    font-size: 18px;
+    box-shadow: 1px 1px 3px rgb(90 90 90 / 35%);
+}
+
+.checkBtn {
+	height: 30px;
+    font-size: 16px;
+    background-color: #fff;
+    padding: 0px 8px;
+    border: 1px solid transparent;
+    border-color: #E3C8F8;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgb(90 90 90 / 35%);
+    margin: 0 2%;
+}
 </style>
 </head>
 <body>
@@ -35,10 +58,8 @@
 		<jsp:include page="../main/header.jsp"></jsp:include>
 		<jsp:include page="myNav.jsp"></jsp:include>
 		<div id="mee">
-			<h2>계좌 비밀번호 확인</h2>
-			<input type="password" placeholder="계좌 비밀번호를 입력해주세요" id="bankPw"
-				name="accountPassword" class="pin3">
-			<button type="button" id="enterBtn">확인</button>
+			<input type="password" placeholder="계좌 비밀번호를 입력해주세요" id="bankPw" name="accountPassword" class="pin3 pwd">
+			<button type="button" id="enterBtn" class="checkBtn">확인</button>
 		</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include> 
 	</div>

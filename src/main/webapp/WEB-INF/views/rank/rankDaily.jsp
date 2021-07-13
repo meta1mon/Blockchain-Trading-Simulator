@@ -204,7 +204,7 @@
 					<tr>
 						<td>${status.index +1 }위</td>
 						<td>${rank.nickname }</td>
-						<td>
+						<td style="padding-right: 85px; text-align: right;">
 							<c:if test="${rank.yield>=0 }">
 								<font class="rankFont" color="red" ><fmt:formatNumber value="${rank.yield }" pattern="##,###.##" /> % </font>
 							</c:if>
@@ -215,20 +215,22 @@
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="3" >&#8942;
+					<td style="padding-left: 421px;" colspan="3" >&#8942;
 				</tr>
 				<c:if test="${loginMember == null }">
 					<tr>
-						<td colspan="3"><a
+						<td  style="padding-left: 350px;" colspan="3"><a
 							href="${pageContext.request.contextPath}/login">로그인</a>하여 내 랭킹
 							확인하기</td>
 					</tr>
 				</c:if>
 				<c:if test="${my != null }">
 					<tr>
-						<td>본인: ${rank }위</td>
+						<td style="padding-left: 29px;" >
+							<font color="#8c66c8">나의 현재 순위</font> ${rank }위
+						</td>
 						<td>${my.nickname }</td>
-						<td>
+						<td style="padding-right: 85px; text-align: right;">
 							<c:if test="${my.yield>=0 }">
 								<font class="rankFont" color="red" ><fmt:formatNumber value="${my.yield }" pattern="##,###.##" /> % </font>
 							</c:if>

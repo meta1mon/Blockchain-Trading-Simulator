@@ -149,8 +149,10 @@ public class AdminCtrl {
 	public void cashRegister(Cash vo, HttpServletResponse response) {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		
+		double price = (vo.getPrice() * (double) (100 - vo.getDiscountrate()) / 100);
+		vo.setSellprice((int) price);
 
-		vo.setSellprice(vo.getPrice() * (100 - vo.getDiscountrate()) / 100);
 		int result = aService.registerCash(vo);
 		PrintWriter out = null;
 		try {

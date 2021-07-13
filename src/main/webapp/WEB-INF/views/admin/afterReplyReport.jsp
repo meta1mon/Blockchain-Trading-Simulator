@@ -40,9 +40,11 @@ $(function(){
 	$("#btnsearch").css("display", "inline-block");
 	$("#btnsearch2").css("display", "none");
 	if($(".rcontent").has($("img"))){
-		$(".rcontent img").attr("src", null);
-		$(".rcontent img").attr("srcset", null);
-		$(".rcontent img").attr("alt", "[이미지]");
+		var test = $('.rcontent').html();
+		console.log(test);
+		test = test.replace(/<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gi,"[이미지]");
+		console.log(test);
+		$('.rcontent').has($("img")).html(test);
 	}
 var onoff = function(){
 	 var opt = $("#searchType option:selected");

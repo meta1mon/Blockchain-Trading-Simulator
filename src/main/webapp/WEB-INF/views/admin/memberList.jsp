@@ -72,7 +72,7 @@
 									<c:url var="prev" value="ml">
 										<c:param name="page" value="1" />
 									</c:url>
-									<a href="${prev}"><i class="fas fa-angle-double-right"></i></a>
+									<a href="${prev}"><i class="fas fa-angle-double-left"></i></a>
 								</c:if>
 								<!-- 5초과라면 화살표를 눌렀을 때 5페이지 전으로 -->
 								<c:if test="${currentPage > 5}">

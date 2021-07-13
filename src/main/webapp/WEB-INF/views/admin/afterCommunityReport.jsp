@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+zzzz<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -18,14 +18,12 @@ $(function(){
 	$("#btnsearch").css("display", "inline-block");
 	$("#btnsearch2").css("display", "none");
 	if($(".ccontent").has($("img"))){
-		$(".ccontent img").attr("src", null);
-		$(".ccontent img").attr("srcset", null);
-		$(".ccontent img").attr("alt", "[이미지]");
+		var test = $('.ccontent').html();
+		console.log(test);
+			test = test.replace(/<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gi,"[이미지]");
+		console.log(test);
+		$('.ccontent').has($("img")).html(test);
 	}
-	if($(".ccontent figure")){
-		
-	}
-	
 	
 var onoff = function(){
 	 var opt = $("#searchType option:selected");

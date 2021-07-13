@@ -13,9 +13,11 @@
 <script>
 	$(function(){
 		if($(".ccontent").has($("img"))){
-			$(".ccontent img").attr("src", null);
-			$(".ccontent img").attr("srcset", null);
-			$(".ccontent img").attr("alt", "[이미지]");
+			var test = $('.ccontent').html();
+			console.log(test);
+ 			test = test.replace(/<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gi,"[이미지]");
+			console.log(test);
+			$('.ccontent').has($("img")).html(test);
 		}
 		/* 모달창 열기 */
 		var  openModal = function(event) {

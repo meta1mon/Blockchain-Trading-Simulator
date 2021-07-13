@@ -358,7 +358,7 @@ function alltable() {
 						title = "<table class='table table-striped' id='tit'>";
 						// 위 코드 뒤에 붙어있던건데 땠음<tr><th style='position: sticky; top: 0px'>코인명</th></tr>
 						//TODO
-						subtitle = "<table class='table table-striped'><tr><th style='position: sticky; top: 0px'>현재가 </th>";
+						subtitle = "<td style='position: sticky; top: 0px'>현재가 </td>";
 						for (var i = 0; i < coinList.length - 1; i++) {
 							thisCoin = i;
 							html += "<tr><td><a href=# onclick='changename(\""
@@ -386,7 +386,7 @@ function alltable() {
 
 						html += "</table>"
 						title += "</table>"
-						subtitle +="<td>"+ titdisplay[0][0] +"</td></tr></table>"
+						subtitle +="<td>"+ titdisplay[0][0] +"</td>"
 						$("#cointable_div").html(html);
 						$("#title").html(title);
 						$("#now_price").html(subtitle);

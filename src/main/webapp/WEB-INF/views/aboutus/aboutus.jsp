@@ -20,6 +20,16 @@
 <link href="resources/css/aboutus.css" rel="stylesheet" />
 <link href="${pageContext.request.contextPath}/resources/css/footer.css"
 	rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function moveMypagePost() {
+	var newForm = $('<form></form>');
+	newForm.attr("method", "post");
+	newForm.attr("action", "<%=request.getContextPath()%>/mypage");
+	newForm.appendTo('body');
+	newForm.submit();		
+}
+</script>
 </head>
 <body id="page-top">
 	<!-- Navigation-->
@@ -60,7 +70,7 @@
 						</c:when>
 						<c:when test="${loginMember != null }">
 							<li class="nav-item"><a class="nav-link"
-								href="<%=request.getContextPath()%>/mypage">마이페이지</a></li>
+								onclick="moveMypagePost()"  style="cursor:pointer">마이페이지</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="<%=request.getContextPath()%>/logout" id="logout">로그아웃</a></li>
 						</c:when>

@@ -236,14 +236,20 @@ public class AdminCtrl {
 		String rstatus = request.getParameter("rstatus");
 		String cno = request.getParameter("cno");
 		String rno = request.getParameter("rno");
+		System.out.println("******************************************************************");
+		System.out.println("rrno: " + rrno);
+		System.out.println("rstatus: " + rstatus);
+		System.out.println("cno: " + cno);
+		System.out.println("rno: " + rno);
+		System.out.println("******************************************************************");
 		if (rstatus.equals("accept")) { // 수리일 때
 			int result = aService.insertArreportAccept(vo); // arreport에 삽입
-			int result2 = aService.deleteRreport(rrno); // rreport에서 삭제
+			int result2 = aService.deleteRreport(rno); // rreport에서 삭제
 			int result3 = rcmService.deleteRcommunity(rno, cno); // Rcommunity에서 삭제
 			System.out.println(result3);
 		} else if (rstatus.equals("deny")) { // 반려일 때
 			int result = aService.insertArreportDeny(vo); // arreport에 삽입
-			int result2 = aService.deleteRreport(rrno); // rreport에서 삭제
+			int result2 = aService.deleteRreport(rno); // rreport에서 삭제
 		}
 	}
 

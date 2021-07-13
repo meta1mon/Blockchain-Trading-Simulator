@@ -137,14 +137,14 @@ $(function(){
 		console.log("완료하겠습니다.")
 		var thistr = $(this).parents(".item"); //내가 클릭한 버튼의 tr
 		var index = $(".item").index(thistr); //.item 중에 thistr만 골라서 index를 알려준다!
-		
 		var ele1 = $('.item:eq(' + index +') > td:nth-child(1) > input');
 		var ele2 = $('.item:eq(' + index +') > td:nth-child(2) > input');
 		var ele3 = $('.item:eq(' + index +') > td:nth-child(3) >  input');
 		var ele4 = $('.item:eq(' + index +') > td:nth-child(4) > input');
 		var ele5 = $('.item:eq(' + index +') > td:nth-child(5) > input');
 		var ele6 = $('.item:eq(' + index +') > td:nth-child(6) > input');
-		
+
+		$("input[name=cashno]").val(ele1.val());
 		$("input[name=won]").val(ele2.val());
 		$("input[name=price]").val(ele3.val());
 		$("input[name=discountrate]").val(ele4.val());
@@ -161,9 +161,7 @@ $(function(){
 		$.ajax({
 				url: 'updateCash',
 				type: 'post',
-				data: {
-					"cashno" : cashno
-				},
+				data: dataquery,
 				sync : true,
 			success : function(data) {
 				alert("상품 수정 완료!");

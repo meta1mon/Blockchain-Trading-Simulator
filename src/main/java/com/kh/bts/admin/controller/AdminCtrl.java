@@ -130,6 +130,7 @@ public class AdminCtrl {
 	@ResponseBody
 	@RequestMapping(value = "/updateCash")
 	public int updateCash(Cash vo, HttpServletResponse response) {
+		System.out.println(vo);
 		int result = aService.updateCash(vo);
 		System.out.println(result);
 		return result;

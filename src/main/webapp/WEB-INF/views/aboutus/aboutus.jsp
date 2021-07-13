@@ -58,9 +58,9 @@ function moveMypagePost() {
 					<li class="nav-item"><a class="nav-link"
 						href="javascript:void(window.open('<%=request.getContextPath()%>/prochart', '_blank','width=1300px, height=800px'))">프로차트</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/cashShop">충전소</a></li>
-					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/rankDaily">랭킹</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/cashShop">충전소</a></li>
 					<c:choose>
 						<c:when test="${loginMember == null }">
 							<li class="nav-item"><a class="nav-link"
@@ -526,9 +526,8 @@ function moveMypagePost() {
 								<img class="img-fluid d-block mx-auto"
 									src="resources/assets/img/portfolio/cashshop.jpg" alt="..." />
 								<p>
-									Be fearful when others are greedy, Be greedy when others are
-									fearful. <br> - Warren Edward Buffett <br> 여러분의 더 큰 투자 경험을 위해,
-									가상 투자금 충전 서비스를 제공하고 있습니다. <br> 당신의 수익률을 위해 투자하세요!
+									多多益善<br> 많으면 많을수록 더 능력을 발휘할 수 있습니다 <br> 여러분의 더 큰 수익과 더 넓은 경험을 위한
+									가상 투자금 충전 서비스 <br> 당신을 위해 투자하세요!
 
 								</p>
 								<ul class="list-inline">

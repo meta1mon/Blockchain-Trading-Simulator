@@ -95,7 +95,7 @@ public class MemberCtrl {
 	public void emailConfirm(Member vo, Model model, HttpServletResponse response) throws Exception {
 		mService.authMember(vo);
 		model.addAttribute("vo", vo);
-		response.sendRedirect("mainpage");
+		response.sendRedirect("login");
 	}
 
 //	로그인
@@ -161,13 +161,14 @@ public class MemberCtrl {
 				request.setAttribute("errorMessage", "이메일 인증을 진행해주세요.");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/find");
 				dispatcher.forward(request, response);
+				vo.setAuth("N");
 			}
 		}else {
 			request.setAttribute("errorMessage", "존재하지 않는  회원입니다.");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/find");
 			dispatcher.forward(request, response);
 		}
-		System.out.println(vo.toString());
+		System.out.println(email + auth);
 		System.out.println(mService.findPassword(vo));
 	}
 }

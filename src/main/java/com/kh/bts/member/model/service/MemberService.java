@@ -6,9 +6,6 @@ import com.kh.bts.member.model.vo.Member;
 public interface MemberService {
 
 	
-	public String returnAuth(String email);
-	
-
 	 int insertMember(Member vo, Acnt vo2) throws Exception;
 	 String findPassword(Member vo) throws Exception;
 	 int dupeEmail(Member vo) throws Exception;
@@ -21,6 +18,7 @@ public interface MemberService {
 	 void authMember(Member vo);
 	 Member loginMember(Member vo) throws Exception;
 	 String returnNickname(String email);
+	 String returnAuth(String email);
 	 int countMember();
 	 int countTodayMember();
 

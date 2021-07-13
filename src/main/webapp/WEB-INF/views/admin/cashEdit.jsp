@@ -162,8 +162,8 @@ $(function(){
 				url: 'updateCash',
 				type: 'post',
 				data: {
-					"cashno" : cashno;
-				}
+					"cashno" : cashno
+				},
 				sync : true,
 			success : function(data) {
 				alert("상품 수정 완료!");

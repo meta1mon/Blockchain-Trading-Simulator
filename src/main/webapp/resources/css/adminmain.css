@@ -1,35 +1,58 @@
 @charset "UTF-8";
-
-#mm li:not(.sub) {
-	float: left;
-	list-style-type: none;
-	margin: 15px;
-	color: black;
-	width: 140px;
-	height: 167px;
-	text-align: center;
-	border: 5px solid #ffc000;
-	border-radius: 15px;
-    padding-top: 39px;
-    padding-left: 39px;
-    padding-right: 39px;	
-}
-
-.sub{
-	text-align:left;
-	list-style-type: none;
+#wrapper{
+	display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
 }
 
 #mm .img {
 	width: 80px;
 	height: 80px;
+	vertical-align: middle;
+}
+
+.text {
+	vertical-align: middle;
+	float: right;
+}
+
+.text50 {
+	font-size: 50px;	
+	margin-top: 15px;
+}
+.text25 {
+	font-size: 25px;
+	color: #fcc000;
+}
+
+.main {
+	width: 100%;
+}
+
+.main td:not(.sub) {
+	padding: 10px;
+}
+
+.main tr:nth-child(2n-1):not(.sub *){
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.sub * {
+	font-size: 25px;
 	padding: 5px;
 }
 
+.border {
+	border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    margin: 40px;
+    padding: 30px;
+    box-shadow: 5px 5px -0px -0px rgba(0,0,0,0.05);
+	
+}
 #mm {
-	position: absolute;
-	top: calc(50% - 150px);
-	left: calc(50% - 246px);
+	margin-top: 150px;
+	width: 800px;
 }
 
 .fa-chevron-left, .fa-chevron-right {
@@ -39,4 +62,12 @@
 .report a:hover, .money a:hover {
 	color: red;
 	font-weight: bold;
+}
+
+.fa-folder {
+	width: 80px !important;
+}
+.fa-folder-open{
+	width: 90px !important;
+	display: none;
 }

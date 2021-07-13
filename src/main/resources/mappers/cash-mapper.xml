@@ -8,8 +8,7 @@
 		statementType="PREPARED">
 		INSERT INTO CASH VALUES(SEQ_CASH.NEXTVAL,
 		#{price},
-		#{discountrate}, #{sellprice}, #{won}, #{startdate}, #{enddate},
-		default)
+		#{discountrate}, #{sellprice}, #{won}, #{startdate}, #{enddate})
 	</insert>
 	<!-- 충전 상품 수정 -->
 	<update id="updateCash" parameterType="Cash" flushCache="true"

@@ -9,9 +9,8 @@
 	</select>
 	
 	<!-- accumulative 테이블에 newesset 컬럼 = 현금보유액+평가금액 -->
-	<!-- 관리자 페이지 회원 조회 나중에 COINACNT랑 JOIN 하기--> 
 	<select id="adminListMember" resultType="arraylist" resultMap="Member">
-		SELECT M.EMAIL, M.NICKNAME, M.GENDER, M.BIRTHDATE, A.CYBCASH, A.ACNTNO, AC.NEWESSET FROM MEMBER M JOIN ACNT A ON (M.EMAIL = A.EMAIL) JOIN ACCUMULATIVE AC ON(A.ACNTNO = AC.ACNTNO)
+		SELECT M.EMAIL, M.NICKNAME, M.GENDER, M.BIRTHDATE, A.CYBCASH, A.ACNTNO, AC.NEWESSET, AC.OLDESSET FROM MEMBER M JOIN ACNT A ON (M.EMAIL = A.EMAIL) JOIN ACCUMULATIVE AC ON(A.ACNTNO = AC.ACNTNO)
 		ORDER BY REQAGR DESC
 	</select>
 
@@ -31,7 +30,7 @@
 
 	<!-- 회원수조회 -->
 	<select id="countMember" resultType="int">
-		SELECT COUNT(*) FROM MEMBER
+		SELECT COUNT(*) FROM MEMBER WHERE EMAIL NOT LIKE '%admin%'
 	</select>
 	
 	<!-- 오늘 가입한 회원수조회 -->

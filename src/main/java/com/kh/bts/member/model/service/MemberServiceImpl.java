@@ -67,8 +67,9 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String findPassword(Member vo) throws Exception {
 		String result = null;
+		String email = vo.getEmail();
 		if(vo.getEmail()!=null) {
-			if(vo.getAuth() != null) {
+			if(vo.getAuth() != "N" || !vo.getAuth().equals("N")) {
 			String key = new TempKey().getKey(12, false); // 랜덤 문자 생성
 			mDao.createTempPassword(vo.getEmail(), key);
 			MailHandler sendMail = new MailHandler(mailSender);
@@ -90,7 +91,7 @@ public class MemberServiceImpl implements MemberService {
 			sendMail.send();
 			result = "Success";
 			} else {
-				result = "Fail";
+				result = vo + "Fail";
 			}
 		} else {
 			result = "Fail";

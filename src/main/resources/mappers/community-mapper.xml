@@ -62,6 +62,9 @@
 	<select id="countCommunity" resultType="int">
 		SELECT count(*) FROM COMMUNITY WHERE CWRITER LIKE '%관리자%'
 	</select>
+	<select id="countTotalCommunity" resultType="int">
+		SELECT count(*) FROM COMMUNITY WHERE CWRITER NOT LIKE '%관리자%'
+	</select>
 	<!-- 오늘 게시글 전체 개수 조회 -->
 	<select id="countTodayCommunity" resultType="int">
 		SELECT count(*) FROM

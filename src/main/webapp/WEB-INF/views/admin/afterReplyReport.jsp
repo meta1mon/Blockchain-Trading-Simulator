@@ -74,9 +74,9 @@ var onoff = function(){
 	<div id="frmSearch">
 			<form action="arr" method="get">
 				<select id="searchType" name="searchType">
-					<option value="1" selected>처리 상태</option>
-					<option value="2">피신고자</option>
+					<option value="2" selected>피신고자</option>
 					<option value="3">신고자</option>
+					<option value="1">처리 상태</option>
 				</select> <input type="search" name="keyword" id="search" placeholder="검색어를 입력해주세요.">
 				<button type="submit" id="btnsearch" class="inbl">검색</button>
 			</form>

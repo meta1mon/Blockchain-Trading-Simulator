@@ -5294,6 +5294,18 @@ textarea.form-control-lg {
   padding: 1rem;
 }
 
+.modal-body p {
+	text-align: center;
+}
+
+.modal-body a, a:link, a:visited {
+	color: black;
+}
+
+.modal-body a:hover {
+	text-decoration: underline;
+}
+
 .modal-footer {
   display: flex;
   flex-wrap: wrap;

@@ -32,7 +32,7 @@ public class CommunityServiceImpl implements CommunityService {
 	
 	@Override
 	public int totalCount() {
-		return cmDao.listCount();
+		return cmDao.listTotalCount();
 	}
 	@Override
 	public int totalTodayCount() {

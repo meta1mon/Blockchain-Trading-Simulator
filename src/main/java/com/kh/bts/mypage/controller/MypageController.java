@@ -359,6 +359,14 @@ public class MypageController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/myinstareply")
+	public ModelAndView myInstaReply(ModelAndView mv, @RequestParam(name = "cno") String cno) {
+		mv.addObject("community", cmService.selectCommunity(1, cno));
+
+		mv.setViewName("mypage/myInstaReply");
+		return mv;
+	}
+	
 // 내 충전내역 -> 나의 자산으로 통합
 //	@RequestMapping(value = "/mcl")
 //	public ModelAndView myCashLog(ModelAndView mv, HttpServletRequest request) {

@@ -237,6 +237,36 @@ function doOpenCheck(chk){
 				</tr>
 			</table>
 		</div>
+		</td>
+		</tr>
+		<tr>
+		<td>
+		<div id="oldSale">
+			<table class="step">
+				<tr>
+					<td colspan="4"><h4><span class="purple">&lt;</span> 할인 종료 상품 <span class="purple">&gt;</span></h4></td>
+				</tr>
+				<tr>
+					<td class="center">모의 투자 충전 금액</td>
+					<td class="center">KRW</td>
+					<td>할인율</td>
+					<td>할인 기간</td>
+				</tr>
+				<c:forEach items="${oldList }" var="cashVo" varStatus="status">
+					<tr class="olist" style="display: none;">
+						<td align="right">${cashVo.won }원</td>
+						<td align="rig	ht">${cashVo.sellprice }원</td>
+						<td>${cashVo.discountrate }%</td>
+						<td>${cashVo.startdate } ~ ${cashVo.enddate }</td>
+					</tr>
+				</c:forEach>
+			</table>
+			<input type="button" id="oExpand" value="더 보기" class="expandBtn"></input>
+		</div>
+		</td>
+		</tr>
+		</table>
+		</div>
 		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</div>
 </body>

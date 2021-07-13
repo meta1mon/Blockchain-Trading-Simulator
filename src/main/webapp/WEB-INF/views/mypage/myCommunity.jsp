@@ -105,7 +105,7 @@
 							<tr>
 								<td align="left">
 									<input type="hidden" value="${fn:escapeXml(vo.rcontent)}" class="rcontentHidden"/>
-									<a href="${pageContext.request.contextPath}/mypage/myinsta?cno=${vo.cno}" class="subject">
+									<a href="${pageContext.request.contextPath}/mypage/myinstareply?cno=${vo.cno}" class="subject">
 										<span class="rcontentSpan"></span>
 									</a> 
 								</td>
@@ -117,7 +117,7 @@
 							<tr class="myReplyCommunityList" style="display: none;">
 								<td align="left">
 									<input type="hidden" value="${fn:escapeXml(vo.rcontent)}" class="rcontentHidden"/>
-									<a href="${pageContext.request.contextPath}/mypage/myinsta?cno=${vo.cno}" class="subject">
+									<a href="${pageContext.request.contextPath}/mypage/myinstareply?cno=${vo.cno}" class="subject">
 										<span class="rcontentSpan"></span>
 									</a> 
 								</td>

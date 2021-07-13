@@ -17,6 +17,16 @@
     align-items: start;
     min-height: 100vh;
 }
+#rr table {
+	table-layout: fixed;	
+}
+.ccontent *{
+	display: inline-block;
+	width: 146.8px;
+	white-space: nowrap;
+	overfow: hidden;
+	text-overflow: ellipsis;
+}
 
 /* 모달 창 공통 */
 #modal{

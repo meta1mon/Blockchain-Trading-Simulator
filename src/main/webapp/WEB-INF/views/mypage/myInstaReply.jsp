@@ -15,6 +15,11 @@
 <link href="${pageContext.request.contextPath}/resources/css/myInsta.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/mikrokosmos.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<style>
+.thumbsup, .thumbsup-liked, .thumbsdown, .thumbsdown-disliked {
+    cursor: pointer !important;
+}
+</style>
 </head>
 <body>
 	<div id="wrapper">
@@ -28,18 +33,18 @@
 							<img class="img-profile pic" src="${pageContext.request.contextPath}/resources/assets/img/user.png"
 								alt=".."> <span class="userID main-id point-span">${community.cwriter }</span>
 						</div>
-						<div class="dropdown" style="float: right;">
-							<div class="icon-react icon-more"
-								style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);">
-								<div class="dropdown-content ddcontent" style="left: 0;">
-<%-- 									<p onclick="report('${community.cno}')" class="report">신고</p> --%>
-									<p class="update"
-										onclick="checkUpdate('${community.cno }', '${community.cwriter }')">수정</p>
-									<p class="delete"
-										onclick="checkDelete('${community.cno }', '${community.cwriter }')">삭제</p>
-								</div>
-							</div>
-						</div>
+<!-- 드랍다운 숨기기				<div class="dropdown" style="float: right;"> -->
+<!-- 							<div class="icon-react icon-more" -->
+<!-- 								style="background-image: url(https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/more.png);"> -->
+<!-- 								<div class="dropdown-content ddcontent" style="left: 0;"> -->
+<%--  									<p onclick="report('${community.cno}')" class="report">신고</p> --%> 
+<!-- 									<p class="update" -->
+<%-- 										onclick="checkUpdate('${community.cno }', '${community.cwriter }')">수정</p> --%>
+<!-- 									<p class="delete" -->
+<%-- 										onclick="checkDelete('${community.cno }', '${community.cwriter }')">삭제</p> --%>
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 					</header>
 					<!-- 게시글 내용 영역 -->
 					<div class="main-image">
@@ -51,14 +56,14 @@
 					</div>
 					<!-- 게시글 추천, 비추천, 댓글 작성 -->
 					<div class="icons-react">
-<%-- 기능없앰			<div class="icons-left"	onclick="clike(0, '${community.cno }')"> --%>
-						<div class="icons-left">
+					<div class="icons-left"	onclick="clike(0, '${community.cno }')">
+<!-- 좋아요 기능없앨때쓰는태그 		<div class="icons-left"> -->
 							<img class="thumbsup-liked"	src="${pageContext.request.contextPath}/resources/assets/img/thumbs-up.png" alt="추천">
 							<img class="thumbsup" src="${pageContext.request.contextPath}/resources/assets/img/thumbsup.png" alt="추천"> 
 							<input type="text" class="nowLike" readonly	value="${community.likecnt }">
 						</div>
-<%-- 기능없앰				<div class="icons-middle" onclick="dislike(0, '${community.cno }')"> --%>
-						<div class="icons-middle" >
+					<div class="icons-middle" onclick="dislike(0, '${community.cno }')">
+<!-- 싫어요 기능없앨때쓰는태그 		<div class="icons-middle" > -->
 							<img class="thumbsdown-disliked"
 								src="${pageContext.request.contextPath}/resources/assets/img/thumbs-down.png" alt="비추천"> <img
 								class="thumbsdown" src="${pageContext.request.contextPath}/resources/assets/img/thumbsdown.png"
@@ -87,7 +92,7 @@
 <!-- 댓글란 삭제			<div> -->
 <!-- 						<div class="hl"></div> -->
 <%-- 						<c:if test="${loginMember != null }"> --%>
-<!--     						<div class="comment"> -->
+<!-- 							<div class="comment"> -->
 <!-- 								<input type="hidden" name="cno" class="replyInsertCno1" -->
 <%-- 									value="${community.cno }"> <input type="text" --%>
 <!-- 									class="input-comment replyContent1" name="rcontent" -->

@@ -66,43 +66,86 @@
 				<tr class="page">
 					<td colspan="8" class="center">
 						<div id="page">
-							<!-- 앞 페이지 번호 처리 -->
-							<c:if test="${currentPage <= 1}">
-							<i class="fas fa-angle-double-left"></i>
-							</c:if>
-							<c:if test="${currentPage > 1}">
-								<c:url var="mlistST" value="ml">
-									<c:param name="page" value="${currentPage-1}"/>
-								</c:url>
-								<a href="${mlistST}"><i class="fas fa-angle-double-left"></i></a>
-							</c:if>
-							<!-- 끝 페이지 번호 처리 -->
-							<c:set var="endPage" value="${maxPage}" />
-							<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
-								<c:if test="${p eq currentPage}">
-									<div class="pageNum"><b>${p}</b></div>
-								</c:if>
-								<c:if test="${p ne currentPage}">
-									<c:url var="mlistchk" value="ml">
-										<c:param name="page" value="${p}" />
+								<c:set var="maxPage" value="${maxPage}" />
+								<!-- 5이하 라면 화살표를 눌렀을 때 1페이지로 -->
+								<c:if test="${currentPage <= 5}">
+									<c:url var="prev" value="ml">
+										<c:param name="page" value="1" />
 									</c:url>
-									<a href="${mlistchk}">${p}</a>
+									<a href="${prev}"><i class="fas fa-angle-double-right"></i></a>
 								</c:if>
-							</c:forEach>
-							<c:if test="${currentPage >= maxPage}">
-								<i class="fas fa-angle-double-right"></i>
-							</c:if>
-							<c:if test="${currentPage < maxPage}">
-								<c:url var="clistEND" value="cl">
-									<c:param name="page" value="${currentPage+1}" />
-								</c:url>
-								<a href="${clistEND}"><i class="fas fa-angle-double-right"></i></a>
-							</c:if>
-						</div>
+								<!-- 5초과라면 화살표를 눌렀을 때 5페이지 전으로 -->
+								<c:if test="${currentPage > 5}">
+									<c:url var="prev" value="ml">
+										<c:param name="page" value="${currentPage-5}" />
+									</c:url>
+									<a href="${prev}"><i class="fas fa-angle-double-left"></i></a>
+								</c:if>
+								<!-- 현재 페이지 -2가 1보다 작다면 1부터 5페이지까지 표시 -->
+								<c:if test="${currentPage -2 < 1}">
+									<c:forEach var="p" begin="${startPage+1}" end="5">
+										<c:if test="${p eq currentPage}">
+											<div class="pageNum">
+												<b>${p}</b>
+											</div>
+										</c:if>
+										<c:if test="${p ne currentPage}">
+											<c:url var="mlistchk" value="ml">
+												<c:param name="page" value="${p}" />
+											</c:url>
+											<a href="${mlistchk}">${p}</a>
+										</c:if>
+									</c:forEach>
+								</c:if>
+								<!-- 현재 페이지 -2가 1이상이고 현재페이지 +2 가 끝페이지보다  -->
+								<c:if test="${currentPage -2 >= 1 and currentPage +2 <= maxPage}">
+									<c:forEach var="p" begin="${currentPage-2}"	end="${currentPage+2}">
+										<c:if test="${p eq currentPage}">
+											<div class="pageNum">
+												<b>${p}</b>
+											</div>
+										</c:if>
+										<c:if test="${p ne currentPage}">
+											<c:url var="mlistchk" value="ml">
+												<c:param name="page" value="${p}" />
+											</c:url>
+											<a href="${mlistchk}">${p}</a>
+										</c:if>
+									</c:forEach>
+								</c:if>
+								<c:if test="${currentPage +2 > maxPage}">
+									<c:forEach var="p" begin="${currentPage-2}" end="${maxPage}">
+										<c:if test="${p eq currentPage}">
+											<div class="pageNum">
+												<b>${p}</b>
+											</div>
+										</c:if>
+										<c:if test="${p ne currentPage}">
+											<c:url var="mlistchk" value="ml">
+												<c:param name="page" value="${p}" />
+											</c:url>
+											<a href="${mlistchk}">${p}</a>
+										</c:if>
+									</c:forEach>
+								</c:if>
+								<!-- 현재 페이지 5페이지 후가 마지막페이지 보다 작다면 -->
+								<c:if test="${currentPage +5 < maxPage}">
+									<!-- 5페이지 뒤로 이동 -->
+									<c:url var="clistEND" value="ml">
+										<c:param name="page" value="${currentPage+5}" />
+									</c:url>
+									<a href="${clistEND}"><i class="fas fa-angle-double-right"></i></a>
+								</c:if>
+								<c:if test="${currentPage +5 >= maxPage}">
+									<c:url var="clistEND" value="ml">
+										<c:param name="page" value="${maxPage}" />
+									</c:url>
+									<a href="${clistEND}"><i class="fas fa-angle-double-right"></i></a>
+								</c:if>
+							</div>
 					</td>
 					</tr>
 			</table>
-
 		</div>
 	</div>
 	</div>

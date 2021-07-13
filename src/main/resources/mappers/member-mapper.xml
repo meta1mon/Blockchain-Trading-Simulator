@@ -9,7 +9,6 @@
 	</select>
 	
 	<!-- accumulative 테이블에 newesset 컬럼 = 현금보유액+평가금액 -->
-	<!-- 관리자 페이지 회원 조회 나중에 COINACNT랑 JOIN 하기--> 
 	<select id="adminListMember" resultType="arraylist" resultMap="Member">
 		SELECT M.EMAIL, M.NICKNAME, M.GENDER, M.BIRTHDATE, A.CYBCASH, A.ACNTNO, AC.NEWESSET FROM MEMBER M JOIN ACNT A ON (M.EMAIL = A.EMAIL) JOIN ACCUMULATIVE AC ON(A.ACNTNO = AC.ACNTNO)
 		ORDER BY REQAGR DESC

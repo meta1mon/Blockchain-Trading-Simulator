@@ -12,6 +12,16 @@
 	margin-top: 150px;
 	width: 1085px;
 }
+#arr table {
+	table-layout: fixed;	
+}
+.ccontent *{
+	display: inline-block;
+	width: 146.8px;
+	white-space: nowrap;
+	overfow: hidden;
+	text-overflow: ellipsis;
+}
 #wrapper{
     display: flex;
     justify-content: center;

@@ -385,11 +385,11 @@ function moveMypagePost() {
 								<p class="item-intro text-muted">Mock Investment</p>
 								<img class="img-fluid d-block mx-auto"
 									src="resources/assets/img/portfolio/investment.jpg" alt="..." />
-								<p>Use this area to describe your project. Lorem ipsum dolor
-									sit amet, consectetur adipisicing elit. Est blanditiis dolorem
-									culpa incidunt minus dignissimos deserunt repellat aperiam
-									quasi sunt officia expedita beatae cupiditate, maiores
-									repudiandae, nostrum, reiciendis facere nemo!</p>
+								<p>Don't hold the stock for 10 minutes unless you're looking at 10 years or more. <br>
+								- Warren Buffett <br>
+								빗썸(Bithumb) API를 사용, 실제와 같은 트레이딩 환경을 제공합니다.<br>
+								모의투자 시스템을 통해 투자경험을 쌓고 매매패턴을 확인하여 <br>
+								자신만의 노하우를 만들어 보시기 바랍니다.<br>
 								<ul class="list-inline">
 								</ul>
 								<button class="btn btn-primary btn-xl text-uppercase"
@@ -420,11 +420,11 @@ function moveMypagePost() {
 								<p class="item-intro text-muted">NEWS</p>
 								<img class="img-fluid d-block mx-auto"
 									src="resources/assets/img/portfolio/news.jpg" alt="..." />
-								<p>Use this area to describe your project. Lorem ipsum dolor
-									sit amet, consectetur adipisicing elit. Est blanditiis dolorem
-									culpa incidunt minus dignissimos deserunt repellat aperiam
-									quasi sunt officia expedita beatae cupiditate, maiores
-									repudiandae, nostrum, reiciendis facere nemo!</p>
+								<p>Beware of false knowledge; it is more dangerous than ignorance.<br>
+								- George Bernard Shaw<br>
+								암호화폐와 관련된 최신 뉴스 컨텐츠를 실시간으로 확인할 수 있는 서비스입니다.<br>
+								크립토허브(<a href="http://www.cryptohub.or.kr">www.cryptohub.or.kr</a>)의 뉴스 API를 사용하였으며, <br>
+								뉴스1에서 기사 원본을 확인할 수 있습니다.</p>
 								<ul class="list-inline">
 								</ul>
 								<button class="btn btn-primary btn-xl text-uppercase"
@@ -455,11 +455,11 @@ function moveMypagePost() {
 								<p class="item-intro text-muted">Pro Chart</p>
 								<img class="img-fluid d-block mx-auto"
 									src="resources/assets/img/portfolio/prochart.jpg" alt="..." />
-								<p>Use this area to describe your project. Lorem ipsum dolor
-									sit amet, consectetur adipisicing elit. Est blanditiis dolorem
-									culpa incidunt minus dignissimos deserunt repellat aperiam
-									quasi sunt officia expedita beatae cupiditate, maiores
-									repudiandae, nostrum, reiciendis facere nemo!</p>
+								<p>Buy in fear, sell in greed<br>
+								- Warren Buffett<br>
+								모의투자 차트에서 여러 기능들을 추가해서 전문적으로 분석 할 수 있는 프로차트입니다.<br>
+								트레이딩뷰(<a href="http://kr.tradingview.com/chart">kr.tradingview.com/chart</a>)의 API를 사용하였으며, <br>
+								보조지표, Bollinger Bands 등 투자에 접목 할 수 있는 기능들을 사용했습니다.</p>
 								<ul class="list-inline">
 								</ul>
 								<button class="btn btn-primary btn-xl text-uppercase"
@@ -490,7 +490,7 @@ function moveMypagePost() {
 								<p class="item-intro text-muted">Community</p>
 								<img class="img-fluid d-block mx-auto"
 									src="resources/assets/img/portfolio/community.jpg" alt="..." />
-								<p>
+								<p>知彼知己 百戰不殆<br>
 									이미지와 게시판이 결합된 커뮤니티 서비스입니다.<br> 투자자 간 주식, 비트코인 등 사회 각 분야에
 									대한 정보와 의견을 공유할 수 있습니다.<br> 현재 CKEditor5, 파일 첨부, 좋아요, 싫어요 등
 									다양한 기능을 제공하고 있으며, <br>자유로운 소통의 장으로 자리매김하고 있습니다.
@@ -526,10 +526,10 @@ function moveMypagePost() {
 								<img class="img-fluid d-block mx-auto"
 									src="resources/assets/img/portfolio/cashshop.jpg" alt="..." />
 								<p>
-									Be fearful when others are greedy, Be greedy when others are
-									fearful. <br> - Warren Edward Buffett <br> 여러분의 더 큰 투자 경험을 위해,
-									가상 투자금 충전 서비스를 제공하고 있습니다. <br> 당신의 수익률을 위해 투자하세요!
-
+									多多益善<br>
+									많으면 많을수록 더 능력을 발휘할 수 있습니다<br>
+									여러분의 더 큰 수익과 더 많은 경험을 위한 가상 투자금 충전 서비스<br>
+									당신을 위해 투자하세요!
 								</p>
 								<ul class="list-inline">
 								</ul>

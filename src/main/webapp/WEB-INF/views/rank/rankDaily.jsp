@@ -94,8 +94,11 @@
 				</div>
 			</div>
 			<!-- 랭킹 스와이프 메뉴 끝 -->
-			
+
 			<div id="daily">
+			<p style="text-align: left;">
+				현재 <fmt:formatNumber value="${other.size() }"	pattern="#,###,###,###,###" /> 명이 랭킹에 참여하고 있습니다.
+			</p>
 			<!-- 일간 TOP3 -->
 			<div class="top3" style="clear: both;">
 			
@@ -111,10 +114,10 @@
 							<div style="margin: 0 auto; width: 12.5em;">
 						</c:if>
 							<p class="rankFont" align="left">
-								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
+								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
 								2등 ${second.nickname }
 								<br>
-								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
+								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
 								수익률&nbsp;
 								
 								<c:if test="${second.yield>=0 }">
@@ -139,10 +142,10 @@
 							<div style="margin: 0 auto; width: 12.5em;">
 						</c:if>
 							<p class="rankFont" align="left">
-								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
+								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
 								1등 ${first.nickname }
 								<br>
-								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
+								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
 								수익률&nbsp;
 								
 								<c:if test="${first.yield>=0 }">
@@ -167,10 +170,10 @@
 							<div style="margin: 0 auto; width: 12.5em;">
 						</c:if>
 							<p class="rankFont" align="left">
-								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
+								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
 								3등 ${third.nickname }
 								<br>
-								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/rank_icon.svg">
+								<img style="vertical-align:middle;" width="25px" height="25px" src="${pageContext.request.contextPath}/resources/assets/img/yeild_icon.svg">
 								수익률&nbsp;
 								
 								<c:if test="${third.yield>=0 }">
@@ -187,14 +190,7 @@
 			
 			<br><br><br><br><br><br>
 			
-			<hr style="clear: both;">
-<!-- 			<hr> -->
 			<br>
-
-			<p style="text-align: center;">전체 참가 인원 : ${other.size() } 명</p>
-
-			<br>
-			
 			<!-- 일간 랭킹 및 내 순위 -->
 			<table style="clear: both;" class="ranktable">
 <!-- 			<table class="ranktable"> -->
@@ -219,7 +215,7 @@
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="3" >&#8942;<br>[나의 순위]
+					<td colspan="3" >&#8942;
 				</tr>
 				<c:if test="${loginMember == null }">
 					<tr>
@@ -230,7 +226,7 @@
 				</c:if>
 				<c:if test="${my != null }">
 					<tr>
-						<td>${rank }위</td>
+						<td>본인: ${rank }위</td>
 						<td>${my.nickname }</td>
 						<td>
 							<c:if test="${my.yield>=0 }">

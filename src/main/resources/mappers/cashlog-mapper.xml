@@ -22,7 +22,7 @@
 
 	<!-- 신규 충전액 조회 -->
 	<select id="countTodayWon" resultType="long">
-		SELECT NVL(SUM(WON),0) FROM CASHLOG WHERE CASHDATE LIKE TO_CHAR(SYSDATE, 'YYYY-MM-DD%')
+		SELECT NVL(SUM(sellprice),0) FROM CASHLOG WHERE CASHDATE LIKE TO_CHAR(SYSDATE, 'YYYY-MM-DD%')
 	</select>
 	
 	<!-- 마이페이지 캐시 로그 -->

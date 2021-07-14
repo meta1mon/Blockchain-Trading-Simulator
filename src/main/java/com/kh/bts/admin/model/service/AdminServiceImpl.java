@@ -211,7 +211,7 @@ public class AdminServiceImpl implements AdminService {
 		if(email!=null) {
 			for(int i=0; i<email.length; i++) {
 			MailHandler sendMail = new MailHandler(mailSender);
-			sendMail.setSubject("[BTS] 주간 랭킹 보상 안내드립니다..");
+			sendMail.setSubject("[BTS] 주간 랭킹 보상 안내드립니다.");
 			sendMail.setText(new StringBuffer()
 					.append("<h1 style='color: #8c8cc6; padding: 10px'>Blockchain Trading Simulator</h1>")
 					.append("<p style='color: #8c8cc6; padding: 5px;'>● 새로운 연결이 세상에 스며들다.</p>")
@@ -221,6 +221,7 @@ public class AdminServiceImpl implements AdminService {
 					.append("<p style='margin: 20px;'>안녕하세요! ").append(email[i]).append("님!</p>")
 					.append("<p style='margin: 20px;'>").append("주간 랭킹 TOP3에 드신 것을 축하드립니다.</p>")
 					.append("<p style='margin: 20px;'>").append("소정의 상품을 지급해드립니다.</p>")
+					.append("<img src='https://mblogthumb-phinf.pstatic.net/MjAxODA5MjhfMjI3/MDAxNTM4MTQwNjMzNzI5.c7ZF7CxdxBkwou-yz5d4JnsF1mUGeNyBKd6cM28I4Ikg.sxZ2LGLrc9sC3NBGqpAE4XqHRyFVAZJks-MRwUOShP8g.JPEG.zoqgns7549/KakaoTalk_20180928_220601336.jpg?type=w800'>")
 					.append("<p style='margin: 20px;'>앞으로도 BTS를 이용해주셔서 감사합니다.</p>")
 					.append("<hr>")
 					.append("<div style='padding: 20px;'><span style='color: #8c8cc6'>♥</span><b>A</b>ces <b>R</b>ecruited <b>M</b>emeber of <b>Y</b>ear 드림<span style='color: #8c8cc6'>♥</span></div>").toString());
@@ -240,7 +241,7 @@ public class AdminServiceImpl implements AdminService {
 		if(email!=null) {
 			for(int i=0; i<email.length; i++) {
 				MailHandler sendMail = new MailHandler(mailSender);
-				sendMail.setSubject("[BTS] 월간 랭킹 보상 안내드립니다..");
+				sendMail.setSubject("[BTS] 월간 랭킹 보상 안내드립니다.");
 				sendMail.setText(new StringBuffer()
 						.append("<h1 style='color: #8c8cc6; padding: 10px'>Blockchain Trading Simulator</h1>")
 						.append("<p style='color: #8c8cc6; padding: 5px;'>● 새로운 연결이 세상에 스며들다.</p>")
@@ -250,6 +251,7 @@ public class AdminServiceImpl implements AdminService {
 						.append("<p style='margin: 20px;'>안녕하세요! ").append(email[i]).append("님!.</p>")
 						.append("<p style='margin: 20px;'>").append("월간 랭킹 TOP3에 드신 것을 축하드립니다.</p>")
 						.append("<p style='margin: 20px;'>").append("소정의 상품을 지급해드립니다.</p>")
+						.append("<img src='https://mblogthumb-phinf.pstatic.net/MjAxODA5MjhfMjI3/MDAxNTM4MTQwNjMzNzI5.c7ZF7CxdxBkwou-yz5d4JnsF1mUGeNyBKd6cM28I4Ikg.sxZ2LGLrc9sC3NBGqpAE4XqHRyFVAZJks-MRwUOShP8g.JPEG.zoqgns7549/KakaoTalk_20180928_220601336.jpg?type=w800'>")
 						.append("<p style='margin: 20px;'>항상 BTS를 이용해주셔서 감사합니다.</p>")
 						.append("<hr>")
 						.append("<div style='padding: 20px;'><span style='color: #8c8cc6'>♥</span><b>A</b>ces <b>R</b>ecruited <b>M</b>emeber of <b>Y</b>ear 드림<span style='color: #8c8cc6'>♥</span></div>").toString());

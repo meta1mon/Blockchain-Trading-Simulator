@@ -147,10 +147,13 @@
 
 ---
 ## Document
-### 1. 유스케이스
+### 1. 개발일정
+![schedule](https://user-images.githubusercontent.com/82936574/125962840-a5019046-daa8-4b37-9baf-523ee7572f41.png)
+[개발일정 전체보기](https://github.com/meta1mon/final01/files/6831288/_.xlsx)
+
+### 2. 유스케이스
 ![usecase](https://user-images.githubusercontent.com/82936574/125957196-0a2b51df-9a06-4433-8781-34aae77a0c35.gif)
 
-
-### 2. ERD
+### 3. ERD
 ![erd_board](https://user-images.githubusercontent.com/82936574/125958624-6300c3fa-1a4d-480f-98a1-d4cc5b9a5677.png)
 ![erd_investment](https://user-images.githubusercontent.com/82936574/125958638-54ebf113-c747-4b82-bcb9-8e816cb6034d.png)

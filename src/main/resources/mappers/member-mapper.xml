@@ -114,10 +114,12 @@
 	
 	<!-- 랭킹 TOP3 조회 -->
 	<select id="selectWeeklyTop3" resultType="arrayList" resultMap="Member">
-	SELECT MEMBER.EMAIL, MEMBER.NICKNAME, YIELD FROM MEMBER JOIN WEEKLY ON MEMBER.EMAIL = WEEKLY.EMAIL WHERE ROWNUM &lt; 4 ORDER BY YIELD DESC
+	select b.* from (select rownum, a.* from (select * from
+		WEEKLY order by yield desc) a) b WHERE ROWNUM &lt; 4
 	</select>
 	<select id="selectMonthlyTop3" resultType="arrayList" resultMap="Member">
-	SELECT MEMBER.EMAIL, MEMBER.NICKNAME, YIELD FROM MEMBER JOIN MONTHLY ON MEMBER.EMAIL = MONTHLY.EMAIL WHERE ROWNUM &lt; 4 ORDER BY YIELD DESC
-	</select>
+		select b.* from (select rownum, a.* from (select * from
+		monthly order by yield desc) a) b WHERE ROWNUM &lt; 4
+		</select>
 
 </mapper>

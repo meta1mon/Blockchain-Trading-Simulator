@@ -150,7 +150,7 @@
 ## Document
 ### 1. 유스케이스
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/82936574/125955860-f1b5ca22-b759-4333-890a-4b9a6d6b0c16.gif", width="70%">
+    <img src="https://user-images.githubusercontent.com/82936574/125956917-68b35e7c-d17e-4b55-9ce5-f02719c66cb1.gif", width="70%">
 </p>
 
 ### 2. ERD

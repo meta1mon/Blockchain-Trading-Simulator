@@ -149,7 +149,7 @@
 ---
 ## Document
 ### 1. 유스케이스
-<p align="center">
+<p align="left">
     <img src="https://user-images.githubusercontent.com/82936574/125956917-68b35e7c-d17e-4b55-9ce5-f02719c66cb1.gif", width="70%">
 </p>
 

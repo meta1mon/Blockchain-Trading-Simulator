@@ -62,7 +62,7 @@
 ## 주요기능
 **1. 로그인**
 <p align="center">
-    <img src = "ReadMe/01.png", width="100%">
+    <img src = "ReadMe/01.png", width="700px">
 </p>
 
 **8888. 랭킹**

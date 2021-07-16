@@ -69,6 +69,12 @@
 <p align="center">
     <img src = "https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif", width="700px">
 </p>
+<p align="center">
+    <img src = "https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif", width="500px">
+</p>
+<p align="center">
+    <img src = "https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif", width="400px">
+</p>
 
 ---
 ## Document

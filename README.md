@@ -29,9 +29,8 @@
 
 ---
 ## 개발환경
-<p align="center">
-    <img src = "ReadMe/environment.png", width="100%">
-</p>
+![environment](https://user-images.githubusercontent.com/82936574/125957241-02971626-a1f4-400a-95b4-8219c22470b7.png)
+
 
 |Category|Detail|
 |:--:|:--:|
@@ -44,7 +43,7 @@
 |Document|Google Drive, KakaoOven, ERDCloud, diagrams.net|
 |CI|Github|
 |DateBase|SQL Developer, Oracle(11g)|
-|API|Investment Widget, Iamport Payment, Trading View, CKeditor5, Java.Mail.Sender, Talk Plus, KaKao Channel, Cryptonews, Bithumb, Upbit
+|API|Investment Widget, Iamport Payment, Trading View, CKeditor5, Java.Mail.Sender, <br>Talk Plus, KaKao Channel, Cryptonews, Bithumb, Upbit
 
 ---
 ## 프로젝트 기능구현
@@ -149,11 +148,9 @@
 ---
 ## Document
 ### 1. 유스케이스
-<p align="left">
-    <img src="https://user-images.githubusercontent.com/82936574/125956917-68b35e7c-d17e-4b55-9ce5-f02719c66cb1.gif", width="70%">
-</p>
+![usecase](https://user-images.githubusercontent.com/82936574/125957196-0a2b51df-9a06-4433-8781-34aae77a0c35.gif)
+
 
 ### 2. ERD
-<p align="center">
-    <img src = "ReadMe/erd.png", width="100%">
-</p>
+![erd_board](https://user-images.githubusercontent.com/82936574/125958624-6300c3fa-1a4d-480f-98a1-d4cc5b9a5677.png)
+![erd_investment](https://user-images.githubusercontent.com/82936574/125958638-54ebf113-c747-4b82-bcb9-8e816cb6034d.png)

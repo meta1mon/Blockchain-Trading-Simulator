@@ -1,7 +1,6 @@
 # Blockchain Trading Simulator
-# CooKingdom, 요리 레시피 검색과 밀키트 구매를 한번에
 ## [시연 영상 바로 보기](https://youtu.be/ZX5bDemHHXQ) 
-##### 팀원 : 강수목, 고현민(조장), 곽서현, 김세훈, 박준태
+##### 팀원 : 강수목, 김도영, 김연준, 정재훈, 제승하
 ---
 ## Contents
 1. [프로젝트 소개](#프로젝트-소개)

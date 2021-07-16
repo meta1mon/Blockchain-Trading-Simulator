@@ -148,7 +148,7 @@
 ---
 ## Document
 ### 1. 개발일정
-![schedule](https://user-images.githubusercontent.com/82936574/125962840-a5019046-daa8-4b37-9baf-523ee7572f41.png)
+![schedule](https://user-images.githubusercontent.com/82936574/125962840-a5019046-daa8-4b37-9baf-523ee7572f41.png) <br>
 [개발일정 전체보기](https://github.com/meta1mon/final01/files/6831288/_.xlsx)
 
 ### 2. 유스케이스

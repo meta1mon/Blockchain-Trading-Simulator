@@ -65,84 +65,9 @@
     <img src = "ReadMe/01.png", width="100%">
 </p>
 
-**2. 사용자회원가입**
+**8888. 랭킹**
 <p align="center">
-    <img src = "ReadMe/02.png", width="100%">
-</p>
-
-**3. 책임자, 관리자 회원가입**
-<p align="center">
-    <img src = "ReadMe/03.png", width="100%">
-</p>
-
-**4. 사용자 정보 수정**
-<p align="center">
-    <img src = "ReadMe/04.png", width="100%">
-</p>
-
-**5. 책임자, 관리자 정보 수정**
-<p align="center">
-    <img src = "ReadMe/05.png", width="100%">
-</p>
-
-**6. 사용자 레시피 조회**
-<p align="center">
-    <img src = "ReadMe/06.png", width="100%">
-</p>
-
-**7. 책임자, 관리자 레시피 조회**
-<p align="center">
-    <img src = "ReadMe/07.png", width="100%">
-</p>
-
-**8. 사용자 레시피 상세 페이지**
-<p align="center">
-    <img src = "ReadMe/08.png", width="100%">
-</p>
-
-**9. 책임자, 관리자 레시피 상세 페이지**
-<p align="center">
-    <img src = "ReadMe/09.png", width="100%">
-</p>
-
-**10. 레시피 등록**
-<p align="center">
-    <img src = "ReadMe/10.png", width="100%">
-</p>
-
-**11. 리뷰 조회**
-<p align="center">
-    <img src = "ReadMe/11.png", width="100%">
-</p>
-
-**12. 리뷰 작성**
-<p align="center">
-    <img src = "ReadMe/12.png", width="100%">
-</p>
-
-**13. 리뷰 수정**
-<p align="center">
-    <img src = "ReadMe/13.png", width="100%">
-</p>
-
-**14. 댓글**
-<p align="center">
-    <img src = "ReadMe/14.png", width="100%">
-</p>
-
-**15. 장바구니**
-<p align="center">
-    <img src = "ReadMe/15.png", width="100%">
-</p>
-
-**16. 주문 결제**
-<p align="center">
-    <img src = "ReadMe/16.png", width="100%">
-</p>
-
-**17. 주문 내역**
-<p align="center">
-    <img src = "ReadMe/17.png", width="100%">
+    <img src = "https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif", width="100%">
 </p>
 
 ---

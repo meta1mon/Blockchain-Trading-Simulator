@@ -4,7 +4,7 @@
 ---
 ## Contents
 1. [프로젝트 소개](#프로젝트-소개)
-2. [설계의 주안점](#설계의-주안점)
+2. [설계의 주안점](#설계목표와-기대효과)
 3. [개발환경](#개발환경)
 4. [프로젝트 기능구현](#프로젝트-기능구현)
 5. [주요기능](#주요기능)
@@ -16,30 +16,35 @@
 - 주식은 모의투자 개념의 프로그램이 이미 많이 활성화 되어있으나 암호화폐는 투자를 연습할 공간이 없는 실정이므로, 이에 암호화폐 모의투자 사이트를 기획하게 됨
 
 ---
-## 설계의 주안점
+## 설계목표와 기대효과
+* 설계의 주안점
 - 적시성 : 현재 사회의 시대적 흐름을 반영한다
 - 실용성 : 현실에서 의미있게 사용되도록 한다
 - 다양한 경험 : 여러 API, 특히 RESTful API를 경험한다
 
-### 기대효과
+* 기대효과
 - 코인 거래 시장에 대한 이해 증진
 - 투자의 Risk와 Return에 대한 이해 증진
 - 경제현상에 대한 분석능력 및 종합 사고력 향상
 
 ---
 ## 개발환경
+<p align="center">
+    <img src = "ReadMe/environment.png", width="100%">
+</p>
 
 |Category|Detail|
 |:--:|:--:|
-|FrontEnd|HTML5, JS, CSS3, JQuery|
-|BackEnd|Java(JDK 1.8), Servlet|
-|OS|Windows 10, MacOS|
+|FrontEnd|HTML5, JavaScript, CSS3, JQuery, Bootstrap|
+|BackEnd|Java(JDK 1.8), Servlet, JSP, Spring, MyBatis|
+|OS|Windows 10|
 |Libray&API|Apache Commons FileUpload, Imgscalr|
-|IDE|Eclipse, VisualStudio|
+|IDE|Eclipse, VisualStudio, Spring Tool Suite|
 |Server|Tomcat(v8.5)|
 |Document|Google Drive, KakaoOven, ERDCloud, diagrams.net|
 |CI|Github|
 |DateBase|SQL Developer, Oracle(11g)|
+|API|Investment Widget, Iamport Payment, Trading View, CKeditor5, Java.Mail.Sender, Talk Plus, KaKao Channel, Cryptonews, Bithumb, Upbit
 
 ---
 ## 프로젝트 기능구현
@@ -143,7 +148,7 @@
 
 ---
 ## Document
-### 1. 요구사항 정의서
+### 1. 유스케이스
 <p align="center">
     <img src = "ReadMe/specification.png", width="100%">
 </p>

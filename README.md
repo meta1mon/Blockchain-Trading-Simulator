@@ -67,26 +67,8 @@
 
 **8888. 랭킹**
 <p align="center">
-    <img src = "https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif", width="700px">
+    <img src = "https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif" width="700" height="400">
 </p>
-<p align="center">
-    <img src = "https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif", width="500px">
-</p>
-<p align="center">
-    <img src = "https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif", width="400px">
-</p>
-<p align="center">
-    <img src = "https://user-images.githubusercontent.com/82925724/125973365-b7e87193-b78c-4081-9ba2-a08033d79085.gif", width="700px">
-</p>
-<p align="center">
-    <img src = "https://user-images.githubusercontent.com/82925724/125973365-b7e87193-b78c-4081-9ba2-a08033d79085.gif", width="500px">
-</p>
-<p align="center">
-    <img src = "https://user-images.githubusercontent.com/82925724/125973365-b7e87193-b78c-4081-9ba2-a08033d79085.gif", width="400px">
-</p>
-
-**10. 마이페이지**<br>
-<left><img src="https://user-images.githubusercontent.com/82936574/126028061-78f821ed-e127-4fe9-9a0f-6e70049ce054.gif"  width="700" height="400" /></left>
 
 
 **13. 공지사항**<br>

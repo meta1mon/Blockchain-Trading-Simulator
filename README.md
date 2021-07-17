@@ -85,9 +85,8 @@
     <img src = "https://user-images.githubusercontent.com/82925724/125973365-b7e87193-b78c-4081-9ba2-a08033d79085.gif", width="400px">
 </p>
 
-**13. 공지사항**
-![notice_demo](https://user-images.githubusercontent.com/82936574/126027318-b70b19d2-534e-4c71-bd41-b417d4e50503.gif)
-
+**13. 공지사항**<br>
+<left><img src="https://user-images.githubusercontent.com/82936574/126027457-7fc8c969-3720-43f7-a3b7-ede15c2f1134.gif"  width="700" height="400" /></left>
 
 ---
 ## Document

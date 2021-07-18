@@ -67,19 +67,19 @@
 
 **2. 회원가입**<br>
 ---
-<left><img src="![signin](https://user-images.githubusercontent.com/82923903/126059410-dc4224d9-a028-4e8e-93df-7f7a60bce22b.gif)"  width="700" height="400" /></left>
+<left><img src="https://user-images.githubusercontent.com/82923903/126059410-dc4224d9-a028-4e8e-93df-7f7a60bce22b.gif"  width="700" height="400" /></left>
 
 **3. 로그인**<br>
 ----
 <p align="center">
-    <img src = "![login](https://user-images.githubusercontent.com/82923903/126059418-84c9c660-c8a5-4300-a7e3-fee2a5d2736e.gif)", width="700px">
+    <img src = "https://user-images.githubusercontent.com/82923903/126059418-84c9c660-c8a5-4300-a7e3-fee2a5d2736e.gif", width="700px">
 </p>
 
 **4. 비밀번호 찾기**
 ---
 <p>
-  <img src="![findpw](https://user-images.githubusercontent.com/82923903/126059447-3530e112-cb0b-4712-82d3-a1d5f4afa2b3.gif)" width="700" height="400">
-  <img src="![캡처_2021_07_18_16_05_17_113](https://user-images.githubusercontent.com/82923903/126059456-4a319326-f0f8-479e-a02b-544292c5fa9c.png)" width="700" height="400">
+  <img src="https://user-images.githubusercontent.com/82923903/126059447-3530e112-cb0b-4712-82d3-a1d5f4afa2b3.gif" width="700" height="400">
+  <img src="https://user-images.githubusercontent.com/82923903/126059456-4a319326-f0f8-479e-a02b-544292c5fa9c.png" width="700" height="400">
 </p>
 
 **5. About Us**<br>
@@ -126,7 +126,7 @@
 **12. 모의투자**
 ---
 <p>
-  <img src="![investing](https://user-images.githubusercontent.com/82923903/126059466-84362948-22cd-44a4-878e-60c68981cc13.gif)" width="700" height="400">
+  <img src="https://user-images.githubusercontent.com/82923903/126059466-84362948-22cd-44a4-878e-60c68981cc13.gif" width="700" height="400">
 </p>
 
 **13. 공지사항**<br>

@@ -62,27 +62,33 @@
 ---
 ## 주요기능
 **1. 메인페이지**<br>
+---
 <left><img src="https://user-images.githubusercontent.com/82923946/126055504-58c75312-4389-4831-97f7-ea82cc0b4b0f.gif"  width="700" height="400" /></left>
 
 **2. 회원가입**<br>
+---
 <left><img src="![signin](https://user-images.githubusercontent.com/82923903/126059410-dc4224d9-a028-4e8e-93df-7f7a60bce22b.gif)"  width="700" height="400" /></left>
 
 **3. 로그인**<br>
+----
 <p align="center">
     <img src = "![login](https://user-images.githubusercontent.com/82923903/126059418-84c9c660-c8a5-4300-a7e3-fee2a5d2736e.gif)", width="700px">
 </p>
 
 **4. 비밀번호 찾기**
+---
 <p>
   <img src="![findpw](https://user-images.githubusercontent.com/82923903/126059447-3530e112-cb0b-4712-82d3-a1d5f4afa2b3.gif)" width="700" height="400">
   <img src="![캡처_2021_07_18_16_05_17_113](https://user-images.githubusercontent.com/82923903/126059456-4a319326-f0f8-479e-a02b-544292c5fa9c.png)" width="700" height="400">
 </p>
 
 **5. About Us**<br>
+---
 <left><img src="https://user-images.githubusercontent.com/82923946/126055327-58d436fa-c3a0-4469-a531-0dc886630e8f.gif"  width="700" height="400" /></left>
 
 
 **6. 뉴스**<br>
+---
 <left><img src="https://user-images.githubusercontent.com/82923926/126056835-c1129338-7b43-4e1c-9c49-7cbd83b0a838.gif"  width="700" height="400" /></left>
 
  - Cryptonews API 사용
@@ -90,6 +96,7 @@
  - CSS marquee기능 사용
 
 **7. 커뮤니티**<br>
+---
 <left><img src="https://user-images.githubusercontent.com/82923926/126056839-548d0992-47c3-4f72-a697-e9d404a295c7.gif"  width="700" height="400" /></left>
 
 - CK Editor API 사용
@@ -98,32 +105,40 @@
 - 페이징 처리
 
 **8. 결제**<br>
+---
 <left><img src="https://user-images.githubusercontent.com/82923926/126056832-54cb2e01-461d-4217-9ecd-55c9dbbfbb71.gif"  width="700" height="400" /></left>
 
 - Iamport API 사용
 - 결제 완료시 DB 추가
 
 **9. 랭킹**<br>
+---
 <left><img src="https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif"  width="700" height="400" /></left>
 
 **10. 마이페이지**<br>
+---
 <left><img src="https://user-images.githubusercontent.com/82936574/126028061-78f821ed-e127-4fe9-9a0f-6e70049ce054.gif"  width="700" height="400" /></left>
 
 **11. 프로차트**<br>
+---
 <left><img src="https://user-images.githubusercontent.com/82936574/126059120-06144804-56a1-4d2f-91ff-853fe9ebdd1c.gif"  width="700" height="400" /></left>
 
 **12. 모의투자**
+---
 <p>
   <img src="![investing](https://user-images.githubusercontent.com/82923903/126059466-84362948-22cd-44a4-878e-60c68981cc13.gif)" width="700" height="400">
 </p>
 
 **13. 공지사항**<br>
+---
 <left><img src="https://user-images.githubusercontent.com/82936574/126027457-7fc8c969-3720-43f7-a3b7-ede15c2f1134.gif"  width="700" height="400" /></left>
 
 **14. 에러페이지**<br>
+---
 <left><img src="https://user-images.githubusercontent.com/82923946/126055894-674e653f-1af0-4341-93bf-423716bfb662.gif"  width="700" height="400" /></left>
 
 **15. 위젯**<br>
+---
 <left><img src=""  width="700" height="400" /></left>
 
 ---

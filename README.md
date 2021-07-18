@@ -65,6 +65,7 @@
 <left><img src="https://user-images.githubusercontent.com/82923946/126055504-58c75312-4389-4831-97f7-ea82cc0b4b0f.gif"  width="700" height="400" /></left>
 - 뉴스 플로팅 메뉴 제공(Cryptonews API 사용)
 - 표, 차트로 주요 코인 실시간 조회(bithumb, upbit, Trading View API 사용)
+- BTMI, BTAI 지수 조회(Highcharts API 사용)
 - 커뮤니티 인기 게시글 조회
 
 **2. 회원가입**<br>

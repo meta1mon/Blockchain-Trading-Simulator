@@ -69,11 +69,19 @@
 ---
 <left><img src="https://user-images.githubusercontent.com/82923903/126059410-dc4224d9-a028-4e8e-93df-7f7a60bce22b.gif"  width="700" height="400" /></left>
 
+- 체크 박스 전체 선택, 전체 해제
+- 입력 사항에 대한 정규식 적용
+- 이메일, 닉네임 중복확인
+- 생년월일 만 19세 이상 판별
+
 **3. 로그인**<br>
 ----
 <left>
     <img src = "https://user-images.githubusercontent.com/82923903/126059418-84c9c660-c8a5-4300-a7e3-fee2a5d2736e.gif", width="700px">
 </left>
+
+- 입력 사항에 대한 정규식 적용
+- 비밀번호 확인
 
 **4. 비밀번호 찾기**
 ---
@@ -81,6 +89,9 @@
   <img src="https://user-images.githubusercontent.com/82923903/126059447-3530e112-cb0b-4712-82d3-a1d5f4afa2b3.gif" width="700" height="400">
   <img src="https://user-images.githubusercontent.com/82923903/126059456-4a319326-f0f8-479e-a02b-544292c5fa9c.png" width="700" height="400">
 </p>
+
+- 입력사항에 대한 정규식 적용
+- Java Mail Sender 사용
 
 **5. About Us**<br>
 ---
@@ -129,10 +140,10 @@
   <img src="https://user-images.githubusercontent.com/82923903/126059466-84362948-22cd-44a4-878e-60c68981cc13.gif" width="700" height="400">
 </left>
 
-* bithumb, upbit API 사용
-* 코인 검색 기능
-* 현재가, 등락률, 거래대금에 대하여 각각 오름차순/내림차순 기능
-* 매수, 매도 체결시 알림 팝업과 소리 출력
+- bithumb, upbit API 사용
+- 코인 검색 기능
+- 현재가, 등락률, 거래대금에 대하여 각각 오름차순/내림차순 기능
+- 매수, 매도 체결시 알림 팝업과 소리 출력
 
 **13. 공지사항**<br>
 ---

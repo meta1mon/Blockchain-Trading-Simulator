@@ -1,5 +1,5 @@
 # Blockchain Trading Simulator(BTS)
-## [시연 영상 바로 보기](https://youtu.be/ZX5bDemHHXQ) 
+## [시연 영상 바로 보기](https://youtu.be/FZKFqH7ZHAs) 
 ##### 팀원 : 강수목, 김도영, 김연준, 정재훈, 제승하
 ---
 ## Contents
@@ -60,41 +60,150 @@
 
 ---
 ## 주요기능
-**1. 메인페이지**
-<p align="center">
-  <img src = "https://user-images.githubusercontent.com/82923946/126055504-58c75312-4389-4831-97f7-ea82cc0b4b0f.gif"  width="700" height="400">
+**1. 메인페이지**<br>
+---
+<left><img src="https://user-images.githubusercontent.com/82923946/126055504-58c75312-4389-4831-97f7-ea82cc0b4b0f.gif"  width="700" height="400" /></left>
+- 뉴스 플로팅 메뉴 제공(Cryptonews API 사용)
+- 표, 차트로 주요 코인 실시간 조회(bithumb, upbit, Trading View API 사용)
+- BTMI, BTAI 지수 조회(Highcharts API 사용)
+- 커뮤니티 인기 게시글 조회
+
+**2. 회원가입**<br>
+---
+<left><img src="https://user-images.githubusercontent.com/82923903/126059410-dc4224d9-a028-4e8e-93df-7f7a60bce22b.gif"  width="700" height="400" /></left>
+
+- 체크 박스 전체 선택, 전체 해제
+- 입력 사항에 대한 정규식 적용
+- 이메일, 닉네임 중복확인
+- 생년월일 만 19세 이상 판별
+
+**3. 로그인**<br>
+----
+<left>
+    <img src = "https://user-images.githubusercontent.com/82923903/126059418-84c9c660-c8a5-4300-a7e3-fee2a5d2736e.gif", width="700px">
+</left>
+
+- 입력 사항에 대한 정규식 적용
+- 비밀번호 확인
+
+**4. 비밀번호 찾기**
+---
+<p>
+  <img src="https://user-images.githubusercontent.com/82923903/126059447-3530e112-cb0b-4712-82d3-a1d5f4afa2b3.gif" width="700" height="400">
+  <img src="https://user-images.githubusercontent.com/82923903/126059456-4a319326-f0f8-479e-a02b-544292c5fa9c.png" width="700" height="400">
 </p>
 
-**3. 로그인**
-<p align="center">
-    <img src = "ReadMe/01.png", width="700px">
-</p>
+- 입력사항에 대한 정규식 적용
+- Java Mail Sender 사용
 
-**4. About Us**
-<p align="center">
-  <img src = "https://user-images.githubusercontent.com/82923946/126055327-58d436fa-c3a0-4469-a531-0dc886630e8f.gif"  width="700" height="400">
-</p>
+**5. About Us**<br>
+---
+<left><img src="https://user-images.githubusercontent.com/82923946/126055327-58d436fa-c3a0-4469-a531-0dc886630e8f.gif"  width="700" height="400" /></left>
+- Bootstrap API 사용
+- 사이트, 서비스, 개발팀 소개
+- 카카오톡 채널을 통해 상담, 피드백 기능 제공
 
-**8888. 랭킹**
-<p align="center">
-    <img src = "https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif" width="700" height="400">
-</p>
+**6. 뉴스**<br>
+---
+<left><img src="https://user-images.githubusercontent.com/82923926/126056835-c1129338-7b43-4e1c-9c49-7cbd83b0a838.gif"  width="700" height="400" /></left>
 
+ - Cryptonews API 사용
+ - '비트코인'에 관련된 최신 뉴스 15일 기춘으로 조회
+ - CSS marquee기능 사용
 
-**13. 공지사항**
+**7. 커뮤니티**<br>
+---
+<left><img src="https://user-images.githubusercontent.com/82923926/126056839-548d0992-47c3-4f72-a697-e9d404a295c7.gif"  width="700" height="400" /></left>
+
+- CK Editor API 사용
+- 글 (등록, 수정, 삭제, 신고), 댓글(등록, 삭제, 신고) 기능
+- @를 사용한 태그검색 기능
+- 페이징 처리
+
+**8. 결제**<br>
+---
+<left><img src="https://user-images.githubusercontent.com/82923926/126056832-54cb2e01-461d-4217-9ecd-55c9dbbfbb71.gif"  width="700" height="400" /></left>
+
+- Iamport API 사용
+- 결제 완료시 DB 추가
+
+**9. 랭킹**<br>
+---
+<left><img src="https://user-images.githubusercontent.com/82925724/126061270-404b767e-2986-4b0b-ac9e-41bfb269e5f6.gif"  width="700" height="400" /></left>
+
+- 4 종류의 랭킹 표시
+- 수익률 순위 1위 ~ 10위까지 표시
+- 비 로그인 시, 로그인 페이지 이동 태그 추가
+- 로그인 시, 자신의 닉네임과 등수와 수익률을 표시
+- 정해진 시간에 자동으로 수익률 재산정 후, 반영이 이루어짐
+
+**10. 마이페이지**<br>
+---
+<left><img src="https://user-images.githubusercontent.com/82936574/126061088-b0f5d13c-7d79-469f-8eb6-b964e6376bd6.gif"  width="700" height="400" /></left>
+
+- 비밀번호 재확인 후 확인 가능하도록 보안 강화
+- 4가지 메뉴로 구성 : 나의정보 / 비밀번호 변경 / 나의 자산 / 나의 커뮤니티
+- 닉네임, 연락처, 수신 동의 정보 변경 기능
+- 비밀번호, 계좌비밀번호 변경 가능하며 계좌비밀번호는 별도의 핀패드를 제공
+- 보유 코인 목록, 체결, 미체결, 충전 내역 조회 기능
+- 나의 게시글, 댓글 작성 내역 조회 기능
+
+**11. 프로차트**<br>
+---
+<left><img src="https://user-images.githubusercontent.com/82936574/126059120-06144804-56a1-4d2f-91ff-853fe9ebdd1c.gif"  width="700" height="400" /></left>
+
+- Trading View API 사용
+- 차트 드로잉 기능, 종목, 시간, 영역 변경 기능, 비교 지표 기능 등 사용 가능
+- 차트의 공유, 캡쳐 기능
+- 위젯, 핫리스트, 달력 기능
+
+**12. 모의투자**
+---
+<left>
+  <img src="https://user-images.githubusercontent.com/82923903/126059466-84362948-22cd-44a4-878e-60c68981cc13.gif" width="700" height="400">
+</left>
+
+- bithumb, upbit API 사용
+- 코인 검색 기능
+- 현재가, 등락률, 거래대금에 대하여 각각 오름차순/내림차순 기능
+- 매수, 매도 체결시 알림 팝업과 소리 출력
+
+**13. 공지사항**<br>
+---
 <left><img src="https://user-images.githubusercontent.com/82936574/126027457-7fc8c969-3720-43f7-a3b7-ede15c2f1134.gif"  width="700" height="400" /></left>
 
-**14. 에러페이지**
-<p align="center">
-  <img src = "https://user-images.githubusercontent.com/82923946/126055894-674e653f-1af0-4341-93bf-423716bfb662.gif"  width="700" height="400">
-</p>
+- CK Editor API 사용
+- 글 (등록, 수정, 삭제, 신고), 댓글(등록, 삭제, 신고) 기능
+- 관리자 계정으로 로그인 시에만 사용 가능
+
+**14. 에러페이지**<br>
+---
+<left><img src="https://user-images.githubusercontent.com/82923946/126055894-674e653f-1af0-4341-93bf-423716bfb662.gif"  width="700" height="400" /></left>
+
+- 오류 발생 시 에러페이지로 이동
+- 메인페이지, 전 페이지로 이동 가능
 
 **15. 위젯**<br>
-<p align="center">
-  <img src = ""  width="700" height="400">
-</p>
-
 ---
+<left><img src=""  width="700" height="400" /></left>
+- Chat : 실시간 채팅 위젯
+- Quick : 실시간 코인 가격 표시 위젯
+- 환율계산 : 환율 계산기 위젯
+- 환율 : 화폐들에 대한 환율 표 위젯
+- 코인지갑 : 보유 코인, 계좌, 자산 조회 위젯
+
+**16. 관리자 페이지**
+---
+<left>
+  <img src="https://user-images.githubusercontent.com/82925724/126061163-7dc23948-1a12-44fe-85d5-09d4584895ae.gif" width="700" height="400">
+</left>
+
+- 관리자 계정(admin)으로 로그인 시에만 관리자 페이지 접근 가능(POST)
+- 회원 정보 관리 : 회원 정보 검색, 조회, 삭제
+- 랭킹 보상 관리 : 주간/월간 랭킹 1~3위에게 보상 기능, Java Mail Sender로 제공
+- 신고 게시글/댓글 관리 : 수리(해당 게시글/댓글 삭제), 반려(유지)
+- 충전소 관리 : 충전 상품 등록, 조회, 수정, 삭제
+
 ## Document
 ### 1. 개발일정
 ![schedule](https://user-images.githubusercontent.com/82936574/125962840-a5019046-daa8-4b37-9baf-523ee7572f41.png) <br>
@@ -106,3 +215,9 @@
 ### 3. ERD
 ![erd_board](https://user-images.githubusercontent.com/82936574/125958624-6300c3fa-1a4d-480f-98a1-d4cc5b9a5677.png)
 ![erd_investment](https://user-images.githubusercontent.com/82936574/125958638-54ebf113-c747-4b82-bcb9-8e816cb6034d.png)
+
+
+
+
+
+

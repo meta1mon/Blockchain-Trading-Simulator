@@ -165,7 +165,7 @@
 
 **13. 공지사항**<br>
 ---
-<left><img src="https://user-images.githubusercontent.com/82936574/126027457-7fc8c969-3720-43f7-a3b7-ede15c2f1134.gif"  width="700" height="400" /></left>
+<left><img src="https://user-images.githubusercontent.com/82936574/126061415-01472fe1-a29d-4cc7-9048-5fc1ed85c638.gif"  width="700" height="400" /></left>
 
 - CK Editor API 사용
 - 글 (등록, 수정, 삭제, 신고), 댓글(등록, 삭제, 신고) 기능

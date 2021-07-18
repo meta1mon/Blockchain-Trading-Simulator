@@ -71,7 +71,7 @@
 
 **3. 로그인**<br>
 ----
-<p align="center">
+<p>
     <img src = "https://user-images.githubusercontent.com/82923903/126059418-84c9c660-c8a5-4300-a7e3-fee2a5d2736e.gif", width="700px">
 </p>
 

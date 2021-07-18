@@ -60,7 +60,15 @@
 
 ---
 ## 주요기능
-**1. 메인**
+**1. 메인페이지**
+<p align="center">
+  <img src = "https://user-images.githubusercontent.com/82923946/126055504-58c75312-4389-4831-97f7-ea82cc0b4b0f.gif"  width="700" height="400">
+</p>
+
+**3. 로그인**
+<p align="center">
+    <img src = "ReadMe/01.png", width="700px">
+</p>
 
 **4. About Us**
 <p align="center">
@@ -78,11 +86,13 @@
 
 **14. 에러페이지**
 <p align="center">
-  
+  <img src = "https://user-images.githubusercontent.com/82923946/126055894-674e653f-1af0-4341-93bf-423716bfb662.gif"  width="700" height="400">
 </p>
 
 **15. 위젯**<br>
-
+<p align="center">
+  <img src = ""  width="700" height="400">
+</p>
 
 ---
 ## Document

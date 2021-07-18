@@ -134,7 +134,7 @@
 
 **10. 마이페이지**<br>
 ---
-<left><img src="https://user-images.githubusercontent.com/82936574/126028061-78f821ed-e127-4fe9-9a0f-6e70049ce054.gif"  width="700" height="400" /></left>
+<left><img src="https://user-images.githubusercontent.com/82936574/126061088-b0f5d13c-7d79-469f-8eb6-b964e6376bd6.gif"  width="700" height="400" /></left>
 
 - 비밀번호 재확인 후 확인 가능하도록 보안 강화
 - 4가지 메뉴로 구성 : 나의정보 / 비밀번호 변경 / 나의 자산 / 나의 커뮤니티

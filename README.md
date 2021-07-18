@@ -1,6 +1,6 @@
 # Blockchain Trading Simulator(BTS)
-## [시연 영상 바로 보기](https://youtu.be/FZKFqH7ZHAs) 
-## [BTS 바로 가기](http://112.221.156.36:8090/bts) 
+## [BTS 바로 가기](http://112.221.156.36:8090/bts){:target="_blank" rel="noopener"}
+## [시연 영상 바로 보기](https://youtu.be/FZKFqH7ZHAs){:target="_blank" rel="noopener"} 
 ##### 팀원 : 강수목, 김도영, 김연준, 정재훈, 제승하
 ---
 ## Contents

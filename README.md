@@ -1,3 +1,4 @@
+
 # Blockchain Trading Simulator(BTS)
 ## [시연 영상 바로 보기](https://youtu.be/ZX5bDemHHXQ) 
 ##### 팀원 : 강수목, 김도영, 김연준, 정재훈, 제승하
@@ -73,6 +74,21 @@
 **4. About Us**
 <p align="center">
   <img src = "https://user-images.githubusercontent.com/82923946/126055327-58d436fa-c3a0-4469-a531-0dc886630e8f.gif"  width="700" height="400">
+</p>
+
+**5. 뉴스**
+<p align="center">
+  <img src = "https://user-images.githubusercontent.com/82923926/126056835-c1129338-7b43-4e1c-9c49-7cbd83b0a838.gif"  width="700" height="400">
+</p>
+
+**6. 커뮤니티**
+<p align="center">
+  <img src = "https://user-images.githubusercontent.com/82923926/126056839-548d0992-47c3-4f72-a697-e9d404a295c7.gif"  width="700" height="400">
+</p>
+
+**7. 결제**
+<p align="center">
+  <img src = "https://user-images.githubusercontent.com/82923926/126056832-54cb2e01-461d-4217-9ecd-55c9dbbfbb71.gif"  width="700" height="400">
 </p>
 
 **8888. 랭킹**

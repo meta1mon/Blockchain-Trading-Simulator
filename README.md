@@ -130,9 +130,21 @@
 ---
 <left><img src="https://user-images.githubusercontent.com/82936574/126028061-78f821ed-e127-4fe9-9a0f-6e70049ce054.gif"  width="700" height="400" /></left>
 
+- 비밀번호 재확인 후 확인 가능하도록 보안 강화
+- 4가지 메뉴로 구성 : 나의정보 / 비밀번호 변경 / 나의 자산 / 나의 커뮤니티
+- 닉네임, 연락처, 수신 동의 정보 변경 기능
+- 비밀번호, 계좌비밀번호 변경 가능하며 계좌비밀번호는 별도의 핀패드를 제공
+- 보유 코인 목록, 체결, 미체결, 충전 내역 조회 기능
+- 나의 게시글, 댓글 작성 내역 조회 기능
+
 **11. 프로차트**<br>
 ---
 <left><img src="https://user-images.githubusercontent.com/82936574/126059120-06144804-56a1-4d2f-91ff-853fe9ebdd1c.gif"  width="700" height="400" /></left>
+
+- Trading View API 사용
+- 차트 드로잉 기능, 종목, 시간, 영역 변경 기능, 비교 지표 기능 등 사용 가능
+- 차트의 공유, 캡쳐 기능
+- 위젯, 핫리스트, 달력 기능
 
 **12. 모의투자**
 ---
@@ -149,6 +161,10 @@
 ---
 <left><img src="https://user-images.githubusercontent.com/82936574/126027457-7fc8c969-3720-43f7-a3b7-ede15c2f1134.gif"  width="700" height="400" /></left>
 
+- CK Editor API 사용
+- 글 (등록, 수정, 삭제, 신고), 댓글(등록, 삭제, 신고) 기능
+- 관리자 계정으로 로그인 시에만 사용 가능
+
 **14. 에러페이지**<br>
 ---
 <left><img src="https://user-images.githubusercontent.com/82923946/126055894-674e653f-1af0-4341-93bf-423716bfb662.gif"  width="700" height="400" /></left>
@@ -158,6 +174,8 @@
 <left><img src=""  width="700" height="400" /></left>
 
 ---
+
+
 ## Document
 ### 1. 개발일정
 ![schedule](https://user-images.githubusercontent.com/82936574/125962840-a5019046-daa8-4b37-9baf-523ee7572f41.png) <br>

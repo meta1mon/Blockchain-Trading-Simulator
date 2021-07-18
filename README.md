@@ -61,29 +61,29 @@
 
 ---
 ## 주요기능
-**1. 메인페이지**
+**1. 메인페이지**<br>
 <left><img src="https://user-images.githubusercontent.com/82923946/126055504-58c75312-4389-4831-97f7-ea82cc0b4b0f.gif"  width="700" height="400" /></left>
 
-**2. 회원가입**
+**2. 회원가입**<br>
 <left><img src="ReadMe/01.png"  width="700" height="400" /></left>
 
-**3. 로그인**
+**3. 로그인**<br>
 <p align="center">
     <img src = "ReadMe/01.png", width="700px">
 </p>
 
-**4. About Us**
+**4. About Us**<br>
 <left><img src="https://user-images.githubusercontent.com/82923946/126055327-58d436fa-c3a0-4469-a531-0dc886630e8f.gif"  width="700" height="400" /></left>
 
 
-**5. 뉴스**
+**5. 뉴스**<br>
 <left><img src="https://user-images.githubusercontent.com/82923926/126056835-c1129338-7b43-4e1c-9c49-7cbd83b0a838.gif"  width="700" height="400" /></left>
 
  - Cryptonews API 사용
  - '비트코인'에 관련된 최신 뉴스 15일 기춘으로 조회
  - CSS marquee기능 사용
 
-**6. 커뮤니티**
+**6. 커뮤니티**<br>
 <left><img src="https://user-images.githubusercontent.com/82923926/126056839-548d0992-47c3-4f72-a697-e9d404a295c7.gif"  width="700" height="400" /></left>
 
 - CK Editor API 사용
@@ -91,13 +91,13 @@
 - @를 사용한 태그검색 기능
 - 페이징 처리
 
-**7. 결제**
+**7. 결제**<br>
 <left><img src="https://user-images.githubusercontent.com/82923926/126056832-54cb2e01-461d-4217-9ecd-55c9dbbfbb71.gif"  width="700" height="400" /></left>
 
 - Iamport API 사용
 - 결제 완료시 DB 추가
 
-**8. 랭킹**
+**8. 랭킹**<br>
 <left><img src="https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif"  width="700" height="400" /></left>
 
 **10. 마이페이지**<br>
@@ -110,7 +110,7 @@
 **13. 공지사항**<br>
 <left><img src="https://user-images.githubusercontent.com/82936574/126027457-7fc8c969-3720-43f7-a3b7-ede15c2f1134.gif"  width="700" height="400" /></left>
 
-**14. 에러페이지**
+**14. 에러페이지**<br>
 <left><img src="https://user-images.githubusercontent.com/82923946/126055894-674e653f-1af0-4341-93bf-423716bfb662.gif"  width="700" height="400" /></left>
 
 **15. 위젯**<br>

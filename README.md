@@ -108,17 +108,21 @@
 <left><img src="https://user-images.githubusercontent.com/82923926/126056835-c1129338-7b43-4e1c-9c49-7cbd83b0a838.gif"  width="700" height="400" /></left>
 
  - Cryptonews API 사용
- - '비트코인'에 관련된 최신 뉴스 15일 기춘으로 조회
- - CSS marquee기능 사용
+ - '비트코인'에 관련된 최신 뉴스 15일 기준으로 조회
+ - CSS marquee(플로팅)기능 사용
 
 **7. 커뮤니티**<br>
 ---
 <left><img src="https://user-images.githubusercontent.com/82923926/126056839-548d0992-47c3-4f72-a697-e9d404a295c7.gif"  width="700" height="400" /></left>
 
 - CK Editor API 사용
-- 글 (등록, 수정, 삭제, 신고), 댓글(등록, 삭제, 신고) 기능
+- 글 (등록, 수정, 삭제, 신고, 좋아요, 싫어요), 댓글(등록, 삭제, 신고) 기능
+- 비동기 방식을 활용한 조회기능
 - @를 사용한 태그검색 기능
-- 페이징 처리
+- 일간랭킹, 누적랭킹 (1위~10위) 조회
+- 파일첨부기능 common.io(1.4) 라이브러리 사용
+- 실시간 댓글수 조회
+
 
 **8. 결제**<br>
 ---
@@ -126,6 +130,8 @@
 
 - Iamport API 사용
 - 결제 완료시 DB 추가
+- 충전상품 조회
+- 실제로 결제
 
 **9. 랭킹**<br>
 ---

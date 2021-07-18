@@ -79,7 +79,7 @@
 			<table style="width: 100%">
 				<tr style="border: 2px solid; border-color: #E3C8F8;">
 					<td><div class="ex1">
-							<a>BTS MajerCoin지수</a>
+							<a>BTS MajorCoin지수</a>
 						</div></td>
 					<td><div class="ex1">
 							<a>BTS AltCoin지수</a>

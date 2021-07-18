@@ -128,10 +128,6 @@
 <left>
   <img src="https://user-images.githubusercontent.com/82923903/126059466-84362948-22cd-44a4-878e-60c68981cc13.gif" width="700" height="400">
 </left>
- - bithumb, upbit API 사용
- - 코인 검색 기능
- - 현재가, 등락률, 거래대금에 대하여 각각 오름차순/내림차순 기능
- - 매수, 매도 체결시 알림 팝업과 소리 출력
 
 **13. 공지사항**<br>
 ---

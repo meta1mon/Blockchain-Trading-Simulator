@@ -60,9 +60,19 @@
 
 ---
 ## 주요기능
-**1. 로그인**
+**1. 메인**
+<p align="center">
+  
+</p>
+
+**3. 로그인**
 <p align="center">
     <img src = "ReadMe/01.png", width="700px">
+</p>
+
+**4. About Us**
+<p align="center">
+  
 </p>
 
 **8888. 랭킹**
@@ -71,8 +81,18 @@
 </p>
 
 
-**13. 공지사항**<br>
+**13. 공지사항**
 <left><img src="https://user-images.githubusercontent.com/82936574/126027457-7fc8c969-3720-43f7-a3b7-ede15c2f1134.gif"  width="700" height="400" /></left>
+
+**14. 에러페이지**
+<p align="center">
+  
+</p>
+
+**15. 위젯**<br>
+<p align="center">
+  
+</p>
 
 ---
 ## Document

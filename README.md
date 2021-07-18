@@ -194,7 +194,7 @@
 **16. 관리자 페이지**
 ---
 <left>
-  <img src="" width="700" height="400">
+  <img src="https://user-images.githubusercontent.com/82925724/126067727-68f2e265-316a-4b93-8cf8-792960b3313e.gif" width="700" height="400">
 </left>
 
 - 관리자 계정(admin)으로 로그인 시에만 관리자 페이지 접근 가능(POST)

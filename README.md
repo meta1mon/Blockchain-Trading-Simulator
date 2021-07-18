@@ -181,16 +181,15 @@
 <left><img src="https://user-images.githubusercontent.com/82923946/126055894-674e653f-1af0-4341-93bf-423716bfb662.gif"  width="700" height="400" /></left>
 
 - 오류 발생 시 에러페이지로 이동
-- 메인페이지, 전 페이지로 이동 가능
+- 메인페이지, 이전 페이지로 이동 가능
 
 **15. 위젯**<br>
 ---
 <left><img src=""  width="700" height="400" /></left>
-- Chat : 실시간 채팅 위젯
-- Quick : 실시간 코인 가격 표시 위젯
-- 환율계산 : 환율 계산기 위젯
-- 환율 : 화폐들에 대한 환율 표 위젯
-- 코인지갑 : 보유 코인, 계좌, 자산 조회 위젯
+- Chat : 실시간 채팅 위젯(Talk Plus API 사용)
+- Quick : 실시간 코인 가격 표시 위젯(Investment Widget API 사용)
+- 환율계산 : 실시간 환율 계산기 위젯(Investment Widget API 사용)
+- 환율 : 화폐별 실시간 환율 표 위젯(Investment Widget API 사용)
 
 **16. 관리자 페이지**
 ---

@@ -191,7 +191,7 @@
 
 **15. 위젯**<br>
 ---
-<left><img src="https://user-images.githubusercontent.com/82923946/126068391-860fe8e8-bbe2-4bfe-8311-35e68a2dbc4e.gif"  width="700" height="400" /></left>
+<left><img src="https://user-images.githubusercontent.com/82923946/126069700-6d230250-a97a-490d-9e75-eafe125a7dd9.gif"  width="700" height="400" /></left>
 - Chat : 실시간 채팅 위젯(Talk Plus API 사용)
 - Quick : 실시간 코인 가격 표시 위젯(Investment Widget API 사용)
 - 환율계산 : 실시간 환율 계산기 위젯(Investment Widget API 사용)

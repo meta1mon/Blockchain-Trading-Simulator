@@ -62,14 +62,10 @@
 ---
 ## 주요기능
 **1. 메인페이지**
-<p align="center">
-  <img src = "https://user-images.githubusercontent.com/82923946/126055504-58c75312-4389-4831-97f7-ea82cc0b4b0f.gif"  width="700" height="400">
-</p>
+<left><img src="https://user-images.githubusercontent.com/82923946/126055504-58c75312-4389-4831-97f7-ea82cc0b4b0f.gif"  width="700" height="400" /></left>
 
 **2. 회원가입**
-<p align="center">
-    <img src = "ReadMe/01.png", width="700px">
-</p>
+<left><img src="ReadMe/01.png"  width="700" height="400" /></left>
 
 **3. 로그인**
 <p align="center">
@@ -77,23 +73,18 @@
 </p>
 
 **4. About Us**
-<p align="center">
-  <img src = "https://user-images.githubusercontent.com/82923946/126055327-58d436fa-c3a0-4469-a531-0dc886630e8f.gif"  width="700" height="400">
-</p>
+<left><img src="https://user-images.githubusercontent.com/82923946/126055327-58d436fa-c3a0-4469-a531-0dc886630e8f.gif"  width="700" height="400" /></left>
+
 
 **5. 뉴스**
-<p align="center">
-  <img src = "https://user-images.githubusercontent.com/82923926/126056835-c1129338-7b43-4e1c-9c49-7cbd83b0a838.gif"  width="700" height="400">
-</p>
+<left><img src="https://user-images.githubusercontent.com/82923926/126056835-c1129338-7b43-4e1c-9c49-7cbd83b0a838.gif"  width="700" height="400" /></left>
 
  - Cryptonews API 사용
  - '비트코인'에 관련된 최신 뉴스 15일 기춘으로 조회
  - CSS marquee기능 사용
 
 **6. 커뮤니티**
-<p align="center">
-  <img src = "https://user-images.githubusercontent.com/82923926/126056839-548d0992-47c3-4f72-a697-e9d404a295c7.gif"  width="700" height="400">
-</p>
+<left><img src="https://user-images.githubusercontent.com/82923926/126056839-548d0992-47c3-4f72-a697-e9d404a295c7.gif"  width="700" height="400" /></left>
 
 - CK Editor API 사용
 - 글 (등록, 수정, 삭제, 신고), 댓글(등록, 삭제, 신고) 기능
@@ -101,31 +92,29 @@
 - 페이징 처리
 
 **7. 결제**
-<p align="center">
-  <img src = "https://user-images.githubusercontent.com/82923926/126056832-54cb2e01-461d-4217-9ecd-55c9dbbfbb71.gif"  width="700" height="400">
-</p>
+<left><img src="https://user-images.githubusercontent.com/82923926/126056832-54cb2e01-461d-4217-9ecd-55c9dbbfbb71.gif"  width="700" height="400" /></left>
 
 - Iamport API 사용
 - 결제 완료시 DB 추가
 
-**8888. 랭킹**
-<p align="center">
-    <img src = "https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif" width="700" height="400">
-</p>
+**8. 랭킹**
+<left><img src="https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif"  width="700" height="400" /></left>
+
+**10. 마이페이지**<br>
+<left><img src="https://user-images.githubusercontent.com/82936574/126028061-78f821ed-e127-4fe9-9a0f-6e70049ce054.gif"  width="700" height="400" /></left>
+
+**12. 프로차트**<br>
+<left><img src="https://user-images.githubusercontent.com/82936574/126059120-06144804-56a1-4d2f-91ff-853fe9ebdd1c.gif"  width="700" height="400" /></left>
 
 
-**13. 공지사항**
+**13. 공지사항**<br>
 <left><img src="https://user-images.githubusercontent.com/82936574/126027457-7fc8c969-3720-43f7-a3b7-ede15c2f1134.gif"  width="700" height="400" /></left>
 
 **14. 에러페이지**
-<p align="center">
-  <img src = "https://user-images.githubusercontent.com/82923946/126055894-674e653f-1af0-4341-93bf-423716bfb662.gif"  width="700" height="400">
-</p>
+<left><img src="https://user-images.githubusercontent.com/82923946/126055894-674e653f-1af0-4341-93bf-423716bfb662.gif"  width="700" height="400" /></left>
 
 **15. 위젯**<br>
-<p align="center">
-  <img src = ""  width="700" height="400">
-</p>
+<left><img src=""  width="700" height="400" /></left>
 
 ---
 ## Document
@@ -139,3 +128,9 @@
 ### 3. ERD
 ![erd_board](https://user-images.githubusercontent.com/82936574/125958624-6300c3fa-1a4d-480f-98a1-d4cc5b9a5677.png)
 ![erd_investment](https://user-images.githubusercontent.com/82936574/125958638-54ebf113-c747-4b82-bcb9-8e816cb6034d.png)
+
+
+
+
+
+

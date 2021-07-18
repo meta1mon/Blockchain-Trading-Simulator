@@ -66,6 +66,11 @@
   <img src = "https://user-images.githubusercontent.com/82923946/126055504-58c75312-4389-4831-97f7-ea82cc0b4b0f.gif"  width="700" height="400">
 </p>
 
+**2. 회원가입**
+<p align="center">
+    <img src = "ReadMe/01.png", width="700px">
+</p>
+
 **3. 로그인**
 <p align="center">
     <img src = "ReadMe/01.png", width="700px">

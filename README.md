@@ -1,4 +1,3 @@
-
 # Blockchain Trading Simulator(BTS)
 ## [시연 영상 바로 보기](https://youtu.be/ZX5bDemHHXQ) 
 ##### 팀원 : 강수목, 김도영, 김연준, 정재훈, 제승하
@@ -124,7 +123,7 @@
 
 **9. 랭킹**<br>
 ---
-<left><img src="https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif"  width="700" height="400" /></left>
+<left><img src="https://user-images.githubusercontent.com/82925724/126061270-404b767e-2986-4b0b-ac9e-41bfb269e5f6.gif"  width="700" height="400" /></left>
 
 - 4 종류의 랭킹 표시
 - 수익률 순위 1위 ~ 10위까지 표시
@@ -165,7 +164,7 @@
 
 **13. 공지사항**<br>
 ---
-<left><img src="https://user-images.githubusercontent.com/82936574/126061415-01472fe1-a29d-4cc7-9048-5fc1ed85c638.gif"  width="700" height="400" /></left>
+<left><img src="https://user-images.githubusercontent.com/82936574/126027457-7fc8c969-3720-43f7-a3b7-ede15c2f1134.gif"  width="700" height="400" /></left>
 
 - CK Editor API 사용
 - 글 (등록, 수정, 삭제, 신고), 댓글(등록, 삭제, 신고) 기능
@@ -185,9 +184,11 @@
   <img src="https://user-images.githubusercontent.com/82925724/126061163-7dc23948-1a12-44fe-85d5-09d4584895ae.gif" width="700" height="400">
 </left>
 
-- CK Editor API 사용
-- 글 (등록, 수정, 삭제, 신고), 댓글(등록, 삭제, 신고) 기능
-- 관리자 계정으로 로그인 시에만 사용 가능
+- 관리자 계정(admin)으로 로그인 시에만 관리자 페이지 접근 가능(POST)
+- 회원 정보 관리 : 회원 정보 검색, 조회, 삭제
+- 랭킹 보상 관리 : 주간/월간 랭킹 1~3위에게 보상 기능, Java Mail Sender로 제공
+- 신고 게시글/댓글 관리 : 수리(해당 게시글/댓글 삭제), 반려(유지)
+- 충전소 관리 : 충전 상품 등록, 조회, 수정, 삭제
 
 ## Document
 ### 1. 개발일정

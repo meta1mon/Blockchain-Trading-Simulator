@@ -63,8 +63,9 @@
 **1. 메인**
 
 **4. About Us**
-<left><img src = "https://user-images.githubusercontent.com/82923946/126055327-58d436fa-c3a0-4469-a531-0dc886630e8f.gif"  width="700" height="400" /></left>
-
+<p align="center">
+  <img src = "https://user-images.githubusercontent.com/82923946/126055327-58d436fa-c3a0-4469-a531-0dc886630e8f.gif"  width="700" height="400">
+</p>
 
 **8888. 랭킹**
 <p align="center">

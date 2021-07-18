@@ -126,6 +126,12 @@
 ---
 <left><img src="https://user-images.githubusercontent.com/82925724/125972371-b938481a-50f6-4803-8120-5a5e97600d82.gif"  width="700" height="400" /></left>
 
+- 4 종류의 랭킹 표시
+- 수익률 순위 1위 ~ 10위까지 표시
+- 비 로그인 시, 로그인 페이지 이동 태그 추가
+- 로그인 시, 자신의 닉네임과 등수와 수익률을 표시
+- 정해진 시간에 자동으로 수익률 재산정 후, 반영이 이루어짐
+
 **10. 마이페이지**<br>
 ---
 <left><img src="https://user-images.githubusercontent.com/82936574/126028061-78f821ed-e127-4fe9-9a0f-6e70049ce054.gif"  width="700" height="400" /></left>
@@ -173,7 +179,11 @@
 ---
 <left><img src=""  width="700" height="400" /></left>
 
+**16. 관리자 페이지**
 ---
+<left>
+  <img src="https://user-images.githubusercontent.com/82923903/126059466-84362948-22cd-44a4-878e-60c68981cc13.gif" width="700" height="400">
+</left>
 
 
 ## Document

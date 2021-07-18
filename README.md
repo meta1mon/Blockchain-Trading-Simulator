@@ -81,15 +81,27 @@
   <img src = "https://user-images.githubusercontent.com/82923926/126056835-c1129338-7b43-4e1c-9c49-7cbd83b0a838.gif"  width="700" height="400">
 </p>
 
+ - Cryptonews API 사용
+ - '비트코인'에 관련된 최신 뉴스 15일 기춘으로 조회
+ - CSS marquee기능 사용
+
 **6. 커뮤니티**
 <p align="center">
   <img src = "https://user-images.githubusercontent.com/82923926/126056839-548d0992-47c3-4f72-a697-e9d404a295c7.gif"  width="700" height="400">
 </p>
 
+- CK Editor API 사용
+- 글 (등록, 수정, 삭제, 신고), 댓글(등록, 삭제, 신고) 기능
+- @를 사용한 태그검색 기능
+- 페이징 처리
+
 **7. 결제**
 <p align="center">
   <img src = "https://user-images.githubusercontent.com/82923926/126056832-54cb2e01-461d-4217-9ecd-55c9dbbfbb71.gif"  width="700" height="400">
 </p>
+
+- Iamport API 사용
+- 결제 완료시 DB 추가
 
 **8888. 랭킹**
 <p align="center">

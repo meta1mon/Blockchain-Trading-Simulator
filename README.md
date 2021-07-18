@@ -170,7 +170,7 @@
 
 **13. 공지사항**<br>
 ---
-<left><img src="https://user-images.githubusercontent.com/82936574/126027457-7fc8c969-3720-43f7-a3b7-ede15c2f1134.gif"  width="700" height="400" /></left>
+<left><img src="https://user-images.githubusercontent.com/82936574/126067372-360596d0-0361-44e3-91d1-30c1e5628b78.gif"  width="700" height="400" /></left>
 
 - CK Editor API 사용
 - 글 (등록, 수정, 삭제, 신고), 댓글(등록, 삭제, 신고) 기능
@@ -195,7 +195,7 @@
 **16. 관리자 페이지**
 ---
 <left>
-  <img src="https://user-images.githubusercontent.com/82925724/126061163-7dc23948-1a12-44fe-85d5-09d4584895ae.gif" width="700" height="400">
+  <img src="" width="700" height="400">
 </left>
 
 - 관리자 계정(admin)으로 로그인 시에만 관리자 페이지 접근 가능(POST)

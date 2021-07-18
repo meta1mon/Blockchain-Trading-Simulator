@@ -182,9 +182,12 @@
 **16. 관리자 페이지**
 ---
 <left>
-  <img src="https://user-images.githubusercontent.com/82923903/126059466-84362948-22cd-44a4-878e-60c68981cc13.gif" width="700" height="400">
+  <img src="https://user-images.githubusercontent.com/82925724/126061163-7dc23948-1a12-44fe-85d5-09d4584895ae.gif" width="700" height="400">
 </left>
 
+- CK Editor API 사용
+- 글 (등록, 수정, 삭제, 신고), 댓글(등록, 삭제, 신고) 기능
+- 관리자 계정으로 로그인 시에만 사용 가능
 
 ## Document
 ### 1. 개발일정

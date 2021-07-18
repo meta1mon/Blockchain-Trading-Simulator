@@ -423,7 +423,7 @@ function moveMypagePost() {
 								<p>Beware of false knowledge; it is more dangerous than ignorance.<br>
 								- George Bernard Shaw<br>
 								암호화폐와 관련된 최신 뉴스 컨텐츠를 실시간으로 확인할 수 있는 서비스입니다.<br>
-								크립토허브(<a href="http://www.cryptohub.or.kr">www.cryptohub.or.kr</a>)의 뉴스 API를 사용하였으며, <br>
+								크립토허브(<a href="http://www.cryptohub.or.kr" style="color:black;">www.cryptohub.or.kr</a>)의 뉴스 API를 사용하였으며, <br>
 								뉴스1에서 기사 원본을 확인할 수 있습니다.</p>
 								<ul class="list-inline">
 								</ul>
@@ -458,7 +458,7 @@ function moveMypagePost() {
 								<p>Buy in fear, sell in greed<br>
 								- Warren Buffett<br>
 								모의투자 차트에서 여러 기능들을 추가해서 전문적으로 분석 할 수 있는 프로차트입니다.<br>
-								트레이딩뷰(<a href="http://kr.tradingview.com/chart">kr.tradingview.com/chart</a>)의 API를 사용하였으며, <br>
+								트레이딩뷰(<a href="http://kr.tradingview.com/chart" style="color:black;">kr.tradingview.com/chart</a>)의 API를 사용하였으며, <br>
 								보조지표, Bollinger Bands 등 투자에 접목 할 수 있는 기능들을 사용했습니다.</p>
 								<ul class="list-inline">
 								</ul>

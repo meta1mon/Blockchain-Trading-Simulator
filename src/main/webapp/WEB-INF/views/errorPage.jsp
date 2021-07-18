@@ -23,7 +23,7 @@
 	min-width: 1000px;
 	height: 95%;
 	padding: 20px;
-	margin: 25px auto;
+	margin: 0 auto 25px auto;
 	background-color: #fff;
 	border: 1.5px solid #E3C8F8;
 	box-shadow: 1px 1px 3px rgb(90 90 90/ 35%);

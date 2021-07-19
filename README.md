@@ -71,7 +71,8 @@
 
 **2. 회원가입**<br>
 ---
-<left><img src="https://user-images.githubusercontent.com/82923903/126059410-dc4224d9-a028-4e8e-93df-7f7a60bce22b.gif"  width="700" height="400" /></left>
+<left><img src="https://user-images.githubusercontent.com/82923903/126093478-8b04c152-eb47-4c9b-962b-ebdcb217495d.gif
+"  width="700" height="400" /></left>
 
 - 체크 박스 전체 선택, 전체 해제
 - 입력 사항에 대한 정규식 적용

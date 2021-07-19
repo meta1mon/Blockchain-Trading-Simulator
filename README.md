@@ -38,7 +38,7 @@
 |FrontEnd|HTML5, JavaScript, CSS3, JQuery, Bootstrap|
 |BackEnd|Java(JDK 1.8), Servlet, JSP, Spring, MyBatis|
 |OS|Windows 10|
-|Libray&API|Apache Commons FileUpload, Imgscalr|
+|Libray|Apache Commons FileUpload, Imgscalr|
 |IDE|Eclipse, VisualStudio, Spring Tool Suite|
 |Server|Tomcat(v8.5)|
 |Document|Google Drive, KakaoOven, ERDCloud, diagrams.net|

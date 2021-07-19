@@ -250,6 +250,5 @@
 ### 5. 화면설계서
 ![슬라이드7](https://user-images.githubusercontent.com/82923946/126185505-a7f56b0a-74da-46e8-94f1-ec92660895d2.PNG)
 ![슬라이드18](https://user-images.githubusercontent.com/82923946/126185522-6e3d8456-5ed3-4f3b-9a1d-633277b4f351.PNG)
-![슬라이드32](https://user-images.githubusercontent.com/82923946/126185551-d66544c5-2bb8-480e-80c1-99ae0f0347cf.PNG)
 ![슬라이드62](https://user-images.githubusercontent.com/82923946/126185570-f1756c10-bdb0-49e0-9802-5361754bc700.PNG)
 [화면설계서 전체보기](https://github.com/meta1mon/Blockchain-Trading-Simulator/files/6842144/V3.4_StoryBoard.pdf)

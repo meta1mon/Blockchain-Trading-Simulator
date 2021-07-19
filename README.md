@@ -242,11 +242,10 @@
 
 ### 4. 요구사항 정의서 및 분석서
 ![requirements_def](https://user-images.githubusercontent.com/82936574/126136679-44ad8a10-26eb-424c-8eba-046624f868d2.png) <br>
-[요구사항 정의서 전체보기](https://github.com/meta1mon/Blockchain-Trading-Simulator/blob/4e47b1ccccd185ac431eb87b7f814b296150df36/document/%ED%8C%8C%EC%9D%B4%EB%84%90_%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EC%A0%95%EC%9D%98%EC%84%9C.docx)<br><br>
+[요구사항 정의서 전체보기](https://github.com/meta1mon/Blockchain-Trading-Simulator/files/6839726/_.docx)<br><br>
+
 ![requirements_ana](https://user-images.githubusercontent.com/82936574/126138014-ee594f5e-8908-4fb5-8322-24f2c3b22663.png) <br>
-[요구사항 분석서 전체보기](https://github.com/meta1mon/Blockchain-Trading-Simulator/blob/4e47b1ccccd185ac431eb87b7f814b296150df36/document/%ED%8C%8C%EC%9D%B4%EB%84%90_%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EB%B6%84%EC%84%9D%EC%84%9C.docx)
-
-
+[요구사항 분석서 전체보기](https://github.com/meta1mon/Blockchain-Trading-Simulator/files/6839728/_.docx)
 
 
 

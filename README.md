@@ -81,7 +81,8 @@
 **3. 로그인**<br>
 ----
 <left>
-    <img src = "https://user-images.githubusercontent.com/82923903/126059418-84c9c660-c8a5-4300-a7e3-fee2a5d2736e.gif", width="700px">
+    <img src = "https://user-images.githubusercontent.com/82923903/126093586-66babf64-6513-40c7-a980-a283044a4156.gif" width="700" height="400">
+    <img src="https://user-images.githubusercontent.com/82923903/126093694-ab9f2dd7-9106-468d-a5a1-5336a4f5d475.png" width="700" height="400">
 </left>
 
 - 입력 사항에 대한 정규식 적용
@@ -90,7 +91,7 @@
 **4. 비밀번호 찾기**
 ---
 <p>
-  <img src="https://user-images.githubusercontent.com/82923903/126059447-3530e112-cb0b-4712-82d3-a1d5f4afa2b3.gif" width="700" height="400">
+  <img src="https://user-images.githubusercontent.com/82923903/126093623-9c64b460-d07f-476f-aa30-57801f8fe752.gif" width="700" height="400">
   <img src="https://user-images.githubusercontent.com/82923903/126059456-4a319326-f0f8-479e-a02b-544292c5fa9c.png" width="700" height="400">
 </p>
 
@@ -175,7 +176,7 @@
 **12. 모의투자**
 ---
 <left>
-  <img src="https://user-images.githubusercontent.com/82923903/126059466-84362948-22cd-44a4-878e-60c68981cc13.gif" width="700" height="400">
+  <img src="https://user-images.githubusercontent.com/82923903/126093721-f9bba260-6691-4b36-843e-f74531281afc.gif" width="700" height="400">
 </left>
 
 - bithumb, upbit API 사용

@@ -71,11 +71,12 @@
 
 **2. 회원가입**<br>
 ---
-<left><img src="https://user-images.githubusercontent.com/82923903/126093478-8b04c152-eb47-4c9b-962b-ebdcb217495d.gif"  width="700" height="400" /></left>
+<left><img src="https://user-images.githubusercontent.com/82923903/126094204-3487d128-8d79-4cef-be6d-90062726ec43.gif"  width="700" height="400" /></left>
 
-- 체크 박스 전체 선택, 전체 해제
+- 약관동의 체크 박스 전체 선택, 전체 해제
 - 입력 사항에 대한 정규식 적용
 - 이메일, 닉네임 중복확인
+- 계좌 비밀번호 입력 시, 핀패드 사용
 - 생년월일 만 19세 이상 판별
 
 **3. 로그인**<br>
@@ -86,12 +87,12 @@
 </left>
 
 - 입력 사항에 대한 정규식 적용
-- 비밀번호 확인
+- 비밀번호 보이기, 숨기기 
 
 **4. 비밀번호 찾기**
 ---
 <p>
-  <img src="https://user-images.githubusercontent.com/82923903/126093623-9c64b460-d07f-476f-aa30-57801f8fe752.gif" width="700" height="400">
+  <img src="https://user-images.githubusercontent.com/82923903/126094243-549bbf94-2db3-46e2-95c7-4bdf9d705cb1.gif" width="700" height="400">
   <img src="https://user-images.githubusercontent.com/82923903/126059456-4a319326-f0f8-479e-a02b-544292c5fa9c.png" width="700" height="400">
 </p>
 
@@ -180,9 +181,16 @@
 </left>
 
 - bithumb, upbit API 사용
+- 선택한 코인 실시간 시세표, 차트 제공
 - 코인 검색 기능
+- 코인별 실시간 현재가, 등락률, 거래 대금 제공
 - 현재가, 등락률, 거래대금에 대하여 각각 오름차순/내림차순 기능
+- 호가창
+- 계좌 비밀번호 입력 시, 코인 지갑 위젯으로 현재 보유 중인 코인과 평가 손익 확인 가능
+- 미체결, 체결 거래 내역 제공
 - 매수, 매도 체결시 알림 팝업과 소리 출력
+※ 매수 조건: 매수가 ≤ 현재가
+※ 매도 조건: 매도가 ≥ 현재가
 
 **13. 공지사항**<br>
 ---
